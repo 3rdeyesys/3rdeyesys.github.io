@@ -29,8 +29,8 @@ markdown_extensions:
 extra_javascript:
   - javascripts/extra.js
     
-repo_url: 'https://github.com/3rdeyesys/3rdeyesys.github.io/docs'
+repo_url: 'https://github.com/3rdeyesys/3rdeyesys.github.io'
 docs_dir: 'docs'
-edit_uri: 'edit/main/docs'
+edit_uri: 'edit/main/docs/docs'
 
 use_directory_urls: false
