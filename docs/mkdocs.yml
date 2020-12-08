@@ -29,7 +29,7 @@ markdown_extensions:
 extra_javascript:
   - javascripts/extra.js
     
-repo_url: 'https://github.com/3rdeyesys/3rdeyesys.github.io'
+repo_url: 'https://github.com/3rdeyesys/3rdeyesys.github.io/docs'
 docs_dir: 'docs'
 edit_uri: 'edit/main/docs'
 
