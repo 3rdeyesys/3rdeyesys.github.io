@@ -27,7 +27,7 @@
 <meta property="og:url" content="https://docs.3rdeyesys.com/search/" />
 <meta property="og:site_name" content="3rdeyesys" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://docs.3rdeyesys.com/siteicon.png"}},"url":"https://docs.3rdeyesys.com/search/","description":"써드아이시스템 기술문서","@type":"WebPage","headline":"Search","@context":"http://schema.org"}</script>
+{"url":"https://docs.3rdeyesys.com/search/","headline":"Search","description":"써드아이시스템 기술문서","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://docs.3rdeyesys.com/siteicon.png"}},"@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link type="application/atom+xml" rel="alternate" href="https://docs.3rdeyesys.com/feed.xml" title="3rdeyesys" />
@@ -99,12 +99,72 @@
 				
 					
 					
+					"99-etc-etc-jekyll-install": {
+						"id": "99-etc-etc-jekyll-install",
+						"title": "jekyll 설치(윈도 10) with base-theme",
+						"categories": "99.ETC",
+						"url": " /99.etc/etc_jekyll_install/",
+						"content": "설치 전체과정 요약\n\n\n  Ruby 설치\n  ridk 설치\n  gem 업데이트\n  jekyll, Bundler 설치\n\n\nRuby 설치\n일반적으로 jekyll를 사용한다면 최신 버전을 사용하면 되겠지만 여기서는 base-theme를 기반으로 하기 때문에 호환에 잘되는 2.5를 설치합니다.\n\nRuby Installer 다운로드 경로\nhttps://rubyinstaller.org/downloads/\n\n위 사이트에서 rubyinstaller-devkit-2.5.8-2-x64 를 다운 받아 설치하면 됩니다.\n\nRuby 설치가 끝나면서 완료화면에 Run ‘ridk install’ to setup MSYS2 and development toolchain. 이라는 옵션이 나타납니다.\n반드시 선택하고 완료를 하시기 바랍니다.\n\n\n\nridk 설치\n앞단계인 Ruby 설치 완료에서 ridk install을 선택했다면 ridk 설치 커맨드 창이 나타납니다.\n(혹시 선택하지 않았다면 커맨드 창을 열어서 ridk install 을 입력하면 됩니다)\n이때 설치 옵션을 선택할 수 있는데 1,2,3 을 선택하고 Enter 키를 입력하면 설치가 진행됩니다.\n\n\n\ngem 업데이트\n\ngem update\n\n\nJekyll, Bundler 설치\n\ngem install jekyll bundler\n\n\nbase-theme 설치\nbase-theme는 jekyll의 여러 테마 중에서 CloudCannon에서 제작한 테마입니다.\n\n\n\n다운로드 경로\nhttps://github.com/CloudCannon/base-jekyll-template\n\n위 다운로드 경로에서 소스를 직접 다운 받거나 GitHub Desktop을 이용해서 가져오면 됩니다.\n\n블로그 실행, 접속\n작업하면서 결과물을 확인할 때는 다음과 같은 명령어로 입력하고 브라우져에서 http://127.0.0.1:4000/ 로 접속하시면 되니다.\n\nbundle exec jekyll serve\n\n\n사이트 빌드\n작업이 끝난 결과물을 실제 서버나 gitHub에 업로드, 배포할 경우에는 다음 명령어로 빌드 한 후에 _site에 생성된 html 등을 사용하시면 됩니다.\n\nbundle exec jekyll build\n\n\n추가 패키지 설치\n혹시 블로그 실행, 접속에서 오류가 발생하면 나타나는 메시지를 보고 처리를 해주면 됩니다.\n혹시 필요한 gem이 설치되지 않았을 경우에는 다음과 같이 설치해주면 됩니다.\n\ngem install public_suffix -v 3.0.1\n\n\n기본 블로그 생성\n위에서 소개한 것처럼 테마를 사용하는 것이 아닌 기본 설정만의 블로그를 새로 만들려면 다음과 같이 입력하면 됩니다.\n\njekyll new PATH\n\n기본 블로그를 만들고 접속하면 다음과 같은 화면이 나타납니다.\n\n\n\n\n  “문서 최종 수정일 : 2021-01-05”"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"99-etc-etc-jekyll-customizing": {
+						"id": "99-etc-etc-jekyll-customizing",
+						"title": "jekyll base-theme 커스터마이징",
+						"categories": "99.ETC",
+						"url": " /99.etc/etc_jekyll_customizing/",
+						"content": "폰트 교체\nbase-theme는 기본 폰트가 Merriweather로 되어 있습니다.\n영어 표기에는 적당하지만, 한글 표기에는 좋지 않아 나눔고딕 폰트로 변경하였습니다.\n\n그리고 폰트 파일을 별도로 추가하기 보다는 구글에서 제공하는 폰트 경로를 설정하는 방식으로 교체했습니다.\n구글에서 제공하는 폰트 리스트와 적용 방법은 아래 사이트에서 확인 가능합니다.\nhttps://fonts.google.com/\n\nhtml 수정\n\n파일 위치 : _layouts\\default.html\n&lt;link rel=\"preconnect\" href=\"https://fonts.gstatic.com\"&gt;\n&lt;link href=\"https://fonts.googleapis.com/css2?family=Nanum+Gothic&amp;display=swap\" rel=\"stylesheet\"&gt; \n\n\ncss 수정\n\n파일 위치: _sass\\typography.scss\nbody {\n  height: 100%;\n  max-height: 100%;\n  font-family: 'Nanum Gothic', sans-serif;\n  }\n\n\n한글 검색 오류 수정\nbase-theme 기본 설정으로는 한글 등 utf-8 언어 검색이 되지 않습니다.\n그에 따라 몇가지 수정을 하면 한글 검색이 가능해집니다.\n\njs 파일 위치: \\js\\search.js\n\n기존:\nwindow.index = lunr(function () {\n\t\tthis.field(\"id\");\n\t\tthis.field(\"title\", {boost: 10});\n\t\tthis.field(\"categories\");\n\t\tthis.field(\"url\");\n\t\tthis.field(\"content\");\n\t});\n\n수정: \nwindow.index = new lunr.Index;\nwindow.index.field('id');\nwindow.index.field('title', { boost: 10 });\nwindow.index.field('author');\nwindow.index.field('category');\nwindow.index.field('content');\n\n\n다음으로 charset 을 설정합니다.\nhtml 파일 위치 : \\search.html\n기존: \n&lt;script src=\"/js/lunr.min.js\"&gt;&lt;/script&gt;\n&lt;script src=\"/js/search.js\"&gt;&lt;/script&gt;\n\n수정: \n&lt;script src=\"/js/lunr.min.js\" charset=\"utf-8\"&gt;&lt;/script&gt;\n&lt;script src=\"/js/search.js\" charset=\"utf-8\"&gt;&lt;/script&gt;\n\n\n상단 header bg 교체\n\n파일 위치: _sass\\header.scss\n\n기존:\nheader {\n\tbackground: $header-color;\n}\n\n수정: \nheader {\n\tbackground: url(\"/images/ncp-header-bg.png\");\n\tbackground-size: 2200px;\n}\n\n\nlogo 파일 교체\n\n파일 위치: _includes\\logo.html\n\n\n기존:\n&lt;svg version=\"1.1\" id=\"Layer_1\" ..중략.. xml:space=\"preserve\"&gt;\n\t ..중략..\n&lt;/svg&gt;\n\n수정:\n&lt;img src=\"/images/title_logo_white.png\" style=\"width:160px;height:33px;margin-top:5px\"&gt;\n\n\n상단 메뉴 수정\n\n파일 위치: _data\\navigation.yml\n\n- name: Docs\n  link: /\n  target: _self\n- name: FAQ\n  link: /faq/\n  target: _self\n- name: Company\n  link: https://3rdeyesys.com\n  target: _blank\n\n\n상단 header에 검색 박스 추가\n\n파일 위치: _includes\\navigation.html\n\n{% if page.url != \"/\" %}\n\t&lt;span style=\"width:100px\"&gt;\\{% include search.html %}&lt;/span&gt;\n{% endif %}\t\n&lt;/nav&gt;\n\n\n하단 footer social 아이콘 수정\n\n파일 위치: _data\\footer.yml\n\n- name:\n  link: https://www.facebook.com/3rdeyesys\n  social_icon: Facebook\n  target: _blank\n- name:\n  link: mailto:biz@3rdeyesys.com\n  social_icon: Email\n  target: _blank\n\n\n\n  “문서 최종 수정일 : 2021-01-04”"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"5-database-ncp-database-compare": {
+						"id": "5-database-ncp-database-compare",
+						"title": "설치형 DB서버와 관리형 Cloud DB 비교",
+						"categories": "5.database",
+						"url": " /5.database/ncp_database_compare/",
+						"content": "개요\n서버에 DB가 설치된 상태로 제공되는 설치형 DB서버와 Cloud 형태로 제공되는 관리형 DB서버는 어떤 특징과 차이점이 있는지 확인합니다.\n더불어 비용 비교와 함께 각각의 DB서버를 어떤 경우에 사용하면 좋은지 예시를 통해 DB서버 선택에 도움을 드리고자 합니다.\n\n설치형 DB  특징\n\n  저렴한 비용\n  DB관련 아주 세부적인 부분까지 직접 설정 가능\n\n\n관리형 Cloud DB 특징\n\n  빠르고 손쉬운 설치\n  네이버 클라우드에서 검증된 최적화 설정\n  자동으로 증가하는 데이터 스토리지 (MSSQL : 2TB까지, Mysql : 6000GB까지)\n  장애 발생시 자동 Fail-over를 통한 장애 최소화를 할 수 있는 탁월한 가용성 제공\n  읽기 부하 분산을 위한 읽기 전용 Slave 5개까지 지원\n  자동화된 DB 백업, 최대 30일까지 보관\n  성능 모니터링과 알람\n  원하는 시간을 선택하여 DB 자동 복원 (Mysql)\n  1분 단위의 쿼리 레벨 성능 분석을 지원 (MSSQL)\n\n\n비용 전체 비교\n\n  DB 서버 스펙 : Standard(2 vCPU, 4GB 메모리, 100GB 디스크)\n\n\n\n  \n    \n      DB 구분\n      설치형 DB (서버 비용 포함)\n      관리형 Cloud for DB\n    \n  \n  \n    \n      mysql\n      69,000원/월\n      115,200원/월\n    \n    \n      MSSQL\n      379,000원/월\n      614,880원/월\n    \n  \n\n\n비용 비교 상세 (Mysql)\n\n설치형\n\n  69,000원/월 : 서버 비용 + DB 무료\n\n\n관리형 Cloud\n-115,200원/월 : 160원(시간당) * 24시간(1일) * 30일(한달)\n\n비용 비교 상세 (MSSQL)\n\n설치형\n\n  379,000원/월 : 69,000원(서버) + 20,000원(서버 Windows 라이선스) + 290,000원(MSSQL 라이선스)\n\n\n관리형 Cloud\n\n  614,880원/월 : 854원 (시간당) * 24시간(1일) * 30일(한달)\n\n\n\n  관리형 Cloud for MSSQL은 2020년 12월 기준으로 Classic 환경에서만 이용 가능합니다. VPC 환경에서는 아직 이용할 수 없습니다.\n\n\n\n  관리형 Cloud for MSSQL에서 HA (Principal-Mirror 구성) 구성을 할 경우, DBMS 라이선스 요금은 마스터/슬레이브 서버에만 적용됩니다.\n\n\n설치형 DB서버를 사용하면 좋은 경우\n\n  사내에 DB전문가가 있을 경우\n  서비스에 최적화된 DB설정을 하고 싶은 경우\n  장애 시 자동 Fail-over가 굳이 필요하지 않은 경우\n  DB백업을 원하는 방식으로 직접 하고 싶은 경우\n  DB 사이즈가 일정 크기 이상으로 늘어나는 것을 원하지 않는 경우\n  서비스 안정성 보다 비용 절감이 더 중요한 경우\n\n\n관리형 Cloud DB를 사용하면 좋은 경우\n\n  장애 시 자동 Fail-over를 통해 서비스 중지 시간을 최소로 하고 싶을 경우\n  DB의 읽기 요청이 많아서 읽기 전용 DB를 마련했을 때 효과가 큰 경우\n  DB백업과 디스크 용량 증설 등이 특별한 작업 없이 자동으로 진행되길 원하는 경우\n  비용보다 서비스 안정성이 더 중요한 경우\n  DB전문가가 없는 경우\n\n\n참고 URL\nhttps://www.ncloud.com/product/database\n\n\n  문서 최종 수정일 : 2020-12-30"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"4-storage-ncp-storage-compare": {
+						"id": "4-storage-ncp-storage-compare",
+						"title": "스토리지 비교",
+						"categories": "4.storage",
+						"url": " /4.storage/ncp_storage_compare/",
+						"content": "개요\n네이버 클라우드에서 제공하는 스토리지들의 주요 기능과 용도를 QnA 형식으로 비교 정리해보겠습니다.\n\n비교 대상 스토리지\n\n  Block Storage\n  Object Storage\n  NAS\n  Archive Storage\n\n\n가격 비교\n\n\n  \n    \n      스토리지\n      구분\n      과금 단위\n      시간 당 요금\n      500G 기준 요금\n      기타 사항\n    \n  \n  \n    \n      Block Storage\n      HDD\n      10G\n      0.8원\n      40원\n       \n    \n    \n       \n      SDD\n      10G\n      1.6원\n      80원\n       \n    \n    \n      NAS\n       \n      500G\n      50원\n      50원\n       \n    \n    \n      Object Storage\n      1PB 이하\n      1G\n      0.039원\n      19.5원\n      트래픽, API요청수 요금 별도\n    \n    \n       \n      1PB 초과\n      1G\n      0.036원\n      18원\n      트래픽, API요청수 요금 별도\n    \n    \n      Archive Storage\n       \n      1G\n      0.0076원\n      3.8원\n      트래픽, API요청수 요금 별도\n    \n  \n\n\nQnA\n서버에 디스크를 추가하고 싶을 때는 어떤 스토리지를 사용하면 되나요?\nBlock Storage를 사용하면 됩니다.\nConsole - Server - 서버 상세 정보 - 스토리지 생성 메뉴에서 스토리지를 추가하고 서버에 마운트해서 사용하시면 됩니다.\n\n여러 서버에서 공용으로 사용할 스토리지가 필요합니다.\nNAS 서비스를 이용하시면 됩니다.\n서버 간 데이터 공유, 대용량 스토리지, 유연한 용량 확대/축소, 스냅샷 백업 등 NAS 서비스의 주요 기능을 활용해 안전하고 편리하게 데이터를 관리할 수 있습니다.\n특히, 프로토콜에 따른 인증 설정으로 높은 보안성을 제공하고, 이중화된 Controller 및 Disk Array Raid 구성으로 강력한 서비스 안정성을 확보하고 있습니다.\n\n유저가 업로드 하는 이미지를 저장하고 싶습니다.\nBlock Storage, Object Storage, NAS 모두 가능합니다만 용도에 따라 선택하시면 되겠습니다.\n매우 빠른 응답 속도가 필요하면 Block Storage.\n저렴한 비용과 여러 서버에서 동시에 이미지를 저장해야 한다면 Object Storage.\n\n백업 자료를 오랜기간 보관해 두고 싶습니다.\nArchive Storage를 이용하시면 됩니다.\nArchive Storage는 높은 내구성과 저렴한 비용이 특징인 데이터 아카이빙 및 장기 백업에 최적화된 스토리지 서비스입니다.\n\nAWS S3와 비슷한 스토리지는 어떤 건가요?\nObject Storage입니다.\n네이버 클라우드의 Object Storage는 AWS의 S3에서 사용하는 API와 호환이 되므로 쉽게 사용하실 수 있습니다.\n\nCDN를 서비스를 이용하려면 어떤 스토리지를 사용해야 하나요?\nObject Storage를 사용하시면 됩니다.\n물론 CDN의 원본 서버로 설정할 수 있는 것은 자체 웹 서버 및 네이버 클라우드 Object Storage, Server 등이 있는데, 그 중에서도 Object Storage를 사용하시는 것이 가장 쉽고 안정적입니다.\n\n참고 URL\nhttps://docs.ncloud.com/ko/storage/storage-5-1.html\n\n\n  문서 최종 수정일 : 2020-12-28"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
 					"1-compute-ncp-server-connect-by-public-ip": {
 						"id": "1-compute-ncp-server-connect-by-public-ip",
 						"title": "서버 접속 가이드(Linux) - 공인IP 있을 때",
 						"categories": "1.compute",
 						"url": " /1.compute/ncp_server_connect_by_public_ip/",
-						"content": "개요\n네이버 클라우드에서 리눅스 서버에 접속하는 방법 중에서 공인아이피가 있을 때 접속하는 방법에 대한 내용을 정리하였습니다.\n여기서는 서버에 접속하는 방법을 정리하기 때문에 이미 서버는 생성되어 있다는 전제하게 정리하게 됩니다.\n\n요약\n우선은 전체 과정을 텍스트로 간단하게 요약해서 살펴보고 스크린샷을 포함한 상세 과정은 아래쪽에서 살펴보겠습니다.\n\n\n  포트 포워딩 설정 해제 (설정되어 있을 경우)\n  관리자(root) 비밀번호 확인\n  터미널 프로그램(Putty) 실행\n  공인IP와 ACG에서 설정한 포트로 접속\n  위 2번 관리자 비밀번호 확인에서 기록한 비번 입력\n\n\n포트 포워딩 설정 해제 (설정되어 있을 경우)\n\n네이버 클라우드에서는 포트 포워딩과 공인 IP가 동시에 설정되어 있을 경우 포트 포워딩이 우선 적용됩니다.\n즉, 포트 포워딩이 설정된 상태에서는 Putty로 접속할 때 공인IP로는 접속 되지 않는다는 뜻입니다.\n그러므로, 서버 접속을 공인 IP로 하는 경우에는 포트 포워딩을 해제하시고,\n포트 포워딩을 설정하지 않았다면 다음 순서인 관리자(root) 비밀번호 확인으로 바로 이동하시면 되겠습니다.\n\n\n포트 포워딩을 해제 하시려면 아래 화면처럼 설정된 포트 포워딩에서 삭제 버튼을 클릭하시고 하단의 적용 버튼을 클릭합니다.\n\n\n관리자 비밀번호 확인\n\n네이버 클라우드에서 처음 서버를 생성하고 접속하게 되면 root와 비밀번호로 접속하게 됩니다.\n물론 매번 비번을 입력하고 접속하는 것은 번거롭기도 하고 보안 측면에서 좋지 않기 때문에 이후에 SSH Key를 생성해서 접속하는 방식으로 바꾸는 것이 좋습니다.\n\n\n관리자 비밀번호 확인 메뉴를 클릭하면 인증키를 확인하는 화면이 나옵니다.\n인증키는 서버 생성시에 설정하고 PC에 다운로드 해 둔 확장지 *.pem 파일입니다. \n\n\n인증키 파일을 마우스로 끌어오거나 화면을 클릭해서 선택합니다.\n\n\n인증키가 일치하면 아래와 같이 root 계정에 해당하는 비밀번호가 나타납니다.\n이 비밀번호를 복사하여 저장해둡니다.\n혹시 복사-저장하는 것을 잊으셨어도 언제든지 관리자 비밀번호 확인 메뉴에 들어가서 인증키를 인증하면 다시 확인할 수 있으니 걱정하지 않으셔도 됩니다.\n\n\n터미널 프로그램(Putty) 실행\n\nPutty를 실행해서 서버 생성 시에 ACG에서 설정한 포트와 공인IP를 입력합니다\n\n\n접속을 하면 rsa2 key fingerprint 를 Putty 캐시에 저장할 것인지 묻는 화면이 나타납니다. \n보통 예(Y)를 선택하면 됩니다.\n\n\nroot 계정과 관리자 비밀번호 입력\n\n계정 root와 관리자 비밀번호 확인에서 저장해 둔 비밀번호를 입력합니다.\n\n\n접속이 완료되면 이렇게 화면이 나타납니다.\n\n\n참고 URL\nhttps://docs.ncloud.com/ko/compute/compute-3-1-v2.html\n\n\n  문서 최종 수정일 : 2020-12-22"
+						"content": "개요\n네이버 클라우드에서 리눅스 서버에 접속하는 방법 중에서 공인아이피가 있을 때 접속하는 방법에 대한 내용을 정리하였습니다.\n여기서는 서버에 접속하는 방법을 정리하기 때문에 이미 서버는 생성되어 있다는 전제하게 정리하게 됩니다.\n\n요약\n우선은 전체 과정을 텍스트로 간단하게 요약해서 살펴보고 스크린샷을 포함한 상세 과정은 아래쪽에서 살펴보겠습니다.\n\n\n  포트 포워딩 설정 해제 (설정되어 있을 경우)\n  관리자(root) 비밀번호 확인\n  터미널 프로그램(Putty) 실행\n  공인IP로 접속\n  위 2번 관리자 비밀번호 확인에서 기록한 비번 입력\n\n\n포트 포워딩 설정 해제 (설정되어 있을 경우)\n\n네이버 클라우드에서는 Server, Bare Metal Server에서 공인 IP와 포트 포워딩을 동시에 사용하면 22(Linux), 3389(Windows) 포트가 포트 포워딩에 먼저 할당되므로 공인 IP에서 해당 포트 사용이 불가해집니다.\n즉, 포트 포워딩이 설정된 상태에서는 Putty로 접속할 때 공인IP로는 22, 3389 포트가 접속 되지 않는다는 뜻입니다.\n그러므로, 공인 IP로 22, 3389 포트에 접속하는 경우에는 포트 포워딩을 해제하시고,\n포트 포워딩을 설정하지 않았다면 다음 순서인 관리자(root) 비밀번호 확인으로 바로 이동하시면 되겠습니다.\n\n\n포트 포워딩을 해제 하시려면 아래 화면처럼 설정된 포트 포워딩에서 삭제 버튼을 클릭하시고 하단의 적용 버튼을 클릭합니다.\n\n\n관리자 비밀번호 확인\n\n네이버 클라우드에서 처음 서버를 생성하고 접속하게 되면 root와 비밀번호로 접속하게 됩니다.\n물론 매번 비번을 입력하고 접속하는 것은 번거롭기도 하고 보안 측면에서 좋지 않기 때문에 이후에 SSH Key를 생성해서 접속하는 방식으로 바꾸는 것이 좋습니다.\n\n\n관리자 비밀번호 확인 메뉴를 클릭하면 인증키를 확인하는 화면이 나옵니다.\n인증키는 서버 생성시에 설정하고 PC에 다운로드 해 둔 확장지 *.pem 파일입니다. \n\n\n인증키 파일을 마우스로 끌어오거나 화면을 클릭해서 선택합니다.\n\n\n인증키가 일치하면 아래와 같이 root 계정에 해당하는 비밀번호가 나타납니다.\n이 비밀번호를 복사하여 저장해둡니다.\n혹시 복사-저장하는 것을 잊으셨어도 언제든지 관리자 비밀번호 확인 메뉴에 들어가서 인증키를 인증하면 다시 확인할 수 있으니 걱정하지 않으셔도 됩니다.\n\n\n터미널 프로그램(Putty) 실행\n\nPutty를 실행해서 공인IP를 입력합니다\n\n\n접속을 하면 rsa2 key fingerprint 를 Putty 캐시에 저장할 것인지 묻는 화면이 나타납니다. \n보통 예(Y)를 선택하면 됩니다.\n\n\nroot 계정과 관리자 비밀번호 입력\n\n계정 root와 관리자 비밀번호 확인에서 저장해 둔 비밀번호를 입력합니다.\n\n\n접속이 완료되면 이렇게 화면이 나타납니다.\n\n\n참고 URL\nhttps://docs.ncloud.com/ko/compute/compute-3-1-v2.html\n\n\n  문서 최종 수정일 : 2020-12-22"
 					}
 					
 				
@@ -119,7 +179,7 @@
 						"title": "서버 접속 가이드(Linux) - 공인IP 없을 때",
 						"categories": "1.compute",
 						"url": " /1.compute/ncp_server_connect_no_public_ip/",
-						"content": "개요\n네이버 클라우드에서 리눅스 서버에 접속하는 방법 중에서 공인아이피가 없을 때 접속하는 방법에 대한 내용을 정리하였습니다.\n여기서는 서버에 접속하는 방법을 정리하기 때문에 이미 서버는 생성되어 있다는 전제하게 정리하게 됩니다.\n\n요약\n우선은 전체 과정을 텍스트로 간단하게 요약해서 살펴보고 스크린샷을 포함한 상세 과정은 아래쪽에서 살펴보겠습니다.\n\n\n  포트 포워딩 설정\n  관리자(root) 비밀번호 확인\n  터미널 프로그램(Putty) 실행\n  위 1번 포트 포워딩에서 설정한 포트와 IP로 접속\n  위 2번 관리자 비밀번호 확인에서 기록한 비번 입력\n\n\n포트 포워딩 설정\n\n네이버 클라우드에서 공인IP 없이 서버에 접속하려면 외부 접속을 위한 포트 포워딩을 설정해야 합니다.\n생성된 서버를 선택하면 상단 메뉴에 포트 포워딩 설정이 있습니다.\n\n\n포트 포워딩 메뉴에 들어가면 아래와 같이 서버 접속용 공인 IP가 보이고, 외부에서 접속할 포트 (Putty에 입력할 포트)를 입력하는 곳이 있습니다.\n\n\n포트 포워딩에서 사용할 수 있는 포트 번호 범위는 1,024 ~ 65,534 이며, 이 범위 내에서 원하는 포트를 입력하시면 됩니다.\n(Tip: 서버 접속용 공인IP를 활용해서 포트 번호를 입력하면 기억하기 쉽습니다. )\n(예: OOO.12.45.178 인 경우 포트를 17822,  106.10.OO.OO 인 경우 10622 )\n\n\n포트를 입력하고 +추가 버튼을 클릭합니다.\n\n\n추가된 포트와 서버 접속용 공인 IP 정보를 확인하고 수정할 부분이 있으면 수정합니다.\n더 이상 수정할 내용이 없으면 하단의 적용 버튼을 반드시 클릭합니다.\n\n\n관리자 비밀번호 확인\n\n네이버 클라우드에서 처음 서버를 생성하고 접속하게 되면 root와 비밀번호로 접속하게 됩니다.\n물론 매번 비번을 입력하고 접속하는 것은 번거롭기도 하고 보안 측면에서 좋지 않기 때문에 이후에 SSH Key를 생성해서 접속하는 방식으로 바꾸는 것이 좋습니다.\n\n\n관리자 비밀번호 확인 메뉴를 클릭하면 인증키를 확인하는 화면이 나옵니다.\n인증키는 서버 생성시에 설정하고 PC에 다운로드 해 둔 확장지 *.pem 파일입니다. \n\n\n인증키 파일을 마우스로 끌어오거나 화면을 클릭해서 선택합니다.\n\n\n인증키가 일치하면 아래와 같이 root 계정에 해당하는 비밀번호가 나타납니다.\n이 비밀번호를 복사하여 저장해둡니다.\n혹시 복사-저장하는 것을 잊으셨어도 언제든지 관리자 비밀번호 확인 메뉴에 들어가서 인증키를 인증하면 다시 확인할 수 있으니 걱정하지 않으셔도 됩니다.\n\n\n터미널 프로그램(Putty) 실행\n\nPutty를 실행해서 포트 포워딩에서 설정한 포트와 서버 접속용 공인IP를 입력합니다\n\n\n접속을 하면 rsa2 key fingerprint 를 Putty 캐시에 저장할 것인지 묻는 화면이 나타납니다. \n보통 예(Y)를 선택하면 됩니다.\n\n\nroot 계정과 관리자 비밀번호 입력\n\n계정 root와 관리자 비밀번호 확인에서 저장해 둔 비밀번호를 입력합니다.\n\n\n접속이 완료되면 이렇게 화면이 나타납니다.\n\n\n참고 URL\nhttps://docs.ncloud.com/ko/compute/compute-3-1-v2.html\n\n\n  문서 최종 수정일 : 2020-12-21"
+						"content": "개요\n네이버 클라우드에서 리눅스 서버에 접속하는 방법 중에서 공인아이피가 없을 때 접속하는 방법에 대한 내용을 정리하였습니다.\n여기서는 서버에 접속하는 방법을 정리하기 때문에 이미 서버는 생성되어 있다는 전제하게 정리하게 됩니다.\n또한, Classic 과 VPC 환경 중에서 VPC는 포트 포워딩이 없고 공인 IP로만 접속하기 때문에 아래에서 설명하는 내용은 Classic 환경 기준입니다.\n\n요약\n우선은 전체 과정을 텍스트로 간단하게 요약해서 살펴보고 스크린샷을 포함한 상세 과정은 아래쪽에서 살펴보겠습니다.\n\n\n  포트 포워딩 설정\n  관리자(root) 비밀번호 확인\n  터미널 프로그램(Putty) 실행\n  위 1번 포트 포워딩에서 설정한 포트와 IP로 접속\n  위 2번 관리자 비밀번호 확인에서 기록한 비번 입력\n\n\n포트 포워딩 설정\n\n네이버 클라우드에서 공인IP 없이 서버에 접속하려면 외부 접속을 위한 포트 포워딩을 설정해야 합니다.\n생성된 서버를 선택하면 상단 메뉴에 포트 포워딩 설정이 있습니다.\n\n\n포트 포워딩 메뉴에 들어가면 아래와 같이 서버 접속용 공인 IP가 보이고, 외부에서 접속할 포트 (Putty에 입력할 포트)를 입력하는 곳이 있습니다.\n\n\n포트 포워딩에서 사용할 수 있는 포트 번호 범위는 1,024 ~ 65,534 이며, 이 범위 내에서 원하는 포트를 입력하시면 됩니다.\n(Tip: 서버 접속용 공인IP를 활용해서 포트 번호를 입력하면 기억하기 쉽습니다. )\n(예: OOO.12.45.178 인 경우 포트를 17822,  106.10.OO.OO 인 경우 10622 )\n\n\n포트를 입력하고 +추가 버튼을 클릭합니다.\n\n\n추가된 포트와 서버 접속용 공인 IP 정보를 확인하고 수정할 부분이 있으면 수정합니다.\n더 이상 수정할 내용이 없으면 하단의 적용 버튼을 반드시 클릭합니다.\n\n\n관리자 비밀번호 확인\n\n네이버 클라우드에서 처음 서버를 생성하고 접속하게 되면 root와 비밀번호로 접속하게 됩니다.\n물론 매번 비번을 입력하고 접속하는 것은 번거롭기도 하고 보안 측면에서 좋지 않기 때문에 이후에 SSH Key를 생성해서 접속하는 방식으로 바꾸는 것이 좋습니다.\n\n\n관리자 비밀번호 확인 메뉴를 클릭하면 인증키를 확인하는 화면이 나옵니다.\n인증키는 서버 생성시에 설정하고 PC에 다운로드 해 둔 확장지 *.pem 파일입니다. \n\n\n인증키 파일을 마우스로 끌어오거나 화면을 클릭해서 선택합니다.\n\n\n인증키가 일치하면 아래와 같이 root 계정에 해당하는 비밀번호가 나타납니다.\n이 비밀번호를 복사하여 저장해둡니다.\n혹시 복사-저장하는 것을 잊으셨어도 언제든지 관리자 비밀번호 확인 메뉴에 들어가서 인증키를 인증하면 다시 확인할 수 있으니 걱정하지 않으셔도 됩니다.\n\n\n터미널 프로그램(Putty) 실행\n\nPutty를 실행해서 포트 포워딩에서 설정한 포트와 서버 접속용 공인IP를 입력합니다\n\n\n접속을 하면 rsa2 key fingerprint 를 Putty 캐시에 저장할 것인지 묻는 화면이 나타납니다. \n보통 예(Y)를 선택하면 됩니다.\n\n\nroot 계정과 관리자 비밀번호 입력\n\n계정 root와 관리자 비밀번호 확인에서 저장해 둔 비밀번호를 입력합니다.\n\n\n접속이 완료되면 이렇게 화면이 나타납니다.\n\n\n참고 URL\nhttps://docs.ncloud.com/ko/compute/compute-3-1-v2.html\n\n\n  문서 최종 수정일 : 2020-12-21"
 					}
 					
 				
@@ -471,7 +531,7 @@
 					</a></li>
 			
 		</ul>
-		<p class="copyright">&copy; 3rdeyesys 2020. All rights reserved.</p>
+		<p class="copyright">&copy; 3rdeyesys 2021. All rights reserved.</p>
 	</div>
 </footer>
 
