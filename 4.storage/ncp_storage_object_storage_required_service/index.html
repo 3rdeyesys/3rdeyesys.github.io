@@ -26,19 +26,19 @@
 		
 
 		<!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>스토리지 비교 | 3rdeyesys</title>
+<title>Object Storage와 연동이 필수인 서비스 | 3rdeyesys</title>
 <meta name="generator" content="Jekyll v3.7.2" />
-<meta property="og:title" content="스토리지 비교" />
+<meta property="og:title" content="Object Storage와 연동이 필수인 서비스" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="네이버 클라우드 스토리지 비교" />
-<meta property="og:description" content="네이버 클라우드 스토리지 비교" />
-<link rel="canonical" href="https://docs.3rdeyesys.com/4.storage/ncp_storage_compare/" />
-<meta property="og:url" content="https://docs.3rdeyesys.com/4.storage/ncp_storage_compare/" />
+<meta name="description" content="네이버 클라우드 Object Storage와 연동이 필수인 서비스" />
+<meta property="og:description" content="네이버 클라우드 Object Storage와 연동이 필수인 서비스" />
+<link rel="canonical" href="https://docs.3rdeyesys.com/4.storage/ncp_storage_object_storage_required_service/" />
+<meta property="og:url" content="https://docs.3rdeyesys.com/4.storage/ncp_storage_object_storage_required_service/" />
 <meta property="og:site_name" content="3rdeyesys" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-12-24T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-01-29T00:00:00+09:00" />
 <script type="application/ld+json">
-{"url":"https://docs.3rdeyesys.com/4.storage/ncp_storage_compare/","headline":"스토리지 비교","dateModified":"2020-12-24T00:00:00+09:00","datePublished":"2020-12-24T00:00:00+09:00","description":"네이버 클라우드 스토리지 비교","mainEntityOfPage":{"@type":"WebPage","@id":"https://docs.3rdeyesys.com/4.storage/ncp_storage_compare/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://docs.3rdeyesys.com/siteicon.png"}},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"url":"https://docs.3rdeyesys.com/4.storage/ncp_storage_object_storage_required_service/","headline":"Object Storage와 연동이 필수인 서비스","dateModified":"2021-01-29T00:00:00+09:00","datePublished":"2021-01-29T00:00:00+09:00","description":"네이버 클라우드 Object Storage와 연동이 필수인 서비스","mainEntityOfPage":{"@type":"WebPage","@id":"https://docs.3rdeyesys.com/4.storage/ncp_storage_object_storage_required_service/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://docs.3rdeyesys.com/siteicon.png"}},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link type="application/atom+xml" rel="alternate" href="https://docs.3rdeyesys.com/feed.xml" title="3rdeyesys" />
@@ -107,130 +107,50 @@
 			
 				<li><a href="#개요">개요</a></li>
 			
-				<li><a href="#비교-대상-스토리지">비교 대상 스토리지</a></li>
+				<li><a href="#연동-필수-서비스">연동 필수 서비스</a></li>
 			
-				<li><a href="#가격-비교">가격 비교</a></li>
-			
-				<li><a href="#qna">QnA</a></li>
-			
-				<li><a href="#참고-url">참고 URL</a></li>
+				<li><a href="#연동-선택-서비스">연동 선택 서비스</a></li>
 			
 		</ul>
 	</section>
 	<section class="tutorial-content">
-		<h1>스토리지 비교</h1>
+		<h1>Object Storage와 연동이 필수인 서비스</h1>
 
 		
 		
 		<div class="tutorial-main">
 			<h2 id="개요">개요</h2>
-<p>네이버 클라우드에서 제공하는 스토리지들의 주요 기능과 용도를 QnA 형식으로 비교 정리해보겠습니다.</p>
+<p>네이버 클라우드의 수 많은 서비스들 중에는 Object Storage가 설정, 준비되어 있어야 하는 서비스들, 즉, Object Storage와 연동이 필수인 서비스들이 여럿 있습니다.<br />
+어떤 서비스들이 이에 해당하는지 정리해보겠습니다.</p>
 
-<h2 id="비교-대상-스토리지">비교 대상 스토리지</h2>
+<h2 id="연동-필수-서비스">연동 필수 서비스</h2>
+<p>Object Storage와 연동이 필수인 서비스들에는 AI-Application Service와 Media 관련 서비스들이 많습니다.</p>
+
 <ul>
-  <li>Block Storage</li>
-  <li>Object Storage</li>
-  <li>NAS</li>
-  <li>Archive Storage</li>
+  <li>CLOVA Speech</li>
+  <li>CLOVA Dubbing</li>
+  <li>VOD Transcoder</li>
+  <li>VOD Station</li>
+  <li>Video Player</li>
+  <li>Image Optimizer</li>
+  <li>SourceBuild</li>
+  <li>Cloud Hadoop</li>
 </ul>
 
-<h2 id="가격-비교">가격 비교</h2>
+<p><img src="../../images/ncp_storage_object_storage_required_service_01.jpg" alt="Object Storage와 연동이 필수인 서비스" style="width:800px;align:center" /></p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">스토리지</th>
-      <th style="text-align: center">구분</th>
-      <th style="text-align: right">과금 단위</th>
-      <th style="text-align: right">시간 당 요금</th>
-      <th style="text-align: right">500G 기준 요금</th>
-      <th style="text-align: center">기타 사항</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">Block Storage</td>
-      <td style="text-align: center">HDD</td>
-      <td style="text-align: right">10G</td>
-      <td style="text-align: right">0.8원</td>
-      <td style="text-align: right">40원</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center"> </td>
-      <td style="text-align: center">SDD</td>
-      <td style="text-align: right">10G</td>
-      <td style="text-align: right">1.6원</td>
-      <td style="text-align: right">80원</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">NAS</td>
-      <td style="text-align: center"> </td>
-      <td style="text-align: right">500G</td>
-      <td style="text-align: right">50원</td>
-      <td style="text-align: right">50원</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Object Storage</td>
-      <td style="text-align: center">1PB 이하</td>
-      <td style="text-align: right">1G</td>
-      <td style="text-align: right">0.039원</td>
-      <td style="text-align: right">19.5원</td>
-      <td style="text-align: center">트래픽, API요청수 요금 별도</td>
-    </tr>
-    <tr>
-      <td style="text-align: center"> </td>
-      <td style="text-align: center">1PB 초과</td>
-      <td style="text-align: right">1G</td>
-      <td style="text-align: right">0.036원</td>
-      <td style="text-align: right">18원</td>
-      <td style="text-align: center">트래픽, API요청수 요금 별도</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Archive Storage</td>
-      <td style="text-align: center"> </td>
-      <td style="text-align: right">1G</td>
-      <td style="text-align: right">0.0076원</td>
-      <td style="text-align: right">3.8원</td>
-      <td style="text-align: center">트래픽, API요청수 요금 별도</td>
-    </tr>
-  </tbody>
-</table>
+<p><img src="../../images/ncp_storage_object_storage_required_service_02.jpg" alt="Object Storage와 연동이 필수인 서비스" style="width:800px;align:center" /></p>
 
-<h2 id="qna">QnA</h2>
-<h3 id="서버에-디스크를-추가하고-싶을-때는-어떤-스토리지를-사용하면-되나요">서버에 디스크를 추가하고 싶을 때는 어떤 스토리지를 사용하면 되나요?</h3>
-<p>Block Storage를 사용하면 됩니다.<br />
-Console - Server - 서버 상세 정보 - 스토리지 생성 메뉴에서 스토리지를 추가하고 서버에 마운트해서 사용하시면 됩니다.</p>
+<h2 id="연동-선택-서비스">연동 선택 서비스</h2>
+<p>Object Storage와 반드시 연동해야 하는 것은 아니지만, Object Storage를 이용하면 훨씬 편하고, 빠르고 안정적으로 서비스 가능한 경우도 있습니다.</p>
 
-<h3 id="여러-서버에서-공용으로-사용할-스토리지가-필요합니다">여러 서버에서 공용으로 사용할 스토리지가 필요합니다.</h3>
-<p>NAS 서비스를 이용하시면 됩니다.<br />
-서버 간 데이터 공유, 대용량 스토리지, 유연한 용량 확대/축소, 스냅샷 백업 등 NAS 서비스의 주요 기능을 활용해 안전하고 편리하게 데이터를 관리할 수 있습니다.<br />
-특히, 프로토콜에 따른 인증 설정으로 높은 보안성을 제공하고, 이중화된 Controller 및 Disk Array Raid 구성으로 강력한 서비스 안정성을 확보하고 있습니다.</p>
-
-<h3 id="유저가-업로드-하는-이미지를-저장하고-싶습니다">유저가 업로드 하는 이미지를 저장하고 싶습니다.</h3>
-<p>Block Storage, Object Storage, NAS 모두 가능합니다만 용도에 따라 선택하시면 되겠습니다.<br />
-매우 빠른 응답 속도가 필요하면 Block Storage.<br />
-저렴한 비용과 여러 서버에서 동시에 이미지를 저장해야 한다면 Object Storage.</p>
-
-<h3 id="백업-자료를-오랜기간-보관해-두고-싶습니다">백업 자료를 오랜기간 보관해 두고 싶습니다.</h3>
-<p>Archive Storage를 이용하시면 됩니다.<br />
-Archive Storage는 높은 내구성과 저렴한 비용이 특징인 데이터 아카이빙 및 장기 백업에 최적화된 스토리지 서비스입니다.</p>
-
-<h3 id="aws-s3와-비슷한-스토리지는-어떤-건가요">AWS S3와 비슷한 스토리지는 어떤 건가요?</h3>
-<p>Object Storage입니다.<br />
-네이버 클라우드의 Object Storage는 AWS의 S3에서 사용하는 API와 호환이 되므로 쉽게 사용하실 수 있습니다.</p>
-
-<h3 id="cdn를-서비스를-이용하려면-어떤-스토리지를-사용해야-하나요">CDN를 서비스를 이용하려면 어떤 스토리지를 사용해야 하나요?</h3>
-<p>Object Storage를 사용하시면 됩니다.<br />
-물론 CDN의 원본 서버로 설정할 수 있는 것은 자체 웹 서버 및 네이버 클라우드 Object Storage, Server 등이 있는데, 그 중에서도 Object Storage를 사용하시는 것이 가장 쉽고 안정적입니다.</p>
-
-<h2 id="참고-url">참고 URL</h2>
-<p><a href="https://docs.ncloud.com/ko/storage/storage-5-1.html" target="_blank">https://docs.ncloud.com/ko/storage/storage-5-1.html</a></p>
+<ul>
+  <li>CDN+</li>
+  <li>Global CDN</li>
+</ul>
 
 <blockquote>
-  <p>문서 최종 수정일 : 2020-12-28</p>
+  <p>문서 최종 수정일 : 2021-01-29</p>
 </blockquote>
 
 		</div>
@@ -260,7 +180,7 @@ Archive Storage는 높은 내구성과 저렴한 비용이 특징인 데이터 �
 
 		<ul class="listing">
 	
-		<li class="active">
+		<li >
 			<a href="/4.storage/ncp_storage_compare/">
 				<div class="icon">
 		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -311,7 +231,7 @@ Archive Storage는 높은 내구성과 저렴한 비용이 특징인 데이터 �
 			</a>
 		</li>
 	
-		<li >
+		<li class="active">
 			<a href="/4.storage/ncp_storage_object_storage_required_service/">
 				<div class="icon">
 		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -338,23 +258,6 @@ Archive Storage는 높은 내구성과 저렴한 비용이 특징인 데이터 �
 		<h3>Related tutorials</h3>
 
 		<ul class="listing">
-	
-		<li >
-			<a href="/4.storage/ncp_storage_object_storage_required_service/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>Object Storage와 연동이 필수인 서비스</h3>
-						<p class="description">네이버 클라우드 Object Storage와 연동이 필수인 서비스</p>
-					</div>
-				</article>
-			</a>
-		</li>
 	
 		<li >
 			<a href="/1.compute/ncp_server_pip_python_install_centos6/">
@@ -509,6 +412,23 @@ Archive Storage는 높은 내구성과 저렴한 비용이 특징인 데이터 �
 			</a>
 		</li>
 	
+		<li >
+			<a href="/1.compute/ncp_server_vpc_create/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>VPC 환경에서 서버 생성</h3>
+						<p class="description">네이버 클라우드 VPC 환경에서 서버 생성</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
 </ul>
 	</div>
 
@@ -533,17 +453,17 @@ Archive Storage는 높은 내구성과 저렴한 비용이 특징인 데이터 �
 		<h2>Share</h2>
 		<p>Share this tutorial with your community.</p>
 		<ul>
-			<li><a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdocs.3rdeyesys.com%2F4.storage%2Fncp_storage_compare%2F">
+			<li><a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdocs.3rdeyesys.com%2F4.storage%2Fncp_storage_object_storage_required_service%2F">
 		<svg class="twitter" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" /></svg>
 	
  Twitter</a></li>
-			<li><a class="facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdocs.3rdeyesys.com%2F4.storage%2Fncp_storage_compare%2F">
+			<li><a class="facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdocs.3rdeyesys.com%2F4.storage%2Fncp_storage_object_storage_required_service%2F">
 		<svg class="facebook" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="15.8 15.8 25 25"><path d="M32.8 24.7h-3.2v-2.1c0-0.8 0.5-1 0.9-1s2.3 0 2.3 0v-3.5l-3.1 0c-3.5 0-4.3 2.6-4.3 4.3v2.3h-2v3.6h2c0 4.6 0 10.2 0 10.2h4.2c0 0 0-5.6 0-10.2h2.8L32.8 24.7z"/></svg>
 	
  Facebook</a></li>
-			<li><a class="google-plus" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fdocs.3rdeyesys.com%2F4.storage%2Fncp_storage_compare%2F">
+			<li><a class="google-plus" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fdocs.3rdeyesys.com%2F4.storage%2Fncp_storage_object_storage_required_service%2F">
  Google+</a></li>
-			<li><a class="hacker-news" target="_blank" href="http://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdocs.3rdeyesys.com%2F4.storage%2Fncp_storage_compare%2F&t=%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80%20%EB%B9%84%EA%B5%90">
+			<li><a class="hacker-news" target="_blank" href="http://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdocs.3rdeyesys.com%2F4.storage%2Fncp_storage_object_storage_required_service%2F&t=Object%20Storage%EC%99%80%20%EC%97%B0%EB%8F%99%EC%9D%B4%20%ED%95%84%EC%88%98%EC%9D%B8%20%EC%84%9C%EB%B9%84%EC%8A%A4">
 		<svg class="hacker-news" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18.8 3.3c-0.4 0.8-5.6 11.1-5.6 11.2 0 2 0 6.2 0 6.2 -0.1 0-2.2 0-2.3 0 0 0 0-5.9 0-6.2 0 0-5.5-10.9-5.6-11.1C5.3 3.3 5.3 3.3 5.3 3.3 5.3 3.3 5.3 3.3 5.3 3.3c0 0 0 0 0.1 0 0.9 0 1.7 0 2.6 0 0 0 0 0 0 0.1 0.1 0.1 4 8.3 4.1 8.3 0 0 4.2-8.3 4.3-8.4 0.8 0 1.6 0 2.4 0 0 0 0 0 0 0C18.8 3.3 18.8 3.3 18.8 3.3z"/></svg>
 	
  Hacker News</a></li>
