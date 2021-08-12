@@ -26,19 +26,19 @@
 		
 
 		<!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>Micro 타입 서버에서 사용할 수 없는 서비스 | 3rdeyesys</title>
+<title>AWS S3 수명 주기 (LifeCycle) 설정하기 | 3rdeyesys</title>
 <meta name="generator" content="Jekyll v3.7.2" />
-<meta property="og:title" content="Micro 타입 서버에서 사용할 수 없는 서비스" />
+<meta property="og:title" content="AWS S3 수명 주기 (LifeCycle) 설정하기" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="네이버 클라우드 Micro 타입 서버에서 사용할 수 없는 서비스" />
-<meta property="og:description" content="네이버 클라우드 Micro 타입 서버에서 사용할 수 없는 서비스" />
-<link rel="canonical" href="https://docs.3rdeyesys.com/1.compute/ncp_server_micro_limit/" />
-<meta property="og:url" content="https://docs.3rdeyesys.com/1.compute/ncp_server_micro_limit/" />
+<meta name="description" content="AWS S3 수명 주기 (LifeCycle) 설정하기 가이드입니다" />
+<meta property="og:description" content="AWS S3 수명 주기 (LifeCycle) 설정하기 가이드입니다" />
+<link rel="canonical" href="https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management/" />
+<meta property="og:url" content="https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management/" />
 <meta property="og:site_name" content="3rdeyesys" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-11-13T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-08-12T00:00:00+09:00" />
 <script type="application/ld+json">
-{"url":"https://docs.3rdeyesys.com/1.compute/ncp_server_micro_limit/","headline":"Micro 타입 서버에서 사용할 수 없는 서비스","dateModified":"2020-11-13T00:00:00+09:00","datePublished":"2020-11-13T00:00:00+09:00","description":"네이버 클라우드 Micro 타입 서버에서 사용할 수 없는 서비스","mainEntityOfPage":{"@type":"WebPage","@id":"https://docs.3rdeyesys.com/1.compute/ncp_server_micro_limit/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://docs.3rdeyesys.com/siteicon.png"}},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"url":"https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management/","headline":"AWS S3 수명 주기 (LifeCycle) 설정하기","dateModified":"2021-08-12T00:00:00+09:00","datePublished":"2021-08-12T00:00:00+09:00","description":"AWS S3 수명 주기 (LifeCycle) 설정하기 가이드입니다","mainEntityOfPage":{"@type":"WebPage","@id":"https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://docs.3rdeyesys.com/siteicon.png"}},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link type="application/atom+xml" rel="alternate" href="https://docs.3rdeyesys.com/feed.xml" title="3rdeyesys" />
@@ -128,7 +128,9 @@
 			
 				<li><a href="#개요">개요</a></li>
 			
-				<li><a href="#제한되는-서비스">제한되는 서비스</a></li>
+				<li><a href="#수명주기-설정">수명주기 설정</a></li>
+			
+				<li><a href="#주의사항">주의사항</a></li>
 			
 				<li><a href="#참고-url">참고 URL</a></li>
 			
@@ -142,7 +144,9 @@
 	
 	
 	<section class="tutorial-content">
-		<h1>Micro 타입 서버에서 사용할 수 없는 서비스
+		<h1>AWS S3 수명 주기 (LifeCycle) 설정하기
+		
+			<span class="badge badge-pill badge-danger" style="font-size:50%">new</span>
 		
 		</h1>
 
@@ -150,53 +154,58 @@
 		
 		<div class="tutorial-main">
 			<h2 id="개요">개요</h2>
-<p>네이버 클라우드에서 제공하는 서버 타입 중에서 Micro 타입의 서버는 신규 가입 후 최초 결제수단 등록월부터 1년간 무료로 제공되는 체험용 서버입니다.
-계정당 1대만 이용 가능하며 1년이 지나면 유료로 전환됩니다.</p>
+<p>AWS S3에서는 버킷내 특정 디렉토리 하위 파일들에 대해 지정된 날짜가 지난 후 만료(삭제)가 되도록 설정할 수 있습니다. 
+수명 주기 관리(LifeCycle Management)라고 불리는 이 방법은 파일관리 뿐만 아니라 비용절감에도 도움이 됩니다.</p>
 
-<h2 id="제한되는-서비스">제한되는 서비스</h2>
-<p>Micro 타입의 서버에서 사용할 수 없는 서비스는 다음과 같습니다.</p>
+<h2 id="수명주기-설정">수명주기 설정</h2>
+<p>AWS 콘솔에 접속 후 수명 주기를 적용할 S3 버킷으로 이동해 [관리] 메뉴 클릭합니다.</p>
 
-<ul>
-  <li>mssql</li>
-  <li>LAMP, WordPress, LEMP 등</li>
-  <li>Network Interface</li>
-  <li>Private Subnet</li>
-</ul>
+<p><img src="../../images/aws_s3_lifecycle_01.jpg" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" style="width:770px;align:center" /></p>
 
-<h3 id="mssql">MSSQL</h3>
-<p>mssql 중에서 mssql 2017 Express은 무료로 제공되는 서비스이지만, mssql이 1년 무료제공 서버인 Micro서버에서는 설치가 되지 않기 때문에, compact 이상의 유료 서버를 이용해야 합니다.
-즉, mssql 2017 Express는 무료이나 서버와 그에 따른 하드 디스크 비용은 유료입니다.</p>
+<p>[수명 주기 규칙 생성] 버튼을 클릭합니다.</p>
 
-<h3 id="lamp">LAMP</h3>
-<p>LAMP (Linux + Apache, Mysql, PHP)의 경우 Micro 타입의 서버에 설치를 할 수 없고, Standard 이상의 서버에서만 설치할 수 있는데, 대신 네이버 클라우드에서는 LAMP 등 많이 사용되는 오픈 소스 소프트웨어가 설치된 서버를 쉽게 이용할 수 있도록 해주는 서비스인 Application Server Launcher를 제공하고 있습니다.</p>
+<p><img src="../../images/aws_s3_lifecycle_02.jpg" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" style="width:770px;align:center" /></p>
 
-<p>Application Server Launcher에서는 원하는 소프트웨어의 이미지를 선택하기만 하면 쉽게 Micro 타입의 서버를 세팅하고 이용할 수 있습니다.</p>
+<p>수명 주기 규칙 이름을 입력하고, 규칙 범위는 [하나 이상의 필터를 사용하여 이 규칙의 범위 제한]을 선택합니다.<br />
+접두사에는 수명 주기를 적용할 디렉토리나 파일 등의 필터를 작성합니다. 예를 들어 images 디렉토리가 포함된 모든 파일에 적용하려면 <strong>images/</strong> 라고 입력합니다. 이때 버킷명은 제외하고 입력해야 합니다.</p>
 
-<blockquote>
-  <p>다만, Application Server Launcher에서 생성한 서버도 Micro 타입의 서버이기 때문에 계정당 1개만 제공되는 Micro 타입 서버 기준에 따라 Micro 타입의 서버는 더 이상 추가할 수 없습니다.</p>
-</blockquote>
+<p><img src="../../images/aws_s3_lifecycle_03.jpg" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" style="width:770px;align:center" /></p>
 
-<p>Application Server Launcher에서 OS버전(CentOS, Ubuntu)별로 제공되는 애플리케이션은 다음과 같습니다.</p>
+<p>수명 주기 규칙 작업에서 [객체의 이전버전 영구 삭제]를 선택하면, 몇일 후에 삭제할 것인지를 설정할 수 있는 [객체가 이전 버전이 된 후 경과 일수] 항목이 나타납니다. 
+여기에 원하는 날짜를 입력하고, [규칙 생성] 버튼을 클릭합니다.</p>
 
-<ul>
-  <li>Drupal (CMS)</li>
-  <li>Joomla! (CMS)</li>
-  <li>Magento (E-Commerce)</li>
-  <li>Shadowsocks (VPN)</li>
-  <li>LAMP (Web Stack)</li>
-  <li>WordPress (CMS)</li>
-  <li>Jenkins (Dev Tools)</li>
-</ul>
+<p><img src="../../images/aws_s3_lifecycle_04.jpg" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" style="width:770px;align:center" /></p>
 
-<h3 id="private-subnet">Private Subnet</h3>
-<p>Private Subnet을 구성해서 서버환경을 만들려고 해도 Micro 서버 타입은 Network Interface를 추가할 수 없고, 그에 따라 Private Subnet도 적용할 수 없습니다.</p>
+<h2 id="주의사항">주의사항</h2>
+<p>AWS 수명 주기 관련해서 주의해야 할 사항이 몇가지 있습니다.</p>
+
+<h4 id="수명-주기-규칙-작동-시점">수명 주기 규칙 작동 시점</h4>
+<p>수명 주기 규칙이 생각한 것보다 늦게 작동하는 경우가 있습니다. 이는 <strong>Amazon S3가 객체의 전환 또는 만료(삭제) 날짜를 익일 자정(UTC)부터 계산하기 때문</strong>입니다.<br />
+예를 들어 2020년 1월 1일 10:30(UTC)에 객체를 생성하고 3일 후 객체가 만료(삭제)되도록 수명 주기 규칙을 설정할 경우 객체의 만료(삭제) 날짜는 2020년 1월 5일 00:00(UTC)이 됩니다. 
+따라서 수명 주기 규칙이 충족되었는지 확인하기 전에 충분한 시간이 경과했는지 확인해야 합니다.</p>
+
+<h4 id="수명-주기-규칙-접두사-필터-설정">수명 주기 규칙 접두사 필터 설정</h4>
+<p>수명 주기 규칙에서 접두사 필터에 디렉토리를 지정할 경우 접두사 필터의 끝에 / 문자를 지정해야 합니다. 접두사 필터의 처음에 / 문자가 있으면 수명 주기 규칙이 올바르게 평가되지 않습니다.<br />
+즉, images 디렉토리가 포함된 모든 파일에 적용하려면 <strong>images/</strong> 라고 입력해야 합니다.</p>
+
+<p><img src="../../images/aws_s3_lifecycle_05.jpg" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" style="width:770px;align:center" /></p>
 
 <h2 id="참고-url">참고 URL</h2>
-<p><a href="https://guide.ncloud-docs.com/docs/compute-compute-1-1-v2" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/compute-compute-1-1-v2.html</a>
-<a href="https://guide.ncloud-docs.com/docs/asl-asl_console" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/asl-asl_console.html</a></p>
+<ol>
+  <li>AWS S3 수명 주기 관리 가이드
+    <ul>
+      <li><a href="https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/object-lifecycle-mgmt.html" target="_blank" style="word-break:break-all;">https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/object-lifecycle-mgmt.html</a></li>
+    </ul>
+  </li>
+  <li>수명 주기 규칙 작동 지연 관련 FAQ
+    <ul>
+      <li><a href="https://aws.amazon.com/ko/premiumsupport/knowledge-center/s3-lifecycle-rule-delay/" target="_blank" style="word-break:break-all;">https://aws.amazon.com/ko/premiumsupport/knowledge-center/s3-lifecycle-rule-delay/</a></li>
+    </ul>
+  </li>
+</ol>
 
 <blockquote>
-  <p>문서 최종 수정일 : 2021-01-19</p>
+  <p>문서 최종 수정일 : 2021-08-12</p>
 </blockquote>
 
 		</div>
@@ -221,543 +230,248 @@
 	
 	
 	<div class="tutorial-series">
-		<h3>Server - Series</h3>
-		<p>네이버 클라우드 Server 관련 문서들입니다.</p>
+		<h3> - Series</h3>
+		<p></p>
 
 		<ul class="listing">
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_compare/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>1. 스토리지 비교 
+							
+						</h3>
+						<p class="description">네이버 클라우드 스토리지 비교</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_object_storage_lifecycle_management/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>2. Object Storage Lifecycle Management 관리대상 설정 방법 
+							
+						</h3>
+						<p class="description">네이버 클라우드 Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_object_storage_aws_cli_connect/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>3. AWS CLI를 이용한 Object Storage 접속 방법 
+							
+						</h3>
+						<p class="description">네이버 클라우드 Object Storage를 AWS CLI를 이용해서 접속하는 방법</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_object_storage_required_service/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>4. Object Storage와 연동이 필수인 서비스 
+							
+						</h3>
+						<p class="description">네이버 클라우드 Object Storage와 연동이 필수인 서비스</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_object_storage_s3_client_s3browser/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>5. Object Storage 접속용 Windows Client Tool - S3 Browser 
+							
+						</h3>
+						<p class="description">네이버 클라우드 Object Storage 접속용 Windows Client Tool - S3 Browser</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_object_storage_s3_client_cloudberry_explorer/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>6. Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 
+							
+						</h3>
+						<p class="description">네이버 클라우드Object Storage 접속용 Windows Client Tool - CloudBerry Explorer</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_object_storage_s3_client_cyberduck/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>7. Object Storage 접속용 Windows, MacOS Client Tool - Cyberduck 
+							
+						</h3>
+						<p class="description">네이버 클라우드 Object Storage 접속용 Windows, MacOS Client Tool - Cyberduck</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_object_storage_transfer_to_archive_storage/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>8. Object Storage 데이터를 Archive Storage로 자동으로 이동시키는 방법 
+							
+						</h3>
+						<p class="description">네이버 클라우드 Object Storage 데이터를 Archive Storage로 이동시키는 방법</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/4.storage/ncp_storage_nas_vpc_guide/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>9. NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드 
+							
+								<span class="badge badge-pill badge-danger" style="font-size:50%">new</span>
+							
+						</h3>
+						<p class="description">네이버 클라우드 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드입니다</p>
+					</div>
+				</article>
+			</a>
+		</li>
 	
 		<li class="active">
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_micro_limit/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>1. Micro 타입 서버에서 사용할 수 없는 서비스 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Micro 타입 서버에서 사용할 수 없는 서비스</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_spec_change/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>2. 서버 스펙 변경 
-							
-						</h3>
-						<p class="description">네이버 클라우드 서버 스펙 변경</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_stop_price/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>3. 서버 정지 시 요금할인 
-							
-						</h3>
-						<p class="description">네이버 클라우드 서버 정지 시 요금할인</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_autoscaling_limit/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>4. Auto Scaling 서비스 제한사항 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Auto Scaling 서비스 제한사항</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_storage_add_guide/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>5. 스토리지 추가 생성 기본 가이드 
-							
-						</h3>
-						<p class="description">네이버 클라우드 스토리지 추가 생성 기본 가이드</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/3.security/ncp_security_acg_guide/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>6. ACG(Access Control Group) 가이드 
-							
-						</h3>
-						<p class="description">네이버 클라우드 ACG(Access Control Group) 가이드</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_storage_add_detail_process/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>7. Linux 스토리지(디스크) 추가 상세 가이드 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Linux 스토리지(디스크) 추가 상세 가이드</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/4.storage/ncp_storage_backup_guide/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>8. 백업 서비스 가이드와 신청 절차 
-							
-						</h3>
-						<p class="description">네이버 클라우드 백업 서비스 가이드와 신청 절차</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_connect_no_public_ip/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>9. 서버 접속 가이드(Linux) - 공인IP 없을 때 
-							
-						</h3>
-						<p class="description">네이버 클라우드 서버 접속 가이드 - 공인IP 없을 때</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_connect_by_public_ip/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>10. 서버 접속 가이드(Linux) - 공인IP 있을 때 
-							
-						</h3>
-						<p class="description">네이버 클라우드 서버 접속 가이드 - 공인IP 있을 때</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_vpc_create/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>11. VPC 환경에서 서버 생성 
-							
-						</h3>
-						<p class="description">네이버 클라우드 VPC 환경에서 서버 생성</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_autoscaling_event_setting/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>12. AutoScaling 이벤트 설정하는 방법 
-							
-						</h3>
-						<p class="description">네이버 클라우드 AutoScaling 그룹 이벤트 설정하는 방법</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_cloud_functions_dotnet_csharp_cmd/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>13. Cloud Functions Action을 .Net (C#)을 사용하여 윈도우 명령프롬프트(cmd)에서 만드는 방법 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Cloud Functions Action을 .Net (C#)을 사용하여 윈도우 명령프롬프트(cmd)에서 만드는 방법</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_cloud_functions_dotnet_csharp_vs/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>14. Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>15. Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_server_image_share_classic/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>16. Classic 환경에서 서버 이미지를 다른 계정에 공유하는 방법 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Classic 환경에서 서버 이미지를 다른 계정에 공유하는 방법을 소개합니다.</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_ssh_security_setting/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>17. 리눅스서버 SSH 접속 보안 설정하기 
-							
-						</h3>
-						<p class="description">네이버 클라우드 리눅스 서버에 SSH로 접속할 때 필요한 보안 설정입니다.</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_windows_server_image_copy_classic_to_vpc/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>18. Classic 환경 Windows 서버 이미지를 VPC 환경으로 복제하는 방법 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Classic 환경 Windows 서버 이미지를 VPC 환경으로 복제하는 방법을 소개합니다.</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_storage_lvm_create/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>19. 리눅스서버 스토리지(디스크) LVM 구성하기 
-							
-						</h3>
-						<p class="description">네이버 클라우드 리눅스 서버의 Block Storage를 LVM으로 구성하는 방법입니다</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-		<li >
-		
-		
-		
-		
-		
-		
-		
-			<a href="/1.compute/ncp_server_kubernetes_service_start_guide/">
-				<div class="icon">
-		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
-			<path d="M0 0h24v24H0z" fill="none"/>
-		</svg>
-</div>
-				<article>
-					<div>
-						<h3>20. Kubernetes Service 클러스터 생성 및 제어 가이드 
-							
-						</h3>
-						<p class="description">네이버 클라우드 Kubernetes Service 클러스터 생성 및 제어 가이드입니다</p>
-					</div>
-				</article>
-			</a>
-		</li>
-	
-</ul>
-	</div>
-
-
-
-
-	<div class="related">
-		<h3>Related docs</h3>
-
-		<ul class="listing">
-	
-		<li >
 		
 		
 		
@@ -774,7 +488,7 @@
 </div>
 				<article>
 					<div>
-						<h3>AWS S3 수명 주기 (LifeCycle) 설정하기 
+						<h3>10. AWS S3 수명 주기 (LifeCycle) 설정하기 
 							
 								<span class="badge badge-pill badge-danger" style="font-size:50%">new</span>
 							
@@ -784,6 +498,17 @@
 				</article>
 			</a>
 		</li>
+	
+</ul>
+	</div>
+
+
+
+
+	<div class="related">
+		<h3>Related docs</h3>
+
+		<ul class="listing">
 	
 		<li >
 		
@@ -1027,6 +752,32 @@
 			</a>
 		</li>
 	
+		<li >
+		
+		
+		
+		
+		
+		
+		
+			<a href="/1.compute/ncp_server_windows_server_image_copy_classic_to_vpc/">
+				<div class="icon">
+		<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+			<path d="M0 0h24v24H0z" fill="none"/>
+		</svg>
+</div>
+				<article>
+					<div>
+						<h3>Classic 환경 Windows 서버 이미지를 VPC 환경으로 복제하는 방법 
+							
+						</h3>
+						<p class="description">네이버 클라우드 Classic 환경 Windows 서버 이미지를 VPC 환경으로 복제하는 방법을 소개합니다.</p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
 </ul>
 	</div>
 
@@ -1051,17 +802,17 @@
 		<h2>Share</h2>
 		<p>Share this tutorial with your community.</p>
 		<ul>
-			<li><a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdocs.3rdeyesys.com%2F1.compute%2Fncp_server_micro_limit%2F">
+			<li><a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdocs.3rdeyesys.com%2F91.aws%2Faws_s3_lifecycle_management%2F">
 		<svg class="twitter" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" /></svg>
 	
  Twitter</a></li>
-			<li><a class="facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdocs.3rdeyesys.com%2F1.compute%2Fncp_server_micro_limit%2F">
+			<li><a class="facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdocs.3rdeyesys.com%2F91.aws%2Faws_s3_lifecycle_management%2F">
 		<svg class="facebook" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="15.8 15.8 25 25"><path d="M32.8 24.7h-3.2v-2.1c0-0.8 0.5-1 0.9-1s2.3 0 2.3 0v-3.5l-3.1 0c-3.5 0-4.3 2.6-4.3 4.3v2.3h-2v3.6h2c0 4.6 0 10.2 0 10.2h4.2c0 0 0-5.6 0-10.2h2.8L32.8 24.7z"/></svg>
 	
  Facebook</a></li>
-			<li><a class="google-plus" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fdocs.3rdeyesys.com%2F1.compute%2Fncp_server_micro_limit%2F">
+			<li><a class="google-plus" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fdocs.3rdeyesys.com%2F91.aws%2Faws_s3_lifecycle_management%2F">
  Google+</a></li>
-			<li><a class="hacker-news" target="_blank" href="http://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdocs.3rdeyesys.com%2F1.compute%2Fncp_server_micro_limit%2F&t=Micro%20%ED%83%80%EC%9E%85%20%EC%84%9C%EB%B2%84%EC%97%90%EC%84%9C%20%EC%82%AC%EC%9A%A9%ED%95%A0%20%EC%88%98%20%EC%97%86%EB%8A%94%20%EC%84%9C%EB%B9%84%EC%8A%A4">
+			<li><a class="hacker-news" target="_blank" href="http://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdocs.3rdeyesys.com%2F91.aws%2Faws_s3_lifecycle_management%2F&t=AWS%20S3%20%EC%88%98%EB%AA%85%20%EC%A3%BC%EA%B8%B0%20%28LifeCycle%29%20%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0">
 		<svg class="hacker-news" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18.8 3.3c-0.4 0.8-5.6 11.1-5.6 11.2 0 2 0 6.2 0 6.2 -0.1 0-2.2 0-2.3 0 0 0 0-5.9 0-6.2 0 0-5.5-10.9-5.6-11.1C5.3 3.3 5.3 3.3 5.3 3.3 5.3 3.3 5.3 3.3 5.3 3.3c0 0 0 0 0.1 0 0.9 0 1.7 0 2.6 0 0 0 0 0 0 0.1 0.1 0.1 4 8.3 4.1 8.3 0 0 4.2-8.3 4.3-8.4 0.8 0 1.6 0 2.4 0 0 0 0 0 0 0C18.8 3.3 18.8 3.3 18.8 3.3z"/></svg>
 	
  Hacker News</a></li>
