@@ -1,4 +1,142 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://docs.3rdeyesys.com/" rel="alternate" type="text/html" /><updated>2021-08-12T17:24:14+09:00</updated><id>https://docs.3rdeyesys.com/feed.xml</id><title type="html">3rdeyesys</title><subtitle>써드아이시스템 기술문서</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><entry><title type="html">AWS S3 수명 주기 (LifeCycle) 설정하기</title><link href="https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management/" rel="alternate" type="text/html" title="AWS S3 수명 주기 (LifeCycle) 설정하기" /><published>2021-08-12T00:00:00+09:00</published><updated>2021-08-12T00:00:00+09:00</updated><id>https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management</id><content type="html" xml:base="https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management/">&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://docs.3rdeyesys.com/" rel="alternate" type="text/html" /><updated>2021-08-20T15:23:34+09:00</updated><id>https://docs.3rdeyesys.com/feed.xml</id><title type="html">3rdeyesys</title><subtitle>써드아이시스템 기술문서</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><entry><title type="html">Sub Account 생성 가이드</title><link href="https://docs.3rdeyesys.com/81.manage/ncp_manage_sub_account_guide/" rel="alternate" type="text/html" title="Sub Account 생성 가이드" /><published>2021-08-19T00:00:00+09:00</published><updated>2021-08-19T00:00:00+09:00</updated><id>https://docs.3rdeyesys.com/81.manage/ncp_manage_sub_account_guide</id><content type="html" xml:base="https://docs.3rdeyesys.com/81.manage/ncp_manage_sub_account_guide/">&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
+&lt;p&gt;Sub Account(서브 계정)는 네이버 클라우드의 서비스 자원을 여러 사용자가 동시에 이용, 관리해야 할 때 필요한 만큼만 권한을 부여해서 사용할 수 있게 해주는 서비스입니다.&lt;br /&gt;
+Sub Account를 사용하면 사내 담당부서나 담당자별로 지정된 자원에만 접근하도록 하거나, 협력사에게 일부 접근권한을 부여해야 할 때 효과적입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;특징&quot;&gt;특징&lt;/h2&gt;
+&lt;p&gt;네이버 클라우드의 Sub Account는 다음과 같은 특징이 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;별도의 로그인 페이지를 이용하여 접속&lt;/li&gt;
+  &lt;li&gt;대시보드에서 서브 계정 수, 그룹 수, 정책 수, 접속 페이지 설정을 확인할 수 있음&lt;/li&gt;
+  &lt;li&gt;그룹, 정책, 역할을 생성해 상세한 권한 설정을 할 수 있음&lt;/li&gt;
+  &lt;li&gt;Access Key를 별도로 생성해서 사용할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;주요-권한&quot;&gt;주요 권한&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;네이버 클라우드 메인 계정과 동일한 접근 권한&lt;br /&gt;
+  &lt;strong&gt;NCP_ADMINISTRATOR&lt;/strong&gt; 정책을 부여하시면 메인 계정과 동일하게 네이버클라우드플랫폼 내 포털, 콘솔을 접근할 수 있습니다&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;네이버 클라우드 콘솔 내 모든 상품/서비스 접근 권한&lt;br /&gt;
+  &lt;strong&gt;NCP_INFRA_MANAGER&lt;/strong&gt; 정책을 부여하시면 메인 계정과 동일하게 콘솔 내 모든 상품/서비스에 접근할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;네이버 클라우드 콘솔 내 각 상품/서비스별 접근 권한&lt;br /&gt;
+  &lt;strong&gt;NCP_상품/서비스명_MANAGER/VIEWER&lt;/strong&gt; 정책을 부여하시면 해당 상품/서비스에 접근할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;네이버 클라우드 포털 내 마이페이지 “이용관리” 메뉴 접근 권한&lt;br /&gt;
+  &lt;strong&gt;NCP_FINANCE_MANAGER&lt;/strong&gt; 정책을 부여하시면 포털 마이페이지 내 “서비스 이용내역/현황, 프로모션 내역, 청구 내역 추세” 메뉴에 접근할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;서브-계정-생성&quot;&gt;서브 계정 생성&lt;/h2&gt;
+&lt;p&gt;[Console] - [Sub Account] - [Sub Accounts]에서 [서브 계정 생성] 버튼을 클릭합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_01.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;서브 계정 생성 화면에서는 로그인 아이디, 이름, 이메일 주소를 우선 입력합니다.&lt;/p&gt;
+
+&lt;p&gt;다음으로 접근 유형으로 [Console 접근]과 [API 접근]을 모두 허용할 것인지, 하나만 허용할 것인지 선택하고, 
+Conosole 접근의 경우에 지정한 IP대역에서만 접근하게 할 것인지, 모두 허용할 것인지도 선택합니다.&lt;/p&gt;
+
+&lt;p&gt;휴대폰 문자인증 또는 이메일 인증 등의 2차 인증을 적용할 것인지도 선택합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_02.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;마지막으로 로그인 비밀번호를 입력하고, 해당 서브 계정으로 로그인 시에 비밀번호를 변경하도록 할 것인지 선택할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_03.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;계정-정책-추가&quot;&gt;계정 정책 추가&lt;/h2&gt;
+&lt;p&gt;생성된 서브 계정을 클릭하면 서브 계정 상세 설정 화면으로 이동합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_04.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;서브 계정 상세 화면에서는 정책, 그룹, Access Key를 추가하고 관리할 수 있습니다.  우선 정책 탭에서 [추가] 버튼을 클릭합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_05.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;정책 추가 화면에서는 네이버 클라우드에서 기본으로 제공하는 [관리형 정책]과 사용자가 직접 정의하는 [사용자 정의 정책]이 있습니다.&lt;br /&gt;
+우선 [관리형 정책]에서 필요한 정책을 선택하고 [추가] 버튼을 클릭합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_06.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;여기서는 네이버 클라우드의 Server 상품 내 모든 기능을 이용할 수 있는 권한인 [NCP_SERVER_MANAGER] 선택했고, 아래와 같이 추가된 것을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_07.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;접속-환경-설정&quot;&gt;접속 환경 설정&lt;/h2&gt;
+&lt;p&gt;네이버 클라우드 서브 계정은 별도의 접속 페이지가 존재하는데, 
+[Sub Account] - [Dashboard]에서 서브 계정으로 접속하기 위한 페이지 주소를 입력할 수 있습니다.&lt;br /&gt;
+https://www.ncloud.com/nsa/ 까지는 공통이고, 그 다음 페이지 주소를 직접 입력하고 저장하시면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_09.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음으로 [미사용 세션 만료 설정]에서는 로그인된 서브 계정이 아무 활동없이 미사용일 경우 지정한 시간 기준으로 자동 로그아웃이 되도록 설정할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_10.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:680px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;[비밀번호 만료 설정]은 비밀번호 만료를 활성화할 경우 지정된 만료일을 초과했을 때 비밀번호를 변경해야만 접속 할 수 있습니다.&lt;br /&gt;
+활성화 하지 않았을 경우에는 90일이 지난 후에 비밀번호 변경 안내 팝업만 나타납니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_11.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:680px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;접속---로그인&quot;&gt;접속 - 로그인&lt;/h2&gt;
+&lt;p&gt;위에서 설정한 접속 페이지 [ &lt;strong&gt;https://www.ncloud.com/nsa/******&lt;/strong&gt;] 에 접속하면 아래와 같이 서브 계정 로그인 화면을 확인할 수 있습니다.&lt;br /&gt;
+바꿔말하면 서브 계정(Sub Account)은 반드시 위에서 설정한 접속 페이지로 접속해야 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_18.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;access-key-설정&quot;&gt;Access Key 설정&lt;/h2&gt;
+&lt;p&gt;서브 계정에서 Access Key를 사용해야 할 경우 서브 계정 상세 화면 [Access Key]탭에서 [추가] 버튼을 클릭해 생성할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_08.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;계정-그룹-설정&quot;&gt;계정 그룹 설정&lt;/h2&gt;
+&lt;p&gt;여러 개의 서브 계정을 묶어서 하나의 그룹으로 구성하면 해당 그룹의 서브 계정에 동일한 정책을 동시에 적용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_12.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;사용자-정의-정책-생성&quot;&gt;사용자 정의 정책 생성&lt;/h2&gt;
+&lt;p&gt;서브 계정 정책에는 네이버 클라우드에서 기본으로 제공하는 [관리형 정책] 외에도 사용자가 직접 설정하는 [사용자 정의 정책]도 사용할 수 있습니다. 
+[Sub Account] - [Plicies]에서 [정책 생성] 버튼을 클릭합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_13.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;vpc-환경에서-정책-생성&quot;&gt;VPC 환경에서 정책 생성&lt;/h4&gt;
+&lt;p&gt;정책 이름을 입력하고, VPC를 선택 후, 어떤 서비스 상품에 적용할 것인지 선택합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_14.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음으로 Actions 항목에서는 읽기 권한인 View 또는 수정 권한인 Change를 선택하면 아래쪽에 리소스별로 상세한 권한 설정을 할 수 있는 화면이 나타납니다. 
+모든 설정을 마치고, 아래쪽 [적용대상 추가] 버튼을 클릭하면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_17.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;classic-환경에서-정책-생성&quot;&gt;Classic 환경에서 정책 생성&lt;/h4&gt;
+&lt;p&gt;Classic 환경에서는 리소스별 상세 권한은 설정할 수 없고, View 또는 Change를 선택한 후에 [적용대상 추가] 버튼을 클릭하면 모든 권한이 추가됩니다.
+&lt;img src=&quot;../../images/ncp_manage_sub_account_15.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;아래와 같이 선택한 서비스 상품에 대해 모든 리전, 모든 리소스에 선택한 권한이 지정됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../images/ncp_manage_sub_account_16.jpg&quot; alt=&quot;네이버 클라우드Sub Account 생성 가이드&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;참고-url&quot;&gt;참고 URL&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Sub Account 사용 가이드
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://guide.ncloud-docs.com/docs/management-management-4-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/management-management-4-1&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;문서 최종 수정일 : 2021-08-20&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">개요 Sub Account(서브 계정)는 네이버 클라우드의 서비스 자원을 여러 사용자가 동시에 이용, 관리해야 할 때 필요한 만큼만 권한을 부여해서 사용할 수 있게 해주는 서비스입니다. Sub Account를 사용하면 사내 담당부서나 담당자별로 지정된 자원에만 접근하도록 하거나, 협력사에게 일부 접근권한을 부여해야 할 때 효과적입니다.</summary></entry><entry><title type="html">AWS S3 수명 주기 (LifeCycle) 설정하기</title><link href="https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management/" rel="alternate" type="text/html" title="AWS S3 수명 주기 (LifeCycle) 설정하기" /><published>2021-08-12T00:00:00+09:00</published><updated>2021-08-12T00:00:00+09:00</updated><id>https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management</id><content type="html" xml:base="https://docs.3rdeyesys.com/91.aws/aws_s3_lifecycle_management/">&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
 &lt;p&gt;AWS S3에서는 버킷내 특정 디렉토리 하위 파일들에 대해 지정된 날짜가 지난 후 만료(삭제)가 되도록 설정할 수 있습니다. 
 수명 주기 관리(LifeCycle Management)라고 불리는 이 방법은 파일관리 뿐만 아니라 비용절감에도 도움이 됩니다.&lt;/p&gt;
 
@@ -1222,210 +1360,4 @@ systemctl status httpd
 
 &lt;blockquote&gt;
   &lt;p&gt;문서 최종 수정일 : 2021-06-30&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">개요 네이버 클라우드 VPC 환경의 대표적인 Load Balancer인 Application Load Balancer 를 생성하는 가이드입니다. VPC와 Subnet을 생성하고, 테스트를 위한 서버 2대를 CentOS와 Ubuntu 각각 1대씩 준비해서 Application Load Balancer와 연결하고 접속해보는 과정까지 정리해보겠습니다.</summary></entry><entry><title type="html">Video Player 구현하기 샘플 예제</title><link href="https://docs.3rdeyesys.com/6.media/ncp_media_video_player_sample/" rel="alternate" type="text/html" title="Video Player 구현하기 샘플 예제" /><published>2021-06-15T00:00:00+09:00</published><updated>2021-06-15T00:00:00+09:00</updated><id>https://docs.3rdeyesys.com/6.media/ncp_media_video_player_sample</id><content type="html" xml:base="https://docs.3rdeyesys.com/6.media/ncp_media_video_player_sample/">&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
-&lt;p&gt;네이버 클라우드 비디오 플레이어는 최신의 네이버 미디어 플레이어를 기반으로 개발된 클라우드 전용 상품으로 
-네이버 동영상 서비스에 적용되어 수 많은 성공사례를 가지고 있는 최신의 네이버 플레이어를 손쉽고 빠르게 고객의 미디어 서비스에 적용할 수 있습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;플레이어-생성하기&quot;&gt;플레이어 생성하기&lt;/h2&gt;
-&lt;p&gt;우선은 네이버 클라우드 콘솔에서 js 파일로 구성된 플레이어를 생성하는 과정부터 살펴보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;[네이버 클라우드 콘솔] - [Video Player]에서 [플레이어 생성] 버튼을 클릭합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../images/ncp_media_video_player_01.jpg&quot; alt=&quot;Video Player 구현하기 샘플 예제&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;플레이어 이름, 유-무료 상품(현재는 무료만 선택 가능), 플레이어 사이즈, 버전, 플레이어가 저장될 Object Storage 위치 등을 선택합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../images/ncp_media_video_player_02.jpg&quot; alt=&quot;Video Player 구현하기 샘플 예제&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;재생 속도 조절 등의 기능을 설정하고, 우클릭 메뉴 바로가기를 추가할 수도 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../images/ncp_media_video_player_03.jpg&quot; alt=&quot;Video Player 구현하기 샘플 예제&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;자동 재성이나 대역폭 등의 재생 관련 설정을 선택합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../images/ncp_media_video_player_04.jpg&quot; alt=&quot;Video Player 구현하기 샘플 예제&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;마지막으로 현재까지 선택한 설정을 확인하고, 플레이어 미리보기를 한 후에 [플레이어 생성] 버튼을 클릭합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../images/ncp_media_video_player_05.jpg&quot; alt=&quot;Video Player 구현하기 샘플 예제&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;생성된 플레이어 js 파일의 경로를 확인할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../images/ncp_media_video_player_06.jpg&quot; alt=&quot;Video Player 구현하기 샘플 예제&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;js 파일이 저장된 Object Storage에서도 확인 가능합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../images/ncp_media_video_player_07.jpg&quot; alt=&quot;Video Player 구현하기 샘플 예제&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;플레이어-구현하기&quot;&gt;플레이어 구현하기&lt;/h2&gt;
-&lt;p&gt;생성된 플레이어는 자바스크립트 js 파일이므로 html 파일을 만들어서 플레이어를 구현해야 합니다.&lt;/p&gt;
-
-&lt;h4 id=&quot;플레이어-javascript-소스-예시&quot;&gt;플레이어 JavaScript 소스 예시&lt;/h4&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;player&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ncplayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;divVideoPlayer&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;playlist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;http://example.com/myVideo.mp4&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-  &lt;span class=&quot;nx&quot;&gt;player&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h4 id=&quot;플레이어-html-소스-예시&quot;&gt;플레이어 html 소스 예시&lt;/h4&gt;
-&lt;p&gt;아래 예시에서는  컨트롤러 표시, 자동 재생 안함, 음소거, 가로 크기 1024로 옵션을 설정했습니다. 상세한 옵션을 아래쪽에서 다시 살펴보겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kr&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width, initial-scale=1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Video Player Sample&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://kr.object.ncloudstorage.com/플레이어 파일명.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text-align:center&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;divVideoPlayer&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;divVideoPlayer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;player&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ncplayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;divVideoPlayer&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;controls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;autostart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;mute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;playlist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://kr.object.ncloudstorage.com/재생할 동영상 파일명.mp4&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-      &lt;span class=&quot;nx&quot;&gt;player&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;플레이어-구현-예시&quot;&gt;플레이어 구현 예시&lt;/h2&gt;
-&lt;p&gt;위 html 소스대로 플레이어를 구현해서 웹브라우져에서 확인해보면 다음과 같이 나타납니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../../images/ncp_media_video_player_08.jpg&quot; alt=&quot;Video Player 구현하기 샘플 예제&quot; style=&quot;width:770px;align:center&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;플레이어-상세-옵션&quot;&gt;플레이어 상세 옵션&lt;/h2&gt;
-&lt;p&gt;플레이어 상세 옵션을 간단하게 정리해보겠습니다. 좀 더 자세한 설명은 아래 링크에 있는 네이버 클라우드 가이드 문서를 참고하시면 됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;player&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ncplayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;divVideoPlayer&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;controls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;autostart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;mute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;playlist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://CDN도메인/example_video_01.mp4&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://CDN도메인/example_video_02.mp4&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://CDN도메인/example_video_03.mp4/index.m3u8&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;PROPERTY&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;TYPE&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;DESCRIPTION&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;DEFAULT&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;playlist&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string/array&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;재생하고자 하는 video 정보 (단일 경로 또는, 여러 경로를 전달)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;autostart&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;boolean&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;player 시작 시, video를 자동으로 재생 (브라우저의 자동재생 정책을 따름)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;mute&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;boolean&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;player 시작 시, video를 자동으로 음소거 상태로 설정&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;controls&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;boolean&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;player 제어를 위한 컨트롤의 표시 여부 결정&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;true&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;autoPause&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;boolean&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;창이 전환되거나 최소화되었을 때, 자동으로 player를 정지 상태로 만듦&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;aspectRatio&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;player의 가로X세로 비율 지정, “width:height” 형식으로 전달해야 합니다.&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;width&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;number&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;player의 가로 사이즈 고정&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;height&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;number&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;player의 세로 사이즈 고정&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;playbackRate&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;boolean&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;video 의 재생속도 조절, 1.0보다 낮으면 느려지고, 1.0보다 높으면 빠르게 재생&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;repeat&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;boolean&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;video의 반복 재생 여부 결정&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;about&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;object&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;마우스 우클릭 시 표시되는 바로가기 정보 수정&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;참고-url&quot;&gt;참고 URL&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Video Player 사용 가이드
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://guide.ncloud-docs.com/docs/videoplayer-videoplayerguide&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/videoplayer-videoplayerguide&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Video Player Demo 가이드
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://guide.ncloud-docs.com/docs/videoplayer-videoplayerdemo&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/videoplayer-videoplayerdemo&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;문서 최종 수정일 : 2021-06-14&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">개요 네이버 클라우드 비디오 플레이어는 최신의 네이버 미디어 플레이어를 기반으로 개발된 클라우드 전용 상품으로 네이버 동영상 서비스에 적용되어 수 많은 성공사례를 가지고 있는 최신의 네이버 플레이어를 손쉽고 빠르게 고객의 미디어 서비스에 적용할 수 있습니다.</summary></entry></feed>
+&lt;/blockquote&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">개요 네이버 클라우드 VPC 환경의 대표적인 Load Balancer인 Application Load Balancer 를 생성하는 가이드입니다. VPC와 Subnet을 생성하고, 테스트를 위한 서버 2대를 CentOS와 Ubuntu 각각 1대씩 준비해서 Application Load Balancer와 연결하고 접속해보는 과정까지 정리해보겠습니다.</summary></entry></feed>
