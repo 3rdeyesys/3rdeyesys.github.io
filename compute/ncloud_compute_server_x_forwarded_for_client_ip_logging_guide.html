@@ -1472,6 +1472,7 @@ $('#toc').on('click', 'a', function() {
 </code></pre></div></div>
 
 <p>httpd.conf 파일 196번째 라인의 LogFormat 항목에서 <strong>%h</strong> 를 <strong>%{X-Forwarded-For}i</strong> 로 수정합니다.</p>
+<div class="alert alert-success" role="alert"><i class="far fa-check-square"></i> <b>Line 번호:</b> 196번째 라인 등으로 표시한 해당 항목의 라인은 Ncloud 서버에 Apache를 설치했을 때의 기본 라인으로 환경설정 파일을 수정하거나 했을 경우에는 조금 달라질 수도 있습니다.</div>
 
 <h3 id="httpdconf-수정-전">httpd.conf 수정 전</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>196   LogFormat <span class="s2">"%h %l %u %t </span><span class="se">\"</span><span class="s2">%r</span><span class="se">\"</span><span class="s2"> %&gt;s %b </span><span class="se">\"</span><span class="s2">%{Referer}i</span><span class="se">\"</span><span class="s2"> </span><span class="se">\"</span><span class="s2">%{User-Agent}i</span><span class="se">\"</span><span class="s2">"</span> combined
@@ -1524,6 +1525,7 @@ RemoteIPHeader X-FORWARDED-FOR
 </code></pre></div></div>
 
 <p>apache2.conf 213번째 라인의 LogFormat 부분에서 <strong>%h</strong> 를 <strong>%a</strong> 로 변경합니다.</p>
+<div class="alert alert-success" role="alert"><i class="far fa-check-square"></i> <b>Line 번호:</b> 213번째 라인 등으로 표시한 해당 항목의 라인은 Ncloud 서버에 Apache를 설치했을 때의 기본 라인으로 환경설정 파일을 수정하거나 했을 경우에는 조금 달라질 수도 있습니다.</div>
 
 <h3 id="apache2conf-수정-전">apache2.conf 수정 전</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>213 LogFormat <span class="s2">"%h %l %u %t </span><span class="se">\"</span><span class="s2">%r</span><span class="se">\"</span><span class="s2"> %&gt;s %O </span><span class="se">\"</span><span class="s2">%{Referer}i</span><span class="se">\"</span><span class="s2"> </span><span class="se">\"</span><span class="s2">%{User-Agent}i</span><span class="se">\"</span><span class="s2">"</span> combined  
