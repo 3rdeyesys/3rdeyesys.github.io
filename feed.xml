@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 10 Feb 2022 13:20:01 +0900</pubDate>
-        <lastBuildDate>Thu, 10 Feb 2022 13:20:01 +0900</lastBuildDate>
+        <pubDate>Thu, 10 Feb 2022 18:22:47 +0900</pubDate>
+        <lastBuildDate>Thu, 10 Feb 2022 18:22:47 +0900</lastBuildDate>
         <generator>Jekyll v4.2.1</generator>
         
         
@@ -200,7 +200,7 @@ NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 
 1.  NginX Linux packages 설치 가이드
 	- &lt;a href=&quot;http://nginx.org/en/linux_packages.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;http://nginx.org/en/linux_packages.html&lt;/a&gt;
 </description>
-            <pubDate></pubDate>
+            <pubDate>Tue, 18 Jan 2022 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html</guid>
             
@@ -339,7 +339,7 @@ Event를 발생 하게 하는 조건을 감시설정이라 하며 해당 Event�
 1.  상세 모니터링 사용 가이드
 	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/management-management-1-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/management-management-1-1&lt;/a&gt;
 </description>
-            <pubDate></pubDate>
+            <pubDate>Wed, 29 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/management/ncloud_management_classic_monitoring_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud_management_classic_monitoring_guide.html</guid>
             
@@ -418,6 +418,7 @@ Cloud Log Analytics에서 수집한 로그를 확인해보면 위에서 설정�
 ```
 
 httpd.conf 파일 196번째 라인의 LogFormat 항목에서 **%h** 를 **%{X-Forwarded-For}i** 로 수정합니다.
+{% include tip.html title=&quot;Line 번호&quot; content=&quot;196번째 라인 등으로 표시한 해당 항목의 라인은 Ncloud 서버에 Apache를 설치했을 때의 기본 라인으로 환경설정 파일을 수정하거나 했을 경우에는 조금 달라질 수도 있습니다.&quot; %}
 
 ### httpd.conf 수정 전
 ``` bash   
@@ -478,6 +479,7 @@ RemoteIPHeader X-FORWARDED-FOR
 ```
 
 apache2.conf 213번째 라인의 LogFormat 부분에서 **%h** 를 **%a** 로 변경합니다. 
+{% include tip.html title=&quot;Line 번호&quot; content=&quot;213번째 라인 등으로 표시한 해당 항목의 라인은 Ncloud 서버에 Apache를 설치했을 때의 기본 라인으로 환경설정 파일을 수정하거나 했을 경우에는 조금 달라질 수도 있습니다.&quot; %}
 
 ### apache2.conf 수정 전
 ``` bash
@@ -507,7 +509,7 @@ apache2.conf 213번째 라인의 LogFormat 부분에서 **%h** 를 **%a** 로 �
 1.  X-Forwarded-For 안내
 	- &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/X-Forwarded-For&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/X-Forwarded-For&lt;/a&gt;
 </description>
-            <pubDate></pubDate>
+            <pubDate>Wed, 29 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_x_forwarded_for_client_ip_logging_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_x_forwarded_for_client_ip_logging_guide.html</guid>
             
@@ -601,7 +603,7 @@ ACG를 설정할 때 접근 소스 항목은 보통 IP주소를 입력하게 됩
 ## 참고 URL
 &lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-2-3&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-2-3.html&lt;/a&gt;
 </description>
-            <pubDate></pubDate>
+            <pubDate>Wed, 29 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</guid>
             
@@ -706,7 +708,7 @@ C:\Program Files (x86)\NBP\NSight\
 1.  성능 수집 오류 해결 FAQ
 	- &lt;a href=&quot;https://www.ncloud.com/support/faq/all/1292&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/support/faq/all/1292&lt;/a&gt;
 </description>
-            <pubDate></pubDate>
+            <pubDate>Tue, 28 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/management/ncloud_management_monitoring_win_perf_data_error_troubleshoot.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud_management_monitoring_win_perf_data_error_troubleshoot.html</guid>
             
@@ -877,7 +879,7 @@ systemctl status httpd
 2. Target Group 가이드
 	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/networking-loadbalancer-targetgroupconsole&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/networking-loadbalancer-targetgroupconsole&lt;/a&gt;
 </description>
-            <pubDate></pubDate>
+            <pubDate>Fri, 17 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html</guid>
             
@@ -1099,7 +1101,7 @@ Windows 서버에서 Agent 삭제를 시도할 때 아래와 같이 오류 메�
 
 
 </description>
-            <pubDate></pubDate>
+            <pubDate>Tue, 14 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/analytics/ncloud_analytics_cloud_log_analytics_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/analytics/ncloud_analytics_cloud_log_analytics_guide.html</guid>
             
@@ -1265,7 +1267,7 @@ USER_ID, HOST, DB 권한, 암호를 입력하고 DB User 추가 버튼을 클릭
 2. Cloud DB 서버 외부 접근 가이드
 	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-5-10&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-5-10&lt;/a&gt;
 </description>
-            <pubDate></pubDate>
+            <pubDate>Mon, 13 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_guide.html</guid>
             
@@ -1430,7 +1432,7 @@ DB 서버 상세보기 메뉴에서는 [Process list], [Variables], [Status], [D
 2. Cloud DB 서버 외부 접근 가이드
 	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-5-10&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-5-10&lt;/a&gt;
 </description>
-            <pubDate></pubDate>
+            <pubDate>Mon, 13 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html</guid>
             
@@ -1477,7 +1479,7 @@ Cloud Log Analytics에서 수집하는 각 종 서비스의 로그 템플릿 종
 
 ## 참고 URL
 &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cla-cla-1-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cla-cla-1-1.html&lt;/a&gt;</description>
-            <pubDate></pubDate>
+            <pubDate>Tue, 07 Dec 2021 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/analytics/ncloud_analytics_cloud_log_analytics_info.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/analytics/ncloud_analytics_cloud_log_analytics_info.html</guid>
             
