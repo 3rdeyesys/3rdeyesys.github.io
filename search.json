@@ -1,0 +1,1177 @@
+[
+
+
+
+
+{
+"title": "AWS CLOUDWATCH LOG 수집 매뉴얼",
+"tags": "awsmonitoringlog",
+"keywords": "AWS, Monitoring, 모니터링",
+"url": "/aws/aws_cloud_watch_log.html",
+"summary": "AWS에서 CLOUDWATCH LOG를 수집하기 위해 필요한 절차와 오류 대처법에 대한 매뉴얼입니다"
+}
+,
+
+
+
+{
+"title": "AWS S3 수명 주기 (LifeCycle) 설정하기",
+"tags": "awss3object_storage",
+"keywords": "AWS, S3, LifeCycle",
+"url": "/aws/aws_s3_lifecycle_management.html",
+"summary": "AWS S3 수명 주기 (LifeCycle) 설정하기"
+}
+,
+
+
+
+{
+"title": "jekyll base-theme 커스터마이징",
+"tags": "markdownjekyllwindows",
+"keywords": "Markdown, Windows, Hugo",
+"url": "/etc/etc_jekyll_base_theme_customizing.html",
+"summary": "jekyll base-theme의 디자인과 각종 요소들을 커스터마이징하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "jekyll 설치(윈도 10) with base-theme",
+"tags": "markdownjekyllwindows",
+"keywords": "Markdown, Windows, Hugo",
+"url": "/etc/etc_jekyll_install.html",
+"summary": "윈도 10 환경에 base-theme를 사용한 jekyll을 설치하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "mkdocs 설치 (윈도 10)",
+"tags": "markdownjekyllwindows",
+"keywords": "Markdown, Windows, Hugo",
+"url": "/etc/etc_mkdocs_install.html",
+"summary": "윈도 10 환경에서 mkdocs를 설치하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Pdf 문서 합치기 PHP로 구현하는 방법",
+"tags": "php",
+"keywords": "PDF, PHP",
+"url": "/etc/etc_pdf_merge_php_sample.html",
+"summary": "Pdf 문서 합치기 PHP로 구현하는 방법"
+}
+,
+
+
+
+{
+"title": "PHP로 텔레그램 비공개 채널에 메시지 전송하기",
+"tags": "php",
+"keywords": "Telegram, Message",
+"url": "/etc/etc_php_to_telegram_message_send.html",
+"summary": "PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "PhpSpreadsheet 설정 샘플 코드",
+"tags": "phpexcel",
+"keywords": "PHP, Excel, 엑셀",
+"url": "/etc/etc_phpspreadsheet_sample_code.html",
+"summary": "PHP로 Excel 문서 생성, 데이터 읽기를 할 수 있는 PhpSpreadsheet 설정 샘플 코드입니다"
+}
+,
+
+
+
+{
+"title": "Gmail을 이용해 smtp 메일 발송할 때 인증오류 해결 방법",
+"tags": "gmailsmtpauth",
+"keywords": "Auth, 인증, 앱 비밀번호",
+"url": "/etc/etc_smtp_auth_to_google_gmail_account.html",
+"summary": "Gmail을 이용해 smtp 메일 발송할 때 인증오류 해결 방법입니다"
+}
+,
+
+
+
+{
+"title": "FAQ",
+"tags": "",
+"keywords": "frequently asked questions, FAQ, question and answer, Support",
+"url": "/faq/faq.html",
+"summary": "Ncloud 서비스와 관련된 자주 묻는 질문들을 정리했습니다"
+}
+,
+
+
+
+
+
+{
+"title": "Cloud Log Analytics 설정 가이드",
+"tags": "loganalytics",
+"keywords": "분석",
+"url": "/analytics/ncloud_analytics_cloud_log_analytics_guide.html",
+"summary": "Ncloud 로그 분석 서비스인 Cloud Log Analytics를 생성하고 설정하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Cloud Log Analytics에서 수집하는 로그 유형",
+"tags": "loganalytics",
+"keywords": "log, analytics",
+"url": "/analytics/ncloud_analytics_cloud_log_analytics_info.html",
+"summary": "Ncloud Cloud Log Analytics에서 수집하는 로그 유형"
+}
+,
+
+
+
+{
+"title": "C#으로 Ncloud API를 호출하는 샘플 예제",
+"tags": "apicsharp",
+"keywords": "API",
+"url": "/api/ncloud_api_call_csharp_sample.html",
+"summary": "C#으로 Ncloud API를 호출하는 샘플 예제"
+}
+,
+
+
+
+{
+"title": "PHP로 Ncloud API를 호출하는 샘플 예제",
+"tags": "apiphp",
+"keywords": "API",
+"url": "/api/ncloud_api_call_php_sample.html",
+"summary": "PHP로 Ncloud API를 호출하는 샘플 예제"
+}
+,
+
+
+
+{
+"title": "Cloud Outbound Mailer로 대량 메일 발송하는 방법",
+"tags": "applicationmail",
+"keywords": "Mail",
+"url": "/application-service/ncloud_application_service_cloud_outbound_mailer_bulk_mail_send.html",
+"summary": "Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "PHP로 nShortURL 서비스 이용하기 샘플 예제",
+"tags": "applicationphp",
+"keywords": "Application, PHP",
+"url": "/application-service/ncloud_application_service_nshorturl_php_sample.html",
+"summary": "Ncloud 서비스 중에서 길고 복잡한 URL을 간단하고 짧게 바꿔주는 API nShortURL을 PHP로 이용하는 샘플 예제입니다"
+}
+,
+
+
+
+{
+"title": "Papago Korean Name Romanizer 서비스 이용하기 PHP 샘플 예제",
+"tags": "applicationapi",
+"keywords": "파파고, 한글 이름, 로마자",
+"url": "/application-service/ncloud_application_service_papago_korean_name_romanizer_php_sample.html",
+"summary": "Ncloud Papago Korean Name Romanizer 서비스 이용하기 PHP 샘플 예제입니다"
+}
+,
+
+
+
+{
+"title": "Classic 환경에서 AutoScaling 설정하는 방법",
+"tags": "autoscalingclassic",
+"keywords": "Auto Scaling, 오토스케일링",
+"url": "/compute/ncloud_compute_autoscaling_classic_guide.html",
+"summary": "Ncloud Classic 환경에서 AutoScaling 설정하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "AutoScaling 이벤트 설정하는 방법",
+"tags": "autoscaling",
+"keywords": "Auto Scaling, Server, Limit, 오토스케일링",
+"url": "/compute/ncloud_compute_autoscaling_event_setting.html",
+"summary": "Ncloud 서버에서 AutoScaling Group 이벤트를 설정하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Auto Scaling 서비스 제한사항",
+"tags": "autoscalinglimit",
+"keywords": "Auto Scaling, Server, Limit",
+"url": "/compute/ncloud_compute_autoscaling_limit.html",
+"summary": "Ncloud Auto Scaling 서비스를 구성할 때 제한사항에 대한 정리입니다"
+}
+,
+
+
+
+{
+"title": "Cloud Functions Action을 .Net (C#)을 사용하여 윈도우 명령프롬프트(cmd)에서 만드는 방법",
+"tags": "cloud_functionscsharp",
+"keywords": "Server, Lamda",
+"url": "/compute/ncloud_compute_cloud_functions_dotnet_csharp_cmd.html",
+"summary": "Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 윈도우 명령프롬프트(cmd)에서 만드는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법",
+"tags": "cloud_functionscsharp",
+"keywords": "Server, Lamda",
+"url": "/compute/ncloud_compute_cloud_functions_dotnet_csharp_vs.html",
+"summary": "NCloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법",
+"tags": "cloud_functionsphpsmtpgmailnatgateway",
+"keywords": "Email, 이메일, PHP",
+"url": "/compute/ncloud_compute_cloud_functions_php_smtp_via_gmail_with_phpmailer.html",
+"summary": "NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Kubernetes Service 클러스터 생성 및 제어 가이드",
+"tags": "kubernetesvpc",
+"keywords": "k8s, K8S, 쿠버네티스",
+"url": "/compute/ncloud_compute_kubernetes_service_start_guide.html",
+"summary": "Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법에 대한 소개입니다"
+}
+,
+
+
+
+{
+"title": "Ncloud LAMP 기본 환경 설정 정보",
+"tags": "lampapachemysqlphpdatabase",
+"keywords": "Linux, Apache, MySql, PHP",
+"url": "/compute/ncloud_compute_lamp_config_basic.html",
+"summary": "Ncloud에서 제공하는 Application 이미지 중에서 LAMP의 기본 환경 설정 정보입니다"
+}
+,
+
+
+
+{
+"title": "LAMP(CentOS) 기본 명령어와 환경 설정 파일 위치",
+"tags": "lampcentosapachemysqlphpdatabase",
+"keywords": "Linux, Apache, MySql, PHP",
+"url": "/compute/ncloud_compute_lamp_config_centos.html",
+"summary": "Ncloud LAMP(CentOS) 기본 명령어와 환경 설정 파일 위치입니다"
+}
+,
+
+
+
+{
+"title": "LAMP(Ubuntu) 기본 명령어와 환경 설정 파일 위치",
+"tags": "lampubuntuapachemysqlphpdatabase",
+"keywords": "Linux, Apache, MySql, PHP",
+"url": "/compute/ncloud_compute_lamp_config_ubuntu.html",
+"summary": "Ncloud LAMP(Ubuntu) 기본 명령어와 환경 설정 파일 위치입니다"
+}
+,
+
+
+
+{
+"title": "CentOS에서 NginX 설치, 설정하는 방법",
+"tags": "centoslempnginxinstall",
+"keywords": "Linux, LEMP, LAMP",
+"url": "/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html",
+"summary": "Ncloud CentOS 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "서버 접속 가이드(Linux) - 공인IP 있을 때",
+"tags": "linux",
+"keywords": "Public IP",
+"url": "/compute/ncloud_compute_server_connect_by_public_ip.html",
+"summary": "공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "서버 접속 가이드(Linux) - 공인IP 없을 때",
+"tags": "linux",
+"keywords": "Public IP",
+"url": "/compute/ncloud_compute_server_connect_no_public_ip.html",
+"summary": "공인IP 없이 Ncloud 서버(Linux)에 접속하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS",
+"tags": "apachecentos",
+"keywords": "redirect, 아파치",
+"url": "/compute/ncloud_compute_server_http_to_https_centos.html",
+"summary": "Ncloud에서 http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS입니다"
+}
+,
+
+
+
+{
+"title": "http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu",
+"tags": "apacheubuntu",
+"keywords": "redirect, 아파치",
+"url": "/compute/ncloud_compute_server_http_to_https_ubuntu.html",
+"summary": "Ncloud에서 http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu입니다"
+}
+,
+
+
+
+{
+"title": "Classic 환경에서 서버 이미지를 다른 계정에 공유하는 방법",
+"tags": "classic",
+"keywords": "Server, Image Share, ServerImage",
+"url": "/compute/ncloud_compute_server_image_share_classic.html",
+"summary": "Ncloud Classic 환경에서 서버 이미지를 다른 계정에 공유하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Micro 타입 서버에서 사용할 수 없는 서비스",
+"tags": "limit",
+"keywords": "limit",
+"url": "/compute/ncloud_compute_server_micro_type_limit.html",
+"summary": "Ncloud Micro 타입 서버에서 사용할 수 없는 서비스입니다"
+}
+,
+
+
+
+{
+"title": "CentOS 6에서 pip - Python 설치하기",
+"tags": "centospythoninstall",
+"keywords": "Linux, 파이썬, 센트OS",
+"url": "/compute/ncloud_compute_server_pip_python_install_centos6.html",
+"summary": "Ncloud CentOS 6.x에서 Repository를 변경해 pip - Python을 설치하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "외부 네트워크에 연결할 수 없는 환경에서 Repository를 변경해 리눅스 패키지 설치하기",
+"tags": "linuxcentosubuntu",
+"keywords": "Package, Yum, Apt, Secure Zone, Private Network",
+"url": "/compute/ncloud_compute_server_repository_change_on_private_network.html",
+"summary": "Ncloud에서 외부 네트워크에 연결할 수 없는 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "서버 스펙 변경",
+"tags": "classicvpc",
+"keywords": "Spec, Compace, Standard",
+"url": "/compute/ncloud_compute_server_spec_change.html",
+"summary": "Ncloud 서버들의 스펙을 변경하는 방법과 제한사항에 대한 내용입니다"
+}
+,
+
+
+
+{
+"title": "리눅스서버 SSH 접속 보안 설정하기",
+"tags": "linuxssh",
+"keywords": "Linux",
+"url": "/compute/ncloud_compute_server_ssh_security_setting.html",
+"summary": "Ncloud 리눅스서버 SSH 접속 보안 설정하기입니다"
+}
+,
+
+
+
+{
+"title": "서버 정지 시 요금할인",
+"tags": "price",
+"keywords": "Stop, Price",
+"url": "/compute/ncloud_compute_server_stop_price.html",
+"summary": "Ncloud에서 서버 정지 시 요금할인 횟수와 서버 정지 기한에 대한 안내입니다"
+}
+,
+
+
+
+{
+"title": "Linux 스토리지(디스크) 추가 상세 가이드",
+"tags": "linuxstorage",
+"keywords": "Storage, Disk",
+"url": "/compute/ncloud_compute_server_storage_add_detail_process.html",
+"summary": "Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드입니다"
+}
+,
+
+
+
+{
+"title": "스토리지 추가 생성 기본 가이드",
+"tags": "linuxstorage",
+"keywords": "Storage, Linux",
+"url": "/compute/ncloud_compute_server_storage_add_guide.html",
+"summary": "Ncloud Linux서버 스토리지 추가 생성 기본 가이드입니다"
+}
+,
+
+
+
+{
+"title": "리눅스서버 스토리지(디스크) LVM 구성하기",
+"tags": "linuxstorage",
+"keywords": "Linux, Storage, Disk",
+"url": "/compute/ncloud_compute_server_storage_lvm_create.html",
+"summary": "Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기입니다"
+}
+,
+
+
+
+{
+"title": "VPC 환경에서 서버 생성",
+"tags": "vpc",
+"keywords": "VPC, Server",
+"url": "/compute/ncloud_compute_server_vpc_create.html",
+"summary": "Ncloud VPC 환경에서 서버를 생성하는 방법을 간단하게 정리했습니다"
+}
+,
+
+
+
+{
+"title": "Classic 환경 Windows 서버 이미지를 VPC 환경으로 복제하는 방법",
+"tags": "classicwindows",
+"keywords": "Classic, Windows, Image Copy",
+"url": "/compute/ncloud_compute_server_windows_server_image_copy_classic_to_vpc.html",
+"summary": "Ncloud Classic 환경 Windows 서버 이미지를 VPC 환경으로 복제하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP 기록하기",
+"tags": "proxyload_balancerlog",
+"keywords": "프록시, 로드밸런서, 클라이언트IP",
+"url": "/compute/ncloud_compute_server_x_forwarded_for_client_ip_logging_guide.html",
+"summary": "Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP 기록하기"
+}
+,
+
+
+
+{
+"title": "MySQL 복구 시 ERROR 1227 (42000) 문제 원인과 해결방법",
+"tags": "databasebackupmysqlclouddb",
+"keywords": "Database, Restore, GTID",
+"url": "/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting.html",
+"summary": "Ncloud에서 Cloud DB for MySQL 복구 시 ERROR 1227 (42000) 문제 원인과 해결방법입니다"
+}
+,
+
+
+
+{
+"title": "VPC환경에서 Cloud DB for MySQL 생성하기",
+"tags": "databasemysqlclouddbvpc",
+"keywords": "Database, Domain",
+"url": "/database/ncloud_database_cloud_db_for_mysql_guide.html",
+"summary": "Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Cloud DB for MySQL 생성후 Public 도메인으로 접속하기",
+"tags": "databasemysqlclouddbvpc",
+"keywords": "Database, Domain",
+"url": "/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html",
+"summary": "Ncloud Cloud DB for MySQL 생성후 Public 도메인으로 접속하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "설치형 DB서버와 관리형 Cloud DB 비교",
+"tags": "mysqlmssql",
+"keywords": "Database",
+"url": "/database/ncloud_database_compare.html",
+"summary": "Ncloud의 설치형 DB서버와 관리형 Cloud DB를 비교한 내용을 정리해보았습니다"
+}
+,
+
+
+
+{
+"title": "CentOS에서 mariaDB 외부접속 허용, 원격접속하기 with HeidiSQL",
+"tags": "databasecentosmariadbmysql",
+"keywords": "Database, 마리아디비",
+"url": "/database/ncloud_database_mariadb_access_from_remote_centos.html",
+"summary": "Ncloud CentOS 서버에서 mariaDB 외부접속 허용하는 방법과 HeidiSQL으로 원격접속하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Ubuntu에서 mariaDB 외부접속 허용, 원격접속하기 with HeidiSQL",
+"tags": "databaseubuntumariadbmysql",
+"keywords": "Database, 마리아디비",
+"url": "/database/ncloud_database_mariadb_access_from_remote_ubuntu.html",
+"summary": "Ncloud Ubuntu 서버에서 mariaDB 외부접속 허용하는 방법과 HeidiSQL으로 원격접속하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Mysql DB 자동백업 방법",
+"tags": "databasemysqlbackup",
+"keywords": "Database, BackUp",
+"url": "/database/ncloud_database_mysql_auto_backup.html",
+"summary": "Mysql DB를 지정된 시간에 자동으로 백업하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치",
+"tags": "databasemysqlmariadb",
+"keywords": "Database, Config",
+"url": "/database/ncloud_database_mysql_mariadb_config_bind_address.html",
+"summary": "Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내입니다"
+}
+,
+
+
+
+{
+"title": "Mysql, mariadb 환경설정 파일 my.cnf 위치",
+"tags": "databasemysqlmariadb",
+"keywords": "Database, Config",
+"url": "/database/ncloud_database_mysql_mariadb_config_my_cnf.html",
+"summary": "Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내입니다"
+}
+,
+
+
+
+{
+"title": "MYSQL(MARIADB) replication 생성하기",
+"tags": "databasebackupmysqlmariadb",
+"keywords": "Database, 복제, Backup, 이중화, 고가용성, Master, Slave",
+"url": "/database/ncloud_database_mysql_mariadb_replication.html",
+"summary": "Ncloud에서 MYSQL(MARIADB) replication 생성하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "CentOS에서 mysql DB를 Object Storage로 자동 백업하기",
+"tags": "databasecentosbackupmysqlobject_storage",
+"keywords": "Database, 오브젝트스토리지, Backup",
+"url": "/database/ncloud_database_mysql_object_storage_auto_backup_centos.html",
+"summary": "Ncloud CentOS에서 mysql DB를 Object Storage로 자동 백업하기입니다"
+}
+,
+
+
+
+{
+"title": "Ubuntu에서 mysql DB를 Object Storage로 자동 백업하기",
+"tags": "databaseubuntubackupmysqlobject_storage",
+"keywords": "Database, 오브젝트스토리지, Backup",
+"url": "/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html",
+"summary": "Ncloud Ubuntu에서 mysql DB를 Object Storage로 자동 백업하기입니다"
+}
+,
+
+
+
+{
+"title": "설치형 MySQL DB에서 root Password 설정, 변경하는 방법",
+"tags": "databasemysqlpassword",
+"keywords": "Database, Config, 패스워드",
+"url": "/database/ncloud_database_mysql_root_password_set_update_guide.html",
+"summary": "Ncloud 설치형 MySQL DB에서 root Password 설정, 변경하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "서버 모니터링 서비스 Monitoring 설정 가이드",
+"tags": "classicmonitoring",
+"keywords": "Classic, 클래식, Log",
+"url": "/management/ncloud_management_classic_monitoring_guide.html",
+"summary": "Ncloud Classic 환경의 서버 모니터링 서비스 Monitoring 설정 가이드입니다"
+}
+,
+
+
+
+{
+"title": "Ncloud Classic 환경 vs VPC 환경 비교",
+"tags": "classicvpc",
+"keywords": "장단점, 클래식",
+"url": "/management/ncloud_management_classic_vs_vpc_guide.html",
+"summary": "Ncloud 서비스의 Classic 환경과 VPC 환경 각각의 장점과 주요 사용 환경에 대해 정리해보았습니다"
+}
+,
+
+
+
+{
+"title": "모니터링 서비스 Cloud Insight 설정 가이드",
+"tags": "monitoringlog",
+"keywords": "Monitoring, 모니터링, Log",
+"url": "/management/ncloud_management_cloud_insight_guide.html",
+"summary": "Ncloud 성능/운영 지표를 통합 관리해주고 모니터링 해주는 서비스 Cloud Insight 설정 가이드입니다"
+}
+,
+
+
+
+{
+"title": "Windows 서버 모니터링 성능 정보 수집 오류 해결 방법",
+"tags": "windowsmonitoringlog",
+"keywords": "Monitoring, Log, 윈도우",
+"url": "/management/ncloud_management_monitoring_win_perf_data_error_troubleshoot.html",
+"summary": "Ncloud(네이버 클라우드) Classic 환경에서 Windows 서버의 모니터링 성능 정보를 수집할 때 발생하는 오류를 해결하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Sub Account 생성 가이드",
+"tags": "account",
+"keywords": "account, sub account",
+"url": "/management/ncloud_management_sub_account_guide.html",
+"summary": "Ncloud Sub Account 생성 가이드"
+}
+,
+
+
+
+{
+"title": "Video Player 구현하기 샘플 예제",
+"tags": "mediaobject_storage",
+"keywords": "streaming",
+"url": "/media/ncloud_media_video_player_sample.html",
+"summary": "Ncloud Video Player 구현하기 샘플 예제"
+}
+,
+
+
+
+{
+"title": "Global DNS 사용 가이드 - 도메인 추가",
+"tags": "dns",
+"keywords": "Domain",
+"url": "/networking/ncloud_networking_global_dns_guide.html",
+"summary": "Ncloud Global DNS 사용 가이드 - 도메인 추가 방법입니다"
+}
+,
+
+
+
+{
+"title": "Classic Load Balancer 운영을 위한 ACG 설정 방법",
+"tags": "classicload_balanceracg",
+"keywords": "로드밸런서",
+"url": "/networking/ncloud_networking_load_balancer_acg.html",
+"summary": "Ncloud Classic Load Balancer 운영을 위한 ACG 설정 방법입니다"
+}
+,
+
+
+
+{
+"title": "VPC 환경에서 Application Load Balancer 생성하기",
+"tags": "vpcload_balancer",
+"keywords": "로드밸런서",
+"url": "/networking/ncloud_networking_load_balancer_application_lb.html",
+"summary": "Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드입니다"
+}
+,
+
+
+
+{
+"title": "VPC 환경에서 NAT Gateway 설정하기",
+"tags": "vpcnatgatewayroutetable",
+"keywords": "NATGW, RouteTable",
+"url": "/networking/ncloud_networking_natgw_routetb.html",
+"summary": "Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드입니다"
+}
+,
+
+
+
+{
+"title": "주요 서비스 포트(Port) 정보",
+"tags": "port",
+"keywords": "Network, Port",
+"url": "/networking/ncloud_networking_service_port_info.html",
+"summary": "네이버 클라우드 주요 서비스 포트(Port) 정보"
+}
+,
+
+
+
+{
+"title": "ACG와 NACL 비교",
+"tags": "vpcacg",
+"keywords": "VPC, Networking",
+"url": "/networking/ncloud_networking_vpc_acg_nacl.html",
+"summary": "Ncloud VPC 환경의 ACG와 NACL 비교입니다"
+}
+,
+
+
+
+{
+"title": "VPC 환경 Load Balancer 상품군의 변화",
+"tags": "load_balancer",
+"keywords": "로드밸런서",
+"url": "/networking/ncloud_networking_vpc_load_balancer.html",
+"summary": "Ncloud VPC 환경 Load Balancer 상품군의 변화입니다"
+}
+,
+
+
+
+{
+"title": "VPC 구성요소",
+"tags": "vpcacgnaclsubnetnatgatewayroute_tablevpc_peering",
+"keywords": "Subnet, ACG, NACL, NAT Gateway",
+"url": "/networking/ncloud_networking_vpc_overview.html",
+"summary": "Ncloud VPC를 구성하는 요소들에 대한 설명으로 네이버 클라우드 파트너 테크데이에서 발표된 내용입니다"
+}
+,
+
+
+
+{
+"title": "VPC Peering 생성 가이드",
+"tags": "vpc",
+"keywords": "Virtual Private Cloud",
+"url": "/networking/ncloud_networking_vpc_peering_guide.html",
+"summary": "Ncloud에서 분리되어 있는 VPC간의 통신이 필요할때 사용할 수 있는 서비스 VPC Peering 생성 가이드입니다"
+}
+,
+
+
+
+{
+"title": "Subnet 과 NAT Gateway",
+"tags": "vpcsubnetnatgatewayload_balancer",
+"keywords": "VPC, 서브넷",
+"url": "/networking/ncloud_networking_vpc_subnet_natgw.html",
+"summary": "Ncloud VPC 환경 Subnet 과 NAT Gateway 비교입니다"
+}
+,
+
+
+
+{
+"title": "ACG(Access Control Group) 가이드",
+"tags": "acgclassicvpc",
+"keywords": "방화벽, Firewall",
+"url": "/security/ncloud_security_acg_guide.html",
+"summary": "Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드입니다"
+}
+,
+
+
+
+{
+"title": "Ncloud vs On-Premise Security 비교",
+"tags": "security",
+"keywords": "보안서비스",
+"url": "/security/ncloud_security_onpremise_compare.html",
+"summary": "Ncloud와 On-Premise 두 환경의 보안서비스에 대한 비교 정리입니다"
+}
+,
+
+
+
+{
+"title": "Security 서비스 요약",
+"tags": "security",
+"keywords": "Security",
+"url": "/security/ncloud_security_service_summary.html",
+"summary": "Ncloud Security 서비스 요약"
+}
+,
+
+
+
+{
+"title": "SSL인증서 DCV (Domain Control Validation) 인증 방법과 유의사항 정리",
+"tags": "ssldns",
+"keywords": "암호화 통신, 보안접속",
+"url": "/security/ncloud_security_ssl_dcv_method.html",
+"summary": "SSL인증서 DCV (Domain Control Validation) 인증 방법과 유의사항 정리입니다"
+}
+,
+
+
+
+{
+"title": "Classic 환경에서 SSL VPN 설정하고 접속하는 방법",
+"tags": "classicsslvpn",
+"keywords": "암호화 통신, 보안접속",
+"url": "/security/ncloud_security_ssl_vpn_classic_guide.html",
+"summary": "Ncloud Classic 환경에서 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 설정하고 접속하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "VPC 환경에서 SSL VPN 설정하고 접속하는 방법",
+"tags": "vpcsslvpn",
+"keywords": "암호화 통신, 보안접속",
+"url": "/security/ncloud_security_ssl_vpn_vpc_guide.html",
+"summary": "Ncloud VPC 환경에서 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 설정하고 접속하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "PHP로 Archive Storage API 인증 토큰 생성하는 방법",
+"tags": "object_storageapiauthphp",
+"keywords": "아카이브 스토리지, Auth, Token",
+"url": "/storage/ncloud_storage_archive_storage_api_access_token_create.html",
+"summary": "PHP로 Ncloud Archive Storage API 인증 토큰 생성하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "PHP로 Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회",
+"tags": "object_storageapiauthphp",
+"keywords": "아카이브 스토리지, Auth, Token",
+"url": "/storage/ncloud_storage_archive_storage_api_get_container_by_php.html",
+"summary": "PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Archive Storage CLI 사용 가이드 - Windows 환경",
+"tags": "archive_storagecliapiwindows",
+"keywords": "아카이브 스토리지, 윈도우, API",
+"url": "/storage/ncloud_storage_archive_storage_cli_windows_guide.html",
+"summary": "Windows 환경에서 Ncloud Archive Storage CLI를 사용하는 방법에 대한 가이드입니다"
+}
+,
+
+
+
+{
+"title": "백업 서비스 가이드와 신청 절차",
+"tags": "backupdatabase",
+"keywords": "BackUp, Storage, DataBase",
+"url": "/storage/ncloud_storage_backup_guide.html",
+"summary": "Ncloud 서버 파일과 데이터베이스 등의 백업 서비스 가이드와 신청 절차입니다"
+}
+,
+
+
+
+{
+"title": "네이버 클라우드 스토리지 비교",
+"tags": "port",
+"keywords": "Storage",
+"url": "/storage/ncloud_storage_compare.html",
+"summary": "네이버 클라우드 스토리지 비교"
+}
+,
+
+
+
+{
+"title": "NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드",
+"tags": "linuxnasstorage",
+"keywords": "스토리지, Storage, 리눅스, mount",
+"url": "/storage/ncloud_storage_nas_vpc_guide.html",
+"summary": "Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드입니다"
+}
+,
+
+
+
+{
+"title": "AWS CLI를 이용한 Object Storage 접속 방법",
+"tags": "awss3object_storagecliapiauth",
+"keywords": "오브젝트 스토리지, 아마존, API",
+"url": "/storage/ncloud_storage_object_storage_aws_cli_connect.html",
+"summary": "AWS CLI를 이용해 Ncloud Object Storage에 접속하는 방법입니다"
+}
+,
+
+
+
+{
+"title": "Object Storage Lifecycle Management 관리대상 설정 방법",
+"tags": "object_storage",
+"keywords": "오브젝트 스토리지, 수명주기",
+"url": "/storage/ncloud_storage_object_storage_lifecycle_management.html",
+"summary": "Ncloud Object Storage Lifecycle Management 관리대상 설정 방법입니다"
+}
+,
+
+
+
+{
+"title": "Object Storage와 연동이 필수인 서비스",
+"tags": "object_storagevod",
+"keywords": "오브젝트 스토리지, CLOVA, VOD",
+"url": "/storage/ncloud_storage_object_storage_required_service.html",
+"summary": "Ncloud Object Storage와 연동이 필수인 서비스를 정리해보았습니다"
+}
+,
+
+
+
+{
+"title": "Object Storage 접속용 Windows Client Tool - CloudBerry Explorer",
+"tags": "object_storagebackup",
+"keywords": "오브젝트 스토리지, 백업, backup, 클라우드베리",
+"url": "/storage/ncloud_storage_object_storage_s3_client_cloudberry_explorer.html",
+"summary": "Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법입니다"
+}
+,
+
+
+
+{
+"title": "Object Storage 접속용 Windows, MacOS Client Tool - Cyberduck",
+"tags": "object_storagebackup",
+"keywords": "오브젝트 스토리지, 백업, backup, 사이버덕",
+"url": "/storage/ncloud_storage_object_storage_s3_client_cyberduck.html",
+"summary": "Ncloud Object Storage 접속용 Windows, MacOS Client Tool - Cyberduck 사용 방법입니다"
+}
+,
+
+
+
+{
+"title": "Object Storage 접속용 Windows Client Tool - S3 Browser",
+"tags": "object_storagebackup",
+"keywords": "오브젝트 스토리지, 백업, backup",
+"url": "/storage/ncloud_storage_object_storage_s3_client_s3browser.html",
+"summary": "Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법입니다"
+}
+,
+
+
+
+{
+"title": "Object Storage 데이터를 Archive Storage로 자동으로 이동시키는 방법",
+"tags": "object_storagearchive_storagebackup",
+"keywords": "오브젝트 스토리지, 아카이브 스토리지, 백업, backup",
+"url": "/storage/ncloud_storage_object_storage_transfer_to_archive_storage.html",
+"summary": "Ncloud Object Storage 데이터를 Archive Storage로 자동으로 이동시키는 방법입니다"
+}
+,
+
+
+
+{
+"title": "News &amp; Notice",
+"tags": "",
+"keywords": "news, updates, release notes, announcements",
+"url": "/news/news.html",
+"summary": "Ncloud 서비스와 관련된 새로운 소식들을 알려 드립니다."
+}
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+"title": "Updates",
+"tags": "",
+"keywords": "news, updates, release notes, announcements",
+"url": "/update/update.html",
+"summary": "최근에 업데이트 된 기술문서 10개 리스트입니다."
+}
+
+
+
+
+
+
+]
