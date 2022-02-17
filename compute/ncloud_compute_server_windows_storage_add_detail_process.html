@@ -4,24 +4,24 @@
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="keywords" content=" ">
+<meta name="description" content="Ncloud Windows 서버 스토리지(디스크) 추가 상세 가이드입니다">
+<meta name="keywords" content="windowsstorage,  Storage, Disk">
 <!-- Begin Jekyll SEO tag v2.7.1 -->
 <meta name="generator" content="Jekyll v4.2.1" />
-<meta property="og:title" content="Page Not Found" />
+<meta property="og:title" content="Windows 서버 스토리지(디스크) 추가 상세 가이드" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너" />
-<meta property="og:description" content="써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너" />
-<link rel="canonical" href="http://localhost:4001/404.html" />
-<meta property="og:url" content="http://localhost:4001/404.html" />
+<meta name="description" content="Ncloud Windows 서버 스토리지(디스크) 추가 상세 가이드입니다" />
+<meta property="og:description" content="Ncloud Windows 서버 스토리지(디스크) 추가 상세 가이드입니다" />
+<link rel="canonical" href="http://localhost:4001/compute/ncloud_compute_server_windows_storage_add_detail_process.html" />
+<meta property="og:url" content="http://localhost:4001/compute/ncloud_compute_server_windows_storage_add_detail_process.html" />
 <meta property="og:site_name" content="3rdeyesys" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Page Not Found" />
+<meta property="twitter:title" content="Windows 서버 스토리지(디스크) 추가 상세 가이드" />
 <script type="application/ld+json">
-{"headline":"Page Not Found","@type":"WebPage","url":"http://localhost:4001/404.html","description":"써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너","@context":"https://schema.org"}</script>
+{"headline":"Windows 서버 스토리지(디스크) 추가 상세 가이드","@type":"WebPage","url":"http://localhost:4001/compute/ncloud_compute_server_windows_storage_add_detail_process.html","description":"Ncloud Windows 서버 스토리지(디스크) 추가 상세 가이드입니다","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-<title>Page Not Found | 써드아이시스템 기술문서</title>
+<title>Windows 서버 스토리지(디스크) 추가 상세 가이드 | 써드아이시스템 기술문서</title>
 <link rel="stylesheet" href="/css/syntax.css">
 
 <link rel="stylesheet" href="/fontawesome/css/all.min.css"/>
@@ -274,7 +274,7 @@
           
           
           
-          <li><a title="Windows 서버 디스크 추가 가이드" href="/compute/ncloud_compute_server_windows_storage_add_detail_process.html">Windows 서버 디스크 추가 가이드</a></li>          
+          <li class="active"><a title="Windows 서버 디스크 추가 가이드" href="/compute/ncloud_compute_server_windows_storage_add_detail_process.html">Windows 서버 디스크 추가 가이드</a></li>
                     
           
           
@@ -1367,13 +1367,15 @@
         <!-- Content Column -->
         <div class="col-md-9" id="tg-sb-content">
             <div class="post-header">
-   <h1 class="post-title-main">Page Not Found</h1>
+   <h1 class="post-title-main">Windows 서버 스토리지(디스크) 추가 상세 가이드</h1>
 </div>
 
 
 
 <div class="post-content">
 
+   
+    <div class="summary">Ncloud Windows 서버 스토리지(디스크) 추가 상세 가이드입니다</div>
    
 
     
@@ -1403,10 +1405,133 @@ $('#toc').on('click', 'a', function() {
 
     
 
-   <p>Sorry, but the page you were trying to view does not exist. Try searching for it or looking at the URL to see if it looks correct.</p>
+   <h2 id="개요">개요</h2>
+<p><strong>Ncloud (네이버 클라우드)는</strong> 스토리지 당 <strong>최대 2TB</strong>까지 확장할 수 있으며, <strong>최대 16개</strong>의 스토리지를 이용할 수 있습니다.<br />
+이번에는 Windows 서버에 스토리지 즉, 디스크를 추가하는 방법에 대해 정리해보겠습니다.</p>
+
+<h2 id="테스트-환경">테스트 환경</h2>
+<p>Windows Server 2016 (64-bit) English Edition 으로 진행 되었습니다. 추가 스토리지는 총 10G disk 총 4개 입니다.</p>
+
+<h2 id="스토리지-생성">스토리지 생성</h2>
+
+<ul>
+  <li>서버 &gt; 서버 관리 및 설정 변경 &gt; 스토리지생성</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_01.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 745px; " /><figcaption></figcaption></figure>
+
+<ul>
+  <li>스토리지 생성에 필요한 내용을 입력합니다.</li>
+  <li>크기는 스토리지 하나 당 <strong>10GB~2000GB까지</strong> 사용할 수 있습니다.</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_02.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 695px; " /><figcaption></figcaption></figure>
+
+<ul>
+  <li>사용 될 추가디스크를 생성합니다.</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_03.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 680px; " /><figcaption></figcaption></figure>
+
+<h2 id="윈도우-서버-디스크-관리">윈도우 서버 디스크 관리</h2>
+
+<ul>
+  <li>디스크관리(윈도우키+r) : diskmgmt.msc</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_04.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 450px; " /><figcaption></figcaption></figure>
+
+<h3 id="디스크-초기화">디스크 초기화</h3>
+<ul>
+  <li>initializeDisk를 선택하여 디스크를 초기화 합니다.</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_05.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 805px; " /><figcaption></figcaption></figure>
+
+<h3 id="초기화-방식-선택">초기화 방식 선택</h3>
+<ul>
+  <li>두 가지 방식 중 하나를 선택합니다.</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_06.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 805px; " /><figcaption></figcaption></figure>
+
+<h4 id="mbr과--gpt-차이">MBR과  GPT 차이</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">MBR</th>
+      <th style="text-align: center">GTP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">주파티션을 4개까지 생성 가능</td>
+      <td style="text-align: center">주 파티션을 128개까지 생성 가능</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">디스크 용량 최대 2TB까지 인식</td>
+      <td style="text-align: center">디스크 용량 최대 9.4ZB까지 인식</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">BIOS가 설치된 PC에서 사용</td>
+      <td style="text-align: center">UEFI 또는 EFI가 설치된 PC에서 사용 가능</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Windows 32비트와 64비트 사용 가능</td>
+      <td style="text-align: center">Windows 32비트 사용 불가</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="동적-디스크-변환">동적 디스크 변환</h3>
+<ul>
+  <li>추 후 레이드 구성을 위해 동적 디스크 변환을 선택합니다.</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_07.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 805px; " /><figcaption></figcaption></figure>
+
+<ul>
+  <li>디스크의 상태가 Basic에서 Dynamic으로 바뀐 것을 확인할 수 있습니다.</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_08.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 665px; " /><figcaption></figcaption></figure>
+
+<h3 id="볼륨-생성">볼륨 생성</h3>
+<ul>
+  <li>새 단순 볼륨 생성하기</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_09.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 805px; " /><figcaption></figcaption></figure>
+
+<ul>
+  <li>추가한 총 4개의 디스크 단순 볼륨 생성을 하였습니다.</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_10.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 805px; " /><figcaption></figcaption></figure>
+
+<h2 id="디스크-추가-확인">디스크 추가 확인</h2>
+<ul>
+  <li>아래와 같이 추가 생성한 디스크 추가가 완료되었습니다.</li>
+</ul>
+
+<figure><img class="docimage" src="/images/compute/ncloud_compute_server_windows_storage_add_detail_process_11.png" alt="cloud Windows 서버 스토리지(디스크) 추가 상세 가이드" style="width: 837px; " /><figcaption></figcaption></figure>
+
 
    
     <div class="tags">
+        
+        <b>Tags: </b>
+        
+        
+        
+        <a href="/tag/tag_windows.html" class="btn btn-default navbar-btn cursorNorm" role="button">windows</a>
+        
+        
+        
+        <a href="/tag/tag_storage.html" class="btn btn-default navbar-btn cursorNorm" role="button">storage</a>
+        
+        
         
     </div>
    
@@ -1440,7 +1565,7 @@ $('#toc').on('click', 'a', function() {
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-         Site last generated: 2022-02-17 <br />
+        <span>Page last updated:</span> 2022-02-17<br/> Site last generated: 2022-02-17 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
