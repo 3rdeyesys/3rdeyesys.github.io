@@ -490,6 +490,17 @@
 
 
 {
+"title": "Windows 서버 스토리지(디스크) 추가 상세 가이드",
+"tags": "windowsstorage",
+"keywords": "Storage, Disk",
+"url": "/compute/ncloud_compute_server_Windows_storage_add_detail_process.html",
+"summary": "Ncloud Windows 서버 스토리지(디스크) 추가 상세 가이드입니다"
+}
+,
+
+
+
+{
 "title": "X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP 기록하기",
 "tags": "proxyload_balancerlog",
 "keywords": "프록시, 로드밸런서, 클라이언트IP",
