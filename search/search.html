@@ -506,6 +506,13 @@
           
           
           
+          <li><a title="Load Balancer에서 http to https" href="/networking/ncloud_networking_load_balancer_http_to_https.html">Load Balancer에서 http to https</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Subnet 과 NAT Gateway 비교" href="/networking/ncloud_networking_vpc_subnet_natgw.html">Subnet 과 NAT Gateway 비교</a></li>          
                     
           
@@ -2438,6 +2445,21 @@
 				
 					,
 					
+					"networking-ncloud-networking-load-balancer-http-to-https-html": {
+						"id": "networking-ncloud-networking-load-balancer-http-to-https-html",
+						"title": "LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법",
+						"categories": "",
+						"url": " /networking/ncloud_networking_load_balancer_http_to_https.html",
+						"content": "개요\nNcloud에서는 웹서버에 인증서를 설치하지 않고 Application LoadBlancer에 인증서를 추가 할수 있습니다.\nLoadBalancer에 에 인증서를 두고 로드밸런서에서 HTTPS/443 요청을 받아 서버의 80 포트와 통신을 하게 되는 구조입니다.\n이럴 경우 HTTPS 접속만 허용되어 HTTP 요청을 못 받을수 있는데 HTTP로 접속할시 로드밸런서에서 HTTPS로 리다이렉트 시키는 방법을 알아보겠습니다.\n\n테스트환경 사전준비\n\n\n  웹서버: httpd 패키지를 설치 후 간단한 index.html 생성, 80포트를 오픈\n  Target group: 웹서버를 포함하는 HTTP protocol 과 80 port 설정\n  로드밸런서: 리스너를 HTTPS protocol 과 443 port로 설정\n  DNS 및 인증서: 테스트에 사용할 인증서와 DNS(test1.3rdeyesys.com) 등록\n\n\nN서버생성과 Application LoadBlancer 의 생성 가이드는 아래 문서를 참고하시기 바랍니다. \n- VPC 환경에서 서버 생성 \n- VPC 환경에서 Application Load Balancer 생성하기\n\nHTTPS와 HTTP 접속\n\n로드밸런서 생성시 HTTPS/443 요청은 받을수 있게 설정하고, HTTP/80 요청을 설정하지않아 \ntest1.3rdeyesys.com 요청은 받을수 있지만 HTTP/80 요청은 연결이 불가한 상태임을 확인할 수 있습니다.\n\nHTTPS/433 접속 상태 확인\n\n\nHTTP/80 접속 상태 확인\n\n\n리스너 추가\n\n로드밸런서 생성시 설정한 HTTPS/443 요청 외에 HTTP/80 요청도 받을 수 있게 로드밸런서에서  HTTP/80 요청을 받을 새로운 리스너를 설정합니다.\n\n로드밸런서를 선택하고 상단의 [리스너 설정 변경] 버튼을 클릭합니다.\n\n\n\n[리스너 추가] 버튼을 클릭합니다.\n\n\n\n\n\nHTTP 프로토콜 항목란에 80포트, Target Group 항목란에 80  으로 설정하여 확인버튼을 눌러 마무리 합니다.\n\n\n\n다음과 같이 80 to 80 으로 리스너가 추가되어 HTTP/80 요청에도 응답하여 페이지를 띄울수 있습니다.\n\n\n\nHTTP/80 요청은 로드밸런서를 거쳐 그대로 서버의 80 포트와 통신하기에 보안상에 문제가 생길수 있습니다. 그러므로 Application LoadBalancer의 기능을 이용하여 HTTP/80으로 들어오는 요청을 HTTPS/443으로 Redirection 하겠습니다.\n\n규칙 추가\n\nHTTP로 생성한 리스너를 선택하고 [규칙 조회/변경] 버튼을 클릭합니다.\n\n\n\n다음으로 [규칙 추가] 버튼을 클릭합니다.\n\n\n\n다음의 항목들을 설정합니다.\n\n\n  우선순위: 규칙을 적용할 순번을 정할수 있습니다.\n  조건: Host Header 와 Path Pattern 를 선택 할수 있습니다. (본 테스트 에서는 Host Header 기반을 사용하였습니다.)\n  액션: Target group과 Redierction 을 선택할 수 있습니다. (Redierction 선택합니다.)\n\n\n\n\n-  우선순위는 적당한 순번의 숫자를 넣습니다.\n- 조건에서 호스트 헤더를 선택후 리디렉션할 도메인 명을 입력한뒤 +추가 버튼을 눌러 추가합니다.\n- 액션에서 Redirection 을 선택 Protocol은 HTTPS 로 Port는 443으로 설정하고 확인을 눌러 규칙을 추가합니다. \n- 그 외 사용환경에 맞게 규칙을 설정해 사용합니다.\n\n\n설정된 규칙들을 확인 합니다.\n\n\n\n\n최종 테스트\n이제 다시 HTTP로 도메인 주소를 접속 해보면 규칙에 추가된 Host Header 기반으로 HTTPS로 Redirection 되는 모습을 확인 할수가 있습니다.\n\nHTTP/80 으로 접속시도\n\n\nHTTPS/443 으로 Redirection 확인\n\n\n참고 URL\n\n  Application Load Balancer 가이드\n    \n      https://guide.ncloud-docs.com/docs/networking-loadbalancer-applicationlbconsole\n    \n  \n  Target Group 가이드\n    \n      https://guide.ncloud-docs.com/docs/networking-loadbalancer-targetgroupconsole"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
 					"networking-ncloud-networking-natgw-routetb-html": {
 						"id": "networking-ncloud-networking-natgw-routetb-html",
 						"title": "VPC 환경에서 NAT Gateway 설정하기",
@@ -3151,7 +3173,7 @@
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-         Site last generated: 2022-02-25 <br />
+         Site last generated: 2022-03-02 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>

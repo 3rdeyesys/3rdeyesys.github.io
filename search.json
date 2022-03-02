@@ -765,6 +765,17 @@
 
 
 {
+"title": "LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법",
+"tags": "vpcload_balancerssl",
+"keywords": "로드밸런서",
+"url": "/networking/ncloud_networking_load_balancer_http_to_https.html",
+"summary": "Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법"
+}
+,
+
+
+
+{
 "title": "VPC 환경에서 NAT Gateway 설정하기",
 "tags": "vpcnatgatewayroutetable",
 "keywords": "NATGW, RouteTable",
