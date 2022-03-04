@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Search" />
 <script type="application/ld+json">
-{"headline":"Search","@type":"WebPage","url":"https://docs.3rdeyesys.com/search/search.html","description":"써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너","@context":"https://schema.org"}</script>
+{"url":"https://docs.3rdeyesys.com/search/search.html","@type":"WebPage","headline":"Search","description":"써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title>Search | 써드아이시스템 기술문서</title>
@@ -995,6 +995,13 @@
           
           
           
+          <li><a title="Jekyll Documentation Theme 설치" href="/etc/etc_jekyll_documentation_theme_install.html">Jekyll Documentation Theme 설치</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="jekyll 설치(윈도 10) with base-theme" href="/etc/etc_jekyll_install.html">jekyll 설치(윈도 10) with base-theme</a></li>          
                     
           
@@ -1442,6 +1449,21 @@
 						"categories": "",
 						"url": " /etc/etc_jekyll_base_theme_customizing.html",
 						"content": "폰트 교체\nbase-theme는 기본 폰트가 Merriweather로 되어 있습니다.\n영어 표기에는 적당하지만, 한글 표기에는 좋지 않아 나눔고딕 폰트로 변경하였습니다.\n\n그리고 폰트 파일을 별도로 추가하기 보다는 구글에서 제공하는 폰트 경로를 설정하는 방식으로 교체했습니다.\n구글에서 제공하는 폰트 리스트와 적용 방법은 아래 사이트에서 확인 가능합니다.\nhttps://fonts.google.com/\n\nhtml 수정\n\n파일 위치 : \\_layouts\\default.html\n&lt;link rel=\"preconnect\" href=\"https://fonts.gstatic.com\"&gt;\n&lt;link href=\"https://fonts.googleapis.com/css2?family=Nanum+Gothic&amp;display=swap\" rel=\"stylesheet\"&gt; \n\n\ncss 수정\n\n파일 위치: \\_sass\\typography.scss\nbody {\n  height: 100%;\n  max-height: 100%;\n  font-family: 'Nanum Gothic', sans-serif;\n  }\n\n\n한글 검색 오류 수정\nbase-theme 기본 설정으로는 한글 등 utf-8 언어 검색이 되지 않습니다.\n그에 따라 몇가지 수정을 하면 한글 검색이 가능해집니다.\n\njs 파일 위치: \\js\\search.js\n\n기존:\nwindow.index = lunr(function () {\n\t\tthis.field(\"id\");\n\t\tthis.field(\"title\", {boost: 10});\n\t\tthis.field(\"categories\");\n\t\tthis.field(\"url\");\n\t\tthis.field(\"content\");\n\t});\n\n수정: \nwindow.index = new lunr.Index;\nwindow.index.field('id');\nwindow.index.field('title', { boost: 10 });\nwindow.index.field('author');\nwindow.index.field('category');\nwindow.index.field('content');\n\n\n다음으로 charset 을 설정합니다.\nhtml 파일 위치 : \\search.html\n기존: \n&lt;script src=\"{{ site.baseurl }}/js/lunr.min.js\"&gt;&lt;/script&gt;\n&lt;script src=\"{{ site.baseurl }}/js/search.js\"&gt;&lt;/script&gt;\n\n수정: \n&lt;script src=\"{{ site.baseurl }}/js/lunr.min.js\" charset=\"utf-8\"&gt;&lt;/script&gt;\n&lt;script src=\"{{ site.baseurl }}/js/search.js\" charset=\"utf-8\"&gt;&lt;/script&gt;\n\n\n상단 header bg 교체\n\n파일 위치: \\_sass\\header.scss\n\n기존:\nheader {\n\tbackground: $header-color;\n}\n\n수정: \nheader {\n\tbackground: url(\"/images/ncp-header-bg.png\");\n\tbackground-size: 2200px;\n}\n\n\nlogo 파일 교체\n\n파일 위치: \\_includes\\logo.html\n\n\n기존:\n&lt;svg version=\"1.1\" id=\"Layer_1\" ..중략.. xml:space=\"preserve\"&gt;\n\t ..중략..\n&lt;/svg&gt;\n\n수정:\n&lt;img src=\"/images/title_logo_white.png\" style=\"width:160px;height:33px;margin-top:5px\"&gt;\n\n\n상단 메뉴 수정\n\n파일 위치: \\_data\\navigation.yml\n\n- name: Docs\n  link: /\n  target: _self\n- name: FAQ\n  link: /faq/\n  target: _self\n- name: Company\n  link: https://3rdeyesys.com\n  target: _blank\n\n\n상단 header에 검색 박스 추가\n\n파일 위치: \\_includes\\navigation.html\n\n{% if page.url != \"/\" %}\n\t&lt;span style=\"width:100px\"&gt;\\{% include search.html %}&lt;/span&gt;\n{% endif %}\t\n&lt;/nav&gt;\n\n\n하단 footer social 아이콘 수정\n\n파일 위치: \\_data\\footer.yml\n\n- name:\n  link: https://www.facebook.com/3rdeyesys\n  social_icon: Facebook\n  target: _blank\n- name:\n  link: mailto:biz@3rdeyesys.com\n  social_icon: Email\n  target: _blank\n\n\n코드 블럭 스타일 수정\n\n  첫째줄만 들여쓰기 되는 현상 수정\n  컨텐츠 넓이 정도로 영역이 자동 할당되도록 수정\n  과도한 padding, margin 영역 축소\n\n\n파일 위치: \\_sass\\dark-theme.scss\n\n기존:\n.highlight { \n padding: 10px 15px;\n}\n \n수정: \n.highlight { \n  padding: 7px 30px 7px 10px;\n  display:inline-block;\n}\n\n\n파일 위치: \\_sass\\elements.scss\n\n기존:\ncode, pre, tt {\t\n\tpadding: 2px 5px;\n}\n \n수정: \ncode, pre, tt {\t\n\tmargin: 0px;\n\tdisplay:inline-block;\n}"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"etc-etc-jekyll-documentation-theme-install-html": {
+						"id": "etc-etc-jekyll-documentation-theme-install-html",
+						"title": "Jekyll Documentation Theme 설치 가이드",
+						"categories": "",
+						"url": " /etc/etc_jekyll_documentation_theme_install.html",
+						"content": "Documentation Theme 특징\n이 기술문서에 사용된 Documentation Theme의 가장 큰 특징은 다음과 같습니다.\n\n- 문서를 카테고리별로 정렬해서 보여주는 네비게이션 리스트\n- 문서 상단에 보여주는 문서 목차 (TOC)\n- 다양한 상단 네비게이션 구성\n- Tag를 활용해서 비슷한 주제의 문서를 함께 확인할 수 있음\n\n\n\n설치 전체과정 요약\n\n\n  Ruby 설치\n  ridk 설치\n  Documentation Theme 다운로드\n  Jekyll gem 설치\n  Bundler 설치\n\n\n Tip: 이미 Ruby 2.5등 3.0 이전 버전이 설치되어 있더라도 3.0을 설치하시는 걸 추천드립니다. build 속도 개선 등 많은 기능이 향상 되었습니다.\n\nRuby 설치\njekyll 최신 버전은 2022-03-03 현재 v.3.1이지만 여기서는 Documentation Theme를 기반으로 하기 때문에 호환이 잘되는 3.0을 설치합니다.\n\nRuby Installer 다운로드 경로\nhttps://rubyinstaller.org/downloads/\n\n위 사이트에서 rubyinstaller-devkit-3.0.3-1-x64 를 다운 받아 설치하면 됩니다.\n\n\n\nRuby 설치 화면에서 PATH와 파일 확장자 연결에 체크 되어 있는지 확인하고 [Install] 버튼을 클릭합니다.\n\n\n설치할 컴포넌트 선택화면에서 모두 선택하거나 최소한 MSYS2 development toolchain은 꼭 선택하고 [Next] 버튼을 클릭합니다. 설치에 필요한 공간은 972MB 정도 됩니다.\n\n\nRuby 설치가 끝나면서 완료화면에 Run ‘ridk install’ to setup MSYS2 and development toolchain. 이라는 옵션이 나타납니다. \n꼭 설치해야 하는 툴이므로 반드시 선택하고 완료를 해서 바로 설치화면으로 이동하도록 합니다.\n\n\n\nridk 설치\n앞단계인 Ruby 설치 완료에서 ridk install을 선택했다면 ridk 설치 커맨드 창이 나타납니다.\n(혹시 선택하지 않았다면 커맨드 창을 열어서 ridk install 을 입력하면 됩니다)\n이때 설치 옵션을 선택할 수 있는데 Enter 키를 입력하면 기본 옵션인 1, 3으로 설치가 진행됩니다.\n\n\n\nDocumentation Theme 설치\nDocumentation Theme는 jekyll의 여러 테마 중에서 문서 작성에 특화된 테마입니다.\n\n다운로드 경로\nhttps://github.com/tomjoht/documentation-theme-jekyll\n\n위 다운로드 경로에서 소스를 직접 다운 받거나 GitHub Desktop을 이용해서 가져오면 됩니다.\n\nLive Demo\n실제 Documentaion Theme를 적용하면 어떤 사이트를 만들 수 있는지 미리 확인해볼 수 있는 Live Demo 사이트가 있습니다.\nhttps://idratherbewriting.com/documentation-theme-jekyll/\n\nJekyll gem 설치\n우선 jekyll을 설치합니다.\n\ngem install jekyll\n\n\nBundler 설치\n\n\n  다운로드 받은 Documentation theme 폴더를 오픈합니다.\n  Gemfile 과 Gemfile.lock 파일을 삭제하거나 이름을 변경합니다.\n  다음 명령으로 bundler를 설치합니다: gem install bundler\n  \n    Bundler를 초기화 합니다: bundle init\n\n    초기화 작업이 진행되면서 Gemfile 파일이 생성됩니다.\n  \n  \n    Gemfile을 열어서 기존 내용을 삭제하고 다음 내용으로 변경합니다.\n\n    source \"https://rubygems.org\"\n  \ngem 'jekyll', '~&gt; 4.2.1'\n\ngroup :jekyll_plugins do \n  gem 'jekyll-seo-tag', '~&gt; 2.7.0'\n  gem 'jekyll-sitemap', '~&gt; 1.4.0'\n  gem 'wdm', '~&gt; 0.1.1'\n  gem 'kramdown-parser-gfm'\nend\n\ngem \"webrick\", \"~&gt; 1.7\"\n    \n  \n  Gemfile을 저장합니다.\n  다음 명령어로 필요한 gem을 설치합니다: bundle install\n\n\n사이트 실행, 접속\n작업하면서 결과물을 확인할 때는 다음과 같은 명령어로 입력하고 브라우져에서 http://127.0.0.1:4000/ 로 접속하시면 되니다.\n\nbundle exec jekyll serve\n\n\n최종 결과 화면\n위 절차대로 모두 실행하면 아래와 같은 화면을 볼 수 있습니다.\n\n\n\n사이트 빌드\n작업이 끝난 결과물을 실제 서버나 gitHub에 업로드, 배포할 경우에는 다음 명령어로 빌드 한 후에 _site에 생성된 html 등을 사용하시면 됩니다.\n\nbundle exec jekyll build\n\n\n추가 패키지 설치\n혹시 사이트 실행, 접속에서 오류가 발생하면 나타나는 메시지를 보고 처리를 해주면 됩니다.\n혹시 필요한 gem이 설치되지 않았을 경우에는 다음과 같이 설치해주면 됩니다.\n\n# gem 수동 설치 예시\ngem install public_suffix -v 3.0.1"
 					}
 					
 				
@@ -3173,7 +3195,7 @@
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-         Site last generated: 2022-03-02 <br />
+         Site last generated: 2022-03-04 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>

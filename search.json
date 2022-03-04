@@ -37,6 +37,17 @@
 
 
 {
+"title": "Jekyll Documentation Theme 설치 가이드",
+"tags": "markdownjekyllwindows",
+"keywords": "Markdown, Windows, Hugo",
+"url": "/etc/etc_jekyll_documentation_theme_install.html",
+"summary": "윈도 10 환경에서 Jekyll Documentation Theme를 설치하는 방법입니다"
+}
+,
+
+
+
+{
 "title": "jekyll 설치(윈도 10) with base-theme",
 "tags": "markdownjekyllwindows",
 "keywords": "Markdown, Windows, Hugo",
