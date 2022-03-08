@@ -1435,7 +1435,17 @@ $('#toc').on('click', 'a', function() {
 
     
 
-   <h2 id="개요">개요</h2>
+   <h2 id="문서-편집툴">문서 편집툴</h2>
+
+<h3 id="visual-studio-code">Visual Studio Code</h3>
+<p>Windows에서 Jekyll 문서를 편집하는 경우에는 Command 창을 열어서 로컬 사이트를 실행하거나 빌드하고, 오류가 발생하면 실시간으로 나타나는 오류 메시지를 확인하면서 작업하게 됩니다. 
+이때 문서 편집툴과 Command 창을 별도로 띄워놓고 확인하는 것이 불편한데 Visual Studio Code를 사용하면 아래 스샷처럼, <code class="language-plaintext highlighter-rouge">문서 편집화면과 터미널 창을 함께 보면서 작업 가능해서 무척 편리</code>합니다.</p>
+
+<ul>
+  <li>다운로드: <a href="https://code.visualstudio.com/" target="_blank" style="word-break:break-all;">https://code.visualstudio.com/</a></li>
+</ul>
+
+<figure><img class="docimage" src="/images/etc/etc_jekyll_documentation_theme_page_create_guide_04.png" alt="Jekyll Documentation Theme 문서 작성하는 기본 방법" style="width: 845px; " /></figure>
 
 <h2 id="md-파일-생성">md 파일 생성</h2>
 <p>작성하려는 문서를 markdown 파일의 확장자인 .md 파일로 생성합니다.</p>
@@ -1509,7 +1519,7 @@ sidebar 파일은 <code class="language-plaintext highlighter-rouge">/_data/side
 <p>permalink는 문서의 최종 html 페이지 URL 입니다. md 파일의 위치와 관계없이 원하는 형태의 URL로 설정할 수 있습니다.</p>
 
 <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># md 파일 위치 예시</span>
-<span class="s">_pages/compute/server/server_compare.md</span>
+<span class="s">/pages/compute/server/server_compare.md</span>
 
 <span class="c1"># permalink 예시</span>
 <span class="s">/compute/compute_server_compare.html</span>
@@ -1524,26 +1534,23 @@ sidebar 파일은 <code class="language-plaintext highlighter-rouge">/_data/side
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Second-level heading
 </code></pre></div></div>
 
-<p><strong>Result:</strong></p>
-
-<p><span style="font-size:24px"> Second-level heading</span></p>
+<p><strong>Result:</strong><br />
+<span style="font-size:24px"> Second-level heading</span></p>
 
 <hr />
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>### Third-level heading
 </code></pre></div></div>
-<p><strong>Result:</strong></p>
-
-<p><span style="color: #ED1951; font-weight:normal; font-size:130%;"> Third-level heading</span></p>
+<p><strong>Result:</strong><br />
+<span style="color: #ED1951; font-weight:normal; font-size:130%;"> Third-level heading</span></p>
 
 <hr />
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#### Fourth-level heading
 </code></pre></div></div>
 
-<p><strong>Result:</strong></p>
-
-<p><span style="color: #808080; font-weight:normal; font-size:120%; font-style:italic;"> Fourth-level heading</span></p>
+<p><strong>Result:</strong><br />
+<span style="color: #808080; font-weight:normal; font-size:120%; font-style:italic;"> Fourth-level heading</span></p>
 
 <h2 id="이미지-설정">이미지 설정</h2>
 <p>이미지는 이미지에 대한 html 태그가 설정된 파일을 include 하게 됩니다.</p>
@@ -1885,7 +1892,7 @@ using (HMACSHA256 sha256 = new HMACSHA256(hmac_key))
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2022-03-07<br/> Site last generated: 2022-03-07 <br />
+        <span>Page last updated:</span> 2022-03-07<br/> Site last generated: 2022-03-08 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>

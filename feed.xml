@@ -5,14 +5,24 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 07 Mar 2022 15:04:54 +0900</pubDate>
-        <lastBuildDate>Mon, 07 Mar 2022 15:04:54 +0900</lastBuildDate>
+        <pubDate>Tue, 08 Mar 2022 10:26:29 +0900</pubDate>
+        <lastBuildDate>Tue, 08 Mar 2022 10:26:29 +0900</lastBuildDate>
         <generator>Jekyll v4.2.1</generator>
         
         
         <item>
             <title>Jekyll Documentation Theme 문서 작성 기본 가이드</title>
-            <description>&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
+            <description>&lt;h2 id=&quot;문서-편집툴&quot;&gt;문서 편집툴&lt;/h2&gt;
+
+&lt;h3 id=&quot;visual-studio-code&quot;&gt;Visual Studio Code&lt;/h3&gt;
+&lt;p&gt;Windows에서 Jekyll 문서를 편집하는 경우에는 Command 창을 열어서 로컬 사이트를 실행하거나 빌드하고, 오류가 발생하면 실시간으로 나타나는 오류 메시지를 확인하면서 작업하게 됩니다. 
+이때 문서 편집툴과 Command 창을 별도로 띄워놓고 확인하는 것이 불편한데 Visual Studio Code를 사용하면 아래 스샷처럼, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;문서 편집화면과 터미널 창을 함께 보면서 작업 가능해서 무척 편리&lt;/code&gt;합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;다운로드: &lt;a href=&quot;https://code.visualstudio.com/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://code.visualstudio.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure&gt;&lt;img class=&quot;docimage&quot; src=&quot;/images/etc/etc_jekyll_documentation_theme_page_create_guide_04.png&quot; alt=&quot;Jekyll Documentation Theme 문서 작성하는 기본 방법&quot; style=&quot;width: 845px; &quot; /&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;md-파일-생성&quot;&gt;md 파일 생성&lt;/h2&gt;
 &lt;p&gt;작성하려는 문서를 markdown 파일의 확장자인 .md 파일로 생성합니다.&lt;/p&gt;
@@ -86,7 +96,7 @@ sidebar 파일은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot
 &lt;p&gt;permalink는 문서의 최종 html 페이지 URL 입니다. md 파일의 위치와 관계없이 원하는 형태의 URL로 설정할 수 있습니다.&lt;/p&gt;
 
 &lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# md 파일 위치 예시&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;_pages/compute/server/server_compare.md&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/pages/compute/server/server_compare.md&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# permalink 예시&lt;/span&gt;
 &lt;span class=&quot;s&quot;&gt;/compute/compute_server_compare.html&lt;/span&gt;
@@ -101,26 +111,23 @@ sidebar 파일은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## Second-level heading
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;font-size:24px&quot;&gt; Second-level heading&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt;&lt;br /&gt;
+&lt;span style=&quot;font-size:24px&quot;&gt; Second-level heading&lt;/span&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;### Third-level heading
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color: #ED1951; font-weight:normal; font-size:130%;&quot;&gt; Third-level heading&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt;&lt;br /&gt;
+&lt;span style=&quot;color: #ED1951; font-weight:normal; font-size:130%;&quot;&gt; Third-level heading&lt;/span&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#### Fourth-level heading
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color: #808080; font-weight:normal; font-size:120%; font-style:italic;&quot;&gt; Fourth-level heading&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt;&lt;br /&gt;
+&lt;span style=&quot;color: #808080; font-weight:normal; font-size:120%; font-style:italic;&quot;&gt; Fourth-level heading&lt;/span&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;이미지-설정&quot;&gt;이미지 설정&lt;/h2&gt;
 &lt;p&gt;이미지는 이미지에 대한 html 태그가 설정된 파일을 include 하게 됩니다.&lt;/p&gt;
