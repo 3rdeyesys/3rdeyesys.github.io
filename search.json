@@ -743,6 +743,28 @@
 
 
 {
+"title": "Web service Monitoring System 사용 가이드",
+"tags": "monitoringlog",
+"keywords": "Log, 홈페이지",
+"url": "/management/ncloud_management_webservice_monitoring_system_guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Web service Monitoring System 스텝 추가 상세 가이드",
+"tags": "monitoringlog",
+"keywords": "Log, 홈페이지",
+"url": "/management/ncloud_management_webservice_monitoring_system_step_guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Video Player 구현하기 샘플 예제",
 "tags": "mediaobject_storage",
 "keywords": "streaming",
