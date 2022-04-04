@@ -6,18 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="써드아이시스템이 네이버 클라우드 프리미엄 파트너사로 활동하면서 보유하게 된 네이버 클라우드와 관련된 여러 기술 노하우들을 많은 분들께 공유합니다">
 <meta name="keywords" content=",  3rdEYE, Docs, Tech">
-<!-- Begin Jekyll SEO tag v2.7.1 -->
-<meta name="generator" content="Jekyll v4.2.1" />
-<meta property="og:title" content="3rdeyesys" />
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:description" content="써드아이시스템이 네이버 클라우드 프리미엄 파트너사로 활동하면서 보유하게 된 네이버 클라우드와 관련된 여러 기술 노하우들을 많은 분들께 공유합니다" />
 <link rel="canonical" href="https://docs.3rdeyesys.com/" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/" />
-<meta property="og:site_name" content="3rdeyesys" />
+<meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
+<meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="3rdeyesys" />
+<meta property="twitter:title" content="3RDEYESYSTEM Technical Documentations" />
 <script type="application/ld+json">
-{"headline":"3rdeyesys","@type":"WebSite","url":"https://docs.3rdeyesys.com/","description":"써드아이시스템이 네이버 클라우드 프리미엄 파트너사로 활동하면서 보유하게 된 네이버 클라우드와 관련된 여러 기술 노하우들을 많은 분들께 공유합니다","name":"3rdeyesys","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"써드아이시스템이 네이버 클라우드 프리미엄 파트너사로 활동하면서 보유하게 된 네이버 클라우드와 관련된 여러 기술 노하우들을 많은 분들께 공유합니다","headline":"3RDEYESYSTEM Technical Documentations","name":"3RDEYESYSTEM Corp","sameAs":["https://3rdeyesys.com/","https://www.facebook.com/3rdeyesys","https://kr.linkedin.com/company/3rdeyesystem"],"url":"https://docs.3rdeyesys.com/"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title> | 써드아이시스템 기술문서</title>
@@ -54,7 +55,7 @@
 
 <link rel="shortcut icon" href="/images/favicon.ico">
 
-<link rel="alternate" type="application/rss+xml" title="3rdeyesys" href="https://docs.3rdeyesys.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="3RDEYESYSTEM Technical Documentations" href="https://docs.3rdeyesys.com/feed.xml">
 
 
 
@@ -76,6 +77,12 @@
                     easing: 'swing'
                 }
             });
+            
+            window_width = $(window).width();
+            if (window_width <= 990) //모바일 환경에서는 사이드바 접기
+            {
+                $("#mysidebar").navgoco('toggle', false);
+            }
 
             $("#collapseAll").click(function(e) {
                 e.preventDefault();
@@ -223,8 +230,9 @@
         <!-- Content Column -->
         <div class="col-md-12" id="tg-sb-content">
             <div class="post-header">
-   <h1 class="post-title-main"></h1>
+
 </div>
+
 
 
 
@@ -251,14 +259,14 @@
     <ul>    
        
     <li>
-        <a href="/compute/ncloud_compute_autoscaling_classic_guide.html">
+        <a href="/compute/ncloud_compute_server_vpc_create.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        Classic 환경에서 AutoScaling 설정
+        VPC 환경에서 서버 생성
         
         </a>
     </li>
@@ -267,14 +275,14 @@
     
        
     <li>
-        <a href="/compute/ncloud_compute_autoscaling_event_setting.html">
+        <a href="/compute/ncloud_compute_server_micro_type_limit.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        AutoScaling 이벤트 설정하는 방법
+        Micro 타입 서버에서 제한되는 서비스
         
         </a>
     </li>
@@ -283,14 +291,14 @@
     
        
     <li>
-        <a href="/compute/ncloud_compute_server_repository_change_on_private_network.html">
+        <a href="/compute/ncloud_compute_server_storage_add_guide.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        Repository 변경해 리눅스 패키지 설치
+        스토리지 추가 생성 기본 가이드
         
         </a>
     </li>
@@ -299,14 +307,14 @@
     
        
     <li>
-        <a href="/compute/ncloud_compute_server_image_share_classic.html">
+        <a href="/compute/ncloud_compute_server_connect_by_public_ip.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        Classic환경 서버이미지 타 계정 공유
+        서버 접속 방법(Linux) - 공인IP 있을 때
         
         </a>
     </li>
@@ -334,6 +342,22 @@
     <ul>    
        
     <li>
+        <a href="/networking/ncloud_networking_load_balancer_acg.html">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
+			   <path d="M0 0h24v24H0z" fill="none" />
+		    </svg> 
+        
+        
+        Classic Load Balancer ACG 설정
+        
+        </a>
+    </li>
+
+            
+    
+       
+    <li>
         <a href="/networking/ncloud_networking_vpc_overview.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
@@ -350,14 +374,14 @@
     
        
     <li>
-        <a href="/networking/ncloud_networking_load_balancer_http_to_https.html">
+        <a href="/networking/ncloud_networking_natgw_routetb.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        Load Balancer에서 http to h...
+        VPC 환경에서 NAT Gateway 설정하기
         
         </a>
     </li>
@@ -374,22 +398,6 @@
         
         
         Subnet 과 NAT Gateway 비교
-        
-        </a>
-    </li>
-
-            
-    
-       
-    <li>
-        <a href="/networking/ncloud_networking_global_dns_guide.html">
-        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
-			   <path d="M0 0h24v24H0z" fill="none" />
-		    </svg> 
-        
-        
-        Global DNS 사용 가이드 - 도메인 추가
         
         </a>
     </li>
@@ -417,22 +425,6 @@
     <ul>    
        
     <li>
-        <a href="/storage/ncloud_storage_object_storage_lifecycle_management.html">
-        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
-			   <path d="M0 0h24v24H0z" fill="none" />
-		    </svg> 
-        
-        
-        Object Storage Lifecycle ...
-        
-        </a>
-    </li>
-
-            
-    
-       
-    <li>
         <a href="/storage/ncloud_storage_object_storage_transfer_to_archive_storage.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
@@ -449,14 +441,14 @@
     
        
     <li>
-        <a href="/storage/ncloud_storage_archive_storage_api_get_container_by_php.html">
+        <a href="/storage/ncloud_storage_object_storage_aws_cli_connect.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        Archive Storage API - 오브젝...
+        AWS CLI를 이용 Object Storag...
         
         </a>
     </li>
@@ -465,14 +457,30 @@
     
        
     <li>
-        <a href="/storage/ncloud_storage_object_storage_s3_client_cloudberry_explorer.html">
+        <a href="/storage/ncloud_storage_archive_storage_api_access_token_create.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        CloudBerry Explorer 사용방법
+        Archive Storage API 인증 토큰 생성
+        
+        </a>
+    </li>
+
+            
+    
+       
+    <li>
+        <a href="/storage/ncloud_storage_nas_vpc_guide.html">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
+			   <path d="M0 0h24v24H0z" fill="none" />
+		    </svg> 
+        
+        
+        NAS 볼륨 Linux 서버에 마운트하기
         
         </a>
     </li>
@@ -516,22 +524,6 @@
     
        
     <li>
-        <a href="/database/ncloud_database_mariadb_access_from_remote_ubuntu.html">
-        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
-			   <path d="M0 0h24v24H0z" fill="none" />
-		    </svg> 
-        
-        
-        Ubuntu에서 mariaDB 외부접속 허용
-        
-        </a>
-    </li>
-
-            
-    
-       
-    <li>
         <a href="/database/ncloud_database_mysql_root_password_set_update_guide.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
@@ -548,14 +540,30 @@
     
        
     <li>
-        <a href="/database/ncloud_database_mysql_mariadb_config_bind_address.html">
+        <a href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        Mysql, mariadb bind-addre...
+        Ubuntu Mysql Object Stora...
+        
+        </a>
+    </li>
+
+            
+    
+       
+    <li>
+        <a href="/database/ncloud_database_compare.html">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
+			   <path d="M0 0h24v24H0z" fill="none" />
+		    </svg> 
+        
+        
+        설치형 DB와 관리형 Cloud DB 비교
         
         </a>
     </li>
@@ -583,22 +591,6 @@
     <ul>    
        
     <li>
-        <a href="/security/ncloud_security_ssl_vpn_vpc_guide.html">
-        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
-			   <path d="M0 0h24v24H0z" fill="none" />
-		    </svg> 
-        
-        
-        VPC 환경에서 SSL VPN 설정, 접속
-        
-        </a>
-    </li>
-
-            
-    
-       
-    <li>
         <a href="/security/ncloud_security_onpremise_compare.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
@@ -615,14 +607,14 @@
     
        
     <li>
-        <a href="/security/ncloud_security_ssl_dcv_method.html">
+        <a href="/security/ncloud_security_service_summary.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        SSL인증서 DCV 인증 방법 정리
+        Security 서비스 요약
         
         </a>
     </li>
@@ -631,14 +623,30 @@
     
        
     <li>
-        <a href="/security/ncloud_security_ssl_vpn_classic_guide.html">
+        <a href="/security/ncloud_security_ssl_vpn_vpc_guide.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        Classic 환경에서 SSL VPN 설정, 접속
+        VPC 환경에서 SSL VPN 설정, 접속
+        
+        </a>
+    </li>
+
+            
+    
+       
+    <li>
+        <a href="/security/ncloud_security_acg_guide.html">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
+			   <path d="M0 0h24v24H0z" fill="none" />
+		    </svg> 
+        
+        
+        ACG 설정 가이드
         
         </a>
     </li>
@@ -666,30 +674,14 @@
     <ul>    
        
     <li>
-        <a href="/management/ncloud_management_webservice_monitoring_system_guide.html">
+        <a href="/management/ncloud_management_monitoring_win_perf_data_error_troubleshoot.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        Webservice Monitoring Sys...
-        
-        </a>
-    </li>
-
-            
-    
-       
-    <li>
-        <a href="/management/ncloud_management_webservice_monitoring_system_step_guide.html">
-        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
-			   <path d="M0 0h24v24H0z" fill="none" />
-		    </svg> 
-        
-        
-        Webservice Monitoring Sys...
+        Windows 서버 모니터링 성능 정보 수집 ...
         
         </a>
     </li>
@@ -722,6 +714,22 @@
         
         
         Sub Account 생성 가이드
+        
+        </a>
+    </li>
+
+            
+    
+       
+    <li>
+        <a href="/management/ncloud_management_webservice_monitoring_system_guide.html">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
+			   <path d="M0 0h24v24H0z" fill="none" />
+		    </svg> 
+        
+        
+        Webservice Monitoring Sys...
         
         </a>
     </li>
@@ -814,22 +822,6 @@
     
        
     <li>
-        <a href="/api/ncloud_api_call_csharp_sample.html">
-        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
-			   <path d="M0 0h24v24H0z" fill="none" />
-		    </svg> 
-        
-        
-        C#으로 Ncloud API 호출하기 샘플
-        
-        </a>
-    </li>
-
-            
-    
-       
-    <li>
         <a href="/api/ncloud_api_call_php_sample.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
@@ -838,6 +830,22 @@
         
         
         PHP로 Ncloud API 호출하기 샘플
+        
+        </a>
+    </li>
+
+            
+    
+       
+    <li>
+        <a href="/api/ncloud_api_call_csharp_sample.html">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
+			   <path d="M0 0h24v24H0z" fill="none" />
+		    </svg> 
+        
+        
+        C#으로 Ncloud API 호출하기 샘플
         
         </a>
     </li>
@@ -1010,6 +1018,22 @@
     <ul>    
        
     <li>
+        <a href="/etc/etc_phpspreadsheet_sample_code.html">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
+			   <path d="M0 0h24v24H0z" fill="none" />
+		    </svg> 
+        
+        
+        PhpSpreadsheet 설정 샘플 코드
+        
+        </a>
+    </li>
+
+            
+    
+       
+    <li>
         <a href="/etc/etc_jekyll_documentation_theme_install.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
@@ -1026,14 +1050,14 @@
     
        
     <li>
-        <a href="/etc/etc_mkdocs_install.html">
+        <a href="/etc/etc_jekyll_install.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        mkdocs 설치 (윈도 10)
+        jekyll 설치(윈도 10) with bas...
         
         </a>
     </li>
@@ -1042,30 +1066,14 @@
     
        
     <li>
-        <a href="/etc/etc_jekyll_base_theme_customizing.html">
+        <a href="/etc/etc_php_to_telegram_message_send.html">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			   <path d="M0 0h24v24H0z" fill="none" />
 		    </svg> 
         
         
-        jekyll base-theme 커스터마이징
-        
-        </a>
-    </li>
-
-            
-    
-       
-    <li>
-        <a href="/etc/etc_phpspreadsheet_sample_code.html">
-        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			   <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
-			   <path d="M0 0h24v24H0z" fill="none" />
-		    </svg> 
-        
-        
-        PhpSpreadsheet 설정 샘플 코드
+        PHP로 텔레그램 메시지 전송하기
         
         </a>
     </li>
@@ -1111,27 +1119,13 @@
     
     
     <li>
-        <a href="/tag/tag_nginx.html"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <a href="/tag/tag_acg.html"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
 			<path d="M0 0h24v24H0z" fill="none" />
 		</svg> 
         
         
-        NginX pages
-        
-        </a>
-    </li>
-
-    
-    
-    <li>
-        <a href="/tag/tag_excel.html"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
-			<path d="M0 0h24v24H0z" fill="none" />
-		</svg> 
-        
-        
-        Excel pages
+        ACG pages
         
         </a>
     </li>
@@ -1146,6 +1140,20 @@
         
         
         AWS pages
+        
+        </a>
+    </li>
+
+    
+    
+    <li>
+        <a href="/tag/tag_excel.html"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z" />
+			<path d="M0 0h24v24H0z" fill="none" />
+		</svg> 
+        
+        
+        Excel pages
         
         </a>
     </li>
@@ -1198,7 +1206,7 @@
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-         Site last generated: 2022-03-23 <br />
+         Site last generated: 2022-04-04 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>

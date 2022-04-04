@@ -1350,7 +1350,7 @@ h4.panel-title>a {
 header {	
     padding: 5px 0 10px 0;
     background-color: #232C43;
-    background: url("/images/ncp-header-bg_newyear.jpg");
+    background: url("/images/ncp-header-bg-202204.jpg");
     background-size: 2200px;
 }
 
@@ -1453,4 +1453,27 @@ header nav input{ border: solid 1px gray;}
 img.docimage{
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+@media screen and (max-width: 990px)
+{
+    #tg-sb-sidebar {display:none;}
+    #tg-sb-content {width: 100%;}
+}
+
+@media screen and (min-width: 991px)
+{
+    #tg-sb-sidebar {display:inline;}
+    #tg-sb-content {width: 75%;}
+}
+
+.simple_table > thead > tr > th,
+.simple_table > tbody > tr > th,
+.simple_table > tfoot > tr > th,
+.simple_table > thead > tr > td,
+.simple_table > tbody > tr > td,
+.simple_table > tfoot > tr > td {    
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
 }

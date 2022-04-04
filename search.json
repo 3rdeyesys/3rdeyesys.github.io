@@ -1007,11 +1007,11 @@
 
 
 {
-"title": "네이버 클라우드 스토리지 비교",
+"title": "Ncloud 제공 스토리지 비교",
 "tags": "port",
 "keywords": "Storage",
 "url": "/storage/ncloud_storage_compare.html",
-"summary": "네이버 클라우드 스토리지 비교"
+"summary": ""
 }
 ,
 
@@ -1119,6 +1119,15 @@
 
 
 
+
+{
+"title": "ACG",
+"tags": "",
+"keywords": "",
+"url": "/tag/tag_acg.html",
+"summary": ""
+}
+,
 
 
 

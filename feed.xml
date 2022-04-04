@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>3rdeyesys</title>
+        <title>3RDEYESYSTEM Technical Documentations</title>
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 23 Mar 2022 16:04:38 +0900</pubDate>
-        <lastBuildDate>Wed, 23 Mar 2022 16:04:38 +0900</lastBuildDate>
-        <generator>Jekyll v4.2.1</generator>
+        <pubDate>Mon, 04 Apr 2022 16:25:13 +0900</pubDate>
+        <lastBuildDate>Mon, 04 Apr 2022 16:25:13 +0900</lastBuildDate>
+        <generator>Jekyll v4.2.2</generator>
         
         
         <item>
