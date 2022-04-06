@@ -742,6 +742,20 @@
           
           
           
+          
+          
+          <li><a title="Cloud DB PostgreSQL 생성 | CentOS" href="/database/ncloud-database-cloud-db-for-postgresql-guide-centos.html">Cloud DB PostgreSQL 생성 | CentOS</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="Cloud DB PostgreSQL 생성 | Ubuntu" href="/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html">Cloud DB PostgreSQL 생성 | Ubuntu</a></li>          
+                    
+          
+          
+          
       </ul>
    </li>
      
@@ -1618,6 +1632,36 @@
 		
 			
 		
+			
+		
+			
+				
+					,
+					
+					"database-ncloud-database-cloud-db-for-postgresql-guide-centos-html": {
+						"id": "database-ncloud-database-cloud-db-for-postgresql-guide-centos-html",
+						"title": "VPC환경에서 Cloud DB for PostgreSQL 생성하기 | CentOS",
+						"categories": "",
+						"url": " /database/ncloud-database-cloud-db-for-postgresql-guide-centos.html",
+						"content": "지원 클라우드 환경\nNcloud Cloud DB for PostgreSQL이 지원하는 클라우드 환경은 다음과 같습니다.\n\n\n  리전(존): 한국, 싱가포르\n  VPC만\t지원\n  언어: 한국어, 영어, 일본어, 중국어(간체)\n  DB 엔진 버전: PostgreSQL 13.3\n\n\n서버 사양과 요금\n\n(2022-03-30 기준)\n\n  \n    타입제공사양이용 요금\n    vCPU메모리디스크시간당/대\n  \n  \n    High CPU2개4GB50GB158원\n    4개8GB323원\n    8개16GB653원\n    16개32GB1,313원\n    32개64GB2,633원\n    Standard2개8GB50GB250원\n    4개16GB506원\n    8개32GB1,019원\n    16개64GB2,045원\n    32개128GB4,099원\n    High Memory2개16GB50GB302원\n    4개32GB611원\n    8개64GB1,227원\n    16개128GB2,462원\n    32개256GB4,927원\n  \n\n\n서버 사양 변경 시 제약 사항\nCloud DB for PostgreSQL 서버는 타입은 변경할 수 없지만 메모리 크기는 콘솔 PostgreSQL Server 메뉴에서 스펙 변경 기능을 사용하여 언제든지 변경할 수 있습니다. 그 외 제약 사항은 아래와 같습니다.\n\n\n  같은 타입 내에서만 변경 가능\n  2대 이상의 서버로 구성된 경우(고가용성 사용 및 Read Replica 사용) 모두 동일한 사양으로 변경\n  변경 완료 후 서버가 다시 시작되며 이에 따라 서비스 영향 발생 가능성 존재\n\n\n상세 특징\n\n  DB 엔진 버전: PostgreSQL 13.3\n  스토리지: 기본 10GB 데이터 스토리지를 제공하며, 10GB 단위로 6000GB까지 자동으로 용량이 증가\n  Multi Zone 구성 제공\n  자동 Fail-over 기본 지원\n  최대 5대까지 Read Replica 확장\n  최대 30일까지 자동 백업 및 보관\n\n\n서버 접근 방법\nCloud DB for PostgreSQL은 현재 Public Domain을 제공하지 않고, Ncloud 내부에서만 접근이 가능하기 때문에 다음의 방법을 사용해야 합니다.\n\n\n⁃ PostgreSQL DB와 Private 통신을 위한 별도의 서버를 생성해서 접근\n⁃ SSL VPN을 이용해서 접근\n\n\nDB 생성\n[VPC] - [Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.\n\n\n\n서버 설정\n\n  DB 엔진: 현재 지원되는 DB 엔진 버전은 PostgreSQL 13.3 입니다.\n  고가용성 지원은 기본 선택 사항인데, 필요하지 않을 경우 체크를 해제하면 됩니다.\n  VPC와 Subnet을 선택하고, 미리 생성된 VPC와 Subnet가 없으면 생성 버튼을 클릭합니다.\n  DB Server 타입은 위쪽에서 확인했던 서버 사양 중에서 원하는 vCPU와 메모리를 선택하면 됩니다.\n\n\n\n\n\n  데이터 스토리지 타입과 암호화 적용 여부를 선택합니다.\n  데이터 스토리지는 기본 10GB로 설정되며 최대 6000GB까지 자동으로 증가합니다.\n  DB Server 이름과 DB Service 이름을 입력합니다. DB Service 이름은 DB Server를 역할별로 구분한 그룹의 명칭입니다.\n\n\n\n\nDB 설정\n\n  USER ID와 암호를 입력합니다. (ID와 암호는 잊어버리지 않도록 잘 보관해야 합니다.)\n  접근제어는 접근을 허용할 IP 대역을 입력합니다.\n  DB 접속포트는 기본 포트가 5432 입니다.\n  기본 DB명을 입력하고, Backup 설정을 선택합니다.\n\n\n\n\n최종 확인\n지금까지 입력한 값이 이상이 없는지 최종 확인하고, 수정할 부분이 없으면 [생성] 버튼을 클릭합니다.\n\n\n\nDB 상세 정보\nDB 생성이 완료되면 아래와 같이 DB의 상세 정보를 확인할 수 있습니다.\n이 중에서 Private 도메인과 ACG는 이후 설정에서 사용할 중요한 항목입니다.\n\n\n\nClient Server 생성 | CentOS\n처음에 설명했 듯이 Cloud DB for PostgreSQL DB Server는 Private 환경에서만 접속 가능하므로 PostgreSQL Client를 설치할 Linux Server를 생성해야 하는데, \n여기서는 CentOS 7.8을 설치했습니다.\n\nVPC 환경에서 Linux Server를 생성하는 방법은 다음 문서를 참고하시기 바랍니다.\n\n  VPC 환경에서 서버 생성하기\n\n\n\n생성된 Client Server의 정보 중에서 비공인 IP는 다음 ACG 설정에서 필요하니 기억해 둡니다.\n마찬가지로 공인 IP는 로컬 PC에서 PostgreSQL Client에 접속할 때 필요하니 기억해 둡니다.\n\n\n\n\nACG 설정\n[VPC] - [Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.\n\n\n\nACG 규칙 설정\nACG 규칙 설정 창에서 [Inbound] 탭을 선택하고 [접근 소스]는 위에서 생성한 Client Server의 비공인 IP를 입력하고 허용 포트는 5432를 입력하고 [추가] 버튼을 클릭합니다.\n\n\n\npgAdmin4 설치\nClient용 Linux Server에 PostgreSQL DB의 Client 프로그램인 pgAdmin4를 설치합니다.\n\n~# yum install -y https://ftp.postgresql.org/pub/pgadmin/pgadmin4/yum/pgadmin4-redhat-repo-2-1.noarch.rpm\n\n\n\npgAdmin4-Web 설치\n로컬 PC에서 pgAdmin4에 접속하기 위해 pgAdmin4-Web을 설치합니다.\n\n~# yum install -y pgadmin4-web\n\n\n\npgAdmin4-Web 환경 설정\nsetup-web.sh 스크립트를 실행 후 pgAdmin4-Web 접속을 위한 이메일 계정과 패스워드를 입력합니다.\n\n~# /usr/pgadmin4/bin/setup-web.sh\n\n\n\n오류 상황\n간혹 위에서 진행한 pgAdmin4-Web 환경 설정에서 아래와 같은 오류가 발생하는 경우가 있습니다.\n\n semanage 오류: \n/usr/pgamin4/bin/setup-web.sh: line 87: semanage: command not found\n/usr/pgamin4/bin/setup-web.sh: line 89: semanage: command not found\n\n\n\n\n필요한 파일 확인\nsemanage 실행에 필요한 파일을 확인합니다.\n아래 명령어를 실행하면 나오면 결과에 나오는 파일명을 복사합니다.\n\n~# yum provides /usr/sbin/semanage\n\n\n\n추가 파일 설치\n위에서 확인한 추가 파일을 설치합니다.\n\n~# yum install -y policycoreutils-python-2.5-34.el7.x86_64\n\n\n\npgAdmin4-Web 설정 재 확인\n필요한 파일 설치를 마쳤으면 pgAdmin4-Web 환경 설정 명령어를 다시 실행합니다. 문제가 해결되었으면 오류 메시지가 나타나지 않습니다.\n\n~# /usr/pgadmin4/bin/setup-web.sh\n\n\n\npgAdmin4 접속\npgAdmin4 접속 주소는 http://[Client Server 공인IP 주소]/pgadmin4/ 입니다.\n위 주소로 접속하면 아래와 같이 Email Address와 Password 입력 화면이 나오는데 pgAdmin4-Web 환경 설정에서 입력한 이메일과 패스워드를 입력하고 로그인 합니다.\n\n\n\n서버 추가\npgAdmin에서 [Add New Server] 버튼을 클릭해서 위에서 생성했던 DB서버를 연결합니다.\n\n\n\nName 입력\n등록할 DB의 이름을 편하게 입력합니다.\n\n\n\n연결 정보 입력\n\n  Host name/address: Cloud DB for PostgreSQL 생성 후에 확인한 Private 도메인 (pg-oooo-vpc-cdb-kr.ntruss.com)을 입력합니다.\n  Username: Cloud DB for PostgreSQL 생성 시에 입력한 USER ID를 입력합니다.\n  Password: Cloud DB for PostgreSQL 생성 시에 입력한 USER 암호를 입력합니다.\n\n\n\n\npgAdmin4 대시보드\n연결 정보에 이상이 없고 정상적으로 접속이 되면 아래와 같이 대시보드 화면을 확인할 수 있습니다.\n\n\n\nDB Service 상세 보기\nDB Service 상세 보기에서는 Database 추가/삭제, Config 관리, User 추가/삭제, Backup 설정 등을 관리할 수 있습니다.\nCloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 메뉴를 클릭합니다.\n\n\n\nDatabase 관리\nPostgreSQL DB의 Database를 추가/삭제 할 수 있습니다.\n\n\n\nDB User 관리\nCloud DB for PostgreSQL의 DB User를 추가/삭제 할 수 있습니다.\n\n\n⁃ PostgreSQL은 1개의 DB에 1개 계정만 owner로 지정할 수 있습니다.\n⁃ 1개의 DB를 여러 계정으로 관리해야 하는 경우는 서브 계정을 만들고 \n   owner 계정으로 서브 계정에 별도의 권한을 설정해야 합니다.\n⁃ 이때 계정 생성은 Ncloud 콘솔에서만 가능합니다. (아래 화면의 DB User 관리 기능)\n⁃ 그 외의 권한 설정은 pgAdmin4 웹페이지에서 설정해야 합니다.\n\n\n\n\n서브 계정\nsubid라는 서브 계정을 만들었다고 가정했을 때 아래 화면처럼 Superuser 등의 권한 설정을 할 수 있습니다.\n\n\n\nDB 접근 권한 설정\n서브 계정의 특정 DB에 대한 접근 권한을 설정하고자 할 경우는 아래와 같이 DB를 선택하고, 마우스 오른쪽 클릭을 한 후 [Properties] 메뉴를 선택합니다.\n\n\n\n[Properties] 설정 화면에서 [Security] 메뉴를 선택하면 계정별로 권한을 설정할 수 있습니다.\n\n\n\n참고 URL\n\n  Ncloud Cloud DB for PostgreSQL 기본 가이드\n    \n      https://guide.ncloud-docs.com/docs/clouddbforpostgresql-overview\n    \n  \n  pgAdmin 홈페이지\n    \n      hhttps://www.pgadmin.org/"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"database-ncloud-database-cloud-db-for-postgresql-guide-ubuntu-html": {
+						"id": "database-ncloud-database-cloud-db-for-postgresql-guide-ubuntu-html",
+						"title": "VPC환경에서 Cloud DB for PostgreSQL 생성하기 | Ubuntu",
+						"categories": "",
+						"url": " /database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html",
+						"content": "지원 클라우드 환경\nNcloud Cloud DB for PostgreSQL이 지원하는 클라우드 환경은 다음과 같습니다.\n\n\n  리전(존): 한국, 싱가포르\n  VPC만\t지원\n  언어: 한국어, 영어, 일본어, 중국어(간체)\n  DB 엔진 버전: PostgreSQL 13.3\n\n\n서버 사양과 요금\n\n(2022-03-30 기준)\n\n  \n    타입제공사양이용 요금\n    vCPU메모리디스크시간당/대\n  \n  \n    High CPU2개4GB50GB158원\n    4개8GB323원\n    8개16GB653원\n    16개32GB1,313원\n    32개64GB2,633원\n    Standard2개8GB50GB250원\n    4개16GB506원\n    8개32GB1,019원\n    16개64GB2,045원\n    32개128GB4,099원\n    High Memory2개16GB50GB302원\n    4개32GB611원\n    8개64GB1,227원\n    16개128GB2,462원\n    32개256GB4,927원\n  \n\n\n서버 사양 변경 시 제약 사항\nCloud DB for PostgreSQL 서버는 타입은 변경할 수 없지만 메모리 크기는 콘솔 PostgreSQL Server 메뉴에서 스펙 변경 기능을 사용하여 언제든지 변경할 수 있습니다. 그 외 제약 사항은 아래와 같습니다.\n\n\n  같은 타입 내에서만 변경 가능\n  2대 이상의 서버로 구성된 경우(고가용성 사용 및 Read Replica 사용) 모두 동일한 사양으로 변경\n  변경 완료 후 서버가 다시 시작되며 이에 따라 서비스 영향 발생 가능성 존재\n\n\n상세 특징\n\n  DB 엔진 버전: PostgreSQL 13.3\n  스토리지: 기본 10GB 데이터 스토리지를 제공하며, 10GB 단위로 6000GB까지 자동으로 용량이 증가\n  Multi Zone 구성 제공\n  자동 Fail-over 기본 지원\n  최대 5대까지 Read Replica 확장\n  최대 30일까지 자동 백업 및 보관\n\n\n서버 접근 방법\nCloud DB for PostgreSQL은 현재 Public Domain을 제공하지 않고, Ncloud 내부에서만 접근이 가능하기 때문에 다음의 방법을 사용해야 합니다.\n\n\n⁃ PostgreSQL DB와 Private 통신을 위한 별도의 서버를 생성해서 접근\n⁃ SSL VPN을 이용해서 접근\n\n\nDB 생성\n[VPC] - [Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.\n\n\n\n서버 설정\n\n  DB 엔진: 현재 지원되는 DB 엔진 버전은 PostgreSQL 13.3 입니다.\n  고가용성 지원은 기본 선택 사항인데, 필요하지 않을 경우 체크를 해제하면 됩니다.\n  VPC와 Subnet을 선택하고, 미리 생성된 VPC와 Subnet가 없으면 생성 버튼을 클릭합니다.\n  DB Server 타입은 위쪽에서 확인했던 서버 사양 중에서 원하는 vCPU와 메모리를 선택하면 됩니다.\n\n\n\n\n\n  데이터 스토리지 타입과 암호화 적용 여부를 선택합니다.\n  데이터 스토리지는 기본 10GB로 설정되며 최대 6000GB까지 자동으로 증가합니다.\n  DB Server 이름과 DB Service 이름을 입력합니다. DB Service 이름은 DB Server를 역할별로 구분한 그룹의 명칭입니다.\n\n\n\n\nDB 설정\n\n  USER ID와 암호를 입력합니다. (ID와 암호는 잊어버리지 않도록 잘 보관해야 합니다.)\n  접근제어는 접근을 허용할 IP 대역을 입력합니다.\n  DB 접속포트는 기본 포트가 5432 입니다.\n  기본 DB명을 입력하고, Backup 설정을 선택합니다.\n\n\n\n\n최종 확인\n지금까지 입력한 값이 이상이 없는지 최종 확인하고, 수정할 부분이 없으면 [생성] 버튼을 클릭합니다.\n\n\n\nDB 상세 정보\nDB 생성이 완료되면 아래와 같이 DB의 상세 정보를 확인할 수 있습니다.\n이 중에서 Private 도메인과 ACG는 이후 설정에서 사용할 중요한 항목입니다.\n\n\n\nClient Server 생성 | Ubuntu\n처음에 설명했 듯이 Cloud DB for PostgreSQL DB Server는 Private 환경에서만 접속 가능하므로 PostgreSQL Client를 설치할 Linux Server를 생성해야 하는데, \n여기서는 Ubuntu 18.04을 설치했습니다.\n\nVPC 환경에서 Linux Server를 생성하는 방법은 다음 문서를 참고하시기 바랍니다.\n\n  VPC 환경에서 서버 생성하기\n\n\n\n생성된 Client Server의 정보 중에서 비공인 IP는 다음 ACG 설정에서 필요하니 기억해 둡니다.\n마찬가지로 공인 IP는 로컬 PC에서 PostgreSQL Client에 접속할 때 필요하니 기억해 둡니다.\n\n\n\n\nACG 설정\n[VPC] - [Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.\n\n\n\nACG 규칙 설정\nACG 규칙 설정 창에서 [Inbound] 탭을 선택하고 [접근 소스]는 위에서 생성한 Client Server의 비공인 IP를 입력하고 허용 포트는 5432를 입력하고 [추가] 버튼을 클릭합니다.\n\n\n\npgAdmin4 설치\nClient용 Linux Server에 PostgreSQL DB의 Client 프로그램인 pgAdmin4를 설치합니다.\n\nRepository 설정\npgAdmin4 설치하기 위해 Repository를 먼저 설정합니다.\n\n~# curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add\n\n\n\n~# sh -c 'echo \"deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main\" &gt; /etc/apt/sources.list.d/pgadmin4.list &amp;&amp; apt update'\n\n\n\n오류 상황\n간혹 위에서 진행한 Repository 설정에서 아래와 같은 오류가 발생하는 경우가 있습니다.\n\n Certificate verification failed: \nThe certificate is NOT trusted. The certificate chain uses expired certificate. Could not handshake: Error in the certificate verification.\n\n\n\n\n추가 기능 설치\n위 오류 메시지에 보면 인증서 관련해서 오류가 발생하는 것으로 확인되었기에 인증서 관련 기능을 추가 설치합니다.\n\n~# apt install ca-certificates\n\n\n\nRepository 다시 설정\nRepository 설정에서 오류가 발생했던 부분을 다시 설정합니다. 실행해보면 정상적으로 설정되었다는 메시지를 확인할 수 있습니다.\n\n~# sh -c 'echo \"deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main\" &gt; /etc/apt/sources.list.d/pgadmin4.list &amp;&amp; apt update'\n\n\n\npgAdmin4 설치\n로컬 PC에서 pgAdmin4에 접속하기 위해 pgAdmin4-Web을 설치합니다.\n\n~# apt install pgadmin4\n\n\n⁃ apt install pgadmin4: desktop, web mode 두가지 모두 설치\n⁃ apt install pgadmin4-desktop: desktop mode만 설치\n⁃ apt install pgadmin4-web: web mode만 설치\n\n\n\n\npgAdmin4-Web 환경 설정\nsetup-web.sh 스크립트를 실행 후 pgAdmin4-Web 접속을 위한 이메일 계정과 패스워드를 입력합니다.\n\n~# /usr/pgadmin4/bin/setup-web.sh\n\n\n\npgAdmin4 접속\npgAdmin4 접속 주소는 http://[Client Server 공인IP 주소]/pgadmin4/ 입니다.\n위 주소로 접속하면 아래와 같이 Email Address와 Password 입력 화면이 나오는데 pgAdmin4-Web 환경 설정에서 입력한 이메일과 패스워드를 입력하고 로그인 합니다.\n\n\n\n서버 추가\npgAdmin에서 [Add New Server] 버튼을 클릭해서 위에서 생성했던 DB서버를 연결합니다.\n\n\n\nName 입력\n등록할 DB의 이름을 편하게 입력합니다.\n\n\n\n연결 정보 입력\n\n  Host name/address: Cloud DB for PostgreSQL 생성 후에 확인한 Private 도메인 (pg-oooo-vpc-cdb-kr.ntruss.com)을 입력합니다.\n  Username: Cloud DB for PostgreSQL 생성 시에 입력한 USER ID를 입력합니다.\n  Password: Cloud DB for PostgreSQL 생성 시에 입력한 USER 암호를 입력합니다.\n\n\n\n\npgAdmin4 대시보드\n연결 정보에 이상이 없고 정상적으로 접속이 되면 아래와 같이 대시보드 화면을 확인할 수 있습니다.\n\n\n\nDB Service 상세 보기\nDB Service 상세 보기에서는 Database 추가/삭제, Config 관리, User 추가/삭제, Backup 설정 등을 관리할 수 있습니다.\nCloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 메뉴를 클릭합니다.\n\n\n\nDatabase 관리\nPostgreSQL DB의 Database를 추가/삭제 할 수 있습니다.\n\n\n\nDB User 관리\nCloud DB for PostgreSQL의 DB User를 추가/삭제 할 수 있습니다.\n\n\n⁃ PostgreSQL은 1개의 DB에 1개 계정만 owner로 지정할 수 있습니다.\n⁃ 1개의 DB를 여러 계정으로 관리해야 하는 경우는 서브 계정을 만들고 \n   owner 계정으로 서브 계정에 별도의 권한을 설정해야 합니다.\n⁃ 이때 계정 생성은 Ncloud 콘솔에서만 가능합니다. (아래 화면의 DB User 관리 기능)\n⁃ 그 외의 권한 설정은 pgAdmin4 웹페이지에서 설정해야 합니다.\n\n\n\n\n서브 계정\nsubid라는 서브 계정을 만들었다고 가정했을 때 아래 화면처럼 Superuser 등의 권한 설정을 할 수 있습니다.\n\n\n\nDB 접근 권한 설정\n서브 계정의 특정 DB에 대한 접근 권한을 설정하고자 할 경우는 아래와 같이 DB를 선택하고, 마우스 오른쪽 클릭을 한 후 [Properties] 메뉴를 선택합니다.\n\n\n\n[Properties] 설정 화면에서 [Security] 메뉴를 선택하면 계정별로 권한을 설정할 수 있습니다.\n\n\n\n참고 URL\n\n  Ncloud Cloud DB for PostgreSQL 기본 가이드\n    \n      https://guide.ncloud-docs.com/docs/clouddbforpostgresql-overview\n    \n  \n  pgAdmin 홈페이지\n    \n      hhttps://www.pgadmin.org/"
+					}
+					
+				
 			
 		
 			
@@ -3278,7 +3322,7 @@
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-         Site last generated: 2022-04-04 <br />
+         Site last generated: 2022-04-06 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
