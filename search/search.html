@@ -24,8 +24,9 @@
 <title>Search | 써드아이시스템 기술문서</title>
 <link rel="stylesheet" href="/css/syntax.css">
 
-<link rel="stylesheet" href="/fontawesome/css/all.min.css"/>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/fontawesome/css/all.min.css"/>
+<link rel="stylesheet" href="/fontawesome/css/v4.7.0.css"/>
 <link rel="stylesheet" href="/css/modern-business.css">
 <!-- Latest compiled and minified CSS -->
 <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
@@ -660,21 +661,21 @@
           
           
           
-          <li><a title="Mysql DB 자동백업 방법" href="/database/ncloud_database_mysql_auto_backup.html">Mysql DB 자동백업 방법</a></li>          
+          <li><a title="MySQL DB 자동백업 방법" href="/database/ncloud_database_mysql_auto_backup.html">MySQL DB 자동백업 방법</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql, mariadb my.cnf 위치" href="/database/ncloud_database_mysql_mariadb_config_my_cnf.html">Mysql, mariadb my.cnf 위치</a></li>          
+          <li><a title="MySQL, mariadb my.cnf 위치" href="/database/ncloud_database_mysql_mariadb_config_my_cnf.html">MySQL, mariadb my.cnf 위치</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql, mariadb bind-address 위치" href="/database/ncloud_database_mysql_mariadb_config_bind_address.html">Mysql, mariadb bind-address 위치</a></li>          
+          <li><a title="MySQL, mariadb bind-address 위치" href="/database/ncloud_database_mysql_mariadb_config_bind_address.html">MySQL, mariadb bind-address 위치</a></li>          
                     
           
           
@@ -695,49 +696,56 @@
           
           
           
-          <li><a title="CentOS Mysql Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS Mysql Object Storage로 백업</a></li>          
+          <li><a title="CentOS MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS MySQL Object Storage로 백업</a></li>          
                     
           
           
           
           
           
-          <li><a title="Ubuntu Mysql Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu Mysql Object Storage로 백업</a></li>          
+          <li><a title="Ubuntu MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu MySQL Object Storage로 백업</a></li>          
                     
           
           
           
           
           
-          <li><a title="VPC 환경 Cloud DB for Mysql 생성" href="/database/ncloud_database_cloud_db_for_mysql_guide.html">VPC 환경 Cloud DB for Mysql 생성</a></li>          
+          <li><a title="VPC 환경 Cloud DB for MySQL 생성" href="/database/ncloud_database_cloud_db_for_mysql_guide.html">VPC 환경 Cloud DB for MySQL 생성</a></li>          
                     
           
           
           
           
           
-          <li><a title="Cloud DB Mysql Public 도메인 접속" href="/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html">Cloud DB Mysql Public 도메인 접속</a></li>          
+          <li><a title="Cloud DB MySQL Public 도메인 접속" href="/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html">Cloud DB MySQL Public 도메인 접속</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql(MARIADB) replication 생성" href="/database/ncloud_database_mysql_mariadb_replication.html">Mysql(MARIADB) replication 생성</a></li>          
+          <li><a title="MySQL(MARIADB) Replication 생성" href="/database/ncloud_database_mysql_mariadb_replication.html">MySQL(MARIADB) Replication 생성</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql DB root Password 설정, 변경" href="/database/ncloud_database_mysql_root_password_set_update_guide.html">Mysql DB root Password 설정, 변경</a></li>          
+          <li><a title="MySQL GTID Replication 상세 가이드" href="/database/ncloud-database-mysql-gtid-replication.html">MySQL GTID Replication 상세 가이드</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql 복구 시 ERROR 1227 해결" href="/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting.html">Mysql 복구 시 ERROR 1227 해결</a></li>          
+          <li><a title="MySQL DB root Password 설정, 변경" href="/database/ncloud_database_mysql_root_password_set_update_guide.html">MySQL DB root Password 설정, 변경</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="MySQL 복구 시 ERROR 1227 해결" href="/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting.html">MySQL 복구 시 ERROR 1227 해결</a></li>          
                     
           
           
@@ -1668,6 +1676,21 @@
 				
 					,
 					
+					"database-ncloud-database-mysql-gtid-replication-html": {
+						"id": "database-ncloud-database-mysql-gtid-replication-html",
+						"title": "MySQL GTID Replication 생성 상세 가이드",
+						"categories": "",
+						"url": " /database/ncloud-database-mysql-gtid-replication.html",
+						"content": "GTID 란?\nGTID는 Global Transaction Identifier의 약자로 MySQL 복제에서 서버의 각 트랜잭션을 구분하는 고유한 식별자입니다. \nGTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본으로 장애 조치, 계층적 복제, 특정 시점으로 백업 복구하는 등의 작업을 더 쉽게 구현할 수 있으며, 오류 발생 빈도도 줄일 수 있습니다.\n\nGTID 구성\nGTID는 source_id:transaction_id의 형태로 저장됩니다.\n\n  예시: 2070b9863-4c88-72ef-9fa053db4612:1-12\n\n\nsource_id\n여기서 source_id는 서버의 uuid이며 다음의 방법으로 확인할 수 있습니다.\n\nmysql&gt; SELECT @@server_uuid;\n\n\n\n\n테스트 환경\n\n\n⁃ CentOS 7.8\n⁃ MySQL 5.7\n⁃ Master Server IP: 10.0.0.6\n⁃ Slave Server IP: 10.0.0.7\n⁃ VPC 대역: 10.0.0.0/16\n⁃ Subnet 대역: 10.0.0.0/24\n⁃ ACG: test3-vpc-default-acg\n\n\n파라미터 설정\nMaster 서버와 Slave 서버에 각각 파라미터를 설정합니다.\n\n# Master, Slaver \n~# vi /etc/my.cnf\n\n\nMaster 서버\n\n# Master \n[mysqld]\nserver-id=1\nlog-bin=binlog\ngtid-mode=ON\nenforce-gtid-consistency=ON\nlog_slave_updates=ON\n\n\n\n\nSlaver 서버\n\n# Slave\n[mysqld]\nserver-id=2\nlog-bin=binlog\ngtid-mode=ON\nenforce-gtid-consistency=ON\nlog_slave_updates=ON\n\n\n\n\ngtid_mode 상태 확인\n위 설정 변경 후 mysql DB를 재시작하고 Master와 Slave모두 gtid_mode가 ON상태인지 확인합니다.\n# Master, Slaver \n~# systemctl restart mysqld\n\n/* Master, Slaver */\nmysql&gt; show variables like '%gtid_mode%';\n\n\nMaster 서버\n\n\nSlaver 서버\n\n\nReplication 전용 유저 생성\nMaster 서버에서 Replication 전용 유저를 생성합니다.\n\n/* Master */\nmysql&gt; create user '3rd'@'%' identified by 'Test123$';\nmysql&gt; grant replication slave,replication client on *.* to '3rd'@'%';\nmysql&gt; flush privileges;\nmysql&gt; SELECT user,host,authentication_string FROM mysql.user;\n\n\n\n\n테스트용 DB 생성\n테스트에 사용할 database를 생성합니다.\n\n/* Master */\nmysql&gt; CREATE DATABASE testdb default CHARACTER SET UTF8;\nmysql&gt; show databases;\n\n\n\n\n백업 파일 생성\nMaster 서버에서 백업 파일을 생성합니다.\n\n백업 디렉터리 생성\n\n# Master\n~# mkdir /root/db_backup\n\n\nmysqldump 명령으로 백업 파일 생성\n# Master \n~# mysqldump -u root -p -v --databases testdb \\\n--quick --single-transaction --routines --set-gtid-purged=ON \\\n--triggers --extended-insert --master-data=2 &gt; /root/db_backup/testdb.sql\n\n\n\n\n동기화 프로그램 rsync 설치\nMaster 와 Slaver 서버 모두 rsync를 설치합니다.\n\n~# yum install -y rsync\n\nMaster 서버\n\n\nSlaver 서버\n\n\nACG (방화벽) 설정\n이제 Master, Slaver 두 서버간에 동기화, 복제가 가능하도록 ACG (방화벽)를 설정합니다.\n두 서버를 설치할 때 사용하도록 설정한 ACG는 test3-vpc-default-acg이기에 해당 ACG를 선택하고, ACG 규칙 설정에서 접근소스에는 Subnet의 IP 대역인 10.0.0.0/24, 허용포트는 22, 3306를 입력하고 추가합니다.\n\n  접근소스: 10.0.0.0/24\n  허용포트 22: rsync 사용을 위한 포트\n  허용포트 3306: Replication을 위한 포트\n\n\n\n\n 접근 소스: 여기서는 테스트를 위해 접근소스에 Subnet IP 전체 대역을 지정했지만, 실제 서비스 환경에서는 해당 Subnet에 DB서버 외에 다른 서버들이 존재하는 경우도 있을 수 있으므로 각 DB서버 IP만 지정하는 것이 보안 측면에서는 더욱 안전할 수 있습니다.\n\n백업 파일 전송\nMaster -&gt; Slaver로 DB 백업 파일을 전송합니다.\n전송 과정에서 정말 전송할 것인지 확인하는 단계와 Slaver 서버의 root 패스워드를 확인하는 단계가 있습니다.\n\n# rsync -avzr --progress testdb.sql root@슬레이브서버IP:~/\n\n~# cd db_backup/\n~# rsync -avzr --progress testdb.sql root@10.0.0.7:~/\n\n\n\n\nSlaver 서버에서 DB 복원\nrsync로 전송 받은 DB 백업 파일을 실행해서 DB를 복원합니다.\n\n/* Slave */\nmysql&gt; source testdb.sql;\n\n\n\n\nReplication 설정\nSlaver 서버에서 Replication을 설정합니다.\n\n/* Slave \nmysql&gt; CHANGE MASTER TO MASTER_HOST='Master 서버 IP',\nMASTER_USER='Replication 계정',MASTER_PASSWORD='Replication 계정 비번', \nMASTER_AUTO_POSITION=1;\n*/\n\nmysql&gt; CHANGE MASTER TO MASTER_HOST='101.0.0.6',\nMASTER_USER='3rd',MASTER_PASSWORD='Test123$', \nMASTER_AUTO_POSITION=1;\n\nmysql&gt; start slave;\n\n\n\n\nReplication 대기 상태 확인\nSlaver 서버에서 Replication 상태가 어떤지 확인합니다.\n아래 명령어를 실행해보면 Master에서의 이벤트 전송을 대기 중이라는 메시지와 Master 서버의 정보를 확인할 수 있습니다.\n\n/* Slaver */\nmysql&gt; show slave status \\G\n\n\n\nReplication 테스트\nMaster 서버에서 테스트용 테이블을 생성하고, 데이터를 입력한 후 Slaver 서버에도 복제가 되었는지 확인합니다.\n\nMaster 서버에 테스트용 데이터 입력\n/* Master */\nmysql&gt; use testdb;\nmysql&gt; create table 3rd (\n    no int(10) auto_increment , \n    name varchar(10), \n    primary key(no));\nmysql&gt; insert into 3rd values(1,'3rd');\nmysql&gt; commit;\nmysql&gt; select * from 3rd;\n\n\n\n\nSlaver 서버에서 복제 확인\n/* Slaver */\nmysql&gt; use testdb;\nmysql&gt; select * from 3rd;\n\n\n\n\n추가 테스트\n추가로 데이터를 다시 입력해보면 정상적으로 복제가 되는 것을 확인할 수 있습니다.\n\nMaster 서버\n\n\nSlaver 서버\n\n\n오류 상황\nMaster 서버에서 데이터를 입력해도 Slaver 서버에 제대로 복제되지 않는 등 Replication 기능에 문제가 생겼을 때에는 \n위쪽에서도 사용했었던 다음 명령어로 Replication 상태를 확인해봅니다.\n\n/* Slaver */\nmysql&gt; show slave status \\G\n\n\n혹시 Slave_IO_State: Connecting to master 등의 Master 서버에 연결하지 못한다는 메시지가 보이는 경우 ACG (방화벽) 설정에 문제가 있는 것이니\n위쪽에서 설정했던 ACG (방화벽) 설정 을 다시 한번 확인해보시기 바랍니다.\n\n Slave_IO_State: Connecting to master\n\n Slave_IO_Running: Connecting\n\n\n\n참고 URL\n\n  GTID를 이용한 Mysql 복제 가이드\n    \n      https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
 					"analytics-ncloud-analytics-cloud-log-analytics-guide-html": {
 						"id": "analytics-ncloud-analytics-cloud-log-analytics-guide-html",
 						"title": "Cloud Log Analytics 설정 가이드",
@@ -2243,7 +2266,7 @@
 						"title": "VPC환경에서 Cloud DB for MySQL 생성하기",
 						"categories": "",
 						"url": " /database/ncloud_database_cloud_db_for_mysql_guide.html",
-						"content": "개요\nNcloud의 Cloud DB for MySQL 서비스는 MySQL 데이터베이스를 쉽고 간편하게 구축하고 관리할 수 있고 자동 Fail-Over, 자동백업, 네이버 서비스에서 검증된 최적화된 설정 등을 제공해주는 \n완전 관리형 클라우드 데이터베이스 서비스입니다.\n여기서는 VPC환경에서 Cloud DB for MySQL 서비스를 생성하는 과정을 정리해보겠습니다.\n\nNcloud는 Classic환경에서는 DB 서버 이미지를 제공하지만, VPC 환경에서는 제공하지 않습니다. \n그러므로 VPC 환경에서 DB서버를 사용하려면 OS에 사용자가 직접 DB를 설치해서 사용하는 방법과 Cloud DB를 사용하는 방법 중에서 선택해야 합니다.\n\n특징\n\n  기본 10GB 데이터 스토리지를 제공하며, 10GB 단위로 6,000GB까지 자동으로 용량이 증가합니다.\n  하나의 마스터 DB마다 최대 10대의 슬레이브 DB를 생성할 수 있습니다.\n  Load Balancer 상품을 통해 슬레이브 DB 서버들을 읽기 전용 복제본으로 사용함으로써 데이터베이스의 읽기 부하를 분산 시킬 수 있습니다.\n  매일 1회 고객이 원하는 시간에 DB를 자동으로 백업하며, 백업한 데이터를 최대 30일까지 보관할 수 있습니다.\n  VPC 환경에서는 멀티 존으로 구성해 높은 안정성을 보장받을 수 있습니다.\n  Cloud DB for MySQL 서비스는 완전 관리형 상품으로 사용자는 DB서버의 운영체제에 접근할 수 없습니다.\n\n\nDB 접속 방법 3가지\n\n  Private 도메인을 이용해 접속하는 방법\n  SSL VPN을 이용해 접속하는 방법\n  Public 도메인을 이용해 접속하는 방법\n\n\n아래에서는 VPC환경에서 Private 도메인을 이용해 접속하는 방법을 설명하도록 하겠습니다.\n만약 네이버 클라우드 외부 환경에서  Cloud DB for MySQL로 접속하려면 Public 도메인을 사용해야 합니다.\n\nVPC-Subnet  생성\n\nVPC 생성\nVPC환경에서 작업할 것이므로 우선 VPC를 생성합니다.\n\n\n\n\n\nSubnet 생성\nSubnet은 Cloud DB for MySQL을 위한 Private Subnet과 DB 접속 테스트를 위한 Server용 Public Subnet을 각각 생성합니다.\n\n\n\nCloud DB for MySQL을 위한 Private Subnet\n\n\n테스트용 Server를 위한 Public Subnet\n\n\n테스트 Server 생성\nDB 서버 접속을 테스트 하기 위한 Server를 생성합니다.\n\n\n\nDB 서버 생성\n[Database] - [Cloud DB for MySQL]에서 [DB Server 생성] 버튼을 클릭합니다.\n\n\n\nDB 서버 엔진 버전\nDB 엔진 버전은 MySQL 최신 버전 중 네이버에서 안정성이 검증된 버전인 5.7버전과 8.0버전을 제공합니다. (기본값 5.7.32)\n\n\n\nDB 서버 이름과 DB 서비스 이름\n\n  DB Server 이름은 고객이 DB 서버를 구분하기 위한 명칭으로, 사용자가 입력한 이름 뒤에 001, 002와 같이 숫자를 붙여 서버를 구분하게 됩니다.\n  예를 들어 DB 서버 이름을 mydb라고 입력하면 생성되는 DB 서버 이름은 mydb-001, mydb-002와 같습니다.\n  DB 서비스 이름은 역할별 DB 서버를 구분하기 위한 이름입니다.\n  일반적으로 하나의 액티브 마스터 DB, 스탠바이 마스터 DB, 다수의 슬레이브 DB로 구성되는 DB 서버군을 말하며, 동일한 데이터를 갖고 있는 DB 서버들을 하나의 DB 서비스라 말합니다.\n  예를 들어 “쇼핑 메인 DB”, “게임 유저 DB”와 같은 식으로 DB 서비스의 역할을 구분하기 위해 사용합니다.\n\n\n\n\nCloud DB를 위한 ACG는 자동 생성됩니다(예: cloud-mysql-*)\n\nDB 서버 설정\nDB 이름과 계정. 비번, 접속 포트 등을 설정합니다.\nHOST(IP) 설정에는 DB에 접근을 허용할 IP대역을 입력합니다. 여기서는 테스트용 서버의 Subnet 대역을 모두 허용하기 위해 [192.168.2.%]를 입력합니다.\n만약 특정 서버 1대만 허용하려고 할 경우에는 앞에서 생성한 테스트 서버 IP처럼 [192.168.2.6]을 입력합니다.\n\n 접속포트 설정: DB 접속포트는 한번 설정하면 이후에 변경할 수 없으니 신중하게 설정하셔야 합니다.\n\n\n\nACG 설정\nCloud DB for MySQL을 생성할 때 자동 생성된 ACG [cloud-mysql-*]을 선택하고 ACG 설정을 클릭합니다.\n\n\n\nInbound 설정에 테스트용 Server의 Subnet 대역인 192.168.2.0/24를 접근소스에 입력합니다.\n또는 특정 서버 1대만 허용하려고 할 경우에는 앞에서 생성한 테스트 서버 IP처럼 [192.168.2.6]을 입력합니다.\n\n\n\nMySQL Client 설치\nDB 접속 테스트를 위해 생성한 서버에서 MySQL Client를 설치합니다.\n\n# mariadb\n~# yum install -y mysql mysql-server\n\n# mysql 5.7\n~# yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm\n~# yum install -y --disablerepo=\"mysql80-community\" --enablerepo=\"mysql57-community\" mysql-community-server\n~# mysqld --initialize-insecure --user=mysql\n~# systemctl start mysqld\n\nCentOS 7부터는 yum으로 설치하는 MySQL의 기본 데이터베이스가 MariaDB로 변경되었습니다\n\n\n\nDB 서버 접속\nCloud DB for MySQL에 접속하기 위한 주소인 [Private 도메인]을 확인 합니다.\n\n\n\n테스트용 Server에서 Cloud DB for MySQL로 접속하는 방법은 다음과 같습니다.\n\n~# mysql -h [Private 도메인명] -u [user_id] -p\n\n\nDB에 접속해보면 처음 Cloud DB for MySQL 생성할 때 입력한 테이터베이스 [test]를 확인할 수 있습니다.\n\n\n\nDB 서버 상세보기\nDB 서버 상세보기 메뉴에서는 [Process list], [Variables], [Status], [Database 관리], [DB Config 관리], [DB User 관리], [Backup 설정 관리], [DB Server Logs] 등을 확인할 수 있습니다.\n\n\n\n\n\nDB User 관리\nDB 서버를 이용하다보면 여러 계정이 필요하게 됩니다. 이때 계정을 추가하기 위해 [DB 서버 상세보기] - [DB User 관리] 메뉴를 클릭합니다.\n\nUSER_ID, HOST, DB 권한, 암호를 입력하고 DB User 추가 버튼을 클릭합니다.\n\n  사용자가 변경한 DB 계정은 DB 서비스 전체에 적용됩니다.\n  USER_ID + HOST(IP) 단위로 계정 추가 및 권한 관리를 합니다.\n  DB 권한에서 DDL 권한은 CRUD 권한을 포함합니다.\n  최대 1,000개까지 계정을 추가 및 조회 할 수 있습니다.\n\n\n\n\n참고 URL\n\n  Cloud DB for MySQL 기본 가이드\n    \n      https://guide.ncloud-docs.com/docs/database-database-5-6\n    \n  \n  Cloud DB 서버 외부 접근 가이드\n    \n      https://guide.ncloud-docs.com/docs/database-database-5-10"
+						"content": "개요\nNcloud의 Cloud DB for MySQL 서비스는 MySQL 데이터베이스를 쉽고 간편하게 구축하고 관리할 수 있고 자동 Fail-Over, 자동백업, 네이버 서비스에서 검증된 최적화된 설정 등을 제공해주는 \n완전 관리형 클라우드 데이터베이스 서비스입니다.\n여기서는 VPC환경에서 Cloud DB for MySQL 서비스를 생성하는 과정을 정리해보겠습니다.\n\nNcloud는 Classic환경에서는 DB 서버 이미지를 제공하지만, VPC 환경에서는 제공하지 않습니다. \n그러므로 VPC 환경에서 DB서버를 사용하려면 OS에 사용자가 직접 DB를 설치해서 사용하는 방법과 Cloud DB를 사용하는 방법 중에서 선택해야 합니다.\n\n특징\n\n  기본 10GB 데이터 스토리지를 제공하며, 10GB 단위로 6,000GB까지 자동으로 용량이 증가합니다.\n  하나의 마스터 DB마다 최대 10대의 슬레이브 DB를 생성할 수 있습니다.\n  Load Balancer 상품을 통해 슬레이브 DB 서버들을 읽기 전용 복제본으로 사용함으로써 데이터베이스의 읽기 부하를 분산 시킬 수 있습니다.\n  매일 1회 고객이 원하는 시간에 DB를 자동으로 백업하며, 백업한 데이터를 최대 30일까지 보관할 수 있습니다.\n  VPC 환경에서는 멀티 존으로 구성해 높은 안정성을 보장받을 수 있습니다.\n  Cloud DB for MySQL 서비스는 완전 관리형 상품으로 사용자는 DB서버의 운영체제에 접근할 수 없습니다.\n\n\nDB 접속 방법 3가지\n\n  Private 도메인을 이용해 접속하는 방법\n  SSL VPN을 이용해 접속하는 방법\n  Public 도메인을 이용해 접속하는 방법\n\n\n아래에서는 VPC환경에서 Private 도메인을 이용해 접속하는 방법을 설명하도록 하겠습니다.\n만약 네이버 클라우드 외부 환경에서  Cloud DB for MySQL로 접속하려면 Public 도메인을 사용해야 합니다.\n\nVPC-Subnet  생성\n\nVPC 생성\nVPC환경에서 작업할 것이므로 우선 VPC를 생성합니다.\n\n\n\n\n\nSubnet 생성\nSubnet은 Cloud DB for MySQL을 위한 Private Subnet과 DB 접속 테스트를 위한 Server용 Public Subnet을 각각 생성합니다.\n\n\n\nCloud DB for MySQL을 위한 Private Subnet\n\n\n테스트용 Server를 위한 Public Subnet\n\n\n테스트 Server 생성\nDB 서버 접속을 테스트 하기 위한 Server를 생성합니다.\n\n\n\nDB 서버 생성\n[Database] - [Cloud DB for MySQL]에서 [DB Server 생성] 버튼을 클릭합니다.\n\n\n\nDB 서버 엔진 버전\nDB 엔진 버전은 MySQL 최신 버전 중 네이버에서 안정성이 검증된 버전인 5.7버전과 8.0버전을 제공합니다. (기본값 5.7.32)\n\n\n\nDB 서버 이름과 DB 서비스 이름\n\n  DB Server 이름은 고객이 DB 서버를 구분하기 위한 명칭으로, 사용자가 입력한 이름 뒤에 001, 002와 같이 숫자를 붙여 서버를 구분하게 됩니다.\n  예를 들어 DB 서버 이름을 mydb라고 입력하면 생성되는 DB 서버 이름은 mydb-001, mydb-002와 같습니다.\n  DB 서비스 이름은 역할별 DB 서버를 구분하기 위한 이름입니다.\n  일반적으로 하나의 액티브 마스터 DB, 스탠바이 마스터 DB, 다수의 슬레이브 DB로 구성되는 DB 서버군을 말하며, 동일한 데이터를 갖고 있는 DB 서버들을 하나의 DB 서비스라 말합니다.\n  예를 들어 “쇼핑 메인 DB”, “게임 유저 DB”와 같은 식으로 DB 서비스의 역할을 구분하기 위해 사용합니다.\n\n\n\n\nCloud DB를 위한 ACG는 자동 생성됩니다(예: cloud-mysql-*)\n\nDB 서버 설정\nDB 이름과 계정. 비번, 접속 포트 등을 설정합니다.\nHOST(IP) 설정에는 DB에 접근을 허용할 IP대역을 입력합니다. 여기서는 테스트용 서버의 Subnet 대역을 모두 허용하기 위해 [192.168.2.%]를 입력합니다.\n만약 특정 서버 1대만 허용하려고 할 경우에는 앞에서 생성한 테스트 서버 IP처럼 [192.168.2.6]을 입력합니다.\n\n 접속포트 설정: DB 접속포트는 한번 설정하면 이후에 변경할 수 없으니 신중하게 설정하셔야 합니다.\n\n\n\nACG 설정\nCloud DB for MySQL을 생성할 때 자동 생성된 ACG [cloud-mysql-*]을 선택하고 ACG 설정을 클릭합니다.\n\n\n\nInbound 설정에 테스트용 Server의 Subnet 대역인 192.168.2.0/24를 접근소스에 입력합니다.\n또는 특정 서버 1대만 허용하려고 할 경우에는 앞에서 생성한 테스트 서버 IP처럼 [192.168.2.6]을 입력합니다.\n\n\n\nMySQL Client 설치\nDB 접속 테스트를 위해 생성한 서버에서 MySQL Client를 설치합니다.\n\n Note: CentOS 7부터는 yum으로 설치하는 MySQL의 기본 데이터베이스가 MariaDB로 변경되었습니다.\n\n# mariadb\n~# yum install -y mysql mysql-server\n\n# mysql 5.7\n# {version-number} 확인 : https://dev.mysql.com/downloads/repo/yum/\n# yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-{version-number}.noarch.rpm\n~# yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm\n~# yum install -y --disablerepo=\"mysql80-community\" --enablerepo=\"mysql57-community\" mysql-community-server\n~# mysqld --initialize-insecure --user=mysql\n~# systemctl start mysqld\n\n\n\n\nDB 서버 접속\nCloud DB for MySQL에 접속하기 위한 주소인 [Private 도메인]을 확인 합니다.\n\n\n\n테스트용 Server에서 Cloud DB for MySQL로 접속하는 방법은 다음과 같습니다.\n\n~# mysql -h [Private 도메인명] -u [user_id] -p\n\n\nDB에 접속해보면 처음 Cloud DB for MySQL 생성할 때 입력한 테이터베이스 [test]를 확인할 수 있습니다.\n\n\n\nDB 서버 상세보기\nDB 서버 상세보기 메뉴에서는 [Process list], [Variables], [Status], [Database 관리], [DB Config 관리], [DB User 관리], [Backup 설정 관리], [DB Server Logs] 등을 확인할 수 있습니다.\n\n\n\n\n\nDB User 관리\nDB 서버를 이용하다보면 여러 계정이 필요하게 됩니다. 이때 계정을 추가하기 위해 [DB 서버 상세보기] - [DB User 관리] 메뉴를 클릭합니다.\n\nUSER_ID, HOST, DB 권한, 암호를 입력하고 DB User 추가 버튼을 클릭합니다.\n\n  사용자가 변경한 DB 계정은 DB 서비스 전체에 적용됩니다.\n  USER_ID + HOST(IP) 단위로 계정 추가 및 권한 관리를 합니다.\n  DB 권한에서 DDL 권한은 CRUD 권한을 포함합니다.\n  최대 1,000개까지 계정을 추가 및 조회 할 수 있습니다.\n\n\n\n\n참고 URL\n\n  Cloud DB for MySQL 기본 가이드\n    \n      https://guide.ncloud-docs.com/docs/database-database-5-6\n    \n  \n  Cloud DB 서버 외부 접근 가이드\n    \n      https://guide.ncloud-docs.com/docs/database-database-5-10"
 					}
 					
 				
@@ -2360,7 +2383,7 @@
 					
 					"database-ncloud-database-mysql-mariadb-replication-html": {
 						"id": "database-ncloud-database-mysql-mariadb-replication-html",
-						"title": "MYSQL(MARIADB) replication 생성하기",
+						"title": "MYSQL(MARIADB) Replication 생성하기",
 						"categories": "",
 						"url": " /database/ncloud_database_mysql_mariadb_replication.html",
 						"content": "선행조건\n\n\n  master, slave 장비의 mysql설치가 사전에 완료된 조건\n  mysql 버전 5.7이상 조건에서 작성됨\n  mysql 리플리케이션작업을 진행시 masterdb의 데이터베이스는 쓰기작업이 없는 서비스 미진행 상태이어야함.\n\n\nMASTER 장비 구성\n\nmy.cnf파일 내용 추가\n\n[mysqld]\nlog-bin=mysql-bin\nbinlog_format = mixed\n\n# 해당 ID값은 마스터장비만 1을 설정할수있음\nserver-id = 1 \n\n# 마스터 장비의 bin로그 특정일자(예시는10일) 이후 삭제\n# (해당 내역이없을 경우 지속적으로 기록되어 디스크 사용)\nexpire_logs_days = 10 \n\n\nmysql접속 후 리플리케이션을 진행할 계정 생성\n\nGRANT REPLICATION SLAVE ON *.* TO '리플리케이션계정명'@'%' IDENTIFIED BY '패스워드';\nFLUSH PRIVILEGES;\n\n\nSLAVE 장비 구성\n\nmy.cnf파일 내용 추가\n\n[mysqld]\nserver-id=2 #해당ID값은 1을 제외한 숫자지정\nslave-skip-errors = all  \n\n\n\n데이터베이스 사전 동기화작업\n\n\n  \n    master장비의 데이터베이스가 생성되어 있고 데이터가 있을 경우\n\n    A. master장비 데이터베이스 백업 진행\n    # 데이터베이스가 추가로 있다면 남은 데이터베이스도 백업\nmysqldump -u root -p --databases 데이터베이스명 &gt; 백업파일.sql \n    \n    \n B. slave장비 데이터베이스 복구 진행\n    create database 데이터베이스명; #mysql 접속 후 생성\nmysql -u root -p 데이터베이스명 &lt; 백업파일.sql  \n    \n    \n  \n  \n    master 장비의 데이터베이스가 없을 경우\n\n    A. 별도 작업 없으며, 데이터베이스만 생성되어 데이터가 없을경우도 slave장비에 동일한 데이터베이스 생성으로 마무리\n  \n\n\n리플리케이션 작업\n\n\n  \n    master 장비 mysql 접속 후 현재 로그파일번호와 포지션 넘버 확인\n\n    show master status;\nfile| Position #내역을 확인 후 별도 기입.\n    \n  \n  \n    slave 장비 mysql 접속 후 아래 명령어 실행 하여 리플리케이션 master정보 기입\n\n    CHANGE MASTER TO MASTER_HOST='마스터IP',MASTER_USER='생성한리플리케이션계정명',MASTER_PASSWORD='패스워드',MASTER_LOG_FILE='위에서확인된 file이름',MASTER_LOG_POS=위에서 확인된 포지션번호;\n    \n  \n  \n    slave 리플리케이션 시작및 확인\n\n    start slave;\nshow slave status\\G; #실행 후 에러가 없다면 정상."
@@ -2528,7 +2551,7 @@
 						"title": "Video Player 구현하기 샘플 예제",
 						"categories": "",
 						"url": " /media/ncloud_media_video_player_sample.html",
-						"content": "개요\n네이버 클라우드 비디오 플레이어는 최신의 네이버 미디어 플레이어를 기반으로 개발된 클라우드 전용 상품으로 \n네이버 동영상 서비스에 적용되어 수 많은 성공사례를 가지고 있는 최신의 네이버 플레이어를 손쉽고 빠르게 고객의 미디어 서비스에 적용할 수 있습니다.\n\n플레이어 생성하기\n우선은 네이버 클라우드 콘솔에서 js 파일로 구성된 플레이어를 생성하는 과정부터 살펴보겠습니다.\n\n[네이버 클라우드 콘솔] - [Video Player]에서 [플레이어 생성] 버튼을 클릭합니다.\n\n\n\n플레이어 이름, 유-무료 상품(현재는 무료만 선택 가능), 플레이어 사이즈, 버전, 플레이어가 저장될 Object Storage 위치 등을 선택합니다.\n\n\n\n재생 속도 조절 등의 기능을 설정하고, 우클릭 메뉴 바로가기를 추가할 수도 있습니다.\n\n\n\n자동 재성이나 대역폭 등의 재생 관련 설정을 선택합니다.\n\n\n\n마지막으로 현재까지 선택한 설정을 확인하고, 플레이어 미리보기를 한 후에 [플레이어 생성] 버튼을 클릭합니다.\n\n\n\n생성된 플레이어 js 파일의 경로를 확인할 수 있습니다.\n\n\n\njs 파일이 저장된 Object Storage에서도 확인 가능합니다.\n\n\n\n플레이어 구현하기\n생성된 플레이어는 자바스크립트 js 파일이므로 html 파일을 만들어서 플레이어를 구현해야 합니다.\n\n플레이어 JavaScript 소스 예시\n\n  var player = new ncplayer('divVideoPlayer', {\n    playlist: \"http://example.com/myVideo.mp4\"\n  });\n\n  player.play();\n\n\n플레이어 html 소스 예시\n아래 예시에서는  컨트롤러 표시, 자동 재생 안함, 음소거, 가로 크기 1024로 옵션을 설정했습니다. 상세한 옵션을 아래쪽에서 다시 살펴보겠습니다.\n\n&lt;!doctype html&gt;\n&lt;html lang=\"kr\"&gt;\n  &lt;head&gt;\n    &lt;meta charset=\"utf-8\"&gt;\n    &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;\n    &lt;title&gt;Video Player Sample&lt;/title&gt;\n\n    &lt;script src=\"https://kr.object.ncloudstorage.com/플레이어 파일명.js\"&gt;&lt;/script&gt;\n  &lt;/head&gt;\n\n  &lt;body&gt;\n\n    &lt;div style=\"text-align:center\"&gt;\n      &lt;div id=\"divVideoPlayer\" name=\"divVideoPlayer\"&gt;&lt;/div&gt;\n    &lt;/div&gt;\n\n     &lt;script type=\"text/javascript\"&gt;\n\n      var player = new ncplayer('divVideoPlayer', {\n        controls: true,\n        autostart: false,\n        mute: true,\n        width: 1024,\n        playlist: [\n        {\n          file: 'https://kr.object.ncloudstorage.com/재생할 동영상 파일명.mp4',\n        },\n        ],\n      });\n\n      player.play();\n\n     &lt;/script&gt;\n\n   &lt;/body&gt;\n&lt;/html&gt;\n\n\n플레이어 구현 예시\n위 html 소스대로 플레이어를 구현해서 웹브라우져에서 확인해보면 다음과 같이 나타납니다.\n\n\n\n플레이어 상세 옵션\n플레이어 상세 옵션을 간단하게 정리해보겠습니다. 좀 더 자세한 설명은 아래 링크에 있는 네이버 클라우드 가이드 문서를 참고하시면 됩니다.\n\n\nvar player = new ncplayer('divVideoPlayer', {\n  controls: true,\n  autostart: false,\n  mute: true,\n  width: 1024,\n  playlist: [\n    { file: 'https://CDN도메인/example_video_01.mp4' },\n    { file: 'https://CDN도메인/example_video_02.mp4' },\n    { file: 'https://CDN도메인/example_video_03.mp4/index.m3u8' }\n  ],\n  });\n\n\n\n\n  \n    \n      PROPERTY\n      TYPE\n      DESCRIPTION\n      DEFAULT\n    \n  \n  \n    \n      playlist\n      string/array\n      재생하고자 하는 video 정보 (단일 경로 또는, 여러 경로를 전달)\n      -\n    \n    \n      autostart\n      boolean\n      player 시작 시, video를 자동으로 재생 (브라우저의 자동재생 정책을 따름)\n      false\n    \n    \n      mute\n      boolean\n      player 시작 시, video를 자동으로 음소거 상태로 설정\n      false\n    \n    \n      controls\n      boolean\n      player 제어를 위한 컨트롤의 표시 여부 결정\n      true\n    \n    \n      autoPause\n      boolean\n      창이 전환되거나 최소화되었을 때, 자동으로 player를 정지 상태로 만듦\n      false\n    \n    \n      aspectRatio\n      string\n      player의 가로X세로 비율 지정, “width:height” 형식으로 전달해야 합니다.\n      -\n    \n    \n      width\n      number\n      player의 가로 사이즈 고정\n      -\n    \n    \n      height\n      number\n      player의 세로 사이즈 고정\n      -\n    \n    \n      playbackRate\n      boolean\n      video 의 재생속도 조절, 1.0보다 낮으면 느려지고, 1.0보다 높으면 빠르게 재생\n      1.0\n    \n    \n      repeat\n      boolean\n      video의 반복 재생 여부 결정\n      false\n    \n    \n      about\n      object\n      마우스 우클릭 시 표시되는 바로가기 정보 수정\n      false\n    \n  \n\n\n참고 URL\n\n  Video Player 사용 가이드\n    \n      https://guide.ncloud-docs.com/docs/videoplayer-videoplayerguide\n    \n  \n  Video Player Demo 가이드\n    \n      https://guide.ncloud-docs.com/docs/videoplayer-videoplayerdemo"
+						"content": "개요\n네이버 클라우드 비디오 플레이어는 최신의 네이버 미디어 플레이어를 기반으로 개발된 클라우드 전용 상품으로 \n네이버 동영상 서비스에 적용되어 수 많은 성공사례를 가지고 있는 최신의 네이버 플레이어를 손쉽고 빠르게 고객의 미디어 서비스에 적용할 수 있습니다.\n\n플레이어 생성하기\n우선은 네이버 클라우드 콘솔에서 js 파일로 구성된 플레이어를 생성하는 과정부터 살펴보겠습니다.\n\n[네이버 클라우드 콘솔] - [Video Player]에서 [플레이어 생성] 버튼을 클릭합니다.\n\n\n\n플레이어 이름, 유-무료 상품(현재는 무료만 선택 가능), 플레이어 사이즈, 버전, 플레이어가 저장될 Object Storage 위치 등을 선택합니다.\n\n\n\n재생 속도 조절 등의 기능을 설정하고, 우클릭 메뉴 바로가기를 추가할 수도 있습니다.\n\n\n\n자동 재성이나 대역폭 등의 재생 관련 설정을 선택합니다.\n\n\n\n마지막으로 현재까지 선택한 설정을 확인하고, 플레이어 미리보기를 한 후에 [플레이어 생성] 버튼을 클릭합니다.\n\n\n\n생성된 플레이어 js 파일의 경로를 확인할 수 있습니다.\n\n\n\njs 파일이 저장된 Object Storage에서도 확인 가능합니다.\n\n\n\n플레이어 구현하기\n생성된 플레이어는 자바스크립트 js 파일이므로 html 파일을 만들어서 플레이어를 구현해야 합니다.\n\n플레이어 JavaScript 소스 예시\n\n  var player = new ncplayer('divVideoPlayer', {\n    playlist: \"http://example.com/myVideo.mp4\"\n  });\n\n  player.play();\n\n\n플레이어 html 소스 예시\n아래 예시에서는  컨트롤러 표시, 자동 재생 안함, 음소거, 가로 크기 1024로 옵션을 설정했습니다. 상세한 옵션을 아래쪽에서 다시 살펴보겠습니다.\n\n&lt;!doctype html&gt;\n&lt;html lang=\"kr\"&gt;\n  &lt;head&gt;\n    &lt;meta charset=\"utf-8\"&gt;\n    &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;\n    &lt;title&gt;Video Player Sample&lt;/title&gt;\n\n    &lt;script src=\"https://kr.object.ncloudstorage.com/플레이어 파일명.js\"&gt;&lt;/script&gt;\n  &lt;/head&gt;\n\n  &lt;body&gt;\n\n    &lt;div style=\"text-align:center\"&gt;\n      &lt;div id=\"divVideoPlayer\" name=\"divVideoPlayer\"&gt;&lt;/div&gt;\n    &lt;/div&gt;\n\n     &lt;script&gt;\n\n      var player = new ncplayer('divVideoPlayer', {\n        controls: true,\n        autostart: false,\n        mute: true,\n        width: 1024,\n        playlist: [\n        {\n          file: 'https://kr.object.ncloudstorage.com/재생할 동영상 파일명.mp4',\n        },\n        ],\n      });\n\n      player.play();\n\n     &lt;/script&gt;\n\n   &lt;/body&gt;\n&lt;/html&gt;\n\n\n플레이어 구현 예시\n위 html 소스대로 플레이어를 구현해서 웹브라우져에서 확인해보면 다음과 같이 나타납니다.\n\n\n\n플레이어 상세 옵션\n플레이어 상세 옵션을 간단하게 정리해보겠습니다. 좀 더 자세한 설명은 아래 링크에 있는 네이버 클라우드 가이드 문서를 참고하시면 됩니다.\n\n\nvar player = new ncplayer('divVideoPlayer', {\n  controls: true,\n  autostart: false,\n  mute: true,\n  width: 1024,\n  playlist: [\n    { file: 'https://CDN도메인/example_video_01.mp4' },\n    { file: 'https://CDN도메인/example_video_02.mp4' },\n    { file: 'https://CDN도메인/example_video_03.mp4/index.m3u8' }\n  ],\n  });\n\n\n\n\n  \n    \n      PROPERTY\n      TYPE\n      DESCRIPTION\n      DEFAULT\n    \n  \n  \n    \n      playlist\n      string/array\n      재생하고자 하는 video 정보 (단일 경로 또는, 여러 경로를 전달)\n      -\n    \n    \n      autostart\n      boolean\n      player 시작 시, video를 자동으로 재생 (브라우저의 자동재생 정책을 따름)\n      false\n    \n    \n      mute\n      boolean\n      player 시작 시, video를 자동으로 음소거 상태로 설정\n      false\n    \n    \n      controls\n      boolean\n      player 제어를 위한 컨트롤의 표시 여부 결정\n      true\n    \n    \n      autoPause\n      boolean\n      창이 전환되거나 최소화되었을 때, 자동으로 player를 정지 상태로 만듦\n      false\n    \n    \n      aspectRatio\n      string\n      player의 가로X세로 비율 지정, “width:height” 형식으로 전달해야 합니다.\n      -\n    \n    \n      width\n      number\n      player의 가로 사이즈 고정\n      -\n    \n    \n      height\n      number\n      player의 세로 사이즈 고정\n      -\n    \n    \n      playbackRate\n      boolean\n      video 의 재생속도 조절, 1.0보다 낮으면 느려지고, 1.0보다 높으면 빠르게 재생\n      1.0\n    \n    \n      repeat\n      boolean\n      video의 반복 재생 여부 결정\n      false\n    \n    \n      about\n      object\n      마우스 우클릭 시 표시되는 바로가기 정보 수정\n      false\n    \n  \n\n\n참고 URL\n\n  Video Player 사용 가이드\n    \n      https://guide.ncloud-docs.com/docs/videoplayer-videoplayerguide\n    \n  \n  Video Player Demo 가이드\n    \n      https://guide.ncloud-docs.com/docs/videoplayer-videoplayerdemo"
 					}
 					
 				
@@ -3017,17 +3040,6 @@
 		
 			
 				
-					,
-					
-					"tag-tag-acg-html": {
-						"id": "tag-tag-acg-html",
-						"title": "ACG",
-						"categories": "",
-						"url": " /tag/tag_acg.html",
-						"content": "{% include taglogic.html %}\n\n{% include links.html %}"
-					}
-					
-				
 			
 		
 			
@@ -3322,7 +3334,7 @@
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-         Site last generated: 2022-04-06 <br />
+         Site last generated: 2022-04-11 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>

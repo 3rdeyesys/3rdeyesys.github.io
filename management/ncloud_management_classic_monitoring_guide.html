@@ -25,8 +25,9 @@
 <title>서버 모니터링 서비스 Monitoring 설정 가이드 | 써드아이시스템 기술문서</title>
 <link rel="stylesheet" href="/css/syntax.css">
 
-<link rel="stylesheet" href="/fontawesome/css/all.min.css"/>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/fontawesome/css/all.min.css"/>
+<link rel="stylesheet" href="/fontawesome/css/v4.7.0.css"/>
 <link rel="stylesheet" href="/css/modern-business.css">
 <!-- Latest compiled and minified CSS -->
 <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
@@ -661,21 +662,21 @@
           
           
           
-          <li><a title="Mysql DB 자동백업 방법" href="/database/ncloud_database_mysql_auto_backup.html">Mysql DB 자동백업 방법</a></li>          
+          <li><a title="MySQL DB 자동백업 방법" href="/database/ncloud_database_mysql_auto_backup.html">MySQL DB 자동백업 방법</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql, mariadb my.cnf 위치" href="/database/ncloud_database_mysql_mariadb_config_my_cnf.html">Mysql, mariadb my.cnf 위치</a></li>          
+          <li><a title="MySQL, mariadb my.cnf 위치" href="/database/ncloud_database_mysql_mariadb_config_my_cnf.html">MySQL, mariadb my.cnf 위치</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql, mariadb bind-address 위치" href="/database/ncloud_database_mysql_mariadb_config_bind_address.html">Mysql, mariadb bind-address 위치</a></li>          
+          <li><a title="MySQL, mariadb bind-address 위치" href="/database/ncloud_database_mysql_mariadb_config_bind_address.html">MySQL, mariadb bind-address 위치</a></li>          
                     
           
           
@@ -696,49 +697,56 @@
           
           
           
-          <li><a title="CentOS Mysql Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS Mysql Object Storage로 백업</a></li>          
+          <li><a title="CentOS MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS MySQL Object Storage로 백업</a></li>          
                     
           
           
           
           
           
-          <li><a title="Ubuntu Mysql Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu Mysql Object Storage로 백업</a></li>          
+          <li><a title="Ubuntu MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu MySQL Object Storage로 백업</a></li>          
                     
           
           
           
           
           
-          <li><a title="VPC 환경 Cloud DB for Mysql 생성" href="/database/ncloud_database_cloud_db_for_mysql_guide.html">VPC 환경 Cloud DB for Mysql 생성</a></li>          
+          <li><a title="VPC 환경 Cloud DB for MySQL 생성" href="/database/ncloud_database_cloud_db_for_mysql_guide.html">VPC 환경 Cloud DB for MySQL 생성</a></li>          
                     
           
           
           
           
           
-          <li><a title="Cloud DB Mysql Public 도메인 접속" href="/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html">Cloud DB Mysql Public 도메인 접속</a></li>          
+          <li><a title="Cloud DB MySQL Public 도메인 접속" href="/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html">Cloud DB MySQL Public 도메인 접속</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql(MARIADB) replication 생성" href="/database/ncloud_database_mysql_mariadb_replication.html">Mysql(MARIADB) replication 생성</a></li>          
+          <li><a title="MySQL(MARIADB) Replication 생성" href="/database/ncloud_database_mysql_mariadb_replication.html">MySQL(MARIADB) Replication 생성</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql DB root Password 설정, 변경" href="/database/ncloud_database_mysql_root_password_set_update_guide.html">Mysql DB root Password 설정, 변경</a></li>          
+          <li><a title="MySQL GTID Replication 상세 가이드" href="/database/ncloud-database-mysql-gtid-replication.html">MySQL GTID Replication 상세 가이드</a></li>          
                     
           
           
           
           
           
-          <li><a title="Mysql 복구 시 ERROR 1227 해결" href="/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting.html">Mysql 복구 시 ERROR 1227 해결</a></li>          
+          <li><a title="MySQL DB root Password 설정, 변경" href="/database/ncloud_database_mysql_root_password_set_update_guide.html">MySQL DB root Password 설정, 변경</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="MySQL 복구 시 ERROR 1227 해결" href="/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting.html">MySQL 복구 시 ERROR 1227 해결</a></li>          
                     
           
           
@@ -1559,7 +1567,7 @@ Event를 발생 하게 하는 조건을 감시설정이라 하며 해당 Event�
 
 <figure><img class="docimage" src="/images/management/ncp_management_monitoring_guide_13.jpg" alt="Ncloud Classic 환경의 서버 모니터링 서비스 Monitoring 설정 가이드" style="width: 770px; " /><figcaption></figcaption></figure>
 
-<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle"></i> <b>주의사항:</b> 감시 통보설정에서 중요한 것은 <strong>지속시간</strong>입니다. 위 설정화면을 예로 설명하자면 CPU 사용율이 90% 이상인 상태가 5분 이상 지속되면 통보되도록 설정된 상태입니다. 
+<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <b>주의사항:</b> 감시 통보설정에서 중요한 것은 <strong>지속시간</strong>입니다. 위 설정화면을 예로 설명하자면 CPU 사용율이 90% 이상인 상태가 5분 이상 지속되면 통보되도록 설정된 상태입니다. 
 즉, 중간에 한번이라도 90% 미만으로 내려가면, 예를 들어 4분 50초 동안 90% 이상을 유지하다 85%로 내려간 경우라면 통보가 되지 않습니다. 
 <br />혹시 통보 알람을 테스트 하고 싶을 경우에는 지정한 상태가 5분 이상 지속되는 상황을 연출해서 테스트 해보셔야 합니다.</div>
 
@@ -1645,7 +1653,7 @@ Event를 발생 하게 하는 조건을 감시설정이라 하며 해당 Event�
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2021-12-29<br/> Site last generated: 2022-04-06 <br />
+        <span>Page last updated:</span> 2021-12-29<br/> Site last generated: 2022-04-11 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
