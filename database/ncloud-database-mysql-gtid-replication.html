@@ -1521,7 +1521,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <h2 id="파라미터-설정">파라미터 설정</h2>
 <p>Master 서버와 Slave 서버에 각각 파라미터를 설정합니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Master, Slaver </span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Master, Slave </span>
 ~# vi /etc/my.cnf
 </code></pre></div></div>
 
@@ -1538,7 +1538,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-01.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<h3 id="slaver-서버">Slaver 서버</h3>
+<h3 id="slave-서버">Slave 서버</h3>
 
 <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Slave
 </span>[<span class="n">mysqld</span>]
@@ -1553,17 +1553,17 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 
 <h2 id="gtid_mode-상태-확인">gtid_mode 상태 확인</h2>
 <p>위 설정 변경 후 mysql DB를 재시작하고 Master와 Slave모두 gtid_mode가 ON상태인지 확인합니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Master, Slaver </span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Master, Slave </span>
 ~# systemctl restart mysqld
 </code></pre></div></div>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Master, Slaver */</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Master, Slave */</span>
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">'%gtid_mode%'</span><span class="p">;</span>
 </code></pre></div></div>
 
 <h3 id="master-서버-1">Master 서버</h3>
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-03.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<h3 id="slaver-서버-1">Slaver 서버</h3>
+<h3 id="slave-서버-1">Slave 서버</h3>
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-04.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
 <h2 id="replication-전용-유저-생성">Replication 전용 유저 생성</h2>
@@ -1606,19 +1606,20 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-07.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<h2 id="동기화-프로그램-rsync-설치">동기화 프로그램 rsync 설치</h2>
-<p>Master 와 Slaver 서버 모두 rsync를 설치합니다.</p>
+<h2 id="백업-파일-복사">백업 파일 복사</h2>
+<p>백업 파일을 Slave 서버로 복사하기 위해 Master 와 Slave 서버 모두 rsync를 설치합니다.<br />
+(<strong>백업 파일 복사는 rsync를 사용하지 않고 다른 방법을 사용해도 됩니다.</strong>)</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nb">install</span> <span class="nt">-y</span> rsync
 </code></pre></div></div>
 <h3 id="master-서버-2">Master 서버</h3>
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-08.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<h3 id="slaver-서버-2">Slaver 서버</h3>
+<h3 id="slave-서버-2">Slave 서버</h3>
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-09.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
 <h2 id="acg-setting">ACG (방화벽) 설정</h2>
-<p>이제 Master, Slaver 두 서버간에 동기화, 복제가 가능하도록 ACG (방화벽)를 설정합니다.<br />
+<p>이제 Master, Slave 두 서버간에 동기화, 복제가 가능하도록 ACG (방화벽)를 설정합니다.<br />
 두 서버를 설치할 때 사용하도록 설정한 ACG는 test3-vpc-default-acg이기에 해당 ACG를 선택하고, ACG 규칙 설정에서 접근소스에는 Subnet의 IP 대역인 10.0.0.0/24, 허용포트는 22, 3306를 입력하고 추가합니다.</p>
 <ul>
   <li>접근소스: 10.0.0.0/24</li>
@@ -1631,8 +1632,8 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <div class="alert alert-success" role="alert"><i class="far fa-check-square"></i> <b>접근 소스:</b> 여기서는 테스트를 위해 접근소스에 Subnet IP 전체 대역을 지정했지만, 실제 서비스 환경에서는 해당 Subnet에 DB서버 외에 다른 서버들이 존재하는 경우도 있을 수 있으므로 각 DB서버 IP만 지정하는 것이 보안 측면에서는 더욱 안전할 수 있습니다.</div>
 
 <h2 id="백업-파일-전송">백업 파일 전송</h2>
-<p>Master -&gt; Slaver로 DB 백업 파일을 전송합니다.<br />
-전송 과정에서 정말 전송할 것인지 확인하는 단계와 Slaver 서버의 root 패스워드를 확인하는 단계가 있습니다.</p>
+<p>Master -&gt; Slave로 DB 백업 파일을 전송합니다.<br />
+전송 과정에서 정말 전송할 것인지 확인하는 단계와 Slave 서버의 root 패스워드를 확인하는 단계가 있습니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># rsync -avzr --progress testdb.sql root@슬레이브서버IP:~/</span>
 
@@ -1642,7 +1643,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-10.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<h2 id="slaver-서버에서-db-복원">Slaver 서버에서 DB 복원</h2>
+<h2 id="slave-서버에서-db-복원">Slave 서버에서 DB 복원</h2>
 <p>rsync로 전송 받은 DB 백업 파일을 실행해서 DB를 복원합니다.</p>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slave */</span>
@@ -1652,7 +1653,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-11.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
 <h3 id="replication-설정">Replication 설정</h3>
-<p>Slaver 서버에서 Replication을 설정합니다.</p>
+<p>Slave 서버에서 Replication을 설정합니다.</p>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slave 
 mysql&gt; CHANGE MASTER TO MASTER_HOST='Master 서버 IP',
@@ -1670,16 +1671,16 @@ MASTER_AUTO_POSITION=1;
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-12.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
 <h2 id="replication-대기-상태-확인">Replication 대기 상태 확인</h2>
-<p>Slaver 서버에서 Replication 상태가 어떤지 확인합니다.<br />
+<p>Slave 서버에서 Replication 상태가 어떤지 확인합니다.<br />
 아래 명령어를 실행해보면 Master에서의 이벤트 전송을 대기 중이라는 메시지와 Master 서버의 정보를 확인할 수 있습니다.</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slaver */</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slave */</span>
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">slave</span> <span class="n">status</span> <span class="err">\</span><span class="k">G</span>
 </code></pre></div></div>
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-14.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
 <h2 id="replication-테스트">Replication 테스트</h2>
-<p>Master 서버에서 테스트용 테이블을 생성하고, 데이터를 입력한 후 Slaver 서버에도 복제가 되었는지 확인합니다.</p>
+<p>Master 서버에서 테스트용 테이블을 생성하고, 데이터를 입력한 후 Slave 서버에도 복제가 되었는지 확인합니다.</p>
 
 <h3 id="master-서버에-테스트용-데이터-입력">Master 서버에 테스트용 데이터 입력</h3>
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Master */</span>
@@ -1695,8 +1696,8 @@ MASTER_AUTO_POSITION=1;
 
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-15.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<h3 id="slaver-서버에서-복제-확인">Slaver 서버에서 복제 확인</h3>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slaver */</span>
+<h3 id="slave-서버에서-복제-확인">Slave 서버에서 복제 확인</h3>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slave */</span>
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="n">use</span> <span class="n">testdb</span><span class="p">;</span>
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="mi">3</span><span class="n">rd</span><span class="p">;</span>
 </code></pre></div></div>
@@ -1709,14 +1710,14 @@ MASTER_AUTO_POSITION=1;
 <h4 id="master-서버-3">Master 서버</h4>
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-17.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<h4 id="slaver-서버-3">Slaver 서버</h4>
+<h4 id="slave-서버-3">Slave 서버</h4>
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-18.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
 <h2 id="오류-상황">오류 상황</h2>
-<p>Master 서버에서 데이터를 입력해도 Slaver 서버에 제대로 복제되지 않는 등 Replication 기능에 문제가 생겼을 때에는 
+<p>Master 서버에서 데이터를 입력해도 Slave 서버에 제대로 복제되지 않는 등 Replication 기능에 문제가 생겼을 때에는 
 위쪽에서도 사용했었던 다음 명령어로 Replication 상태를 확인해봅니다.</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slaver */</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slave */</span>
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">slave</span> <span class="n">status</span> <span class="err">\</span><span class="k">G</span>
 </code></pre></div></div>
 
