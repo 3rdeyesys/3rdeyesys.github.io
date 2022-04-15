@@ -1348,7 +1348,7 @@ h4.panel-title>a {
 }
 
 header {	
-    padding: 5px 0 10px 0;
+    padding: 0;
     background-color: #232C43;
     background: url("/images/ncp-header-bg-202204.jpg");
     background-size: 2200px;
@@ -1476,4 +1476,60 @@ img.docimage{
     border: 1px solid #ddd;
     text-align: center;
     vertical-align: middle;
+}
+
+
+.section-global-wrapper {
+  position: relative;
+}
+.section-global-wrapper:before,
+.section-global-wrapper:after {
+  content: " ";
+  display: table;
+}
+.section-global-wrapper:after {
+  clear: both;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+display: block;
+width:100%;  
+height: 250px;
+}
+
+@media screen and (max-width: 990px)
+{
+    .hidden-xs-desktop {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 991px)
+{
+    .hidden-xs-mobile {
+        display: none !important;
+    }
+}
+
+
+.carousel-indicators{
+    list-style:none
+}
+.carousel-indicators li{border-radius:0px;width:32px;height:5px;margin:0 3px;background-color:#919699;opacity:0.8;border:none;transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-webkit-transition:all 0.4s ease-in-out;-o-transition:all 0.4s ease-in-out}
+
+.carousel-indicators li.active{border-radius:0px;width:32px;height:5px;margin:0 5px;background-color:fff;opacity:1;border:none;transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-webkit-transition:all 0.4s ease-in-out;-o-transition:all 0.4s ease-in-out}
+
+.side-bar-right{
+    position:fixed;
+    top:100px;
+    right:50px;
+    width:230px;
+}
+
+@media screen and (max-width: 1650px)
+{
+    .side-bar-right{
+        display:none;
+    }
 }

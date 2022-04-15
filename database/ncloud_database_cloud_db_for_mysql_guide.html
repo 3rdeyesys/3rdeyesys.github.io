@@ -57,6 +57,7 @@
 <script src="/js/toc.js"></script>
 <script src="/js/customscripts.js"></script>
 
+
 <link rel="shortcut icon" href="/images/favicon.ico">
 
 <link rel="alternate" type="application/rss+xml" title="3RDEYESYSTEM Technical Documentations" href="https://docs.3rdeyesys.com/feed.xml">
@@ -202,7 +203,7 @@
     <path d="M0 0h24v24H0z" fill="none"/>
 </svg>
 	<input type="submit" value="Search" style="display: none;">
-</form> </div>                                               
+</form></div>                                               
                     </div>                    
                     <!--end search-->
                 </li>
@@ -1589,13 +1590,13 @@ HOST(IP) 설정에는 DB에 접근을 허용할 IP대역을 입력합니다. 여
 <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>Note:</b> CentOS 7부터는 yum으로 설치하는 MySQL의 기본 데이터베이스가 MariaDB로 변경되었습니다.</div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># mariadb</span>
-~# yum <span class="nb">install</span> <span class="nt">-y</span> mysql mysql-server
+~# yum <span class="nt">-y</span> <span class="nb">install </span>mysql mysql-server
 
 <span class="c"># mysql 5.7</span>
 <span class="c"># {version-number} 확인 : https://dev.mysql.com/downloads/repo/yum/</span>
-<span class="c"># yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-{version-number}.noarch.rpm</span>
-~# yum <span class="nb">install</span> <span class="nt">-y</span> https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
-~# yum <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">--disablerepo</span><span class="o">=</span><span class="s2">"mysql80-community"</span> <span class="nt">--enablerepo</span><span class="o">=</span><span class="s2">"mysql57-community"</span> mysql-community-server
+<span class="c"># yum -y install https://dev.mysql.com/get/mysql80-community-release-el7-{version-number}.noarch.rpm</span>
+~# yum <span class="nt">-y</span> <span class="nb">install </span>https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+~# yum <span class="nt">-y</span> <span class="nb">install</span> <span class="nt">--disablerepo</span><span class="o">=</span><span class="s2">"mysql80-community"</span> <span class="nt">--enablerepo</span><span class="o">=</span><span class="s2">"mysql57-community"</span> mysql-community-server
 ~# mysqld <span class="nt">--initialize-insecure</span> <span class="nt">--user</span><span class="o">=</span>mysql
 ~# systemctl start mysqld
 </code></pre></div></div>
@@ -1705,7 +1706,7 @@ DB에 접속해보면 처음 Cloud DB for MySQL 생성할 때 입력한 테이�
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2022-04-08<br/> Site last generated: 2022-04-11 <br />
+        <span>Page last updated:</span> 2022-04-08<br/> Site last generated: 2022-04-15 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
@@ -1719,6 +1720,11 @@ DB에 접속해보면 처음 Cloud DB for MySQL 생성할 때 입력한 테이�
         </div>
     <!-- /.row -->
 </div>
+
+    <div class="side-bar-right">    
+    <a href="https://hyphen.im/benefit/view?seq=31" target="_blank" class="no_icon"><img src="/images/slider/banner.jpg"></a>
+</div>  
+
 <!-- /.container -->
 </div>
 <!-- /#main -->

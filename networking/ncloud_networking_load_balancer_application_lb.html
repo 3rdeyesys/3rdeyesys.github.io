@@ -55,6 +55,7 @@
 <script src="/js/toc.js"></script>
 <script src="/js/customscripts.js"></script>
 
+
 <link rel="shortcut icon" href="/images/favicon.ico">
 
 <link rel="alternate" type="application/rss+xml" title="3RDEYESYSTEM Technical Documentations" href="https://docs.3rdeyesys.com/feed.xml">
@@ -200,7 +201,7 @@
     <path d="M0 0h24v24H0z" fill="none"/>
 </svg>
 	<input type="submit" value="Search" style="display: none;">
-</form> </div>                                               
+</form></div>                                               
                     </div>                    
                     <!--end search-->
                 </li>
@@ -1576,10 +1577,10 @@ Load Balancer를 테스트 하기 위한 서버이므로 2대를 생성하면서
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
-apt-get update
-apt-get <span class="nb">install </span>apache2 
-apt-get <span class="nb">install </span>php
-apt-get <span class="nb">install </span>libapache2-mod-php
+apt update
+apt <span class="nb">install </span>apache2 
+apt <span class="nb">install </span>php
+apt <span class="nb">install </span>libapache2-mod-php
 
 systemctl start apache2
 
@@ -1602,7 +1603,7 @@ systemctl status apache2
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
-yum <span class="nb">install</span> <span class="nt">-y</span> httpd php
+yum <span class="nt">-y</span> <span class="nb">install </span>httpd php
 
 systemctl start httpd
 
@@ -1691,7 +1692,7 @@ systemctl status httpd
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2021-12-17<br/> Site last generated: 2022-04-11 <br />
+        <span>Page last updated:</span> 2021-12-17<br/> Site last generated: 2022-04-15 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
@@ -1705,6 +1706,11 @@ systemctl status httpd
         </div>
     <!-- /.row -->
 </div>
+
+    <div class="side-bar-right">    
+    <a href="https://hyphen.im/benefit/view?seq=31" target="_blank" class="no_icon"><img src="/images/slider/banner.jpg"></a>
+</div>  
+
 <!-- /.container -->
 </div>
 <!-- /#main -->

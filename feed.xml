@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 11 Apr 2022 17:01:24 +0900</pubDate>
-        <lastBuildDate>Mon, 11 Apr 2022 17:01:24 +0900</lastBuildDate>
+        <pubDate>Fri, 15 Apr 2022 15:40:38 +0900</pubDate>
+        <lastBuildDate>Fri, 15 Apr 2022 15:40:38 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -112,13 +112,13 @@ DB 접속 테스트를 위해 생성한 서버에서 MySQL Client를 설치합�
 
 ``` bash
 # mariadb
-~# yum install -y mysql mysql-server
+~# yum -y install mysql mysql-server
 
 # mysql 5.7
 # {version-number} 확인 : https://dev.mysql.com/downloads/repo/yum/
-# yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-{version-number}.noarch.rpm
-~# yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
-~# yum install -y --disablerepo=&quot;mysql80-community&quot; --enablerepo=&quot;mysql57-community&quot; mysql-community-server
+# yum -y install https://dev.mysql.com/get/mysql80-community-release-el7-{version-number}.noarch.rpm
+~# yum -y install https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+~# yum -y install --disablerepo=&quot;mysql80-community&quot; --enablerepo=&quot;mysql57-community&quot; mysql-community-server
 ~# mysqld --initialize-insecure --user=mysql
 ~# systemctl start mysqld
 ```
@@ -220,7 +220,7 @@ mysql&gt; SELECT @@server_uuid;
 Master 서버와 Slave 서버에 각각 파라미터를 설정합니다.
 
 ```bash
-# Master, Slaver 
+# Master, Slave 
 ~# vi /etc/my.cnf
 ```
 
@@ -238,7 +238,7 @@ log_slave_updates=ON
 
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
-### Slaver 서버
+### Slave 서버
 
 ``` conf
 # Slave
@@ -255,18 +255,18 @@ log_slave_updates=ON
 ## gtid_mode 상태 확인
 위 설정 변경 후 mysql DB를 재시작하고 Master와 Slave모두 gtid_mode가 ON상태인지 확인합니다.
 ``` bash
-# Master, Slaver 
+# Master, Slave 
 ~# systemctl restart mysqld
 ```
 ```sql
-/* Master, Slaver */
+/* Master, Slave */
 mysql&gt; show variables like &apos;%gtid_mode%&apos;;
 ```
 
 ### Master 서버
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
-### Slaver 서버
+### Slave 서버
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
 
@@ -315,20 +315,21 @@ Master 서버에서 백업 파일을 생성합니다.
 
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
-## 동기화 프로그램 rsync 설치
-Master 와 Slaver 서버 모두 rsync를 설치합니다.
+## 백업 파일 복사
+백업 파일을 Slave 서버로 복사하기 위해 Master 와 Slave 서버 모두 rsync를 설치합니다.  
+(**백업 파일 복사는 rsync를 사용하지 않고 다른 방법을 사용해도 됩니다.**)
 
 ``` bash
-~# yum install -y rsync
+~# yum -y install rsync
 ```
 ### Master 서버
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
-### Slaver 서버
+### Slave 서버
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
 ## ACG (방화벽) 설정 {#acg-setting}
-이제 Master, Slaver 두 서버간에 동기화, 복제가 가능하도록 ACG (방화벽)를 설정합니다.  
+이제 Master, Slave 두 서버간에 동기화, 복제가 가능하도록 ACG (방화벽)를 설정합니다.  
 두 서버를 설치할 때 사용하도록 설정한 ACG는 test3-vpc-default-acg이기에 해당 ACG를 선택하고, ACG 규칙 설정에서 접근소스에는 Subnet의 IP 대역인 10.0.0.0/24, 허용포트는 22, 3306를 입력하고 추가합니다.
 - 접근소스: 10.0.0.0/24
 - 허용포트 22: rsync 사용을 위한 포트
@@ -340,8 +341,8 @@ Master 와 Slaver 서버 모두 rsync를 설치합니다.
 
 
 ## 백업 파일 전송
-Master -&gt; Slaver로 DB 백업 파일을 전송합니다.  
-전송 과정에서 정말 전송할 것인지 확인하는 단계와 Slaver 서버의 root 패스워드를 확인하는 단계가 있습니다.
+Master -&gt; Slave로 DB 백업 파일을 전송합니다.  
+전송 과정에서 정말 전송할 것인지 확인하는 단계와 Slave 서버의 root 패스워드를 확인하는 단계가 있습니다.
 
 ``` bash
 # rsync -avzr --progress testdb.sql root@슬레이브서버IP:~/
@@ -353,7 +354,7 @@ Master -&gt; Slaver로 DB 백업 파일을 전송합니다.
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
 
-## Slaver 서버에서 DB 복원
+## Slave 서버에서 DB 복원
 rsync로 전송 받은 DB 백업 파일을 실행해서 DB를 복원합니다.
 
 ``` sql
@@ -364,7 +365,7 @@ mysql&gt; source testdb.sql;
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
 ### Replication 설정
-Slaver 서버에서 Replication을 설정합니다.
+Slave 서버에서 Replication을 설정합니다.
 
 ```sql
 /* Slave 
@@ -383,17 +384,17 @@ mysql&gt; start slave;
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
 ## Replication 대기 상태 확인
-Slaver 서버에서 Replication 상태가 어떤지 확인합니다.  
+Slave 서버에서 Replication 상태가 어떤지 확인합니다.  
 아래 명령어를 실행해보면 Master에서의 이벤트 전송을 대기 중이라는 메시지와 Master 서버의 정보를 확인할 수 있습니다.
 
 ``` sql
-/* Slaver */
+/* Slave */
 mysql&gt; show slave status \G
 ```
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
 ## Replication 테스트
-Master 서버에서 테스트용 테이블을 생성하고, 데이터를 입력한 후 Slaver 서버에도 복제가 되었는지 확인합니다.
+Master 서버에서 테스트용 테이블을 생성하고, 데이터를 입력한 후 Slave 서버에도 복제가 되었는지 확인합니다.
 
 ### Master 서버에 테스트용 데이터 입력
 ```sql
@@ -410,9 +411,9 @@ mysql&gt; select * from 3rd;
 
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
-### Slaver 서버에서 복제 확인
+### Slave 서버에서 복제 확인
 ``` sql
-/* Slaver */
+/* Slave */
 mysql&gt; use testdb;
 mysql&gt; select * from 3rd;
 ```
@@ -425,16 +426,16 @@ mysql&gt; select * from 3rd;
 #### Master 서버
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
-#### Slaver 서버
+#### Slave 서버
 {% include image.html file=&quot;database/ncloud-database-mysql-gtid-replication-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법&quot; caption=&quot;&quot; %}
 
 
 ## 오류 상황
-Master 서버에서 데이터를 입력해도 Slaver 서버에 제대로 복제되지 않는 등 Replication 기능에 문제가 생겼을 때에는 
+Master 서버에서 데이터를 입력해도 Slave 서버에 제대로 복제되지 않는 등 Replication 기능에 문제가 생겼을 때에는 
 위쪽에서도 사용했었던 다음 명령어로 Replication 상태를 확인해봅니다.
 
 ``` sql
-/* Slaver */
+/* Slave */
 mysql&gt; show slave status \G
 ```
 
@@ -871,7 +872,7 @@ ACG 규칙 설정 창에서 [Inbound] 탭을 선택하고 `[접근 소스]는 �
 Client용 Linux Server에 PostgreSQL DB의 Client 프로그램인 pgAdmin4를 설치합니다.
 
 ``` bash
-~# yum install -y https://ftp.postgresql.org/pub/pgadmin/pgadmin4/yum/pgadmin4-redhat-repo-2-1.noarch.rpm
+~# yum -y install https://ftp.postgresql.org/pub/pgadmin/pgadmin4/yum/pgadmin4-redhat-repo-2-1.noarch.rpm
 ```
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
 
@@ -879,7 +880,7 @@ Client용 Linux Server에 PostgreSQL DB의 Client 프로그램인 pgAdmin4를 �
 로컬 PC에서 pgAdmin4에 접속하기 위해 pgAdmin4-Web을 설치합니다.
 
 ``` bash
-~# yum install -y pgadmin4-web
+~# yum -y install pgadmin4-web
 ```
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
 
@@ -914,7 +915,7 @@ semanage 실행에 필요한 파일을 확인합니다.
 위에서 확인한 추가 파일을 설치합니다.
 
 ``` bash
-~# yum install -y policycoreutils-python-2.5-34.el7.x86_64
+~# yum -y install policycoreutils-python-2.5-34.el7.x86_64
 ```
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
 

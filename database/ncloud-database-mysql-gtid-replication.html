@@ -57,6 +57,7 @@
 <script src="/js/toc.js"></script>
 <script src="/js/customscripts.js"></script>
 
+
 <link rel="shortcut icon" href="/images/favicon.ico">
 
 <link rel="alternate" type="application/rss+xml" title="3RDEYESYSTEM Technical Documentations" href="https://docs.3rdeyesys.com/feed.xml">
@@ -202,7 +203,7 @@
     <path d="M0 0h24v24H0z" fill="none"/>
 </svg>
 	<input type="submit" value="Search" style="display: none;">
-</form> </div>                                               
+</form></div>                                               
                     </div>                    
                     <!--end search-->
                 </li>
@@ -1610,7 +1611,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <p>백업 파일을 Slave 서버로 복사하기 위해 Master 와 Slave 서버 모두 rsync를 설치합니다.<br />
 (<strong>백업 파일 복사는 rsync를 사용하지 않고 다른 방법을 사용해도 됩니다.</strong>)</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nb">install</span> <span class="nt">-y</span> rsync
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>rsync
 </code></pre></div></div>
 <h3 id="master-서버-2">Master 서버</h3>
 <figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-08.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
@@ -1790,7 +1791,7 @@ MASTER_AUTO_POSITION=1;
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2022-04-08<br/> Site last generated: 2022-04-11 <br />
+        <span>Page last updated:</span> 2022-04-08<br/> Site last generated: 2022-04-15 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
@@ -1804,6 +1805,11 @@ MASTER_AUTO_POSITION=1;
         </div>
     <!-- /.row -->
 </div>
+
+    <div class="side-bar-right">    
+    <a href="https://hyphen.im/benefit/view?seq=31" target="_blank" class="no_icon"><img src="/images/slider/banner.jpg"></a>
+</div>  
+
 <!-- /.container -->
 </div>
 <!-- /#main -->

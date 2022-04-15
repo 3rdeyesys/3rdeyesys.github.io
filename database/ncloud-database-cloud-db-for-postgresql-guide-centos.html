@@ -57,6 +57,7 @@
 <script src="/js/toc.js"></script>
 <script src="/js/customscripts.js"></script>
 
+
 <link rel="shortcut icon" href="/images/favicon.ico">
 
 <link rel="alternate" type="application/rss+xml" title="3RDEYESYSTEM Technical Documentations" href="https://docs.3rdeyesys.com/feed.xml">
@@ -202,7 +203,7 @@
     <path d="M0 0h24v24H0z" fill="none"/>
 </svg>
 	<input type="submit" value="Search" style="display: none;">
-</form> </div>                                               
+</form></div>                                               
                     </div>                    
                     <!--end search-->
                 </li>
@@ -1625,14 +1626,14 @@ $("#toc_onoff").click(function() {
 <h2 id="pgadmin4-설치">pgAdmin4 설치</h2>
 <p>Client용 Linux Server에 PostgreSQL DB의 Client 프로그램인 pgAdmin4를 설치합니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nb">install</span> <span class="nt">-y</span> https://ftp.postgresql.org/pub/pgadmin/pgadmin4/yum/pgadmin4-redhat-repo-2-1.noarch.rpm
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>https://ftp.postgresql.org/pub/pgadmin/pgadmin4/yum/pgadmin4-redhat-repo-2-1.noarch.rpm
 </code></pre></div></div>
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-postgresql-10.png" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기" style="width: 840px; " /><figcaption></figcaption></figure>
 
 <h3 id="pgadmin4-web-설치">pgAdmin4-Web 설치</h3>
 <p>로컬 PC에서 pgAdmin4에 접속하기 위해 pgAdmin4-Web을 설치합니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nb">install</span> <span class="nt">-y</span> pgadmin4-web
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>pgadmin4-web
 </code></pre></div></div>
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-postgresql-11.png" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기" style="width: 840px; " /><figcaption></figcaption></figure>
 
@@ -1664,7 +1665,7 @@ $("#toc_onoff").click(function() {
 <h3 id="추가-파일-설치">추가 파일 설치</h3>
 <p>위에서 확인한 추가 파일을 설치합니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nb">install</span> <span class="nt">-y</span> policycoreutils-python-2.5-34.el7.x86_64
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>policycoreutils-python-2.5-34.el7.x86_64
 </code></pre></div></div>
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-postgresql-15.png" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기" style="width: 840px; " /><figcaption></figcaption></figure>
 
@@ -1808,7 +1809,7 @@ Cloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2022-04-06<br/> Site last generated: 2022-04-11 <br />
+        <span>Page last updated:</span> 2022-04-06<br/> Site last generated: 2022-04-15 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
@@ -1822,6 +1823,11 @@ Cloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 
         </div>
     <!-- /.row -->
 </div>
+
+    <div class="side-bar-right">    
+    <a href="https://hyphen.im/benefit/view?seq=31" target="_blank" class="no_icon"><img src="/images/slider/banner.jpg"></a>
+</div>  
+
 <!-- /.container -->
 </div>
 <!-- /#main -->
