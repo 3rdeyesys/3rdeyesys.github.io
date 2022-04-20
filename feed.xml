@@ -5,10 +5,124 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 19 Apr 2022 11:09:14 +0900</pubDate>
-        <lastBuildDate>Tue, 19 Apr 2022 11:09:14 +0900</lastBuildDate>
+        <pubDate>Wed, 20 Apr 2022 17:45:26 +0900</pubDate>
+        <lastBuildDate>Wed, 20 Apr 2022 17:45:26 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>SourceCommit에서 GitHub Repository 복사해오기 | Ncloud</title>
+            <description>## 개요
+Ncloud SourceCommit에서 GitHub Repository를 복사해서 가져오기 위해서는 [외부 리포지토리 복사] 기능을 이용해야 하는데, Public Repository는 간단하게 가져올 수 있지만, Private Repository는 GitHub에서 생성한 별도의 Personal access token을 사용해야 가져올 수 있어서 그 내용을 정리해보겠습니다.
+
+## 외부 리포지토리 복사
+SourceCommit에서 [외부 리포지토리 복사] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## Public Repository
+퍼블릭 리포지토리는 아래와 같이 [복사할 Git URL] 정보를 입력한 후에 [Git 연결 확인] 버튼을 클릭해서 올바른 리포지토리인지 확인 후 [다음] 버튼을 클릭해 이후 과정을 진행하면 완료됩니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## Private Repository
+프라이빗 리포지토리는 [프라이빗 리포지토리 여부] 옵션을 켜고 [ID]와 [Password]를 입력해야 복사해 올 수 있습니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+### Password 오류
+깃허브 계정과 패스워드를 입력하고 [Git 연결 확인] 버튼을 클릭해 보면 ID 또는 Password가 올바르지 않다는 메시지가 나타납니다.  
+올바르게 입력했음에도 이런 오류가 발생하는 것은 `2021년 8월부터 외부에서 깃허브에 연결하려고 할 때 계정 패스워드를 사용하지 않고 토큰을 사용하는 방식으로 바뀌었기 때문`입니다.
+
+깃허브 공지 내용을 보면 다음과 같습니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&apos;From GitHub Blog &quot;In July 2020, we announced our intent to require the use of token-based authentication (for example, a personal access, OAuth, or GitHub App installation token) for all authenticated Git operations. Beginning August 13, 2021, we will no longer accept account passwords when authenticating Git operations on GitHub.com.&quot;&apos; %}
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## Personal Access Token 생성
+그러면 이제 Personal access token을 생성해보겠습니다.  
+깃허브 사이트에 접속해서 [계정] - [Settings]를 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+[Settings] 화면 아래쪽에 [Developer settings] 메뉴를 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+[Developer settings] 화면에서 [Personal access tokens] 메뉴를 클릭하고, [Generate new token] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+### Token 생성
+우선 Personal access token 생성 화면에서 토큰 이름을 입력하고, 만료기간을 설정합니다.  
+그리고, 토큰으로 이용 가능한 기능의 범위 즉, 권한 설정을 해야 하는데 단순히 리포지토리를 복사하는 용도라면 [repo] 그룹 항목만 체크하셔도 됩니다.  
+설정을 마친 후에 아래쪽에 있는 [Generate token] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+### Token 복사
+생성된 Personal access toke을 복사합니다.
+
+{% include warning.html title=&quot;주의&quot; content=&quot;생성된 Token은 바로 복사해 두셔야 합니다. 이 화면을 벗어나면 **두번 다시 토큰 문자열을 확인할 수 없습니다**.&lt;br /&gt;Make sure to copy your personal access token now. You won&apos;t be able to see it again!&quot; %}
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## Personal Access Token 입력
+[Password] 항목에 Personal Access Token을 입력하고, [Git 연결 확인] 버튼을 클릭하면 문제없이 연결되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## 보안상품 연동
+리포지토리에 악성코드 필터링 보안 시스템인 [File Safer]를 연동하고 싶은 경우 [File Safer 이용 신청] 링크를 클릭해 먼저 이용신청을 하시면 됩니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## 최종 확인
+입력한 정보들이 이상이 없는지 최종 확인을 하고 [생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## Repository 확인
+생성된 리포지토리를 이렇게 확인할 수 있고, 리포지토리 이름을 클릭하면 리포지토리 내용을 확인할 수 있습니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+아래와 같이 깃허브에서 복사된 내용을 확인할 수 있습니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## Personal Access Token 분실
+Personal Access Token이 기억나지 않거나 분실했을 경우에는 다음과 같은 방법으로 재생성 하시면 됩니다.  
+[Settings] - [Developer settings] - [Personal access token] 메뉴에서 토큰 이름을 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+토큰 수정 메뉴에서 [Regenerate token] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+혹시 만료 기간을 수정려면 수정한 후에 [Regenerate token] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+재 생성된 [Personal access token]을 복사합니다. 마찬가지로 이 화면을 벗어나면 두번 다시 확인할 수 없으니 꼭 복사해서 별도로 저장합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-source-commit-external-repository-copy-18.png&quot; width=&quot;845&quot; alt=&quot;Ncloud SourceCommit에서 외부 리포지토리 복사하기 기능으로 GitHub Repository 복사해오는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1. Ncloud SourceCommit 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/devtools-devtools-2-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/devtools-devtools-2-1&lt;/a&gt;
+
+</description>
+            <pubDate>Wed, 20 Apr 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/dev-tools/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/dev-tools/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html</guid>
+            
+            <category>github</category>
+            
+            
+        </item>
         
         <item>
             <title>Proxy Protocol을 이용해 Client IP 확인하기 | Ubuntu</title>
@@ -491,180 +605,6 @@ Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quo
         </item>
         
         <item>
-            <title>VPC환경에서 Cloud DB for MySQL 생성하기</title>
-            <description>## 개요
-Ncloud의 Cloud DB for MySQL 서비스는 MySQL 데이터베이스를 쉽고 간편하게 구축하고 관리할 수 있고 자동 Fail-Over, 자동백업, 네이버 서비스에서 검증된 최적화된 설정 등을 제공해주는 
-완전 관리형 클라우드 데이터베이스 서비스입니다.  
-여기서는 VPC환경에서 Cloud DB for MySQL 서비스를 생성하는 과정을 정리해보겠습니다.
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Ncloud는 Classic환경에서는 DB 서버 이미지를 제공하지만, VPC 환경에서는 제공하지 않습니다. 
-그러므로 VPC 환경에서 DB서버를 사용하려면 OS에 사용자가 직접 DB를 설치해서 사용하는 방법과 Cloud DB를 사용하는 방법 중에서 선택해야 합니다.&quot; %}
-
-## 특징
-- 기본 10GB 데이터 스토리지를 제공하며, 10GB 단위로 6,000GB까지 자동으로 용량이 증가합니다. 
-- 하나의 마스터 DB마다 최대 10대의 슬레이브 DB를 생성할 수 있습니다.
-- Load Balancer 상품을 통해 슬레이브 DB 서버들을 읽기 전용 복제본으로 사용함으로써 데이터베이스의 읽기 부하를 분산 시킬 수 있습니다.
-- 매일 1회 고객이 원하는 시간에 DB를 자동으로 백업하며, 백업한 데이터를 최대 30일까지 보관할 수 있습니다.
-- VPC 환경에서는 멀티 존으로 구성해 높은 안정성을 보장받을 수 있습니다.
-- Cloud DB for MySQL 서비스는 완전 관리형 상품으로 사용자는 DB서버의 운영체제에 접근할 수 없습니다.
-
-## DB 접속 방법 3가지
-1. Private 도메인을 이용해 접속하는 방법
-2. SSL VPN을 이용해 접속하는 방법
-3. Public 도메인을 이용해 접속하는 방법
-
-아래에서는 VPC환경에서 Private 도메인을 이용해 접속하는 방법을 설명하도록 하겠습니다.  
-만약 네이버 클라우드 외부 환경에서  Cloud DB for MySQL로 접속하려면 Public 도메인을 사용해야 합니다.
-
-## VPC-Subnet  생성
-
-### VPC 생성
-VPC환경에서 작업할 것이므로 우선 VPC를 생성합니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_01.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_02.jpg&quot; width=&quot;680&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### Subnet 생성
-Subnet은 Cloud DB for MySQL을 위한 Private Subnet과 DB 접속 테스트를 위한 Server용 Public Subnet을 각각 생성합니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_03.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### Cloud DB for MySQL을 위한 Private Subnet
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_05.jpg&quot; width=&quot;680&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### 테스트용 Server를 위한 Public Subnet
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_04.jpg&quot; width=&quot;680&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## 테스트 Server 생성
-DB 서버 접속을 테스트 하기 위한 Server를 생성합니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## DB 서버 생성
-[Database] - [Cloud DB for MySQL]에서 [DB Server 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_11.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### DB 서버 엔진 버전
-DB 엔진 버전은 MySQL 최신 버전 중 네이버에서 안정성이 검증된 버전인 5.7버전과 8.0버전을 제공합니다. (기본값 5.7.32)
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_12-1.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### DB 서버 이름과 DB 서비스 이름
-- DB Server 이름은 고객이 DB 서버를 구분하기 위한 명칭으로, 사용자가 입력한 이름 뒤에 001, 002와 같이 숫자를 붙여 서버를 구분하게 됩니다.
-- 예를 들어 DB 서버 이름을 mydb라고 입력하면 생성되는 DB 서버 이름은 mydb-001, mydb-002와 같습니다.
-- DB 서비스 이름은 역할별 DB 서버를 구분하기 위한 이름입니다.
-- 일반적으로 하나의 액티브 마스터 DB, 스탠바이 마스터 DB, 다수의 슬레이브 DB로 구성되는 DB 서버군을 말하며, 동일한 데이터를 갖고 있는 DB 서버들을 하나의 DB 서비스라 말합니다.
-- 예를 들어 &quot;쇼핑 메인 DB&quot;, &quot;게임 유저 DB&quot;와 같은 식으로 DB 서비스의 역할을 구분하기 위해 사용합니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_12-2.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;Cloud DB를 위한 ACG는 자동 생성됩니다(예: cloud-mysql-*)&quot; %}
-
-### DB 서버 설정
-DB 이름과 계정. 비번, 접속 포트 등을 설정합니다.  
-HOST(IP) 설정에는 DB에 접근을 허용할 IP대역을 입력합니다. 여기서는 테스트용 서버의 Subnet 대역을 모두 허용하기 위해 [192.168.2.%]를 입력합니다.  
-만약 특정 서버 1대만 허용하려고 할 경우에는 앞에서 생성한 테스트 서버 IP처럼 [192.168.2.6]을 입력합니다.
-
-{% include warning.html title=&quot;접속포트 설정&quot; content=&quot;DB 접속포트는 한번 설정하면 이후에 변경할 수 없으니 신중하게 설정하셔야 합니다.&quot; %}
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_12-3.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## ACG 설정
-Cloud DB for MySQL을 생성할 때 자동 생성된 ACG [cloud-mysql-*]을 선택하고 ACG 설정을 클릭합니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_14.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-Inbound 설정에 테스트용 Server의 Subnet 대역인 192.168.2.0/24를 접근소스에 입력합니다.  
-또는 특정 서버 1대만 허용하려고 할 경우에는 앞에서 생성한 테스트 서버 IP처럼 [192.168.2.6]을 입력합니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_15.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-
-## MySQL Client 설치
-DB 접속 테스트를 위해 생성한 서버에서 MySQL Client를 설치합니다.
-
-{% include note.html content=&quot;CentOS 7부터는 yum으로 설치하는 MySQL의 기본 데이터베이스가 MariaDB로 변경되었습니다.&quot; %}
-
-
-``` bash
-# mariadb
-~# yum -y install mysql mysql-server
-
-# mysql 5.7
-# {version-number} 확인 : https://dev.mysql.com/downloads/repo/yum/
-# yum -y install https://dev.mysql.com/get/mysql80-community-release-el7-{version-number}.noarch.rpm
-~# yum -y install https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
-~# yum -y install --disablerepo=&quot;mysql80-community&quot; --enablerepo=&quot;mysql57-community&quot; mysql-community-server
-~# mysqld --initialize-insecure --user=mysql
-~# systemctl start mysqld
-```
-
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## DB 서버 접속
-Cloud DB for MySQL에 접속하기 위한 주소인 [Private 도메인]을 확인 합니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_13.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-테스트용 Server에서 Cloud DB for MySQL로 접속하는 방법은 다음과 같습니다.
-
-``` bash
-~# mysql -h [Private 도메인명] -u [user_id] -p
-```
-&lt;br /&gt;
-DB에 접속해보면 처음 Cloud DB for MySQL 생성할 때 입력한 테이터베이스 [test]를 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_18.jpg&quot; width=&quot;650&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## DB 서버 상세보기
-DB 서버 상세보기 메뉴에서는 [Process list], [Variables], [Status], [Database 관리], [DB Config 관리], [DB User 관리], [Backup 설정 관리], [DB Server Logs] 등을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_16.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_17.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### DB User 관리
-DB 서버를 이용하다보면 여러 계정이 필요하게 됩니다. 이때 계정을 추가하기 위해 [DB 서버 상세보기] - [DB User 관리] 메뉴를 클릭합니다. 
-
-USER_ID, HOST, DB 권한, 암호를 입력하고 DB User 추가 버튼을 클릭합니다.  
-- 사용자가 변경한 DB 계정은 DB 서비스 전체에 적용됩니다.
-- USER_ID + HOST(IP) 단위로 계정 추가 및 권한 관리를 합니다.
-- DB 권한에서 DDL 권한은 CRUD 권한을 포함합니다.
-- 최대 1,000개까지 계정을 추가 및 조회 할 수 있습니다.
-
-{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_20.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1. Cloud DB for MySQL 기본 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-5-6&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-5-6&lt;/a&gt;
-
-2. Cloud DB 서버 외부 접근 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-5-10&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-5-10&lt;/a&gt;
-</description>
-            <pubDate>Fri, 08 Apr 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_guide.html</guid>
-            
-            <category>database</category>
-            
-            <category>mysql</category>
-            
-            <category>clouddb</category>
-            
-            <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
             <title>MySQL GTID Replication 생성 상세 가이드</title>
             <description>## GTID 란?
 GTID는 **Global Transaction Identifier**의 약자로 MySQL 복제에서 서버의 각 트랜잭션을 구분하는 고유한 식별자입니다. 
@@ -946,274 +886,171 @@ mysql&gt; show slave status \G
         </item>
         
         <item>
-            <title>VPC환경에서 Cloud DB for PostgreSQL 생성하기 | Ubuntu</title>
-            <description>## 지원 클라우드 환경
-Ncloud Cloud DB for PostgreSQL이 지원하는 클라우드 환경은 다음과 같습니다.
+            <title>VPC환경에서 Cloud DB for MySQL 생성하기</title>
+            <description>## 개요
+Ncloud의 Cloud DB for MySQL 서비스는 MySQL 데이터베이스를 쉽고 간편하게 구축하고 관리할 수 있고 자동 Fail-Over, 자동백업, 네이버 서비스에서 검증된 최적화된 설정 등을 제공해주는 
+완전 관리형 클라우드 데이터베이스 서비스입니다.  
+여기서는 VPC환경에서 Cloud DB for MySQL 서비스를 생성하는 과정을 정리해보겠습니다.
 
-- 리전(존): 한국, 싱가포르
-- VPC만	지원
-- 언어: 한국어, 영어, 일본어, 중국어(간체)
-- DB 엔진 버전: PostgreSQL 13.3
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Ncloud는 Classic환경에서는 DB 서버 이미지를 제공하지만, VPC 환경에서는 제공하지 않습니다. 
+그러므로 VPC 환경에서 DB서버를 사용하려면 OS에 사용자가 직접 DB를 설치해서 사용하는 방법과 Cloud DB를 사용하는 방법 중에서 선택해야 합니다.&quot; %}
 
+## 특징
+- 기본 10GB 데이터 스토리지를 제공하며, 10GB 단위로 6,000GB까지 자동으로 용량이 증가합니다. 
+- 하나의 마스터 DB마다 최대 10대의 슬레이브 DB를 생성할 수 있습니다.
+- Load Balancer 상품을 통해 슬레이브 DB 서버들을 읽기 전용 복제본으로 사용함으로써 데이터베이스의 읽기 부하를 분산 시킬 수 있습니다.
+- 매일 1회 고객이 원하는 시간에 DB를 자동으로 백업하며, 백업한 데이터를 최대 30일까지 보관할 수 있습니다.
+- VPC 환경에서는 멀티 존으로 구성해 높은 안정성을 보장받을 수 있습니다.
+- Cloud DB for MySQL 서비스는 완전 관리형 상품으로 사용자는 DB서버의 운영체제에 접근할 수 없습니다.
 
-## 서버 사양과 요금
+## DB 접속 방법 3가지
+1. Private 도메인을 이용해 접속하는 방법
+2. SSL VPN을 이용해 접속하는 방법
+3. Public 도메인을 이용해 접속하는 방법
 
-*(2022-03-30 기준)*
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;&lt;th rowspan=&quot;2&quot;&gt;타입&lt;/th&gt;&lt;th colspan=&quot;3&quot;&gt;제공사양&lt;/th&gt;&lt;th&gt;이용 요금&lt;/th&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;th&gt;vCPU&lt;/th&gt;&lt;th&gt;메모리&lt;/th&gt;&lt;th&gt;디스크&lt;/th&gt;&lt;th&gt;시간당/대&lt;/th&gt;&lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td rowspan=&quot;5&quot;&gt;High CPU&lt;/td&gt;&lt;td&gt;2개&lt;/td&gt;&lt;td&gt;4GB&lt;/td&gt;&lt;td rowspan=&quot;5&quot;&gt;50GB&lt;/td&gt;&lt;td&gt;158원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;4개&lt;/td&gt;&lt;td&gt;8GB&lt;/td&gt;&lt;td&gt;323원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;8개&lt;/td&gt;&lt;td&gt;16GB&lt;/td&gt;&lt;td&gt;653원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;16개&lt;/td&gt;&lt;td&gt;32GB&lt;/td&gt;&lt;td&gt;1,313원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;32개&lt;/td&gt;&lt;td&gt;64GB&lt;/td&gt;&lt;td&gt;2,633원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td rowspan=&quot;5&quot;&gt;Standard&lt;/td&gt;&lt;td&gt;2개&lt;/td&gt;&lt;td&gt;8GB&lt;/td&gt;&lt;td rowspan=&quot;5&quot;&gt;50GB&lt;/td&gt;&lt;td&gt;250원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;4개&lt;/td&gt;&lt;td&gt;16GB&lt;/td&gt;&lt;td&gt;506원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;8개&lt;/td&gt;&lt;td&gt;32GB&lt;/td&gt;&lt;td&gt;1,019원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;16개&lt;/td&gt;&lt;td&gt;64GB&lt;/td&gt;&lt;td&gt;2,045원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;32개&lt;/td&gt;&lt;td&gt;128GB&lt;/td&gt;&lt;td&gt;4,099원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td rowspan=&quot;5&quot;&gt;High Memory&lt;/td&gt;&lt;td&gt;2개&lt;/td&gt;&lt;td&gt;16GB&lt;/td&gt;&lt;td rowspan=&quot;5&quot;&gt;50GB&lt;/td&gt;&lt;td&gt;302원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;4개&lt;/td&gt;&lt;td&gt;32GB&lt;/td&gt;&lt;td&gt;611원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;8개&lt;/td&gt;&lt;td&gt;64GB&lt;/td&gt;&lt;td&gt;1,227원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;16개&lt;/td&gt;&lt;td&gt;128GB&lt;/td&gt;&lt;td&gt;2,462원&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;32개&lt;/td&gt;&lt;td&gt;256GB&lt;/td&gt;&lt;td&gt;4,927원&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+아래에서는 VPC환경에서 Private 도메인을 이용해 접속하는 방법을 설명하도록 하겠습니다.  
+만약 네이버 클라우드 외부 환경에서  Cloud DB for MySQL로 접속하려면 Public 도메인을 사용해야 합니다.
 
+## VPC-Subnet  생성
 
-## 서버 사양 변경 시 제약 사항
- Cloud DB for PostgreSQL 서버는 타입은 변경할 수 없지만 `메모리 크기는 콘솔 PostgreSQL Server 메뉴에서 스펙 변경 기능을 사용하여 언제든지 변경`할 수 있습니다. 그 외 제약 사항은 아래와 같습니다.
+### VPC 생성
+VPC환경에서 작업할 것이므로 우선 VPC를 생성합니다.
 
-- 같은 타입 내에서만 변경 가능
-- 2대 이상의 서버로 구성된 경우(고가용성 사용 및 Read Replica 사용) 모두 동일한 사양으로 변경
-- 변경 완료 후 서버가 다시 시작되며 이에 따라 서비스 영향 발생 가능성 존재
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_01.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_02.jpg&quot; width=&quot;680&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-## 상세 특징
-- DB 엔진 버전: **PostgreSQL 13.3**
-- 스토리지: 기본 10GB 데이터 스토리지를 제공하며, 10GB 단위로 6000GB까지 자동으로 용량이 증가
-- Multi Zone 구성 제공
-- 자동 Fail-over 기본 지원
-- 최대 5대까지 Read Replica 확장
-- 최대 30일까지 자동 백업 및 보관
+### Subnet 생성
+Subnet은 Cloud DB for MySQL을 위한 Private Subnet과 DB 접속 테스트를 위한 Server용 Public Subnet을 각각 생성합니다.
 
-## 서버 접근 방법
-Cloud DB for PostgreSQL은 현재 `Public Domain을 제공하지 않고, Ncloud 내부에서만 접근이 가능`하기 때문에 다음의 방법을 사용해야 합니다.
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_03.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-{% include callout_v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;
-&amp;#8259; PostgreSQL DB와 Private 통신을 위한 별도의 서버를 생성해서 접근&lt;br /&gt;
-&amp;#8259; SSL VPN을 이용해서 접근
-&quot; %}
+### Cloud DB for MySQL을 위한 Private Subnet
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_05.jpg&quot; width=&quot;680&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-## DB 생성
-[VPC] - [Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.
+### 테스트용 Server를 위한 Public Subnet
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_04.jpg&quot; width=&quot;680&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하는 방법&quot; caption=&quot;&quot; %}
+## 테스트 Server 생성
+DB 서버 접속을 테스트 하기 위한 Server를 생성합니다.
 
-### 서버 설정
-- DB 엔진: 현재 지원되는 `DB 엔진 버전은 PostgreSQL 13.3` 입니다.  
-- 고가용성 지원은 기본 선택 사항인데, 필요하지 않을 경우 체크를 해제하면 됩니다.
-- VPC와 Subnet을 선택하고, 미리 생성된 VPC와 Subnet가 없으면 생성 버튼을 클릭합니다.
-- DB Server 타입은 위쪽에서 확인했던 서버 사양 중에서 원하는 vCPU와 메모리를 선택하면 됩니다.
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 서버 설정 1&quot; caption=&quot;&quot; %}
+## DB 서버 생성
+[Database] - [Cloud DB for MySQL]에서 [DB Server 생성] 버튼을 클릭합니다.
 
-- 데이터 스토리지 타입과 암호화 적용 여부를 선택합니다.
-- 데이터 스토리지는 기본 10GB로 설정되며 최대 6000GB까지 자동으로 증가합니다.
-- DB Server 이름과 DB Service 이름을 입력합니다. DB Service 이름은 DB Server를 역할별로 구분한 그룹의 명칭입니다.
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_11.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 서버 설정 2&quot; caption=&quot;&quot; %}
+### DB 서버 엔진 버전
+DB 엔진 버전은 MySQL 최신 버전 중 네이버에서 안정성이 검증된 버전인 5.7버전과 8.0버전을 제공합니다. (기본값 5.7.32)
 
-### DB 설정
-- USER ID와 암호를 입력합니다. (ID와 암호는 잊어버리지 않도록 잘 보관해야 합니다.)
-- 접근제어는 접근을 허용할 IP 대역을 입력합니다.
-- DB 접속포트는 기본 포트가 5432 입니다.
-- 기본 DB명을 입력하고, Backup 설정을 선택합니다.
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_12-1.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - DB 설정&quot; caption=&quot;&quot; %}
+### DB 서버 이름과 DB 서비스 이름
+- DB Server 이름은 고객이 DB 서버를 구분하기 위한 명칭으로, 사용자가 입력한 이름 뒤에 001, 002와 같이 숫자를 붙여 서버를 구분하게 됩니다.
+- 예를 들어 DB 서버 이름을 mydb라고 입력하면 생성되는 DB 서버 이름은 mydb-001, mydb-002와 같습니다.
+- DB 서비스 이름은 역할별 DB 서버를 구분하기 위한 이름입니다.
+- 일반적으로 하나의 액티브 마스터 DB, 스탠바이 마스터 DB, 다수의 슬레이브 DB로 구성되는 DB 서버군을 말하며, 동일한 데이터를 갖고 있는 DB 서버들을 하나의 DB 서비스라 말합니다.
+- 예를 들어 &quot;쇼핑 메인 DB&quot;, &quot;게임 유저 DB&quot;와 같은 식으로 DB 서비스의 역할을 구분하기 위해 사용합니다.
 
-### 최종 확인
-지금까지 입력한 값이 이상이 없는지 최종 확인하고, 수정할 부분이 없으면 [생성] 버튼을 클릭합니다.  
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_12-2.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 최종 확인&quot; caption=&quot;&quot; %}
+{% include callout.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;Cloud DB를 위한 ACG는 자동 생성됩니다(예: cloud-mysql-*)&quot; %}
 
-## DB 상세 정보
-DB 생성이 완료되면 아래와 같이 DB의 상세 정보를 확인할 수 있습니다.  
-이 중에서 Private 도메인과 ACG는 이후 설정에서 사용할 중요한 항목입니다.
+### DB 서버 설정
+DB 이름과 계정. 비번, 접속 포트 등을 설정합니다.  
+HOST(IP) 설정에는 DB에 접근을 허용할 IP대역을 입력합니다. 여기서는 테스트용 서버의 Subnet 대역을 모두 허용하기 위해 [192.168.2.%]를 입력합니다.  
+만약 특정 서버 1대만 허용하려고 할 경우에는 앞에서 생성한 테스트 서버 IP처럼 [192.168.2.6]을 입력합니다.
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL DB 상세정보&quot; caption=&quot;&quot; %}
+{% include warning.html title=&quot;접속포트 설정&quot; content=&quot;DB 접속포트는 한번 설정하면 이후에 변경할 수 없으니 신중하게 설정하셔야 합니다.&quot; %}
 
-## Client Server 생성 | Ubuntu
-처음에 설명했 듯이 `Cloud DB for PostgreSQL DB Server는 Private 환경에서만 접속 가능`하므로 PostgreSQL Client를 설치할 Linux Server를 생성해야 하는데, 
-여기서는 **Ubuntu 18.04**을 설치했습니다.
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_12-3.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-VPC 환경에서 Linux Server를 생성하는 방법은 다음 문서를 참고하시기 바랍니다. 
-- &lt;a href=&quot;/compute/ncloud_compute_server_vpc_create.html&quot; target=&quot;_blank&quot;&gt;VPC 환경에서 서버 생성하기&lt;/a&gt;
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-생성된 Client Server의 정보 중에서 비공인 IP는 다음 ACG 설정에서 필요하니 기억해 둡니다.&lt;br &gt;
-마찬가지로 공인 IP는 로컬 PC에서 PostgreSQL Client에 접속할 때 필요하니 기억해 둡니다.
-&quot; %}
-
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 접속용 Sever 생성&quot; caption=&quot;&quot; %}
 
 ## ACG 설정
-[VPC] - [Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.
+Cloud DB for MySQL을 생성할 때 자동 생성된 ACG [cloud-mysql-*]을 선택하고 ACG 설정을 클릭합니다.
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 리스트&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_14.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-### ACG 규칙 설정
-ACG 규칙 설정 창에서 [Inbound] 탭을 선택하고 `[접근 소스]는 위에서 생성한 Client Server의 비공인 IP를 입력`하고 허용 포트는 5432를 입력하고 [추가] 버튼을 클릭합니다.
+Inbound 설정에 테스트용 Server의 Subnet 대역인 192.168.2.0/24를 접근소스에 입력합니다.  
+또는 특정 서버 1대만 허용하려고 할 경우에는 앞에서 생성한 테스트 서버 IP처럼 [192.168.2.6]을 입력합니다.
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_15.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-## pgAdmin4 설치
-Client용 Linux Server에 PostgreSQL DB의 Client 프로그램인 pgAdmin4를 설치합니다.
 
-### Repository 설정
-pgAdmin4 설치하기 위해 Repository를 먼저 설정합니다.
+
+## MySQL Client 설치
+DB 접속 테스트를 위해 생성한 서버에서 MySQL Client를 설치합니다.
+
+{% include note.html content=&quot;CentOS 7부터는 yum으로 설치하는 MySQL의 기본 데이터베이스가 MariaDB로 변경되었습니다.&quot; %}
+
 
 ``` bash
-~# curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+# mariadb
+~# yum -y install mysql mysql-server
+
+# mysql 5.7
+# {version-number} 확인 : https://dev.mysql.com/downloads/repo/yum/
+# yum -y install https://dev.mysql.com/get/mysql80-community-release-el7-{version-number}.noarch.rpm
+~# yum -y install https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+~# yum -y install --disablerepo=&quot;mysql80-community&quot; --enablerepo=&quot;mysql57-community&quot; mysql-community-server
+~# mysqld --initialize-insecure --user=mysql
+~# systemctl start mysqld
 ```
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
+
+
+## DB 서버 접속
+Cloud DB for MySQL에 접속하기 위한 주소인 [Private 도메인]을 확인 합니다.
+
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_13.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
+
+테스트용 Server에서 Cloud DB for MySQL로 접속하는 방법은 다음과 같습니다.
 
 ``` bash
-~# sh -c &apos;echo &quot;deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main&quot; &gt; /etc/apt/sources.list.d/pgadmin4.list &amp;&amp; apt update&apos;
+~# mysql -h [Private 도메인명] -u [user_id] -p
 ```
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-29.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+&lt;br /&gt;
+DB에 접속해보면 처음 Cloud DB for MySQL 생성할 때 입력한 테이터베이스 [test]를 확인할 수 있습니다.
 
-### 오류 상황
-간혹 위에서 진행한 Repository 설정에서 아래와 같은 오류가 발생하는 경우가 있습니다.
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_18.jpg&quot; width=&quot;650&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-{% include warning.html title=&quot;Certificate verification failed&quot; content=&quot;
-The certificate is NOT trusted. The certificate chain uses expired certificate. Could not handshake: Error in the certificate verification.
-&quot; %}
+## DB 서버 상세보기
+DB 서버 상세보기 메뉴에서는 [Process list], [Variables], [Status], [Database 관리], [DB Config 관리], [DB User 관리], [Backup 설정 관리], [DB Server Logs] 등을 확인할 수 있습니다.
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-35.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_16.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-### 추가 기능 설치
-위 오류 메시지에 보면 인증서 관련해서 오류가 발생하는 것으로 확인되었기에 인증서 관련 기능을 추가 설치합니다.
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_17.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
-``` bash
-~# apt install ca-certificates
-```
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-30.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-### Repository 다시 설정
-Repository 설정에서 오류가 발생했던 부분을 다시 설정합니다. 실행해보면 정상적으로 설정되었다는 메시지를 확인할 수 있습니다.
-
-``` bash
-~# sh -c &apos;echo &quot;deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main&quot; &gt; /etc/apt/sources.list.d/pgadmin4.list &amp;&amp; apt update&apos;
-```
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-31.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-
-### pgAdmin4 설치
-로컬 PC에서 pgAdmin4에 접속하기 위해 pgAdmin4-Web을 설치합니다.
-
-``` bash
-~# apt install pgadmin4
-```
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; apt install pgadmin4: desktop, web mode 두가지 모두 설치&lt;br /&gt;
-&amp;#8259; apt install pgadmin4-desktop: desktop mode만 설치&lt;br /&gt;
-&amp;#8259; apt install pgadmin4-web: web mode만 설치
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-32.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-
-### pgAdmin4-Web 환경 설정
-setup-web.sh 스크립트를 실행 후 pgAdmin4-Web 접속을 위한 이메일 계정과 패스워드를 입력합니다. 
-
-``` bash
-~# /usr/pgadmin4/bin/setup-web.sh
-```
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-33.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-## pgAdmin4 접속
-pgAdmin4 접속 주소는 `http://[Client Server 공인IP 주소]/pgadmin4/` 입니다.  
-위 주소로 접속하면 아래와 같이 Email Address와 Password 입력 화면이 나오는데 pgAdmin4-Web 환경 설정에서 입력한 이메일과 패스워드를 입력하고 로그인 합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-17.png&quot; width=&quot;835&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-### 서버 추가
-pgAdmin에서 [Add New Server] 버튼을 클릭해서 위에서 생성했던 DB서버를 연결합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-18.png&quot; width=&quot;837&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-#### Name 입력
-등록할 DB의 이름을 편하게 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-19.png&quot; width=&quot;497&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-#### 연결 정보 입력
-- Host name/address: Cloud DB for PostgreSQL 생성 후에 확인한 **`Private 도메인 (pg-oooo-vpc-cdb-kr.ntruss.com)`**을 입력합니다.
-- Username: Cloud DB for PostgreSQL 생성 시에 입력한 **USER ID**를 입력합니다.
-- Password: Cloud DB for PostgreSQL 생성 시에 입력한 **USER 암호**를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-20.png&quot; width=&quot;497&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-## pgAdmin4 대시보드
-연결 정보에 이상이 없고 정상적으로 접속이 되면 아래와 같이 대시보드 화면을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-21.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-## DB Service 상세 보기
-DB Service 상세 보기에서는 Database 추가/삭제, Config 관리, User 추가/삭제, Backup 설정 등을 관리할 수 있습니다.  
-Cloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 메뉴를 클릭합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-22.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-### Database 관리
-PostgreSQL DB의 Database를 추가/삭제 할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-23.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
 
 ### DB User 관리
-Cloud DB for PostgreSQL의 DB User를 추가/삭제 할 수 있습니다.
+DB 서버를 이용하다보면 여러 계정이 필요하게 됩니다. 이때 계정을 추가하기 위해 [DB 서버 상세보기] - [DB User 관리] 메뉴를 클릭합니다. 
 
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-&amp;#8259; PostgreSQL은 `1개의 DB에 1개 계정만 owner`로 지정할 수 있습니다.&lt;br /&gt;
-&amp;#8259; 1개의 DB를 여러 계정으로 관리해야 하는 경우는 서브 계정을 만들고 &lt;br /&gt;
-&amp;nbsp;&amp;nbsp; owner 계정으로 서브 계정에 별도의 권한을 설정해야 합니다.&lt;br /&gt;&lt;br /&gt;
-&amp;#8259; 이때 `계정 생성은 Ncloud 콘솔에서만 가능`합니다. (아래 화면의 DB User 관리 기능)&lt;br /&gt;
-&amp;#8259; 그 외의 `권한 설정은 pgAdmin4 웹페이지에서` 설정해야 합니다.
-&quot; %}
+USER_ID, HOST, DB 권한, 암호를 입력하고 DB User 추가 버튼을 클릭합니다.  
+- 사용자가 변경한 DB 계정은 DB 서비스 전체에 적용됩니다.
+- USER_ID + HOST(IP) 단위로 계정 추가 및 권한 관리를 합니다.
+- DB 권한에서 DDL 권한은 CRUD 권한을 포함합니다.
+- 최대 1,000개까지 계정을 추가 및 조회 할 수 있습니다.
 
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-#### 서브 계정
-subid라는 서브 계정을 만들었다고 가정했을 때 아래 화면처럼 Superuser 등의 권한 설정을 할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-25.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-### DB 접근 권한 설정
-서브 계정의 특정 DB에 대한 접근 권한을 설정하고자 할 경우는 아래와 같이 DB를 선택하고, 마우스 오른쪽 클릭을 한 후 [Properties] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-26.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
-
-[Properties] 설정 화면에서 [Security] 메뉴를 선택하면 계정별로 권한을 설정할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-27.png&quot; width=&quot;750&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;database/ncp_database_cloud_db_for_mysql_20.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
 
 ## 참고 URL
-1. Ncloud Cloud DB for PostgreSQL 기본 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/clouddbforpostgresql-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/clouddbforpostgresql-overview&lt;/a&gt;
+1. Cloud DB for MySQL 기본 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-5-6&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-5-6&lt;/a&gt;
 
-1. pgAdmin 홈페이지
-	- &lt;a href=&quot;https://www.pgadmin.org/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;hhttps://www.pgadmin.org/&lt;/a&gt;</description>
-            <pubDate>Wed, 06 Apr 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html</guid>
+2. Cloud DB 서버 외부 접근 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-5-10&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-5-10&lt;/a&gt;
+</description>
+            <pubDate>Fri, 08 Apr 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_guide.html</guid>
             
             <category>database</category>
+            
+            <category>mysql</category>
             
             <category>clouddb</category>
             
@@ -1484,6 +1321,283 @@ subid라는 서브 계정을 만들었다고 가정했을 때 아래 화면처�
             <pubDate>Wed, 06 Apr 2022 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-centos.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-centos.html</guid>
+            
+            <category>database</category>
+            
+            <category>clouddb</category>
+            
+            <category>vpc</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>VPC환경에서 Cloud DB for PostgreSQL 생성하기 | Ubuntu</title>
+            <description>## 지원 클라우드 환경
+Ncloud Cloud DB for PostgreSQL이 지원하는 클라우드 환경은 다음과 같습니다.
+
+- 리전(존): 한국, 싱가포르
+- VPC만	지원
+- 언어: 한국어, 영어, 일본어, 중국어(간체)
+- DB 엔진 버전: PostgreSQL 13.3
+
+
+## 서버 사양과 요금
+
+*(2022-03-30 기준)*
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th rowspan=&quot;2&quot;&gt;타입&lt;/th&gt;&lt;th colspan=&quot;3&quot;&gt;제공사양&lt;/th&gt;&lt;th&gt;이용 요금&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th&gt;vCPU&lt;/th&gt;&lt;th&gt;메모리&lt;/th&gt;&lt;th&gt;디스크&lt;/th&gt;&lt;th&gt;시간당/대&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td rowspan=&quot;5&quot;&gt;High CPU&lt;/td&gt;&lt;td&gt;2개&lt;/td&gt;&lt;td&gt;4GB&lt;/td&gt;&lt;td rowspan=&quot;5&quot;&gt;50GB&lt;/td&gt;&lt;td&gt;158원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;4개&lt;/td&gt;&lt;td&gt;8GB&lt;/td&gt;&lt;td&gt;323원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;8개&lt;/td&gt;&lt;td&gt;16GB&lt;/td&gt;&lt;td&gt;653원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;16개&lt;/td&gt;&lt;td&gt;32GB&lt;/td&gt;&lt;td&gt;1,313원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;32개&lt;/td&gt;&lt;td&gt;64GB&lt;/td&gt;&lt;td&gt;2,633원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td rowspan=&quot;5&quot;&gt;Standard&lt;/td&gt;&lt;td&gt;2개&lt;/td&gt;&lt;td&gt;8GB&lt;/td&gt;&lt;td rowspan=&quot;5&quot;&gt;50GB&lt;/td&gt;&lt;td&gt;250원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;4개&lt;/td&gt;&lt;td&gt;16GB&lt;/td&gt;&lt;td&gt;506원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;8개&lt;/td&gt;&lt;td&gt;32GB&lt;/td&gt;&lt;td&gt;1,019원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;16개&lt;/td&gt;&lt;td&gt;64GB&lt;/td&gt;&lt;td&gt;2,045원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;32개&lt;/td&gt;&lt;td&gt;128GB&lt;/td&gt;&lt;td&gt;4,099원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td rowspan=&quot;5&quot;&gt;High Memory&lt;/td&gt;&lt;td&gt;2개&lt;/td&gt;&lt;td&gt;16GB&lt;/td&gt;&lt;td rowspan=&quot;5&quot;&gt;50GB&lt;/td&gt;&lt;td&gt;302원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;4개&lt;/td&gt;&lt;td&gt;32GB&lt;/td&gt;&lt;td&gt;611원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;8개&lt;/td&gt;&lt;td&gt;64GB&lt;/td&gt;&lt;td&gt;1,227원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;16개&lt;/td&gt;&lt;td&gt;128GB&lt;/td&gt;&lt;td&gt;2,462원&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;32개&lt;/td&gt;&lt;td&gt;256GB&lt;/td&gt;&lt;td&gt;4,927원&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+## 서버 사양 변경 시 제약 사항
+ Cloud DB for PostgreSQL 서버는 타입은 변경할 수 없지만 `메모리 크기는 콘솔 PostgreSQL Server 메뉴에서 스펙 변경 기능을 사용하여 언제든지 변경`할 수 있습니다. 그 외 제약 사항은 아래와 같습니다.
+
+- 같은 타입 내에서만 변경 가능
+- 2대 이상의 서버로 구성된 경우(고가용성 사용 및 Read Replica 사용) 모두 동일한 사양으로 변경
+- 변경 완료 후 서버가 다시 시작되며 이에 따라 서비스 영향 발생 가능성 존재
+
+
+## 상세 특징
+- DB 엔진 버전: **PostgreSQL 13.3**
+- 스토리지: 기본 10GB 데이터 스토리지를 제공하며, 10GB 단위로 6000GB까지 자동으로 용량이 증가
+- Multi Zone 구성 제공
+- 자동 Fail-over 기본 지원
+- 최대 5대까지 Read Replica 확장
+- 최대 30일까지 자동 백업 및 보관
+
+## 서버 접근 방법
+Cloud DB for PostgreSQL은 현재 `Public Domain을 제공하지 않고, Ncloud 내부에서만 접근이 가능`하기 때문에 다음의 방법을 사용해야 합니다.
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;
+&amp;#8259; PostgreSQL DB와 Private 통신을 위한 별도의 서버를 생성해서 접근&lt;br /&gt;
+&amp;#8259; SSL VPN을 이용해서 접근
+&quot; %}
+
+## DB 생성
+[VPC] - [Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하는 방법&quot; caption=&quot;&quot; %}
+
+### 서버 설정
+- DB 엔진: 현재 지원되는 `DB 엔진 버전은 PostgreSQL 13.3` 입니다.  
+- 고가용성 지원은 기본 선택 사항인데, 필요하지 않을 경우 체크를 해제하면 됩니다.
+- VPC와 Subnet을 선택하고, 미리 생성된 VPC와 Subnet가 없으면 생성 버튼을 클릭합니다.
+- DB Server 타입은 위쪽에서 확인했던 서버 사양 중에서 원하는 vCPU와 메모리를 선택하면 됩니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 서버 설정 1&quot; caption=&quot;&quot; %}
+
+- 데이터 스토리지 타입과 암호화 적용 여부를 선택합니다.
+- 데이터 스토리지는 기본 10GB로 설정되며 최대 6000GB까지 자동으로 증가합니다.
+- DB Server 이름과 DB Service 이름을 입력합니다. DB Service 이름은 DB Server를 역할별로 구분한 그룹의 명칭입니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 서버 설정 2&quot; caption=&quot;&quot; %}
+
+### DB 설정
+- USER ID와 암호를 입력합니다. (ID와 암호는 잊어버리지 않도록 잘 보관해야 합니다.)
+- 접근제어는 접근을 허용할 IP 대역을 입력합니다.
+- DB 접속포트는 기본 포트가 5432 입니다.
+- 기본 DB명을 입력하고, Backup 설정을 선택합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - DB 설정&quot; caption=&quot;&quot; %}
+
+### 최종 확인
+지금까지 입력한 값이 이상이 없는지 최종 확인하고, 수정할 부분이 없으면 [생성] 버튼을 클릭합니다.  
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 최종 확인&quot; caption=&quot;&quot; %}
+
+## DB 상세 정보
+DB 생성이 완료되면 아래와 같이 DB의 상세 정보를 확인할 수 있습니다.  
+이 중에서 Private 도메인과 ACG는 이후 설정에서 사용할 중요한 항목입니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL DB 상세정보&quot; caption=&quot;&quot; %}
+
+## Client Server 생성 | Ubuntu
+처음에 설명했 듯이 `Cloud DB for PostgreSQL DB Server는 Private 환경에서만 접속 가능`하므로 PostgreSQL Client를 설치할 Linux Server를 생성해야 하는데, 
+여기서는 **Ubuntu 18.04**을 설치했습니다.
+
+VPC 환경에서 Linux Server를 생성하는 방법은 다음 문서를 참고하시기 바랍니다. 
+- &lt;a href=&quot;/compute/ncloud_compute_server_vpc_create.html&quot; target=&quot;_blank&quot;&gt;VPC 환경에서 서버 생성하기&lt;/a&gt;
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+생성된 Client Server의 정보 중에서 비공인 IP는 다음 ACG 설정에서 필요하니 기억해 둡니다.&lt;br &gt;
+마찬가지로 공인 IP는 로컬 PC에서 PostgreSQL Client에 접속할 때 필요하니 기억해 둡니다.
+&quot; %}
+
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 접속용 Sever 생성&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+[VPC] - [Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 리스트&quot; caption=&quot;&quot; %}
+
+### ACG 규칙 설정
+ACG 규칙 설정 창에서 [Inbound] 탭을 선택하고 `[접근 소스]는 위에서 생성한 Client Server의 비공인 IP를 입력`하고 허용 포트는 5432를 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+## pgAdmin4 설치
+Client용 Linux Server에 PostgreSQL DB의 Client 프로그램인 pgAdmin4를 설치합니다.
+
+### Repository 설정
+pgAdmin4 설치하기 위해 Repository를 먼저 설정합니다.
+
+``` bash
+~# curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+```
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+``` bash
+~# sh -c &apos;echo &quot;deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main&quot; &gt; /etc/apt/sources.list.d/pgadmin4.list &amp;&amp; apt update&apos;
+```
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-29.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+### 오류 상황
+간혹 위에서 진행한 Repository 설정에서 아래와 같은 오류가 발생하는 경우가 있습니다.
+
+{% include warning.html title=&quot;Certificate verification failed&quot; content=&quot;
+The certificate is NOT trusted. The certificate chain uses expired certificate. Could not handshake: Error in the certificate verification.
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-35.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+### 추가 기능 설치
+위 오류 메시지에 보면 인증서 관련해서 오류가 발생하는 것으로 확인되었기에 인증서 관련 기능을 추가 설치합니다.
+
+``` bash
+~# apt install ca-certificates
+```
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-30.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+### Repository 다시 설정
+Repository 설정에서 오류가 발생했던 부분을 다시 설정합니다. 실행해보면 정상적으로 설정되었다는 메시지를 확인할 수 있습니다.
+
+``` bash
+~# sh -c &apos;echo &quot;deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main&quot; &gt; /etc/apt/sources.list.d/pgadmin4.list &amp;&amp; apt update&apos;
+```
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-31.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+
+### pgAdmin4 설치
+로컬 PC에서 pgAdmin4에 접속하기 위해 pgAdmin4-Web을 설치합니다.
+
+``` bash
+~# apt install pgadmin4
+```
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; apt install pgadmin4: desktop, web mode 두가지 모두 설치&lt;br /&gt;
+&amp;#8259; apt install pgadmin4-desktop: desktop mode만 설치&lt;br /&gt;
+&amp;#8259; apt install pgadmin4-web: web mode만 설치
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-32.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+
+### pgAdmin4-Web 환경 설정
+setup-web.sh 스크립트를 실행 후 pgAdmin4-Web 접속을 위한 이메일 계정과 패스워드를 입력합니다. 
+
+``` bash
+~# /usr/pgadmin4/bin/setup-web.sh
+```
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-33.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+## pgAdmin4 접속
+pgAdmin4 접속 주소는 `http://[Client Server 공인IP 주소]/pgadmin4/` 입니다.  
+위 주소로 접속하면 아래와 같이 Email Address와 Password 입력 화면이 나오는데 pgAdmin4-Web 환경 설정에서 입력한 이메일과 패스워드를 입력하고 로그인 합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-17.png&quot; width=&quot;835&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+### 서버 추가
+pgAdmin에서 [Add New Server] 버튼을 클릭해서 위에서 생성했던 DB서버를 연결합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-18.png&quot; width=&quot;837&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+#### Name 입력
+등록할 DB의 이름을 편하게 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-19.png&quot; width=&quot;497&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+#### 연결 정보 입력
+- Host name/address: Cloud DB for PostgreSQL 생성 후에 확인한 **`Private 도메인 (pg-oooo-vpc-cdb-kr.ntruss.com)`**을 입력합니다.
+- Username: Cloud DB for PostgreSQL 생성 시에 입력한 **USER ID**를 입력합니다.
+- Password: Cloud DB for PostgreSQL 생성 시에 입력한 **USER 암호**를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-20.png&quot; width=&quot;497&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+## pgAdmin4 대시보드
+연결 정보에 이상이 없고 정상적으로 접속이 되면 아래와 같이 대시보드 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-21.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+## DB Service 상세 보기
+DB Service 상세 보기에서는 Database 추가/삭제, Config 관리, User 추가/삭제, Backup 설정 등을 관리할 수 있습니다.  
+Cloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 메뉴를 클릭합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-22.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+### Database 관리
+PostgreSQL DB의 Database를 추가/삭제 할 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-23.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+### DB User 관리
+Cloud DB for PostgreSQL의 DB User를 추가/삭제 할 수 있습니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
+&amp;#8259; PostgreSQL은 `1개의 DB에 1개 계정만 owner`로 지정할 수 있습니다.&lt;br /&gt;
+&amp;#8259; 1개의 DB를 여러 계정으로 관리해야 하는 경우는 서브 계정을 만들고 &lt;br /&gt;
+&amp;nbsp;&amp;nbsp; owner 계정으로 서브 계정에 별도의 권한을 설정해야 합니다.&lt;br /&gt;&lt;br /&gt;
+&amp;#8259; 이때 `계정 생성은 Ncloud 콘솔에서만 가능`합니다. (아래 화면의 DB User 관리 기능)&lt;br /&gt;
+&amp;#8259; 그 외의 `권한 설정은 pgAdmin4 웹페이지에서` 설정해야 합니다.
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+#### 서브 계정
+subid라는 서브 계정을 만들었다고 가정했을 때 아래 화면처럼 Superuser 등의 권한 설정을 할 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-25.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+### DB 접근 권한 설정
+서브 계정의 특정 DB에 대한 접근 권한을 설정하고자 할 경우는 아래와 같이 DB를 선택하고, 마우스 오른쪽 클릭을 한 후 [Properties] 메뉴를 선택합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-26.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+[Properties] 설정 화면에서 [Security] 메뉴를 선택하면 계정별로 권한을 설정할 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-27.png&quot; width=&quot;750&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1. Ncloud Cloud DB for PostgreSQL 기본 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/clouddbforpostgresql-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/clouddbforpostgresql-overview&lt;/a&gt;
+
+1. pgAdmin 홈페이지
+	- &lt;a href=&quot;https://www.pgadmin.org/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;hhttps://www.pgadmin.org/&lt;/a&gt;</description>
+            <pubDate>Wed, 06 Apr 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html</guid>
             
             <category>database</category>
             
@@ -2197,146 +2311,6 @@ using (HMACSHA256 sha256 = new HMACSHA256(hmac_key))
             <pubDate>Mon, 07 Mar 2022 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/etc/etc_jekyll_documentation_theme_page_create_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/etc/etc_jekyll_documentation_theme_page_create_guide.html</guid>
-            
-            <category>markdown</category>
-            
-            <category>jekyll</category>
-            
-            <category>windows</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Jekyll Documentation Theme 설치 가이드</title>
-            <description>&lt;h2 id=&quot;documentation-theme-특징&quot;&gt;Documentation Theme 특징&lt;/h2&gt;
-&lt;p&gt;이 기술문서에 사용된 Documentation Theme의 가장 큰 특징은 다음과 같습니다.&lt;/p&gt;
-
-&lt;div class=&quot;bs-callout bs-callout-info bs-callout-level-&quot;&gt;- 문서를 카테고리별로 정렬해서 보여주는 네비게이션 리스트&lt;br /&gt;
-- 문서 상단에 보여주는 문서 목차 (TOC)&lt;br /&gt;
-- 다양한 상단 네비게이션 구성&lt;br /&gt;
-- Tag를 활용해서 비슷한 주제의 문서를 함께 확인할 수 있음&lt;/div&gt;
-
-&lt;figure&gt;&lt;img class=&quot;docimage&quot; src=&quot;/images/etc/etc_jekyll_documentation_theme_install_01.png&quot; alt=&quot;도 10 환경에서 Jekyll Documentation Theme를 설치하는 방법&quot; style=&quot;width: 850px; max-width: 100%&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;설치-전체과정-요약&quot;&gt;설치 전체과정 요약&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Ruby 설치&lt;/li&gt;
-  &lt;li&gt;ridk 설치&lt;/li&gt;
-  &lt;li&gt;Documentation Theme 다운로드&lt;/li&gt;
-  &lt;li&gt;Jekyll gem 설치&lt;/li&gt;
-  &lt;li&gt;Bundler 설치&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;alert alert-success&quot; role=&quot;alert&quot;&gt;&lt;i class=&quot;far fa-check-square&quot;&gt;&lt;/i&gt; &lt;b&gt;Tip:&lt;/b&gt; 이미 Ruby 2.5등 3.0 이전 버전이 설치되어 있더라도 3.0을 설치하시는 걸 추천드립니다. build 속도 개선 등 많은 기능이 향상 되었습니다.&lt;/div&gt;
-
-&lt;h2 id=&quot;ruby-설치&quot;&gt;Ruby 설치&lt;/h2&gt;
-&lt;p&gt;jekyll 최신 버전은 2022-03-03 현재 v.3.1이지만 여기서는 Documentation Theme를 기반으로 하기 때문에 호환이 잘되는 3.0을 설치합니다.&lt;/p&gt;
-
-&lt;p&gt;Ruby Installer 다운로드 경로
-&lt;a href=&quot;https://rubyinstaller.org/downloads/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://rubyinstaller.org/downloads/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;위 사이트에서 rubyinstaller-devkit-3.0.3-1-x64 를 다운 받아 설치하면 됩니다.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img class=&quot;docimage&quot; src=&quot;/images/etc/etc_jekyll_ruby_install_01.png&quot; alt=&quot;윈도 10 환경에서 Jekyll Documentation Theme를 설치하는 방법 - Ruby 다운로드&quot; style=&quot;width: 850px; max-width: 100%&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;Ruby 설치 화면에서 PATH와 파일 확장자 연결에 체크 되어 있는지 확인하고 [Install] 버튼을 클릭합니다.&lt;/p&gt;
-&lt;figure&gt;&lt;img class=&quot;docimage&quot; src=&quot;/images/etc/etc_jekyll_ruby_install_02.png&quot; alt=&quot;윈도 10 환경에서 Jekyll Documentation Theme를 설치하는 방법 - Ruby 설치하기&quot; style=&quot;width: 700px; &quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;설치할 컴포넌트 선택화면에서 모두 선택하거나 최소한 MSYS2 development toolchain은 꼭 선택하고 [Next] 버튼을 클릭합니다. 설치에 필요한 공간은 972MB 정도 됩니다.&lt;/p&gt;
-&lt;figure&gt;&lt;img class=&quot;docimage&quot; src=&quot;/images/etc/etc_jekyll_ruby_install_03.png&quot; alt=&quot;윈도 10 환경에서 Jekyll Documentation Theme를 설치하는 방법 - Ruby 설치하기&quot; style=&quot;width: 700px; &quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;Ruby 설치가 끝나면서 완료화면에 &lt;strong&gt;Run ‘ridk install’ to setup MSYS2 and development toolchain.&lt;/strong&gt; 이라는 옵션이 나타납니다. 
-꼭 설치해야 하는 툴이므로 반드시 선택하고 완료를 해서 바로 설치화면으로 이동하도록 합니다.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img class=&quot;docimage&quot; src=&quot;/images/etc/etc_jekyll_ruby_install_04.png&quot; alt=&quot;윈도 10 환경에서 Jekyll Documentation Theme를 설치하는 방법 - Ruby 설치하기&quot; style=&quot;width: 700px; &quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;ridk-설치&quot;&gt;ridk 설치&lt;/h3&gt;
-&lt;p&gt;앞단계인 Ruby 설치 완료에서 ridk install을 선택했다면 ridk 설치 커맨드 창이 나타납니다.&lt;br /&gt;
-(혹시 선택하지 않았다면 커맨드 창을 열어서 &lt;strong&gt;ridk install&lt;/strong&gt; 을 입력하면 됩니다)&lt;br /&gt;
-이때 설치 옵션을 선택할 수 있는데 Enter 키를 입력하면 기본 옵션인 1, 3으로 설치가 진행됩니다.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img class=&quot;docimage&quot; src=&quot;/images/etc/etc_jekyll_ruby_install_05.png&quot; alt=&quot;윈도 10 환경에서 Jekyll Documentation Theme를 설치하는 방법 - ridk 설치하기&quot; style=&quot;width: 600px; &quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;documentation-theme-설치&quot;&gt;Documentation Theme 설치&lt;/h2&gt;
-&lt;p&gt;Documentation Theme는 jekyll의 여러 테마 중에서 문서 작성에 특화된 테마입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;다운로드-경로&quot;&gt;다운로드 경로&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/tomjoht/documentation-theme-jekyll&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://github.com/tomjoht/documentation-theme-jekyll&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;위 다운로드 경로에서 소스를 직접 다운 받거나 GitHub Desktop을 이용해서 가져오면 됩니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;live-demo&quot;&gt;Live Demo&lt;/h3&gt;
-&lt;p&gt;실제 Documentaion Theme를 적용하면 어떤 사이트를 만들 수 있는지 미리 확인해볼 수 있는 Live Demo 사이트가 있습니다.&lt;br /&gt;
-&lt;a href=&quot;https://idratherbewriting.com/documentation-theme-jekyll/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://idratherbewriting.com/documentation-theme-jekyll/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;jekyll-gem-설치&quot;&gt;Jekyll gem 설치&lt;/h2&gt;
-&lt;p&gt;우선 jekyll을 설치합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jekyll
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;bundler-설치&quot;&gt;Bundler 설치&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;다운로드 받은 Documentation theme 폴더를 오픈합니다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; 과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile.lock&lt;/code&gt; 파일을 삭제하거나 이름을 변경합니다.&lt;/li&gt;
-  &lt;li&gt;다음 명령으로 bundler를 설치합니다: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install bundler&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Bundler를 초기화 합니다: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle init&lt;/code&gt;&lt;/p&gt;
-
-    &lt;p&gt;초기화 작업이 진행되면서 Gemfile 파일이 생성됩니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Gemfile을 열어서 기존 내용을 삭제하고 다음 내용으로 변경합니다.&lt;/p&gt;
-
-    &lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;source &quot;https://rubygems.org&quot;&lt;/span&gt;
-  
-&lt;span class=&quot;s&quot;&gt;gem &apos;jekyll&apos;, &apos;~&amp;gt; 4.2.1&apos;&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;group :jekyll_plugins do&lt;/span&gt; 
-  &lt;span class=&quot;s&quot;&gt;gem &apos;jekyll-seo-tag&apos;, &apos;~&amp;gt; 2.7.0&apos;&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;gem &apos;jekyll-sitemap&apos;, &apos;~&amp;gt; 1.4.0&apos;&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;gem &apos;wdm&apos;, &apos;~&amp;gt; 0.1.1&apos;&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;gem &apos;kramdown-parser-gfm&apos;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;gem &quot;webrick&quot;, &quot;~&amp;gt; 1.7&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Gemfile을 저장합니다.&lt;/li&gt;
-  &lt;li&gt;다음 명령어로 필요한 gem을 설치합니다: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle install&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;사이트-실행-접속&quot;&gt;사이트 실행, 접속&lt;/h2&gt;
-&lt;p&gt;작업하면서 결과물을 확인할 때는 다음과 같은 명령어로 입력하고 브라우져에서 &lt;strong&gt;http://127.0.0.1:4000/&lt;/strong&gt; 로 접속하시면 되니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;최종-결과-화면&quot;&gt;최종 결과 화면&lt;/h2&gt;
-&lt;p&gt;위 절차대로 모두 실행하면 아래와 같은 화면을 볼 수 있습니다.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img class=&quot;docimage&quot; src=&quot;/images/etc/etc_jekyll_documentation_theme_install_02.png&quot; alt=&quot;도 10 환경에서 Jekyll Documentation Theme를 설치하는 방법&quot; style=&quot;width: 850px; max-width: 100%&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;사이트-빌드&quot;&gt;사이트 빌드&lt;/h2&gt;
-&lt;p&gt;작업이 끝난 결과물을 실제 서버나 gitHub에 업로드, 배포할 경우에는 다음 명령어로 빌드 한 후에 &lt;strong&gt;_site&lt;/strong&gt;에 생성된 html 등을 사용하시면 됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll build
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;추가-패키지-설치&quot;&gt;추가 패키지 설치&lt;/h2&gt;
-&lt;p&gt;혹시 사이트 실행, 접속에서 오류가 발생하면 나타나는 메시지를 보고 처리를 해주면 됩니다.&lt;br /&gt;
-혹시 필요한 gem이 설치되지 않았을 경우에는 다음과 같이 설치해주면 됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# gem 수동 설치 예시&lt;/span&gt;
-gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;public_suffix &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; 3.0.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-            <pubDate>Fri, 04 Mar 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/etc/etc_jekyll_documentation_theme_install.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/etc/etc_jekyll_documentation_theme_install.html</guid>
             
             <category>markdown</category>
             
