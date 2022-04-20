@@ -1009,7 +1009,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="SourceCommit에서 GitHub Repository 복사해오기" href="/dev-tools/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html">SourceCommit에서 GitHub Repository 복사해오기</a></li>          
+          <li><a title="SourceCommit에서 GitHub Repository 복사해오기" href="/dev-tools/ncloud-dev-tools-source-commit-external-repository-copy.html">SourceCommit에서 GitHub Repository 복사해오기</a></li>          
                     
           
           
@@ -1739,11 +1739,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				
 					,
 					
-					"dev-tools-ncloud-database-cloud-db-for-postgresql-guide-ubuntu-html": {
-						"id": "dev-tools-ncloud-database-cloud-db-for-postgresql-guide-ubuntu-html",
+					"dev-tools-ncloud-dev-tools-source-commit-external-repository-copy-html": {
+						"id": "dev-tools-ncloud-dev-tools-source-commit-external-repository-copy-html",
 						"title": "SourceCommit에서 GitHub Repository 복사해오기 | Ncloud",
 						"categories": "",
-						"url": " /dev-tools/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html",
+						"url": " /dev-tools/ncloud-dev-tools-source-commit-external-repository-copy.html",
 						"content": "개요\nNcloud SourceCommit에서 GitHub Repository를 복사해서 가져오기 위해서는 [외부 리포지토리 복사] 기능을 이용해야 하는데, Public Repository는 간단하게 가져올 수 있지만, Private Repository는 GitHub에서 생성한 별도의 Personal access token을 사용해야 가져올 수 있어서 그 내용을 정리해보겠습니다.\n\n외부 리포지토리 복사\nSourceCommit에서 [외부 리포지토리 복사] 버튼을 클릭합니다.\n\n\n\nPublic Repository\n퍼블릭 리포지토리는 아래와 같이 [복사할 Git URL] 정보를 입력한 후에 [Git 연결 확인] 버튼을 클릭해서 올바른 리포지토리인지 확인 후 [다음] 버튼을 클릭해 이후 과정을 진행하면 완료됩니다.\n\n\n\nPrivate Repository\n프라이빗 리포지토리는 [프라이빗 리포지토리 여부] 옵션을 켜고 [ID]와 [Password]를 입력해야 복사해 올 수 있습니다.\n\n\n\nPassword 오류\n깃허브 계정과 패스워드를 입력하고 [Git 연결 확인] 버튼을 클릭해 보면 ID 또는 Password가 올바르지 않다는 메시지가 나타납니다.\n올바르게 입력했음에도 이런 오류가 발생하는 것은 2021년 8월부터 외부에서 깃허브에 연결하려고 할 때 계정 패스워드를 사용하지 않고 토큰을 사용하는 방식으로 바뀌었기 때문입니다.\n\n깃허브 공지 내용을 보면 다음과 같습니다.\n\nFrom GitHub Blog “In July 2020, we announced our intent to require the use of token-based authentication (for example, a personal access, OAuth, or GitHub App installation token) for all authenticated Git operations. Beginning August 13, 2021, we will no longer accept account passwords when authenticating Git operations on GitHub.com.”\n\n\n\nPersonal Access Token 생성\n그러면 이제 Personal access token을 생성해보겠습니다.\n깃허브 사이트에 접속해서 [계정] - [Settings]를 클릭합니다.\n\n\n\n[Settings] 화면 아래쪽에 [Developer settings] 메뉴를 클릭합니다.\n\n\n\n[Developer settings] 화면에서 [Personal access tokens] 메뉴를 클릭하고, [Generate new token] 버튼을 클릭합니다.\n\n\n\nToken 생성\n우선 Personal access token 생성 화면에서 토큰 이름을 입력하고, 만료기간을 설정합니다.\n그리고, 토큰으로 이용 가능한 기능의 범위 즉, 권한 설정을 해야 하는데 단순히 리포지토리를 복사하는 용도라면 [repo] 그룹 항목만 체크하셔도 됩니다.\n설정을 마친 후에 아래쪽에 있는 [Generate token] 버튼을 클릭합니다.\n\n\n\nToken 복사\n생성된 Personal access toke을 복사합니다.\n\n 주의: 생성된 Token은 바로 복사해 두셔야 합니다. 이 화면을 벗어나면 두번 다시 토큰 문자열을 확인할 수 없습니다.Make sure to copy your personal access token now. You won’t be able to see it again!\n\n\n\nPersonal Access Token 입력\n[Password] 항목에 Personal Access Token을 입력하고, [Git 연결 확인] 버튼을 클릭하면 문제없이 연결되는 것을 확인할 수 있습니다.\n\n\n\n보안상품 연동\n리포지토리에 악성코드 필터링 보안 시스템인 [File Safer]를 연동하고 싶은 경우 [File Safer 이용 신청] 링크를 클릭해 먼저 이용신청을 하시면 됩니다.\n\n\n\n최종 확인\n입력한 정보들이 이상이 없는지 최종 확인을 하고 [생성] 버튼을 클릭합니다.\n\n\n\nRepository 확인\n생성된 리포지토리를 이렇게 확인할 수 있고, 리포지토리 이름을 클릭하면 리포지토리 내용을 확인할 수 있습니다.\n\n\n\n아래와 같이 깃허브에서 복사된 내용을 확인할 수 있습니다.\n\n\n\nPersonal Access Token 분실\nPersonal Access Token이 기억나지 않거나 분실했을 경우에는 다음과 같은 방법으로 재생성 하시면 됩니다.\n[Settings] - [Developer settings] - [Personal access token] 메뉴에서 토큰 이름을 클릭합니다.\n\n\n\n토큰 수정 메뉴에서 [Regenerate token] 버튼을 클릭합니다.\n\n\n\n혹시 만료 기간을 수정려면 수정한 후에 [Regenerate token] 버튼을 클릭합니다.\n\n\n\n재 생성된 [Personal access token]을 복사합니다. 마찬가지로 이 화면을 벗어나면 두번 다시 확인할 수 없으니 꼭 복사해서 별도로 저장합니다.\n\n\n\n참고 URL\n\n  Ncloud SourceCommit 사용 가이드\n    \n      https://guide.ncloud-docs.com/docs/devtools-devtools-2-1"
 					}
 					
