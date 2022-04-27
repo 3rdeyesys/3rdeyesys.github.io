@@ -424,6 +424,28 @@
 
 
 {
+"title": "CentOS에서 NginX SSL 인증서 설정하는 방법",
+"tags": "centoslempnginxssl",
+"keywords": "Linux, LEMP, LAMP",
+"url": "/compute/ncloud_compute_lemp_nginx_ssl_setting_centos_guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Ubuntu에서 NginX SSL 인증서 설정하는 방법",
+"tags": "ubuntulempnginxssl",
+"keywords": "Linux, LEMP, LAMP",
+"url": "/compute/ncloud_compute_lemp_nginx_ssl_setting_ubuntu_guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "서버 접속 가이드(Linux) - 공인IP 있을 때",
 "tags": "linux",
 "keywords": "Public IP",

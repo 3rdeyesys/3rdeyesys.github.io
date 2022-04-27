@@ -21,16 +21,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="canonical" href="https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
-<meta property="og:image" content="https://docs.3rdeyesys.com/image/compute/lemp/ncloud_server_nginx_install_setting_guide_centos_13.png" />
+<meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/lemp/ncloud_server_nginx_install_setting_guide_centos_13.png" />
 <meta property="og:image:alt" content="Ncloud CentOS 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-04-25T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://docs.3rdeyesys.com/image/compute/lemp/ncloud_server_nginx_install_setting_guide_centos_13.png" />
+<meta property="twitter:image" content="https://docs.3rdeyesys.com/images/compute/lemp/ncloud_server_nginx_install_setting_guide_centos_13.png" />
 <meta name="twitter:image:alt" content="Ncloud CentOS 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법" />
 <meta property="twitter:title" content="CentOS에서 NginX 설치, 설정하는 방법" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud CentOS 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법입니다","headline":"CentOS에서 NginX 설치, 설정하는 방법","image":{"alt":"Ncloud CentOS 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법","url":"https://docs.3rdeyesys.com/image/compute/lemp/ncloud_server_nginx_install_setting_guide_centos_13.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud CentOS 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법입니다","headline":"CentOS에서 NginX 설치, 설정하는 방법","image":{"alt":"Ncloud CentOS 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법","url":"https://docs.3rdeyesys.com/images/compute/lemp/ncloud_server_nginx_install_setting_guide_centos_13.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title>CentOS에서 NginX 설치, 설정하는 방법 | 써드아이시스템 기술문서</title>
@@ -410,7 +410,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li class="subfolders">
-              <a title="LEMP" href="#">LEMP</a>
+              <a title="NginX" href="#">NginX</a>
               <ul>                  
                   
                   
@@ -422,6 +422,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   <li><a title="Ubuntu에서 NginX 설치, 설정" href="/compute/ncloud_compute_lemp_nginx_install_setting_ubuntu_guide.html">Ubuntu에서 NginX 설치, 설정</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="CentOS NginX SSL 인증서 설정" href="/compute/ncloud_compute_lemp_nginx_ssl_setting_centos_guide.html">CentOS NginX SSL 인증서 설정</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Ubuntu NginX SSL 인증서 설정" href="/compute/ncloud_compute_lemp_nginx_ssl_setting_ubuntu_guide.html">Ubuntu NginX SSL 인증서 설정</a></li>
                   
                   
                   
@@ -1144,7 +1156,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
-                  <li><a title="CentOS pages" href="/tag/tag_centOS.html">CentOS pages</a></li>
+                  <li><a title="CentOS pages" href="/tag/tag_centos.html">CentOS pages</a></li>
                   
                   
                   
@@ -1524,13 +1536,14 @@ $("#toc_onoff").click(function() {
     
 
    <h2 id="개요">개요</h2>
-<p>네이버 클라우드 CentOS 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.</p>
+<p>Ncloud (네이버 클라우드) CentOS 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.</p>
 
 <h2 id="서버-환경">서버 환경</h2>
-<ul>
-  <li>OS: CentOS 7.8</li>
-  <li>NginX: NginX 1.21.5</li>
-</ul>
+
+<div class="bs-callout-v2 bs-callout-v2-secondary bs-callout-v2-level-2">
+⁃ OS: CentOS 7.8 <br />
+⁃ NginX: NginX 1.21.5 
+</div>
 
 <h2 id="yum-유틸리티-설치">yum 유틸리티 설치</h2>
 <p>yum으로 NginX를 설치하기 전에 yum-utils를 먼저 설치합니다. 이미 설치 되어 있을 경우에는 아래와 같이 설치되어 있다는 메시지가 출력됩니다.</p>
@@ -1754,7 +1767,7 @@ stable 버전을 설치할 경우에는 다음 명령어는 건너띄어도 되�
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2022-04-25<br/> Site last generated: 2022-04-26 <br />
+        <span>Page last updated:</span> 2022-04-25<br/> Site last generated: 2022-04-27 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
