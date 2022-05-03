@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 03 May 2022 15:23:55 +0900</pubDate>
-        <lastBuildDate>Tue, 03 May 2022 15:23:55 +0900</lastBuildDate>
+        <pubDate>Tue, 03 May 2022 16:05:42 +0900</pubDate>
+        <lastBuildDate>Tue, 03 May 2022 16:05:42 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -21,7 +21,7 @@ Ncloud Cloud DB for PostgreSQL이 지원하는 클라우드 환경은 다음과 
 - DB 엔진 버전: PostgreSQL 13.3
 
 ## DB 생성
-[VPC] - [Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.
+[Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-public-domain-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Ncloud Cloud DB for PostgreSQL 생성 후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
 
@@ -79,7 +79,7 @@ DB 생성이 완료되면 아래와 같이 DB의 상세 정보를 확인할 수 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-public-domain-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인 설정 완료&quot; caption=&quot;&quot; %}
 
 ## ACG 설정
-[VPC] - [Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.
+[Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-public-domain-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기&quot; caption=&quot;&quot; %}
 
@@ -113,7 +113,16 @@ C:\Users\{Windows User Account}\AppData\Local\Programs\pgAdmin 4\v6
 ### pgAdmin Master Password 입력
 pgAdmin 4 접속/관리를 위한 Master Password를 입력합니다. DB와는 관계없고 단지 pgAdmin 클라이언트를 위한 패스워드입니다.
 
+{% include callout_v2.html type=&quot;danger&quot; level=&quot;3&quot; content=&quot;
+Master Password는 반드시 입력해야 합니다. 여기서 설정하지 않으면 `internal server error: crypt key is missing` 에러가 발생하면서 서버 관리를 할 수 없게 됩니다.
+&quot; %}
+
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-public-domain-14.png&quot; width=&quot;834&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Master Password 입력&quot; caption=&quot;&quot; %}
+
+### pgAdmin Master Password 재설정
+이후에 혹시 Master Password를 잊어버렸을 경우에는 아래와 같이 [**Reset Master Password**] 기능을 이용해 재설정 할 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-public-domain-27.png&quot; width=&quot;834&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Master Password 재설정&quot; caption=&quot;&quot; %}
 
 ### 서버 추가
 pgAdmin에서 [Add New Server] 버튼을 클릭해서 위에서 생성했던 DB서버를 연결합니다.
@@ -276,7 +285,7 @@ Cloud DB for PostgreSQL은 현재 다음의 3가지 방법으로 접근 가능�
 &quot; %}
 
 ## DB 생성
-[VPC] - [Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.
+[Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
@@ -331,7 +340,7 @@ VPC 환경에서 Linux Server를 생성하는 방법은 다음 문서를 참고�
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 접속용 Sever 생성&quot; caption=&quot;&quot; %}
 
 ## ACG 설정
-[VPC] - [Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.
+[Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 리스트&quot; caption=&quot;&quot; %}
 
@@ -557,7 +566,7 @@ Cloud DB for PostgreSQL은 현재 다음의 3가지 방법으로 접근 가능�
 &quot; %}
 
 ## DB 생성
-[VPC] - [Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.
+[Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
@@ -612,7 +621,7 @@ VPC 환경에서 Linux Server를 생성하는 방법은 다음 문서를 참고�
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL 접속용 Sever 생성&quot; caption=&quot;&quot; %}
 
 ## ACG 설정
-[VPC] - [Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.
+[Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-postgresql-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 리스트&quot; caption=&quot;&quot; %}
 

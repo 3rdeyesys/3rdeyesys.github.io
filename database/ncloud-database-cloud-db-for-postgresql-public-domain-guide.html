@@ -1578,7 +1578,7 @@ $("#toc_onoff").click(function() {
 </ul>
 
 <h2 id="db-생성">DB 생성</h2>
-<p>[VPC] - [Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.</p>
+<p>[Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.</p>
 
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-01.png" alt="Ncloud VPC환경에서 Ncloud Cloud DB for PostgreSQL 생성 후 Public 도메인으로 접속하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
 
@@ -1641,7 +1641,7 @@ $("#toc_onoff").click(function() {
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-09.png" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인 설정 완료" style="width: 845px; " /><figcaption></figcaption></figure>
 
 <h2 id="acg-설정">ACG 설정</h2>
-<p>[VPC] - [Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.</p>
+<p>[Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.</p>
 
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-10.png" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기" style="width: 845px; " /><figcaption></figcaption></figure>
 
@@ -1675,7 +1675,16 @@ $("#toc_onoff").click(function() {
 <h3 id="pgadmin-master-password-입력">pgAdmin Master Password 입력</h3>
 <p>pgAdmin 4 접속/관리를 위한 Master Password를 입력합니다. DB와는 관계없고 단지 pgAdmin 클라이언트를 위한 패스워드입니다.</p>
 
+<div class="bs-callout-v2 bs-callout-v2-danger bs-callout-v2-level-3">
+Master Password는 반드시 입력해야 합니다. 여기서 설정하지 않으면 <code class="language-plaintext highlighter-rouge">internal server error: crypt key is missing</code> 에러가 발생하면서 서버 관리를 할 수 없게 됩니다.
+</div>
+
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-14.png" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Master Password 입력" style="width: 834px; " /><figcaption></figcaption></figure>
+
+<h3 id="pgadmin-master-password-재설정">pgAdmin Master Password 재설정</h3>
+<p>이후에 혹시 Master Password를 잊어버렸을 경우에는 아래와 같이 [<strong>Reset Master Password</strong>] 기능을 이용해 재설정 할 수 있습니다.</p>
+
+<figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-27.png" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Master Password 재설정" style="width: 834px; " /><figcaption></figcaption></figure>
 
 <h3 id="서버-추가">서버 추가</h3>
 <p>pgAdmin에서 [Add New Server] 버튼을 클릭해서 위에서 생성했던 DB서버를 연결합니다.</p>
