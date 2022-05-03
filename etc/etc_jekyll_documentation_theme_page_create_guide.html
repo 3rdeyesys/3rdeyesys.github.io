@@ -352,6 +352,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li class="subfolders">
+              <a title="AutoScaling" href="#">AutoScaling</a>
+              <ul>                  
+                  
+                  
+                  
+                  <li><a title="Classic 환경 AutoScaling 설정" href="/compute/ncloud_compute_autoscaling_classic_guide.html">Classic 환경 AutoScaling 설정</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Auto Scaling 서비스 제한사항" href="/compute/ncloud_compute_autoscaling_limit.html">Auto Scaling 서비스 제한사항</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="AutoScaling 이벤트 설정 방법" href="/compute/ncloud_compute_autoscaling_event_setting.html">AutoScaling 이벤트 설정 방법</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
               <a title="Cloud Functions" href="#">Cloud Functions</a>
               <ul>                  
                   
@@ -720,14 +747,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="CentOS MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS MySQL Object Storage로 백업</a></li>          
+          <li><a title="CentOS MySQL Object Storage 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS MySQL Object Storage 백업</a></li>          
                     
           
           
           
           
           
-          <li><a title="Ubuntu MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu MySQL Object Storage로 백업</a></li>          
+          <li><a title="Ubuntu MySQL Object Storage 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu MySQL Object Storage 백업</a></li>          
                     
           
           
@@ -784,6 +811,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li><a title="Cloud DB PostgreSQL 생성 | Ubuntu" href="/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html">Cloud DB PostgreSQL 생성 | Ubuntu</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="Cloud DB PostgreSQL Public 도메인" href="/database/ncloud-database-cloud-db-for-postgresql-public-domain-guide.html">Cloud DB PostgreSQL Public 도메인</a></li>          
                     
           
           
@@ -1742,20 +1776,20 @@ using (HMACSHA256 sha256 = new HMACSHA256(hmac_key))
 <h3 id="callout-version-1">CallOut Version-1</h3>
 <p>기본으로 제공되는 CallOut Version-1은 다음과 같이 사용합니다.</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>callout.html<span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s2">"danger"</span><span class="w"> </span><span class="na">content</span><span class="o">=</span><span class="s2">"This is my **danger** type callout"</span><span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>callout_v2.html<span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s2">"danger"</span><span class="w"> </span><span class="na">content</span><span class="o">=</span><span class="s2">"This is my **danger** type callout"</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div></div>
 <p>사용 가능한 종류는 다음과 같습니다.</p>
-<div class="bs-callout bs-callout-danger bs-callout-level-">This is my <strong>danger</strong> type callout</div>
+<div class="bs-callout-v2 bs-callout-v2-danger ">This is my <strong>danger</strong> type callout</div>
 
-<div class="bs-callout bs-callout-default bs-callout-level-">This is my <strong>default</strong> type callout</div>
+<div class="bs-callout-v2 bs-callout-v2-default ">This is my <strong>default</strong> type callout</div>
 
-<div class="bs-callout bs-callout-primary bs-callout-level-">This is my <strong>primary</strong> type callout</div>
+<div class="bs-callout-v2 bs-callout-v2-primary ">This is my <strong>primary</strong> type callout</div>
 
-<div class="bs-callout bs-callout-success bs-callout-level-">This is my <strong>success</strong> type callout</div>
+<div class="bs-callout-v2 bs-callout-v2-success ">This is my <strong>success</strong> type callout</div>
 
-<div class="bs-callout bs-callout-info bs-callout-level-">This is my <strong>info</strong> type callout</div>
+<div class="bs-callout-v2 bs-callout-v2-info ">This is my <strong>info</strong> type callout</div>
 
-<div class="bs-callout bs-callout-warning bs-callout-level-">This is my <strong>warning</strong> type callout</div>
+<div class="bs-callout-v2 bs-callout-v2-warning ">This is my <strong>warning</strong> type callout</div>
 
 <h3 id="callout-version-2">CallOut Version-2</h3>
 <p>기본으로 제공되는 Version-1에서 스타일을 변경한 CallOut Version-2는 다음과 같이 level 속성도 추가해서 사용합니다. level의 기본 값은 3입니다.</p>
@@ -1988,7 +2022,7 @@ using (HMACSHA256 sha256 = new HMACSHA256(hmac_key))
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2022-03-07<br/> Site last generated: 2022-04-27 <br />
+        <span>Page last updated:</span> 2022-03-07<br/> Site last generated: 2022-05-03 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>

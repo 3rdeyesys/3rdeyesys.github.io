@@ -160,6 +160,17 @@
 
 
 {
+"title": "Cloud DB for PostgreSQL 생성 후 Public 도메인으로 접속하기",
+"tags": "databaseclouddbvpc",
+"keywords": "Database, Postgre",
+"url": "/database/ncloud-database-cloud-db-for-postgresql-public-domain-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "MySQL GTID Replication 생성 상세 가이드",
 "tags": "databasebackupmysql",
 "keywords": "Database, 복제, Backup, 이중화, 고가용성, Master, Slave",

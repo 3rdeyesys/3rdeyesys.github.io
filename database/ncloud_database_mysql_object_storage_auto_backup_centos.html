@@ -354,6 +354,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li class="subfolders">
+              <a title="AutoScaling" href="#">AutoScaling</a>
+              <ul>                  
+                  
+                  
+                  
+                  <li><a title="Classic 환경 AutoScaling 설정" href="/compute/ncloud_compute_autoscaling_classic_guide.html">Classic 환경 AutoScaling 설정</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Auto Scaling 서비스 제한사항" href="/compute/ncloud_compute_autoscaling_limit.html">Auto Scaling 서비스 제한사항</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="AutoScaling 이벤트 설정 방법" href="/compute/ncloud_compute_autoscaling_event_setting.html">AutoScaling 이벤트 설정 방법</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
               <a title="Cloud Functions" href="#">Cloud Functions</a>
               <ul>                  
                   
@@ -722,14 +749,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li class="active"><a title="CentOS MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS MySQL Object Storage로 백업</a></li>
+          <li class="active"><a title="CentOS MySQL Object Storage 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS MySQL Object Storage 백업</a></li>
                     
           
           
           
           
           
-          <li><a title="Ubuntu MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu MySQL Object Storage로 백업</a></li>          
+          <li><a title="Ubuntu MySQL Object Storage 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu MySQL Object Storage 백업</a></li>          
                     
           
           
@@ -786,6 +813,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li><a title="Cloud DB PostgreSQL 생성 | Ubuntu" href="/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html">Cloud DB PostgreSQL 생성 | Ubuntu</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="Cloud DB PostgreSQL Public 도메인" href="/database/ncloud-database-cloud-db-for-postgresql-public-domain-guide.html">Cloud DB PostgreSQL Public 도메인</a></li>          
                     
           
           
@@ -1569,7 +1603,7 @@ find <span class="nv">$BACKUP_DIR</span> <span class="nt">-ctime</span> +7 <span
 혹시 이미 pip가 설치되어 있다면 아래에 있는 <a href="#awscliinstall">AWS CLI설치</a>로 바로 이동하시면 되겠습니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>python-pip
 </code></pre></div></div>
-<div class="bs-callout bs-callout-danger bs-callout-level-1"><strong>CentOS 6.x</strong> 버전은 기술지원 종료로 인해 위 방법대로 설치가 되지 않습니다. 아래 문서의 방법대로 설치하면 됩니다.
+<div class="bs-callout-v2 bs-callout-v2-danger bs-callout-v2-level-3"><strong>CentOS 6.x</strong> 버전은 기술지원 종료로 인해 위 방법대로 설치가 되지 않습니다. 아래 문서의 방법대로 설치하면 됩니다.
 <br /><a href="/compute/ncloud_compute_server_pip_python_install_centos6.html" target="_blank" style="word-break:break-all;">CentOS6에서 pip - Python 설치하기</a></div>
 
 <h2 id="awscliinstall">AWS CLI 설치</h2>
@@ -1625,7 +1659,7 @@ find <span class="nv">$BACKUP_DIR</span> <span class="nt">-ctime</span> +7 <span
 aws <span class="nt">--endpoint-url</span><span class="o">=</span>https://kr.object.ncloudstorage.com s3 <span class="nb">sync</span> /data_backup/ s3://data-back-up/
 </code></pre></div></div>
 
-<div class="bs-callout bs-callout-info bs-callout-level-1">여기서 db 폴더만 백업-동기화를 하는 것이 아닌 상위 폴더인 /data_backup/ 폴더부터 백업-동기화를 한 이유는 이후에 db 말고도 개발소스 파일 등도 압축해서 백업하기 위해서입니다.</div>
+<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-1">여기서 db 폴더만 백업-동기화를 하는 것이 아닌 상위 폴더인 /data_backup/ 폴더부터 백업-동기화를 한 이유는 이후에 db 말고도 개발소스 파일 등도 압축해서 백업하기 위해서입니다.</div>
 
 <h2 id="스케쥴링을-위한-crontab-설정">스케쥴링을 위한 crontab 설정</h2>
 <p>이제 마지막으로 완성된 스크립트를 일정한 시간, 여기서는 매일 새벽 6시에 실행되도록 설정합니다.</p>
@@ -1713,7 +1747,7 @@ aws <span class="nt">--endpoint-url</span><span class="o">=</span>https://kr.obj
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2021-10-08<br/> Site last generated: 2022-04-27 <br />
+        <span>Page last updated:</span> 2021-10-08<br/> Site last generated: 2022-05-03 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>

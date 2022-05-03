@@ -352,6 +352,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li class="subfolders">
+              <a title="AutoScaling" href="#">AutoScaling</a>
+              <ul>                  
+                  
+                  
+                  
+                  <li><a title="Classic 환경 AutoScaling 설정" href="/compute/ncloud_compute_autoscaling_classic_guide.html">Classic 환경 AutoScaling 설정</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Auto Scaling 서비스 제한사항" href="/compute/ncloud_compute_autoscaling_limit.html">Auto Scaling 서비스 제한사항</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="AutoScaling 이벤트 설정 방법" href="/compute/ncloud_compute_autoscaling_event_setting.html">AutoScaling 이벤트 설정 방법</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
               <a title="Cloud Functions" href="#">Cloud Functions</a>
               <ul>                  
                   
@@ -720,14 +747,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="CentOS MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS MySQL Object Storage로 백업</a></li>          
+          <li><a title="CentOS MySQL Object Storage 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_centos.html">CentOS MySQL Object Storage 백업</a></li>          
                     
           
           
           
           
           
-          <li><a title="Ubuntu MySQL Object Storage로 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu MySQL Object Storage로 백업</a></li>          
+          <li><a title="Ubuntu MySQL Object Storage 백업" href="/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html">Ubuntu MySQL Object Storage 백업</a></li>          
                     
           
           
@@ -784,6 +811,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li><a title="Cloud DB PostgreSQL 생성 | Ubuntu" href="/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html">Cloud DB PostgreSQL 생성 | Ubuntu</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="Cloud DB PostgreSQL Public 도메인" href="/database/ncloud-database-cloud-db-for-postgresql-public-domain-guide.html">Cloud DB PostgreSQL Public 도메인</a></li>          
                     
           
           
@@ -1536,10 +1570,10 @@ $("#toc_onoff").click(function() {
 Classic에서는 Monitoring 서비스와 Cloud Insite(Monitoring) 서비스 이렇게 2가지 서비스가 있는데 여기서는 Monitoring 서비스를 설정하는 방법에 대해 정리해보겠습니다.</p>
 
 <h3 id="기본-모니터링-vs-상세-모니터링">기본 모니터링 vs 상세 모니터링</h3>
-<div class="bs-callout bs-callout-info bs-callout-level-1"><strong>기본 모니터링</strong> : 네이버 클라우드에서 서버를 생성하면 별다른 설정을 하지 않아도 CPU, Memory 사용 등의 기본적인 항목들의 데이터를 확인할 수 있는데 이를 기본 모니터링이라고 하며 5분 단위의 데이터를 확인할 수 있습니다.
+<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-1"><strong>기본 모니터링</strong> : 네이버 클라우드에서 서버를 생성하면 별다른 설정을 하지 않아도 CPU, Memory 사용 등의 기본적인 항목들의 데이터를 확인할 수 있는데 이를 기본 모니터링이라고 하며 5분 단위의 데이터를 확인할 수 있습니다.
   확인 가능한 데이터는 [CPU Used], [Memory Used (except cache/buffer)], [Disk Used], [Swap Used], [Network In (bps)], [Network Out (bps)], [Disk Read (bytes)], [Disk Write (bytes)] 입니다.</div>
 
-<div class="bs-callout bs-callout-success bs-callout-level-1"><strong>상세 모니터링</strong> : 기본 모니터링보다 훨씬 많고 상세한 데이터를 확인하고, 상태 감시와 통보 알람 설정을 통해 지정한 수치 이상의 상태가 되면 문자나 메일로 통보 받을 수 있는 모니터링 서비스이며, 1분 단위의 데이터를 확인할 수 있습니다. 
+<div class="bs-callout-v2 bs-callout-v2-success bs-callout-v2-level-1"><strong>상세 모니터링</strong> : 기본 모니터링보다 훨씬 많고 상세한 데이터를 확인하고, 상태 감시와 통보 알람 설정을 통해 지정한 수치 이상의 상태가 되면 문자나 메일로 통보 받을 수 있는 모니터링 서비스이며, 1분 단위의 데이터를 확인할 수 있습니다. 
   네이버 클라우드 [Console] - [Monitoring] 서비스가 바로 [상세 모니터링]입니다. 또한 [Monitoring] 서비스에서는 Auto Scaling 그룹에 대한 이벤트 설정도 할 수 있습니다.</div>
 
 <h2 id="기본-모니터링">기본 모니터링</h2>
@@ -1698,7 +1732,7 @@ Event를 발생 하게 하는 조건을 감시설정이라 하며 해당 Event�
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2021-12-29<br/> Site last generated: 2022-04-27 <br />
+        <span>Page last updated:</span> 2021-12-29<br/> Site last generated: 2022-05-03 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
