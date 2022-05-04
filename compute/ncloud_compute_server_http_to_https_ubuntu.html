@@ -228,7 +228,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </header>
 <!-- Page Content -->
+
 <div class="container">
+
   <div id="main">
     <!-- Content Row -->
     <div class="row">
@@ -1522,7 +1524,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-<div class="post-content">
+<div class="post-content" >
 
    
    
@@ -1580,21 +1582,21 @@ $("#toc_onoff").click(function() {
 <h2 id="apache-conf-파일-수정">Apache conf 파일 수정</h2>
 
 <p><strong>/etc/apache2/sites-enabled/000-default.conf</strong> 의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RewriteEngine On
-RewriteCond %<span class="o">{</span>HTTPS<span class="o">}</span> <span class="o">!</span>on
-RewriteRule ^<span class="o">(</span>.<span class="k">*</span><span class="o">)</span><span class="nv">$ </span>https://%<span class="o">{</span>HTTP_HOST<span class="o">}</span><span class="nv">$1</span> <span class="o">[</span>R,L]
+<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">RewriteEngine</span> <span class="ss">On</span>
+<span class="nc">RewriteCond</span> %{HTTPS} !on
+<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}$1 [R,L]
 </code></pre></div></div>
 
 <p>000-default.conf 파일에 실제로 적용하면 다음과 비슷한 모습이 되겠습니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;VirtualHost <span class="k">*</span>:80&gt;
-	DocumentRoot <span class="s2">"/ncp/data/www/"</span>
-	ServerName www.test.com
+<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nl">VirtualHost</span><span class="sr"> *:80</span><span class="p">&gt;
+</span>	<span class="nc">DocumentRoot</span> "/ncp/data/www/"
+	<span class="nc">ServerName</span> www.test.com
 
-	RewriteEngine On
-	RewriteCond %<span class="o">{</span>HTTPS<span class="o">}</span> <span class="o">!</span>on
-	RewriteRule ^<span class="o">(</span>.<span class="k">*</span><span class="o">)</span><span class="nv">$ </span>https://%<span class="o">{</span>HTTP_HOST<span class="o">}</span><span class="nv">$1</span> <span class="o">[</span>R,L]
-&lt;/VirtualHost&gt;
-</code></pre></div></div>
+	<span class="nc">RewriteEngine</span> <span class="ss">On</span>
+	<span class="nc">RewriteCond</span> %{HTTPS} !on
+	<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}$1 [R,L]
+<span class="p">&lt;/</span><span class="nl">VirtualHost</span><span class="p">&gt;
+</span></code></pre></div></div>
 
 <h2 id="apache-재시작">Apache 재시작</h2>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl restart apache2
@@ -1617,17 +1619,17 @@ Dec 04 16:09:44 test-lamp apachectl[11924]: Invalid <span class="nb">command</sp
 </code></pre></div></div>
 
 <p>위 오류 메시지에 나온 /etc/apache2/sites-enabled/000-default.conf 파일을 찾아가서 SSLEngine을 확인해보면 다음과 같습니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;VirtualHost <span class="k">*</span>:443&gt;
-    ServerName www.test.com
-    ServerAdmin web@test.com
+<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nl">VirtualHost</span><span class="sr"> *:443</span><span class="p">&gt;
+</span>    <span class="nc">ServerName</span> www.test.com
+    <span class="nc">ServerAdmin</span> web@test.com
 
-    <span class="o">{==</span>SSLEngine <span class="nv">on</span><span class="o">==}</span>
-    SSLCertificateFile /etc/<span class="k">******</span>/server.crt
-    SSLCertificateKeyFile /etc/<span class="k">******</span>/server.key
+    <span class="err">{==</span><span class="nc">SSLEngine</span> on==}
+    <span class="nc">SSLCertificateFile</span> /etc/******/server.crt
+    <span class="nc">SSLCertificateKeyFile</span> /etc/******/server.key
 
     <span class="c">###중략###</span>
-&lt;/VirtualHost&gt;
-</code></pre></div></div>
+<span class="p">&lt;/</span><span class="nl">VirtualHost</span><span class="p">&gt;
+</span></code></pre></div></div>
 
 <p>확인해보면 SSLEngine on 명령어가 제대로 동작하지 못해서 생긴 문제라는 것을 알 수 있습니다.   <br />
 즉, SSL 모듈이 제대로 활성화 되지 않았기에 활성화 해주면 문제가 해결됩니다.<br />
@@ -1690,7 +1692,7 @@ Dec 04 16:09:44 test-lamp apachectl[11924]: Invalid <span class="nb">command</sp
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2020-12-09<br/> Site last generated: 2022-05-03 <br />
+        <span>Page last updated:</span> 2020-12-09<br/> Site last generated: 2022-05-04 <br />
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
