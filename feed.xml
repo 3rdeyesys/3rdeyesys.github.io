@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 27 May 2022 17:10:32 +0900</pubDate>
-        <lastBuildDate>Fri, 27 May 2022 17:10:32 +0900</lastBuildDate>
+        <pubDate>Fri, 27 May 2022 17:18:30 +0900</pubDate>
+        <lastBuildDate>Fri, 27 May 2022 17:18:30 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -117,7 +117,8 @@ kubectl의 버전 확인이 필요한 경우 다음 명령어를 사용하시면
 
 {% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_05.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
 
-kubectl을 실행해 Kubernetes에 접속하고 제어하는 방법은 [가이드 보기] 버튼 클릭하면 아래와 같이 자세히 확인할 수 있습니다.
+kubectl을 실행해 Kubernetes에 접속하고 제어하는 방법은 [가이드 보기] 버튼 클릭하면  
+아래와 같이 [설치 가이드 바로가기]와 [IAM 인증 가이드] 링크에서 자세히 확인할 수 있습니다.
 
 {% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_06.jpg&quot; width=&quot;690&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
 
