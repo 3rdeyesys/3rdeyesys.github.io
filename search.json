@@ -864,6 +864,17 @@
 
 
 {
+"title": "STS 기간 제한 임시 API AccessKey 발급하기",
+"tags": "accountapitoken",
+"keywords": "account, sub account, Secure Token Service,",
+"url": "/management/ncloud-management-sub-account-sts-temporary-accesskey-create-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Web service Monitoring System 사용 가이드",
 "tags": "monitoringlog",
 "keywords": "Log, 홈페이지",
@@ -1361,12 +1372,14 @@
 
 
 
+
+
 {
 "title": "Updates",
 "tags": "",
 "keywords": "news, updates, release notes, announcements",
 "url": "/update/update.html",
-"summary": "최근에 업데이트 된 기술문서 10개 리스트입니다."
+"summary": ""
 }
 
 
