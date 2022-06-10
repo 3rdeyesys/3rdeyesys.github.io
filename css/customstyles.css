@@ -1558,3 +1558,21 @@ height: 250px;
         display:none;
     }
 }
+
+.new_dot_lv_1:after {
+    content: '\2022';
+    font-size:20px;
+    color:red;
+    vertical-align: top;
+    margin-left:3px;
+    top:-10px;
+}
+
+.new_dot_lv_2:after {
+    content: '\2022';
+    font-size:30px;
+    color:red;
+    vertical-align: top;
+    margin-left:3px;
+    top:-10px;
+}

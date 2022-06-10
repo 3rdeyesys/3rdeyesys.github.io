@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 08 Jun 2022 17:42:54 +0900</pubDate>
-        <lastBuildDate>Wed, 08 Jun 2022 17:42:54 +0900</lastBuildDate>
+        <pubDate>Fri, 10 Jun 2022 10:25:18 +0900</pubDate>
+        <lastBuildDate>Fri, 10 Jun 2022 10:25:18 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -38,7 +38,7 @@ STS로 생성하는 임시 Access Key의 권한은 **Sub Account의 권한을 �
 &quot;%}
 
 Sub Account를 생성하는 방법은 아래 가이드 문서를 참고하시면 됩니다.
-- Sub Account 생성 가이드: &lt;a href=&quot;/management/ncloud_management_sub_account_guide.html&quot; target=&quot;_blank&quot; style=&quot;work-break:break-all&quot;&gt;https://docs.3rdeyesys.com/management/ncloud_management_sub_account_guide.html&lt;/a&gt;  
+- Sub Account 생성 가이드: &lt;a href=&quot;/management/ncloud_management_sub_account_guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;https://docs.3rdeyesys.com/management/ncloud_management_sub_account_guide.html&lt;/a&gt;  
 
 
 {% include image.html file=&quot;management/ncloud-management-sub-account-sts-temporary-accesskey-create-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Sub Account의 STS (Secure Token Service) 기능을 이용해 기간 제한 임시 API AccessKey 발급하는 방법&quot; caption=&quot;&quot; %}
@@ -117,9 +117,9 @@ STS API를 이용해 기간 제한이 있는 임시 Access Key를 발급 받으�
 
 ### API 호출 방법
 Ncloud API 호출 방법에 대한 기본 가이드는 아래 문서를 확인하시면 됩니다.
-- PHP로 Ncloud API 호출 방법: &lt;a href=&quot;/api/ncloud_api_call_php_sample.html&quot; target=&quot;_blank&quot; style=&quot;work-break:break-all&quot;&gt;https://docs.3rdeyesys.com/api/ncloud_api_call_php_sample.html&lt;/a&gt;
-- C#으로 Ncloud API 호출 방법: &lt;a href=&quot;/api/ncloud_api_call_csharp_sample.html&quot; target=&quot;_blank&quot; style=&quot;work-break:break-all&quot;&gt;https://docs.3rdeyesys.com/api/ncloud_api_call_csharp_sample.html&lt;/a&gt;
-- Python으로 Ncloud API 호출 방법: &lt;a href=&quot;/api/ncloud_api_call_python_sample.html&quot; target=&quot;_blank&quot; style=&quot;work-break:break-all&quot;&gt;https://docs.3rdeyesys.com/api/ncloud_api_call_python_sample.html&lt;/a&gt;
+- PHP로 Ncloud API 호출 방법: &lt;a href=&quot;/api/ncloud_api_call_php_sample.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;https://docs.3rdeyesys.com/api/ncloud_api_call_php_sample.html&lt;/a&gt;
+- C#으로 Ncloud API 호출 방법: &lt;a href=&quot;/api/ncloud_api_call_csharp_sample.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;https://docs.3rdeyesys.com/api/ncloud_api_call_csharp_sample.html&lt;/a&gt;
+- Python으로 Ncloud API 호출 방법: &lt;a href=&quot;/api/ncloud_api_call_python_sample.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;https://docs.3rdeyesys.com/api/ncloud_api_call_python_sample.html&lt;/a&gt;
 
 ### 임시 Access Key 발급 PHP 샘플 예제
 ``` php
