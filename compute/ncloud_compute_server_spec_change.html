@@ -15,7 +15,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="keywords" content="classic, vpc,  Spec, Compace, Standard">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="서버 스펙 변경" />
+<meta property="og:title" content="Ncloud 서버 스펙 변경 제한 사항" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:description" content="Ncloud 서버들의 스펙을 변경하는 방법과 제한사항에 대한 내용입니다" />
 <link rel="canonical" href="https://docs.3rdeyesys.com/compute/ncloud_compute_server_spec_change.html" />
@@ -24,12 +24,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-07-02T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="서버 스펙 변경" />
+<meta property="twitter:title" content="Ncloud 서버 스펙 변경 제한 사항" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud 서버들의 스펙을 변경하는 방법과 제한사항에 대한 내용입니다","headline":"서버 스펙 변경","url":"https://docs.3rdeyesys.com/compute/ncloud_compute_server_spec_change.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud 서버들의 스펙을 변경하는 방법과 제한사항에 대한 내용입니다","headline":"Ncloud 서버 스펙 변경 제한 사항","url":"https://docs.3rdeyesys.com/compute/ncloud_compute_server_spec_change.html"}</script>
 <!-- End Jekyll SEO tag -->
 
-<title>서버 스펙 변경 | 써드아이시스템 기술문서</title>
+<title>Ncloud 서버 스펙 변경 제한 사항 | 써드아이시스템 기술문서</title>
 <link rel="stylesheet" href="/css/syntax.css">
 
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
@@ -360,6 +360,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   <li><a title="Classic 환경 AutoScaling 설정" href="/compute/ncloud_compute_autoscaling_classic_guide.html">Classic 환경 AutoScaling 설정</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="VPC 환경 AutoScaling 설정" href="/compute/ncloud-compute-autoscaling-vpc-guide.html">VPC 환경 AutoScaling 설정</a></li>
                   
                   
                   
@@ -1531,7 +1537,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="col-md-9" id="tg-sb-content">
             <div class="post-header">
 
-   <h1 class="post-title-main">서버 스펙 변경</h1>
+   <h1 class="post-title-main">Ncloud 서버 스펙 변경 제한 사항</h1>
 
 </div>
 
@@ -1547,42 +1553,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    
 
     
-    
-<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
-<script>
-$( document ).ready(function() {
-  // Handler for .ready() called.
-
-$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
-
-/* this offset helps account for the space taken up by the floating toolbar. */
-$('#toc').on('click', 'a', function() {
-  var target = $(this.getAttribute('href'))
-    , scroll_target = target.offset().top
-
-  $(window).scrollTop(scroll_target - 10);
-  return false
-});
-
-$("#toc_onoff").click(function() {  
-        $("#toc").toggle();
-        $("#tg-toc-icon").toggleClass('fa-toggle-on');
-        $("#tg-toc-icon").toggleClass('fa-toggle-off');
-
-});
-
-});
-</script>
-
-<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
-<div id="toc"></div>
-
-
-
-    
 
    <h2 id="개요">개요</h2>
-<p>네이버 클라우드에서는 기본적으로 서버 타입 간의 스펙 변경을 지원하지 않고, 동일한 타입 내에서의 스펙 변경만 지원합니다.</p>
+<p>Ncloud (네이버 클라우드)에서는 기본적으로 서버 타입 간의 스펙 변경을 지원하지 않고, 동일한 타입 내에서의 스펙 변경만 지원합니다.</p>
 
 <div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">다른 타입의 스펙으로 변경하려면 [내 서버 이미지] 기능을 이용해서 서버 이미지를 생성한 다음, 다른 타입으로 서버를 새로 만들어야 합니다. 이때 <strong>IP 주소는 변경</strong>됩니다.</div>
 
@@ -1644,7 +1617,8 @@ $("#toc_onoff").click(function() {
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2021-07-02<br/> Site last generated: 2022-06-10 <br />
+        Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
+        <span>Page last updated:</span> 2021-07-02<br/> Site last generated: 2022-06-21 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>

@@ -365,6 +365,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  <li><a title="VPC 환경 AutoScaling 설정" href="/compute/ncloud-compute-autoscaling-vpc-guide.html">VPC 환경 AutoScaling 설정</a></li>
+                  
+                  
+                  
+                  
+                  
                   <li><a title="Auto Scaling 서비스 제한사항" href="/compute/ncloud_compute_autoscaling_limit.html">Auto Scaling 서비스 제한사항</a></li>
                   
                   
@@ -1586,11 +1592,17 @@ $("#toc_onoff").click(function() {
 Classic에서는 Monitoring 서비스와 Cloud Insite(Monitoring) 서비스 이렇게 2가지 서비스가 있는데 여기서는 Monitoring 서비스를 설정하는 방법에 대해 정리해보겠습니다.</p>
 
 <h3 id="기본-모니터링-vs-상세-모니터링">기본 모니터링 vs 상세 모니터링</h3>
-<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-1"><strong>기본 모니터링</strong> : 네이버 클라우드에서 서버를 생성하면 별다른 설정을 하지 않아도 CPU, Memory 사용 등의 기본적인 항목들의 데이터를 확인할 수 있는데 이를 기본 모니터링이라고 하며 5분 단위의 데이터를 확인할 수 있습니다.
-  확인 가능한 데이터는 [CPU Used], [Memory Used (except cache/buffer)], [Disk Used], [Swap Used], [Network In (bps)], [Network Out (bps)], [Disk Read (bytes)], [Disk Write (bytes)] 입니다.</div>
+<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-1"><strong>기본 모니터링</strong> : 네이버 클라우드에서 서버를 생성하면 별다른 설정을 하지 않아도 CPU, Memory 사용 등의 기본적인 항목들의 데이터를 확인할 수 있는데 이를 기본 모니터링이라고 하며 <strong>5분 단위의 데이터를 확인</strong>할 수 있습니다.
+  확인 가능한 데이터는 다음과 같습니다. <br />
+⁃ [CPU Used] <br />
+⁃ [Memory Used (except cache/buffer)] <br />
+⁃ [Disk Used], [Disk Read (bytes)], [Disk Write (bytes)] <br />
+⁃ [Swap Used] <br />
+⁃ [Network In (bps)], [Network Out (bps)] 입니다.</div>
 
-<div class="bs-callout-v2 bs-callout-v2-success bs-callout-v2-level-1"><strong>상세 모니터링</strong> : 기본 모니터링보다 훨씬 많고 상세한 데이터를 확인하고, 상태 감시와 통보 알람 설정을 통해 지정한 수치 이상의 상태가 되면 문자나 메일로 통보 받을 수 있는 모니터링 서비스이며, 1분 단위의 데이터를 확인할 수 있습니다. 
-  네이버 클라우드 [Console] - [Monitoring] 서비스가 바로 [상세 모니터링]입니다. 또한 [Monitoring] 서비스에서는 Auto Scaling 그룹에 대한 이벤트 설정도 할 수 있습니다.</div>
+<div class="bs-callout-v2 bs-callout-v2-success bs-callout-v2-level-1"><strong>상세 모니터링</strong> : 기본 모니터링보다 훨씬 많고 상세한 데이터를 확인하고, 상태 감시와 통보 알람 설정을 통해 지정한 수치 이상의 상태가 되면 문자나 메일로 통보 받을 수 있는 모니터링 서비스이며, <strong>1분 단위의 데이터를 확인</strong>할 수 있습니다. <br />
+⁃ 네이버 클라우드 [Console] - [Monitoring] 서비스가 바로 [상세 모니터링]입니다. <br />
+⁃ 또한 [Monitoring] 서비스에서는 Auto Scaling 그룹에 대한 이벤트 설정도 할 수 있습니다.</div>
 
 <h2 id="기본-모니터링">기본 모니터링</h2>
 <p>아래와 같이 서버 리스트에서 모니터링할 서버를 선택하고 위에 있는 [모니터링] 버튼을 클릭합니다.</p>
@@ -1748,7 +1760,8 @@ Event를 발생 하게 하는 조건을 감시설정이라 하며 해당 Event�
         		
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
-        <span>Page last updated:</span> 2021-12-29<br/> Site last generated: 2022-06-10 <br />
+        Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
+        <span>Page last updated:</span> 2021-12-29<br/> Site last generated: 2022-06-21 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
       </div>
     </div>
