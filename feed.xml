@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 06 Jul 2022 12:03:34 +0900</pubDate>
-        <lastBuildDate>Wed, 06 Jul 2022 12:03:34 +0900</lastBuildDate>
+        <pubDate>Wed, 06 Jul 2022 15:25:39 +0900</pubDate>
+        <lastBuildDate>Wed, 06 Jul 2022 15:25:39 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -139,7 +139,7 @@ ACG를 설정할 때 접근 소스 항목은 보통 IP주소를 입력하게 됩
 먼저 로드밸런서를 생성하고 서버와 연결한 후에 서버측 ACG에 로드밸런서의 접근을 허용하는 방법에 대해 알아보겠습니다.  
 
 ### VPC 환경
-VPC 환경에서 아래와 같이 로드밸런서의 서브넷 네트워크가 [**10.0.4.0/24**] 대역이라고 가정했보겠습니다.
+VPC 환경에서 아래와 같이 로드밸런서의 서브넷 네트워크가 [**10.0.4.0/24**] 대역이라고 가정해보겠습니다.
 
 {% include image.html file=&quot;security/ncloud-security-acg-setting-sample-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시&quot; caption=&quot;&quot; %}
 
@@ -165,8 +165,7 @@ ACG 규칙 설정 화면에서 접근소스에 로드밸런서의 ACG 소스 [**
 
 
 ## 접근소스를 ACG로 설정
-다음으로 ACG를 접근소스로 지정하는 경우도 있습니다. 
-이 중에서 다른 ACG를 접근 소스 항목으로 지정하는 경우는 해당 ACG가 적용된 서버들이 접근할 수 있도록 규칙을 설정하는 것인데, 아래 설정 방법과 예시를 통해 자세히 알아보겠습니다.
+다음으로 다른 ACG를 접근소스로 지정하는 경우도 있습니다. 이것은 해당 ACG가 적용된 서버들이 접근할 수 있도록 규칙을 설정하는 것인데, 아래 설정 방법과 예시를 통해 자세히 알아보겠습니다.
 
 ### VPC 환경
 ACG 규칙 설정에서 접근 소스 항목에 지정하려는 ACG 이름을 일부 입력하면 아래와 같이 적용 가능한 ACG 리스트가 나타는데 그 중에서 지정하려는 ACG를 선택하면 됩니다.
@@ -249,7 +248,7 @@ Classic 환경에서 삭제를 시도하면 [서버가 한대라도 ACG 에 적�
         </item>
         
         <item>
-            <title>ACG(Access Control Group) 가이드</title>
+            <title>Ncloud 방화벽 ACG(Access Control Group) 기본 가이드</title>
             <description>## 개요
 ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스로 AWS에서는 비슷하게 Security Group이라는 것이 있습니다.
 
@@ -283,7 +282,7 @@ ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를
 ##### Inbound (기본 설정)
 {% include image.html file=&quot;security/ncp_security_acg_vpc_inbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
 
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것이 좋습니다.&quot; %}
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
 
 ##### Inbound (권장 설정)
 {% include image.html file=&quot;security/ncp_security_acg_vpc_inbound_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
@@ -294,7 +293,7 @@ ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를
 #### Classic 화면 (기본 설정)
 {% include image.html file=&quot;security/ncp_security_acg_classic.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
 
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것이 좋습니다.&quot; %}
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
 
 #### Classic 화면 (권장 설정)
 {% include image.html file=&quot;security/ncp_security_acg_classic_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
