@@ -26,17 +26,6 @@
 
 
 {
-"title": "내 IP 주소 확인하기",
-"tags": "ipvpcacg",
-"keywords": "IP, IP Address",
-"url": "/etc/etc-find-my-ip-address.html",
-"summary": ""
-}
-,
-
-
-
-{
 "title": "jekyll base-theme 커스터마이징",
 "tags": "markdownjekyllwindows",
 "keywords": "Markdown, Windows, Hugo",
@@ -208,6 +197,17 @@
 "tags": "github",
 "keywords": "깃허브, Tool, Dev, 리포지토리, 깃허브",
 "url": "/dev-tools/ncloud-dev-tools-source-commit-git-client-clone-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "내 IP 주소 확인하기",
+"tags": "ipvpcacg",
+"keywords": "IP, IP Address",
+"url": "/networking/ncloud-networking-find-my-ip-address.html",
 "summary": ""
 }
 ,

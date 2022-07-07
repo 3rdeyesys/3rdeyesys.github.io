@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 07 Jul 2022 17:14:28 +0900</pubDate>
-        <lastBuildDate>Thu, 07 Jul 2022 17:14:28 +0900</lastBuildDate>
+        <pubDate>Thu, 07 Jul 2022 17:23:16 +0900</pubDate>
+        <lastBuildDate>Thu, 07 Jul 2022 17:23:16 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -14,30 +14,27 @@
             <title>내 IP 주소 확인하기</title>
             <description>&lt;iframe src=&quot;https://3rdeyesys.com/ip/&quot; style=&quot;width:100%;height:150px;border:1px solid gray;background-color:#a6e1ec&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
 
-&lt;h2 id=&quot;ipv4&quot;&gt;IPv4&lt;/h2&gt;
-&lt;p&gt;111.222.333.444처럼 우리가 일반적으로 알고 있는 IPv4는 32비트로 구성된 IP 주소 체계로 이론적으로는 &lt;strong&gt;2^32&lt;/strong&gt; 즉, 4,294,967,296개의 IP주소를 부여할 수 있습니다.&lt;br /&gt;
-2011년 전세계 IP주소를 관리하고 있는 IANA(Internet Assigned Numbers Authority)에서 인터넷에 연결되는 기기가 급속도로 증가하면서 할당할 수 있는 IP주소가 고갈되어 감에 따라 IPv4의 신규 할당을 공식 종료했고, 그로 인해 신규 IP주소 체계인 IPv6에 대한 관심이 높아졌습니다.&lt;/p&gt;
+## IPv4
+111.222.333.444처럼 우리가 일반적으로 알고 있는 IPv4는 32비트로 구성된 IP 주소 체계로 이론적으로는 **2^32** 즉, 4,294,967,296개의 IP주소를 부여할 수 있습니다.  
+2011년 전세계 IP주소를 관리하고 있는 IANA(Internet Assigned Numbers Authority)에서 인터넷에 연결되는 기기가 급속도로 증가하면서 할당할 수 있는 IP주소가 고갈되어 감에 따라 IPv4의 신규 할당을 공식 종료했고, 그로 인해 신규 IP주소 체계인 IPv6에 대한 관심이 높아졌습니다.
 
-&lt;h2 id=&quot;ipv6&quot;&gt;IPv6&lt;/h2&gt;
-&lt;p&gt;IPv6는 ae06:2610:122a:2002:1849:2874:27c1:18f6 처럼 128비트로 구성된 신규 IP 주소 체계로 이론적으로는 &lt;strong&gt;2^128&lt;/strong&gt; 개의 IP 주소를 부여할 수 있어 IP 주소의 부족은 없을 것이라고 이야기 되고 있습니다.&lt;/p&gt;
+## IPv6
+IPv6는 ae06:2610:122a:2002:1849:2874:27c1:18f6 처럼 128비트로 구성된 신규 IP 주소 체계로 이론적으로는 **2^128** 개의 IP 주소를 부여할 수 있어 IP 주소의 부족은 없을 것이라고 이야기 되고 있습니다.
 
-&lt;h2 id=&quot;private-ip-사설-아이피-대역&quot;&gt;Private IP (사설 아이피) 대역&lt;/h2&gt;
-&lt;p&gt;국제 인터넷 표준화 기구(IETF)에서 정한 RFC 1918 표준에 따라  IP 주소, 최상위 도메인 등을 관리하는 단체인 IANA(Internet Assigned Numbers Authority)가 아래의 주소를 사설 IP 대역으로 지정해두고 있습니다.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;A Class: 10.0.0.0 - 10.255.255.255 (10.0.0.0/8)&lt;/li&gt;
-  &lt;li&gt;B Class: 172.16.0.0 - 172.31.255.255 (172.16.0.0/12)&lt;/li&gt;
-  &lt;li&gt;C Class: 192.168.0.0 - 192.168.255.255 (192.168.0.0/16)&lt;/li&gt;
-&lt;/ul&gt;
+## Private IP (사설 아이피) 대역
+국제 인터넷 표준화 기구(IETF)에서 정한 RFC 1918 표준에 따라  IP 주소, 최상위 도메인 등을 관리하는 단체인 IANA(Internet Assigned Numbers Authority)가 아래의 주소를 사설 IP 대역으로 지정해두고 있습니다.
 
-&lt;div class=&quot;bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-2&quot;&gt;
+- A Class: 10.0.0.0 - 10.255.255.255 (10.0.0.0/8)
+- B Class: 172.16.0.0 - 172.31.255.255 (172.16.0.0/12)
+- C Class: 192.168.0.0 - 192.168.255.255 (192.168.0.0/16)
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
 Ncloud (네이버 클라우드)의 VPC(Virtual Private Cloud)는 퍼블릭 클라우드 상에 논리적으로 완전하게 분리된 고객전용 네트워크를 제공하는 서비스로, 위에서 설명한 RFC 1918 표준에 따른 최대 /16의 IP 네트워크 공간을 제공하고 있습니다.
-&lt;/div&gt;
-
-</description>
+&quot; %}</description>
             <pubDate>Thu, 07 Jul 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/etc/etc-find-my-ip-address.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/etc/etc-find-my-ip-address.html</guid>
+            <link>https://docs.3rdeyesys.com/networking/ncloud-networking-find-my-ip-address.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud-networking-find-my-ip-address.html</guid>
             
             <category>ip</category>
             
