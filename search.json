@@ -182,6 +182,28 @@
 
 
 {
+"title": "Jenkins 서버 설치 가이드 | CentOS",
+"tags": "github",
+"keywords": "깃허브, Tool, Dev, 리포지토리, 젠킨스",
+"url": "/dev-tools/ncloud-dev-tools-jenkins-server-install-guide-centos.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Jenkins 서버 설치 가이드 | Ubuntu",
+"tags": "github",
+"keywords": "깃허브, Tool, Dev, 리포지토리, 젠킨스",
+"url": "/dev-tools/ncloud-dev-tools-jenkins-server-install-guide-ubuntu.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "SourceCommit에서 GitHub Repository 복사해오기 | Ncloud",
 "tags": "github",
 "keywords": "깃허브, Tool, Dev, 리포지토리, 깃허브",
