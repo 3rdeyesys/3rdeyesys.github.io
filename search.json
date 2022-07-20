@@ -138,6 +138,17 @@
 
 
 {
+"title": "Classic 환경 Cloud DB for MySQL 읽기 부하 로드밸런서로 분산시키는 방법",
+"tags": "databasemysqlmariadbload-balancer",
+"keywords": "Database, 이중화, 고가용성, Master, Slave, Stand By, Read Load",
+"url": "/database/ncloud-database-cloud-db-for-mysql-read-load-balancing.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "VPC환경에서 Cloud DB for PostgreSQL 생성하기 | CentOS",
 "tags": "databaseclouddbvpc",
 "keywords": "Database, Postgre",
