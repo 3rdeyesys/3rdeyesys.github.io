@@ -825,6 +825,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="Cloud DB MySQL 읽기 부하 분산 | Network LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html" >Cloud DB MySQL 읽기 부하 분산 | Network LB | VPC 환경</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="Cloud DB MySQL 읽기 부하 분산 | Network Proxy LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html" >Cloud DB MySQL 읽기 부하 분산 | Network Proxy LB | VPC 환경</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Cloud DB PostgreSQL 생성 | CentOS" href="/database/ncloud-database-cloud-db-for-postgresql-guide-centos.html" >Cloud DB PostgreSQL 생성 | CentOS</a></li>          
                     
           
@@ -1710,7 +1724,7 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
 
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-12.png" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<h3 id="접속-테스트">접속 테스트</h3>
+<h2 id="부하-분산-테스트">부하 분산 테스트</h2>
 <p>설치된 MySQL Client를 이용해서 Load Balancer IP로 접속한 후에 접속한 DB 서버의 호스트명을 확인하는 쿼리를 실행합니다.</p>
 
 <p>여러 차례 반복해보면 아래와 같이 위에서 추가했던 Slave DB [test-003], [test-004]에 각각 접속되는 것을 확인할 수 있습니다.</p>
@@ -1721,10 +1735,10 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MySQL</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="o">@@</span><span class="n">hostname</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>[test-003에 접속된 상태]</p>
+<h3 id="test-003에-접속된-상태">[test-003]에 접속된 상태</h3>
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-13.png" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
-<p>[test-004에 접속된 상태]</p>
+<h3 id="test-004에-접속된-상태">[test-004]에 접속된 상태</h3>
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-14.png" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
 
 <h2 id="db-삭제">DB 삭제</h2>
@@ -1733,6 +1747,25 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
 <p>그래서 DB를 삭제할 때는 [Slave DB]부터 삭제해야 하고, [Slave DB]를 삭제할 때에도 동시에 삭제할 수 없고 1대씩 차례로 삭제해야 합니다.</p>
 
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-15.png" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" style="width: 490px; " /><figcaption></figcaption></figure>
+
+<h2 id="참고-url">참고 URL</h2>
+<ol>
+  <li>Ncloud Cloud DB for MySQL 읽기 부하 분산 설정 가이드
+    <ul>
+      <li><a href="https://guide.ncloud-docs.com/docs/database-database-5-2#%EC%9D%BD%EA%B8%B0-%EB%B6%80%ED%95%98-%EB%B6%84%EC%82%B0-%EC%84%A4%EC%A0%95" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/database-database-5-2</a></li>
+    </ul>
+  </li>
+  <li>VPC 환경 Cloud DB for MySQL 읽기 부하를 네트워크 프록시 로드밸런서로 분산시키는 방법
+    <ul>
+      <li><a href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html" target="_blank" style="word-break:break-all;">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html</a></li>
+    </ul>
+  </li>
+  <li>VPC 환경 Cloud DB for MySQL 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법
+    <ul>
+      <li><a href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html" target="_blank" style="word-break:break-all;">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html</a></li>
+    </ul>
+  </li>
+</ol>
 
 
    
@@ -1789,7 +1822,7 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-07-20<br/> Site last generated: 2022-08-04 <br />        
+        <span>Page last updated:</span> 2022-07-20<br/> Site last generated: 2022-08-09 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -1808,7 +1841,7 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
 </div>
 
     <div class="side-banner-right">    
-    <a href="https://hyphen.im/benefit/navercloud-event" id="side-banner-right-01" target="_blank" class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png"></a>
+    <a href="https://hyphen.im/benefit/navercloud-event" id="side-banner-right-01" target="_blank" class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
 </div>  
 
 <!-- /#main -->
