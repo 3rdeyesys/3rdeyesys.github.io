@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 09 Aug 2022 16:32:46 +0900</pubDate>
-        <lastBuildDate>Tue, 09 Aug 2022 16:32:46 +0900</lastBuildDate>
+        <pubDate>Tue, 09 Aug 2022 16:37:34 +0900</pubDate>
+        <lastBuildDate>Tue, 09 Aug 2022 16:37:34 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -117,7 +117,7 @@ Target 추가 화면에 가면 앞에서 생성했던 Slave DB Server 2대를 �
 &quot; %}
 
 
-### Test 서버 비공인 IP 확인
+### Test 서버 공인 IP 확인
 테스트를 위해 미리 준비해 둔 CentOS를 설치한 서버입니다. ACG 설정에 추가할 공인 IP를 확인합니다.
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-15.png&quot; width=&quot;845&quot; alt=&quot;cloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법&quot; caption=&quot;&quot; %}
