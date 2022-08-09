@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 09 Aug 2022 16:37:34 +0900</pubDate>
-        <lastBuildDate>Tue, 09 Aug 2022 16:37:34 +0900</lastBuildDate>
+        <pubDate>Tue, 09 Aug 2022 16:57:33 +0900</pubDate>
+        <lastBuildDate>Tue, 09 Aug 2022 16:57:33 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -64,7 +64,7 @@ Slave DB Server를 추가할 때 설정할 수 있는 것은 Subnet 입니다. �
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-07.png&quot; width=&quot;845&quot; alt=&quot;cloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법&quot; caption=&quot;&quot; %}
 
-## Target Goup 설정
+## Target Group 설정
 다음으로 Load Balancer와 Cloud DB for Mysql을 연결할 Target Group을 설정해보겠습니다.
 
 ### Target Group 생성
@@ -261,7 +261,7 @@ Slave DB Server를 추가할 때 설정할 수 있는 것은 Subnet 입니다. �
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-07.png&quot; width=&quot;845&quot; alt=&quot;cloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 프록시 로드밸런서로 분산시키는 방법&quot; caption=&quot;&quot; %}
 
-## Target Goup 설정
+## Target Group 설정
 다음으로 Load Balancer와 Cloud DB for Mysql을 연결할 Target Group을 설정해보겠습니다.
 
 ### Target Group 생성
