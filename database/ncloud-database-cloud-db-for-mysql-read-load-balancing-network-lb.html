@@ -1731,7 +1731,7 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-14.png" alt="cloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
 
 <h2 id="acg-설정">ACG 설정</h2>
-<p>[Cloud DB for MySQL]에 접근하는 장비의 공인 IP를 ACG에 추가해야 합니다.</p>
+<p>네트워크 로드밸런서와 연동을 할 때는 로드밸런서의 Subnet 대역 뿐만 아니라 [네트워크 로드밸런서]에 접근하는 장비의 공인 IP를 [Cloud DB for MySQL]의 ACG에 추가해야 합니다.</p>
 
 <div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-3">
 ⁃ 네트워크 로드밸런서는 보다 고속으로 분산처리를 하기 위해 DSR(Direct Server Return)로 동작합니다. <br />
@@ -1743,6 +1743,12 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
 <p>테스트를 위해 미리 준비해 둔 CentOS를 설치한 서버입니다. ACG 설정에 추가할 공인 IP를 확인합니다.</p>
 
 <figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-15.png" alt="cloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+
+<h3 id="load-balancer-서브넷-확인">Load Balancer 서브넷 확인</h3>
+<p>ACG에 추가할 멀티존으로 구성된 로드밸런서의 서브넷을 확인합니다.<br />
+그리고, 테스트 시에 접속할 로드밸런서의 접속 정보를 메모해 둡니다.</p>
+
+<figure><img class="docimage" src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-16.png" alt="cloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
 
 <h3 id="acg-확인">ACG 확인</h3>
 <p>[Cloud DB for MySQL]의 [Master] DB를 선택하고 [ACG] 항목 옆의 버튼을 클릭합니다.</p>
