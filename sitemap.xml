@@ -4,7 +4,19 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html</loc>
+    <loc>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html</loc>
+  
+    <lastmod>2022-08-16T00:00:00+09:00</lastmod>
+    
+  
+    <priority>0.7</priority>
+   
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html</loc>
   
     <lastmod>2022-08-08T00:00:00+09:00</lastmod>
     
@@ -16,7 +28,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html</loc>
+    <loc>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html</loc>
   
     <lastmod>2022-08-08T00:00:00+09:00</lastmod>
     
@@ -40,7 +52,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html</loc>
+    <loc>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-ubuntu.html</loc>
   
     <lastmod>2022-08-04T00:00:00+09:00</lastmod>
     
@@ -52,7 +64,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-ubuntu.html</loc>
+    <loc>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html</loc>
   
     <lastmod>2022-08-04T00:00:00+09:00</lastmod>
     
@@ -208,18 +220,6 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html</loc>
-  
-    <lastmod>2022-04-27T00:00:00+09:00</lastmod>
-    
-  
-    <priority>0.7</priority>
-   
-  </url>
-  
-  
-  
-  <url>
     <loc>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-centos.html</loc>
   
     <lastmod>2022-04-27T00:00:00+09:00</lastmod>
@@ -232,7 +232,19 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_ssl_setting_ubuntu_guide.html</loc>
+    <loc>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html</loc>
+  
+    <lastmod>2022-04-27T00:00:00+09:00</lastmod>
+    
+  
+    <priority>0.7</priority>
+   
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_ssl_setting_centos_guide.html</loc>
   
     <lastmod>2022-04-26T00:00:00+09:00</lastmod>
     
@@ -244,7 +256,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_ssl_setting_centos_guide.html</loc>
+    <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_lemp_nginx_ssl_setting_ubuntu_guide.html</loc>
   
     <lastmod>2022-04-26T00:00:00+09:00</lastmod>
     
@@ -604,18 +616,6 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html</loc>
-  
-    <lastmod>2021-10-08T00:00:00+09:00</lastmod>
-    
-  
-    <priority>0.7</priority>
-   
-  </url>
-  
-  
-  
-  <url>
     <loc>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_cloudberry_explorer.html</loc>
   
     <lastmod>2021-10-08T00:00:00+09:00</lastmod>
@@ -640,7 +640,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_cyberduck.html</loc>
+    <loc>https://docs.3rdeyesys.com/database/ncloud_database_mysql_object_storage_auto_backup_ubuntu.html</loc>
   
     <lastmod>2021-10-08T00:00:00+09:00</lastmod>
     
@@ -664,7 +664,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html</loc>
+    <loc>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_cyberduck.html</loc>
   
     <lastmod>2021-10-08T00:00:00+09:00</lastmod>
     
