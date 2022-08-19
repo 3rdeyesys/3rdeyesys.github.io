@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 19 Aug 2022 11:48:01 +0900</pubDate>
-        <lastBuildDate>Fri, 19 Aug 2022 11:48:01 +0900</lastBuildDate>
+        <pubDate>Fri, 19 Aug 2022 12:31:41 +0900</pubDate>
+        <lastBuildDate>Fri, 19 Aug 2022 12:31:41 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -39,6 +39,15 @@ Sub Account를 사용하면 사내 담당부서나 담당자별로 지정된 자
 - 네이버 클라우드 포털 내 마이페이지 &quot;이용관리&quot; 메뉴 접근 권한  
 	**NCP_FINANCE_MANAGER** 정책을 부여하시면 포털 마이페이지 내 &quot;서비스 이용내역/현황, 프로모션 내역, 청구 내역 추세&quot; 메뉴에 접근할 수 있습니다.
 
+
+## Sub Account 서비스
+[**Sub Account**] 서비스는 [**콘솔**] - [**Services**] - [**Management &amp; Governance**] - [**Sub Account**]에 위치하고 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-26.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Sub Account 생성 가이드&quot; caption=&quot;&quot; %}
+
+좀 더 쉽게 찾는 방법은 [**콘솔**] - [**Services**]에서 [**검색**] 기능을 이용하면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-27.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Sub Account 생성 가이드&quot; caption=&quot;&quot; %}
 
 ## 서브 계정 생성
 [**Sub Account**] - [**Sub Accounts**]에서 [**서브 계정 생성**] 버튼을 클릭합니다.
