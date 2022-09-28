@@ -314,6 +314,17 @@
 
 
 {
+"title": "Ncloud VPC환경 IPsecVPN과 FortiGate 장비 연동 가이드",
+"tags": "vpcipsecvpnfortigate",
+"keywords": "LoadBalancer, 로드밸런스, 프록시, 프록시 프로토콜",
+"url": "/networking/ncloud-networking-ipsecvpn-fortigate-setting-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Proxy Protocol을 이용해 Client IP 확인하기 | CentOS",
 "tags": "vpcload_balancerproxy",
 "keywords": "LoadBalancer, 로드밸런스, 프록시, 프록시 프로토콜",
