@@ -259,6 +259,17 @@
 
 
 {
+"title": "설치형 PostgreSQL DB 설치, 접속 가이드 | CentOS",
+"tags": "databasevpc",
+"keywords": "Database, Postgre",
+"url": "/database/ncloud-database-postgresql-install-connect-guide-centos.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Jenkins 서버 설치 가이드 | CentOS",
 "tags": "github",
 "keywords": "깃허브, Tool, Dev, 리포지토리, 젠킨스",
