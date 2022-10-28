@@ -380,6 +380,17 @@
 
 
 {
+"title": "Ncloud 백업 서비스 사용 가이드",
+"tags": "backupdatabase",
+"keywords": "BackUp, Storage, DataBase",
+"url": "/storage/ncloud-storage-backup-service-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Cloud Log Analytics 설정 가이드",
 "tags": "loganalytics",
 "keywords": "분석",
@@ -1297,7 +1308,7 @@
 "tags": "backupdatabase",
 "keywords": "BackUp, Storage, DataBase",
 "url": "/storage/ncloud_storage_backup_guide.html",
-"summary": "Ncloud 서버 파일과 데이터베이스 등의 백업 서비스 가이드와 신청 절차입니다"
+"summary": ""
 }
 ,
 
