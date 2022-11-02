@@ -182,6 +182,17 @@
 
 
 {
+"title": "Ncloud 블록 스토리지 (디스크) 크기 확장하는 방법 - 리눅스",
+"tags": "linuxstorage",
+"keywords": "Storage, Block Disk, Linux",
+"url": "/compute/ncloud-compute-server-storage-extend-guide-linux.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "VPC 환경 Cloud DB for MySQL 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법",
 "tags": "databasemysqlmariadbload-balancer",
 "keywords": "Database, 이중화, 고가용성, Master, Slave, Stand By, Read Load",
