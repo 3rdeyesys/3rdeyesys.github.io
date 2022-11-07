@@ -4,6 +4,18 @@
   
   
   <url>
+    <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html</loc>
+  
+    <lastmod>2022-11-07T00:00:00+09:00</lastmod>
+    
+  
+    <priority>0.7</priority>
+   
+  </url>
+  
+  
+  
+  <url>
     <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-windows.html</loc>
   
     <lastmod>2022-11-02T00:00:00+09:00</lastmod>
@@ -112,18 +124,6 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html</loc>
-  
-    <lastmod>2022-08-22T00:00:00+09:00</lastmod>
-    
-  
-    <priority>0.7</priority>
-   
-  </url>
-  
-  
-  
-  <url>
     <loc>https://docs.3rdeyesys.com/management/ncloud_management_sub_account_guide.html</loc>
   
     <lastmod>2022-08-19T00:00:00+09:00</lastmod>
@@ -196,7 +196,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html</loc>
+    <loc>https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html</loc>
   
     <lastmod>2022-08-04T00:00:00+09:00</lastmod>
     
@@ -220,7 +220,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html</loc>
+    <loc>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html</loc>
   
     <lastmod>2022-08-04T00:00:00+09:00</lastmod>
     
