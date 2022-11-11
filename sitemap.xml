@@ -4,6 +4,18 @@
   
   
   <url>
+    <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html</loc>
+  
+    <lastmod>2022-11-11T00:00:00+09:00</lastmod>
+    
+  
+    <priority>0.7</priority>
+   
+  </url>
+  
+  
+  
+  <url>
     <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html</loc>
   
     <lastmod>2022-11-07T00:00:00+09:00</lastmod>
@@ -43,18 +55,6 @@
     <loc>https://docs.3rdeyesys.com/storage/ncloud_storage_backup_guide.html</loc>
   
     <lastmod>2022-10-28T00:00:00+09:00</lastmod>
-    
-  
-    <priority>0.7</priority>
-   
-  </url>
-  
-  
-  
-  <url>
-    <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html</loc>
-  
-    <lastmod>2022-10-27T00:00:00+09:00</lastmod>
     
   
     <priority>0.7</priority>

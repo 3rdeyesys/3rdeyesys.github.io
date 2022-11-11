@@ -5,10 +5,161 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 07 Nov 2022 16:27:15 +0900</pubDate>
-        <lastBuildDate>Mon, 07 Nov 2022 16:27:15 +0900</lastBuildDate>
+        <pubDate>Fri, 11 Nov 2022 16:27:59 +0900</pubDate>
+        <lastBuildDate>Fri, 11 Nov 2022 16:27:59 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud 블록 스토리지 (디스크) 크기 확장하는 방법 - 리눅스</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 리눅스 환경 서버의 블록스토리지 볼륨 크기를 확장하고 적용하는 방법을 정리해보겠습니다.
+
+
+## 테스트 환경 
+- CentOS 7.8
+- Ubuntu 20.04
+- 추가 블록스토리지 10GB
+
+OS 영역에서 사용하는 50G 블록스토리지 외에 아래와 같이 추가로 할당 된 10G의 블록스토리지의 크기를 변경하고 적용해보겠습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+추가 블록 스토리지 할당 방법에 대한 가이드는 아래의 링크를 참조 바랍니다.
+
+- &lt;a href=&quot;/compute/ncloud_compute_server_storage_add_detail_process.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;Linux 스토리지(디스크) 추가 상세 가이드&lt;/a&gt;
+
+## 스토리지 스냅샷 백업
+아래와 같이 [Console] - [Server] - [Storage]에서 크기를 변경할 스토리지를 선택하고 [스토리지 설정] - [스냅샷 생성] 메뉴를 선택합니다.
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;블록스토리지의 크기를 변경하는 과정에 만에 하나 있을지 모르는 상황에 대비해서 해당 블록스토리지의 스냅샷을 생성해서 백업해 두는 것을 적극 권장합니다.&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+스냅샷 이름을 입력하고 스냅샷을 생성합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스토리지 크기 변경
+스냅샷 생성이 끝났으면 스토리지 크기를 변경하기 위해 [스토리지 설정] - [크기 변경] 메뉴를 선택합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### 서버 정지 알림
+스토리지 크기 변경은 서버가 정지된 상태에서만 가능하므로, 혹시 서버가 동작중인 경우 아래와 같은 알림이 나타납니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### 서버 정지
+먼저 스토리지가 장착된 서버를 정지하겠습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### 크기 변경
+서버를 정지한 후 크기 변경 메뉴를 선택하면 아래와 같이 변경할 크기를 입력할 수 있습니다.  최대 2,000GB까지 가능합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;스토리지 크기는 확대만 가능하며, 축소 기능은 제공하지 않습니다.&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-07.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+변경할 크기를 입력하고 [확인] 버튼을 클릭하면 크기 변경 작업이 진행됩니다. 이후에 서버에서 해당 스토리지의 파티션 확장 등의 작업을 추가로 진행해야 정상적으로 사용할 수 있습니다. 
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-09.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+## 서버 디스크 파티션 확장
+Ncloud 콘솔에서 블록스토리지 크기를 변경 완료했으면 다음으로 서버에 접속해서 할당된 디스크의 파티션을 확장해야 합니다.
+
+### 디스크 마운트 해제
+일반적으로 추가 디스크는 서버가 재시작되어도 사용하는데 문제 없도록 fstab에 마운트 정보를 등록해두기 때문에 서버가 재시작되면서 자동으로 마운트 되어있습니다.  
+
+마운트 된 상태에서는 파티션 확장을 할 수 없으므로 먼저 마운트를 해제합니다. 여기서는 마운트 해제가 잘 되었는지 df 명령으로 확인을 해보았습니다.
+
+``` bash
+~# umount /dev/xvdb1
+~# df -hT
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### growpart 패키지 설치
+디스크 파티션 확장에 필요한 growpart 패키지를 설치합니다.
+
+**Centos**
+```bash
+~# yum -y install cloud-utils-growpart
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+**Ubntu**  
+이미 해당 패키지가 설치되어 있는 경우에는 아래와 같이 추가 설치 없이 통과됩니다.
+```bash
+~# apt-get install cloud-guest-utils 
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### 파티션 확장
+파티션을 확장할 때 growpart 명령 실행 후의 다음 단계는 EXT, XFS 등 디스크의 파일 시스템 타입에 따라 차이가 있으니 확인하고 진행하셔야 합니다.
+
+``` bash
+# growpart {장치명} {파티션 번호}
+~# growpart /dev/xvdb 1
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+
+#### XFS 시스템
+xfs 파일 시스템은 **마운트를 먼저 하고** 최종 파티션 확장 작업을 진행합니다.
+
+``` bash
+~# mount /dev/xvdb1 /mnt/data
+~# xfs_growfs /dev/xvdb1
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+작업이 모두 끝난 후에 디스크 상태를 확인해보면 아래와 같이 문제 없이 확장된 것을 알 수 있습니다.
+
+``` bash
+~# df -hT
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+
+#### EXT4 시스템
+ext4 파일 시스템은 최종 **파티션 확장 작업을 먼저 진행하고** 나서 마운트를 하게 됩니다.
+
+``` bash
+~# e2fsck -f /dev/xvdb1
+~# resize2fs /dev/xvdb1
+~# mount /dev/xvdb1 /mnt/data
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+
+``` bash
+~# df -hT
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Ncloud 블록 스토리지 크기 확장 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2-vpc#%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%81%AC%EA%B8%B0-%ED%99%95%EC%9E%A5&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2-vpc&lt;/a&gt;
+
+</description>
+            <pubDate>Fri, 11 Nov 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html</guid>
+            
+            <category>linux</category>
+            
+            <category>storage</category>
+            
+            
+        </item>
         
         <item>
             <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Linux</title>
@@ -588,146 +739,6 @@ Remote backup은 저장소에 보관 데이터를 원격지에 소산백업을 �
             <category>backup</category>
             
             <category>database</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud 블록 스토리지 (디스크) 크기 확장하는 방법 - 리눅스</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 리눅스 환경 서버의 블록스토리지 볼륨 크기를 확장하고 적용하는 방법을 정리해보겠습니다.
-
-
-## 테스트 환경 
-- CentOS 7.8
-- Ubuntu 20.04
-- 추가 블록스토리지 10GB
-
-OS 영역에서 사용하는 50G 블록스토리지 외에 아래와 같이 추가로 할당 된 10G의 블록스토리지의 크기를 변경하고 적용해보겠습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-추가 블록 스토리지 할당 방법에 대한 가이드는 아래의 링크를 참조 바랍니다.
-
-- &lt;a href=&quot;/compute/ncloud_compute_server_storage_add_detail_process.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;Linux 스토리지(디스크) 추가 상세 가이드&lt;/a&gt;
-
-## 스토리지 스냅샷 백업
-아래와 같이 [Console] - [Server] - [Storage]에서 크기를 변경할 스토리지를 선택하고 [스토리지 설정] - [스냅샷 생성] 메뉴를 선택합니다.
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;블록스토리지의 크기를 변경하는 과정에 만에 하나 있을지 모르는 상황에 대비해서 해당 블록스토리지의 스냅샷을 생성해서 백업해 두는 것을 적극 권장합니다.&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-스냅샷 이름을 입력하고 스냅샷을 생성합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스토리지 크기 변경
-스냅샷 생성이 끝났으면 스토리지 크기를 변경하기 위해 [스토리지 설정] - [크기 변경] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 정지 알림
-스토리지 크기 변경은 서버가 정지된 상태에서만 가능하므로, 혹시 서버가 동작중인 경우 아래와 같은 알림이 나타납니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 정지
-먼저 스토리지가 장착된 서버를 정지하겠습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 크기 변경
-서버를 정지한 후 크기 변경 메뉴를 선택하면 아래와 같이 변경할 크기를 입력할 수 있습니다.  최대 2,000GB까지 가능합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;스토리지 크기는 확대만 가능하며, 축소 기능은 제공하지 않습니다.&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-07.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-변경할 크기를 입력하고 [확인] 버튼을 클릭하면 크기 변경 작업이 진행됩니다. 이후에 서버에서 해당 스토리지의 파티션 확장 등의 작업을 추가로 진행해야 정상적으로 사용할 수 있습니다. 
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-09.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-## 서버 디스크 파티션 확장
-Ncloud 콘솔에서 블록스토리지 크기를 변경 완료했으면 다음으로 서버에 접속해서 할당된 디스크의 파티션을 확장해야 합니다.
-
-### growpart 패키지 설치
-디스크 파티션 확장에 필요한 growpart 패키지를 설치합니다.
-
-**Centos**
-```bash
-~# yum -y install cloud-utils-growpart
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-**Ubntu**  
-이미 해당 패키지가 설치되어 있는 경우에는 아래와 같이 추가 설치 없이 통과됩니다.
-```bash
-~# apt-get install cloud-guest-utils 
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 파티션 확장
-파티션을 확장할 때 growpart 명령 실행 후의 다음 단계는 EXT, XFS 등 디스크의 파일 시스템 타입에 따라 차이가 있으니 확인하고 진행하셔야 합니다.
-
-``` bash
-# growpart {장치명} {파티션 번호}
-~# growpart /dev/xvdb 1
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-#### XFS 시스템
-xfs 파일 시스템은 **마운트를 먼저 하고** 최종 파티션 확장 작업을 진행합니다.
-
-``` bash
-~# mount /dev/xvdb1 /mnt/data
-~# xfs_growfs /dev/xvdb1
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-작업이 모두 끝난 후에 디스크 상태를 확인해보면 아래와 같이 문제 없이 확장된 것을 알 수 있습니다.
-
-``` bash
-~# df -hT
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-#### EXT4 시스템
-ext4 파일 시스템은 최종 **파티션 확장 작업을 먼저 진행하고** 나서 마운트를 하게 됩니다.
-
-``` bash
-~# e2fsck -f /dev/xvdb1
-~# resize2fs /dev/xvdb1
-~# mount /dev/xvdb1 /mnt/data
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-``` bash
-~# df -hT
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Ncloud 블록 스토리지 크기 확장 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2-vpc#%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%81%AC%EA%B8%B0-%ED%99%95%EC%9E%A5&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2-vpc&lt;/a&gt;
-
-</description>
-            <pubDate>Thu, 27 Oct 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html</guid>
-            
-            <category>linux</category>
-            
-            <category>storage</category>
             
             
         </item>

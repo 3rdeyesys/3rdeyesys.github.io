@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:url" content="https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-10-27T00:00:00+09:00" />
+<meta property="article:published_time" content="2022-11-11T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Ncloud 블록 스토리지 (디스크) 크기 확장하는 방법 - 리눅스" />
 <script type="application/ld+json">
@@ -1678,6 +1678,16 @@ $("#toc_onoff").click(function() {
 <h2 id="서버-디스크-파티션-확장">서버 디스크 파티션 확장</h2>
 <p>Ncloud 콘솔에서 블록스토리지 크기를 변경 완료했으면 다음으로 서버에 접속해서 할당된 디스크의 파티션을 확장해야 합니다.</p>
 
+<h3 id="디스크-마운트-해제">디스크 마운트 해제</h3>
+<p>일반적으로 추가 디스크는 서버가 재시작되어도 사용하는데 문제 없도록 fstab에 마운트 정보를 등록해두기 때문에 서버가 재시작되면서 자동으로 마운트 되어있습니다.</p>
+
+<p>마운트 된 상태에서는 파티션 확장을 할 수 없으므로 먼저 마운트를 해제합니다. 여기서는 마운트 해제가 잘 되었는지 df 명령으로 확인을 해보았습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# umount /dev/xvdb1
+~# <span class="nb">df</span> <span class="nt">-hT</span>
+</code></pre></div></div>
+<figure><img class="docimage" src="/images/compute/ncloud-compute-server-storage-extend-guide-linux-18.png" alt="Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+
 <h3 id="growpart-패키지-설치">growpart 패키지 설치</h3>
 <p>디스크 파티션 확장에 필요한 growpart 패키지를 설치합니다.</p>
 
@@ -1789,7 +1799,7 @@ $("#toc_onoff").click(function() {
         </div>
         &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-10-27<br/> Site last generated: 2022-11-07 <br />        
+        <span>Page last updated:</span> 2022-11-11<br/> Site last generated: 2022-11-11 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
