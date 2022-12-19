@@ -1172,6 +1172,28 @@
 
 
 {
+"title": "Classic 환경에서 SSL VPN 설정하고 접속하는 방법",
+"tags": "classicsslvpn",
+"keywords": "암호화 통신, 보안접속",
+"url": "/networking/ncloud_networking_ssl_vpn_classic_guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "VPC 환경에서 SSL VPN 설정하고 접속하는 방법",
+"tags": "vpcsslvpn",
+"keywords": "암호화 통신, 보안접속",
+"url": "/networking/ncloud_networking_ssl_vpn_vpc_guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "ACG와 NACL 비교",
 "tags": "vpcacg",
 "keywords": "VPC, Networking",
