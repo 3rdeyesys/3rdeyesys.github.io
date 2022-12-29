@@ -5,170 +5,233 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 19 Dec 2022 15:12:28 +0900</pubDate>
-        <lastBuildDate>Mon, 19 Dec 2022 15:12:28 +0900</lastBuildDate>
+        <pubDate>Thu, 29 Dec 2022 16:12:47 +0900</pubDate>
+        <lastBuildDate>Thu, 29 Dec 2022 16:12:47 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
         <item>
-            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <title>Windows PowerShell에서 Ncloud API를 호출하는 샘플 예제</title>
             <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+네이버 클라우드 인프라와 상품 및 솔루션 등의 활용을 도와주는 API를 Windows PowerShell에서 호출하는 샘플 예제를 정리해봅니다.  
+네이버 클라우드 API는 RESTful API 방식으로 제공되며, XML와 JSON 형식으로 응답합니다
+우선 전체 소스코드를 살펴보고 다음으로 주요 코드를 상세하게 살펴보겠습니다.
 
 
-## SSL VPN 생성
-[SSL VPN 생성] 버튼을 클릭합니다.
+## API 호출 샘플 코드
 
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+``` powershell
+function Sign-Request(
+    [string] $api_server,
+    [string] $api_url,         
+    [string] $apicall_method,      
+    [string] $ncloud_accesskey,  
+    [string] $ncloud_secretkey 
+)
+{   
+    $datetime = (Get-Date).ToUniversalTime()
+    $unixtimestamp = [System.Math]::Truncate((Get-Date -Date $datetime -UFormat %s)) * 1000
+    
+    $space = &quot; &quot;
+    $new_line = &quot;`n&quot;
+ 
+    $message = $apicall_method + $space +
+                $api_url + $new_line +
+                $unixtimestamp + $new_line +
+                $ncloud_accesskey                    
 
-우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
-다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
-그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+    $signature = Compute-HMACSHA256Hash $ncloud_secretkey $message
+    
+    # Return request headers
+    return @{
+        &quot;x-ncp-apigw-timestamp&quot; = $unixtimestamp;
+        &quot;x-ncp-iam-access-key&quot; = $ncloud_accesskey;
+        &quot;x-ncp-apigw-signature-v2&quot; = $signature
+    }
+}
 
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
-&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
-&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
-&quot; %}
+function Compute-HMACSHA256Hash(
+    [string] $secret,      # base64 encoded
+    [string] $content
+)
+{
+    $hmacsha = New-Object System.Security.Cryptography.HMACSHA256
+    try {
+        $hmacsha.key = [Text.Encoding]::UTF8.GetBytes($secret)
+        $signature = $hmacsha.ComputeHash([Text.Encoding]::UTF8.GetBytes($message))   
+        
+        return [Convert]::ToBase64String($signature)
+    }
+    finally {
+        $hmacsha.Dispose()
+    }
+}
 
+# API 서버와 URL 예시 : 상품별 가격 리스트 호출 api
+$api_server = &quot;https://billingapi.apigw.ntruss.com&quot;;
+$api_url = &quot;/billing/v1/product/getProductPriceList&quot;;
+$api_url = $api_url + &quot;?regionCode=KR&amp;productItemKindCode=VSVR&quot;;
 
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+$apicall_method = &quot;GET&quot;
+$body = $null
+$ncloud_accesskey = &quot;Ncloud AccessKey&quot;
+$ncloud_secretkey = &quot;Ncloud SecretKey&quot;
+$api_full_url = $api_server + $api_url
 
-다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+$headers = Sign-Request $api_server $api_url $apicall_method $ncloud_accesskey $ncloud_secretkey
 
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+Invoke-WebRequest -Uri $api_full_url -Method $apicall_method -Headers $headers  -Body $body
+```
 
-SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+## 코드 상세 설명
 
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+### 유닉스 타임 스탬프
+``` powershell
+$datetime = (Get-Date).ToUniversalTime()
+$unixtimestamp = [System.Math]::Truncate((Get-Date -Date $datetime -UFormat %s)) * 1000
+```
+네이버 클라우드 API를 호출할 때는 13자리 형식의 유닉스 타임 스탬프가 필요합니다.  
+계산한 날짜 값에 1000을 곱해서 13자리로 만듭니다.
 
+### hmac으로 암호화할 문자열 설정
+암호화할 문자열을 설정하는데 필요한 값을 사전에 정의합니다.
 
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+``` powershell
+$space = &quot; &quot;
+$new_line = &quot;`n&quot;
 
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+$message = $apicall_method + $space +
+            $api_url + $new_line +
+            $unixtimestamp + $new_line +
+            $ncloud_accesskey	
+```
+네이버 클라우드 API에서는 호출 방식(GET, POST)과 도메인을 제외한 API URL, 유닉스 타임스탬프, API ACCESSKEY를 공백과 개행문자 `n을 이용해서 하나의 문자열로 설정합니다.  
 
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+{% include note.html title=&quot;API 가이드&quot; content=&quot;API URL은 용도별로 각기 다른데, 네이버 클라우드 API 가이드 사이트에서 확인할 수 있습니다. &lt;br /&gt;&lt;a href=&apos;https://api.ncloud-docs.com/docs/ko/home/&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;https://api.ncloud-docs.com/docs/ko/home/&lt;/a&gt;&quot; %}
 
 
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+### hmac_sha256 방식으로 암호화
+``` powershell
+$signature = Compute-HMACSHA256Hash $ncloud_secretkey $message
 
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+function Compute-HMACSHA256Hash(
+    [string] $secret,      # base64 encoded
+    [string] $content
+)
+{
+    $hmacsha = New-Object System.Security.Cryptography.HMACSHA256
+    try {
+        $hmacsha.key = [Text.Encoding]::UTF8.GetBytes($secret)
+        $signature = $hmacsha.ComputeHash([Text.Encoding]::UTF8.GetBytes($message))   
+        
+        return [Convert]::ToBase64String($signature)
+    }
+    finally {
+        $hmacsha.Dispose()
+    }
+}
+```
+hmac sha256 방식으로 네이버 클라우드 API SecretKey를 이용하여 $message 문자열을 암호화 즉, 해시값을 만들고, 다시 base64로 인코딩합니다.
 
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+### http 호출 헤더값 설정
+``` powershell
+# Return request headers
+return @{
+    &quot;x-ncp-apigw-timestamp&quot; = $unixtimestamp;
+    &quot;x-ncp-iam-access-key&quot; = $ncloud_accesskey;
+    &quot;x-ncp-apigw-signature-v2&quot; = $signature
+}
+```
+API를 호출할 때는 http 헤더값에 다음 3가지를 추가해서 호출합니다.
+- 유닉스 타임스탬프
+- 네이버 클라우드 API AccessKey
+- hmac_256 으로 암호화한 문자열
 
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+여기서 전송하는 타임스탬프는 위에서 $message를 암호화할 때 사용한 타임스탬프와 동일한 값이어야 합니다.
 
 
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+&lt;br /&gt;
+### 네이버 클라우드 인증키
+``` powershell
+$ncloud_accesskey = &quot;Ncloud AccessKey&quot;
+$ncloud_secretkey = &quot;Ncloud SecretKey&quot;	
+```
+네이버 클라우드 인증키는 네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
 
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성하는 방법&quot; caption=&quot;&quot; %}
 
+### api 호출
+``` powershell
+$headers = Sign-Request $api_server $api_url $apicall_method $ncloud_accesskey $ncloud_secretkey
+Invoke-WebRequest -Uri $api_full_url -Method $apicall_method -Headers $headers  -Body $body 
+```
+이제 위에서 준비한 값들을 사용해서 API를 호출합니다.  
+리턴값은 호출하는 용도별로 json 또는 xml 형태로 반환됩니다.
 
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+##  응답 예시
+``` xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;getProductPriceListResponse&gt;
+  &lt;requestId&gt;397d3d13-2b2a-42d2-96d0-20ff63df69dc&lt;/requestId&gt;
+  &lt;returnCode&gt;0&lt;/returnCode&gt;
+  &lt;returnMessage&gt;success&lt;/returnMessage&gt;
+  &lt;totalRows&gt;121&lt;/totalRows&gt;
+  &lt;productPriceList&gt;
+    &lt;productPrice&gt;
+      &lt;productItemKind&gt;
+        &lt;code&gt;VSVR&lt;/code&gt;
+        &lt;codeName&gt;Server (VPC)&lt;/codeName&gt;
+      &lt;/productItemKind&gt;
+      &lt;productItemKindDetail&gt;
+        &lt;code&gt;BM&lt;/code&gt;
+        &lt;codeName&gt;BareMetal&lt;/codeName&gt;
+      &lt;/productItemKindDetail&gt;
+     &apos;&apos;&apos; 중략 &apos;&apos;&apos;
+      &lt;softwareType/&gt;
+      &lt;productType&gt;
+        &lt;code&gt;BM&lt;/code&gt;
+        &lt;codeName&gt;BareMetal&lt;/codeName&gt;
+      &lt;/productType&gt;
+      &lt;productType&gt;
+        &lt;code&gt;BM&lt;/code&gt;
+        &lt;codeName&gt;BareMetal&lt;/codeName&gt;
+      &lt;/productType&gt;
+      &lt;productTypeDetail/&gt;
+      &lt;gpuCount&gt;0&lt;/gpuCount&gt;
+      &lt;cpuCount&gt;24&lt;/cpuCount&gt;
+      &lt;memorySize&gt;137438953472&lt;/memorySize&gt;
+      &lt;baseBlockStorageSize&gt;4123168604160&lt;/baseBlockStorageSize&gt;
+      &lt;dbKind/&gt;
+      &lt;osInfomation/&gt;
+      &lt;platformType/&gt;
+      &lt;osType/&gt;
+      &lt;platformCategoryCode/&gt;
+      &lt;diskType&gt;
+        &lt;code&gt;LOCAL&lt;/code&gt;
+        &lt;codeName&gt;Local storage&lt;/codeName&gt;
+      &lt;/diskType&gt;
+      &lt;diskDetailType&gt;
+        &lt;code&gt;SSD&lt;/code&gt;
+        &lt;codeName&gt;SSD&lt;/codeName&gt;
+      &lt;/diskDetailType&gt;
+      &lt;generationCode&gt;G1&lt;/generationCode&gt;     
+    &apos;&apos;&apos; 중략 &apos;&apos;&apos;
+  &lt;/productPriceList&gt;
+&lt;/getProductPriceListResponse&gt;
+```
 
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
 ## 참고 URL
-1.  SSL VPN 사용 가이드(Classic)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
 
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
+1. 네이버 클라우드 API 가이드
+	- &lt;a href=&quot;https://api.ncloud-docs.com/docs/api-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://api.ncloud-docs.com/docs/api-overview&lt;/a&gt;   </description>
+            <pubDate>Thu, 29 Dec 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/api/ncloud-api-call-powershell-sample.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/api/ncloud-api-call-powershell-sample.html</guid>
             
-            <category>classic</category>
+            <category>api</category>
             
-            <category>ssl</category>
-            
-            <category>vpn</category>
+            <category>windows</category>
             
             
         </item>
@@ -522,8 +585,8 @@ Agent 창에서 [그래프 보기] 버튼을 클릭합니다.
 	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
 </description>
             <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</guid>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
             
             <category>classic</category>
             
@@ -724,6 +787,169 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
             <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</guid>
             
             <category>vpc</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
+다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
+그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
+&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
+&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
+&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(Classic)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</guid>
+            
+            <category>classic</category>
             
             <category>ssl</category>
             
@@ -1461,215 +1687,6 @@ Remote backup은 저장소에 보관 데이터를 원격지에 소산백업을 �
             <category>backup</category>
             
             <category>database</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>설치형 PostgreSQL DB 설치, 접속 가이드 | Ubuntu</title>
-            <description>## 개요
-PostgreSQL은 설치 후에 DB에 접속할 때 MySQL등 다른 DB와 달리 [**OS와 PostgreSQL 양쪽에 동일한 계정을 생성**]하거나 
-[**인증관련 환경설정 파일을 수정**]해야 접속할 수 있는데 이 두가지 방법을 Ubuntu에서 적용하는 과정을 정리해보겠습니다.
-
-## 테스트 환경
-- Ubuntu 20.04
-- PostgreSQL 13.8
-
-
-## 설치
-기본 배포 버전으로 테스트할 수도 있지만, 여기서는 **PostgreSQL 13**을 설치해보겠습니다.
-
-### 리포지토리 설정 파일 생성
-[**PostgreSQL 13**] 설치 정보가 담겨 있는 리포지토리 설정 파일을 생성합니다.
-
-``` bash
-~# sh -c &apos;echo &quot;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&quot; &gt; /etc/apt/sources.list.d/pgdg.list&apos;
-~# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### PostgreSQL 설치
-[**PostgreSQL 13**]을 설치합니다.
-
-``` bash
-~# apt-get update
-~# apt-get -y install postgresql-13
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-### PostgreSQL 시작
-``` bash
-~# systemctl enable postgresql
-~# systemctl start postgresql
-~# systemctl status postgresql
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## DB 접속
-기본 마스터 계정인 [**postgres**]로 [**PostgreSQL**]에 접속합니다.
-
-``` bash
-~# sudo -i -u postgres
-~$ psql
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-### 유저 생성
-테스트용 계정 [testuser]를 생성하고 [**\du**] 명령으로 생성된 유저를 확인합니다.
-
-``` sql
-postgres=# create user testuser password &apos;test123$&apos; superuser;
-postgres=# \du 
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### DB 생성 및 소유자 지정
-테스트용 DB를 생성하고 소유자를 지정한 후에 [**\l**] 명령으로 생성된 DB를 확인합니다.  
-
-``` sql
-postgres=# create database testdb owner testuser;
-postgres=# \l
-postgres=# \q
-~$ exit
-``` 
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-### 접속 시도 - 인증 오류
-위에서 생성한 계정으로 접속을 시도해보면, 아래와 같이 인증 오류가 발생합니다.  
-다음 단계에서는 이 인증 오류를 **해결하는 방법 2가지**를 확인해보겠습니다.
-
-``` bash
-~# psql -U testuser -d testdb
-psql: error: connection to server on socket &quot;/var/run/postgresql/.s.PGSQL.5432&quot; failed: FATAL:  Peer authentication failed for user &quot;testuser&quot;
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 인증 오류 해결
-인증 문제를 해결하고 [**PostgreSQL**]에 접속하는 방법은 크게 2가지가 있는데 한가지씩 확인해보겠습니다.
-
-### 방법1 - 동일한 계정 생성
-우선, 처음에 DB 생성 후에 추가했던 [**PostgreSQL**] 유저 계정과 동일한 계정을 OS 사용자에도 추가하는 방법입니다.  
-
-아래와 같이 DB 유저와 동일한 [testuser] 계정을 생성하겠습니다.
-``` bash
-~# adduser testuser
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- **DB 접속**  
-새로 생성한 [**testuser**] 계정으로 전환한 후에 접속을 해보면 문제 없이 접속되는 것을 확인할 수 있습니다.
-
-``` bash
-~# sudo -i -u testuser
-~$ psql -U testuser -d testdb
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-### 방법2 - 인증 설정 파일 수정
-다음으로 인증 관련 설정 파일인 [**pg_hba.conf**] 파일을 수정해서 접속하는 방법을 확인해보겠습니다.  
-
-[**pg_hba.conf**] 파일을 열어보면 아래와 같이 DB 접근 설정 항목들이 있는데 [**local**]과 IPv4용 [**host**]의 METHOD 항목을 보시면 각각 [**peer**]과 [**md5**]으로 설정되어 있는 것을 확인할 수 있습니다.  
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;여기서 [**peer**]는 운영 체제에서 클라이언트의 운영 체제 사용자 이름과 요청한 데이터베이스 사용자 이름이 일치하는지 확인하는 옵션입니다.&quot; %}
-
-이 항목을 [**md5**]로 수정합니다.
-
-``` bash
-~# vi /etc/postgresql/13/main/pg_hba.conf
-```
-
-- 수정 전
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- 수정 후
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- **DB 재시작 후 접속**  
-설정 파일을 수정했으면 [**PostgreSQL**]을 재시작하고 다시 접속해봅니다.  
-이번에는 문제 없이 패스워드를 입력하고 접속 가능한 것을 확인할 수 있습니다.
-
-``` bash
-~# systemctl restart postgresql
-~# psql -U testuser -d testdb
-```
-{% include image.html file=&quot;database/ncloud-database-postgresql-install-connect-guide-ubuntu-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-
-
-
-
-## 기본 배포 버전 설치
-[**PostgreSQL 13**] 버전이 아닌 기본 배포 버전을 설치하려면 아래와 같은 방법으로 설치를 하면 됩니다.  
-2022년 10월 16일 기준 기본 배포 버전은 [12.8]입니다.
-나머지 인증 방법은 위에서 설명한 내용과 동일합니다.
-
-``` bash
-~# apt-get update
-~# apt-get -y install postgresql
-~# systemctl enable postgresql
-~# systemctl start postgresql
-~# systemctl status postgresql
-```
-
-
-## pg_hba.conf 파일 Method 옵션
-[**pg_hba.conf**] 설정 파일의 Method 옵션 리스트는 아래와 같습니다.
-
-- **trust**: 무조건 접속을 허용합니다. 이 방법을 사용하면 PostgreSQL 데이터베이스 서버에 연결할 수 있는 모든 사람이 암호나 다른 인증 없이 원하는 PostgreSQL 사용자로 로그인할 수 있습니다. 
-
-- **reject**: 무조건 연결을 거부합니다. 이것은 그룹에서 특정 호스트 를 &quot; 필터링 &quot;reject 하는 데 유용합니다. 예를 들어 한 라인은 특정 호스트의 연결을 차단할 수 있고 나중 라인은 특정 네트워크의 나머지 호스트가 연결할 수 있도록 합니다.
-
-- **scram-sha-256**: SCRAM-SHA-256 인증을 수행해 사용자의 암호를 확인합니다. 
-
-- **md5**: SCRAM-SHA-256 또는 MD5 인증을 수행해 사용자의 암호를 확인합니다. 
-
-- **password**: 클라이언트가 인증을 위해 암호화되지 않은 암호를 제공하도록 요구합니다. 암호는 네트워크를 통해 일반 텍스트로 전송되기 때문에 신뢰할 수 없는 네트워크에서는 사용해서는 안 됩니다. 
-
-- **gss**: GSSAPI를 사용해 사용자를 인증합니다. 이것은 TCP/IP 연결에만 사용할 수 있습니다. GSSAPI 암호화와 함께 사용할 수 있습니다.
-
-- **sspi**: SSPI를 사용해 사용자를 인증합니다. 이것은 Windows에서만 사용할 수 있습니다. 
-
-- **ident**: 클라이언트의 ident 서버에 연결하여 클라이언트의 운영 체제 사용자 이름을 얻고 요청한 데이터베이스 사용자 이름과 일치하는지 확인합니다. ID 인증은 TCP/IP 연결에서만 사용할 수 있습니다. 로컬 연결에 대해 지정된 경우 피어 인증이 대신 사용됩니다. 
-
-- **peer**: 운영 체제에서 클라이언트의 운영 체제 사용자 이름을 가져와서 요청한 데이터베이스 사용자 이름과 일치하는지 확인합니다. 이것은 로컬 연결에만 사용할 수 있습니다. 
-
-- **lda**: LDAP 서버를 사용해 인증 합니다. 
-
-- **radius**: RADIUS 서버를 사용해 인증합니다. 
-
-- **cert**: SSL 클라이언트 인증서를 사용해 인증합니다. 
-
-- **pam**: 운영 체제에서 제공하는 PAM(Pluggable Authentication Modules) 서비스를 사용해 인증합니다. 
-
-- **bsd**: 운영 체제에서 제공하는 BSD 인증 서비스를 사용해 인증합니다. 
-
-
-
-## 참고 URL
-1. PostgreSQL OS별 다운로드 안내
-	- &lt;a href=&quot;https://www.postgresql.org/download/linux/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.postgresql.org/download/linux/&lt;/a&gt;
-
-2. PostgreSQL pg_hba.conf 파일 옵션 안내
-	- &lt;a href=&quot;https://www.postgresql.org/docs/current/auth-pg-hba-conf.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.postgresql.org/docs/current/auth-pg-hba-conf.html&lt;/a&gt;
-
-
-
-</description>
-            <pubDate>Fri, 07 Oct 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-postgresql-install-connect-guide-ubuntu.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-postgresql-install-connect-guide-ubuntu.html</guid>
-            
-            <category>database</category>
-            
-            <category>vpc</category>
             
             
         </item>

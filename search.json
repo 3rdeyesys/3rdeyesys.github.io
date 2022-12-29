@@ -138,6 +138,17 @@
 
 
 {
+"title": "Windows PowerShell에서 Ncloud API를 호출하는 샘플 예제",
+"tags": "apiwindows",
+"keywords": "API, 파워쉘",
+"url": "/api/ncloud-api-call-powershell-sample.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Kubernetes Service 클러스터 생성 및 제어 가이드 | Linux",
 "tags": "kubernetesvpc",
 "keywords": "k8s, K8S, 쿠버네티스",
