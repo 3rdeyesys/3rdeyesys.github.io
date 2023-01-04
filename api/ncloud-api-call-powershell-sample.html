@@ -769,7 +769,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="백업 서비스 사용 가이드" href="/storage/ncloud-storage-backup-service-guide.html" >백업 서비스 사용 가이드</a></li>          
+          <li><a title="백업 서비스 기본 가이드" href="/storage/ncloud-storage-backup-service-basic-guide.html" >백업 서비스 기본 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="백업 서비스 상세 가이드 - Linux Data" href="/storage/ncloud-storage-backup-service-linux-data-guide.html" >백업 서비스 상세 가이드 - Linux Data</a></li>          
                     
           
           
@@ -1727,8 +1734,7 @@ $("#toc_onoff").click(function() {
     </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="w"> </span><span class="nv">$ncloud_secretkey</span><span class="w"> 
 </span><span class="p">)</span><span class="w">
 </span><span class="p">{</span><span class="w">   
-    </span><span class="nv">$datetime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Get-Date</span><span class="p">)</span><span class="o">.</span><span class="nf">ToUniversalTime</span><span class="p">()</span><span class="w">
-    </span><span class="nv">$unixtimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">System.Math</span><span class="p">]::</span><span class="n">Truncate</span><span class="p">((</span><span class="n">Get-Date</span><span class="w"> </span><span class="nt">-Date</span><span class="w"> </span><span class="nv">$datetime</span><span class="w"> </span><span class="nt">-UFormat</span><span class="w"> </span><span class="o">%</span><span class="nx">s</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w">
+    </span><span class="nv">$unixtimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">DateTimeOffset</span><span class="p">]::</span><span class="n">Now.ToUnixTimeSeconds</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w">
     
     </span><span class="nv">$space</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">" "</span><span class="w">
     </span><span class="nv">$new_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"</span><span class="se">`n</span><span class="s2">"</span><span class="w">
@@ -1784,8 +1790,7 @@ $("#toc_onoff").click(function() {
 <h2 id="코드-상세-설명">코드 상세 설명</h2>
 
 <h3 id="유닉스-타임-스탬프">유닉스 타임 스탬프</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$datetime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Get-Date</span><span class="p">)</span><span class="o">.</span><span class="nf">ToUniversalTime</span><span class="p">()</span><span class="w">
-</span><span class="nv">$unixtimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">System.Math</span><span class="p">]::</span><span class="n">Truncate</span><span class="p">((</span><span class="n">Get-Date</span><span class="w"> </span><span class="nt">-Date</span><span class="w"> </span><span class="nv">$datetime</span><span class="w"> </span><span class="nt">-UFormat</span><span class="w"> </span><span class="o">%</span><span class="nx">s</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w">
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$unixtimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">DateTimeOffset</span><span class="p">]::</span><span class="n">Now.ToUnixTimeSeconds</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w">
 </span></code></pre></div></div>
 <p>네이버 클라우드 API를 호출할 때는 13자리 형식의 유닉스 타임 스탬프가 필요합니다.<br />
 계산한 날짜 값에 1000을 곱해서 13자리로 만듭니다.</p>
@@ -1967,9 +1972,9 @@ $("#toc_onoff").click(function() {
           </a>
         		
         </div>
-        &copy;2022 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
+        &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-12-29<br/> Site last generated: 2022-12-29 <br />        
+        <span>Page last updated:</span> 2022-12-29<br/> Site last generated: 2023-01-04 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

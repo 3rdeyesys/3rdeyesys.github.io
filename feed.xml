@@ -5,10 +5,234 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 29 Dec 2022 16:12:47 +0900</pubDate>
-        <lastBuildDate>Thu, 29 Dec 2022 16:12:47 +0900</lastBuildDate>
+        <pubDate>Wed, 04 Jan 2023 16:31:30 +0900</pubDate>
+        <lastBuildDate>Wed, 04 Jan 2023 16:31:30 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud 백업 서비스 사용 가이드 - Linux Data</title>
+            <description>## 개요
+Ncloud(네이버 클라우드)의 Backup 상품은 기존에 별도의 신청서를 작성해서 사용하던 [**Managed Backup**]의 대체 상품으로 출시된, 콘솔에서 바로 이용할 수 있는 상품으로 이 백업 상품을 이용해 리눅스 파일 데이터를 백업하는 방법을 알아보도록 하겠습니다.
+
+
+## 상품위치
+Backup 상품은 [**Console**] - [**Services**] - [**Storage**]에 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 테스트 서버
+백업을 테스트할 리눅스 서버를 아래와 같이 미리 준비했습니다.  
+
+그리고, 백업과 복원에 필요한 디렉토리를 다음과 같이 생성했습니다.
+- 백업할 디렉토리: /backup-data
+- 복원할 디렉토리: /restore
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 리소스 생성
+먼저 백업 혹은 복구를 수행할 대상 서버를 설정합니다.  
+Backup 탭에서 [**Backup**] - [**Resource**]로 이동해서 [리소스 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+### 리소스 생성 방법
+
+1. 리소스 이름을 입력합니다.
+2. 백업 서버가 소속된 존(zone)을 선택합니다.
+3. 백업 대상이 되는 서버를 리소스에 등록합니다.
+4. 서버가 위치한 zone 선택 및 대상 서버를 선택하며 파일백업 및 데이터베이스 백업 여부에 따라 체크박스를 선택합니다.
+5. 에이전트 설치에 사용될 아이디 및 비밀번호를 입력합니다. 
+
+{% include warning.html title=&quot;**주의**&quot; content=&quot;아이디는 백업 대상 서버의 **root 계정** 또는 백업 및 리스토어가 진행되는 **디렉터리와 파일에 대한 소유권한을 가진 계정**을 입력해야 합니다.&quot; %}
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;아이디와 비밀번호는 에이전트 설치를 위해 **백업 대상 서버 접속 시 일회성으로 사용**하며, 별도로 저장되지 않습니다.&quot; %}
+
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+내용 최종 확인 후 리소스 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+### 백업 에이전트 설치 확인
+리소스가 생성 되면서 백업 에이전트가 설치되는데 정상적으로 설치가 완료되면 [생성 완료]라는 메시지가 나타납니다.  
+(에이전트 설치는 대략 5분 정도의 시간이 걸리며, 상단의 [새로 고침] 버튼을 클릭하면 확인할 수 있습니다.)
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+**에이전트 설치 실패**  
+아이디/비번을 잘못 입력했거나 기타의 이유로 에이전트 설치가 실패했을 경우에는 [추가] 버튼을 클릭해서 다시 설치하면 됩니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 저장소 생성
+다음으로 백업 데이터를 저장할 저장소를 만들고 관리합니다.  
+Backup 탭에서 [**Backup**] - [**Storage**]로 이동하여 저장소 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+저장소 이름과 백업 저장소가 위치할 존(zone)을 지정 후 다음을 클릭해서 저장소를 생성합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+### 소산 백업용 스토리지 추가 생성
+추후 Remote Backup 메뉴에서 소산 백업(이중화 백업)에 사용할 스토리지를 미리 추가로 생성하도록 하겠습니다.  
+현재 KR-2존에 생성한 스토리지는 그대로 두고 KR-1존에 test2-backup-storage라는 이름으로 추가 생성했습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 정책 생성
+다음은 저장소에 대한 정책을 설정 및 관리합니다.  
+Backup 탭에서 [**Backup**] - [**Policy**]로 이동하여 정책 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+**정책 생성**  
+정책 이름, 보관 주기, 생성한 저장소가 위치한 존을 선택한 후 [연결 저장소]가 맞는지 확인 후 정책을 생성합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+**보관 기간은 백업 주기의 최소 2배 이상**으로 설정해야 합니다. &lt;br /&gt;
+&amp;#8259; 일간 백업 : 최소 7일 이상&lt;br /&gt;
+&amp;#8259; 주간 백업 : 최소 14일 이상&lt;br /&gt;
+&amp;#8259; 월간 백업 : 최소 60일 이상
+&quot; %}
+
+
+## 작업 생성
+다음으로 에이전트가 설치된 리소스와 사전에 설정한 저장소 및 정책 등을 활용하여 실제 백업을 수행하는 작업을 생성하고 관리합니다.  
+
+Backup 탭에서 [**Backup**] - [**Job**]으로 이동하여 작업 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+작업 이름과 대상 리소스(서버) 백업 유형 및 백업 대상 디렉터리 지정을 한 후  Policy 메뉴에서 생성한 백업 정책을 선택합니다.
+
+{% include warning.html title=&quot;**주의**&quot; content=&quot;Job과 Policy는 1:1 매핑만 가능합니다.&quot; %}
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 일정 생성
+마지막으로 작업을 수행하는 일정에 대해 계획하고 관리합니다.  
+Backup 텝에서 [**Backup**] - [**Schedule**]로 이동하여 일정 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+일정 이름과 job에서 등록한 서버 백업 작업을 선택 후 백업 방식, 주기, 시작 요일과 시간을 구성한 후 일정을 생성합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 소산 백업 (이중화 백업)
+백업 상품의 소산 백업을 이용해 기존에 수행한 백업 데이터를 지리적으로 떨어진 다른 존으로 이중화할 수 있습니다.
+
+Backup 탭에서 [**Backup**] - [**Remote Backup**] 으로 이동하여 소산 설정을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+소산 이름, job에서 등록한 작업 선택, 소산 저장소가 위치한 존 선택, 보관 주기, 소산 백업 주기를 설정 후 소산 백업 일정을 등록합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;소산 일정에 백업 작업이 완료되어 있지 않은 경우, 다음 소산 일정에 소산이 수행됩니다.&quot; %}
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-13.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 백업 완료 확인
+기본 백업과 소산 백업까지 모두 완료되면 아래와 같이 [**Report**] 메뉴에서 결과를 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 복원
+복원 기능을 이용하면 위에서 백업한 데이터를 Restore 메뉴에서 원하는 시점의 특정 데이터를 선택해서 원하는 리소스에 복원할 수 있습니다.
+
+ [**Job**]에서 설정한 /backup-data 디렉터리에 저장되어 있는 파일들을 /restore 디렉터리로 복원을 진행해 보겠습니다. 현재 /restore 디렉터리는 비어있는 상태입니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+Backup 탭에서 [**Restore**]로 이동하여 복원 설정을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+복원 설정에서는 백업된 데이터 중 어떤 데이터로 복원할 것인지에 대한 세부항목을 선택합니다.  
+**복원 시점**은 [**가장 최근 백업 시점**] 또는 백업된 데이터들 중에서 [**직접 지정**]도 가능합니다.  
+**복원 대상**은 Job에서 설정한 디렉터리를 선택하고 [다음]을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+타깃 설정에서는 백업한 데이터를 복원할 서버와 디렉터리를 지정하고 다음을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+최종 내용을 확인 후 복원 시작을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+복원 시작 후 복원 상태 확인이 가능합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+작업이 종료되면 /restore 경로에 데이터가 정상적으로 복원된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## Report
+
+백업 혹은 복구에 대한 작업 결과를 일간/월간 단위의 보고서로 확인할 수 있습니다.
+
+Backup 텝에서 **[Report]** 로 이동하여 확인합니다.
+
+Backup Report에서 발생하는 이벤트는 이메일 수신 신청으로 메일로 알림을 받도록 설정이 가능합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+항목에서 담당자 이름 및 메일 주소를 확인하고 [**추가**] 버튼을 클릭한 후 저장합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+등록이 완료되면 아래와 같이 메일로 리포트를 받아보실 수 있으며 **매일 오전 10시 일간 리포트**와 **매월 1일 월간 리포트**가 전송됩니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 백업 리소스 삭제
+더 이상 백업 서비스를 이용하지 않게 되어 백업 리소스를 삭제하려면 위에서 생성했던 순서의 반대로 삭제를 진행해야 합니다.  
+
+우선, [Backup] - [Resource]에서 해당 리소스를 선택하고 [리소스 삭제] 버튼을 클릭해보겠습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-linux-data-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+그러면 다음과 같이 리소스와 함께 설치-생성되었던 [Agent], [Job], [Schedule], [Remote Backup]를 먼저 삭제해야 한다는 안내 메시지가 나타납니다.  
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
+&amp;#8259; 백업 리소스 삭제는 아래와 같이 생성 순서와 반대로 삭제해야 합니다. &lt;br /&gt;
+&amp;#8259; 
+[Remote Backup] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
+[Schedule] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
+[Job] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
+[Agent] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
+[Resource]
+&quot; %}
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-16.png&quot; width=&quot;480&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  Ncloud 백업 상품 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/backup-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/backup-overview&lt;/a&gt;
+
+</description>
+            <pubDate>Wed, 04 Jan 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-linux-data-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-linux-data-guide.html</guid>
+            
+            <category>backup</category>
+            
+            <category>linux</category>
+            
+            
+        </item>
         
         <item>
             <title>Windows PowerShell에서 Ncloud API를 호출하는 샘플 예제</title>
@@ -29,8 +253,7 @@ function Sign-Request(
     [string] $ncloud_secretkey 
 )
 {   
-    $datetime = (Get-Date).ToUniversalTime()
-    $unixtimestamp = [System.Math]::Truncate((Get-Date -Date $datetime -UFormat %s)) * 1000
+    $unixtimestamp = [DateTimeOffset]::Now.ToUnixTimeSeconds() * 1000
     
     $space = &quot; &quot;
     $new_line = &quot;`n&quot;
@@ -87,8 +310,7 @@ Invoke-WebRequest -Uri $api_full_url -Method $apicall_method -Headers $headers  
 
 ### 유닉스 타임 스탬프
 ``` powershell
-$datetime = (Get-Date).ToUniversalTime()
-$unixtimestamp = [System.Math]::Truncate((Get-Date -Date $datetime -UFormat %s)) * 1000
+$unixtimestamp = [DateTimeOffset]::Now.ToUnixTimeSeconds() * 1000
 ```
 네이버 클라우드 API를 호출할 때는 13자리 형식의 유닉스 타임 스탬프가 필요합니다.  
 계산한 날짜 값에 1000을 곱해서 13자리로 만듭니다.
@@ -232,6 +454,272 @@ Invoke-WebRequest -Uri $api_full_url -Method $apicall_method -Headers $headers  
             <category>api</category>
             
             <category>windows</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Ncloud 백업 서비스 기본 가이드</title>
+            <description>## 개요
+Ncloud(네이버 클라우드)의 기존에 별도의 신청서를 작성해서 사용하던 Managed Backup의 대체 상품으로 출시된 콘솔에서 바로 이용할 수 있는 Backup 상품의 기본 가이드를 알아보도록 하겠습니다.
+
+## 서비스 특징
+
+- **다양한 플랫폼 및 데이터베이스 지원**: Linux, Windows 계열 등 다양한 버전의 운영 체제를 지원하며 OS의 데이터 영역 및 서버에 설치된 데이터베이스의 온라인 백업이 가능합니다.
+- **간편한 설치와 백업 단위 선택**: 네이버 클라우드 웹 콘솔에서 간단한 설정을 통해 백업을 받고자 하는 리소스에 에이전트의 설치부터 백업 정책 구성까지 완료할 수 있습니다.
+- **소산 백업 지원**: 기존에 수행한 백업 데이터를 지리적으로 떨어진 다른 존으로 이중화하여 데이터 안정성을 더욱 향상시킬 수 있습니다.
+- **리포트 기능 제공**: 백업 혹은 복구에 대한 작업 결과를 일간/월간 단위 보고서로 확인할 수 있고 이메일로 리포팅을 받을 수 있습니다.
+
+## 제약 사항
+Backup 서비스의 제약 사항은 다음과 같습니다.
+
+### 백업 가능 대상	
+- **서버**: Data 영역
+- **DB**: 서버 설치형DB (MSSQL, MySQL, PostgreSQL)
+
+### 백업 가능한 데이터 크기
+- 계정당 1TB
+
+## 이용 요금
+Backup 서비스는 유료 서비스로 이용 요금은 기본료, 데이터 저장량, 복원 요금, 네트워크 전송 요금을 합산해 부과됩니다.
+
+- **기본료**: 백업 대상 소스 서버 대수당 요금 부과
+- **데이터 저장량**: 백업된 데이터 저장량에 대해 월 평균 사용량에 대한 스토리지 요금 부과
+- **복구 요금**: 백업본 복구시 복구대상이 되는 원본 데이터 전체 용량에 대한 요금 부과
+- **네트워크 전송 요금**: 백업 및 복구간 발생한 존간/리전간 네트워크 전송 요금 부과
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; **데이터 저장량**은 월 평균 사용량 기준입니다. &lt;br /&gt;
+&amp;#8259; **복구 요금**은 원본(소스) 용량 기준으로 당월 수행한 전체 복구 작업에 대한 총량 기준으로 요금이 부과됩니다. &lt;br /&gt;
+&amp;#8259; **동일 존 내**에서 백업 수행 및 복구 시 네트워크 전송 요금은 무료입니다.
+&quot; %}
+
+## 백업 서비스 지원 버전
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;td&gt;구분&lt;/td&gt;
+        &lt;td&gt;지원 범위&lt;/td&gt;
+        &lt;td&gt;비고&lt;/td&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;MSSQL Server&lt;/td&gt;
+            &lt;td&gt;2005, 2008, 2008R2, 2012, 2014, 2016, 2017, 2019&lt;/td&gt;
+            &lt;td&gt;x86, x64&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;MySQL&lt;/td&gt;
+            &lt;td&gt;5.5, 5.6, 5.7, 8.x&lt;br /&gt;
+                Maria DB 5.5, 10.0, 10.1~10.6
+            &lt;/td&gt;
+            &lt;td&gt;Redhat/CentOS 6.x~8.x : x86, x64&lt;br /&gt;
+                Ubuntu 14.0 ~ 20.04 : x64
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;PostgreSQL&lt;/td&gt;
+            &lt;td&gt;9.2 ~ 14.x&lt;/td&gt;
+            &lt;td&gt;Redhat/CentOS 5.x : x86, x64&lt;br /&gt;
+                Redhat/CentOS 6.x ~ 8.x : x64&lt;br /&gt;
+                Ubuntu 12.04 ~ 22.04 : x86, x64
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Windows File System&lt;/td&gt;
+            &lt;td&gt;7, 8, 8.1, 10, 2008, 2008 R2, 2016, 2019, 2022&lt;/td&gt;
+            &lt;td&gt;x86, x64&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Linux File System&lt;/td&gt;
+            &lt;td&gt;Redhat/CentOS : 5.x ~ 8.x&lt;br /&gt;
+                Ubuntu 8.04 ~ 21.04
+            &lt;/td&gt;
+            &lt;td&gt;Redhat/CentOS 5.x ~ 7.x : x86, x64&lt;br /&gt;
+                Redhat/CentOS 8.x : x64
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+## 상세 가이드
+- &lt;a href=&quot;/storage/ncloud-storage-backup-service-linux-data-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;Linux Data 백업 가이드&lt;/a&gt;
+
+
+
+## 참고 URL
+1.  Ncloud 백업 상품 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/backup-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/backup-overview&lt;/a&gt;</description>
+            <pubDate>Thu, 22 Dec 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-basic-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-basic-guide.html</guid>
+            
+            <category>backup</category>
+            
+            <category>linux</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
+다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
+그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
+&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
+&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
+&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(Classic)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
+            
+            <category>classic</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
             
             
         </item>
@@ -426,169 +914,6 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
             <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</guid>
             
             <category>vpc</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
-다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
-그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
-&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
-&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
-&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 개인정보 수집 및 이용에 동의해야 합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(Classic)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
-            
-            <category>classic</category>
             
             <category>ssl</category>
             
@@ -1466,227 +1791,6 @@ Disk Management 툴은 아래의 방법으로 간단하게 실행할 수 있습�
             <category>windows</category>
             
             <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud 백업 서비스 사용 가이드</title>
-            <description>## 개요
-Ncloud(네이버 클라우드)의 기존에 별도의 신청서를 작성해서 사용하던 Managed Backup의 대체 상품으로 출시된 콘솔에서 바로 이용할 수 있는 Backup 상품의 설정 방법을 알아보도록 하겠습니다.
-
-## 상품 위치
-Backup 상품은 [**Console**] - [**Services**] - [**Storage**]에 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-18.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-## 리소스 생성
-먼저 [**Backup**] - [**Backup**] - [**Resource**]에서 리소스를 생성합니다. 
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-백업대상이 되는 서버를 리소스에 등록합니다.  
-
-서버가 위치한 zone선택 및 대상 서버를 선택하며 파일백업 및 데이터베이스 백업여부에 따라 체크박스를 선택합니다.  
-
-아이디 및 비밀번호는 백업 에이전트원격 설치를 위해 필요하며 계정정보는 네이버클라우드에 보관되지 않는1회성으로 사용됩니다. **해당 계정으로 서버에서 에이전트가 작동되기 때문에 별도 유저계정을 생성하고 정보를 입력하여 주시고 서버에서는 계정을 삭제하시면 안됩니다.**
-
-{% include warning.html title=&quot;주의&quot; content=&quot;**아이디**는 **백업파일과 리스토어 폴더의 접근권한**을 가지는 계정을 넣으셔야하며 백업에이전트는 해당 계정으로 설치및 작동을 하게됩니다.&quot; %}
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-내용 최종 확인 후 리소스 생성을 눌러줍니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-리소스 생성 후 agent설치작업 진행 내역을 확인 할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-## Storage 구성
-Storage메뉴는 백업 데이터를 보관할 저장소를 생성하는 메뉴입니다.
-
-저장소이름과 백업저장소가 위치할 존을 지정 후 다음을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-최종 확인 후 생성을 눌러줍니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-## Policy
-Policy는 백업된 데이터의 보관주기를 설정하는 메뉴입니다.
-
-정책이름과 보관주기 생성한 저장소가 위치한 존을 선택 한 후 저장소이름이 맞다면 다음을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-내용 최종 확인 후 생성을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-## Job
-각서버의 백업 대상 설정을 하는 메뉴입니다.
-
-작업이름과 대상 리소스(서버) 백업유형 및 백업 대상 디렉토리 지정을 한 후 백업 정책을 선택해줍니다. 백업정책은 policy메뉴에서 생성한 정책입니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-최종 확인 후 생성을 눌러 줍니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-설정 완료 후 등록된 내용을 확인 할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-## Schedule
-job에서 등록한 백업작업을 백업 스케줄을 등록하는 메뉴 입니다.  
-
-일정 생성을 눌러 생성을 시작합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-일정이름과 job에서 등록한 서버 백업작업을 선택 후 백업 방식, 주기, 시작요일과 시간을 구성한 후 다음을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-최종 확인 후 생성을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-
-## Remote Backup
-Remote backup은 저장소에 보관 데이터를 원격지에 소산백업을 하는 메뉴입니다.  
-소산 설정이 필요한 경우 기존 생성한 저장소가 위치한 zone이 아닌 다른 존에 저장소를 생성을 미리 해두어야합니다.  
-
-
-소산이름과 job에서 등록한 작업 선택 소상 저장소가 위치한 존을 선택한 후 보관주기 소산백업 주기 설정을 선택 후 다음을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-등록한 작업의 백업이 완료되지 않을 경우 소산 백업은 다음 일정의 소산 일정에 진행되며 팝업으로 안내가 됩니다
-
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-16.png&quot; width=&quot;600&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-최종 확인 후 시작을 클릭힙니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 파일과 데이터베이스 데이터 등을 백업할 수 있는 백업 서비스 상품의 사용 가이드&quot; caption=&quot;&quot; %}</description>
-            <pubDate>Tue, 01 Nov 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-guide.html</guid>
-            
-            <category>backup</category>
-            
-            <category>database</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>백업 서비스 가이드와 신청 절차</title>
-            <description>## 개요
-백업 솔루션을 사용해 서버의 데이터 즉, 소스 등의 파일과 데이터베이스 데이터를 정기적으로 백업하고 보관하는 서비스입니다.
-
-## 이용 방법
-
-{% include note.html content=&quot;Ncloud(네이버 클라우드)의 백업 서비스는 이용자가 직접 모든 과정을 마칠 수 없고, 고객센터에 백업신청서를 제출해야 백업이 진행됩니다.&quot; %}
-
-## 지원 OS와 DB 
-- Centos : 6.3, 6.6, 7.2, 7.3
-- ubuntu : 16.04, 18.04
-- Windows : 2012 R2, 2016
-- mssql : 2008std, 2012std, 2014std, 2016std, 2016exp
-- mysql : 5.7.17, 5.6.34
-- 모두 64bit만 지원
-
-
-## 백업 방식
-
-### 파일백업
-- 일회성
-- 1일 1회 전체 백업
-- 1주 ~ 4주에 1회 전체 백업
-- 1주 1회 전체 백업 및 1일 1회 증분 백업
-
-### DB 백업
-- mssql 1일 1회 전체 백업
-- mssql 1주 1회 전체 백업
-- mssql 1주 1회 전체 백업 및 1일 1회 증분 백업
-- mysql 1일 1회 전체 백업
-- mysql 1주 1회 전체 백업
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;증분 백업(변경된 데이터만 백업)의 경우 DBMS는 정합성을 보장하나 파일에 대해서는 정합성을 보장하지 않음&quot; %}
-
-## 백업 신청 절차
-1. 네이버 클라우드 플랫폼 포털(https://www.ncloud.com)에 접속하여 로그인
-2. 고객지원 &gt; 자료를 클릭하여 **네이버 클라우드 플랫폼 백업 서비스 신청서**와 **백업 Agent**를 다운로드
-3. 다운로드한 신청서 양식의 내용에 예를 참고하여 알맞게 기입.
-4. 다운로드한 백업 Agent는 OS에 맞는 버전을 VM에 복사하여 설치
-5. 백업 Agent가 설치 완료되었다면 네이버 클라우드 플랫폼 포털 내 백업 상품 소개 페이지의 &quot;이용 문의하기&quot;를 클릭
-6. 문의하기 페이지에서 제목을 &quot;**백업서비스 신청**&quot;으로 기입하고 작성한 백업 서비스 신청서를 첨부하면 백업 신청이 완료
-
-
-## 백업 Agent 설치 방법
-
-### Windows
-1. 원격 데스크톱을 이용하여 VM 서버에 원격 접속
-2. 다운로드한 백업 Agent 설치 파일(NCP_Backup_Windows.zip)을 VM 내 {==C:\Temp==} 하위에 복사하여 압축을 풀면 NCP 이름으로 총 5개의 파일이 생성
-3. NCP_Backup_Install.bat을 실행하면 자동으로 설치 및 구성이 진행되며 설치 완료
-4. 이후 백업 Agent 관련 파일들은 자동으로 삭제됨
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;백업 Agent설치 후 파일이 자동 삭제되기에 반드시 설치위치는 C:\Temp에서 수행을 권고&quot; %}
-
-
-### Linux
-1. Winscp 등을 이용하여 VM 서버의 {==/tmp==} 하위로 백업 Agent 프로그램(NCP_Backup_Linux.tar.gz)을 복사
-2. 원격 접속 프로그램(ex.putty)을 이용하여 VM 서버에 원격 접속
-3. 백업 Agent 프로그램을 저장한 /tmp 폴더로 이동 후 **tar xvfz NCP_Backup_Linux.tar.gz**을 실행하여 압축 해제
-4. NCP_Backup_Install.sh 파일을 실행하면 자동으로 백업 Agent 설치 및 구성이 완료
-5. 이후 관련 파일은 자동으로 삭제됨
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;백업 Agent설치 후 파일이 자동 삭제되기에 반드시 설치위치는/tmp에서 수행을 권고&quot; %}
-
-
-## 백업 Agent 정보
-
-### 백업 S/W
-- Quest Netvault(구 Dell Netvault)
-
-### 백업 S/W 통신 정보
-- TCP/UDP 20031~21631
-
-### 백업 프로그램 설치 위치
-- Linux: /usr/Netvault
-- Windows: C:\Program Files (x86)\Quest Software\NetVault Backup
-
-
-## Secure Zone에서 백업하기
-- Secure Zone에서 사용 가능한 Agent가 별도로 존재하지 않기 때문에, 프록시 구성을 하던가 해서 Agent를 설치, 실행해야 함.
-
-
-## 참고 URL
-&lt;a href=&quot;https://guide.ncloud-docs.com/docs/storage-storage-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/storage-storage-5-1.html&lt;/a&gt;
-</description>
-            <pubDate>Fri, 28 Oct 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud_storage_backup_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud_storage_backup_guide.html</guid>
-            
-            <category>backup</category>
-            
-            <category>database</category>
             
             
         </item>

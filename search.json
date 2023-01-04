@@ -413,10 +413,32 @@
 
 
 {
+"title": "Ncloud 백업 서비스 기본 가이드",
+"tags": "backuplinux",
+"keywords": "BackUp, Storage, Linux",
+"url": "/storage/ncloud-storage-backup-service-basic-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Ncloud 백업 서비스 사용 가이드",
 "tags": "backupdatabase",
 "keywords": "BackUp, Storage, DataBase",
 "url": "/storage/ncloud-storage-backup-service-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Ncloud 백업 서비스 사용 가이드 - Linux Data",
+"tags": "backuplinux",
+"keywords": "BackUp, Storage, Linux",
+"url": "/storage/ncloud-storage-backup-service-linux-data-guide.html",
 "summary": ""
 }
 ,
