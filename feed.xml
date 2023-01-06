@@ -5,10 +5,235 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 04 Jan 2023 16:31:30 +0900</pubDate>
-        <lastBuildDate>Wed, 04 Jan 2023 16:31:30 +0900</lastBuildDate>
+        <pubDate>Fri, 06 Jan 2023 11:34:24 +0900</pubDate>
+        <lastBuildDate>Fri, 06 Jan 2023 11:34:24 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud 백업 서비스 사용 가이드 - Windows Data</title>
+            <description>## 개요
+Ncloud(네이버 클라우드)의 Backup 상품은 기존에 별도의 신청서를 작성해서 사용하던 [**Managed Backup**]의 대체 상품으로 출시된, 콘솔에서 바로 이용할 수 있는 상품으로 이 백업 상품을 이용해 Windows 파일 데이터를 백업하는 방법을 알아보도록 하겠습니다.
+
+
+## 상품위치
+Backup 상품은 [**Console**] - [**Services**] - [**Storage**]에 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 테스트 서버
+백업을 테스트할 리눅스 서버를 아래와 같이 미리 준비했습니다.  
+
+그리고, 백업과 복원에 필요한 디렉토리를 다음과 같이 생성했습니다.
+- 백업할 디렉토리: C:\Backup-Data
+- 복원할 디렉토리: C:\Restore
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 리소스 생성
+먼저 백업 혹은 복구를 수행할 대상 서버를 설정합니다.  
+Backup 탭에서 [**Backup**] - [**Resource**]로 이동해서 [리소스 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+### 리소스 생성 방법
+
+1. 리소스 이름을 입력합니다.
+2. 백업 서버가 소속된 존(zone)을 선택합니다.
+3. 백업 대상이 되는 서버를 리소스에 선택합니다.
+4. 호스트 이름에는 백업 대상 서버의 이름을 입력합니다.
+5. 서버가 위치한 zone 선택 및 대상 서버를 선택하며 파일백업 및 데이터베이스 백업 여부에 따라 체크박스를 선택합니다.
+6. 에이전트 설치에 사용될 아이디 및 비밀번호를 입력합니다. 
+
+{% include warning.html title=&quot;**주의**&quot; content=&quot;아이디는 백업 대상 서버의 **Administrator 계정** 또는 백업 및 리스토어 수행 시 **해당 디렉터리와  파일에 대한 접근 권한을 가지고 있는 user 계정**을 입력해야합니다.&quot; %}
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;아이디와 비밀번호는 에이전트 설치를 위해 **백업 대상 서버 접속 시 일회성으로 사용**하며, 별도로 저장되지 않습니다.&quot; %}
+
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+내용 최종 확인 후 리소스 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+### 백업 에이전트 설치 확인
+리소스가 생성 되면서 백업 에이전트가 설치되는데 정상적으로 설치가 완료되면 [생성 완료]라는 메시지가 나타납니다.  
+(에이전트 설치는 대략 5분 정도의 시간이 걸리며, 상단의 [새로 고침] 버튼을 클릭하면 확인할 수 있습니다.)
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+**에이전트 설치 실패**  
+아이디/비번을 잘못 입력했거나 기타의 이유로 에이전트 설치가 실패했을 경우에는 [추가] 버튼을 클릭해서 다시 설치하면 됩니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 저장소 생성
+다음으로 백업 데이터를 저장할 저장소를 만들고 관리합니다.  
+Backup 탭에서 [**Backup**] - [**Storage**]로 이동하여 저장소 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+저장소 이름과 백업 저장소가 위치할 존(zone)을 지정 후 다음을 클릭해서 저장소를 생성합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+### 소산 백업용 스토리지 추가 생성
+추후 Remote Backup 메뉴에서 소산 백업(이중화 백업)에 사용할 스토리지를 미리 추가로 생성하도록 하겠습니다.  
+현재 KR-2존에 생성한 스토리지는 그대로 두고 KR-1존에 test2-backup-storage라는 이름으로 추가 생성했습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 정책 생성
+다음은 저장소에 대한 정책을 설정 및 관리합니다.  
+Backup 탭에서 [**Backup**] - [**Policy**]로 이동하여 정책 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+**정책 생성**  
+정책 이름, 보관 주기, 생성한 저장소가 위치한 존을 선택한 후 [연결 저장소]가 맞는지 확인 후 정책을 생성합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+**보관 기간은 백업 주기의 최소 2배 이상**으로 설정해야 합니다. &lt;br /&gt;
+&amp;#8259; 일간 백업 : 최소 7일 이상&lt;br /&gt;
+&amp;#8259; 주간 백업 : 최소 14일 이상&lt;br /&gt;
+&amp;#8259; 월간 백업 : 최소 60일 이상
+&quot; %}
+
+
+## 작업 생성
+다음으로 에이전트가 설치된 리소스와 사전에 설정한 저장소 및 정책 등을 활용하여 실제 백업을 수행하는 작업을 생성하고 관리합니다.  
+
+Backup 탭에서 [**Backup**] - [**Job**]으로 이동하여 작업 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+작업 이름과 대상 리소스(서버) 백업 유형 및 백업 대상 디렉터리 지정을 한 후  Policy 메뉴에서 생성한 백업 정책을 선택합니다.
+
+{% include warning.html title=&quot;**주의**&quot; content=&quot;Job과 Policy는 1:1 매핑만 가능합니다.&quot; %}
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 일정 생성
+마지막으로 작업을 수행하는 일정에 대해 계획하고 관리합니다.  
+Backup 탭에서 [**Backup**] - [**Schedule**]로 이동하여 일정 생성을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+일정 이름과 job에서 등록한 서버 백업 작업을 선택 후 백업 방식, 주기, 시작 요일과 시간을 구성한 후 일정을 생성합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 소산 백업 (이중화 백업)
+백업 상품의 소산 백업을 이용해 기존에 수행한 백업 데이터를 지리적으로 떨어진 다른 존으로 이중화할 수 있습니다.
+
+Backup 탭에서 [**Backup**] - [**Remote Backup**] 으로 이동하여 소산 설정을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+소산 이름, job에서 등록한 작업 선택, 소산 저장소가 위치한 존 선택, 보관 주기, 소산 백업 주기를 설정 후 소산 백업 일정을 등록합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;소산 일정에 백업 작업이 완료되어 있지 않은 경우, 다음 소산 일정에 소산이 수행됩니다.&quot; %}
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-13.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 백업 완료 확인
+기본 백업과 소산 백업까지 모두 완료되면 아래와 같이 [**Report**] 메뉴에서 결과를 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-18.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 복원
+복원 기능을 이용하면 위에서 백업한 데이터를 Restore 메뉴에서 원하는 시점의 특정 데이터를 선택해서 원하는 리소스에 복원할 수 있습니다.
+
+ [**Job**]에서 설정한 C:\Backup-Data 디렉터리에 저장되어 있는 파일들을 C:\Restore 디렉터리로 복원을 진행해 보겠습니다. 현재 /Restore 디렉터리는 비어있는 상태입니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-08.png&quot; width=&quot;600&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+Backup 탭에서 [**Restore**]로 이동하여 복원 설정을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+복원 설정에서는 백업된 데이터 중 어떤 데이터로 복원할 것인지에 대한 세부항목을 선택합니다.  
+**복원 시점**은 [**가장 최근 백업 시점**] 또는 백업된 데이터들 중에서 [**직접 지정**]도 가능합니다.  
+**복원 대상**은 Job에서 설정한 디렉터리를 선택하고 [다음]을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+타깃 설정에서는 백업한 데이터를 복원할 서버와 디렉터리를 지정하고 다음을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+최종 내용을 확인 후 복원 시작을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+복원 시작 후 복원 상태 확인이 가능합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+작업이 종료되면 /restore 경로에 데이터가 정상적으로 복원된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-14.png&quot; width=&quot;600&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## Report
+
+백업 혹은 복구에 대한 작업 결과를 일간/월간 단위의 보고서로 확인할 수 있습니다.
+
+Backup 탭에서 [**Report**] 로 이동하여 확인합니다.
+
+Backup Report에서 발생하는 이벤트는 이메일 수신 신청으로 메일로 알림을 받도록 설정이 가능합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+항목에서 담당자 이름 및 메일 주소를 확인하고 [**추가**] 버튼을 클릭한 후 저장합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+등록이 완료되면 아래와 같이 메일로 리포트를 받아보실 수 있으며 **매일 오전 10시 일간 리포트**와 **매월 1일 월간 리포트**가 전송됩니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 백업 리소스 삭제
+더 이상 백업 서비스를 이용하지 않게 되어 백업 리소스를 삭제하려면 위에서 생성했던 순서의 반대로 삭제를 진행해야 합니다.  
+
+우선, [Backup] - [Resource]에서 해당 리소스를 선택하고 [리소스 삭제] 버튼을 클릭해보겠습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+그러면 다음과 같이 리소스와 함께 설치-생성되었던 [Agent], [Job], [Schedule], [Remote Backup]를 먼저 삭제해야 한다는 안내 메시지가 나타납니다.  
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
+&amp;#8259; 백업 리소스 삭제는 아래와 같이 생성 순서와 반대로 삭제해야 합니다. &lt;br /&gt;
+&amp;#8259; 
+[Remote Backup] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
+[Schedule] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
+[Job] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
+[Agent] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
+[Resource]
+&quot; %}
+{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-16.png&quot; width=&quot;480&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  Ncloud 백업 상품 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/backup-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/backup-overview&lt;/a&gt;
+
+</description>
+            <pubDate>Fri, 06 Jan 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-windows-data-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-windows-data-guide.html</guid>
+            
+            <category>backup</category>
+            
+            <category>windows</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud 백업 서비스 사용 가이드 - Linux Data</title>
@@ -116,7 +341,7 @@ Backup 탭에서 [**Backup**] - [**Job**]으로 이동하여 작업 생성을 �
 
 ## 일정 생성
 마지막으로 작업을 수행하는 일정에 대해 계획하고 관리합니다.  
-Backup 텝에서 [**Backup**] - [**Schedule**]로 이동하여 일정 생성을 클릭합니다.
+Backup 탭에서 [**Backup**] - [**Schedule**]로 이동하여 일정 생성을 클릭합니다.
 
 {% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
 
@@ -183,7 +408,7 @@ Backup 탭에서 [**Restore**]로 이동하여 복원 설정을 클릭합니다.
 
 백업 혹은 복구에 대한 작업 결과를 일간/월간 단위의 보고서로 확인할 수 있습니다.
 
-Backup 텝에서 **[Report]** 로 이동하여 확인합니다.
+Backup 탭에서 **[Report]** 로 이동하여 확인합니다.
 
 Backup Report에서 발생하는 이벤트는 이메일 수신 신청으로 메일로 알림을 받도록 설정이 가능합니다.
 
@@ -562,367 +787,6 @@ Backup 서비스는 유료 서비스로 이용 요금은 기본료, 데이터 �
         </item>
         
         <item>
-            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
-다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
-그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
-&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
-&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
-&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 개인정보 수집 및 이용에 동의해야 합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(Classic)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
-            
-            <category>classic</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성 요청
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
-VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_07.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
-생성 완료까지 걸리는 기간은 **업무일 기준 2~3일** 정도이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_03.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-아래와 같이 생성 요청을 하고 나면 상태가 [생성중] 상태로 표시 됩니다. 2~3일 후 생성 완료 안내 메일이 도착할때까지 기다리시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## SSL VPN 생성 완료
-SSL VPN 생성이 완료되면 아래와 같은 메일을 받을 수 있습니다.   
-메일 내용에는 [**SSL VPN IP POOL**] 정보와 접속 경로 정보가 포함되어 있으니 잘 확인해야 합니다.
-
-{% include warning.html title=&quot;IP POOL&quot; content=&quot;특히 [**SSL VPN IP POOL**] 정보는 Ncloud 콘솔에서 확인할 수 없고, 오로지 생성 완료 메일에서만 확인 가능하니 잘 보관해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_05.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-생성 완료 메일 확인 후에 콘솔에 접속하면 아래와 같이 [운영중] 으로 상태 메시지가 바뀐 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.  
-VPC 환경은 Classic 환경과 달리 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Route Table 설정
-네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-아래와 같이 접속할 서버의 상세정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭합니다.  
-Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_12.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Destination]에 SSL VPN 생성 완료 메일에서 확인한 [**SSL VPN IP POOL**] 정보를 등록하고, [Target Type]은 SSLVPN을 선택, [Target Name]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_13.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-다음으로 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_14.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_17.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, VPC 환경 SSL VPN 서버 주소로 바꾸기 위해 [연결끊기] 클릭해서 연결을 끊고, [서버 변경] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_18.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-서버 선택 창에 **https://sslvpn-kr-vpc-01.ncloud.com** 주소를 입력하고, [다음] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_19.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-그리고 도착한 OTP 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_24.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_25.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_26.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_27.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_28.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_29.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
-Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_31.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(VPC)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-2&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-2&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</guid>
-            
-            <category>vpc</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
             <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
             <description>## 개요
 Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
@@ -1273,6 +1137,367 @@ Agent 창에서 [그래프 보기] 버튼을 클릭합니다.
             <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</guid>
+            
+            <category>classic</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성 요청
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
+VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_07.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
+생성 완료까지 걸리는 기간은 **업무일 기준 2~3일** 정도이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_03.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+아래와 같이 생성 요청을 하고 나면 상태가 [생성중] 상태로 표시 됩니다. 2~3일 후 생성 완료 안내 메일이 도착할때까지 기다리시면 됩니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## SSL VPN 생성 완료
+SSL VPN 생성이 완료되면 아래와 같은 메일을 받을 수 있습니다.   
+메일 내용에는 [**SSL VPN IP POOL**] 정보와 접속 경로 정보가 포함되어 있으니 잘 확인해야 합니다.
+
+{% include warning.html title=&quot;IP POOL&quot; content=&quot;특히 [**SSL VPN IP POOL**] 정보는 Ncloud 콘솔에서 확인할 수 없고, 오로지 생성 완료 메일에서만 확인 가능하니 잘 보관해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_05.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+생성 완료 메일 확인 후에 콘솔에 접속하면 아래와 같이 [운영중] 으로 상태 메시지가 바뀐 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.  
+VPC 환경은 Classic 환경과 달리 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Route Table 설정
+네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+아래와 같이 접속할 서버의 상세정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭합니다.  
+Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_12.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Destination]에 SSL VPN 생성 완료 메일에서 확인한 [**SSL VPN IP POOL**] 정보를 등록하고, [Target Type]은 SSLVPN을 선택, [Target Name]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_13.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+다음으로 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_14.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_17.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, VPC 환경 SSL VPN 서버 주소로 바꾸기 위해 [연결끊기] 클릭해서 연결을 끊고, [서버 변경] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_18.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+서버 선택 창에 **https://sslvpn-kr-vpc-01.ncloud.com** 주소를 입력하고, [다음] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_19.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+그리고 도착한 OTP 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_24.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_25.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_26.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_27.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_28.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_29.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
+Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_31.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(VPC)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-2&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-2&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
+다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
+그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
+&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
+&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
+&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(Classic)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
             
             <category>classic</category>
             
@@ -1685,112 +1910,6 @@ EOF
             <category>kubernetes</category>
             
             <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud 블록 스토리지 (디스크) 크기 확장하는 방법 - 윈도우</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 윈도우 환경 서버의 블록스토리지 볼륨 크기를 확장하고 적용하는 방법을 정리해보겠습니다.
-
-
-## 테스트 환경 
-- Windows Server 2019 (64-bit) English Edition
-- 추가 블록스토리지 10GB
-
-OS 영역에서 사용하는 100G 블록스토리지 외에 아래와 같이 추가로 할당 된 10G의 블록스토리지의 크기를 변경하고 적용해보겠습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Windows 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-추가 블록 스토리지 할당 방법에 대한 가이드는 아래의 링크를 참조 바랍니다.
-
-- &lt;a href=&quot;/compute/ncloud_compute_server_windows_storage_add_detail_process.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;Windows 스토리지(디스크) 추가 상세 가이드&lt;/a&gt;
-
-## 스토리지 스냅샷 백업
-아래와 같이 [Console] - [Server] - [Storage]에서 크기를 변경할 스토리지를 선택하고 [스토리지 설정] - [스냅샷 생성] 메뉴를 선택합니다.
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;블록스토리지의 크기를 변경하는 과정에 만에 하나 있을지 모르는 상황에 대비해서 해당 블록스토리지의 스냅샷을 생성해서 백업해 두는 것을 적극 권장합니다.&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-스냅샷 이름을 입력하고 스냅샷을 생성합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스토리지 크기 변경
-스냅샷 생성이 끝났으면 스토리지 크기를 변경하기 위해 [스토리지 설정] - [크기 변경] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 정지 알림
-스토리지 크기 변경은 서버가 정지된 상태에서만 가능하므로, 혹시 서버가 동작중인 경우 아래와 같은 알림이 나타납니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 정지
-먼저 스토리지가 장착된 서버를 정지하겠습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 크기 변경
-서버를 정지한 후 크기 변경 메뉴를 선택하면 아래와 같이 변경할 크기를 입력할 수 있습니다.  최대 2,000GB까지 가능합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;스토리지 크기는 확대만 가능하며, 축소 기능은 제공하지 않습니다.&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-07.png&quot; width=&quot;680&quot; alt=&quot;Ncloud 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-변경할 크기를 입력하고 [확인] 버튼을 클릭하면 크기 변경 작업이 진행됩니다. 이후에 서버에서 해당 스토리지의 파티션 확장 등의 작업을 추가로 진행해야 정상적으로 사용할 수 있습니다. 
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-09.png&quot; width=&quot;680&quot; alt=&quot;Ncloud 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-## 서버 디스크 파티션 확장
-서버에 접속해 Disk Management를 실행하면 아래와 같이 확장된 추가 블록스토리지의 모습이 보입니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Windows 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### Disk Management
-Disk Management 툴은 아래의 방법으로 간단하게 실행할 수 있습니다.
-
-- 명령 실행 (윈도우키+r) : **diskmgmt.msc**
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_04.png&quot; width=&quot;450&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-### 볼륨 확장
-기존에 할당되어 있던 10GB 볼륨을 선택하고 마우스 오른쪽 버튼을 클릭한 후 [**Extend Volume**] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Windows 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-볼륨 확장 팝업 창에서 [**Next**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Windows 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-**Select Disks**  
-콘솔에서 추가한 10GB 스토리지가 추가 디스크로 선택되어 있습니다. 전체 용량을 모두 확장할 것이므로 특별한 수정 없이 [**Next**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Windows 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-볼륨 확장 작업이 끝났으면 [**Finish**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Windows 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-## 디스크 크기 확인
-작업 완료 후 확인해보면 기존 10GB에서 20GB로 확장된 것을 알 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-windows-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Windows 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Ncloud 블록 스토리지 크기 확장 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2-vpc#%ED%8C%8C%ED%8B%B0%EC%85%98-%EB%B0%8F-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%99%95%EC%9E%A5windows&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2-vpc&lt;/a&gt;</description>
-            <pubDate>Wed, 02 Nov 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-windows.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-windows.html</guid>
-            
-            <category>windows</category>
-            
-            <category>storage</category>
             
             
         </item>
