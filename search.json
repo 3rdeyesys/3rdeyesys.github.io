@@ -193,6 +193,17 @@
 
 
 {
+"title": "Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개",
+"tags": "linuxapachephpnginxmysqlmariadb",
+"keywords": "Linux, Rocky Linux",
+"url": "/compute/ncloud-compute-server-rocky-linux-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Ncloud 블록 스토리지 (디스크) 크기 확장하는 방법 - 리눅스",
 "tags": "linuxstorage",
 "keywords": "Storage, Block Disk, Linux",
