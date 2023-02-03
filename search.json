@@ -468,6 +468,28 @@
 
 
 {
+"title": "Object Storage 파일의 Content-Type 일괄 적용, 변경하는 방법",
+"tags": "storage",
+"keywords": "BackUp, Storage, MIME Type, Media Type, Content-Type",
+"url": "/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Object Storage에서 html, 이미지 파일이 다운로드되는 문제 해결 방법",
+"tags": "storage",
+"keywords": "BackUp, Storage, MIME Type, Media Type, Content-Type",
+"url": "/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Cloud Log Analytics 설정 가이드",
 "tags": "loganalytics",
 "keywords": "분석",

@@ -5,10 +5,247 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 10 Jan 2023 17:34:13 +0900</pubDate>
-        <lastBuildDate>Tue, 10 Jan 2023 17:34:13 +0900</lastBuildDate>
+        <pubDate>Fri, 03 Feb 2023 10:35:24 +0900</pubDate>
+        <lastBuildDate>Fri, 03 Feb 2023 10:35:24 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Object Storage 파일의 Content-Type 일괄 적용, 변경하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) Object Storage에서 업로드하는 파일의 Content-Type을 업로드 시에 일괄 적용하거나, 이미 업로드된 다수의 파일의 Content-Type을 일괄 변경하는 방법을 정리해보겠습니다.
+
+## 테스트 순서
+일괄 적용, 변경 테스트는 다음과 같은 순서로 진행보겠습니다.
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;
+1. 다수의 txt 파일을 업로드 하면서 [**Content-Type**]을 [**application/octet-stream**]으로 일괄 설정 &lt;br /&gt;&lt;br /&gt;
+2. 업로드된 파일의 [**Content-Type**]이 [**application/octet-stream**]인지 확인 &lt;br /&gt;&lt;br /&gt;
+3. AWS CLI를 이용해서 파일들의 [**Content-Type**]을 [**text/plain**]으로 일괄 변경 &lt;br /&gt;&lt;br /&gt;
+4. 파일의 [**Content-Type**]이 [**text/plain**]으로 변경되었는지 확인 &lt;br /&gt;&lt;br /&gt;
+5. CloudBerry Explorer를 이용해 파일들의 [**Content-Type**]을 [**application/octet-stream**]으로 일괄 변경 &lt;br /&gt;&lt;br /&gt;
+6. 파일의 [**Content-Type**]이 [**application/octet-stream**]으로 변경되었는지 확인
+&quot; %}
+
+
+## 업로드 시에 일괄 적용
+[**Console**] - [**Object Storage**] - [**Bucket Management**]에서 버킷을 선택하고 [**파일 올리기**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+업로드 팝업에서 파일을 선택하기 전에 먼저 [**권한 및 메타 데이터 설정**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-02.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### 메타 데이터 설정
+[**권한 및 메타 데이터 설정**] 팝업에서 [**메타 데이터 관리**] 탭을 선택하고 [**Content-Type**] 키워드에 테스트용으로 [**application/octet-stream**]을 입력하고 [**메타데이터 추가**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### 파일 업로드
+[**Content-Type**] 설정을 마쳤으면 업로드할 파일을 선택하고 [**전송 시작**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-04.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### Content-Type 확인
+변경된 [**Content-Type**]을 확인하기 위해 파일 하나를 선택하고, [**편집**] - [**메타 데이터 변경**] 메뉴를 선택합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+메타 데이터 관리 팝업에서 [**Content-Type**]이 [**application/octet-stream**]으로 적용된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-06.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+## AWS CLI로 일괄 변경
+Ncloud Object Storage는 AWS S3와 호환되는 스토리지이므로 AWS CLI로 관리 가능합니다.  
+AWS CLI를 이용해서 Object Storage를 관리하는 방법은 아래 문서에서 확인할 수 있습니다.
+
+{% include note.html title=&quot;AWS CLI&quot; content=&quot;
+&lt;a href=&apos;/storage/ncloud_storage_object_storage_aws_cli_connect.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;AWS CLI를 이용한 Object Storage 접속 방법&lt;/a&gt;
+&quot; %}
+
+### 파일 리스트 조회
+먼저 현재 Object Storage 버킷에 존재하는 파일 리스트를 조회하면 위에서 업로드 했던 5개의 파일을 확인할 수 있습니다.
+
+``` bash
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://content-type-test/ --recursive  --human-readable
+```
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-07.png&quot; width=&quot;843&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### Content-Type 변경
+이제 [**Content-Type**]을 [**text/plain**]으로 변경해보겠습니다.
+
+``` bash
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://content-type-test/test/ s3://content-type-test/test/ --recursive --content-type text/plain --metadata-directive REPLACE 
+```
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-08.png&quot; width=&quot;843&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### Content-Type 확인
+위에서 확인했던 방법대로 [**Console**]에서 파일을 선택하고 [**Content-Type**]을 확인해보면 [**text/plain**]인 것을 알 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-09.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+## CloudBerry Explorer를 사용해 일괄 변경
+Object Storage를 관리하기 편한 여러가지 Client Tool중에서 [**CloudBerry Explorer**]를 사용해서 [**Content-Type**]을 변경해보겠습니다.  
+[**CloudBerry Explorer**] 사용방법은 아래 문서에서 확인 가능합니다.
+
+{% include note.html title=&quot;CloudBerry Explorer&quot; content=&quot;
+&lt;a href=&apos;/storage/ncloud_storage_object_storage_s3_client_cloudberry_explorer.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법&lt;/a&gt;
+&quot; %}
+
+&lt;br /&gt;
+[**CloudBerry Explorer**]로 Object Storage에 접속한 후 위에서 업로드 했던 파일들을 모두 선택하고 마우스 오른쪽 버튼을 클릭하면 나타나는 메뉴에서 [**Set HTTP Headers**]를 선택합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### Content-Type 일괄 변경
+[**Http Headers**] 설정 팝업에서 [**Add**] 버튼을 클릭하고 [**Http Header**]에서는 [**Content-Type**]을, [**Value**]에서는 [**application/octet-stream**]을 선택합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+선택한 값을 확인하고, 아래쪽 옵션에서는 기본값 그대로 두고, [**OK**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+### Content-Type 확인
+위에서 확인했던 방법대로 [Console]에서 파일을 선택하고 [**Content-Type**]을 확인해보면 [**application/octet-stream**]인 것을 알 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-13.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+## Cyberduck을 사용해 일괄 변경
+또 다른 Client Tool중의 하나인 [**Cyberduck**]을 사용할 경우는 아래와 같이 파일을 모두 선택하고, 상단의 [**정보 가져오기**] 버튼을 클릭하고, [**메타데이터**] 탭에서 [**Content-Type**]을 변경할 수 있습니다.
+
+{% include note.html title=&quot;Cyberduck&quot; content=&quot;
+&lt;a href=&apos;/storage/ncloud_storage_object_storage_s3_client_cyberduck.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Object Storage 접속용 Windows, MacOS Client Tool - Cyberduck 사용 방법&lt;/a&gt;
+&quot; %}
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Ncloud Object Storage 기본 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/storage-storage-6-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/storage-storage-6-1&lt;/a&gt;
+
+2.  MIME Type 안내
+	- &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&lt;/a&gt;	
+
+3.  Object Storage에서 html, 이미지 파일이 다운로드되는 문제 해결 방법
+	- &lt;a href=&quot;/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html&lt;/a&gt;		</description>
+            <pubDate>Fri, 03 Feb 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html</guid>
+            
+            <category>storage</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Object Storage에서 html, 이미지 파일이 다운로드되는 문제 해결 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) Object Storage에 html 파일이나 이미지 파일을 올려두고 사용하는 경우가 많습니다.  
+그런데 간혹, 웹브라우저나 앱에서 해당 파일을 호출 했을 때 **html 페이지나 이미지 파일이 화면에 표시되지 않고 다운로드 되는 현상이 발생**하기도 합니다.  
+
+이것은 Object Storage에 파일이 등록될 때 파일의 속성을 나타내는 메타 데이터 중에서 `파일의 종류를 구분하기 위한 MIME Type에 대한 정보를 담고 있는 Content-Type 항목이 제대로 설정되지 않아서 발생하는 문제`입니다. 아래에서 이에 대한 내용을 자세히 정리해보겠습니다.
+
+
+## 메타 데이터
+메타 데이터는 파일의 속성이나 정보를 나타내는 값으로 Ncloud Object Storage에서는 파일 수정 날짜, 파일 크기 등의 기본으로 설정되는 시스템 메타 데이터와 사용자가 임의로 정의하는 유저 메타 데이터로 구분할 수 있으며 아래와 같이 Console 화면에서 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-01.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법&quot; caption=&quot;&quot; %}
+
+### MIME Type (Media Type)
+MIME은 [Multipurpose Internet Mail Extensions]의 약자로 이메일 전송을 위해 만들어진 인터넷 표준 형식으로, MIME Type이란 이메일로 전송되는 컨텐츠나 파일의 종류를 구분하기 위해 정의된 형식입니다. 최근에는 Media Type으로 표현하는 경우도 있습니다.
+
+### Content-Type
+[**Content-Type**]은 MIME Type으로 정의된 컨텐츠나 파일을 전송할 때 프로토콜의 **Header 값에 정의되는 속성**입니다.
+Content-Type Header와 MIME Type은 이메일에 사용하기 위해 정의되었으나, 지금은 HTTP와 같은 다른 인터넷 프로토콜에서 널리 사용하고 있으며, MIME Type 등록은 IANA(Internet Assigned Numbers Authority)에서 관리하고 있습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Ncloud Object Storage에서도 업로드 된 파일의 종류에 대한 정보를 Content-Type 속성으로 정의하고 있습니다.&quot; %}
+
+## 오류 상황
+예를 들어 Object Storage에 등록된 이미지 파일에 대한 Content-Type 속성이 제대로 정의되지 않았을 경우 아래와 같이 이미지 파일을 호출했을 때 이미지가 화면에 표시되지 않고 다운로드 되는 현상이 나타납니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-02.png&quot; width=&quot;807&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법&quot; caption=&quot;&quot; %}
+
+
+## 메타 데이터 변경
+문제를 해결하기 위해서는 메타 데이터에 있는 [**Content-Type**]을 변경해야 하므로, 아래와 같이 콘솔 [**Object Storage**] - [**Bucket Management**]에서 해당 파일을 선택하고 [**편집**] - [**메타 데이터 변경**] 메뉴를 선택합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법&quot; caption=&quot;&quot; %}
+
+[메타 데이터 관리] 팝업창에서 [**Content-Type**] 항목에 있는 [**수정**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-04.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법&quot; caption=&quot;&quot; %}
+
+이미지나 html 문서에 맞는 값을 입력합니다. 여기서는 png 이미지 파일이므로 [**image/png**]를 입력했습니다.  
+html의 경우는 [**text/html**]이며 기타 다양한 파일들의 MIME Type은 문서의 아래쪽에서 정리해보겠습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-05.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법&quot; caption=&quot;&quot; %}
+
+[**Content-Type**] 값 변경 후에 브라우저의 캐시를 지우고 다시 호출해보면 아래와 같이 이미지가 정상적으로 나타나는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-06.png&quot; width=&quot;807&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법&quot; caption=&quot;&quot; %}
+
+## MIME Type 종류
+전체 MIME Type 중에서 자주 사용되는 Type을 정리해보면 다음과 같습니다.  
+
+| 파일 종류 | MIME Type |
+| :--- | :--- | 
+|. aac | audio/aac |
+|. avi | video/x-msvideo |
+|. bin | application/octet-stream |
+|. csh | application/x-csh |
+|. css | text/css |
+|. csv | text/csv |
+|. doc | application/msword |
+|. docx | application/vnd.openxmlformats-officedocument.wordprocessingml.document |
+|. gif | image/gif |
+|. html | text/html |
+|. ico | image/x-icon |
+|. ics | text/calendar |
+|. jar | application/java-archive |
+|. jpg | image/jpeg |
+|. js | text/javascript |
+|. json | application/json |
+|. md | text/markdown |
+|. oga | audio/ogg |
+|. ogv | video/ogg |
+|. pdf | application/pdf |
+|. png | image/png |
+|. ppt | application/vnd.ms-powerpoint |
+|. pptx | application/vnd.openxmlformats-officedocument.presentationml.presentation |
+|. rar | application/x-rar-compressed |
+|. sh | application/x-sh |
+|. svg | image/svg+xml |
+|. tar | application/x-tar |
+|. ttf | application/x-font-ttf |
+|. txt | text/plain |
+|. wav | audio/x-wav |
+|. webp | image/webp |
+|. woff | application/x-font-woff |
+|. xls | application/vnd.ms-excel |
+|. xlsx | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet |
+|. xml | application/xml |
+|. zip | application/zip |
+
+## 참고 URL
+1.  Ncloud Object Storage 기본 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/storage-storage-6-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/storage-storage-6-1&lt;/a&gt;
+
+2.  MIME Type 안내
+	- &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&lt;/a&gt;	
+
+3.  Object Storage 파일의 Content-Type 일괄 적용, 변경하는 방법
+	- &lt;a href=&quot;/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html&lt;/a&gt;		</description>
+            <pubDate>Tue, 31 Jan 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html</guid>
+            
+            <category>storage</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
@@ -1596,355 +1833,6 @@ Agent 창에서 [그래프 보기] 버튼을 클릭합니다.
             <category>ssl</category>
             
             <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성 요청
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
-VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_07.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
-생성 완료까지 걸리는 기간은 **업무일 기준 2~3일** 정도이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_03.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-아래와 같이 생성 요청을 하고 나면 상태가 [생성중] 상태로 표시 됩니다. 2~3일 후 생성 완료 안내 메일이 도착할때까지 기다리시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## SSL VPN 생성 완료
-SSL VPN 생성이 완료되면 아래와 같은 메일을 받을 수 있습니다.   
-메일 내용에는 [**SSL VPN IP POOL**] 정보와 접속 경로 정보가 포함되어 있으니 잘 확인해야 합니다.
-
-{% include warning.html title=&quot;IP POOL&quot; content=&quot;특히 [**SSL VPN IP POOL**] 정보는 Ncloud 콘솔에서 확인할 수 없고, 오로지 생성 완료 메일에서만 확인 가능하니 잘 보관해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_05.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-생성 완료 메일 확인 후에 콘솔에 접속하면 아래와 같이 [운영중] 으로 상태 메시지가 바뀐 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.  
-VPC 환경은 Classic 환경과 달리 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Route Table 설정
-네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-아래와 같이 접속할 서버의 상세정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭합니다.  
-Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_12.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Destination]에 SSL VPN 생성 완료 메일에서 확인한 [**SSL VPN IP POOL**] 정보를 등록하고, [Target Type]은 SSLVPN을 선택, [Target Name]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_13.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-다음으로 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_14.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_17.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, VPC 환경 SSL VPN 서버 주소로 바꾸기 위해 [연결끊기] 클릭해서 연결을 끊고, [서버 변경] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_18.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-서버 선택 창에 **https://sslvpn-kr-vpc-01.ncloud.com** 주소를 입력하고, [다음] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_19.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-그리고 도착한 OTP 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_24.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_25.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_26.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_27.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_28.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_29.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
-Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_31.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(VPC)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-2&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-2&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</guid>
-            
-            <category>vpc</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud 블록 스토리지 (디스크) 크기 확장하는 방법 - 리눅스</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 리눅스 환경 서버의 블록스토리지 볼륨 크기를 확장하고 적용하는 방법을 정리해보겠습니다.
-
-
-## 테스트 환경 
-- CentOS 7.8
-- Ubuntu 20.04
-- 추가 블록스토리지 10GB
-
-OS 영역에서 사용하는 50G 블록스토리지 외에 아래와 같이 추가로 할당 된 10G의 블록스토리지의 크기를 변경하고 적용해보겠습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-추가 블록 스토리지 할당 방법에 대한 가이드는 아래의 링크를 참조 바랍니다.
-
-- &lt;a href=&quot;/compute/ncloud_compute_server_storage_add_detail_process.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;Linux 스토리지(디스크) 추가 상세 가이드&lt;/a&gt;
-
-## 스토리지 스냅샷 백업
-아래와 같이 [Console] - [Server] - [Storage]에서 크기를 변경할 스토리지를 선택하고 [스토리지 설정] - [스냅샷 생성] 메뉴를 선택합니다.
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;블록스토리지의 크기를 변경하는 과정에 만에 하나 있을지 모르는 상황에 대비해서 해당 블록스토리지의 스냅샷을 생성해서 백업해 두는 것을 적극 권장합니다.&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-스냅샷 이름을 입력하고 스냅샷을 생성합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스토리지 크기 변경
-스냅샷 생성이 끝났으면 스토리지 크기를 변경하기 위해 [스토리지 설정] - [크기 변경] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 정지 알림
-스토리지 크기 변경은 서버가 정지된 상태에서만 가능하므로, 혹시 서버가 동작중인 경우 아래와 같은 알림이 나타납니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 정지
-먼저 스토리지가 장착된 서버를 정지하겠습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 크기 변경
-서버를 정지한 후 크기 변경 메뉴를 선택하면 아래와 같이 변경할 크기를 입력할 수 있습니다.  최대 2,000GB까지 가능합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;스토리지 크기는 확대만 가능하며, 축소 기능은 제공하지 않습니다.&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-07.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-변경할 크기를 입력하고 [확인] 버튼을 클릭하면 크기 변경 작업이 진행됩니다. 이후에 서버에서 해당 스토리지의 파티션 확장 등의 작업을 추가로 진행해야 정상적으로 사용할 수 있습니다. 
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-09.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-## 서버 디스크 파티션 확장
-Ncloud 콘솔에서 블록스토리지 크기를 변경 완료했으면 다음으로 서버에 접속해서 할당된 디스크의 파티션을 확장해야 합니다.
-
-### 디스크 마운트 해제
-일반적으로 추가 디스크는 서버가 재시작되어도 사용하는데 문제 없도록 fstab에 마운트 정보를 등록해두기 때문에 서버가 재시작되면서 자동으로 마운트 되어있습니다.  
-
-마운트 된 상태에서는 파티션 확장을 할 수 없으므로 먼저 마운트를 해제합니다. 여기서는 마운트 해제가 잘 되었는지 df 명령으로 확인을 해보았습니다.
-
-``` bash
-~# umount /dev/xvdb1
-~# df -hT
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### growpart 패키지 설치
-디스크 파티션 확장에 필요한 growpart 패키지를 설치합니다.
-
-**Centos**
-```bash
-~# yum -y install cloud-utils-growpart
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-**Ubntu**  
-이미 해당 패키지가 설치되어 있는 경우에는 아래와 같이 추가 설치 없이 통과됩니다.
-```bash
-~# apt-get install cloud-guest-utils 
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 파티션 확장
-파티션을 확장할 때 growpart 명령 실행 후의 다음 단계는 EXT, XFS 등 디스크의 파일 시스템 타입에 따라 차이가 있으니 확인하고 진행하셔야 합니다.
-
-``` bash
-# growpart {장치명} {파티션 번호}
-~# growpart /dev/xvdb 1
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-#### XFS 시스템
-xfs 파일 시스템은 **마운트를 먼저 하고** 최종 파티션 확장 작업을 진행합니다.
-
-``` bash
-~# mount /dev/xvdb1 /mnt/data
-~# xfs_growfs /dev/xvdb1
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-작업이 모두 끝난 후에 디스크 상태를 확인해보면 아래와 같이 문제 없이 확장된 것을 알 수 있습니다.
-
-``` bash
-~# df -hT
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-#### EXT4 시스템
-ext4 파일 시스템은 최종 **파티션 확장 작업을 먼저 진행하고** 나서 마운트를 하게 됩니다.
-
-``` bash
-~# e2fsck -f /dev/xvdb1
-~# resize2fs /dev/xvdb1
-~# mount /dev/xvdb1 /mnt/data
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-``` bash
-~# df -hT
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-extend-guide-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Linux 서버 디스크 (블록 스토리지) 크기를 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Ncloud 블록 스토리지 크기 확장 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2-vpc#%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%81%AC%EA%B8%B0-%ED%99%95%EC%9E%A5&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2-vpc&lt;/a&gt;
-
-</description>
-            <pubDate>Fri, 11 Nov 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-storage-extend-guide-linux.html</guid>
-            
-            <category>linux</category>
-            
-            <category>storage</category>
             
             
         </item>
