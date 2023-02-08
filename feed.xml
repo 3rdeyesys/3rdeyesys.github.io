@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 08 Feb 2023 17:46:22 +0900</pubDate>
-        <lastBuildDate>Wed, 08 Feb 2023 17:46:22 +0900</lastBuildDate>
+        <pubDate>Wed, 08 Feb 2023 18:19:25 +0900</pubDate>
+        <lastBuildDate>Wed, 08 Feb 2023 18:19:25 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -111,7 +111,7 @@ Cloud Insight 서비스는 이용 신청을 해야 사용할 수 있습니다. C
 
 {% include image.html file=&quot;management/ncp_management_cloud_insight_guide_11.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
 
-다음으로 데이터 설정에서 CPU 사용율에 해당하는 CPU/used_rto 등 필요한 항목을 선택하고 [선택 항목 추가] 버튼을 클릭합니다.
+다음으로 데이터 설정에서 CPU 사용률에 해당하는 CPU/used_rto 등 필요한 항목을 선택하고 [선택 항목 추가] 버튼을 클릭합니다.
 
 {% include image.html file=&quot;management/ncp_management_cloud_insight_guide_12.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
 
@@ -154,7 +154,7 @@ Cloud Insight 서비스는 이용 신청을 해야 사용할 수 있습니다. C
 {% include image.html file=&quot;management/ncp_management_cloud_insight_guide_18.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
 
 감시 항목 및 조건 설정에서 [전체 보기]를 선택하고, Server, Memory 등의 항목 중에서 원하는 항목을 선택합니다.  
-여기서는 가장 많이 사용하는 [**SERVER의 CPU 사용율**]에 해당하는 [**SERVER/avg_cpu_used_rto**]를 선택하고, 90% 이상인 상태가 5분 이상 지속되면 경고 알림을 보내도록 설정했습니다. 
+여기서는 가장 많이 사용하는 [**SERVER의 CPU 사용률**]에 해당하는 [**SERVER/avg_cpu_used_rto**]를 선택하고, 90% 이상인 상태가 5분 이상 지속되면 경고 알림을 보내도록 설정했습니다. 
 
 {% include image.html file=&quot;management/ncp_management_cloud_insight_guide_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
 
