@@ -5,10 +5,202 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 08 Feb 2023 15:37:27 +0900</pubDate>
-        <lastBuildDate>Wed, 08 Feb 2023 15:37:27 +0900</lastBuildDate>
+        <pubDate>Wed, 08 Feb 2023 17:46:22 +0900</pubDate>
+        <lastBuildDate>Wed, 08 Feb 2023 17:46:22 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>모니터링 서비스 Cloud Insight 설정 가이드</title>
+            <description>## 개요
+네이버 클라우드와 사용자 애플리케이션의 성능/운영 지표를 통합 관리하고, 장애나 이벤트가 발생했을 때 SMS 및 Email로 알람 통보를 해주는 서비스인 Cloud Insight 서비스를 설정하는 방법에 대해 정리해보겠습니다.
+
+
+### Monitoring 서비스 vs Cloud Insight 서비스
+Classic 환경에 있는 Monitoring 서비스와 Cloud Insight 서비스의 차이점을 정리하면 다음과 같습니다.
+
+{% include callout_v2.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;- Monitoring 서비스는 Classic 환경에서만 사용할 수 있다.
+&lt;br /&gt;- Cloud Insight 서비스는 Classic, VPC 양쪽에서 모두 사용할 수 있고, 두가지 환경을 통합해서 보여준다.
+&lt;br /&gt;- Monitoring 서비스는 Server 제품 (AutoScaling 포함)만 모니터링 한다.
+&lt;br /&gt;- Cloud Insight 서비스는 Server 뿐만 아니라 Object Storage, Load Balancer 등 10여개의 서비스를 모니터링 한다.&quot; %}
+
+
+
+## 적용 서비스 리스트
+위 비교에서도 설명했듯이 Cloud Insight는 Server 뿐만 아니라 네이버 클라우드의 다양한 서비스의 모니터링 정보를 확인할 수 있는데 해당 리스트는 다음과 같습니다.
+
+### Classic 
+- Server
+- Load Balancer
+
+### VPC
+- Server(VPC)
+- Load Balancer(VPC)
+- Cloud DB for MySQL(VPC)
+- Cloud DB for MSSQL(VPC)
+- Cloud DB for Redis(VPC)
+- Cloud DB for MongoDB(VPC)
+- Cloud Hadoop(VPC)
+- Auto Scaling Group(VPC)
+- Kubernetes Service(VPC)
+- Search Engine Service(VPC)
+- Cloud Data Streaming Service(VPC)
+
+### 통합
+- Cloud Search
+- Object Storage
+
+
+## Cloud Insight 서비스
+[**Cloud Insight**] 서비스는 [**콘솔**] - [**Services**] - [**Management &amp; Governance**] - [**Cloud Insight(Monitoring)**]에 위치하고 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-guide-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+좀 더 쉽게 찾는 방법은 [**콘솔**] - [**Services**]에서 [**검색**] 기능을 이용하면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-guide-29.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+
+## 이용 신청
+Cloud Insight 서비스는 이용 신청을 해야 사용할 수 있습니다. Classic, VPC 어떤 환경에서든 [Cloud Insight(Monitoring)] - [Subscription]에서 [상품 이용 신청] 버튼을 클릭해서 이용 신청을 합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_01.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 대시보드
+이용 신청을 한 후에 [Dashboard] 메뉴에 가면 아래와 같이 현재 사용 중인 서비스 중에서 모니터링 가능한 서비스 리스트를 확인할 수 있습니다.  
+또한 기본으로 제공되는 대시보드에서 확인할 수 있는 모니터링 항목을 각 서비스별로 고정되어 있습니다. 
+추가적인 항목을 확인하려면 별도로 대시보드를 생성해야 하는데 이에 대해서는 아래쪽에서 확인해보겠습니다.
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;일부 서비스의 경우 리스트에 나타날 때까지 시간이 걸릴 수도 있습니다. 여유있게 1시간 정도 후에 확인해보시면 됩니다.&quot; %}
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_02.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### Load Balancer 모니터링
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_08.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### Object Storage 모니터링
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_09.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### Server 모니터링
+위에서 설명했듯이 Server 제품도 GPU 관련 항목을 제외하면 5가지 정도의 기본 모니터링 항목을 확인할 수 있습니다. 
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_03.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 커스텀 대시보드
+좀 더 상세한 모니터링 데이터를 확인하려면 커스텀 대시보드가 필요하고 그전에 [상세 모니터링]을 설정해야 합니다. 서버 설정에서 [상세 모니터링 설정 변경] 메뉴를 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_04.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+[상세 모니터링 신청] 팝업에서 [예] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_05.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### 대시보드 생성
+[Dashboard] 화면에서 [대시보드 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+생성 팝업에서 대시보드 이름과 설명을 입력합니다.
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_07.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+
+생성된 대시보드에서 [위젯 추가] 버튼을 클릭해서 위젯을 추가합니다.
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_10.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+위젯 이름을 입력하고, 종류는 [Time Series], [Pie Chart], [Table], [Index], [Markdown] 중에서 하나를 선택합니다.  여기서는 [CPU Usage]와 [Time Series]를 선택했습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_11.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 데이터 설정에서 CPU 사용율에 해당하는 CPU/used_rto 등 필요한 항목을 선택하고 [선택 항목 추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_12.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+항목을 추가하면 아래쪽 화면에 다음과 같이 리스트를 확인할 수 있습니다. 설정이 완료되었으면 [다음] 버튼을 클릭해 마지막 확인을 하고 생성을 완료합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_13.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+위에서 추가한 [CPU Usage] 위젯과 함께 추가로 [Server - Load Average], [File System], [Memory Usage], [Net Work (Max In/Out bps)] 데이터를 확인할 수 있는 위젯을 추가하면 다음과 같은 대시보드를 확인할 수 있습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_14.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 통보 대상자 등록
+이제 이벤트를 등록하고 알람을 통보 받을 대상자를 등록해보겠습니다.  
+먼저 통보 대상자 그룹을 생성합니다.  [Cloud Insight(Monitoring)] - [Notification Recipient] 메뉴에서 [전체 대상자] 옆에 있는 [ + ] 버튼을 클릭하고 아래 입력칸에 그룹명을 입력합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_15.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+네이버 클라우드 계정 생성을 할 때 기본으로 1명의 대상자가 등록됩니다. 해당 대상자를 위에서 생성한 그룹에 할당하기 위해 선택하고 [할당] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_20.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+그룹 할당 팝업에서 [할당] 버튼을 클릭합니다.
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_21.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+대상자 리스트에서 해당 대상자에 그룹이 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_22.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 이벤트 규칙 등록
+이제 이벤트를 등록해보겠습니다. [Cloud Insight(Monitoring)] - [Configuration] - [Event Rue]에서 [Event Rule 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_16.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+이벤트 규칙을 생성해서 감시가 필요한 상품을 선택합니다. 여기서는 [Sever(VPC)]를 선택하겠습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_17.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+[감시 대상 설정]에서 [전체 보기]를 선택하고, 감시 대상에 체크한 후 [다음] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_18.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+감시 항목 및 조건 설정에서 [전체 보기]를 선택하고, Server, Memory 등의 항목 중에서 원하는 항목을 선택합니다.  
+여기서는 가장 많이 사용하는 [**SERVER의 CPU 사용율**]에 해당하는 [**SERVER/avg_cpu_used_rto**]를 선택하고, 90% 이상인 상태가 5분 이상 지속되면 경고 알림을 보내도록 설정했습니다. 
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 감시 대상에서 설정한 이벤트가 발생했을 때 어떤 액션을 취할 것인가를 설정해보겠습니다.  
+설정 가능한 액션은 [알림 메시지 발송], [Integration], [Cloud Functions], [Auto Scaling 정책] 중에서 선택할 수 있는데, 여기서는 [알림 메시지 발송]을 선택하겠습니다.  
+통보 대상자 그룹을 선택하고, [Email]과 [SMS]중에서 원하는 것을 선택하고, [다음] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_23.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+마지막으로 이벤트 규칙 이름을 입력하고, 앞에서 설정한 내용들을 확인한 후에 [생성] 버튼을 클릭합니다.
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_24.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 유지보수 계획 설정
+앞에서 설정한 이벤트 규칙이 업데이트나 점검 등의 유지보수가 진행되는 동안에도 작동되면 유지보수 시간 동안 쉼없이 통보 알람이 울리게 됩니다.  
+이런 불편함이 없도록 Cloud Insight에서는 유지보수 계획 일정을 등록해두면 등록된 기간 동안에는 이벤트 규칙에 따른 통보알람이 울리지 않습니다.
+
+유지보수 일정은 아래와 같이 달력 행태나 리스트 형태로 확인 가능하며 [유지보수 계획 설정하기] 버튼으로 일정을 등록할 수 있습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_25.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+제목을 입력하고, 작업 기간, 작업 대상, 디멘션을 선택하면 아래와 같이 선택한 대상과 디멘션이 리스트로 나타납니다.  보통 위에서 설정했던 이벤트 규칙에 해당하는 항목들을 선택하면 됩니다. 
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_26.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+유지보수 계획을 설정하면 아래와 같이 일정에서 확인할 수 있으며 해당 기간 동안에는 이벤트 통보가 진행되지 않습니다. 
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_27.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Cloud Insight 소개
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&lt;/a&gt;
+
+2.  Cloud Insight 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&lt;/a&gt;
+</description>
+            <pubDate>Wed, 08 Feb 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/management/ncloud_management_cloud_insight_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud_management_cloud_insight_guide.html</guid>
+            
+            <category>monitoring</category>
+            
+            <category>log</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud Certificate Manager SSL 인증서 등록 가이드</title>
@@ -1470,204 +1662,6 @@ Backup 서비스는 유료 서비스로 이용 요금은 기본료, 데이터 �
         </item>
         
         <item>
-            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성 요청
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
-VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_07.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
-생성 완료까지 걸리는 기간은 **업무일 기준 2~3일** 정도이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_03.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-아래와 같이 생성 요청을 하고 나면 상태가 [생성중] 상태로 표시 됩니다. 2~3일 후 생성 완료 안내 메일이 도착할때까지 기다리시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## SSL VPN 생성 완료
-SSL VPN 생성이 완료되면 아래와 같은 메일을 받을 수 있습니다.   
-메일 내용에는 [**SSL VPN IP POOL**] 정보와 접속 경로 정보가 포함되어 있으니 잘 확인해야 합니다.
-
-{% include warning.html title=&quot;IP POOL&quot; content=&quot;특히 [**SSL VPN IP POOL**] 정보는 Ncloud 콘솔에서 확인할 수 없고, 오로지 생성 완료 메일에서만 확인 가능하니 잘 보관해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_05.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-생성 완료 메일 확인 후에 콘솔에 접속하면 아래와 같이 [운영중] 으로 상태 메시지가 바뀐 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.  
-VPC 환경은 Classic 환경과 달리 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Route Table 설정
-네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-아래와 같이 접속할 서버의 상세정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭합니다.  
-Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_12.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Destination]에 SSL VPN 생성 완료 메일에서 확인한 [**SSL VPN IP POOL**] 정보를 등록하고, [Target Type]은 SSLVPN을 선택, [Target Name]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_13.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-다음으로 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_14.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_17.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, VPC 환경 SSL VPN 서버 주소로 바꾸기 위해 [연결끊기] 클릭해서 연결을 끊고, [서버 변경] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_18.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-서버 선택 창에 **https://sslvpn-kr-vpc-01.ncloud.com** 주소를 입력하고, [다음] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_19.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-그리고 도착한 OTP 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_24.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_25.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_26.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_27.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_28.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_29.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
-Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_31.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(VPC)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-2&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-2&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</guid>
-            
-            <category>vpc</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
             <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
             <description>## 개요
 Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
@@ -1818,8 +1812,8 @@ Agent 창에서 [그래프 보기] 버튼을 클릭합니다.
 	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
 </description>
             <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
+            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</guid>
             
             <category>classic</category>
             
