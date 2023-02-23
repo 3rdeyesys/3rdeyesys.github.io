@@ -5,10 +5,422 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 08 Feb 2023 18:25:13 +0900</pubDate>
-        <lastBuildDate>Wed, 08 Feb 2023 18:25:13 +0900</lastBuildDate>
+        <pubDate>Thu, 23 Feb 2023 11:11:22 +0900</pubDate>
+        <lastBuildDate>Thu, 23 Feb 2023 11:11:22 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Object Storage Bucket에 CORS 설정하기</title>
+            <description>## 개요 
+Object Storage를 이용해 서비스 개발을 하다 보면 CORS 와 관련된 오류와 종종 마주치게 되는데, 테스트 버킷과 사이트를 생성해서 해결 방법을 알아보겠습니다.
+그리고, Ncloud(네이버 클라우드) Object Storage의 CORS 설정은 콘솔이 아닌, CLI와 외부 Client Tool 등을 사용해야 하는데 각각의 방법을 차례로 소개합니다.
+
+{% include tip.html title=&quot;CORS&quot; content=&quot;CORS(Cross-Origin Resource Sharing)는 웹 애플리케션이 서비스되는 도메인에서 다른 도메인에 있는 리소스를 접근해야 할 때 리소스에 대한 접근 허용, 제한 등에 대한 방법을 정의합니다.&quot; %}
+
+## 테스트 방법
+1. Object Storage에 **cors-test** 라는 이름의 버킷 생성
+2. **http://cors-test.com** 라는 테스트 사이트 준비
+3. 버킷에 **http://cors-test.com** 도메인에서 접속 가능하도록 CORS 설정
+4. Javascript를 이용해 **cors-test** 버킷에 있는 파일이 호출되는지 확인
+5. 버킷 CORS 설정을 변경하여 **http://cors-test.com** 도메인에서는 접속하지 못하게 설정
+6. **cors-test** 버킷에 있는 파일 호출이 차단되는지 확인
+
+
+## CORS 구성 요소
+CORS는 아래와 같은 요소들로 구성되어 있습니다.
+
+- AllowedHeader : 리소스를 요청할 때 사용할 수 있는 Header
+- AllowedMethod : 리소스를 요청할 때 허용된 Method
+- AllowedOrigin : 접근 허용된 Origin 도메인
+- ExposeHeader : 응답에서 접근이 허용된 Header
+- MaxAgeSeconds : 지정한 리소스에 해당하는 프리플라이트(pre-flight) OPTIONS 요청에 대한 최대 응답 시간 
+
+## CLI 사용
+Ncloud는 Object Storage CLI 접속 시 AWS CLI를 이용해 접속하게 되는데, 자세한 사용 방법은 아래 링크 문서에서 확인 가능합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/storage/ncloud_storage_object_storage_aws_cli_connect.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;AWS CLI를 이용한 Object Storage 접속 방법&lt;/a&gt;
+&quot; %}
+
+### json 파일 생성
+CLI를 사용하기 위해 먼저 간단하게 GET, PUT Method로 접근가능 하게 하는 CORS 설정을 입력한 별도의 json 파일을 생성 합니다. 여기서는 cors-test.json 이라는 이름으로 저장하겠습니다.
+
+``` json
+{
+  &quot;CORSRules&quot;: 
+  [
+    {
+      &quot;AllowedHeaders&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;AllowedMethods&quot;: [
+        &quot;GET&quot;,
+        &quot;PUT&quot;
+      ],
+      &quot;AllowedOrigins&quot;: [
+        &quot;http://cors-test.com&quot;
+      ],           
+      &quot;MaxAgeSeconds&quot;: 3000
+    }
+  ]
+}
+```
+
+json 형식에 대해서는 아래의 링크를 참조 합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/ManageCorsUsing.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;AWS - CORS 구성&lt;/a&gt;
+&quot; %}
+
+json파일을 생성 하였으면 아래와 같은 형식으로 **CORS 규칙 설정을 버킷에 적용하는 명령어**를 입력 합니다. 여기서는 테스트를 위해 미리 [**cors-test**] 라는 이름의 버킷을 생성해두었습니다.
+
+```bash
+# CORS 설정 입력 명령어 형식
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-bucket-cors --bucket &lt;버킷이름&gt; --cors-configuration file://&lt;json파일 경로&gt;
+
+# 예제
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-bucket-cors --bucket cors-test --cors-configuration file://cors-test.json
+```
+
+그런 다음 제대로 적용되었는지 확인 하기 위해 **버킷의 CORS 설정을 확인하는 명령어**를 실행합니다.
+
+``` bash
+# CORS 설정 조회 명령어 형식
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --bucket &lt;버킷이름&gt;
+
+# 예제
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --bucket cors-test
+```
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+
+## S3 Browser 사용 
+외부 Client Tool중에서 CORS 설정이 가능한 것은 S3 Browser 이며, 자세한 사용 방법은 아래의 링크 문서를 참고하시기 바랍니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/storage/ncloud_storage_object_storage_s3_client_s3browser.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Object Storage 접속용 Windows Client Tool - S3 Browser&lt;/a&gt;
+&quot; %}
+
+S3 브라우저에 접속 하신다음 CORS 설정 대상의 버킷에서 오른쪽 마우스 버튼을 클릭 합니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+CORS Configuration 클릭하여 CORS 설정을 오픈하면 처음에는 아무 값도 설정되어 있지 않습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-04.png&quot; width=&quot;645&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+### XML 형식의 설정 준비
+마찬가지로 GET, PUT Method로 접근 가능한 설정을 이번에는 XML 형식으로 입력하고 [**Apply**] 버튼을 클릭해서 적용합니다.
+
+``` xml
+&lt;CORSConfiguration&gt;
+  &lt;CORSRule&gt;
+    &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
+    &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;
+    &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;    
+    &lt;AllowedOrigin&gt;http://cors-test.com&lt;/AllowedOrigin&gt;        
+    &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
+  &lt;/CORSRule&gt;
+&lt;/CORSConfiguration&gt;
+```
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-05.png&quot; width=&quot;645&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+## 접속 테스트
+
+### 정상 접속 확인
+설정을 마친 후 Javascript를 사용해서 cors-test 버킷에 있는 파일을 호출해보면 아래와 같이 문제 없이 접속되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+### CORS 변경
+접속 차단을 테스트 하기 위해 CORS 설정에서 AllowedOrigin 값을 임의의 **http://example.com** 으로 변경하겠습니다.
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-02.png&quot; width=&quot;645&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+### 접속 차단 확인
+설정을 변경한 후에 접속을 해보면 이전과는 다르게 아래와 같은 메시지가 나타나면서 접속이 차단된 것을 확인할 수 있습니다.
+
+{% include warning.html title=&quot;error&quot; content=&quot;
+Access to XMLHttpRequest at &apos;https://kr.object.ncloudstorage.com/cors-test/cors-test.txt&apos; from origin &lt;br /&gt;&apos;**http://cors-test.com**&apos; **has been blocked by CORS policy**: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.
+&quot; %}
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+
+## CORS 예시
+
+### 예시 1
+아래 예시는 http://*.cors-test.com 즉, cors-test.com 도메인을 가진 모든 하위 도메인에 대해 허용할 요청 Method와 허용할 응답 헤더 값을 정의했습니다.
+
+``` json
+{
+  &quot;CORSRules&quot;: 
+  [
+    {    
+      &quot;AllowedHeaders&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;AllowedMethods&quot;: [
+        &quot;PUT&quot;,
+        &quot;POST&quot;,
+        &quot;DELETE&quot;
+      ],
+      &quot;AllowedOrigins&quot;: [
+        &quot;http://*.cors-test.com&quot;
+      ],
+      &quot;ExposeHeaders&quot;: [
+        &quot;x-amz-server-side-encryption&quot;,
+        &quot;x-amz-request-id&quot;,
+        &quot;x-amz-id-2&quot;
+      ],
+      &quot;MaxAgeSeconds&quot;: 3000
+    }
+  ]
+}
+```
+
+``` xml
+&lt;CORSConfiguration&gt;
+  &lt;CORSRule&gt;
+    &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;   
+    &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
+    &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
+    &lt;AllowedMethod&gt;DELETE&lt;/AllowedMethod&gt;
+    &lt;AllowedOrigin&gt;http://*.cors-test.com&lt;/AllowedOrigin&gt;   
+    &lt;ExposeHeader&gt;x-amz-server-side-encryption&lt;/ExposeHeader&gt;
+    &lt;ExposeHeader&gt;x-amz-request-id&lt;/ExposeHeader&gt;
+    &lt;ExposeHeader&gt;x-amz-id-2&lt;/ExposeHeader&gt;
+    &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
+  &lt;/CORSRule&gt;
+&lt;/CORSConfiguration&gt;
+```
+
+### 예제 2
+아래 예제 2는 2가지 도메인에 대해 각각 다른 규칙을 정의했습니다.  
+먼저 http로 접속하는 www.cors-test.com 도메인에 대해서는 GET 방식의 요청만 허용하고,  
+다음 https로 접속하는 api.cors-test.com 도메인에 대해서는 PUT, POST, DELETE 요청을 허용하는 규칙입니다.
+
+``` json
+{
+  &quot;CORSRules&quot;: 
+  [
+    {
+      &quot;AllowedHeaders&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;AllowedMethods&quot;: [
+        &quot;PUT&quot;,
+        &quot;POST&quot;,
+        &quot;DELETE&quot;
+      ],
+      &quot;AllowedOrigins&quot;: [
+        &quot;https://api.cors-test.com&quot;
+      ]
+    },
+    {
+      &quot;AllowedMethods&quot;: [
+        &quot;GET&quot;
+      ],
+      &quot;AllowedOrigins&quot;: [
+        &quot;http://www.cors-test.com&quot;
+      ]
+    }
+  ]
+}
+```
+
+``` xml
+&lt;CORSConfiguration&gt;
+  &lt;CORSRule&gt;
+    &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
+    &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
+    &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
+    &lt;AllowedMethod&gt;DELETE&lt;/AllowedMethod&gt;
+    &lt;AllowedOrigin&gt;http://api.cors-test.com&lt;/AllowedOrigin&gt;
+  &lt;/CORSRule&gt;
+  &lt;CORSRule&gt;
+    &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;
+    &lt;AllowedOrigin&gt;http://www.cors-test.com&lt;/AllowedOrigin&gt;
+  &lt;/CORSRule&gt;
+&lt;/CORSConfiguration&gt;
+```
+
+
+## 참고 URL
+1. Object Storage CLI 가이드
+	- &lt;a href=&quot;https://cli.ncloud-docs.com/docs/guide-objectstorage&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://cli.ncloud-docs.com/docs/guide-objectstorage&lt;/a&gt;
+
+2. AWS CLI를 이용한 Object Storage 접속 방법
+	- &lt;a href=&quot;/storage/ncloud_storage_object_storage_aws_cli_connect.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_aws_cli_connect.html&lt;/a&gt;	
+
+3. Object Storage 접속용 Windows Client Tool - S3 Browser
+	- &lt;a href=&quot;/storage/ncloud_storage_object_storage_s3_client_s3browser.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html&lt;/a&gt;		</description>
+            <pubDate>Thu, 23 Feb 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-bucket-cors-setting-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-bucket-cors-setting-guide.html</guid>
+            
+            <category>storage</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Ncloud Certificate Manager SSL 인증서 등록 가이드</title>
+            <description>## 개요
+Ncloud (네이버 클라우드)에는 인증서를 관리할 수 있는 Certificate Manager 서비스가 있는데, 여기에 SSL 인증서를 등록해두면 Load Balancer 등을 생성할 때 간단하게 인증서를 적용할 수 있습니다.
+
+## Certificate Manager 특징
+
+- 인증서 등록 및 서비스 연동: 공인 SSL 인증서를 등록하여 연계 서비스(Load Balancer, CDN+ 등)에 적용 가능
+- 인증서 정보 제공: 등록된 인증서의 다양한 정보를 제공하여 인증서의 효율적 관리 가능
+- 인증서 만료 알림: 등록된 인증서의 만료 예정일 30일 전부터 5일 단위로 알림(SMS/Email) 발송
+
+### 조회 가능한 인증서 정보
+아래와 같은 인증서 정보를 조회할 수 있습니다.
+
+| 항목 | 내용 |
+| :---: | :---: | 
+| 인증서 이름 | 고객이 설정한 인증서 이름 |
+| 도메인 | 인증서 대표 도메인(DN) |
+| 추가도메인 | 인증서에 포함된 하위 도메인(SAN) |
+| 상태 | 정상, 만료 |
+| 인증 시작일 | 인증 개시일 |
+| 인증 종료일 | 인증 종료일 |
+| 발급기관 | 인증서 발급 기관 정보(Certificate Authority) |
+| 일련번호 | 인증서의 고유 번호 |
+| PK 정보 | 퍼블릭 키 정보 |
+| 사용 서비스 | 연동된 서비스 및 인스턴스 번호 |
+
+
+## 대표적인 인증서 발급 사이트
+여러 인증서 발급 사이트 중에서 대표적인 몇 곳을 정리하면 다음과 같습니다.
+
+1. &lt;a href=&quot;https://www.sslcert.co.kr/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.sslcert.co.kr/ (SecureSign)&lt;/a&gt;
+
+2. &lt;a href=&quot;https://cert.crosscert.com/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://cert.crosscert.com/ (한국전자인증)&lt;/a&gt;
+
+3. &lt;a href=&quot;https://hosting.whois.co.kr/new/ssl.php&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://hosting.whois.co.kr/new/ssl.php (후이즈)&lt;/a&gt;
+
+
+## 인증서 파일 준비
+인증서 발급 업체에서 인증서를 발급 받으면 업체별로 제공하는 파일을 확인할 수 있습니다.  
+대표적인 업체들이 제공하는 파일 형태를 4가지 정도의 예시를 통해 확인해보겠습니다.
+
+### 예시 1
+예시 1과 같은 형태의 경우 아래 파일들 중에서 Ncloud Certificate Manager에 등록할때 필요한 파일은 붉은 색으로 표시한 3가지 파일이니 기억해 두시기 바랍니다. 
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-07.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+### 예시 2
+예시 2와 같은 형태도 아래 파일들 중에서 Ncloud Certificate Manager에 등록할때 필요한 파일은 붉은 색으로 표시한 3가지 파일이니 기억해 두시기 바랍니다. 
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-09.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+### 예시 3
+예시 3과 같은 형태는 아래 파일들 중에서 Ncloud Certificate Manager에 등록할때 필요한 파일은 붉은 색으로 표시한 4가지 파일이니 기억해 두시기 바랍니다. 
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-11.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+### 예시 4
+예시 4과 같은 형태는 아래 파일들 중에서 Ncloud Certificate Manager에 등록할때 필요한 파일은 붉은 색으로 표시한 5가지 파일이니 기억해 두시기 바랍니다.  
+예시 4와 유사한 형태의 경우는, 특히 CA 파일들과 Root CA 파일들이 모두 분리되어 제공되는 경우입니다.
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-13.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+
+## 이용 신청
+인증서 파일을 준비했으므로 인증서를 [**Certificate Manager**]에 등록할 차례인데, [**Certificate Manager**]를 이용하려면 먼저 서비스 이용 신청을 해야 합니다.  
+[**Certificate Manager**] - [**Subscription**]에서 [**이용 신청**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+## 인증서 등록
+신청이 끝났으면, [**Certificate Manager**] - [**Certificate List**]에서 [**외부 인증서 등록**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+인증서를 등록할 때는 아래와 같이 3가지 항목을 입력해야 하는데 각각의 항목에는 위에서 확인했던 3개의 **인증서 파일의 내용을 복사해서 붙여넣기**하면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-02.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+아래와 같이 각각의 파일의 내용을 `텍스트 편집기로 열어서` 전체 내용을 각 항목에 입력하면 되는데, 위에서 살펴본 인증서 예시별로 확인해보겠습니다.
+
+### 예시 1
+- Private Key : [인증서 파일명].**key.pem** , 인증서에 대한 Private Key
+- Certificate Body : [인증서 파일명].**crt.pem**, 도메인에 대한 인증서
+- Certificate Chain : **ca-chain-bundle.pem**, CA와 Root CA 인증서를 합쳐 놓은 파일
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-06.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+### 예시 2
+- Private Key : [인증서 파일명].**key** , 인증서에 대한 Private Key
+- Certificate Body : [인증서 파일명].**crt** , 도메인에 대한 인증서
+- Certificate Chain : **chainca.crt** (또는 **chain.pem**) , CA와 Root CA 인증서를 합쳐 놓은 파일
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-10.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+
+### 예시 3
+- Private Key : [인증서 파일명]_**key1**.pem , 인증서에 대한 Private Key
+- Certificate Body : [인증서 파일명].**crt** , 도메인에 대한 인증서
+- Certificate Chain : (상위)**chain.cer** + (최상위)**chain1.cer** , CA와 Root CA 인증서 파일
+
+{% include note.html title=&quot;Certificate Chain&quot; content=&quot;
+예시 3과 같은 형태의 인증서 파일을 제공 받았을 경우에는 &lt;br /&gt;
+(상위)chain.cer = CA이며, (최상위)chain1.cer = Root CA 파일입니다. &lt;br /&gt;
+두개의 파일을 텍스트 편집기로 열어서 각각의 파일 내용을 복사해서 Certificate Chain 항목에 두 파일의 내용을 모두 붙여 넣기 하시면 됩니다. 
+주의할 점은, 두 파일의 내용 사이 또는 마지막에 줄바꿈 문자 즉, **Enter 키는** 1번까지만 가능하며 **2번이상 들어가면 오류 메시지가 표시**됩니다.
+&quot;%}
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-12.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+
+### 예시 4
+- Private Key : [인증서 파일명]_**key**.pem , 인증서에 대한 Private Key
+- Certificate Body : [인증서 파일명].**crt**.pem , 도메인에 대한 인증서
+- Certificate Chain : **chain1.crt**.pem + **chain2.crt**.pem + **root chain.crt**.pem , CA와 Root CA 인증서 파일들
+
+{% include note.html title=&quot;Certificate Chain&quot; content=&quot;
+예시 4과 같은 형태의 인증서 파일을 제공 받았을 경우에는 &lt;br /&gt;
+CA 파일이 chain1.crt.pem, chain2.crt.pem 처럼 2개 이상 제공되며, root chain.crt.pem = Root CA 파일입니다. &lt;br /&gt;
+제공되는 Chain 3개 또는 그 이상 개수의 파일을 텍스트 편집기로 열어서 각각의 파일 내용을 복사해 Certificate Chain 항목에 내용을 모두 붙여 넣기 하시면 됩니다. 
+주의할 점은, 각각의 파일의 내용 사이 또는 마지막에 줄바꿈 문자 즉, **Enter 키는** 1번까지만 가능하며 **2번이상 들어가면 오류 메시지가 표시**됩니다.
+&quot;%}
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-14.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+## 등록 완료
+인증서가 문제 없이 등록되면 아래와 같이 [**정상**]으로 표시가 되고 인증서의 각종 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
+
+
+
+## 주의 사항
+1. **파일 등록**: 인증서 파일은 `-----BEGIN RSA PRIVATE KEY-----` 중간 생략  `-----END RSA PRIVATE KEY-----` 또는 `-----BEGIN CERTIFICATE-----` 중간 생략 `-----END CERTIFICATE-----` 와 같은 형식으로 구성되어 있는데, 인증서를 등록할 때는 인증서 파일을 수정하지 말고 파일의 처음부터 끝까지 모두 복사해서 등록하셔야 합니다.  
+
+2. **체인 인증서 추출**: 간혹 일부 업체의 경우 도메인 인증서 파일은 제공해주지만, `CA 파일과 Root CA 파일은 제공해주지 않는 경우`가 있습니다. 이럴 때는 아래에 있는 Ncloud 가이드 중에서 인증서 파일 추출 부분을 참고해서 CA 파일과 Root CA 파일을 추출한 다음에 등록하시면 됩니다.
+
+
+## 참고 URL
+1. Ncloud Certificate Manager 전체 가이드 
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-15-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-15-1&lt;/a&gt;
+
+2. Ncloud Certificate Manager 인증서 파일 추출 가이드 
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/certificatemanager-use-list#CertificateChain%EB%93%B1%EB%A1%9D&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/certificatemanager-use-list#CertificateChain%EB%93%B1%EB%A1%9D&lt;/a&gt;
+</description>
+            <pubDate>Wed, 08 Feb 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud-security-certificate-manager-register-ssl-certificate-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-certificate-manager-register-ssl-certificate-guide.html</guid>
+            
+            <category>ssl</category>
+            
+            <category>load_balancer</category>
+            
+            
+        </item>
         
         <item>
             <title>모니터링 서비스 Cloud Insight 설정 가이드</title>
@@ -203,162 +615,6 @@ Cloud Insight 서비스는 이용 신청을 해야 사용할 수 있습니다. C
         </item>
         
         <item>
-            <title>Ncloud Certificate Manager SSL 인증서 등록 가이드</title>
-            <description>## 개요
-Ncloud (네이버 클라우드)에는 인증서를 관리할 수 있는 Certificate Manager 서비스가 있는데, 여기에 SSL 인증서를 등록해두면 Load Balancer 등을 생성할 때 간단하게 인증서를 적용할 수 있습니다.
-
-## Certificate Manager 특징
-
-- 인증서 등록 및 서비스 연동: 공인 SSL 인증서를 등록하여 연계 서비스(Load Balancer, CDN+ 등)에 적용 가능
-- 인증서 정보 제공: 등록된 인증서의 다양한 정보를 제공하여 인증서의 효율적 관리 가능
-- 인증서 만료 알림: 등록된 인증서의 만료 예정일 30일 전부터 5일 단위로 알림(SMS/Email) 발송
-
-### 조회 가능한 인증서 정보
-아래와 같은 인증서 정보를 조회할 수 있습니다.
-
-| 항목 | 내용 |
-| :---: | :---: | 
-| 인증서 이름 | 고객이 설정한 인증서 이름 |
-| 도메인 | 인증서 대표 도메인(DN) |
-| 추가도메인 | 인증서에 포함된 하위 도메인(SAN) |
-| 상태 | 정상, 만료 |
-| 인증 시작일 | 인증 개시일 |
-| 인증 종료일 | 인증 종료일 |
-| 발급기관 | 인증서 발급 기관 정보(Certificate Authority) |
-| 일련번호 | 인증서의 고유 번호 |
-| PK 정보 | 퍼블릭 키 정보 |
-| 사용 서비스 | 연동된 서비스 및 인스턴스 번호 |
-
-
-## 대표적인 인증서 발급 사이트
-여러 인증서 발급 사이트 중에서 대표적인 몇 곳을 정리하면 다음과 같습니다.
-
-1. &lt;a href=&quot;https://www.sslcert.co.kr/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.sslcert.co.kr/ (SecureSign)&lt;/a&gt;
-
-2. &lt;a href=&quot;https://cert.crosscert.com/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://cert.crosscert.com/ (한국전자인증)&lt;/a&gt;
-
-3. &lt;a href=&quot;https://hosting.whois.co.kr/new/ssl.php&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://hosting.whois.co.kr/new/ssl.php (후이즈)&lt;/a&gt;
-
-
-## 인증서 파일 준비
-인증서 발급 업체에서 인증서를 발급 받으면 업체별로 제공하는 파일을 확인할 수 있습니다.  
-대표적인 업체들이 제공하는 파일 형태를 4가지 정도의 예시를 통해 확인해보겠습니다.
-
-### 예시 1
-예시 1과 같은 형태의 경우 아래 파일들 중에서 Ncloud Certificate Manager에 등록할때 필요한 파일은 붉은 색으로 표시한 3가지 파일이니 기억해 두시기 바랍니다. 
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-07.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-### 예시 2
-예시 2와 같은 형태도 아래 파일들 중에서 Ncloud Certificate Manager에 등록할때 필요한 파일은 붉은 색으로 표시한 3가지 파일이니 기억해 두시기 바랍니다. 
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-09.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-### 예시 3
-예시 3과 같은 형태는 아래 파일들 중에서 Ncloud Certificate Manager에 등록할때 필요한 파일은 붉은 색으로 표시한 4가지 파일이니 기억해 두시기 바랍니다. 
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-11.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-### 예시 4
-예시 4과 같은 형태는 아래 파일들 중에서 Ncloud Certificate Manager에 등록할때 필요한 파일은 붉은 색으로 표시한 5가지 파일이니 기억해 두시기 바랍니다.  
-예시 4와 유사한 형태의 경우는, 특히 CA 파일들과 Root CA 파일들이 모두 분리되어 제공되는 경우입니다.
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-13.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-
-## 이용 신청
-인증서 파일을 준비했으므로 인증서를 [**Certificate Manager**]에 등록할 차례인데, [**Certificate Manager**]를 이용하려면 먼저 서비스 이용 신청을 해야 합니다.  
-[**Certificate Manager**] - [**Subscription**]에서 [**이용 신청**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-## 인증서 등록
-신청이 끝났으면, [**Certificate Manager**] - [**Certificate List**]에서 [**외부 인증서 등록**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-인증서를 등록할 때는 아래와 같이 3가지 항목을 입력해야 하는데 각각의 항목에는 위에서 확인했던 3개의 **인증서 파일의 내용을 복사해서 붙여넣기**하면 됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-02.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-아래와 같이 각각의 파일의 내용을 `텍스트 편집기로 열어서` 전체 내용을 각 항목에 입력하면 되는데, 위에서 살펴본 인증서 예시별로 확인해보겠습니다.
-
-### 예시 1
-- Private Key : [인증서 파일명].**key.pem** , 인증서에 대한 Private Key
-- Certificate Body : [인증서 파일명].**crt.pem**, 도메인에 대한 인증서
-- Certificate Chain : **ca-chain-bundle.pem**, CA와 Root CA 인증서를 합쳐 놓은 파일
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-06.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-### 예시 2
-- Private Key : [인증서 파일명].**key** , 인증서에 대한 Private Key
-- Certificate Body : [인증서 파일명].**crt** , 도메인에 대한 인증서
-- Certificate Chain : **chainca.crt** (또는 **chain.pem**) , CA와 Root CA 인증서를 합쳐 놓은 파일
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-10.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-
-### 예시 3
-- Private Key : [인증서 파일명]_**key1**.pem , 인증서에 대한 Private Key
-- Certificate Body : [인증서 파일명].**crt** , 도메인에 대한 인증서
-- Certificate Chain : (상위)**chain.cer** + (최상위)**chain1.cer** , CA와 Root CA 인증서 파일
-
-{% include note.html title=&quot;Certificate Chain&quot; content=&quot;
-예시 3과 같은 형태의 인증서 파일을 제공 받았을 경우에는 &lt;br /&gt;
-(상위)chain.cer = CA이며, (최상위)chain1.cer = Root CA 파일입니다. &lt;br /&gt;
-두개의 파일을 텍스트 편집기로 열어서 각각의 파일 내용을 복사해서 Certificate Chain 항목에 두 파일의 내용을 모두 붙여 넣기 하시면 됩니다. 
-주의할 점은, 두 파일의 내용 사이 또는 마지막에 줄바꿈 문자 즉, **Enter 키는** 1번까지만 가능하며 **2번이상 들어가면 오류 메시지가 표시**됩니다.
-&quot;%}
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-12.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-
-### 예시 4
-- Private Key : [인증서 파일명]_**key**.pem , 인증서에 대한 Private Key
-- Certificate Body : [인증서 파일명].**crt**.pem , 도메인에 대한 인증서
-- Certificate Chain : **chain1.crt**.pem + **chain2.crt**.pem + **root chain.crt**.pem , CA와 Root CA 인증서 파일들
-
-{% include note.html title=&quot;Certificate Chain&quot; content=&quot;
-예시 4과 같은 형태의 인증서 파일을 제공 받았을 경우에는 &lt;br /&gt;
-CA 파일이 chain1.crt.pem, chain2.crt.pem 처럼 2개 이상 제공되며, root chain.crt.pem = Root CA 파일입니다. &lt;br /&gt;
-제공되는 Chain 3개 또는 그 이상 개수의 파일을 텍스트 편집기로 열어서 각각의 파일 내용을 복사해 Certificate Chain 항목에 내용을 모두 붙여 넣기 하시면 됩니다. 
-주의할 점은, 각각의 파일의 내용 사이 또는 마지막에 줄바꿈 문자 즉, **Enter 키는** 1번까지만 가능하며 **2번이상 들어가면 오류 메시지가 표시**됩니다.
-&quot;%}
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-14.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-## 등록 완료
-인증서가 문제 없이 등록되면 아래와 같이 [**정상**]으로 표시가 되고 인증서의 각종 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncloud-security-certificate-manager-register-ssl-certificate-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Certificate Manager에 SSL 인증서를 등록하는 방법입니다&quot; caption=&quot;&quot; %}
-
-
-
-## 주의 사항
-1. **파일 등록**: 인증서 파일은 `-----BEGIN RSA PRIVATE KEY-----` 중간 생략  `-----END RSA PRIVATE KEY-----` 또는 `-----BEGIN CERTIFICATE-----` 중간 생략 `-----END CERTIFICATE-----` 와 같은 형식으로 구성되어 있는데, 인증서를 등록할 때는 인증서 파일을 수정하지 말고 파일의 처음부터 끝까지 모두 복사해서 등록하셔야 합니다.  
-
-2. **체인 인증서 추출**: 간혹 일부 업체의 경우 도메인 인증서 파일은 제공해주지만, `CA 파일과 Root CA 파일은 제공해주지 않는 경우`가 있습니다. 이럴 때는 아래에 있는 Ncloud 가이드 중에서 인증서 파일 추출 부분을 참고해서 CA 파일과 Root CA 파일을 추출한 다음에 등록하시면 됩니다.
-
-
-## 참고 URL
-1. Ncloud Certificate Manager 전체 가이드 
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-15-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-15-1&lt;/a&gt;
-
-2. Ncloud Certificate Manager 인증서 파일 추출 가이드 
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/certificatemanager-use-list#CertificateChain%EB%93%B1%EB%A1%9D&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/certificatemanager-use-list#CertificateChain%EB%93%B1%EB%A1%9D&lt;/a&gt;
-</description>
-            <pubDate>Wed, 08 Feb 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud-security-certificate-manager-register-ssl-certificate-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-certificate-manager-register-ssl-certificate-guide.html</guid>
-            
-            <category>ssl</category>
-            
-            <category>load_balancer</category>
-            
-            
-        </item>
-        
-        <item>
             <title>Object Storage 파일의 Content-Type 일괄 적용, 변경하는 방법</title>
             <description>## 개요
 Ncloud(네이버 클라우드) Object Storage에서 업로드하는 파일의 Content-Type을 업로드 시에 일괄 적용하거나, 이미 업로드된 다수의 파일의 Content-Type을 일괄 변경하는 방법을 정리해보겠습니다.
@@ -478,7 +734,7 @@ Object Storage를 관리하기 편한 여러가지 Client Tool중에서 [**Cloud
 	- &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&lt;/a&gt;	
 
 3.  Object Storage에서 html, 이미지 파일이 다운로드되는 문제 해결 방법
-	- &lt;a href=&quot;/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html&lt;/a&gt;		</description>
+	- &lt;a href=&quot;/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html&lt;/a&gt;		</description>
             <pubDate>Fri, 03 Feb 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html</guid>
@@ -585,7 +841,7 @@ html의 경우는 [**text/html**]이며 기타 다양한 파일들의 MIME Type�
 	- &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&lt;/a&gt;	
 
 3.  Object Storage 파일의 Content-Type 일괄 적용, 변경하는 방법
-	- &lt;a href=&quot;/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html&lt;/a&gt;		</description>
+	- &lt;a href=&quot;/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html&lt;/a&gt;		</description>
             <pubDate>Tue, 31 Jan 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html</guid>
@@ -1657,169 +1913,6 @@ Backup 서비스는 유료 서비스로 이용 요금은 기본료, 데이터 �
             <category>backup</category>
             
             <category>linux</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
-다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
-그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
-&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
-&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
-&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 개인정보 수집 및 이용에 동의해야 합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(Classic)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Thu, 08 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</guid>
-            
-            <category>classic</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
             
             
         </item>
