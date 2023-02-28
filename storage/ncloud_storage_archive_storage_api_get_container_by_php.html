@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1899,11 +1906,21 @@ $("#toc_onoff").click(function() {
 <p>Archive Storage API 이용을 위한 Project ID는 [네이버 클라우드 포탈] - [Archive Storage]에서 [API 이용 정보 확인] 버튼을 클릭하면 확인할 수 있습니다.<br />
 테스트에 사용할 컨테이너(버킷)은 [test]로 설정해두었습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_04.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_04.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>[API 이용 정보 확인] 창에서 Project ID를 확인하고, PHP 소스코드에 입력합니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_access_token_create_02.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 500px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_access_token_create_02.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 500px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="api-서버와-url-설정">API 서버와 URL 설정</h3>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$api_server</span> <span class="o">=</span> <span class="s2">"https://kr.archive.ncloudstorage.com"</span><span class="p">;</span>
@@ -2017,17 +2034,32 @@ curl_setopt($ch, CURLOPT_HEADER, TRUE); 는 Response에 body 뿐만 아니라 he
 <h2 id="목록-출력-예시">목록 출력 예시</h2>
 <p>위의 코드를 실행하면 다음과 같이 오브젝트 목록이 출력됩니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_02.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_02.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>출력된 오브젝트 정보가 올바른지 확인하기 위해 네이버 클라우드(Ncloud) 콘솔에서 해당 컨테이너(버킷)의 정보를 확인하면 다음과 같이 일치하는 것을 알 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_01.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_01.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="제한-사항">제한 사항</h2>
 <p>Archive Storage API를 이용해서 가져올 수 있는 오브젝트 목록의 최대 개수는 10,000개입니다. 
 1만개 이상이 등록된 컨테이너(버킷)에서 오브젝트 목록을 요청해도 아래와 같이 최대 10,000개 까지만 가져올 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_03.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_03.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <div class="bs-callout-v2 bs-callout-v2-success bs-callout-v2-level-1">컨테이너(버킷)에 10,000개 이상의 오브젝트가 저장되어 있을 경우에는 아래쪽에서 소개하는 방법처럼 폴더별로 오브젝트 목록을 따로 조회하시면 됩니다.</div>
 
@@ -2051,7 +2083,12 @@ curl_setopt($ch, CURLOPT_HEADER, TRUE); 는 Response에 body 뿐만 아니라 he
 <p>API URL을 호출할 때 파라미터로 prefix를 전송하면 prefix 값에 해당하는 특정 문자열로 시작하는 오브젝트 목록을 모두 가져 옵니다.<br />
 예를 들어 prefix 값을 [Test_Folder]로 설정하면, 아래와 같이 [Test_Folder]라는 이름으로 시작되는 모든 오브젝트 목록을 가져오게 됩니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_05.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_05.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="특정-폴더-아래에-있는-오브젝트-목록">특정 폴더 아래에 있는 오브젝트 목록</h3>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ncloud_object_prefix</span> <span class="o">=</span> <span class="s2">"Test_Folder/"</span><span class="p">;</span>
@@ -2063,7 +2100,12 @@ curl_setopt($ch, CURLOPT_HEADER, TRUE); 는 Response에 body 뿐만 아니라 he
 
 <p>위쪽에서 확인한 [특정 이름으로 시작하는 오브젝트 목록]의 결과 예시와는 다르게 폴더 자체인 [Test_Folder] 그리고 [Test_Folder_0001.png]는 포함되어 있지 않습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_06.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud_storage_archive_storage_api_get_container_by_php_06.png" alt="PHP로 Ncloud Archive Storage API 호출하기 - 컨테이너(버킷) 오브젝트 목록 조회하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="api-기타-기능">API 기타 기능</h2>
 <p>Archive Storage API에서 지원하는 기능은 컨테이너(버킷)의 오브젝트 목록 외에도 아래와 같이 여러가지가 있습니다. 
@@ -2170,7 +2212,7 @@ curl_setopt($ch, CURLOPT_HEADER, TRUE); 는 Response에 body 뿐만 아니라 he
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-11-17<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2021-11-17<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

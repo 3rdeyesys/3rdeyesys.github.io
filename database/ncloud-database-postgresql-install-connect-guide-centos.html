@@ -1089,6 +1089,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1781,14 +1788,24 @@ $("#toc_onoff").click(function() {
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nb">install</span> <span class="nt">-y</span> https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-01.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-01.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="postgresql-설치">PostgreSQL 설치</h3>
 <p>[<strong>PostgreSQL 13</strong>]을 설치합니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nb">install</span> <span class="nt">-y</span> postgresql13-server
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-02.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-02.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="기본-db-생성">기본 DB 생성</h3>
 <p>[<strong>initdb</strong>] 명령으로 기본 DB를 생성하고 올바르게 생성되었는지 로그를 확인해보겠습니다.</p>
@@ -1797,14 +1814,24 @@ $("#toc_onoff").click(function() {
 ~# postgresql-13-setup initdb
 ~# <span class="nb">cat</span> /var/lib/pgsql/13/initdb.log
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-03.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-03.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="postgresql-시작">PostgreSQL 시작</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl <span class="nb">enable </span>postgresql-13
 ~# systemctl start postgresql-13
 ~# systemctl status postgresql-13
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-04.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-04.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="db-접속">DB 접속</h2>
 <p>기본 마스터 계정인 [<strong>postgres</strong>]로 [<strong>PostgreSQL</strong>]에 접속합니다.</p>
@@ -1812,7 +1839,12 @@ $("#toc_onoff").click(function() {
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# su postgres
 bash<span class="nv">$ </span>psql
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-05.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-05.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="유저-생성">유저 생성</h3>
 <p>테스트용 계정 [testuser]를 생성하고 [<strong>\du</strong>] 명령으로 생성된 유저를 확인합니다.</p>
@@ -1820,7 +1852,12 @@ bash<span class="nv">$ </span>psql
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">postgres</span><span class="o">=#</span> <span class="k">create</span> <span class="k">user</span> <span class="n">testuser</span> <span class="n">password</span> <span class="s1">'test123$'</span> <span class="n">superuser</span><span class="p">;</span>
 <span class="n">postgres</span><span class="o">=#</span> <span class="err">\</span><span class="n">du</span> 
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-06.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-06.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="db-생성-및-소유자-지정">DB 생성 및 소유자 지정</h3>
 <p>테스트용 DB를 생성하고 소유자를 지정한 후에 [<strong>\l</strong>] 명령으로 생성된 DB를 확인합니다.</p>
@@ -1830,7 +1867,12 @@ bash<span class="nv">$ </span>psql
 <span class="n">postgres</span><span class="o">=#</span> <span class="err">\</span><span class="n">q</span>
 <span class="n">bash</span><span class="err">$</span>
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-07.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-07.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="접속-시도---인증-오류">접속 시도 - 인증 오류</h3>
 <p>위에서 생성한 계정으로 접속을 시도해보면, 아래와 같이 인증 오류가 발생합니다.<br />
@@ -1839,7 +1881,12 @@ bash<span class="nv">$ </span>psql
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# psql <span class="nt">-U</span> testuser <span class="nt">-d</span> testdb
 psql: error: FATAl: Peer authentication failed <span class="k">for </span>user <span class="s2">"testuser"</span>
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-08.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-08.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="인증-오류-해결">인증 오류 해결</h2>
 <p>인증 문제를 해결하고 [<strong>PostgreSQL</strong>]에 접속하는 방법은 크게 2가지가 있는데 한가지씩 확인해보겠습니다.</p>
@@ -1851,7 +1898,12 @@ psql: error: FATAl: Peer authentication failed <span class="k">for </span>user <
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# adduser testuser
 ~# passwd testuser
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-12.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-12.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <ul>
   <li><strong>DB 접속</strong><br />
@@ -1861,7 +1913,12 @@ psql: error: FATAl: Peer authentication failed <span class="k">for </span>user <
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# su testuser
 ~<span class="nv">$ </span>psql <span class="nt">-U</span> testuser <span class="nt">-d</span> testdb
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-13.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-13.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="방법2---인증-설정-파일-수정">방법2 - 인증 설정 파일 수정</h3>
 <p>다음으로 인증 관련 설정 파일인 [<strong>pg_hba.conf</strong>] 파일을 수정해서 접속하는 방법을 확인해보겠습니다.</p>
@@ -1878,12 +1935,22 @@ psql: error: FATAl: Peer authentication failed <span class="k">for </span>user <
 <ul>
   <li>수정 전</li>
 </ul>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-09.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-09.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <ul>
   <li>수정 후</li>
 </ul>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-10.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-10.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <ul>
   <li><strong>DB 재시작 후 접속</strong><br />
@@ -1894,7 +1961,12 @@ psql: error: FATAl: Peer authentication failed <span class="k">for </span>user <
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl restart postgresql-13
 ~# psql <span class="nt">-U</span> testuser <span class="nt">-d</span> testdb
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-11.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-postgresql-install-connect-guide-centos-11.png" alt="Ncloud VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="기본-배포-버전-설치">기본 배포 버전 설치</h2>
 <p>[<strong>PostgreSQL 13</strong>] 버전이 아닌 기본 배포 버전을 설치하려면 아래와 같은 방법으로 설치를 하면 됩니다.<br />
@@ -2031,7 +2103,7 @@ psql: error: FATAl: Peer authentication failed <span class="k">for </span>user <
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-10-06<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2022-10-06<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

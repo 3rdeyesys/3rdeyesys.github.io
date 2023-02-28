@@ -1091,6 +1091,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li class="active"><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>
                     
           
@@ -1772,11 +1779,21 @@ $("#toc_onoff").click(function() {
 <h2 id="이용신청">이용신청</h2>
 <p>Ncloud 콘솔 [Management] - [Web service Monitoring System] - [Subscription]에서 이용 신청을 합니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_01.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 620px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_01.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 620px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>다음으로 [Web Monitoring]에서 [서비스 등록] 버튼을 클릭합니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_02.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 600px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_02.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 600px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="스텝-작성">스텝 작성</h2>
 
@@ -1787,40 +1804,75 @@ $("#toc_onoff").click(function() {
 <p>스텝은 여러 가지를 추가할 수 있으나 여기서는 간단하게 URL만 추가해서 진행하겠습니다. 
 URL 접속 설정에서는 모니터링 대상이 되는 METHOD (GET, POST, PUT, DELETE, HEAD) 선택 및 URL을 입력합니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_03.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_03.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <div class="bs-callout-v2 bs-callout-v2-success bs-callout-v2-level-1">- 모니터링 유형에서 URL을 선택해도 스텝을 추가하면 자동으로 SCENARIO로 변경됩니다.<br /> - 지역 선택은 테스트 환경에서는 1곳만 선택이 가능하고, 다음 단계인 서비스 설정에서 원하는 지역을 모두 선택할 수 있습니다.</div>
 
 <h3 id="테스트">테스트</h3>
 <p>모니터링 할 URL을 입력하고 [테스트 시작] 버튼을 클릭하면 아래와 같이 테스트 결과 메시지와 URL 접속 화면 즉, 오브젝트 탐색기가 나타납니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_04.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_04.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h4 id="url-접속-옵션">URL 접속 옵션</h4>
 <p>URL 설정에서 추가 설정이 필요할 경우 [옵션] 버튼을 클릭하면 됩니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_05.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_05.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>옵션에서는 Header, Body, Cookie 등의 Request 값을 설정해서 테스트에 적용할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_06.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_06.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h4 id="스텝-추가">스텝 추가</h4>
 <p>이번 설정에서는 URL 접속만 테스트하는 것으로 진행하지만, 추가로 스텝을 추가해서 다양한 모니터링 설정을 하고자 할 경우에는 [스텝 추가] 버튼을 클릭하면 됩니다.<br />
 추가 가능한 스텝에는 [대기 시간], [마우스 클릭], [텍스트 입력], [유효성 검사 (오브젝트 찾기)], [유효성 검사 (텍스트 찾기)], [팝업 창 이동], [사용자 정의 스크립트 실행] 등이 있습니다.  자세한 내용은 아래쪽 <a href="#stepAddDetail">스텝 추가 상세 내용</a>에서 다시 확인해보겠습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_07.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_07.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="오류-확인">오류 확인</h3>
 <p>혹시 테스트 결과에 Success가 아닌 Error가 나타났을 경우 아래쪽 [오류 로그]에서 어떤 오류인지 자세히 확인 가능합니다.<br />
 특별한 문제가 없다면 [다음] 버튼을 클릭해서 다음 단계로 이동합니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_08.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_08.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="오류-항목-필터-추가">오류 항목 필터 추가</h3>
 <p>오류 유형이 URL, JavaScript인 경우에는 향후 테스트에서 오류로 분류되지 않기를 바라는 항목은 아래 스샷처럼 [+ 추가] 버튼을 클릭해 필터에 추가하면 오류로 측정되지 않도록 할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_24.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_24.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="서비스-설정">서비스 설정</h2>
 <p>서비스에 필요한 설정을 선택합니다.</p>
@@ -1831,22 +1883,42 @@ URL 접속 설정에서는 모니터링 대상이 되는 METHOD (GET, POST, PUT,
   <li>Run Timeout: 모니터링 전체 시나리오 실행 시간을 30초, 40초, 50초, 60초 중에서 선택합니다.</li>
 </ul>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_09.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_09.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="서비스-등록">서비스 등록</h2>
 <p>앞에서 선택한 설정을 최종 확인하고, 서비스 이름을 적당히 입력한 후에 [서비스 등록] 버튼을 클릭합니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_10.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_10.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="모니터링-확인">모니터링 확인</h2>
 <p>서비스 등록을 완료하면 모니터링 화면으로 이동하게 되고, 어느 정도 시간이 지나면 아래와 같이 모니터링 결과가 그래프로 나타납니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_11.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_11.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="알람-설정">알람 설정</h2>
 <p>모니터링 중에 오류가 발생할 경우 SMS나 Email로 알람을 받도록 설정할 수 있습니다. 알람 설정은 모니터링 화면에서 왼쪽 설정 버튼을 클릭하면 나타나는 [알람 설정] 메뉴를 클릭하면 됩니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_12.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_12.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="알람-설정-항목">알람 설정 항목</h3>
 <ul>
@@ -1857,49 +1929,99 @@ URL 접속 설정에서는 모니터링 대상이 되는 METHOD (GET, POST, PUT,
   <li>Webhook: SMS나 Email외에 Slack등의 Webhook URL을 등록해서 알람을 받을 수도 있습니다.</li>
 </ul>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_13.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 760px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_13.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 760px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="일시-정지">일시 정지</h2>
 <p>모니터링 화면 오른쪽 상단에 있는 추가 설정에서 모니터링에 대한 [일시 정지], [스텝 수정], [삭제]를 선택할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_14.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_14.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="모니터링-상세-결과">모니터링 상세 결과</h2>
 <p>모니터링 화면 상단에 있는 서비스 이름을 클릭하면 상세 모니터링 내용을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_20.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_20.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>모니터링 상세 결과 화면에서는 선택한 기간의 상세 그래프와 각각의 모니터링 결과 리스트를 모두 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_15.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_15.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="성공-상세-결과">성공 상세 결과</h3>
 <p>모니터링 결과 리스트에서 Success로 나오는 항목의 날짜를 클릭하면 상세 내역을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_16.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_16.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>성공했을 경우에는 아래와 같이 간단하게 성공 내역이 표시됩니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_17.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_17.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="오류-상세-결과">오류 상세 결과</h3>
 <p>모니터링 결과 리스트에서 Error로 나오는 항목의 날짜를 클릭하면 오류 상세 내역을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_18.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_18.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>오류 상세 결과 화면에서는 어떤 스텝에서 어떤 유형의 오류가 발생했는지 로그까지 자세히 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_19.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_19.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="지역-필터-설정">지역, 필터 설정</h2>
 <p>지역 설정을 변경하거나 필터링할 내용을 설정하고자 할 경우에는 설정에서 [지역 설정], [필터 설정]을 변경하면 됩니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_23.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_23.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="지역-설정">지역 설정</h3>
 <p>초기에 서비스 설정에서 선택했던 모니터링 지역을 지역 설정에서 원하는 지역으로 변경할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_21.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 490px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_21.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 490px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="필터-설정">필터 설정</h3>
 <p>모니터링에서 발생한 오류나 이벤트 중에서 알람을 받고 싶지 않은 것이 있다면 필터링에 추가해서 알람 대상에서 제외할 수 있습니다.</p>
@@ -1911,7 +2033,12 @@ URL 접속 설정에서는 모니터링 대상이 되는 METHOD (GET, POST, PUT,
   <li>JS_PREFIX: 입력한 스크립트를 포함하고 있는 모든 스크립트를 필터링하고 싶을 때</li>
 </ul>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_22.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 684px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_22.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 684px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="stepAddDetail">스텝 추가 상세 내용</h2>
 <p>[스텝 추가]에서 추가 가능한 스텝은 다음과 같습니다.</p>
@@ -1927,7 +2054,12 @@ URL 접속 설정에서는 모니터링 대상이 되는 METHOD (GET, POST, PUT,
   <li>사용자 정의 스크립트 실행 : 사용자가 설정한 Javascript를 실행합니다.</li>
 </ul>
 
-<figure><img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_07.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/management/ncloud_management_webservice_monitoring_system_07.png" alt="Ncloud Web service Monitoring System 사용 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="스텝-추가-상세-가이드">스텝 추가 상세 가이드</h3>
 <p>위 스텝 추가 항목들에 대한 상세 가이드는 아래 문서에서 확인 가능합니다.</p>
@@ -1993,7 +2125,7 @@ URL 접속 설정에서는 모니터링 대상이 되는 METHOD (GET, POST, PUT,
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-03-15<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2022-03-15<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

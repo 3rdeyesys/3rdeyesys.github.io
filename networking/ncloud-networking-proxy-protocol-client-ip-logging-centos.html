@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1786,7 +1793,12 @@ TCP 통신의 경우 X-Forwarded-For 헤더를 사용할 수 없기에 Client IP
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>httpd httpd-devel
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-01.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-01.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="target-group-설정">Target Group 설정</h2>
 <p>우선 Load Balancer를 생성하기 전에 Load Balancer에서 사용할 Target Group을 [Load Balancer] - [Target Group]에서 생성합니다.</p>
@@ -1795,73 +1807,138 @@ TCP 통신의 경우 X-Forwarded-For 헤더를 사용할 수 없기에 Client IP
 <p>Target Group의 이름를 입력하고 Target 유형은 [VPC Server]를 선택, 다음으로 VPC 대역을 선택합니다.<br />
 그리고, <code class="language-plaintext highlighter-rouge">프로토콜은 PROXY_TCP를 선택</code>하고, 포트는 80포트를 사용하겠습니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-03.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-03.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="health-check-설정">Health Check 설정</h3>
 <p>Health Check 할 프로토콜은 TCP를 선택합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-04.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-04.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="target-추가">Target 추가</h3>
 <p>앞에서 생성했던 서버 2대를 선택하고 [적용 Target]쪽으로 이동시킵니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-05.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-05.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="설정-확인">설정 확인</h3>
 <p>설정 정보를 최종 확인하고 이상이 없으면 Target Group을 생성합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-06.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-06.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>생성된 Target Group를 확인할 수 있습니다.</p>
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-07.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-07.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="network-proxy-load-balancer-생성">Network Proxy Load Balancer 생성</h2>
 <p>[Load Balancer]에서 [로드밸런서 생성] 버튼을 클릭하고  [네트워크 프록시 로드밸런서]를 선택합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-08.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-08.png" alt="Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="로드밸런서-설정">로드밸런서 설정</h3>
 <p>필요한 로드밸런서 설정을 선택하는데, 그 중에서 서브넷은 혹시 생성되어 있지 않으면 [서브넷 생성] 버튼을 클릭해 로드밸런서 전용 서브넷을 생성한 후에 다시 돌아옵니다. 여기서는 [10.0.4.0/24] 대역으로 설정했습니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-09.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-09.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="리스너-설정">리스너 설정</h3>
 <p>리스너는 TCP 프로토콜에 80 포트를 선택하고 추가합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-10.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-10.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="target-group-선택">Target Group 선택</h3>
 <p>Target Group는 위쪽에서 생성한 [Proxy-Protocol-TG] 을 선택합니다. 선택하면 해당 Target Group 설정 내용을 바로 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-11.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-11.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="설정-확인-1">설정 확인</h3>
 <p>선택한 설정을 최종 확인하고 이상이 없으면 [로드밸런서 생성] 버튼을 클릭합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-12.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-12.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="생성-확인">생성 확인</h3>
 <p>생성된 로드밸런서의 정보를 확인합니다. 특히 접속 정보와 서브넷은 이후 테스트에 사용되므로 꼭 기억하거나 메모해 두는 것이 좋습니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-13.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-13.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="acg-설정">ACG 설정</h2>
 <p>로드밸런서 → 서버 접속이 가능하도록 서버 ACG에 규칙을 추가합니다.<br />
 서버에 적용된 ACG의 규칙 설정 화면에서 프로토콜은 TCP,  접근소스는 로드밸런서 IP 대역인 10.0.4.0/24, 포트는 80을 입력하고 추가합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-32.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-32.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="로드밸런서-접속-테스트">로드밸런서 접속 테스트</h2>
 <p>위에서 생성된 로드밸런서 접속 주소로 접속을 해보면 아래와 같은 화면을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-14.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-14.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="apache-접속-로그-확인">Apache 접속 로그 확인</h3>
 <p>Apache 접속 로그 파일은 아래의 위치에 존재하지만, 저희는 네이버 클라우드 (Ncloud)의 상품 중 하나인 <strong>Cloud Log Analytics</strong>에서 로그를 수집해서 확인해보겠습니다.</p>
@@ -1878,26 +1955,46 @@ Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" st
 
 <p>다음에는 로드밸런서 IP가 아닌 실제 Client IP가 기록되도록 설정을 변경해 보겠습니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-16-1.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-16-1.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="proxy-protocol-설정">Proxy Protocol 설정</h2>
 <p>이제 실제 Client IP가 기록되도록 Proxy Protocol을 설정해보겠습니다.<br />
 [Load Balancer] - [Target Group]에서 위에서 생성했던 Target Group를 선택하고 [TargetGroup 설정] 버튼을 클릭합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-17.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-17.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>Target Group 설정 화면에서 [ProxyProtocol] 옵션을 체크하고 확인 버튼을 클릭합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-18.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 680px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-18.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 680px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>위에서 정상적으로 접속이 되었던 로드밸런서 주소로 접속하면 [Bad Request] 메시지가 뜨는 것을 확인할 수 있습니다.<br />
 다음으로는 서버 설정을 변경해야 합니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-19.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-19.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="apache-모듈-설치">Apache 모듈 설치</h2>
 <p>Proxy Protocol을 사용할 때 필요한 Apache 모듈을 CentOS 서버에 설치하겠습니다.</p>
@@ -1908,16 +2005,26 @@ Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" st
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# wget <span class="nt">--no-check-certificate</span> https://raw.githubusercontent.com/ggrandes/apache24-modules/master/mod_myfixip.c
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-20.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-20.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="모듈-설치">모듈 설치</h3>
 <p>이어서 /{아파치가 설치된 경로}/bin/apxs -c -i mod_myfixip.c 명령어로 모듈을 설치합니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# /usr/bin/apxs <span class="nt">-c</span> <span class="nt">-i</span> mod_myfixip.c
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-21.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-21.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="httpdconf-설정-변경">httpd.conf 설정 변경</h3>
 <p>모듈 설치가 완료된 후에 httpd.conf 파일을 열어서 제일 아래쪽에 아래 코드를 추가합니다.<br />
@@ -1934,28 +2041,48 @@ RewriteIPAllow 항목에는 로드밸런서 IP 대역 (ex: 192.168.0.0/16, 10.31
 <span class="p">&lt;/</span><span class="nl">IfModule</span><span class="p">&gt;
 </span></code></pre></div></div>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-22.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-22.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="apache-재시작">Apache 재시작</h3>
 <p>설정을 마친 후에 Apache를 재시작합니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl restart httpd
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-23.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-23.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="최종-접속-테스트">최종 접속 테스트</h2>
 <p>모든 설정을 모두 마친 후에 서버에 접속해봅니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-14.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-14.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="최종-접속-로그-확인">최종 접속 로그 확인</h2>
 <p>접속 로그를 다시 확인해보면 이번에는 로드밸런서 IP가 아닌 Client IP가 기록된 것을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-29-1.png" alt="Ncloud Network Proxy Load Balancer에서 
-Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-proxy-protocol-client-ip-logging-29-1.png" alt="Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="참고-url">참고 URL</h2>
 
@@ -2025,7 +2152,7 @@ Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법" st
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-08-04<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2022-08-04<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

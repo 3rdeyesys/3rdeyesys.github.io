@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1772,10 +1779,20 @@ $("#toc_onoff").click(function() {
 </code></pre></div></div>
 <p><br /></p>
 <h3 id="centos">CentOS</h3>
-<figure><img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_01.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_01.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="ubuntu">Ubuntu</h3>
-<figure><img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_06.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_06.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="root-로그인-차단">root 로그인 차단</h2>
 <p>로그인 차단은 위 설정에서 PermitRootLogin 항목을 바꾸시면 됩니다.<br />
@@ -1792,7 +1809,12 @@ PermitRootLogin <span class="nb">yes</span>
 <span class="c"># 변경</span>
 PermitRootLogin no
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_02.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_02.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="기타-옵션">기타 옵션</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 패스워드 로그인은 차단하고 Key 파일을 이용한 로그인만 허용</span>
@@ -1818,7 +1840,12 @@ MaxAuthTries 3
 <p><br />
 데몬 재시작 후 로그인을 시도해보면 로그인이 실패하는 것을 확인하실 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_03.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_03.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="ssh-접속-로그-확인">SSH 접속 로그 확인</h2>
 <p>SSH로 접속을 하면 성공, 실패에 대한 로그가 모두 남게 되는데, 이 로그를 주기적으로 확인하는 것이 좋습니다.</p>
@@ -1829,12 +1856,22 @@ MaxAuthTries 3
 <span class="c"># 또는</span>
 ~# lastb
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_04.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_04.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="접속-성공-로그">접속 성공 로그</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# last <span class="nt">-f</span> /var/log/wtmp
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_05.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_ssh_security_setting_05.jpg" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" style="width: 660px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="참고-url">참고 URL</h2>
 <ol>
@@ -1898,7 +1935,7 @@ MaxAuthTries 3
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-05-27<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2021-05-27<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

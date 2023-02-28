@@ -5,10 +5,122 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 23 Feb 2023 11:11:22 +0900</pubDate>
-        <lastBuildDate>Thu, 23 Feb 2023 11:11:22 +0900</lastBuildDate>
+        <pubDate>Tue, 28 Feb 2023 10:44:27 +0900</pubDate>
+        <lastBuildDate>Tue, 28 Feb 2023 10:44:27 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>모니터링 서비스 Cloud Insight Rule Template 설정 가이드</title>
+            <description>## 개요
+Cloud Insight를 설정할 때 매번 서버마다 일일이 설정하는 방법도 있지만 [**CPU-메모리-디스크 사용률**] 같은 자주 모니터링하는 항목들을 [**Template**]에 등록해 두면 모니터링을 설정할 때 좀 더 쉽고 정확하게 설정할 수 있는데, 그 방법을 정리해보겠습니다.  
+
+
+
+## Cloud Insight 기본 설정 방법
+Cloud Insight의 기본적인 설정 방법은 아래 링크 문서에서 확인 가능합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/management/ncloud_management_cloud_insight_guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;모니터링 서비스 Cloud Insight 설정 가이드&lt;/a&gt;
+&quot; %}
+
+## Template 설정 항목
+Template 설정할 때 서비스 상황에 따라 여러가지를 설정할 수 있는데, 여기서 예시로 설정해 볼 항목은 다음과 같습니다.
+- 서버 평균 CPU 사용률
+- 서버 평균 메모리 사용률
+- 서버 평균 디스크 사용률
+
+## Rule Template 설정
+먼저 [**Cloud Insight**] - [**Configuration**] - [**Template**]에서 [**Rule Template**] 탭을 선택하고, [**Rule Template 생성**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### CPU-디스크 사용률
+[**서버 평균 CPU 사용률**]과 [**서버 평균 디스크 사용률**]은  [**SERVER**] 탭에서 [**`SEVER/avg_cpu_used_rto`**]와 [**`SEVER/avg_fs_usert`**] 항목을 선택합니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### 메모리 사용률
+[**서버 평균 메모리 사용률**]은 [**Memory**] 탭에서 [**`MEMORY/mem_usert`**] 항목을 선택합니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+- 3가지 항목을 모두 선택하고, [다음] 버튼을 클릭하면 아래와 같이 각 항목별로 조건을 설정할 수 있습니다.  
+여기서는 각 수치가 70% 이상일 경우로 설정했고, 몇 분간의 평균값으로 할 것인가는 각 항목별로 다르게 설정해봤습니다.  
+각 수치는 사용하는 서비스 상황에 따라 조절하시면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## Event Rule 설정
+다음으로 [**Cloud Insight**] - [**Configuration**] - [**Event Rule**]에서 [**Event Rule 생성**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### 감시 상품 선택
+Ncloud Cloud Insight에서 모니터링 할 수 있는 상품은 아래와 같은데 그 중에서 여기서는 VPC Server를 선택하겠습니다.
+- Classic Load Balancer Monitor
+- Classic Server
+- VPC Load Balancer Monitor
+- VPC Server
+- Object Storage
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### 감시 대상 설정
+감시 대상은 미리 설정한 그룹이나 Auto Scaling Group에서 선택할 수도 있는데, 여기서는 [**전체 보기**]를 선택해서 미리 만들어둔 테스트용 서버를 선택하겠습니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### 감시 항목 설정
+`여기가 이 가이드 문서의 가장 중요한 단계`인데, 위에서 설정했던 [**Template**]인 [**template-test**]를 감시 항목으로 선택해보겠습니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### 액션 설정
+액션 설정에서 [**통보 대상자**], [**알림 유형**], [**리마인드 알림 주기**], [**종료 알림 여부**]를 설정합니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### 최종 확인
+지금까지 설정한 내역을 최종 확인한 후에 이상이 없으면 [**생성**] 버튼을 클릭해서 Event Rule 생성을 완료합니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-13.png&quot; width=&quot;845&quot; sub-class=&quot;no-bottom&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-14.png&quot; width=&quot;845&quot; sub-class=&quot;no-top&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+
+## 기타
+
+### Target Group 생성
+위에서는 [**Rule Template**]만 사용했는데, 여러 대상을 미리 하나의 그룹으로 묶어서 관리할 수도 있습니다.  
+[**Cloud Insight**] - [**Configuration**] - [**Template**]에서 [**Target Group**] 탭을 선택하고, [**Target Group 생성**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+- 그룹 생성화면에서 원하는 [**Product Type**]을 선택하고, 선택 가능한 감시 대상 중에서 Group으로 묶을 대상을 선택하고 아래 쪽으로 이동 시킨 후에 [**생성**] 버튼을 클릭하면 됩니다. 이후에 [**Event Rule**] 생성할 때 [**감시 대상 설정**] 단계에서 여기서 설정한 Group을 선택하면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Cloud Insight 소개
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&lt;/a&gt;
+
+2.  Cloud Insight 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&lt;/a&gt;
+
+3.  Cloud Insight 기본 설정 가이드
+	- &lt;a href=&quot;/management/ncloud_management_cloud_insight_guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/management/ncloud_management_cloud_insight_guide.html&lt;/a&gt;</description>
+            <pubDate>Tue, 28 Feb 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/management/ncloud-management-cloud-insight-rule-template-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-cloud-insight-rule-template-guide.html</guid>
+            
+            <category>monitoring</category>
+            
+            <category>log</category>
+            
+            
+        </item>
         
         <item>
             <title>Object Storage Bucket에 CORS 설정하기</title>
@@ -267,6 +379,200 @@ Access to XMLHttpRequest at &apos;https://kr.object.ncloudstorage.com/cors-test/
         </item>
         
         <item>
+            <title>모니터링 서비스 Cloud Insight 설정 가이드</title>
+            <description>## 개요
+네이버 클라우드와 사용자 애플리케이션의 성능/운영 지표를 통합 관리하고, 장애나 이벤트가 발생했을 때 SMS 및 Email로 알람 통보를 해주는 서비스인 Cloud Insight 서비스를 설정하는 방법에 대해 정리해보겠습니다.
+
+
+### Monitoring 서비스 vs Cloud Insight 서비스
+Classic 환경에 있는 Monitoring 서비스와 Cloud Insight 서비스의 차이점을 정리하면 다음과 같습니다.
+
+{% include callout_v2.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;- Monitoring 서비스는 Classic 환경에서만 사용할 수 있다.
+&lt;br /&gt;- Cloud Insight 서비스는 Classic, VPC 양쪽에서 모두 사용할 수 있고, 두가지 환경을 통합해서 보여준다.
+&lt;br /&gt;- Monitoring 서비스는 Server 제품 (AutoScaling 포함)만 모니터링 한다.
+&lt;br /&gt;- Cloud Insight 서비스는 Server 뿐만 아니라 Object Storage, Load Balancer 등 10여개의 서비스를 모니터링 한다.&quot; %}
+
+
+
+## 적용 서비스 리스트
+위 비교에서도 설명했듯이 Cloud Insight는 Server 뿐만 아니라 네이버 클라우드의 다양한 서비스의 모니터링 정보를 확인할 수 있는데 해당 리스트는 다음과 같습니다.
+
+### Classic 
+- Server
+- Load Balancer
+
+### VPC
+- Server(VPC)
+- Load Balancer(VPC)
+- Cloud DB for MySQL(VPC)
+- Cloud DB for MSSQL(VPC)
+- Cloud DB for Redis(VPC)
+- Cloud DB for MongoDB(VPC)
+- Cloud Hadoop(VPC)
+- Auto Scaling Group(VPC)
+- Kubernetes Service(VPC)
+- Search Engine Service(VPC)
+- Cloud Data Streaming Service(VPC)
+
+### 통합
+- Cloud Search
+- Object Storage
+
+
+## Cloud Insight 서비스
+[**Cloud Insight**] 서비스는 [**콘솔**] - [**Services**] - [**Management &amp; Governance**] - [**Cloud Insight(Monitoring)**]에 위치하고 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-guide-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+좀 더 쉽게 찾는 방법은 [**콘솔**] - [**Services**]에서 [**검색**] 기능을 이용하면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-guide-29.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+
+## 이용 신청
+Cloud Insight 서비스는 이용 신청을 해야 사용할 수 있습니다. Classic, VPC 어떤 환경에서든 [Cloud Insight(Monitoring)] - [Subscription]에서 [상품 이용 신청] 버튼을 클릭해서 이용 신청을 합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_01.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 대시보드
+이용 신청을 한 후에 [Dashboard] 메뉴에 가면 아래와 같이 현재 사용 중인 서비스 중에서 모니터링 가능한 서비스 리스트를 확인할 수 있습니다.  
+또한 기본으로 제공되는 대시보드에서 확인할 수 있는 모니터링 항목을 각 서비스별로 고정되어 있습니다. 
+추가적인 항목을 확인하려면 별도로 대시보드를 생성해야 하는데 이에 대해서는 아래쪽에서 확인해보겠습니다.
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;일부 서비스의 경우 리스트에 나타날 때까지 시간이 걸릴 수도 있습니다. 여유있게 1시간 정도 후에 확인해보시면 됩니다.&quot; %}
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_02.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### Load Balancer 모니터링
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_08.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### Object Storage 모니터링
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_09.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### Server 모니터링
+위에서 설명했듯이 Server 제품도 GPU 관련 항목을 제외하면 5가지 정도의 기본 모니터링 항목을 확인할 수 있습니다. 
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_03.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 커스텀 대시보드
+좀 더 상세한 모니터링 데이터를 확인하려면 커스텀 대시보드가 필요하고 그전에 [상세 모니터링]을 설정해야 합니다. 서버 설정에서 [상세 모니터링 설정 변경] 메뉴를 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_04.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+[상세 모니터링 신청] 팝업에서 [예] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_05.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+### 대시보드 생성
+[Dashboard] 화면에서 [대시보드 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+생성 팝업에서 대시보드 이름과 설명을 입력합니다.
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_07.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+
+생성된 대시보드에서 [위젯 추가] 버튼을 클릭해서 위젯을 추가합니다.
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_10.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+위젯 이름을 입력하고, 종류는 [Time Series], [Pie Chart], [Table], [Index], [Markdown] 중에서 하나를 선택합니다.  여기서는 [CPU Usage]와 [Time Series]를 선택했습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_11.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 데이터 설정에서 CPU 사용률에 해당하는 [SERVER/avg_cpu_used_rto] 등 필요한 항목을 선택하고 [선택 항목 추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_12.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+항목을 추가하면 아래쪽 화면에 다음과 같이 리스트를 확인할 수 있습니다. 설정이 완료되었으면 [다음] 버튼을 클릭해 마지막 확인을 하고 생성을 완료합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_13.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+위에서 추가한 [CPU Usage] 위젯과 함께 추가로 [Server - Load Average], [File System], [Memory Usage], [Net Work (Max In/Out bps)] 데이터를 확인할 수 있는 위젯을 추가하면 다음과 같은 대시보드를 확인할 수 있습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_14.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 통보 대상자 등록
+이제 이벤트를 등록하고 알람을 통보 받을 대상자를 등록해보겠습니다.  
+먼저 통보 대상자 그룹을 생성합니다.  [Cloud Insight(Monitoring)] - [Notification Recipient] 메뉴에서 [전체 대상자] 옆에 있는 [ + ] 버튼을 클릭하고 아래 입력칸에 그룹명을 입력합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_15.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+네이버 클라우드 계정 생성을 할 때 기본으로 1명의 대상자가 등록됩니다. 해당 대상자를 위에서 생성한 그룹에 할당하기 위해 선택하고 [할당] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_20.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+그룹 할당 팝업에서 [할당] 버튼을 클릭합니다.
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_21.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+대상자 리스트에서 해당 대상자에 그룹이 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_22.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 이벤트 규칙 등록
+이제 이벤트를 등록해보겠습니다. [Cloud Insight(Monitoring)] - [Configuration] - [Event Rue]에서 [Event Rule 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_16.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+이벤트 규칙을 생성해서 감시가 필요한 상품을 선택합니다. 여기서는 [Sever(VPC)]를 선택하겠습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_17.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+[감시 대상 설정]에서 [전체 보기]를 선택하고, 감시 대상에 체크한 후 [다음] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_18.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+감시 항목 및 조건 설정에서 [전체 보기]를 선택하고, Server, Memory 등의 항목 중에서 원하는 항목을 선택합니다.  
+여기서는 가장 많이 사용하는 [**SERVER의 CPU 사용률**]에 해당하는 [**SERVER/avg_cpu_used_rto**]를 선택하고, 90% 이상인 상태가 5분 이상 지속되면 경고 알림을 보내도록 설정했습니다. 
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 감시 대상에서 설정한 이벤트가 발생했을 때 어떤 액션을 취할 것인가를 설정해보겠습니다.  
+설정 가능한 액션은 [**알림 메시지 발송**], [**Integration**], [**Cloud Functions**], [**Auto Scaling 정책**] 중에서 선택할 수 있는데, 여기서는 [알림 메시지 발송]을 선택하겠습니다.  
+통보 대상자 그룹을 선택하고, [**Email**]과 [**SMS**]중에서 원하는 것을 선택하고, [**리마인드 알림 주기**], [**종료 알림 여부**]를 설정한 후 [다음] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_23.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+마지막으로 이벤트 규칙 이름을 입력하고, 앞에서 설정한 내용들을 확인한 후에 [생성] 버튼을 클릭합니다.
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_24.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+## 유지보수 계획 설정
+앞에서 설정한 이벤트 규칙이 업데이트나 점검 등의 유지보수가 진행되는 동안에도 작동되면 유지보수 시간 동안 쉼없이 통보 알람이 울리게 됩니다.  
+이런 불편함이 없도록 Cloud Insight에서는 유지보수 계획 일정을 등록해두면 등록된 기간 동안에는 이벤트 규칙에 따른 통보알람이 울리지 않습니다.
+
+유지보수 일정은 아래와 같이 달력 행태나 리스트 형태로 확인 가능하며 [유지보수 계획 설정하기] 버튼으로 일정을 등록할 수 있습니다.
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_25.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+제목을 입력하고, 작업 기간, 작업 대상, 디멘션을 선택하면 아래와 같이 선택한 대상과 디멘션이 리스트로 나타납니다.  보통 위에서 설정했던 이벤트 규칙에 해당하는 항목들을 선택하면 됩니다. 
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_26.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+유지보수 계획을 설정하면 아래와 같이 일정에서 확인할 수 있으며 해당 기간 동안에는 이벤트 통보가 진행되지 않습니다. 
+
+{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_27.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Cloud Insight 소개
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&lt;/a&gt;
+
+2.  Cloud Insight 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&lt;/a&gt;
+
+3.  Cloud Insight Rule Template 설정 가이드
+	- &lt;a href=&quot;/management/ncloud-management-cloud-insight-rule-template-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/management/ncloud-management-cloud-insight-rule-template-guide.html&lt;/a&gt;</description>
+            <pubDate>Wed, 08 Feb 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/management/ncloud_management_cloud_insight_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud_management_cloud_insight_guide.html</guid>
+            
+            <category>monitoring</category>
+            
+            <category>log</category>
+            
+            
+        </item>
+        
+        <item>
             <title>Ncloud Certificate Manager SSL 인증서 등록 가이드</title>
             <description>## 개요
 Ncloud (네이버 클라우드)에는 인증서를 관리할 수 있는 Certificate Manager 서비스가 있는데, 여기에 SSL 인증서를 등록해두면 Load Balancer 등을 생성할 때 간단하게 인증서를 적용할 수 있습니다.
@@ -418,198 +724,6 @@ CA 파일이 chain1.crt.pem, chain2.crt.pem 처럼 2개 이상 제공되며, roo
             <category>ssl</category>
             
             <category>load_balancer</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>모니터링 서비스 Cloud Insight 설정 가이드</title>
-            <description>## 개요
-네이버 클라우드와 사용자 애플리케이션의 성능/운영 지표를 통합 관리하고, 장애나 이벤트가 발생했을 때 SMS 및 Email로 알람 통보를 해주는 서비스인 Cloud Insight 서비스를 설정하는 방법에 대해 정리해보겠습니다.
-
-
-### Monitoring 서비스 vs Cloud Insight 서비스
-Classic 환경에 있는 Monitoring 서비스와 Cloud Insight 서비스의 차이점을 정리하면 다음과 같습니다.
-
-{% include callout_v2.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;- Monitoring 서비스는 Classic 환경에서만 사용할 수 있다.
-&lt;br /&gt;- Cloud Insight 서비스는 Classic, VPC 양쪽에서 모두 사용할 수 있고, 두가지 환경을 통합해서 보여준다.
-&lt;br /&gt;- Monitoring 서비스는 Server 제품 (AutoScaling 포함)만 모니터링 한다.
-&lt;br /&gt;- Cloud Insight 서비스는 Server 뿐만 아니라 Object Storage, Load Balancer 등 10여개의 서비스를 모니터링 한다.&quot; %}
-
-
-
-## 적용 서비스 리스트
-위 비교에서도 설명했듯이 Cloud Insight는 Server 뿐만 아니라 네이버 클라우드의 다양한 서비스의 모니터링 정보를 확인할 수 있는데 해당 리스트는 다음과 같습니다.
-
-### Classic 
-- Server
-- Load Balancer
-
-### VPC
-- Server(VPC)
-- Load Balancer(VPC)
-- Cloud DB for MySQL(VPC)
-- Cloud DB for MSSQL(VPC)
-- Cloud DB for Redis(VPC)
-- Cloud DB for MongoDB(VPC)
-- Cloud Hadoop(VPC)
-- Auto Scaling Group(VPC)
-- Kubernetes Service(VPC)
-- Search Engine Service(VPC)
-- Cloud Data Streaming Service(VPC)
-
-### 통합
-- Cloud Search
-- Object Storage
-
-
-## Cloud Insight 서비스
-[**Cloud Insight**] 서비스는 [**콘솔**] - [**Services**] - [**Management &amp; Governance**] - [**Cloud Insight(Monitoring)**]에 위치하고 있습니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-guide-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-좀 더 쉽게 찾는 방법은 [**콘솔**] - [**Services**]에서 [**검색**] 기능을 이용하면 됩니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-guide-29.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-
-## 이용 신청
-Cloud Insight 서비스는 이용 신청을 해야 사용할 수 있습니다. Classic, VPC 어떤 환경에서든 [Cloud Insight(Monitoring)] - [Subscription]에서 [상품 이용 신청] 버튼을 클릭해서 이용 신청을 합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_01.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-## 대시보드
-이용 신청을 한 후에 [Dashboard] 메뉴에 가면 아래와 같이 현재 사용 중인 서비스 중에서 모니터링 가능한 서비스 리스트를 확인할 수 있습니다.  
-또한 기본으로 제공되는 대시보드에서 확인할 수 있는 모니터링 항목을 각 서비스별로 고정되어 있습니다. 
-추가적인 항목을 확인하려면 별도로 대시보드를 생성해야 하는데 이에 대해서는 아래쪽에서 확인해보겠습니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;일부 서비스의 경우 리스트에 나타날 때까지 시간이 걸릴 수도 있습니다. 여유있게 1시간 정도 후에 확인해보시면 됩니다.&quot; %}
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_02.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### Load Balancer 모니터링
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_08.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### Object Storage 모니터링
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_09.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### Server 모니터링
-위에서 설명했듯이 Server 제품도 GPU 관련 항목을 제외하면 5가지 정도의 기본 모니터링 항목을 확인할 수 있습니다. 
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_03.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-## 커스텀 대시보드
-좀 더 상세한 모니터링 데이터를 확인하려면 커스텀 대시보드가 필요하고 그전에 [상세 모니터링]을 설정해야 합니다. 서버 설정에서 [상세 모니터링 설정 변경] 메뉴를 클릭합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_04.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-[상세 모니터링 신청] 팝업에서 [예] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_05.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### 대시보드 생성
-[Dashboard] 화면에서 [대시보드 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-생성 팝업에서 대시보드 이름과 설명을 입력합니다.
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_07.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-
-생성된 대시보드에서 [위젯 추가] 버튼을 클릭해서 위젯을 추가합니다.
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_10.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-위젯 이름을 입력하고, 종류는 [Time Series], [Pie Chart], [Table], [Index], [Markdown] 중에서 하나를 선택합니다.  여기서는 [CPU Usage]와 [Time Series]를 선택했습니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_11.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-다음으로 데이터 설정에서 CPU 사용률에 해당하는 [SERVER/avg_cpu_used_rto] 등 필요한 항목을 선택하고 [선택 항목 추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_12.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-항목을 추가하면 아래쪽 화면에 다음과 같이 리스트를 확인할 수 있습니다. 설정이 완료되었으면 [다음] 버튼을 클릭해 마지막 확인을 하고 생성을 완료합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_13.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-위에서 추가한 [CPU Usage] 위젯과 함께 추가로 [Server - Load Average], [File System], [Memory Usage], [Net Work (Max In/Out bps)] 데이터를 확인할 수 있는 위젯을 추가하면 다음과 같은 대시보드를 확인할 수 있습니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_14.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-## 통보 대상자 등록
-이제 이벤트를 등록하고 알람을 통보 받을 대상자를 등록해보겠습니다.  
-먼저 통보 대상자 그룹을 생성합니다.  [Cloud Insight(Monitoring)] - [Notification Recipient] 메뉴에서 [전체 대상자] 옆에 있는 [ + ] 버튼을 클릭하고 아래 입력칸에 그룹명을 입력합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_15.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-네이버 클라우드 계정 생성을 할 때 기본으로 1명의 대상자가 등록됩니다. 해당 대상자를 위에서 생성한 그룹에 할당하기 위해 선택하고 [할당] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_20.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-그룹 할당 팝업에서 [할당] 버튼을 클릭합니다.
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_21.jpg&quot; width=&quot;500&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-대상자 리스트에서 해당 대상자에 그룹이 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_22.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-## 이벤트 규칙 등록
-이제 이벤트를 등록해보겠습니다. [Cloud Insight(Monitoring)] - [Configuration] - [Event Rue]에서 [Event Rule 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_16.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-이벤트 규칙을 생성해서 감시가 필요한 상품을 선택합니다. 여기서는 [Sever(VPC)]를 선택하겠습니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_17.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-[감시 대상 설정]에서 [전체 보기]를 선택하고, 감시 대상에 체크한 후 [다음] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_18.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-감시 항목 및 조건 설정에서 [전체 보기]를 선택하고, Server, Memory 등의 항목 중에서 원하는 항목을 선택합니다.  
-여기서는 가장 많이 사용하는 [**SERVER의 CPU 사용률**]에 해당하는 [**SERVER/avg_cpu_used_rto**]를 선택하고, 90% 이상인 상태가 5분 이상 지속되면 경고 알림을 보내도록 설정했습니다. 
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-다음으로 감시 대상에서 설정한 이벤트가 발생했을 때 어떤 액션을 취할 것인가를 설정해보겠습니다.  
-설정 가능한 액션은 [알림 메시지 발송], [Integration], [Cloud Functions], [Auto Scaling 정책] 중에서 선택할 수 있는데, 여기서는 [알림 메시지 발송]을 선택하겠습니다.  
-통보 대상자 그룹을 선택하고, [Email]과 [SMS]중에서 원하는 것을 선택하고, [다음] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_23.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-마지막으로 이벤트 규칙 이름을 입력하고, 앞에서 설정한 내용들을 확인한 후에 [생성] 버튼을 클릭합니다.
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_24.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-## 유지보수 계획 설정
-앞에서 설정한 이벤트 규칙이 업데이트나 점검 등의 유지보수가 진행되는 동안에도 작동되면 유지보수 시간 동안 쉼없이 통보 알람이 울리게 됩니다.  
-이런 불편함이 없도록 Cloud Insight에서는 유지보수 계획 일정을 등록해두면 등록된 기간 동안에는 이벤트 규칙에 따른 통보알람이 울리지 않습니다.
-
-유지보수 일정은 아래와 같이 달력 행태나 리스트 형태로 확인 가능하며 [유지보수 계획 설정하기] 버튼으로 일정을 등록할 수 있습니다.
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_25.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-제목을 입력하고, 작업 기간, 작업 대상, 디멘션을 선택하면 아래와 같이 선택한 대상과 디멘션이 리스트로 나타납니다.  보통 위에서 설정했던 이벤트 규칙에 해당하는 항목들을 선택하면 됩니다. 
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_26.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-유지보수 계획을 설정하면 아래와 같이 일정에서 확인할 수 있으며 해당 기간 동안에는 이벤트 통보가 진행되지 않습니다. 
-
-{% include image.html file=&quot;management/ncp_management_cloud_insight_guide_27.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Cloud Insight 소개
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&lt;/a&gt;
-
-2.  Cloud Insight 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&lt;/a&gt;
-</description>
-            <pubDate>Wed, 08 Feb 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/management/ncloud_management_cloud_insight_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud_management_cloud_insight_guide.html</guid>
-            
-            <category>monitoring</category>
-            
-            <category>log</category>
             
             
         </item>
@@ -1810,109 +1924,6 @@ Invoke-WebRequest -Uri $api_full_url -Method $apicall_method -Headers $headers  
             <category>api</category>
             
             <category>windows</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud 백업 서비스 기본 가이드</title>
-            <description>## 개요
-Ncloud(네이버 클라우드)의 기존에 별도의 신청서를 작성해서 사용하던 Managed Backup의 대체 상품으로 출시된 콘솔에서 바로 이용할 수 있는 Backup 상품의 기본 가이드를 알아보도록 하겠습니다.
-
-## 서비스 특징
-
-- **다양한 플랫폼 및 데이터베이스 지원**: Linux, Windows 계열 등 다양한 버전의 운영 체제를 지원하며 OS의 데이터 영역 및 서버에 설치된 데이터베이스의 온라인 백업이 가능합니다.
-- **간편한 설치와 백업 단위 선택**: 네이버 클라우드 웹 콘솔에서 간단한 설정을 통해 백업을 받고자 하는 리소스에 에이전트의 설치부터 백업 정책 구성까지 완료할 수 있습니다.
-- **소산 백업 지원**: 기존에 수행한 백업 데이터를 지리적으로 떨어진 다른 존으로 이중화하여 데이터 안정성을 더욱 향상시킬 수 있습니다.
-- **리포트 기능 제공**: 백업 혹은 복구에 대한 작업 결과를 일간/월간 단위 보고서로 확인할 수 있고 이메일로 리포팅을 받을 수 있습니다.
-
-## 제약 사항
-Backup 서비스의 제약 사항은 다음과 같습니다.
-
-### 백업 가능 대상	
-- **서버**: Data 영역
-- **DB**: 서버 설치형DB (MSSQL, MySQL, PostgreSQL)
-
-### 백업 가능한 데이터 크기
-- 계정당 1TB
-
-## 이용 요금
-Backup 서비스는 유료 서비스로 이용 요금은 기본료, 데이터 저장량, 복원 요금, 네트워크 전송 요금을 합산해 부과됩니다.
-
-- **기본료**: 백업 대상 소스 서버 대수당 요금 부과
-- **데이터 저장량**: 백업된 데이터 저장량에 대해 월 평균 사용량에 대한 스토리지 요금 부과
-- **복구 요금**: 백업본 복구시 복구대상이 되는 원본 데이터 전체 용량에 대한 요금 부과
-- **네트워크 전송 요금**: 백업 및 복구간 발생한 존간/리전간 네트워크 전송 요금 부과
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; **데이터 저장량**은 월 평균 사용량 기준입니다. &lt;br /&gt;
-&amp;#8259; **복구 요금**은 원본(소스) 용량 기준으로 당월 수행한 전체 복구 작업에 대한 총량 기준으로 요금이 부과됩니다. &lt;br /&gt;
-&amp;#8259; **동일 존 내**에서 백업 수행 및 복구 시 네트워크 전송 요금은 무료입니다.
-&quot; %}
-
-## 백업 서비스 지원 버전
-&lt;table&gt;
-    &lt;thead&gt;
-        &lt;td&gt;구분&lt;/td&gt;
-        &lt;td&gt;지원 범위&lt;/td&gt;
-        &lt;td&gt;비고&lt;/td&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;MSSQL Server&lt;/td&gt;
-            &lt;td&gt;2005, 2008, 2008R2, 2012, 2014, 2016, 2017, 2019&lt;/td&gt;
-            &lt;td&gt;x86, x64&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;MySQL&lt;/td&gt;
-            &lt;td&gt;5.5, 5.6, 5.7, 8.x&lt;br /&gt;
-                Maria DB 5.5, 10.0, 10.1~10.6
-            &lt;/td&gt;
-            &lt;td&gt;Redhat/CentOS 6.x~8.x : x86, x64&lt;br /&gt;
-                Ubuntu 14.0 ~ 20.04 : x64
-            &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;PostgreSQL&lt;/td&gt;
-            &lt;td&gt;9.2 ~ 14.x&lt;/td&gt;
-            &lt;td&gt;Redhat/CentOS 5.x : x86, x64&lt;br /&gt;
-                Redhat/CentOS 6.x ~ 8.x : x64&lt;br /&gt;
-                Ubuntu 12.04 ~ 22.04 : x86, x64
-            &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Windows File System&lt;/td&gt;
-            &lt;td&gt;7, 8, 8.1, 10, 2008, 2008 R2, 2016, 2019, 2022&lt;/td&gt;
-            &lt;td&gt;x86, x64&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Linux File System&lt;/td&gt;
-            &lt;td&gt;Redhat/CentOS : 5.x ~ 8.x&lt;br /&gt;
-                Ubuntu 8.04 ~ 21.04
-            &lt;/td&gt;
-            &lt;td&gt;Redhat/CentOS 5.x ~ 7.x : x86, x64&lt;br /&gt;
-                Redhat/CentOS 8.x : x64
-            &lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-&lt;/table&gt;
-
-
-## 상세 가이드
-- &lt;a href=&quot;/storage/ncloud-storage-backup-service-linux-data-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;Linux Data 백업 가이드&lt;/a&gt;
-
-
-
-## 참고 URL
-1.  Ncloud 백업 상품 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/backup-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/backup-overview&lt;/a&gt;</description>
-            <pubDate>Thu, 22 Dec 2022 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-basic-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-basic-guide.html</guid>
-            
-            <category>backup</category>
-            
-            <category>linux</category>
             
             
         </item>

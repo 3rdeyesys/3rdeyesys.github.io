@@ -1089,6 +1089,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1779,7 +1786,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="o">@@</span><span class="n">server_uuid</span><span class="p">;</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-19.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-19.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="테스트-환경">테스트 환경</h2>
 
@@ -1811,7 +1823,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <span class="n">log_slave_updates</span>=<span class="n">ON</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-01.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-01.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="slave-서버">Slave 서버</h3>
 
@@ -1824,7 +1841,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <span class="n">log_slave_updates</span>=<span class="n">ON</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-02.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-02.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="gtid_mode-상태-확인">gtid_mode 상태 확인</h2>
 <p>위 설정 변경 후 mysql DB를 재시작하고 Master와 Slave모두 gtid_mode가 ON상태인지 확인합니다.</p>
@@ -1836,10 +1858,20 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 </code></pre></div></div>
 
 <h3 id="master-서버-1">Master 서버</h3>
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-03.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-03.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="slave-서버-1">Slave 서버</h3>
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-04.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-04.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="replication-전용-유저-생성">Replication 전용 유저 생성</h2>
 <p>Master 서버에서 Replication 전용 유저를 생성합니다.</p>
@@ -1851,7 +1883,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="k">user</span><span class="p">,</span><span class="k">host</span><span class="p">,</span><span class="n">authentication_string</span> <span class="k">FROM</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-05.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-05.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="테스트용-db-생성">테스트용 DB 생성</h2>
 <p>테스트에 사용할 database를 생성합니다.</p>
@@ -1861,7 +1898,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-06.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-06.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="백업-파일-생성">백업 파일 생성</h2>
 <p>Master 서버에서 백업 파일을 생성합니다.</p>
@@ -1879,7 +1921,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <span class="nt">--triggers</span> <span class="nt">--extended-insert</span> <span class="nt">--master-data</span><span class="o">=</span>2 <span class="o">&gt;</span> /root/db_backup/testdb.sql
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-07.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-07.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="백업-파일-복사">백업 파일 복사</h2>
 <p>백업 파일을 Slave 서버로 복사하기 위해 Master 와 Slave 서버 모두 rsync를 설치합니다.<br />
@@ -1888,10 +1935,20 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>rsync
 </code></pre></div></div>
 <h3 id="master-서버-2">Master 서버</h3>
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-08.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-08.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="slave-서버-2">Slave 서버</h3>
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-09.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-09.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="acg-setting">ACG (방화벽) 설정</h2>
 <p>이제 Master, Slave 두 서버간에 동기화, 복제가 가능하도록 ACG (방화벽)를 설정합니다.<br />
@@ -1902,7 +1959,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
   <li>허용포트 3306: Replication을 위한 포트</li>
 </ul>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-13.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-13.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <div class="alert alert-success" role="alert"><i class="far fa-check-square"></i> <b>접근 소스:</b> 여기서는 테스트를 위해 접근소스에 Subnet IP 전체 대역을 지정했지만, 실제 서비스 환경에서는 해당 Subnet에 DB서버 외에 다른 서버들이 존재하는 경우도 있을 수 있으므로 각 DB서버 IP만 지정하는 것이 보안 측면에서는 더욱 안전할 수 있습니다.</div>
 
@@ -1916,7 +1978,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 ~# rsync <span class="nt">-avzr</span> <span class="nt">--progress</span> testdb.sql root@10.0.0.7:~/
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-10.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-10.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="slave-서버에서-db-복원">Slave 서버에서 DB 복원</h2>
 <p>rsync로 전송 받은 DB 백업 파일을 실행해서 DB를 복원합니다.</p>
@@ -1925,7 +1992,12 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">source</span> <span class="n">testdb</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-11.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-11.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="replication-설정">Replication 설정</h3>
 <p>Slave 서버에서 Replication을 설정합니다.</p>
@@ -1943,7 +2015,12 @@ MASTER_AUTO_POSITION=1;
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">start</span> <span class="n">slave</span><span class="p">;</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-12.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-12.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="replication-대기-상태-확인">Replication 대기 상태 확인</h2>
 <p>Slave 서버에서 Replication 상태가 어떤지 확인합니다.<br />
@@ -1952,7 +2029,12 @@ MASTER_AUTO_POSITION=1;
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slave */</span>
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">slave</span> <span class="n">status</span> <span class="err">\</span><span class="k">G</span>
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-14.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-14.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="replication-테스트">Replication 테스트</h2>
 <p>Master 서버에서 테스트용 테이블을 생성하고, 데이터를 입력한 후 Slave 서버에도 복제가 되었는지 확인합니다.</p>
@@ -1969,7 +2051,12 @@ MASTER_AUTO_POSITION=1;
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="mi">3</span><span class="n">rd</span><span class="p">;</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-15.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-15.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="slave-서버에서-복제-확인">Slave 서버에서 복제 확인</h3>
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Slave */</span>
@@ -1977,16 +2064,31 @@ MASTER_AUTO_POSITION=1;
 <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="mi">3</span><span class="n">rd</span><span class="p">;</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-16.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-16.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="추가-테스트">추가 테스트</h3>
 <p>추가로 데이터를 다시 입력해보면 정상적으로 복제가 되는 것을 확인할 수 있습니다.</p>
 
 <h4 id="master-서버-3">Master 서버</h4>
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-17.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-17.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h4 id="slave-서버-3">Slave 서버</h4>
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-18.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-18.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="오류-상황">오류 상황</h2>
 <p>Master 서버에서 데이터를 입력해도 Slave 서버에 제대로 복제되지 않는 등 Replication 기능에 문제가 생겼을 때에는 
@@ -2003,7 +2105,12 @@ MASTER_AUTO_POSITION=1;
 
 <div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <b>Slave_IO_Running:</b> Connecting</div>
 
-<figure><img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-20.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-gtid-replication-20.png" alt="Ncloud에서 MYSQL GTID를 이용해 replication 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="참고-url">참고 URL</h2>
 <ol>
@@ -2066,7 +2173,7 @@ MASTER_AUTO_POSITION=1;
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-04-08<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2022-04-08<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

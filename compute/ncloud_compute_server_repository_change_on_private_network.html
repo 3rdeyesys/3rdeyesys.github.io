@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1777,7 +1784,12 @@ $("#toc_onoff").click(function() {
 <h3 id="classic-환경---centos">Classic 환경 - CentOS</h3>
 <p>네이버 클라우드 Classic 환경 CentOS에서 repository 주소는 미러 사이트가 기본으로 설정 되어 있는 것을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_01.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_01.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>하지만 현재 서버는 Secure Zone 등 외부와 통신이 되지 않는 상태이므로 이대로는 패키지 설치를 할 수 없습니다.
 이때 네이버 클라우드 내부 repository ( <strong>mirror.ncloud.com</strong> )로 접속하도록 mirrorlist를 주석처리하고, baseurl을 주석해제하고, 경로를 수정해주면 됩니다.</p>
@@ -1791,7 +1803,12 @@ $("#toc_onoff").click(function() {
 <span class="nv">baseurl</span><span class="o">=</span>http://mirror.ncloud.com/centos/<span class="nv">$releaserver</span>/extras/<span class="nv">$basearch</span>/
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_03.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 850px; max-width: 100%" /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_03.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 850px; max-width: 100%" />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>변경 후 패키지 설치 테스트를 해봅니다.</p>
 
@@ -1800,7 +1817,12 @@ $("#toc_onoff").click(function() {
 
 <p>웹서버 설치가 문제없이 되는 것을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_04.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_04.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="sed-명령어-사용">sed 명령어 사용</h3>
 <p>sed 명령어를 사용하면 더욱 편하게 변경할 수 있습니다.</p>
@@ -1816,7 +1838,12 @@ $("#toc_onoff").click(function() {
 <h3 id="vpc-환경---centos">VPC 환경 - CentOS</h3>
 <p>네이버 클라우드 VPC 환경은 이미 repository 경로가 네이버 클라우드 내부 repository ( <strong>mirror.ncloud.com</strong> )로 설정되어 있으므로 별도로 수정할 필요가 없습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_10.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_10.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="ubuntu">Ubuntu</h2>
 
@@ -1831,10 +1858,20 @@ $("#toc_onoff").click(function() {
 </code></pre></div></div>
 
 <h3 id="classic-환경---ubuntu">Classic 환경 - Ubuntu</h3>
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_05.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_05.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="vpc-환경---ubuntu">VPC 환경 - Ubuntu</h3>
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_11.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_11.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>현재 서버는 Secure Zone 또는 Private Network  등 외부와 통신이 되지 않는 상태이므로 이대로는 패키지 설치를 할 수 없습니다.
 이때 네이버 클라우드 내부 repository ( <strong>mirror.ncloud.com</strong> )로 접속하도록 경로를 수정해주면 됩니다.</p>
@@ -1846,18 +1883,33 @@ security.ubuntu.com <span class="nt">--</span><span class="o">&gt;</span> mirror
 <span class="c">## VPC 환경 - Ubuntu</span>
 archive.ubuntu.conm <span class="nt">--</span><span class="o">&gt;</span> mirror.ncloud.com <span class="o">(</span>변경<span class="o">)</span>
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_12.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_12.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>/etc/apt/sources.list 에서 위와 같이 변경-저장한 후에 apt update 를 해주면 변경해준 Ncloud 내부 repository에서 패키지 리스트를 가져와 설치를 합니다.</p>
 
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_08.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 700px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_08.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 700px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>설치 된 repository를 테스트 하기 위해 apt install 을 사용하여 패키지 다운로드를 해보면 Ncloud 내부 repository에서 패키지 설치가 진행되는 것을 확인 할 수 있습니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# apt <span class="nt">-y</span> <span class="nb">install </span>apache2
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_09.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 820px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncp_server_repository_change_on_private_network_09.png" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" style="width: 820px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>Ubuntu 또한 sed 명령어로 간단하게 변경할 수 있습니다.</p>
 
@@ -1935,7 +1987,7 @@ archive.ubuntu.conm <span class="nt">--</span><span class="o">&gt;</span> mirror
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-10-25<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2021-10-25<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

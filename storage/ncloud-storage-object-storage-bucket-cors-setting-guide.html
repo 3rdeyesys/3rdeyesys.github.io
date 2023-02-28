@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1841,7 +1848,12 @@ aws <span class="nt">--endpoint-url</span><span class="o">=</span>https://kr.obj
 <span class="c"># 예제</span>
 aws <span class="nt">--endpoint-url</span><span class="o">=</span>https://kr.object.ncloudstorage.com s3api get-bucket-cors <span class="nt">--bucket</span> cors-test
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-03.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-03.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="s3-browser-사용">S3 Browser 사용</h2>
 <p>외부 Client Tool중에서 CORS 설정이 가능한 것은 S3 Browser 이며, 자세한 사용 방법은 아래의 링크 문서를 참고하시기 바랍니다.</p>
@@ -1852,11 +1864,21 @@ aws <span class="nt">--endpoint-url</span><span class="o">=</span>https://kr.obj
 
 <p>S3 브라우저에 접속 하신다음 CORS 설정 대상의 버킷에서 오른쪽 마우스 버튼을 클릭 합니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-01.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-01.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>CORS Configuration 클릭하여 CORS 설정을 오픈하면 처음에는 아무 값도 설정되어 있지 않습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-04.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 645px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-04.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 645px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="xml-형식의-설정-준비">XML 형식의 설정 준비</h3>
 <p>마찬가지로 GET, PUT Method로 접근 가능한 설정을 이번에는 XML 형식으로 입력하고 [<strong>Apply</strong>] 버튼을 클릭해서 적용합니다.</p>
@@ -1872,19 +1894,34 @@ aws <span class="nt">--endpoint-url</span><span class="o">=</span>https://kr.obj
 <span class="nt">&lt;/CORSConfiguration&gt;</span>
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-05.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 645px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-05.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 645px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="접속-테스트">접속 테스트</h2>
 
 <h3 id="정상-접속-확인">정상 접속 확인</h3>
 <p>설정을 마친 후 Javascript를 사용해서 cors-test 버킷에 있는 파일을 호출해보면 아래와 같이 문제 없이 접속되는 것을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-06.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-06.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="cors-변경">CORS 변경</h3>
 <p>접속 차단을 테스트 하기 위해 CORS 설정에서 AllowedOrigin 값을 임의의 <strong>http://example.com</strong> 으로 변경하겠습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-02.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 645px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-02.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 645px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="접속-차단-확인">접속 차단 확인</h3>
 <p>설정을 변경한 후에 접속을 해보면 이전과는 다르게 아래와 같은 메시지가 나타나면서 접속이 차단된 것을 확인할 수 있습니다.</p>
@@ -1893,7 +1930,12 @@ aws <span class="nt">--endpoint-url</span><span class="o">=</span>https://kr.obj
 Access to XMLHttpRequest at ‘https://kr.object.ncloudstorage.com/cors-test/cors-test.txt’ from origin <br />‘<strong>http://cors-test.com</strong>’ <strong>has been blocked by CORS policy</strong>: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.
 </div>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-07.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-07.png" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="cors-예시">CORS 예시</h2>
 
@@ -2052,7 +2094,7 @@ Access to XMLHttpRequest at ‘https://kr.object.ncloudstorage.com/cors-test/cor
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-02-23<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2023-02-23<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

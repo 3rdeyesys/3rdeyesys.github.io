@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1770,21 +1777,41 @@ OS중에서 CentOS는 기본 설정이 허용이지만, Ubuntu는 기본 설정�
 <p>mysql 5.6에서는 bind-address 설정이 <strong>/etc/mysql/my.cnf</strong> 파일에 있습니다.<br />
 OS는 Ubuntu 14.04만 제공됩니다.</p>
 
-<figure><img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_01.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_01.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="mysql-57">mysql 5.7</h2>
 <p>mysql 5.7에서는 bind-address 설정이 <strong>/etc/mysql/mysql.conf.d/mysqld.cnf</strong> 파일에 있습니다.<br />
 OS는 Ubuntu 14.04와 16.04 두 버전이 있는데 모두 동일합니다.</p>
 
-<figure><img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_02.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_02.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
-<figure><img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_03.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_03.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="mariadb">mariaDB</h2>
 <p>mariaDB는 10.2 버전만 있으며 bind-address 설정이 <strong>/etc/mysql/my.cnf</strong> 파일에 있습니다.<br />
 OS는 Ubuntu 16.04만 제공됩니다.</p>
 
-<figure><img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_04.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_04.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="기타---mariadb-centos">기타 - mariaDB CentOS</h2>
 <p>그 외에 mysql의 경우 CentOS는 개요에서 말씀드렸듯이 기본적으로 외부 접속을 차단하는 bind-address 항목이 존재하지 않는데
@@ -1792,7 +1819,12 @@ mariaDB의 경우 외부 접속을 차단하지는 않지만, bind-address 항�
 혹시나 차단하고 싶을 경우 사용하기 쉽게 미리 준비해둔 것으로 보입니다.
 주석처리된 bind-address의 위치는 <strong>/etc/my.cnf.d/server.cnf</strong> 입니다.</p>
 
-<figure><img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_05.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/database/ncp_database_mysql_mariadb_config_bind_address_05.jpg" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" style="width: 800px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="참고-url">참고 URL</h2>
 <ul>
@@ -1852,7 +1884,7 @@ mariaDB의 경우 외부 접속을 차단하지는 않지만, bind-address 항�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-02-24<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2021-02-24<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

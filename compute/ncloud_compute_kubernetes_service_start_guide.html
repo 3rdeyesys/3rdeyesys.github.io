@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1785,7 +1792,12 @@ $("#toc_onoff").click(function() {
 <h2 id="사전-준비">사전 준비</h2>
 <p>먼저 쿠버네티스 클러스터에 사용할 <strong>전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet</strong>이 필요합니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_07.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_07.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-3">IP 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /17~/26 범위의 Private 또는 Public Subnet, 로드밸런서 전용 Subnet이 필요합니다.<br /><br />
 Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내의 Private Subnet, 로드밸런서 전용Subnet은 선택할 수 없습니다.</div>
@@ -1794,13 +1806,23 @@ Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내�
 
 <p>VPC와 Subnet이 준비되었다면, 다음으로 [Kubernetes Sevice] - [Cluster]에서 생성하기를 클릭합니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_09.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 500px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_09.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 500px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="클러스터-설정">클러스터 설정</h2>
 <p>생성할 클러스터의 정보를 설정해줍니다. (ACG는 자동으로 생성 됩니다.)<br />
 <strong>네트워크 타입은 Private과 Public 중에서 선택</strong>할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_01.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_01.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-2">현재 지원되고 있는 Kubenetes 버전은 [<strong>1.21.9</strong>], [<strong>1.22.9</strong>] 입니다.</div>
 
@@ -1808,28 +1830,53 @@ Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내�
 <p><code class="language-plaintext highlighter-rouge">Private Subnet을 선택했을 경우</code>에는 아래와 같이 NAT Gateway 생성 안내 팝업이 나타나는데,<br />
 NAT Gateway를 생성해야 아웃바운드 트래픽을 활성화할 수 있기 때문입니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_10.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 490px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_10.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 490px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>팝업에서 링크를 클릭해서 NAT Gateway 화면으로 이동해 NAT Gateway를 생성합니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_11.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_11.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="노드풀-설정">노드풀 설정</h2>
 <p>노드풀 이름을 입력하고, 서버 이미지와 서버 타입을 선택하고 [추가] 버튼을 클릭합니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_02.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_02.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-2">현재 지원되고 있는 OS는 [<strong>ubuntu16.04</strong>], [<strong>ubuntu18.04</strong>] 입니다.</div>
 
 <h2 id="로그인키-설정">로그인키 설정</h2>
 <p>다음으로 워커노드의 로그인키를 설정 합니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_03.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_03.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="최종-확인">최종 확인</h2>
 <p>설정 정보를 최종적으로 확인한 후 생성버튼을 클릭하여 클러스터를 생성합니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_04.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_04.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">쿠버네티스 클러스터 생성은 20분 정도 소요되므로 여유를 갖고 기다리시면 됩니다.</div>
 
@@ -1863,12 +1910,22 @@ kubectl의 버전 확인이 필요한 경우 다음 명령어를 사용하시면
 <p>클러스터를 제어하기 위해서는 네이버 클라우드 쿠버네티스 서비스에서 제공해주는 접속을 위한 인증정보가 있는 설정파일이 필요합니다. <br />
 [설정파일] - [다운로드] 버튼을 클릭해 설정 파일을 다운로드 받습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_05.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_05.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>kubectl을 실행해 Kubernetes에 접속하고 제어하는 방법은 [가이드 보기] 버튼 클릭하면<br />
 아래와 같이 [설치 가이드 바로가기]와 [IAM 인증 가이드] 링크에서 자세히 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_06.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 690px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/kubernetes/ncp_server_kubernetes_start_guide_06.jpg" alt="Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법" style="width: 690px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>다운로드한 설정 파일경로를 %KUBE_CONFIG% 환경변수에 지정합니다.</p>
 
@@ -1950,7 +2007,7 @@ nks-pool-1865-w2zz   Ready    node    4d5h   v1.16.6
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-05-27<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2022-05-27<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

@@ -1481,6 +1481,17 @@ img.docimage{
     margin-bottom: 20px;
 }
 
+img.docimage-no-top{
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+img.docimage-no-bottom{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+
 @media screen and (max-width: 990px)
 {
     #tg-sb-sidebar {display:none;}

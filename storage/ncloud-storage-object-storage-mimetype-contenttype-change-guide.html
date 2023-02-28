@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1770,7 +1777,12 @@ $("#toc_onoff").click(function() {
 <h2 id="메타-데이터">메타 데이터</h2>
 <p>메타 데이터는 파일의 속성이나 정보를 나타내는 값으로 Ncloud Object Storage에서는 파일 수정 날짜, 파일 크기 등의 기본으로 설정되는 시스템 메타 데이터와 사용자가 임의로 정의하는 유저 메타 데이터로 구분할 수 있으며 아래와 같이 Console 화면에서 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-01.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 685px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-01.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 685px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="mime-type-media-type">MIME Type (Media Type)</h3>
 <p>MIME은 [Multipurpose Internet Mail Extensions]의 약자로 이메일 전송을 위해 만들어진 인터넷 표준 형식으로, MIME Type이란 이메일로 전송되는 컨텐츠나 파일의 종류를 구분하기 위해 정의된 형식입니다. 최근에는 Media Type으로 표현하는 경우도 있습니다.</p>
@@ -1784,25 +1796,50 @@ Content-Type Header와 MIME Type은 이메일에 사용하기 위해 정의되�
 <h2 id="오류-상황">오류 상황</h2>
 <p>예를 들어 Object Storage에 등록된 이미지 파일에 대한 Content-Type 속성이 제대로 정의되지 않았을 경우 아래와 같이 이미지 파일을 호출했을 때 이미지가 화면에 표시되지 않고 다운로드 되는 현상이 나타납니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-02.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 807px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-02.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 807px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="메타-데이터-변경">메타 데이터 변경</h2>
 <p>문제를 해결하기 위해서는 메타 데이터에 있는 [<strong>Content-Type</strong>]을 변경해야 하므로, 아래와 같이 콘솔 [<strong>Object Storage</strong>] - [<strong>Bucket Management</strong>]에서 해당 파일을 선택하고 [<strong>편집</strong>] - [<strong>메타 데이터 변경</strong>] 메뉴를 선택합니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-03.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-03.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>[메타 데이터 관리] 팝업창에서 [<strong>Content-Type</strong>] 항목에 있는 [<strong>수정</strong>] 버튼을 클릭합니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-04.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 685px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-04.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 685px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>이미지나 html 문서에 맞는 값을 입력합니다. 여기서는 png 이미지 파일이므로 [<strong>image/png</strong>]를 입력했습니다.<br />
 html의 경우는 [<strong>text/html</strong>]이며 기타 다양한 파일들의 MIME Type은 문서의 아래쪽에서 정리해보겠습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-05.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 685px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-05.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 685px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>[<strong>Content-Type</strong>] 값 변경 후에 브라우저의 캐시를 지우고 다시 호출해보면 아래와 같이 이미지가 정상적으로 나타나는 것을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-06.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 807px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-06.png" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" style="width: 807px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="mime-type-종류">MIME Type 종류</h2>
 <p>전체 MIME Type 중에서 자주 사용되는 Type을 정리해보면 다음과 같습니다.</p>
@@ -2025,7 +2062,7 @@ html의 경우는 [<strong>text/html</strong>]이며 기타 다양한 파일들�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-01-31<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2023-01-31<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

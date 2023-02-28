@@ -1089,6 +1089,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1785,7 +1792,12 @@ $("#toc_onoff").click(function() {
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>ca-certificates
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-01.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-01.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="패키지-저장소-추가">패키지 저장소 추가</h3>
 <p>이제 Jenkins의 패키지 저장소를 추가합니다.</p>
@@ -1793,7 +1805,12 @@ $("#toc_onoff").click(function() {
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# wget <span class="nt">-O</span> /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-03.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-03.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="gpg-키-추카">GPG 키 추카</h3>
 <p>그런 다음 Jenkins GPG 키를 다음과 같이 추가 합니다.</p>
@@ -1801,7 +1818,12 @@ $("#toc_onoff").click(function() {
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# rpm <span class="nt">--import</span> https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-04.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-04.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="java-설치">JAVA 설치</h3>
 <p>Jenkins를 구동하기 위해서는 JAVA가 필요하고, 추가로 fontconfig도 설치합니다.</p>
@@ -1810,7 +1832,12 @@ $("#toc_onoff").click(function() {
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>fontconfig java-11-openjdk
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-02.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-02.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="jenkins-설치">Jenkins 설치</h3>
 <p>모든 준비가 끝났으면 Jenkins를 설치합니다.</p>
@@ -1818,7 +1845,12 @@ $("#toc_onoff").click(function() {
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# yum <span class="nt">-y</span> <span class="nb">install </span>jenkins
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-05.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-05.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="jenkins-서비스-시작">Jenkins 서비스 시작</h3>
 <p>Jekins 서비스를 시작하고 정상 작동을하고 있는지 다음과 같이 확인합니다.</p>
@@ -1827,12 +1859,22 @@ $("#toc_onoff").click(function() {
 ~# systemctl status jenkins
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-06.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-06.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="방화벽-acg-설정">방화벽 ACG 설정</h2>
 <p>Jekins 서버가 사용하는 기본 포트는 8080 입니다. Ncloud 방화벽 ACG에서 8080 포트를 허용해줍니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-07.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-07.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="초기-설정">초기 설정</h2>
 
@@ -1840,13 +1882,23 @@ $("#toc_onoff").click(function() {
 
 <div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">Jenkins의 기본 접속 Port는 8080인데 /etc/sysconfig/jenkins 의 JENKINS_PORT= 항목에서 변경 할 수 있습니다.</div>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-17.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-17.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="초기-패스워드-확인">초기 패스워드 확인</h3>
 
 <p>설치가 완료 되면 http://{서버 IP주소}:8080 으로 접속하면 아래의 스크린샷처럼 초기 어드민 패스워드를 입력하는 화면이 나타납니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-08.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-08.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>초기 어드민 패스워드는 <strong>/var/lib/jenkins/secrets/initialAdminPassword</strong> 파일에 기록되어 있습니다.<br />
 cat 명령어로 초기 패스워드를 확인합니다.</p>
@@ -1854,38 +1906,78 @@ cat 명령어로 초기 패스워드를 확인합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# <span class="nb">cat</span> /var/lib/jenkins/secrets/initialAdminPassword
 </code></pre></div></div>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-09.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-09.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="플러그인-설치">플러그인 설치</h2>
 <p>플러그인 설치는 추천 플러그인을 설치하는 옵션과 직접 선택해서 설치하는 옵션이 있습니다. 일단 여기서는 추천 플러그인을 선택하겠습니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-10.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-10.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>추천 플러그인을 선택하면 아래와 같이 설치과정이 나타납니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-11.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-11.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>직접 플러그인을 선택할 경우 아래와 같이 여러 플러그인 중에서 설치하고 싶은 플러그인을 선택할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-12.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-12.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="어드민-계정-정보-입력">어드민 계정 정보 입력</h2>
 <p>플러그인 설치를 마치면 아래와 같이 어드민 계정 정보를 입력하게 됩니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-13.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-13.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="설치-완료">설치 완료</h2>
 <p>필요한 정보를 모두 입력하고 나면 마지막으로 Jekins URL을 확정하고 저장합니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-14.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-14.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>설치가 모두 끝났습니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-15.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-15.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>이제 Jekins에 접속하면 아래와 같은 화면을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-16.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/dev-tools/ncloud-dev-tools-jenkins-install-guide-centos-16.png" alt="Ncloud VPC 환경에서 CentOS에 Jenkins 서버를 설치하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="참고-url">참고 URL</h2>
 <ol>
@@ -1946,7 +2038,7 @@ cat 명령어로 초기 패스워드를 확인합니다.</p>
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-07-08<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2022-07-08<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

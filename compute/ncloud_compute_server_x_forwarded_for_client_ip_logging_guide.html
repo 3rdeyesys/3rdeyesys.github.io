@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1791,7 +1798,12 @@ $("#toc_onoff").click(function() {
   <li>VPC 환경에서 서버 생성하는 방법 : <a href="/compute/ncloud_compute_server_vpc_create.html" target="_blank" style="word-break:break-all;">https://docs.3rdeyesys.com/compute/ncloud_compute_server_vpc_create.html</a></li>
 </ul>
 
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_01.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_01.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <p>로드밸런서도 마찬가지로 준비하고, 서버와 연동까지 완료했습니다.</p>
 
@@ -1799,16 +1811,31 @@ $("#toc_onoff").click(function() {
   <li>VPC 환경에서 Application Load Balancer 생성하는 방법 : <a href="/networking/ncloud_networking_load_balancer_application_lb.html" target="_blank" style="word-break:break-all;">https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html</a></li>
 </ul>
 
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_02.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_02.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="설정-전-테스트">설정 전 테스트</h2>
 <p>우선, <strong>X-Forwarded-For (XFF)</strong> 설정을 하기 전에 어떻게 기록이 남는지 확인해보겠습니다.<br />
 아래와 같이 Load Balancer 주소로 접속해서 2대의 서버에 각각 접근하도록 합니다.<br />
 위에서 소개한 Application Load Balancer 생성하는 방법을 그대로 따라하면 아래와 같은 메시지를 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_11-1.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 560px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_11-1.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 560px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_11-2.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 560px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_11-2.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 560px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="apache-접속-로그-확인">Apache 접속 로그 확인</h3>
 <p>Apache 접속 로그 파일은 아래의 위치에 존재하지만, 저희는 네이버 클라우드 (Ncloud)의 상품 중 하나인 <strong>Cloud Log Analytics</strong>에서 로그를 수집해서 확인해보겠습니다.</p>
@@ -1822,7 +1849,12 @@ $("#toc_onoff").click(function() {
 
 <p>Cloud Log Analytics에서 수집한 로그를 확인해보면 위에서 설정했던 <strong>Load Balancer의 IP 대역 (172.16.20.xx)</strong>이 기록된 것을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_03.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_03.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="centos-설정">CentOS 설정</h2>
 <p>이제 실제 Client IP가 기록 되도록 설정을 변경해보겠습니다.<br />
@@ -1840,12 +1872,22 @@ $("#toc_onoff").click(function() {
 <h3 id="httpdconf-수정-전">httpd.conf 수정 전</h3>
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code>196   <span class="ss">LogFormat</span> "%h %l %u %t \"%r\" %&gt;s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_04.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_04.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="httpdconf-수정-후">httpd.conf 수정 후</h3>
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code>196   <span class="ss">LogFormat</span> "%{X-Forwarded-For}i %l %u %t \"%r\" %&gt;s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_05.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_05.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="apache-재시작">Apache 재시작</h3>
 <p>httpd.conf 파일 수정 후에 Apache를 재시작합니다. 로그 테스트는 Ubuntu까지 설정을 마친 후에 진행하겠습니다.</p>
@@ -1861,7 +1903,12 @@ $("#toc_onoff").click(function() {
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# a2enmod remoteip
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_06.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_06.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="remoteipload-수정">remoteip.load 수정</h3>
 <p>다음으로 remoteip.load 파일을 수정해서 아래쪽에 [<strong>RemoteIPHeader X-FORWARDED-FOR</strong>]을 추가 합니다.</p>
@@ -1876,7 +1923,12 @@ $("#toc_onoff").click(function() {
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">LoadModule</span> remoteip_module /usr/lib/apache2/modules/mod_remoteip.so
 <span class="nc">RemoteIPHeader</span> <span class="ss">X-FORWARDED-FOR</span>
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_07.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_07.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="apache2conf-수정">apache2.conf 수정</h3>
 <p>다음으로 <strong>apache2.conf</strong> 파일을 수정합니다.</p>
@@ -1893,12 +1945,22 @@ $("#toc_onoff").click(function() {
 <h3 id="apache2conf-수정-전">apache2.conf 수정 전</h3>
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code>213 <span class="ss">LogFormat</span> "%h %l %u %t \"%r\" %&gt;s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined  
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_08.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_08.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="apache2conf-수정-후">apache2.conf 수정 후</h3>
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code>213 <span class="ss">LogFormat</span> "%a %l %u %t \"%r\" %&gt;s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined  
 </code></pre></div></div>
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_09.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_09.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="apache-재시작-1">Apache 재시작</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl restart apache2
@@ -1908,7 +1970,12 @@ $("#toc_onoff").click(function() {
 <p>위와 같이  CentOS, Ubuntu 2대 서버에서 설정을 모두 마친 후에 로드 밸런서 URL로 접속합니다.<br />
 이후에 Cloud Log Analytics에서 로그를 확인해보면 아래와 같이 로드밸런서 IP가 아닌 실제 접속한 Client의 IP가 기록된 것을 확인할 수 있습니다.</p>
 
-<figure><img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_10.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/compute/ncloud_server_x_forwarded_for_client_ip_logging_guide_10.png" alt="Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Apache access_log에 기록하는 방법" style="width: 770px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="참고-url">참고 URL</h2>
 <ol>
@@ -1971,7 +2038,7 @@ $("#toc_onoff").click(function() {
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-12-29<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2021-12-29<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

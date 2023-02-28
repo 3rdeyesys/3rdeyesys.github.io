@@ -1087,6 +1087,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드" href="/management/ncloud-management-cloud-insight-rule-template-guide.html" >&nbsp;&nbsp; L &nbsp; Rule Template 설정 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Webservice Monitoring System 가이드" href="/management/ncloud_management_webservice_monitoring_system_guide.html" >Webservice Monitoring System 가이드</a></li>          
                     
           
@@ -1777,18 +1784,33 @@ $("#toc_onoff").click(function() {
 
 <p>그리고 이동 시점은 파일이 Object Storage에 저장-생성된 후 경과한 일자를 기준으로 하며 1일 ~ 3,650일 사이의 값을 입력합니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncp_storage_object_storage_lifecycle_01.jpg" alt="Ncloud Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법" style="width: 650px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncp_storage_object_storage_lifecycle_01.jpg" alt="Ncloud Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법" style="width: 650px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="관리대상-source">관리대상 (Source)</h3>
 <p>관리대상의 버킷(Bucket)을 선택하고 Object 이름의 규칙을 접두어 방식으로 입력합니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncp_storage_object_storage_lifecycle_02.jpg" alt="Ncloud Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법" style="width: 650px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncp_storage_object_storage_lifecycle_02.jpg" alt="Ncloud Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법" style="width: 650px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h3 id="이동위치-target">이동위치 (Target)</h3>
 <p>이동할 위치는 Archive Storage로 고정이며, Archive Storage의 컨테이너(버킷)을 선택하고 세부경로 즉, 폴더를 입력합니다.<br />
 세부경로에 아무것도 입력하지 않으면 Source 즉, Object Storage의 위치, 폴더 구조 그대로 이동됩니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncp_storage_object_storage_lifecycle_03.jpg" alt="Ncloud Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법" style="width: 650px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncp_storage_object_storage_lifecycle_03.jpg" alt="Ncloud Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법" style="width: 650px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="관리대상source-object-이름-규칙">관리대상(Source) Object 이름 규칙</h2>
 <div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-3">
@@ -1809,7 +1831,12 @@ $("#toc_onoff").click(function() {
 다른 항목들은 동일하고, 관리대상(Source) Object 이름 규칙에 따라 어떤 결과가 나오지는 확인해보겠습니다.<br />
 물론 아래의 예시들에서 공통적으로 위에서 지정한 수명주기 날짜에 해당하는 파일들만 이동하게 됩니다.</p>
 
-<figure><img class="docimage" src="/images/storage/ncp_storage_object_storage_lifecycle_04.jpg" alt="Ncloud Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법" style="width: 700px; " /><figcaption></figcaption></figure>
+<figure>
+  <img class="docimage" src="/images/storage/ncp_storage_object_storage_lifecycle_04.jpg" alt="Ncloud Object Storage Lifecycle Management의 관리대상(Source) Object 접두어 설정 방법" style="width: 700px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 3rdeyesys
 	- img_01.png
@@ -1925,7 +1952,7 @@ $("#toc_onoff").click(function() {
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-06-02<br/> Site last generated: 2023-02-23 <br />        
+        <span>Page last updated:</span> 2021-06-02<br/> Site last generated: 2023-02-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
