@@ -490,6 +490,17 @@
 
 
 {
+"title": "Object Storage에서 CORS를 SDK for S3 API로 설정하기",
+"tags": "storage",
+"keywords": "BackUp, Storage, Cross-Origin, Resource, Sharing",
+"url": "/storage/ncloud-storage-object-storage-bucket-cors-setting-api-sdk-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Object Storage Bucket에 CORS 설정하기",
 "tags": "storage",
 "keywords": "BackUp, Storage, Cross-Origin, Resource, Sharing",
