@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:url" content="https://docs.3rdeyesys.com/management/ncloud-management-cloud-insight-rule-template-guide.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-02-28T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-03-07T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="모니터링 서비스 Cloud Insight Rule Template 설정 가이드" />
 <script type="application/ld+json">
@@ -1803,8 +1803,8 @@ $("#toc_onoff").click(function() {
   
 </figure>
 
-<h3 id="cpu-디스크-사용률">CPU-디스크 사용률</h3>
-<p>[<strong>서버 평균 CPU 사용률</strong>]과 [<strong>서버 평균 디스크 사용률</strong>]은  [<strong>SERVER</strong>] 탭에서 [<strong><code class="language-plaintext highlighter-rouge">SEVER/avg_cpu_used_rto</code></strong>]와 [<strong><code class="language-plaintext highlighter-rouge">SEVER/avg_fs_usert</code></strong>] 항목을 선택합니다.</p>
+<h3 id="cpu-사용률">CPU 사용률</h3>
+<p>[<strong>서버 평균 CPU 사용률</strong>]은  [<strong>SERVER</strong>] 탭에서 [<strong><code class="language-plaintext highlighter-rouge">SEVER/avg_cpu_used_rto</code></strong>] 항목을 선택합니다.</p>
 
 <figure>
   <img class="docimage" src="/images/management/ncloud-management-cloud-insight-rule-template-guide-04.png" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" style="width: 845px; " />
@@ -1818,6 +1818,31 @@ $("#toc_onoff").click(function() {
 
 <figure>
   <img class="docimage" src="/images/management/ncloud-management-cloud-insight-rule-template-guide-05.png" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="디스크별-사용-중인-용량">디스크별 사용 중인 용량</h3>
+<p>[<strong>디스크별 사용 중인 용량</strong>]은  [<strong>FILE STSTEM</strong>] 탭에서 [<strong><code class="language-plaintext highlighter-rouge">FILE STSTEM/fs_usert</code></strong>] 항목을 선택합니다.</p>
+
+<figure>
+  <img class="docimage" src="/images/management/ncloud-management-cloud-insight-rule-template-guide-15.png" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-3">
+- [<strong>사용 중인 디스크가 2개 이상인 경우</strong>] <br />
+서버를 생성할 때 자동으로 추가되는 OS용 기본 디스크 말고 별도로 디스크를 추가했을 경우에는 기본 / 영역외에 추가 디스크가 마운트된 영역에 대해서도 항목을 추가해야 합니다.<br />
+<br />
+추가 디스크를 <strong>/data 디렉토리로 마운트</strong>했다고 가정했을 경우 아래 스샷처럼 [<strong><code class="language-plaintext highlighter-rouge">FILE STSTEM/fs_usert</code></strong>] 항목 오른쪽에 있는 [<strong>+</strong>] 버튼을 클릭해서 동일한 
+항목을 하나 더 추가하고, 디멘션에서 [<strong>mnt_nm: /data</strong>]를 선택합니다. 다른 곳으로 마운트했을 경우에는 그에 맞는 값을 선택하면 됩니다.
+</div>
+
+<figure>
+  <img class="docimage" src="/images/management/ncloud-management-cloud-insight-rule-template-guide-16.png" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2001,7 +2026,7 @@ $("#toc_onoff").click(function() {
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-02-28<br/> Site last generated: 2023-03-06 <br />        
+        <span>Page last updated:</span> 2023-03-07<br/> Site last generated: 2023-03-07 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -2033,6 +2058,34 @@ $("#toc_onoff").click(function() {
     });
 </script>
 
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4Q6RVEFJ3S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4Q6RVEFJ3S');
+</script>
+
+  
+
+  
+  <!-- NCloud Real User Analytics -->
+<script>
+  (function() {
+    var s = document.getElementsByTagName('script')[0]
+      , p = document.createElement('script');
+    p.async = 'async';
+    p.src = 'https://rua-api.ncloud.com/api/v1/beacon/boomerang/collect/'+
+      'e4c80491-1665-457b-9cec-550a5f554dde';
+    s.parentNode.insertBefore(p, s);
+  })();
+</script>
+
+  
 
 </body>
 </html>
