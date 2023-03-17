@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 17 Mar 2023 15:01:56 +0900</pubDate>
-        <lastBuildDate>Fri, 17 Mar 2023 15:01:56 +0900</lastBuildDate>
+        <pubDate>Fri, 17 Mar 2023 15:22:36 +0900</pubDate>
+        <lastBuildDate>Fri, 17 Mar 2023 15:22:36 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -34,13 +34,19 @@ VOD Station이 제공하는 기능은 다음과 같은 것들이 있습니다.
 - 썸네일 추출저장
 - 최적의 CDN 생성(선택 옵션)
 
+## 사전 준비 사항
+VOD Station을 이용하기 위해서는 반드시 필요한 것이 2가지 있는데 다음과 같습니다.
+
+- **Object Storage**: 원본 미디어 파일과 변환된 영상 파일을 저장하기 위한 공간
+- **CDN**: 영상 배포를 위한 콘텐츠 스트리밍 플랫폼
+
 ## 메뉴 위치
 Ncloud Console에서 [**VOD Station**] 서비스 위치는 아래와 같이 [**Media**] - [**VOD Station**]에 있습니다.
 
 {% include image.html file=&quot;media/ncloud-media-vod-station-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
 
 ## Object Storage Bucket 생성
-VOD Station을 좀 더 편하게 사용하려면 VOD Station 생성 전에 `먼저 Object Storage에 Bucket을 생성하는 것이 좋습니다`.
+VOD Station을 좀 더 편하게 생성하려면 VOD Station 생성 전에 `먼저 Object Storage에 Bucket을 생성하는 것이 좋습니다`.
 
 ### Bucket 생성
 예를 들어 아래와 같이 용도별 Bucket 3개를 생성합니다.
@@ -258,7 +264,7 @@ Channel에서 확인했던 파일 하나를 선택해서 재생 URL이 어떻게
 1. Ncloud VOD Station 가이드
 	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview&lt;/a&gt;
 </description>
-            <pubDate>Wed, 15 Mar 2023 00:00:00 +0900</pubDate>
+            <pubDate>Fri, 17 Mar 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/media/ncloud-media-vod-station-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/media/ncloud-media-vod-station-guide.html</guid>
             
