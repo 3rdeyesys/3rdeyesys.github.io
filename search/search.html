@@ -31,17 +31,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <title>Search | 써드아이시스템 기술문서</title>
 <link rel="stylesheet" href="/css/syntax.css">
 
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/fontawesome/css/all.min.css"/>
-<link rel="stylesheet" href="/fontawesome/css/v4.7.0.css"/>
-<link rel="stylesheet" href="/css/modern-business.css">
-<!-- Latest compiled and minified CSS -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/fontawesome/css/all.min.css" />
+<link rel="stylesheet" href="/fontawesome/css/v4.7.0.css" />
+<link rel="stylesheet" href="/css/modern-business.css"> <!-- Latest compiled and minified CSS -->
 <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
-<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"-->
-<link rel="stylesheet" href="/css/customstyles.css">
-<link rel="stylesheet" href="/css/boxshadowproperties.css">
+<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"--> <link rel="stylesheet" href="/css/customstyles.css"> <link rel="stylesheet" href="/css/boxshadowproperties.css">
 <!-- most color styles are extracted out to here -->
 <link rel="stylesheet" href="/css/theme-ncloud.css">
+<link rel="stylesheet" href="/css/tabs.css">
 
 <script src="/js/jquery.341.min.js"></script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script-->
@@ -55,17 +56,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="/js/bootstrap.341.min.js"></script>
 <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script-->
 <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script-->
-<!-- Anchor.js -->
-<script src="/js/anchor.420.min.js"></script>
+<!-- Anchor.js --><script src="/js/anchor.420.min.js"> </script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script-->
 <script src="/js/toc.js"></script>
 <script src="/js/customscripts.js"></script>
+<script src="/js/tabs.js"></script>
 
 
 <link rel="shortcut icon" href="/images/favicon.ico">
 
-<link rel="alternate" type="application/rss+xml" title="3RDEYESYSTEM Technical Documentations" href="https://docs.3rdeyesys.com/feed.xml">
-
+<link rel="alternate"
+  type="application/rss+xml"
+  title="3RDEYESYSTEM Technical Documentations"
+  href="https://docs.3rdeyesys.com/feed.xml">
 
 
     <script>
@@ -1213,6 +1216,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="VOD Station 생성 가이드" href="/media/ncloud-media-vod-station-guide.html" >VOD Station 생성 가이드</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="Video Player 구현하기 샘플" href="/media/ncloud_media_video_player_sample.html" >Video Player 구현하기 샘플</a></li>          
                     
           
@@ -2265,6 +2275,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				
 					,
 					
+					"media-ncloud-media-vod-station-guide-html": {
+						"id": "media-ncloud-media-vod-station-guide-html",
+						"title": "Ncloud VOD Station 생성 가이드",
+						"categories": "",
+						"url": " /media/ncloud-media-vod-station-guide.html",
+						"content": "개요\nNcloud(네이버 클라우드) VOD Station은 저장된 영상을 다양한 디바이스에서 시청할 수 있도록 변환하는 인코딩 기능과 동영상 파일을 패킷타이징하여 네트워크를 효율적으로 사용할 수 있는 스트리밍 기능을 제공하는 VOD 전용 서비스입니다.\n\n특징\nVOD Station 서비스의 특징은 다음과 같습니다.\n\n\n  하나의 서비스로 인코딩과 송출 가능: 여러 가지 VOD 서비스를 고민할 필요 없이 VOD Station 하나로 인코딩과 스트리밍이 가능합니다.\n  영상의 길이와 해상도에 따른 합리적 과금: 영상의 길이와 코딩 후 변환된 해상도에 따라 요금이 책정되므로 합리적인 비용으로 서비스를 이용할 수 있습니다.\n  고품질의 안정적인 스트리밍: Progressive Download 방식이 아닌 영상을 패킷타이징하여 송출하는 방식이므로 안정적인 품질로 스트리밍을 제공할 수 있습니다.\n  간편한 CDN 생성: CDN(Content Delivery Network) 선택 옵션을 통해 VOD 스트리밍 서비스에 최적화된 CDN을 쉽게 생성할 수 있습니다.\n  서비스 간의 유연한 연동: 인코딩, 보안, 비디오 플레이어와의 연동 등 VOD 서비스에 필요한 유연한 연동을 제공합니다.\n\n\n제공 기능\nVOD Station이 제공하는 기능은 다음과 같은 것들이 있습니다.\n\n\n  인코딩\n  On-the-fly 패킷타이징\n  템플릿 인코딩 설정\n  DRM\n  썸네일 추출저장\n  최적의 CDN 생성(선택 옵션)\n\n\n메뉴 위치\nNcloud Console에서 [VOD Station] 서비스 위치는 아래와 같이 [Media] - [VOD Station]에 있습니다.\n\n\n  \n  \n    \n  \n\n\nObject Storage Bucket 생성\nVOD Station을 좀 더 편하게 사용하려면 VOD Station 생성 전에 먼저 Object Storage에 Bucket을 생성하는 것이 좋습니다.\n\nBucket 생성\n예를 들어 아래와 같이 용도별 Bucket 3개를 생성합니다.\n\n\n  vod-station-input: 동영상 원본 파일을 저장할 Bucket\n  vod-station-output: 인코딩이 완료된 동영상을 저장할 Bucket\n  vod-station-thumbnail: 동영상에서 추출한 썸네일 이미지를 저장할 Bucket\n\n\n\n  \n  \n    \n  \n\n\n\n  아래와 같이 Bucket 3개를 생성했습니다.\n\n\n  \n  \n    \n  \n\n\n파일 업로드\nBucket 생성 후에 [vod-station-input] Bucket에 테스트할 동영상 파일을 업로드 합니다.\n\n\n  \n  \n    \n  \n\n\n이용 신청\n다음으로 [VOD Station] - [Subscription]에서 이용 신청을 합니다.\n\n\n  \n  \n    \n  \n\n\n이용 신청이 끝나면 [Category]를 생성하라는 안내 팝업이 나타납니다.\n\n\n  \n  \n    \n  \n\n\n카테고리 생성\n카테고리 생성 화면은 다음과 같은데 아래쪽에서 차례대로 살펴보겠습니다.\n\n\n  \n  \n    \n  \n\n\n인코딩 설정\n인코딩 설정 방법은 미리 지정된 템플릿을 이용해서 간편하게 설정할 수도 있고, 원하는 옵션으로 직접 설정할 수도 있는데, 여기서는 [템플릿 간편 설정]으로 진행하겠습니다.\n\n\n  템플릿 간편 설정\n템플릿 간편 설정에는 [실속형 콘텐츠], [비즈니스 콘텐츠], [초고화질 콘텐츠] 등의 3가지 옵션이 있는데, 아래쪽에서 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  인코딩 템플릿\n인코딩 템플릿의 상세 옵션을 확인하려면 [템플릿 간편 설정] 옆에 있는  아이콘을 클릭하면 아래와 같이 자세히 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  직접 설정\n템플릿을 사용하지 않고 상세 옵션을 직접 설정하려면 [설정함] 옵션을 선택하고 [추가] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  상세 옵션\n인코딩 옵션을 직접 설정하는 경우 아래와 같이 17개의 Video 옵션과 4개의 Audio 옵션 중에서 최대 5개를 선택할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n파일 경로 설정\n가능하면 썸네일은 설정함을 선택하고, [+ 선택] 버튼을 클릭해 아웃풋 파일 경로와 썸네일 아웃풋 파일 경로를 설정하도록 하겠습니다.\n\n\n  \n  \n    \n  \n\n\n\n  아웃풋 파일 경로 설정\n파일 경로 설정 팝업에서 미리 생성해 둔 [vod-station-output] Bucket을 선택합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  썸네일 아웃풋 파일 경로 설정\n마찬가지로 썸네일 경로 설정 팝업에서 미리 생성해 둔 [vod-station-thumbnail] Bucket을 선택합니다.\n\n\n  \n  \n    \n  \n\n\n고급 설정\n고급 설정에서는 [재생구간 설정]과 [워터마크 이미지]를 추가할 수 있는데, 서비스 상황에 맞에 선택하시면 되고, 여기서는 설정하지 않고 완료하겠습니다.\n\n\n  \n  \n    \n  \n\n\n최종 확인\n위에서 설정한 값들을 최종 확인한 후에 이상이 없으면 [생성] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n파일 인코딩\n이제 생성된 카테고리 리스트에서 [신규파일 인코딩] 버튼을 클릭해 인코딩할 파일을 등록합니다.\n\n\n  \n  \n    \n  \n\n\n\n  파일 경로 선택\n인풋 파일 경로는 [오브젝트 스토리지]와 별도의 [HTTP 다운로드 URL]을 선택할 수 있는데 여기서는 앞에서 생성한 오브젝트 스토리지를 선택하겠습니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  파일 선택\n오브젝트 스토리지 버킷에서 앞에서 업로드한 인코딩할 파일을 선택합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  인코딩 시작\n선택한 파일이 맞는지 최종 확인하고 이상이 없으면 [확인] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n인코딩 상태 확인\n위에서 선택한 파일의 인코딩 상태 확인은 [VOD Station] - [Status]에서 확인 가능합니다.\n\n\n  \n  \n    \n  \n\n\n썸네일 파일 확인\n썸네일 파일은 앞에서 생성하고 선택했던 오브젝트 스토리지 [vod-station-thumbnail] 버킷에서 아래와 같이 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n채널 생성\n인코딩이 끝났으면, 이제 스트리밍을 위한 채널을 생성해야 합니다.\n[VOD Station] - [Channel]에서 [채널 생성] 버튼을 클릭해 VOD Streaming을 구성하기 위한 새로운 채널을 생성합니다.\n\n\n  \n  \n    \n  \n\n\n채널 생성 구성 항목\n채널 생성 시에 입력 또는 선택이 필요한 항목들을 차례대로 살펴보겠습니다.\n\n\n  \n    Object Storage Bucket 선택\nStreaming할 파일의 위치는 위에서 설정했던 인코딩된 파일의 위치인 [vod-station-output] 버킷을 선택합니다.\n  \n  \n    Object Storage 비공개 파일 접근\nObject Storage 비공개 파일 접근 설정은 [허용]을 선택하는 것을 추천합니다. \nVOD Station은 Object Storage 의 “공개 안함” 권한을 가진 파일도 스트리밍할 수 있는 기능을 제공하므로 Object Storage 에 있는 원본 파일의 권한을 “공개” 대신 “공개 안함” 으로 설정함으로써 컨텐츠의 보안 수준을 높일 수 있습니다.\n  \n\n\n\n  \n  \n    \n  \n\n\n\n  \n    Protocol\nProtocol은 [HLS], [DASH] 중에서 선택하거나 두 가지 모두 선택할 수 있습니다.\n  \n  \n    Segment 설정\nSegment 설정도 서비스 상황에 맞에 선택하시면 됩니다.\n  \n\n\n\n  \n  \n    \n  \n\n\n\n  CDN 설정\nVOD Station은 CDN 연동이 필수인 상품으로 [신규 생성]을 선택해 VOD Station에 최적화된 CDN을 자동 생성하거나, 기존 CDN 연동 또는 차후 별도의 CDN을 생성할 수도 있지만, \n가급적 [신규 생성] 옵션을 선택하는 것을 추천드립니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  콘텐츠 보호 설정\nDRM 등의 콘텐츠 보호 설정이 필요할 경우 관련된 설정을 추가할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  채널 생성 완료\n채널은 생성과 함께 운영상태로 전환되고, 그에 따라 과금이 발생하게 됩니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  생성된 채널 확인\n채널이 생성되면 아래와 같이 파일리스트와 채널 정보를 확인할 수 있습니다. 자세한 채널 정보는 상단에 있는 [채널 정보] 버튼을 클릭하면 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n채널 정보\n위에서 확인한 채널 리스트에서 [채널 정보] 버튼을 클릭하면 아래와 같은 채널 정보를 확인할 수 있는데, 이 채널 정보 중에서 중요한 항목은 아래에 표시한 3가지 입니다.\n\n\n  Object Storage Bucket (암호화명)\n  Protocol\n  CDN 재생경로\n\n\n\n  \n  \n    \n  \n\n\n재생 경로 URL 확인\nCDN에 위치한 VOD의 재생 경로 URL은 다음과 같은 요소로 구성되어 있습니다.\n\n URL Template: https://[CDN Domain]/[Protocol]/[EncryptedBucketName]/[Path]/[Video Filename]/[Manifest]\n\n\n  \n    \n      Domain\n      Protocol\n      BucketName\n      Path\n      FileName\n      Manifest\n    \n  \n  \n    \n      example.cdn.ntruss.com\n      ~aiEihf7l39******fs890ilkjlkfts_\n      /hls/dash\n      /example_category\n      /example.mp4\n      /index.m3u8/manifest.mpd\n    \n    \n      CDN 도메인\n      암호화된 Bucket 이름\n      스트리밍프로토콜\n      카테고리 이름으로구성된 폴더 경로\n      파일명\n      스트리밍을 위한Manifest 파일\n    \n  \n\n\nURL 예시\nChannel에서 확인했던 파일 하나를 선택해서 재생 URL이 어떻게 구성되는지 예시를 들어보겠습니다.\n\n 파일명 예시: test-category/VOD-Station_AVC_HD_1Pass_30fps.mp4\n\n 재생 경로 URL: https://yyvs***46***73.cdn.ntruss.com/hls/~ndO***eX~d1Y***OfE***VRYsO***Mgb***ri24_/test-category/VOD-Station_AVC_HD_1Pass_30fps.mp4/index.m3u8\n\n재생 URL 빠르게 확인하기\n재생 경로 URL이 복잡하게 구성되어 있다보니 직접 작성하기 쉽지 않은데, 이럴 때는 아래와 같은 방법으로 빠르게 확인할 수 있습니다.\n사용하시는 웹브라우저(여기서는 크롬을 사용)에 HLS, DASH 프로토콜 파일을 플레이할 수 있는 기능이 설치되어 있으면 보다 간편하게 확인 가능합니다.\n\n\n  웹브라우저 확장 프로그램 설치\n혹시 설치되어 있지 않을 경우 크롬 웹스토어 [확장 프로그램]에서 HLS, DASH Player를 아래와 같이 검색해서 설치합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  CDN 재생경로 URL 생성\n확장 프로그램이 설치되었으면 [VOD Station] - [Channel]에서 파일 리스트 오른쪽에 있는 [HLS URL 생성] 또는 [DASH URL 생성] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  CDN 재생경로 URL 확인\n그러면 아래와 같이 웹브라우저에서 해당 파일이 재생되면서 주소창에서 재생 URL을 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n참고 URL\n\n  Ncloud VOD Station 가이드\n    \n      https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
 					"networking-ncloud-networking-find-my-ip-address-html": {
 						"id": "networking-ncloud-networking-find-my-ip-address-html",
 						"title": "내 IP 주소 확인하기",
@@ -2466,6 +2491,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						"categories": "",
 						"url": " /storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html",
 						"content": "개요\nNcloud(네이버 클라우드) Object Storage에 html 파일이나 이미지 파일을 올려두고 사용하는 경우가 많습니다.\n그런데 간혹, 웹브라우저나 앱에서 해당 파일을 호출 했을 때 html 페이지나 이미지 파일이 화면에 표시되지 않고 다운로드 되는 현상이 발생하기도 합니다.\n\n이것은 Object Storage에 파일이 등록될 때 파일의 속성을 나타내는 메타 데이터 중에서 파일의 종류를 구분하기 위한 MIME Type에 대한 정보를 담고 있는 Content-Type 항목이 제대로 설정되지 않아서 발생하는 문제입니다. 아래에서 이에 대한 내용을 자세히 정리해보겠습니다.\n\n메타 데이터\n메타 데이터는 파일의 속성이나 정보를 나타내는 값으로 Ncloud Object Storage에서는 파일 수정 날짜, 파일 크기 등의 기본으로 설정되는 시스템 메타 데이터와 사용자가 임의로 정의하는 유저 메타 데이터로 구분할 수 있으며 아래와 같이 Console 화면에서 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\nMIME Type (Media Type)\nMIME은 [Multipurpose Internet Mail Extensions]의 약자로 이메일 전송을 위해 만들어진 인터넷 표준 형식으로, MIME Type이란 이메일로 전송되는 컨텐츠나 파일의 종류를 구분하기 위해 정의된 형식입니다. 최근에는 Media Type으로 표현하는 경우도 있습니다.\n\nContent-Type\n[Content-Type]은 MIME Type으로 정의된 컨텐츠나 파일을 전송할 때 프로토콜의 Header 값에 정의되는 속성입니다.\nContent-Type Header와 MIME Type은 이메일에 사용하기 위해 정의되었으나, 지금은 HTTP와 같은 다른 인터넷 프로토콜에서 널리 사용하고 있으며, MIME Type 등록은 IANA(Internet Assigned Numbers Authority)에서 관리하고 있습니다.\n\nNcloud Object Storage에서도 업로드 된 파일의 종류에 대한 정보를 Content-Type 속성으로 정의하고 있습니다.\n\n오류 상황\n예를 들어 Object Storage에 등록된 이미지 파일에 대한 Content-Type 속성이 제대로 정의되지 않았을 경우 아래와 같이 이미지 파일을 호출했을 때 이미지가 화면에 표시되지 않고 다운로드 되는 현상이 나타납니다.\n\n\n  \n  \n    \n  \n\n\n메타 데이터 변경\n문제를 해결하기 위해서는 메타 데이터에 있는 [Content-Type]을 변경해야 하므로, 아래와 같이 콘솔 [Object Storage] - [Bucket Management]에서 해당 파일을 선택하고 [편집] - [메타 데이터 변경] 메뉴를 선택합니다.\n\n\n  \n  \n    \n  \n\n\n[메타 데이터 관리] 팝업창에서 [Content-Type] 항목에 있는 [수정] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n이미지나 html 문서에 맞는 값을 입력합니다. 여기서는 png 이미지 파일이므로 [image/png]를 입력했습니다.\nhtml의 경우는 [text/html]이며 기타 다양한 파일들의 MIME Type은 문서의 아래쪽에서 정리해보겠습니다.\n\n\n  \n  \n    \n  \n\n\n[Content-Type] 값 변경 후에 브라우저의 캐시를 지우고 다시 호출해보면 아래와 같이 이미지가 정상적으로 나타나는 것을 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\nMIME Type 종류\n전체 MIME Type 중에서 자주 사용되는 Type을 정리해보면 다음과 같습니다.\n\n\n  \n    \n      파일 종류\n      MIME Type\n    \n  \n  \n    \n      . aac\n      audio/aac\n    \n    \n      . avi\n      video/x-msvideo\n    \n    \n      . bin\n      application/octet-stream\n    \n    \n      . csh\n      application/x-csh\n    \n    \n      . css\n      text/css\n    \n    \n      . csv\n      text/csv\n    \n    \n      . doc\n      application/msword\n    \n    \n      . docx\n      application/vnd.openxmlformats-officedocument.wordprocessingml.document\n    \n    \n      . gif\n      image/gif\n    \n    \n      . html\n      text/html\n    \n    \n      . ico\n      image/x-icon\n    \n    \n      . ics\n      text/calendar\n    \n    \n      . jar\n      application/java-archive\n    \n    \n      . jpg\n      image/jpeg\n    \n    \n      . js\n      text/javascript\n    \n    \n      . json\n      application/json\n    \n    \n      . md\n      text/markdown\n    \n    \n      . oga\n      audio/ogg\n    \n    \n      . ogv\n      video/ogg\n    \n    \n      . pdf\n      application/pdf\n    \n    \n      . png\n      image/png\n    \n    \n      . ppt\n      application/vnd.ms-powerpoint\n    \n    \n      . pptx\n      application/vnd.openxmlformats-officedocument.presentationml.presentation\n    \n    \n      . rar\n      application/x-rar-compressed\n    \n    \n      . sh\n      application/x-sh\n    \n    \n      . svg\n      image/svg+xml\n    \n    \n      . tar\n      application/x-tar\n    \n    \n      . ttf\n      application/x-font-ttf\n    \n    \n      . txt\n      text/plain\n    \n    \n      . wav\n      audio/x-wav\n    \n    \n      . webp\n      image/webp\n    \n    \n      . woff\n      application/x-font-woff\n    \n    \n      . xls\n      application/vnd.ms-excel\n    \n    \n      . xlsx\n      application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\n    \n    \n      . xml\n      application/xml\n    \n    \n      . zip\n      application/zip\n    \n  \n\n\n참고 URL\n\n  Ncloud Object Storage 기본 가이드\n    \n      https://guide.ncloud-docs.com/docs/storage-storage-6-1\n    \n  \n  MIME Type 안내\n    \n      https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types\n    \n  \n  Object Storage 파일의 Content-Type 일괄 적용, 변경하는 방법\n    \n      https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"storage-ncloud-storage-object-storage-sdk-for-s3-api-guide-html": {
+						"id": "storage-ncloud-storage-object-storage-sdk-for-s3-api-guide-html",
+						"title": "Object Storage에서 CORS를 SDK for S3 API로 설정하기",
+						"categories": "",
+						"url": " /storage/ncloud-storage-object-storage-sdk-for-s3-api-guide.html",
+						"content": "개요\nNcloud(네이버 클라우드)의 Object Storage Bucket CORS를 AWS S3에서 제공하는 [SDK for S3 API]로 설정하는 방법을 소개합니다. 여기서 소개할 SDK는 [Python용 SDK for S3 API]와 [PHP용 SDK for S3 API] 두가지입니다.\n\nCORS 설정 기본 방법\nObject Storage Bucket에 CORS를 설정하는 기본 방법인 CLI와 외부 Client Tool에 대한 것은 아래 문서에서 확인 가능합니다.\n\n\n⁃ Object Storage Bucket에 CORS 설정하기 - CLI &amp; Client Tool\n\n\n\n  \n      \n          yaml \n      \n  \n      \n          python \n      \n  \n      \n          php \n      \n  \n\n\n  \n      \nhello:\n  - 'whatsup'\n  - 'hi'\n\n\n  \n      \nimport boto3\n\nservice_name = 's3'\nendpoint_url = 'https://kr.object.ncloudstorage.com'\nregion_name = 'kr-standard'\naccess_key = '{ACCESS_KEY_ID}'\nsecret_key = '{SECRET_KEY}'\n\nif __name__ == \"__main__\":\n    s3 = boto3.client(service_name, endpoint_url=endpoint_url,\n                         aws_access_key_id=access_key, aws_secret_access_key=secret_key)\n                      \n    bucket_name = '{버킷명}'\n\n# Define the configuration rules\n    cors_configuration = {\n        'CORSRules': [{\n            'AllowedHeaders': ['*'],\n            'AllowedMethods': ['GET', 'PUT'],\n            'AllowedOrigins': ['http://cors-test.com'],\n            'MaxAgeSeconds': 3000\n        }]\n    }\n\n    # Set CORS configuration\n    response = s3.put_bucket_cors(Bucket=bucket_name, CORSConfiguration=cors_configuration)\n    print(response['ResponseMetadata'])\n\n    # Get CORS configuration\n    response = s3.get_bucket_cors(Bucket=bucket_name)\n    print(response['CORSRules'])\n\n\n  \n      \n&lt;?php\n    use Aws\\S3\\S3Client;\n    use Aws\\Exception\\AwsException;\n    \n    $s3Client = new S3Client ([\n        'endpoint' =&gt; 'https://kr.object.ncloudstorage.com',\n        'region'   =&gt; 'kr-standard',\n        'credentials' =&gt; array(\n            'key'      =&gt; '{ACCESS_KEY_ID}',\n            'secret'   =&gt; '{SECRET_KEY}'\n        ),\n        'version' =&gt; 'latest'\n    ]);\n\n\n    $bucketName = \"{버킷명}\";\n\n    # Set CORS configuration\n    try \n    {\n        $result = $s3Client-&gt;putBucketCors([\n            'Bucket' =&gt; $bucketName, // REQUIRED\n            'CORSConfiguration' =&gt; [ // REQUIRED\n                'CORSRules' =&gt; [ // REQUIRED\n                    [\n                        'AllowedHeaders' =&gt; ['*'],\n                        'AllowedMethods' =&gt; ['GET', 'PUT'], // REQUIRED\n                        'AllowedOrigins' =&gt; ['http://cors-test.com'], // REQUIRED\n                        'ExposeHeaders' =&gt; [],\n                        'MaxAgeSeconds' =&gt; 3000\n                    ],\n                ],\n            ]\n        ]);\n\n        var_dump($result[\"@metadata\"]);\n    } \n    catch (AwsException $e) \n    {   // output error message if fails\n        error_log($e-&gt;getMessage());\n    }\n\n    echo(\"&lt;hr /&gt;\");\n\n    # Get CORS configuration\n    try \n    {\n        $result = $s3Client-&gt;getBucketCors([\n            'Bucket' =&gt; $bucketName, // REQUIRED\n        ]);\n\n        var_dump($result[\"CORSRules\"]);\n    } \n    catch (AwsException $e) \n    {   // output error message if fails\n        error_log($e-&gt;getMessage());\n    }\n\n?&gt;\n\n\n  \n\n\n예제 코드 실행 결과\n\n\n  \n      \n          text \n      \n  \n      \n          test2 \n      \n  \n\n\n  \n      \n\n  \n  \n    \n  \n\n\n\n  \n      \n\n  \n  \n    \n  \n\n\n\n  \n\n\n참고 URL\n\n  Ncloud Python용 AWS SDK (Boto3) 가이드\n    \n      https://guide.ncloud-docs.com/docs/storage-storage-8-2\n    \n  \n  PHP용 AWS SDK 가이드\n    \n      https://aws.amazon.com/ko/sdk-for-php/\n    \n  \n  Object Storage Bucket에 CORS 설정하는 기본 방법\n    \n      https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-bucket-cors-setting-guide.html"
 					}
 					
 				
@@ -4230,7 +4270,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-         Site last generated: 2023-03-07 <br />        
+         Site last generated: 2023-03-17 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

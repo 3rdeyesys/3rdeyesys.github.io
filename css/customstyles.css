@@ -1491,6 +1491,11 @@ img.docimage-no-bottom{
     margin-bottom: 0px;
 }
 
+img.docimage-no-top-bottom{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 
 @media screen and (max-width: 990px)
 {

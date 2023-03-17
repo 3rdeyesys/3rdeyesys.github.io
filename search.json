@@ -380,6 +380,17 @@
 
 
 {
+"title": "Ncloud VOD Station 생성 가이드",
+"tags": "mediaobject_storage",
+"keywords": "streaming, video",
+"url": "/media/ncloud-media-vod-station-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "내 IP 주소 확인하기",
 "tags": "ipvpcacg",
 "keywords": "IP, IP Address",
@@ -527,6 +538,17 @@
 "tags": "storage",
 "keywords": "BackUp, Storage, MIME Type, Media Type, Content-Type",
 "url": "/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Object Storage에서 CORS를 SDK for S3 API로 설정하기",
+"tags": "storage",
+"keywords": "BackUp, Storage, Cross-Origin, Resource, Sharing",
+"url": "/storage/ncloud-storage-object-storage-sdk-for-s3-api-guide.html",
 "summary": ""
 }
 ,
@@ -1220,7 +1242,7 @@
 "tags": "mediaobject_storage",
 "keywords": "streaming",
 "url": "/media/ncloud_media_video_player_sample.html",
-"summary": "Ncloud Video Player 구현하기 샘플 예제"
+"summary": ""
 }
 ,
 
@@ -1275,7 +1297,7 @@
 "tags": "vpcnatgatewayroutetable",
 "keywords": "NATGW, RouteTable",
 "url": "/networking/ncloud_networking_natgw_routetb.html",
-"summary": "Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드입니다"
+"summary": ""
 }
 ,
 
