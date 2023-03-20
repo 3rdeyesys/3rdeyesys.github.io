@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 17 Mar 2023 15:22:36 +0900</pubDate>
-        <lastBuildDate>Fri, 17 Mar 2023 15:22:36 +0900</lastBuildDate>
+        <pubDate>Mon, 20 Mar 2023 17:49:53 +0900</pubDate>
+        <lastBuildDate>Mon, 20 Mar 2023 17:49:53 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -271,6 +271,8 @@ Channel에서 확인했던 파일 하나를 선택해서 재생 URL이 어떻게
             <category>media</category>
             
             <category>object_storage</category>
+            
+            <category>cdn</category>
             
             
         </item>

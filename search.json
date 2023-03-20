@@ -381,7 +381,7 @@
 
 {
 "title": "Ncloud VOD Station 생성 가이드",
-"tags": "mediaobject_storage",
+"tags": "mediaobject_storagecdn",
 "keywords": "streaming, video",
 "url": "/media/ncloud-media-vod-station-guide.html",
 "summary": ""
@@ -466,15 +466,6 @@
 ,
 
 
-
-{
-"title": "Ncloud 백업 서비스 사용 가이드",
-"tags": "backupdatabase",
-"keywords": "BackUp, Storage, DataBase",
-"url": "/storage/ncloud-storage-backup-service-guide.html",
-"summary": ""
-}
-,
 
 
 
@@ -1478,15 +1469,6 @@
 ,
 
 
-
-{
-"title": "백업 서비스 가이드와 신청 절차",
-"tags": "backupdatabase",
-"keywords": "BackUp, Storage, DataBase",
-"url": "/storage/ncloud_storage_backup_guide.html",
-"summary": ""
-}
-,
 
 
 
