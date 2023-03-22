@@ -5,10 +5,423 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 20 Mar 2023 17:49:53 +0900</pubDate>
-        <lastBuildDate>Mon, 20 Mar 2023 17:49:53 +0900</lastBuildDate>
+        <pubDate>Wed, 22 Mar 2023 17:03:50 +0900</pubDate>
+        <lastBuildDate>Wed, 22 Mar 2023 17:03:50 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud Video Player Enhancement 사용 가이드</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) [**Video Player Enhancement**]는 웹/앱에서 비디오 또는 오디오와 같은 미디어 재생을 위한 서비스로, Live Station, VOD Station과 연동을 통해, 다양한 디바이스 환경에서 시청자에게 최고 품질의 경험을 제공합니다.
+
+## 특징
+Video Player Enhancement 서비스의 특징은 다음과 같습니다.
+
+- **Live Station** &amp; **VOD Station**과 손쉽게 연동 가능
+- **HTML5 표준** : HTML5 표준에 맞게 제작된 SaaS 기반의 서비스로 별도의 APP 설치 없이 모든 디바이스 및 OS Browser에서 재생 가능
+- **사용자가 직접 커스터마이징** : Console 에서 UI &amp; UX 패널 제공하여 고객이 직접 커스터마이징을 할 수 있음 (유료 버전)
+- **개발 시간 단축** : 스크립트 코드 예제를 통해 플레이어를 웹페이지 내 손쉽게 임베디드가 가능하며 완성된 코드 제공을 통해 개발 시간을 단축 시킬 수 있음
+
+## 제공 기능
+VOD Station이 제공하는 기능은 다음과 같은 것들이 있습니다.
+
+- 다양한 재생 옵션 설정을 위한 기능
+- **콘텐츠 보안**: MultiDRM (FairPlay, Widevine, PlayReady) 및 Visible Watermark 기능 제공
+- **모바일 SDK**: Native SDK 제공 (AOS - Kotlin, iOS - Swift)
+- **커스터마이징**: 콘솔에 UI/UX 설정을 위한 기능 제공
+- **CMAF LL-HLS** 지원
+
+## 사전 준비 사항
+[**Video Player Enhancement**]을 테스트 하기 위해 [**VOD Station**]에 스트리밍 가능한 영상 파일을 미리 등록해 두겠습니다.  
+
+{% include image.html file=&quot;media/ncloud-media-vod-station-guide-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
+
+- [**VOD Station**] 사용 방법은 아래 가이드 문서에서 확인할 수 있습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/media/ncloud-media-vod-station-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; VOD Station 생성 가이드&lt;/a&gt;
+&quot; %}
+
+## 서비스 위치
+Ncloud Console에서 [**Video Player Enhancement**] 서비스 위치는 아래와 같이 [**Media**] - [**Video Player Enhancement**]에 있습니다.
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+## 서비스 신청
+[**Video Player Enhancement**] 서비스를 사용하기 위해서는 먼저 [서비스 신청] 버튼을 클릭해 서비스를 신청해야 합니다.
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+### 서비스 선택
+[**Video Player Enhancement**] 서비스는 무료 서비스인 Basic 버전과 유료 서비스인 Standard 버전이 있습니다. 각각이 제공하는 기능이 다르므로 잘 살펴보고 선택하시면 됩니다.
+
+{% include warning.html title=&quot;주의&quot; content=&quot;서비스를 유료로 신청 또는 무료에서 유료로 전환 후에는 다시 무료로 전환이 불가합니다.&quot; %}
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+
+- 서비스 신청이 끝났으면 플레이어를 생성해야 합니다.
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+## 플레이어 생성
+플레이어 생성 화면에서는 현재 계약된 정보가 표시되며, 무료인 경우 [**유료 전환**] 버튼도 확인할 수 있습니다.
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+### 기본 설정
+기본 설정에서는 플레이어를 사용할 [**사이트 도메인**] 또는 [**앱 패키지 ID**]를 입력해야 합니다.
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 사이트 도메인은 플레이어가 노출될 사이트 도메인에 대한 유효성을 확인하기 위함입니다.&lt;br /&gt;
+&amp;#8259; 등록된 도메인이 아닐 경우 플레이어가 동작하지 않습니다.&lt;br /&gt;
+&amp;#8259; 사이트 도메인은 5개까지 입력 가능합니다.&lt;br /&gt;
+&amp;#8259; 5개 이상 입력이 필요할 경우 영업팀에 별도 문의 부탁 드립니다.
+&quot; %}
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+## 플레이어 옵션
+플레이어가 생성되면 플레이어 옵션 미리보기를 할 수 있습니다.
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+### 미리보기
+미리 보기 화면에서 플레이어의 기본 스크립트를 확인할 수 있는데 [복사] 버튼을 클릭해서 스크립트를 가져옵니다.
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+
+## 플레이어 스크립트 기본 템플릿
+위에서 복사해 온 플레이어 스크립트는 기본적으로 다음과 같은 형태로 구성되어 있습니다.
+
+``` html
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://player.vpe.naverncp.com/ncplayer.js?access_key={Access Key}&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;video&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  let player = new ncplayer(&apos;video&apos;,{		
+    playlist:[
+      {
+       file:&quot;{재생 파일 URL}&quot;,
+        poster:&quot;{썸네일 이미지 URL}&quot;    
+      }		
+    ],		
+  });
+&lt;/script&gt;
+```
+
+### 플레이어 샘플 예제
+[**VOD Station**]에 등록한 스트리밍 파일을 이용한 샘플 스크립트 예제는 다음과 같습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/media/ncloud-media-vod-station-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; VOD Station 생성 가이드&lt;/a&gt;
+&quot; %}
+
+``` html
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://player.vpe.naverncp.com/ncplayer.js?access_key=1b***d7&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;video&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  let player = new ncplayer(&apos;video&apos;,{
+    autostart: true,
+    muted: true,			
+    aspectRatio: &apos;16/9&apos;,
+    repeat: true,
+    playlist:[
+      {
+        file:&quot;https://fv***47.cdn.ntruss.com/hls/OS***E8_/test-category/VOD-Station_***_30fps.mp4/index.m3u8&quot;,
+        poster:&quot;https://kr***08.cdn.ntruss.com/test-category/VOD-Station_02.jpg&quot;,				
+      }			
+    ],		
+  });
+&lt;/script&gt;
+```
+
+## 플레이어 실행 화면
+위 스크립트로 생성한 플레이어를 실행하면 아래와 같이 영상이 플레이 되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+## 플레이어 상세 옵션
+
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;프로퍼티&lt;/th&gt;
+      &lt;th&gt;유형&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+      &lt;th&gt;기본값&lt;/th&gt;
+      &lt;th&gt;옵션값&lt;/th&gt;
+      &lt;th&gt;라이선스&lt;/th&gt;
+      &lt;th&gt;필수여부&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;*playlist&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;&lt;td&gt;플레이리스트&lt;/td&gt;&lt;td&gt;없음&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;O&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;autostart&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;자동재생여부&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;muted&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;음소거&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;keyboardShortcut&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;키보드 단축키&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;controls&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;컨트롤바 사용 여부&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;ui&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;UI 설정&lt;/td&gt;&lt;td&gt;all&lt;/td&gt;&lt;td&gt;all, mobile , pc&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;**controlBtn&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;&lt;td&gt;컨트롤바 버튼 on/off&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;progressBarColor&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;컨트롤바 컬러&lt;/td&gt;&lt;td&gt;#4299f5&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;controlActiveTime&lt;/td&gt;&lt;td&gt;number&lt;/td&gt;&lt;td&gt;컨트롤바 활성 시간(ms)&lt;/td&gt;&lt;td&gt;3000&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;startMutedInfoNotVisible&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;음소거 알림&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;aspectRatio&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;화면비&lt;/td&gt;&lt;td&gt;16/9&lt;/td&gt;&lt;td&gt;16/9 , 4/3 , 1/1 , 9/16 , 21/9&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;objectFit&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;영상 화면 맞춤&lt;/td&gt;&lt;td&gt;contain&lt;/td&gt;&lt;td&gt;contain , cover , fill&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;playRateSetting&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;&lt;td&gt;배속 선택 옵션&lt;/td&gt;&lt;td&gt;[0.5,0.75,1,1.5,2]&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;seekingPreview&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;영상 구간 이동 미리보기&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;autoPause&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;탭 비활성화 시 자동멈춤&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;repeat&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;영상 반복&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;touchGestures&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;터치 제스처&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;descriptionNotVisible&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;영상 메타 데이터&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;lang&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;UI 언어설정&lt;/td&gt;&lt;td&gt;auto&lt;/td&gt;&lt;td&gt;auto , ko , en , ja , zh&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;lowLatencyMode&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;CMAF LL-HLS&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+### \*playlist 상세 속성
+
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;프로퍼티&lt;/th&gt;
+      &lt;th&gt;유형&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+      &lt;th&gt;기본값&lt;/th&gt;
+      &lt;th&gt;옵션값&lt;/th&gt;
+      &lt;th&gt;라이선스&lt;/th&gt;
+      &lt;th&gt;필수여부&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;재생하고자 하는 video 정보&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sources&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;
+      &lt;td&gt;
+        video에 여러가지 해상도를 제공하는 경우 사용
+        &lt;br /&gt;&lt;br /&gt;
+        &lt;table class=&quot;simple_table&quot;&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;해상도별 video 파일 경로&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;label&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;해상도 조절 컨트롤에 표시되는 텍스트&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;default&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;기본 해상도로 적용&lt;/td&gt;&lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt; 
+      &lt;/td&gt;
+      &lt;td&gt;&lt;/td&gt;&lt;td&gt;file로 대체 가능&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;poster&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;video 재생 전 표시할 이미지&lt;/td&gt;&lt;td&gt;없음&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;description&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;
+      &lt;td&gt;
+        Player 상단에 표시할 메타데이터
+        &lt;br /&gt;&lt;br /&gt;
+        &lt;table class=&quot;simple_table&quot;&gt;          
+          &lt;tbody&gt;
+            &lt;tr&gt;&lt;td&gt;title &lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;제목 표시&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;created_at &lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;날짜 표시&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;profile_name &lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;채널명 or 업로더 닉네임&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;profile_image &lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;채널이미지 or 업로더 프로필 이미지&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;callback &lt;/td&gt;&lt;td&gt;function&lt;/td&gt;&lt;td&gt;메타데이터 클릭시 발생시킬 이벤트&lt;/td&gt;&lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt; 
+      &lt;/td&gt;
+      &lt;td&gt;없음&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;   
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+### \*\*controlBtn 상세 속성
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;div class=&quot;col-sm-6&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;프로퍼티&lt;/th&gt;
+      &lt;th&gt;유형&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+      &lt;th&gt;기본값&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;play&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;플레이버튼&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;fullscreen&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;전체화면 전환&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;volume&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;볼륨컨트롤&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;times&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;시간정보 UI&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;pictureInPicture&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;미니플레이어&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;setting&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;세팅 버튼&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;    
+&lt;/div&gt;
+&lt;/div&gt;
+
+## 통계
+[**Player Statistics**] 화면에서는 플레이어 사용량 등의 통계를 확인할 수 있습니다.
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-10.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-11.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1. Ncloud Video Player Enhancement 개요
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/videoplayerenhancement-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/videoplayerenhancement-overview&lt;/a&gt;
+
+2. Ncloud Video Player Enhancement 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/videoplayerenhancement-user-guide&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/videoplayerenhancement-user-guide&lt;/a&gt;  
+</description>
+            <pubDate>Wed, 22 Mar 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/media/ncloud-media-video-player-enhancement-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/media/ncloud-media-video-player-enhancement-guide.html</guid>
+            
+            <category>media</category>
+            
+            <category>object_storage</category>
+            
+            <category>cdn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>VPC 환경에서 NAT Gateway 설정하기</title>
+            <description>## 개요
+NAT Gateway는 비공인 IP를 가진 다수의 서버들이 대표 공인 IP를 이용해 외부와 통신을 할 수 있도록 도와주는 네트워킹 서비스입니다.  
+그리고, 일반적으로 서버에 직접 공인 IP를 부여하는 것과 달리 외부에서 서버로의 직접 접근은 허용하지 않기 때문에 높은 수준의 보안을 유지할 수 있는 것이 특징입니다.  
+여기서는 VPC 환경에서 NAT Gateway를 어떻게 구성하고, NAT Gateway를 적용하기 전과 후의 외부와 통신 상태에 대해 확인해보도록 하겠습니다.
+
+## 생성개수 제한
+우선 VPC는 리전별로 계정당 3개씩 생성 가능하고, **NAT Gateway는 각 VPC별로 Zone당 1개씩 생성 가능**합니다.  
+현재 한국 리전에는 KR-1, KR-2 이렇게 2개의 Zone이 있으므로 한국 리전 기준으로 VPC당 최대 2개, **계정당 최대 6개의 NAT Gateway를 생성**할 수 있습니다.
+
+## VPC 서비스 위치
+[**VPC**] 서비스는 [**Console**] - [**Networking**]에 위치해 있습니다.  
+
+그리고, 아래 스샷에서 확인할 수 있듯이 [**VPC**]에는 [**VPC**], [**Subnet**], [**Network ACL**], [**NAT Gateway**], [**Route Table**], [**VPC Peering**], [**Virtual Private Gateway**] 등의 하부 서비스 메뉴가 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-natgw-routetb-00.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+## VPC 생성
+먼저 VPC를 생성합니다. IP주소 범위는 10.0.0.0/16으로 정하겠습니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_01.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+## Subnet 생성
+NAT Gateway 동작 테스트를 위해 Public, Private 이렇게 2가지 Subnet을 생성하겠습니다.
+
+### Public Subnet 생성
+Public Subnet의 IP 범위는 **10.0.0.0/24**로 설정하겠습니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_02.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+### Private Subnet 생성
+Private Subnet의 IP 범위는 **10.0.0.1/24**로 설정하겠습니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_03.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+테스트를 위한 ACG (Access Control Group)를 생성하고 설정합니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_04.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+### Inbound 설정
+Inbound 규칙에는 Public, Private Subnet과 SSH 접속을 위한 로컬PC IP를 허용하고, Ping 테스트를 위한 ICMP도 허용합니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_05.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+### Outbound 설정
+Outbound 규칙은 TCP, UDP, ICMP 모두 전체 허용으로 추가합니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+## 서버 생성
+테스트를 위해 Public, Private 각각의 Subnet에 1대씩 서버를 설정하고 Public 서버에는 공인 IP도 할당합니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_07.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+### Public -&gt; Private 서버 접속 확인
+Public Subnet에 있는 서버에서 Private Subnet에 있는 서버로 통신이 가능한 것을 확인할 수 있습니다.  
+다음 단계에서 Private 서버로 SSH로 접속하기 위한 사전 확인 단계입니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_08.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+### Private 서버 외부 접속 여부 확인
+Public 서버에서 Private 서버로 SSH로 접속한 후에 Private 서버에서 외부로 통신이 되는 것을 확인해보면 불가능한 것을 확인할 수 있습니다.  
+이후 단계에서 NAT Gateway를 설정하고 Private 서버에서 외부와 통신이 가능한지 확인해보겠습니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_09.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+## Route Table 설정 확인
+NAT Gateway를 위한 Route Table 설정을 추가하기 전에 현재 상태의 Route Table 설정을 확인해보겠습니다.
+
+### Public Subnet의 Route Table 설정 확인
+위에서 Public Subnet의 서버와 Private Subnet의 서버가 통신이 가능했던 것은 VPC와 Subnet이 생성될때 Route Table이 생성되면서 VPC 내부 통신을 위한 규칙 (10.0.0.0/16 LOCAL)이 기본으로 설정되기 때문입니다.  
+그리고 Public의 경우 외부 통신을 위한 INTERNET GATEWAY가 추가되어 있는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_10.jpg&quot; width=&quot;780&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+### Private Subnet의 Route Table 설정 확인
+반면에 Private의 경우는 VPC 내부 통신을 위한 LOCAL만 설정된 것을 확인 할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_11.jpg&quot; width=&quot;780&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+Route Table 설정 화면에 들어가도 Target Type에 LOCAL만 선택할 수 있는 것을 확인할 수 있습니다.
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_14.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+## NAT Gateway 생성
+[**NAT Gateway**]는 별도의 메뉴가 있지 않고, [**Networking**] - [**VPC**] 서비스 내에 하부 서비스로 존재합니다. 그러면 이제 [**NAT Gateway 생성**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+이름을 입력하고 VPC와 Zone을 선택하고 NAT Gateway를 생성합니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_16.jpg&quot; width=&quot;650&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+### Route Table 설정
+앞에서 LOCAL 항목만 존재했던 Private Subnet의 Route Table 설정 화면에 가보면 Target Type에 NATGW가 추가된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_18.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+목적지(Destination)에 0.0.0.0/0을 입력하고, Target Type을 NATGW를 선택하고 생성 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+## 외부 접속 테스트
+마지막으로 다시 한번 Private 서버에서 외부 통신이 가능한지 ping 테스트를 해보면, 아래 화면과 같이 정상적으로 통신이 되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_20.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
+
+
+## 고려사항
+{% include warning.html title=&quot;요금&quot; content=&quot;NAT Gateway는 사용하지 않고 생성만 해두어도 요금이 부과됩니다. (데이터 처리요금 별도)&quot; %}
+  
+생성 후 보유 시간에 따라 요금이 부과되는데 1개당 56원/시간 입니다. 그러므로 1달간 보유하고만 있다고 가정할 때 비용을 계산해보면 
+**24시간 * 30일 * 56원 = 40,320원** 그러므로 사용하지 않는 NAT Gatway는 반드시 삭제하기를 추천드립니다.
+
+
+
+## 참고 URL
+1. NAT Gateway 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/networking-vpc-vpcdetailenatgw&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/networking-vpc-vpcdetailenatgw&lt;/a&gt;
+
+2. NAT Gateway 특징과 비교
+	- &lt;a href=&quot;https://m.blog.naver.com/n_cloudplatform/221173116642&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://m.blog.naver.com/n_cloudplatform/221173116642&lt;/a&gt;
+</description>
+            <pubDate>Tue, 21 Mar 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_natgw_routetb.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_natgw_routetb.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>natgateway</category>
+            
+            <category>routetable</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud VOD Station 생성 가이드</title>
@@ -40,7 +453,7 @@ VOD Station을 이용하기 위해서는 반드시 필요한 것이 2가지 있�
 - **Object Storage**: 원본 미디어 파일과 변환된 영상 파일을 저장하기 위한 공간
 - **CDN**: 영상 배포를 위한 콘텐츠 스트리밍 플랫폼
 
-## 메뉴 위치
+## 서비스 위치
 Ncloud Console에서 [**VOD Station**] 서비스 위치는 아래와 같이 [**Media**] - [**VOD Station**]에 있습니다.
 
 {% include image.html file=&quot;media/ncloud-media-vod-station-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
@@ -369,9 +782,9 @@ Ncloud Cloud Insight에서 모니터링 할 수 있는 상품은 아래와 같�
 ### 최종 확인
 지금까지 설정한 내역을 최종 확인한 후에 이상이 없으면 [**생성**] 버튼을 클릭해서 Event Rule 생성을 완료합니다.
 
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-13.png&quot; width=&quot;845&quot; sub-class=&quot;no-bottom&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-13.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-14.png&quot; width=&quot;845&quot; sub-class=&quot;no-top&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-14.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
 
 
 ## 기타
@@ -1438,521 +1851,6 @@ html의 경우는 [**text/html**]이며 기타 다양한 파일들의 MIME Type�
             <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html</guid>
             
             <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
-            <description>## 개요
-Rocky Linux (록키 리눅스)는 CentOS의 서비스 지원 종료로 대안으로 떠오른 CentOS 기반의 리눅스 OS입니다.  
-Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 선정되어 국내에서 록키 리눅스 인프라와 기술지원을 위해 협력해왔고, 드디어 Ncloud 콘솔에서 록키 리눅스를 제공하기 시작했기에 간단하게 소개해보려고 합니다.
-
-## 제공 버전
-Ncloud에서는 현재 Rocky Linux 8.6 버전을 VPC 환경에서 제공하고 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-## 설치할 소프트웨어
-록키 리눅스 서버를 실행하고 보통 자주 사용하게 되는 아래의 소프트웨어들을 설치하고 확인해보겠습니다.
-- Apache
-- PHP
-- NGINX
-- MariaDB (MySQL)
-
-## 접속 화면
-서버를 생성하고 접속하면 아래와 같이 Ncloud 로고가 크게 표시된 화면을 볼 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-## 패키지 업데이트
-우선 패키지 업데이트를 해보겠습니다.
-
-``` bash
-~# dnf update
-```
-{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
-Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
-&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-## 저장소 패키지 설치
-다음으로 epel-release 저장소 패키지를 설치하겠습니다.
-
-``` bash
-~# dnf -y install epel-release
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-
-## Apache, PHP 설치
-설치할 소프트웨어 중에서 Apache와 PHP를 동시에 설치해보겠습니다.  
-
-``` bash
-~# dnf -y install httpd php
-```
-
-설치된 버전은 다음과 같습니다.
-- Apache: 2.4.37
-- PHP: 7.2.24
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### 접속화면
-설치 완료 후에 웹브라우저로 접속해보면 다음과 같이 Apache 로고가 포함된 화면을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### PHP 버전 리스트
-Ncloud Rocky Linux 8.6에서 지원하는 PHP 버전은 다음과 같이 확인해볼 수 있습니다.  
-리스트를 확인해보면 7.2버전이 기본이고, 현재 활성화된 버전도 7.2버전인 것을 알 수 있습니다.
-
-``` bash
-~# dnf module list php
-```
-
-- PHP 7.2 (default)
-- PHP 7.3
-- PHP 7.4
-- PHP 8.0
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-19.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-## PHP 버전 변경
-기본으로 설치된 **7.2** 버전에서 다른 버전으로 변경하는 방법에 대해 알아보겠습니다. 여기서는 **8.0**으로 변경해보겠습니다.
-
-### 버전 활성화 정보 초기화
-우선 위에서 확인했던 php 버전 활성화 정보를 초기화 합니다.
-
-``` bash
-~# dnf module reset php
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-
-### PHP 8.0 활성화
-다음으로 8.0 버전을 활성화 합니다.
-
-``` bash
-~# dnf module enable php:8.0
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-21.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### PHP 8.0 설치
-마지막으로 8.0 버전을 설치하고 버전을 확인해봅니다.
-
-``` bash
-~# dnf -y install php
-~# php -v
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-22.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-
-
-
-## NGINX 설치
-다음으로 NGINX를 최신버전으로 설치해보겠습니다.
-
-### NGINX 버전 리스트
-우선, Ncloud Rocky Linux 8.6에서 지원하는 NGINX 버전을 확인합니다.  
-리스트를 살펴보면 1.14가 기본 버전이고, 현재 활성화된 버전도 1.14인 것을 알 수 있습니다.
-
-``` bash
-~# dnf module list nginx
-```
-
-- nginx 1.14 (default)
-- nginx 1.16
-- nginx 1.18
-- nginx 1.20
-- nginx mainline
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-23.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### 버전 활성화 정보 초기화
-우선 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다.
-
-``` bash
-~# dnf module reset nginx
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-24.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### mainline 버전 활성화
-최신 버전인 mainline 버전을 활성화합니다.
-
-``` bash
-~# dnf module enable nginx:mainline
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### 설치
-NGINX를 설치합니다. 설치된 버전은 다음과 같습니다.
-
-``` bash
-~# dnf -y install nginx
-~# nginx -v
-```
-- NGINX: 1.23.1
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### 접속화면
-설치 완료 후에 웹브라우저로 접속해보면 다음과 같이 NGINX 로고가 포함된 화면을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-## MariaDB (MySQL) 설치
-
-### MariaDB 버전 리스트
-우선, Ncloud Rocky Linux 8.6에서 지원하는 MariaDB 버전을 확인합니다.  
-리스트를 살펴보면 10.3이 기본 버전인 것을 알 수 있습니다.
-
-``` bash
-~# dnf module list mariadb
-```
-
-- mariadb 10.3 (default)
-- mariadb 10.5
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-27.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### 설치
-Rocky Linux에서는 기본 DB가 MariaDB이고, 설치할 때도 [**mariadb-server**]로 설치하게 됩니다.  
-여기서는 기본 버전으로 설치하겠습니다.
-
-``` bash
-~# dnf -y install mariadb-server
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-MariaDB 데몬을 시작합니다.  
-그런데 자세히 보시면 생성된 symlink가 [**mysql.service**]인 것을 확인할 수 있습니다. 즉, MariaDB를 실행할 때는 [**mysql**] 명령을 입력하면 된다는 뜻입니다.
-
-``` bash
-~# systemctl enable mariadb
-~# systemctl start mariadb
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### DB 접속
-[**mysql**] 명령을 입력하면 아래와 같이 MariaDB 서버에 접속됩니다.  
-설치된 DB 서버 버전은 다음과 같습니다.
-- MariaDB: 10.3.32
-
-``` bash
-~# mysql
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-
-## 웹 콘솔
-Rocky Linux는 웹브라우저에서 서버에 접속해서 서버를 관리할 수 있는 웹 콘솔을 제공하는데, 처음 서버에 접속했던 콘솔화면을 보면 아래와 같이 웹 콘솔을 활성화하는 방법이 안내되어 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-아래 명령어를 입력하면 [**9090**] 포트로 접속할 수 있는 웹 콘솔이 활성화됩니다.
-``` bash
-~# systemctl enable --now cockpit.socket
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### 웹 콘솔 접속
-먼저, ACG에서 [**9090**] 포트를 오픈하고, [**https://{서버 IP}:9090**]으로 접속하면 아래와 같은 화면을 볼 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### 웹 콘솔 화면
-웹 콘솔에 접속하면 서버 상태와 시스템 정보, CPU-메모리 사용량 등을 확인할 수 있고, 그 외에도 여러 가지 기능을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-18.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-
-## 버전 활성화 오류 해결 방법
-[dnf module enable &lt;module_name&gt;] 명령으로 다른 버전을 활성화하려고 할 때 아래와 같은 오류가 발생하는 경우가 있습니다.  
-오류 메시지 하단에 보면 [**dnf module reset &lt;module_name&gt;**] 명령을 입력하면 해결된다 합니다.
-
-{% include warning.html title=&quot;Error&quot; content=&quot;It is not possible to switch enabled streams of a module unless explicitly enabled via configuration option module_stream_switch. 
-It is recommended to rather remove all installed content from the module, and reset the module using &apos;**dnf module reset \&lt;module_name\&gt;**&apos; command. After you reset the module, you can install the other stream.
-&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-25.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-
-명령을 입력하고 처리가 완료되면 [**dnf module enable \&lt;module_name\&gt;:\&lt;module_version\&gt;**] 명령을 다시 입력하면 됩니다.
-``` bash
-#예시
-~# dnf module reset php
-~# dnf module reset nginx
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-26.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Rocky Linux 공식 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/&lt;/a&gt;
-
-2.  Rocky Linux Apache 설정
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/apache-sites-enabled/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/apache-sites-enabled/&lt;/a&gt;
-
-2.  Rocky Linux NGINX 설정
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;
-
-2.  Rocky Linux MariaDB 설치
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/database/database_mariadb-server/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/database/database_mariadb-server/&lt;/a&gt;		
-</description>
-            <pubDate>Tue, 10 Jan 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html</guid>
-            
-            <category>linux</category>
-            
-            <category>apache</category>
-            
-            <category>php</category>
-            
-            <category>nginx</category>
-            
-            <category>mysql</category>
-            
-            <category>mariadb</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud 백업 서비스 사용 가이드 - Windows Data</title>
-            <description>## 개요
-Ncloud(네이버 클라우드)의 Backup 상품은 기존에 별도의 신청서를 작성해서 사용하던 [**Managed Backup**]의 대체 상품으로 출시된, 콘솔에서 바로 이용할 수 있는 상품으로 이 백업 상품을 이용해 Windows 파일 데이터를 백업하는 방법을 알아보도록 하겠습니다.
-
-
-## 상품위치
-Backup 상품은 [**Console**] - [**Services**] - [**Storage**]에 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-## 테스트 서버
-백업을 테스트할 리눅스 서버를 아래와 같이 미리 준비했습니다.  
-
-그리고, 백업과 복원에 필요한 디렉토리를 다음과 같이 생성했습니다.
-- 백업할 디렉토리: C:\Backup-Data
-- 복원할 디렉토리: C:\Restore
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-## 리소스 생성
-먼저 백업 혹은 복구를 수행할 대상 서버를 설정합니다.  
-Backup 탭에서 [**Backup**] - [**Resource**]로 이동해서 [리소스 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-### 리소스 생성 방법
-
-1. 리소스 이름을 입력합니다.
-2. 백업 서버가 소속된 존(zone)을 선택합니다.
-3. 백업 대상이 되는 서버를 리소스에 선택합니다.
-4. 호스트 이름에는 백업 대상 서버의 이름을 입력합니다.
-5. 서버가 위치한 zone 선택 및 대상 서버를 선택하며 파일백업 및 데이터베이스 백업 여부에 따라 체크박스를 선택합니다.
-6. 에이전트 설치에 사용될 아이디 및 비밀번호를 입력합니다. 
-
-{% include warning.html title=&quot;**주의**&quot; content=&quot;아이디는 백업 대상 서버의 **Administrator 계정** 또는 백업 및 리스토어 수행 시 **해당 디렉터리와  파일에 대한 접근 권한을 가지고 있는 user 계정**을 입력해야합니다.&quot; %}
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;아이디와 비밀번호는 에이전트 설치를 위해 **백업 대상 서버 접속 시 일회성으로 사용**하며, 별도로 저장되지 않습니다.&quot; %}
-
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-내용 최종 확인 후 리소스 생성을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-### 백업 에이전트 설치 확인
-리소스가 생성 되면서 백업 에이전트가 설치되는데 정상적으로 설치가 완료되면 [생성 완료]라는 메시지가 나타납니다.  
-(에이전트 설치는 대략 5분 정도의 시간이 걸리며, 상단의 [새로 고침] 버튼을 클릭하면 확인할 수 있습니다.)
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-**에이전트 설치 실패**  
-아이디/비번을 잘못 입력했거나 기타의 이유로 에이전트 설치가 실패했을 경우에는 [추가] 버튼을 클릭해서 다시 설치하면 됩니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-## 저장소 생성
-다음으로 백업 데이터를 저장할 저장소를 만들고 관리합니다.  
-Backup 탭에서 [**Backup**] - [**Storage**]로 이동하여 저장소 생성을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-저장소 이름과 백업 저장소가 위치할 존(zone)을 지정 후 다음을 클릭해서 저장소를 생성합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-### 소산 백업용 스토리지 추가 생성
-추후 Remote Backup 메뉴에서 소산 백업(이중화 백업)에 사용할 스토리지를 미리 추가로 생성하도록 하겠습니다.  
-현재 KR-2존에 생성한 스토리지는 그대로 두고 KR-1존에 test2-backup-storage라는 이름으로 추가 생성했습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-## 정책 생성
-다음은 저장소에 대한 정책을 설정 및 관리합니다.  
-Backup 탭에서 [**Backup**] - [**Policy**]로 이동하여 정책 생성을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-**정책 생성**  
-정책 이름, 보관 주기, 생성한 저장소가 위치한 존을 선택한 후 [연결 저장소]가 맞는지 확인 후 정책을 생성합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-**보관 기간은 백업 주기의 최소 2배 이상**으로 설정해야 합니다. &lt;br /&gt;
-&amp;#8259; 일간 백업 : 최소 7일 이상&lt;br /&gt;
-&amp;#8259; 주간 백업 : 최소 14일 이상&lt;br /&gt;
-&amp;#8259; 월간 백업 : 최소 60일 이상
-&quot; %}
-
-
-## 작업 생성
-다음으로 에이전트가 설치된 리소스와 사전에 설정한 저장소 및 정책 등을 활용하여 실제 백업을 수행하는 작업을 생성하고 관리합니다.  
-
-Backup 탭에서 [**Backup**] - [**Job**]으로 이동하여 작업 생성을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-작업 이름과 대상 리소스(서버) 백업 유형 및 백업 대상 디렉터리 지정을 한 후  Policy 메뉴에서 생성한 백업 정책을 선택합니다.
-
-{% include warning.html title=&quot;**주의**&quot; content=&quot;Job과 Policy는 1:1 매핑만 가능합니다.&quot; %}
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 일정 생성
-마지막으로 작업을 수행하는 일정에 대해 계획하고 관리합니다.  
-Backup 탭에서 [**Backup**] - [**Schedule**]로 이동하여 일정 생성을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-일정 이름과 job에서 등록한 서버 백업 작업을 선택 후 백업 방식, 주기, 시작 요일과 시간을 구성한 후 일정을 생성합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 소산 백업 (이중화 백업)
-백업 상품의 소산 백업을 이용해 기존에 수행한 백업 데이터를 지리적으로 떨어진 다른 존으로 이중화할 수 있습니다.
-
-Backup 탭에서 [**Backup**] - [**Remote Backup**] 으로 이동하여 소산 설정을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-소산 이름, job에서 등록한 작업 선택, 소산 저장소가 위치한 존 선택, 보관 주기, 소산 백업 주기를 설정 후 소산 백업 일정을 등록합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;소산 일정에 백업 작업이 완료되어 있지 않은 경우, 다음 소산 일정에 소산이 수행됩니다.&quot; %}
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-13.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-## 백업 완료 확인
-기본 백업과 소산 백업까지 모두 완료되면 아래와 같이 [**Report**] 메뉴에서 결과를 확인할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-18.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 복원
-복원 기능을 이용하면 위에서 백업한 데이터를 Restore 메뉴에서 원하는 시점의 특정 데이터를 선택해서 원하는 리소스에 복원할 수 있습니다.
-
- [**Job**]에서 설정한 C:\Backup-Data 디렉터리에 저장되어 있는 파일들을 C:\Restore 디렉터리로 복원을 진행해 보겠습니다. 현재 /Restore 디렉터리는 비어있는 상태입니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-08.png&quot; width=&quot;600&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-Backup 탭에서 [**Restore**]로 이동하여 복원 설정을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-복원 설정에서는 백업된 데이터 중 어떤 데이터로 복원할 것인지에 대한 세부항목을 선택합니다.  
-**복원 시점**은 [**가장 최근 백업 시점**] 또는 백업된 데이터들 중에서 [**직접 지정**]도 가능합니다.  
-**복원 대상**은 Job에서 설정한 디렉터리를 선택하고 [다음]을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-타깃 설정에서는 백업한 데이터를 복원할 서버와 디렉터리를 지정하고 다음을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-최종 내용을 확인 후 복원 시작을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-복원 시작 후 복원 상태 확인이 가능합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-작업이 종료되면 /restore 경로에 데이터가 정상적으로 복원된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-14.png&quot; width=&quot;600&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-## Report
-
-백업 혹은 복구에 대한 작업 결과를 일간/월간 단위의 보고서로 확인할 수 있습니다.
-
-Backup 탭에서 [**Report**] 로 이동하여 확인합니다.
-
-Backup Report에서 발생하는 이벤트는 이메일 수신 신청으로 메일로 알림을 받도록 설정이 가능합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-항목에서 담당자 이름 및 메일 주소를 확인하고 [**추가**] 버튼을 클릭한 후 저장합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-등록이 완료되면 아래와 같이 메일로 리포트를 받아보실 수 있으며 **매일 오전 10시 일간 리포트**와 **매월 1일 월간 리포트**가 전송됩니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 백업 리소스 삭제
-더 이상 백업 서비스를 이용하지 않게 되어 백업 리소스를 삭제하려면 위에서 생성했던 순서의 반대로 삭제를 진행해야 합니다.  
-
-우선, [Backup] - [Resource]에서 해당 리소스를 선택하고 [리소스 삭제] 버튼을 클릭해보겠습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-windows-data-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-그러면 다음과 같이 리소스와 함께 설치-생성되었던 [Agent], [Job], [Schedule], [Remote Backup]를 먼저 삭제해야 한다는 안내 메시지가 나타납니다.  
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-&amp;#8259; 백업 리소스 삭제는 아래와 같이 생성 순서와 반대로 삭제해야 합니다. &lt;br /&gt;
-&amp;#8259; 
-[Remote Backup] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
-[Schedule] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
-[Job] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
-[Agent] &lt;i class=&apos;fa-solid fa-arrow-right-long&apos;&gt;&lt;/i&gt;
-[Resource]
-&quot; %}
-{% include image.html file=&quot;storage/ncloud-storage-backup-service-guide-common-16.png&quot; width=&quot;480&quot; alt=&quot;Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  Ncloud 백업 상품 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/backup-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/backup-overview&lt;/a&gt;
-
-</description>
-            <pubDate>Fri, 06 Jan 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-windows-data-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-backup-service-windows-data-guide.html</guid>
-            
-            <category>backup</category>
-            
-            <category>windows</category>
             
             
         </item>
