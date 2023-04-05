@@ -5,10 +5,524 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 24 Mar 2023 18:46:20 +0900</pubDate>
-        <lastBuildDate>Fri, 24 Mar 2023 18:46:20 +0900</lastBuildDate>
+        <pubDate>Wed, 05 Apr 2023 17:55:03 +0900</pubDate>
+        <lastBuildDate>Wed, 05 Apr 2023 17:55:03 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>MySQL Multi Source Replication 구성 가이드</title>
+            <description>## 개요
+
+n대의 마스터 DB와 1대의 슬레이브 DB를 연결하여 마스터 DB들의 데이터를 슬레이브 DB 한곳에 모아 조회할 수 있는  MySQL Multi-Source-Replication(MSR)을 구성하는 방법을 정리해보겠습니다.
+
+## 테스트 준비
+
+- 마스터 서버 2대, 슬레이브 서버 1대 준비
+- 각 서버에 MySQL 5.7 이상 설치
+- MySQL 리플리케이션작업 진행 시 마스터 서버의 데이터베이스에 쓰기 작업 금지
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+## ACG 설정
+서버 준비가 끝났으면 우선 마스터 서버 &lt;i class=&quot;fa-solid fa-arrow-right&quot;&gt;&lt;/i&gt; 슬레이브 서버로 디비 백업 파일 복사과 복제 구성에 필요한 22, 3306 포트를 오픈해야 합니다.  
+오픈 할 때 규칙은 마스터 서버와 슬레이브 서버의 공통 ACG에 사설 IP 대역 전체를 지정할 수도 있고, 슬레이브 서버 전용 ACG에 마스터 서버 IP만 등록하는 방법도 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## Slave 장비에 백업 디렉토리 생성
+먼저 Slave 장비에 Master 장비들로 부터 DB 복원용 덤프 파일을 전송 받을 백업 디렉토리를 생성하는 것 부터 시작하겠습니다.
+
+```bash
+~# mkdir /data
+~# cd /data
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## Master1 장비 구성
+
+### master1 설정 추가
+- /etc/my.cnf에 Master1 설정을 추가합니다.
+
+```bash
+~# vi /etc/my.cnf
+
+server-id = 1
+log-bin = mysql-bin
+binlog_format = mixed
+character-set-server = utf8
+
+#MySQL을 재시작해 변경사항 적용.
+~# systemctl restart mysqld
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-03.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-04.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### 리플리케이션 계정 생성
+MySQL 접속 후 리플리케이션을 진행할 계정 생성
+
+```bash
+#master1 계정 생성.
+mysql&gt; create user &apos;리플리케이션 계정명&apos;@&apos;%&apos; identified by &apos;패스워드&apos;;
+mysql&gt; grant replication slave,replication client on *.* to &apos;리플리케이션 계정명&apos;@&apos;%&apos;;
+mysql&gt; flush privileges;
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### 테스트 DB 생성
+다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.
+
+```bash
+mysql&gt; CREATE DATABASE testdb1 default CHARACTER SET UTF8;
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### Master1 정보확인
+이제 리플리케이션 설정에 필요한 Master 정보를 확인합니다.
+
+```bash
+mysql&gt; show variables like &apos;server_id&apos;;
+mysql&gt; show master status;
+```
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
+[**show master status**] 명령으로 확인한 [**File**], [**Position**] 정보는 아래쪽에서 `Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야` 합니다.
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-06.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+### DB 백업 파일 슬레이브 장비로 전송
+testdb1 DB의 백업파일을 생성하고, 슬레이브 서버로 전송합니다.
+
+```bash
+~# mkdir /data
+~# cd /data
+~# mysqldump -u root -p --databases testdb1 &gt; /data/test1.sql 
+
+#슬레이브 서버에 전송.
+~# scp test1.sql root@10.0.0.8:/data
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## Master2 장비 구성
+
+### Master2 설정 추가
+- /etc/my.cnf에 Master2 설정을 추가합니다.
+
+```bash
+~# vi /etc/my.cnf
+
+server-id = 2
+log-bin = mysql-bin
+binlog_format = mixed
+character-set-server = utf8
+
+#DB를 재시작하여 변경사항 적용.
+~# systemctl restart mysqld
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-09.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-10.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### 리클리케이션 계정 생성
+MySQL 접속 후 리플리케이션을 진행할 계정 생성합니다.
+
+```bash
+#master2 계정 생성.
+mysql&gt; create user &apos;리플리케이션 계정명&apos;@&apos;%&apos; identified by &apos;패스워드&apos;;
+mysql&gt; grant replication slave,replication client on *.* to &apos;리플리케이션 계정명&apos;@&apos;%&apos;;
+mysql&gt; flush privileges;
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### 테스트 DB 생성
+다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.
+
+```bash
+mysql&gt; CREATE DATABASE testdb2 default CHARACTER SET UTF8;
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### Master2 정보확인
+마찬가지로 리플리케이션 설정에 필요한 Master 정보를 확인합니다.
+
+```bash
+mysql&gt; show variables like &apos;server_id&apos;;
+mysql&gt; show master status;
+```
+
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
+[**show master status**] 명령으로 확인한 [**File**], [**Position**] 정보는 아래쪽에서 `Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야` 합니다.
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-12.png&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+### DB 백업 파일 슬레이브 장비로 전송
+testdb2 DB의 백업파일 생성하고, 슬레이브 서버로 전송합니다.
+
+```bash
+~# mkdir /data
+~# cd /data
+~# mysqldump -u root -p --databases testdb2 &gt; /data/test2.sql
+
+~# scp test2.sql root@10.0.0.8:/data
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## Slave 장비 구성
+
+### Slave 설정 추가
+- /etc/my.cnf에 Slave 설정을 추가합니다.  
+MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.
+
+{% tabs slave_my_cnf %}
+
+{% tab slave_my_cnf MySQL 5.7 %}
+```bash
+~# vi /etc/my.cnf
+
+### MySQL5.7 기준 ###
+
+server-id = 3 
+
+#리플리케이션 대상 디비 설정.
+replicate-do-db = testdb1
+replicate-do-db = testdb2
+
+#리플리케이션 제외 디비 설정.
+replicate-ignore-db = information_schema
+replicate-ignore-db = mysql
+replicate-ignore-db = performance_schema
+replicate-ignore-db = sys
+
+master_info_repository = &apos;TABLE&apos;
+relay_log_info_repository = &apos;TABLE&apos;
+slave-skip-errors = all
+
+#DB를 재시작하여 변경사항 적용.
+~# systemctl restart mysqld
+```
+{% endtab %}
+
+{% tab slave_my_cnf MySQL 8.0 %}
+```bash
+~# vi /etc/my.cnf
+
+### MySQL 8 기준 ###
+
+server-id = 3 
+
+# 리플리케이션 대상 디비 설정 (replicate-do-db = 채널명:DB명)
+replicate-do-db = ch_testdb1:testdb1
+replicate-do-db = ch_testdb1:testdb2
+
+#리플리케이션 제외 디비 설정.
+replicate-ignore-db = information_schema
+replicate-ignore-db = mysql
+replicate-ignore-db = performance_schema
+replicate-ignore-db = sys
+
+master_info_repository = &apos;TABLE&apos;
+relay_log_info_repository = &apos;TABLE&apos;
+slave-skip-errors = all
+
+#DB를 재시작하여 변경사항 적용.
+~# systemctl restart mysqld
+```
+{% endtab %}
+
+{% endtabs %}
+
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-16.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-17.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+### DB 복구 진행
+먼저 복구할 DB를 미리 생성하고 Master1, Master2 장비에서 전송 받은 백업 파일을 사용해 DB를 복구합니다.
+```bash
+#복구할 DB 생성.
+mysql&gt; create database testdb1;
+mysql&gt; create database testdb2;
+mysql&gt; quit
+
+#DB 복구
+~# mysql -u root -p testdb1 &lt; /data/test1.sql
+~# mysql -u root -p testdb2 &lt; /data/test2.sql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+- 백업 파일을 전송 받은 디렉토리로 이동해 백업 파일이 정상적으로 전송되었는지 확인합니다.
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-19.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## 리플리케이션 채널 설정
+리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.  
+채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.
+
+{% tabs config_channel %}
+
+{% tab config_channel MySQL 5.7 %}
+```bash
+# MySQL 5.7
+mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;마스터IP&apos;, MASTER_PORT=포트번호, MASTER_USER=&apos;생성한 리플리케이션 계정명&apos;, MASTER_PASSWORD=&apos;패스워드&apos;, MASTER_LOG_FILE=&apos;위에서 확인된 File명&apos;, MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;채널 이름&apos;;
+```
+{% endtab %}
+
+{% tab config_channel MySQL 8.0 ~ 8.0.22 %}
+```bash
+# MySQL 8.0 ~ 8.0.22
+mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;마스터IP&apos;, MASTER_PORT=포트번호, MASTER_USER=&apos;생성한 리플리케이션 계정명&apos;, MASTER_PASSWORD=&apos;패스워드&apos;, GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE=&apos;위에서 확인된 File명&apos;, MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;채널 이름&apos;;
+```
+{% endtab %}
+
+{% tab config_channel MySQL 8.0.23 ~ %}
+```bash
+# MySQL 8.0.23 이후 버전
+mysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST=&apos;마스터IP&apos;, SOURCE_PORT=포트번호, SOURCE_USER=&apos;생성한 리플리케이션 계정명&apos;, SOURCE_PASSWORD=&apos;패스워드&apos;, GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE=&apos;위에서 확인된 File명&apos;, SOURCE_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;ch_testdb1&apos;;
+```
+{% endtab %}
+
+{% endtabs %}
+
+여기에 필요한 정보 중에서 [**MASTER_LOG_FILE**(**SOURCE_LOG_FILE**)]과 [**MASTER_LOG_POS**(**SOURCE_LOG_POS**)]은 위쪽에서 확인한 Master DB들의 정보에 나타났던 것으로 정리하면 다음과 같습니다.
+
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;div class=&quot;col-sm-6&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;DB&lt;/th&gt;
+      &lt;th&gt;File&lt;/th&gt;
+      &lt;th&gt;Position&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Master1&lt;/td&gt;&lt;td&gt;mysql-bin.000001&lt;/td&gt;&lt;td&gt;1321&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Master2&lt;/td&gt;&lt;td&gt;mysql-bin.000002&lt;/td&gt;&lt;td&gt;970&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;    
+&lt;/div&gt;
+&lt;/div&gt;
+
+### Master 서버 정보 입력
+Slave 서버에 Master 서버 정보를 하나씩 입력합니다.
+
+{% tabs config_channel_sample %}
+
+{% tab config_channel_sample MySQL 5.7 %}
+```bash
+#Master1
+mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.6&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, MASTER_LOG_FILE=&apos;mysql-bin.000001&apos;, MASTER_LOG_POS=1321 FOR CHANNEL &apos;ch_testdb1&apos;;
+
+#Master2
+mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.7&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, MASTER_LOG_FILE=&apos;mysql-bin.000002&apos;, MASTER_LOG_POS=970 FOR CHANNEL &apos;ch_testdb2&apos;;
+
+mysql&gt; FLUSH PRIVILEGES;
+```
+{% endtab %}
+
+{% tab config_channel_sample MySQL 8.0 ~ 8.0.22 %}
+```bash
+#Master1
+mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.6&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE=&apos;mysql-bin.000001&apos;, MASTER_LOG_POS=1321 FOR CHANNEL &apos;ch_testdb1&apos;;
+
+#Master2
+mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.7&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE=&apos;mysql-bin.000002&apos;, MASTER_LOG_POS=970 FOR CHANNEL &apos;ch_testdb2&apos;;
+
+mysql&gt; FLUSH PRIVILEGES;
+```
+{% endtab %}
+
+{% tab config_channel_sample MySQL 8.0.23 ~ %}
+```bash
+#Master1
+mysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST=&apos;10.0.0.6&apos;, SOURCE_PORT=3306, SOURCE_USER=&apos;testuser&apos;, SOURCE_PASSWORD=&apos;Test!@123&apos;, GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE=&apos;mysql-bin.000001&apos;, SOURCE_LOG_POS=1321 FOR CHANNEL &apos;ch_testdb1&apos;;
+
+#Master2
+mysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST=&apos;10.0.0.7&apos;, SOURCE_PORT=3306, SOURCE_USER=&apos;testuser&apos;, SOURCE_PASSWORD=&apos;Test!@123&apos;, GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE=&apos;mysql-bin.000001&apos;, SOURCE_LOG_POS=970 FOR CHANNEL &apos;ch_testdb2&apos;;
+
+mysql&gt; FLUSH PRIVILEGES;
+```
+{% endtab %}
+
+{% endtabs %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-21.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+### 리플리케이션 채널 시작
+리플리케이션 시작 후 에러가 없는지 확인합니다.  
+
+{% tabs start_channel %}
+
+{% tab start_channel MySQL 5.7 %}
+```bash
+#MySQL 5.7 기준
+mysql&gt; start slave for channel &apos;ch_testdb1&apos;; 
+mysql&gt; start slave for channel &apos;ch_testdb2&apos;;
+
+mysql&gt; show slave status for channel &apos;ch_testdb1&apos;\G 
+mysql&gt; show slave status for channel &apos;ch_testdb2&apos;\G
+```
+{% endtab %}
+
+{% tab start_channel MySQL 8.0 %}
+```bash
+#MySQL 8 기준
+mysql&gt; start replica for channel &apos;ch_testdb1&apos;; 
+mysql&gt; start replica for channel &apos;ch_testdb2&apos;;
+
+mysql&gt; show replica status for channel &apos;ch_testdb1&apos;\G 
+mysql&gt; show replica status for channel &apos;ch_testdb2&apos;\G
+```
+{% endtab %}
+
+{% endtabs %}
+
+
+- Master1  
+상태 확인에서는 [**Slave_IO_State**], [**Slave_IO_Running**], [**Slave_SQL_Running**] 항목들이 아래와 같이 되어 있으면 정상입니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-22.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+- Master2  
+상태 확인에서는 [**Slave_IO_State**], [**Slave_IO_Running**], [**Slave_SQL_Running**] 항목들이 아래와 같이 되어 있으면 정상입니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-23.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## 리플리케이션 테스트
+리플리케이션 설정을 모두 마친 후에 Master 서버들에서 DB 작업을 진행하고, Slave 서버에 해당 내용이 복제되는지 확인해보겠습니다.
+
+- Master1 서버 작업  
+Master1 서버에 테스트를 위한 [**sampletable**] Table을 생성합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-24.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+-  Slave 서버 확인  
+Slave 서버에서 testdb1 DB에 sampletable Table이 복제되었는지 확인합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-25.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+-  Master2 서버 작업  
+Master2 서버에 테스트를 위한 [**sampletable**] Table을 생성합니다.
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-26.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+- Slave 서버 확인  
+Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인합니다.
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-27.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## 버전별 명령어 비교
+
+{% tabs replication_command %}
+
+{% tab replication_command MySQL 5.7 %}
+&lt;div&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th width=&quot;110px&quot;&gt;MySQL 5.7&lt;/th&gt;
+      &lt;th&gt;리플리케이션 명령어&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;채널 설정&lt;/td&gt;
+      &lt;td style=&quot;font-size:0.8em;line-height:130%;&quot;&gt;CHANGE &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt; TO &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_HOST=&apos;마스터IP&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_PORT=포트번호, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_USER=&apos;생성한 리플리케이션 계정명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_PASSWORD=&apos;패스워드&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_LOG_FILE=&apos;위에서 확인된 File명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;채널 이름&apos;;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 시작&lt;/td&gt;&lt;td&gt;START &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 중지&lt;/td&gt;&lt;td&gt;STOP &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 상태 확인&lt;/td&gt;&lt;td&gt;SHOW &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; STATUS FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 정보 삭제&lt;/td&gt;&lt;td&gt;RESET &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; ALL FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+{% endtab %}
+
+{% tab replication_command MySQL 8.0 ~ 8.0.22 %}
+&lt;div&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th width=&quot;110px&quot;&gt;MySQL 5.7&lt;/th&gt;
+      &lt;th&gt;리플리케이션 명령어&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;채널 설정&lt;/td&gt;
+      &lt;td style=&quot;font-size:0.8em;line-height:130%;&quot;&gt;CHANGE &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt; TO &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_HOST=&apos;마스터IP&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_PORT=포트번호, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_USER=&apos;생성한 리플리케이션 계정명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_PASSWORD=&apos;패스워드&apos;, GET_&lt;span style=&quot;font-weight:bolder&quot;&gt;Master&lt;/span&gt;_PUBLIC_KEY=1, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_LOG_FILE=&apos;위에서 확인된 File명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;채널 이름&apos;;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 시작&lt;/td&gt;&lt;td&gt;START &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 중지&lt;/td&gt;&lt;td&gt;STOP &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 상태 확인&lt;/td&gt;&lt;td&gt;SHOW &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; STATUS FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 정보 삭제&lt;/td&gt;&lt;td&gt;RESET &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; ALL FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+{% endtab %}
+
+{% tab replication_command MySQL 8.0.23 ~ %}
+&lt;div&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th width=&quot;110px&quot;&gt;MySQL 8.0&lt;/th&gt;
+      &lt;th&gt;리플리케이션 명령어&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;채널 설정&lt;/td&gt;
+      &lt;td style=&quot;font-size:0.8em;line-height:130%;&quot;&gt;CHANGE &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICATION SOURCE&lt;/span&gt; TO &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_HOST=&apos;마스터IP&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_PORT=포트번호, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_USER=&apos;생성한 리플리케이션 계정명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_PASSWORD=&apos;패스워드&apos;, GET_&lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_PUBLIC_KEY=1, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_LOG_FILE=&apos;위에서 확인된 File명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;ch_testdb1&apos;;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 시작&lt;/td&gt;&lt;td&gt;START &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICA&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 중지&lt;/td&gt;&lt;td&gt;STOP &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICA&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 상태 확인&lt;/td&gt;&lt;td&gt;SHOW &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICA&lt;/span&gt; STATUS FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 정보 삭제&lt;/td&gt;&lt;td&gt;RESET &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICA&lt;/span&gt; ALL FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+{% endtab %}
+
+{% endtabs %}
+
+
+## 참고 URL
+1. MySQL 5.7 Multi-Source Replication 가이드
+	- &lt;a href=&quot;https://dev.mysql.com/doc/refman/5.7/en/replication-multi-source.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/doc/refman/5.7/en/replication-multi-source.html&lt;/a&gt;
+
+1. MySQL 8.0 Multi-Source Replication 가이드
+	- &lt;a href=&quot;https://dev.mysql.com/doc/refman/8.0/en/replication-multi-source.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/doc/refman/8.0/en/replication-multi-source.html&lt;/a&gt;  </description>
+            <pubDate>Wed, 05 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/database/ncloud-database-mysql-multi-source-replication.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mysql-multi-source-replication.html</guid>
+            
+            <category>database</category>
+            
+            <category>backup</category>
+            
+            <category>mysql</category>
+            
+            
+        </item>
         
         <item>
             <title>Video Player 구현하기 샘플 예제</title>
@@ -539,7 +1053,7 @@ Route Table 설정 화면에 들어가도 Target Type에 LOCAL만 선택할 수 
 
 {% include image.html file=&quot;networking/ncp_networking_natgw_routetb_15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
 
-이름을 입력하고 VPC와 Zone을 선택하고 NAT Gateway를 생성합니다.
+이름을 입력하고 VPC와 Zone을 선택하고 NAT Gateway를 생성합니다. 그리고 마지막으로 Route Table에 NATGW 설정을 추가해야 완료되는데, 관련 설정은 아래에서 확인 가능합니다.
 
 {% include image.html file=&quot;networking/ncp_networking_natgw_routetb_16.jpg&quot; width=&quot;650&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
 
@@ -879,8 +1393,8 @@ Cloud Insight의 기본적인 설정 방법은 아래 링크 문서에서 확인
 ## Template 설정 항목
 Template 설정할 때 서비스 상황에 따라 여러가지를 설정할 수 있는데, 여기서 예시로 설정해 볼 항목은 다음과 같습니다.
 - 서버 평균 CPU 사용률
-- 서버 평균 메모리 사용률
-- 서버 평균 디스크 사용률
+- 서버 메모리 사용률
+- 서버 디스크 사용률
 
 ## Rule Template 설정
 먼저 [**Cloud Insight**] - [**Configuration**] - [**Template**]에서 [**Rule Template**] 탭을 선택하고, [**Rule Template 생성**] 버튼을 클릭합니다.
@@ -916,8 +1430,7 @@ Template 설정할 때 서비스 상황에 따라 여러가지를 설정할 수 
 
 
 - 3가지 항목을 모두 선택하고, [다음] 버튼을 클릭하면 아래와 같이 각 항목별로 조건을 설정할 수 있습니다.  
-여기서는 각 수치가 70% 이상일 경우로 설정했고, 몇 분간의 평균값으로 할 것인가는 각 항목별로 다르게 설정해봤습니다.  
-각 수치는 사용하는 서비스 상황에 따라 조절하시면 됩니다.
+여기서는 각 수치가 70% 이상일 경우로 설정했고, 몇 분간의 평균값으로 할 것인가는 사용하는 서비스 상황에 따라 조절하시면 됩니다.
 
 {% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
 
@@ -1786,136 +2299,6 @@ CA 파일이 chain1.crt.pem, chain2.crt.pem 처럼 2개 이상 제공되며, roo
             <category>ssl</category>
             
             <category>load_balancer</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Object Storage 파일의 Content-Type 일괄 적용, 변경하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) Object Storage에서 업로드하는 파일의 Content-Type을 업로드 시에 일괄 적용하거나, 이미 업로드된 다수의 파일의 Content-Type을 일괄 변경하는 방법을 정리해보겠습니다.
-
-## 테스트 순서
-일괄 적용, 변경 테스트는 다음과 같은 순서로 진행보겠습니다.
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;
-1. 다수의 txt 파일을 업로드 하면서 [**Content-Type**]을 [**application/octet-stream**]으로 일괄 설정 &lt;br /&gt;&lt;br /&gt;
-2. 업로드된 파일의 [**Content-Type**]이 [**application/octet-stream**]인지 확인 &lt;br /&gt;&lt;br /&gt;
-3. AWS CLI를 이용해서 파일들의 [**Content-Type**]을 [**text/plain**]으로 일괄 변경 &lt;br /&gt;&lt;br /&gt;
-4. 파일의 [**Content-Type**]이 [**text/plain**]으로 변경되었는지 확인 &lt;br /&gt;&lt;br /&gt;
-5. CloudBerry Explorer를 이용해 파일들의 [**Content-Type**]을 [**application/octet-stream**]으로 일괄 변경 &lt;br /&gt;&lt;br /&gt;
-6. 파일의 [**Content-Type**]이 [**application/octet-stream**]으로 변경되었는지 확인
-&quot; %}
-
-
-## 업로드 시에 일괄 적용
-[**Console**] - [**Object Storage**] - [**Bucket Management**]에서 버킷을 선택하고 [**파일 올리기**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-업로드 팝업에서 파일을 선택하기 전에 먼저 [**권한 및 메타 데이터 설정**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-02.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 메타 데이터 설정
-[**권한 및 메타 데이터 설정**] 팝업에서 [**메타 데이터 관리**] 탭을 선택하고 [**Content-Type**] 키워드에 테스트용으로 [**application/octet-stream**]을 입력하고 [**메타데이터 추가**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### 파일 업로드
-[**Content-Type**] 설정을 마쳤으면 업로드할 파일을 선택하고 [**전송 시작**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-04.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### Content-Type 확인
-변경된 [**Content-Type**]을 확인하기 위해 파일 하나를 선택하고, [**편집**] - [**메타 데이터 변경**] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-메타 데이터 관리 팝업에서 [**Content-Type**]이 [**application/octet-stream**]으로 적용된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-06.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-## AWS CLI로 일괄 변경
-Ncloud Object Storage는 AWS S3와 호환되는 스토리지이므로 AWS CLI로 관리 가능합니다.  
-AWS CLI를 이용해서 Object Storage를 관리하는 방법은 아래 문서에서 확인할 수 있습니다.
-
-{% include note.html title=&quot;AWS CLI&quot; content=&quot;
-&lt;a href=&apos;/storage/ncloud_storage_object_storage_aws_cli_connect.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;AWS CLI를 이용한 Object Storage 접속 방법&lt;/a&gt;
-&quot; %}
-
-### 파일 리스트 조회
-먼저 현재 Object Storage 버킷에 존재하는 파일 리스트를 조회하면 위에서 업로드 했던 5개의 파일을 확인할 수 있습니다.
-
-``` bash
-aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://content-type-test/ --recursive  --human-readable
-```
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-07.png&quot; width=&quot;843&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### Content-Type 변경
-이제 [**Content-Type**]을 [**text/plain**]으로 변경해보겠습니다.
-
-``` bash
-aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://content-type-test/test/ s3://content-type-test/test/ --recursive --content-type text/plain --metadata-directive REPLACE 
-```
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-08.png&quot; width=&quot;843&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### Content-Type 확인
-위에서 확인했던 방법대로 [**Console**]에서 파일을 선택하고 [**Content-Type**]을 확인해보면 [**text/plain**]인 것을 알 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-09.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-## CloudBerry Explorer를 사용해 일괄 변경
-Object Storage를 관리하기 편한 여러가지 Client Tool중에서 [**CloudBerry Explorer**]를 사용해서 [**Content-Type**]을 변경해보겠습니다.  
-[**CloudBerry Explorer**] 사용방법은 아래 문서에서 확인 가능합니다.
-
-{% include note.html title=&quot;CloudBerry Explorer&quot; content=&quot;
-&lt;a href=&apos;/storage/ncloud_storage_object_storage_s3_client_cloudberry_explorer.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법&lt;/a&gt;
-&quot; %}
-
-&lt;br /&gt;
-[**CloudBerry Explorer**]로 Object Storage에 접속한 후 위에서 업로드 했던 파일들을 모두 선택하고 마우스 오른쪽 버튼을 클릭하면 나타나는 메뉴에서 [**Set HTTP Headers**]를 선택합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### Content-Type 일괄 변경
-[**Http Headers**] 설정 팝업에서 [**Add**] 버튼을 클릭하고 [**Http Header**]에서는 [**Content-Type**]을, [**Value**]에서는 [**application/octet-stream**]을 선택합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-선택한 값을 확인하고, 아래쪽 옵션에서는 기본값 그대로 두고, [**OK**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-### Content-Type 확인
-위에서 확인했던 방법대로 [Console]에서 파일을 선택하고 [**Content-Type**]을 확인해보면 [**application/octet-stream**]인 것을 알 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-13.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-## Cyberduck을 사용해 일괄 변경
-또 다른 Client Tool중의 하나인 [**Cyberduck**]을 사용할 경우는 아래와 같이 파일을 모두 선택하고, 상단의 [**정보 가져오기**] 버튼을 클릭하고, [**메타데이터**] 탭에서 [**Content-Type**]을 변경할 수 있습니다.
-
-{% include note.html title=&quot;Cyberduck&quot; content=&quot;
-&lt;a href=&apos;/storage/ncloud_storage_object_storage_s3_client_cyberduck.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Object Storage 접속용 Windows, MacOS Client Tool - Cyberduck 사용 방법&lt;/a&gt;
-&quot; %}
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-contenttype-bulk-change-guide-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage에서 파일의 Content-Type을 일괄 적용하거나, 변경하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Ncloud Object Storage 기본 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/storage-storage-6-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/storage-storage-6-1&lt;/a&gt;
-
-2.  MIME Type 안내
-	- &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types&lt;/a&gt;	
-
-3.  Object Storage에서 html, 이미지 파일이 다운로드되는 문제 해결 방법
-	- &lt;a href=&quot;/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide.html&lt;/a&gt;		</description>
-            <pubDate>Fri, 03 Feb 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-contenttype-bulk-change-guide.html</guid>
-            
-            <category>storage</category>
             
             
         </item>

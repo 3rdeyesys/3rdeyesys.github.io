@@ -5,6 +5,7 @@
     padding: 0;
     list-style: none;
     position: relative;
+    margin-bottom: 0px;
 }
 
 .tab > * {
@@ -21,7 +22,7 @@
     border-bottom: 2px solid transparent;
     border-bottom-color: transparent;
     font-size: 12px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     transition: color .1s ease-in-out;
     line-height: 20px;
 }
@@ -38,6 +39,7 @@
 
 .tab-content {
     padding: 0;
+    margin-top: 0px;
 }
 
 .tab-content > li {
@@ -45,4 +47,8 @@
 }
 .tab-content > li.active {
     display: initial;
+}
+
+.tab-content > li > div > div > pre {
+    margin-top: 0px;
 }

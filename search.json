@@ -303,6 +303,17 @@
 
 
 {
+"title": "MySQL Multi Source Replication 구성 가이드",
+"tags": "databasebackupmysql",
+"keywords": "Database, 복제, Backup, 이중화, 고가용성, Master, Slave",
+"url": "/database/ncloud-database-mysql-multi-source-replication.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "설치형 PostgreSQL DB 설치, 접속 가이드 | CentOS",
 "tags": "databasevpc",
 "keywords": "Database, Postgre",
