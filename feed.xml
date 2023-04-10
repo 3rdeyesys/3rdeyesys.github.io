@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 10 Apr 2023 15:05:52 +0900</pubDate>
-        <lastBuildDate>Mon, 10 Apr 2023 15:05:52 +0900</lastBuildDate>
+        <pubDate>Mon, 10 Apr 2023 16:22:11 +0900</pubDate>
+        <lastBuildDate>Mon, 10 Apr 2023 16:22:11 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -39,14 +39,6 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 
 {% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
 
-## 저장소 패키지 설치
-다음으로 epel-release 저장소 패키지를 설치하겠습니다.
-
-``` bash
-~# dnf -y install epel-release
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
 
 ## MySQL Community 패키지 설치
 MySQL 5.7 버전이 포함된 가장 최근의 Repository 설치 패키지는 mysql80-community-release-el7-7.noarch.rpm 입니다.
