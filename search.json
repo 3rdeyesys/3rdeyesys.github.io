@@ -303,6 +303,17 @@
 
 
 {
+"title": "Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법",
+"tags": "databasemysqlinstall",
+"keywords": "Database, 록키 리눅스, 디비, install",
+"url": "/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "MySQL GTID Replication 생성 상세 가이드",
 "tags": "databasebackupmysql",
 "keywords": "Database, 복제, Backup, 이중화, 고가용성, Master, Slave",
