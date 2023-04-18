@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 11 Apr 2023 16:01:32 +0900</pubDate>
-        <lastBuildDate>Tue, 11 Apr 2023 16:01:32 +0900</lastBuildDate>
+        <pubDate>Tue, 18 Apr 2023 14:20:31 +0900</pubDate>
+        <lastBuildDate>Tue, 18 Apr 2023 14:20:31 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -494,7 +494,7 @@ character-set-server = utf8
 
 {% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-10.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
 
-### 리클리케이션 계정 생성
+### 리플리케이션 계정 생성
 MySQL 접속 후 리플리케이션을 진행할 계정 생성합니다.
 
 ```bash
@@ -597,8 +597,6 @@ replicate-ignore-db = mysql
 replicate-ignore-db = performance_schema
 replicate-ignore-db = sys
 
-master_info_repository = &apos;TABLE&apos;
-relay_log_info_repository = &apos;TABLE&apos;
 slave-skip-errors = all
 
 #DB를 재시작하여 변경사항 적용.

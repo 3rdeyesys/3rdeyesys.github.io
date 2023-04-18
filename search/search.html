@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="kr">
-<head>
+  <head>
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -72,72 +72,75 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     <script>
-        $(document).ready(function() {
-            // Initialize navgoco with default options
-            $("#mysidebar").navgoco({
-                caretHtml: '',
-                accordion: true,
-                openClass: 'active', // open
-                save: false, // leave false or nav highlighting doesn't work right
-                cookie: {
-                    name: 'navgoco',
-                    expires: false,
-                    path: '/'
-                },
-                slide: {
-                    duration: 400,
-                    easing: 'swing'
-                }
-            });
-            
-            window_width = $(window).width();
-            if (window_width <= 990) //모바일 환경에서는 사이드바 접기
-            {
-                $("#mysidebar").navgoco('toggle', false);
-            }
+      $(document).ready(function() {
 
-            $("#collapseAll").click(function(e) {
-                e.preventDefault();
-                $("#mysidebar").navgoco('toggle', false);
-            });
-
-            $("#expandAll").click(function(e) {
-                e.preventDefault();
-                $("#mysidebar").navgoco('toggle', true);
-            });
-
+// Initialize navgoco with default options
+        $("#mysidebar").navgoco({
+          caretHtml: '',
+          accordion: true,
+          openClass: 'active', // open
+          save: false, // leave false or nav highlighting doesn't work right
+          cookie: {
+            name: 'navgoco',
+            expires: false,
+            path: '/'
+          },
+          slide: {
+            duration: 400,
+            easing: 'swing'
+          }
         });
 
-    </script>
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#tg-sb-link").click(function() {                
-                if (!$("#tg-sb-link").attr("hide_sidebar"))
-                {
-                    $("#tg-sb-sidebar").toggle();
-                    $("#tg-sb-content").toggleClass('col-md-9');
-                    $("#tg-sb-content").toggleClass('col-md-12');
-                    $("#tg-sb-icon").toggleClass('fa-toggle-on');
-                    $("#tg-sb-icon").toggleClass('fa-toggle-off');
-                }
-            });
+        window_width = $(window).width();
+        if (window_width <= 990) { // 모바일 환경에서는 사이드바 접기
+          $("#mysidebar").navgoco('toggle', false);
+        }
+
+        $("#collapseAll").click(function(e) {
+          e.preventDefault();
+          $("#mysidebar").navgoco('toggle', false);
         });
+
+        $("#expandAll").click(function(e) {
+          e.preventDefault();
+          $("#mysidebar").navgoco('toggle', true);
+        });
+
+      });
+    </script>
+    <script>
+      $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
+    <script>
+      $(document).ready(function() {
+        $("#tg-sb-link").click(function() {
+          if (!$("#tg-sb-link").attr("hide_sidebar")) {
+            $("#tg-sb-sidebar").toggle();
+            $("#tg-sb-content").toggleClass('col-md-9');
+            $("#tg-sb-content").toggleClass('col-md-12');
+            $("#tg-sb-icon").toggleClass('fa-toggle-on');
+            $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          }
+        });
+      });
     </script>
     
 
-</head>
-<body>
-<!-- Google Tag Manager (noscript) -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933218466698885"
+      crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XRCSF3"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<header>
-<!-- Navigation -->
+    <header>
+      <!-- Navigation -->
 <nav class="navbar2 navbar-inverse navbar-static-top">
     <div class="container topnavlinks">
         <div class="navbar-header">
@@ -227,19 +230,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-
-</header>
-<!-- Page Content -->
-
-<div class="container">
-
-  <div id="main">
-    <!-- Content Row -->
-    <div class="row">
+      
+    </header>
+    <!-- Page Content -->
+    
+        <div class="container">
         
-        
-            <!-- Sidebar Column -->
-            <div class="col-md-3" id="tg-sb-sidebar">
+        <div id="main">
+          <!-- Content Row -->
+          <div class="row">
+            
+              
+              <!-- Sidebar Column -->
+              <div class="col-md-3" id="tg-sb-sidebar">
                 
 
 <ul id="mysidebar" class="nav">
@@ -1747,13 +1750,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-            </div>
+              </div>
+              
             
-        
 
-        <!-- Content Column -->
-        <div class="col-md-9" id="tg-sb-content">
-            <div class="post-header">
+            <!-- Content Column -->
+            <div class="col-md-9" id="tg-sb-content">
+              <div class="post-header">
 
    <h1 class="post-title-main">Search</h1>
 
@@ -2226,7 +2229,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						"title": "MySQL Multi Source Replication 구성 가이드",
 						"categories": "",
 						"url": " /database/ncloud-database-mysql-multi-source-replication.html",
-						"content": "개요\n\nn대의 마스터 DB와 1대의 슬레이브 DB를 연결하여 마스터 DB들의 데이터를 슬레이브 DB 한곳에 모아 조회할 수 있는  MySQL Multi-Source-Replication(MSR)을 구성하는 방법을 정리해보겠습니다.\n\n테스트 준비\n\n\n  마스터 서버 2대, 슬레이브 서버 1대 준비\n  각 서버에 MySQL 5.7 이상 설치\n  MySQL 리플리케이션작업 진행 시 마스터 서버의 데이터베이스에 쓰기 작업 금지\n\n\n\n  \n  \n    \n  \n\n\nACG 설정\n서버 준비가 끝났으면 우선 마스터 서버  슬레이브 서버로 디비 백업 파일 복사과 복제 구성에 필요한 22, 3306 포트를 오픈해야 합니다.\n오픈 할 때 규칙은 마스터 서버와 슬레이브 서버의 공통 ACG에 사설 IP 대역 전체를 지정할 수도 있고, 슬레이브 서버 전용 ACG에 마스터 서버 IP만 등록하는 방법도 있습니다.\n\n\n  \n  \n    \n  \n\n\nSlave 장비에 백업 디렉토리 생성\n먼저 Slave 장비에 Master 장비들로 부터 DB 복원용 덤프 파일을 전송 받을 백업 디렉토리를 생성하는 것 부터 시작하겠습니다.\n\n~# mkdir /data\n~# cd /data\n\n\n\n  \n  \n    \n  \n\n\nMaster1 장비 구성\n\nmaster1 설정 추가\n\n  /etc/my.cnf에 Master1 설정을 추가합니다.\n\n\n~# vi /etc/my.cnf\n\nserver-id = 1\nlog-bin = mysql-bin\nbinlog_format = mixed\ncharacter-set-server = utf8\n\n#MySQL을 재시작해 변경사항 적용.\n~# systemctl restart mysqld\n\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 계정 생성\nMySQL 접속 후 리플리케이션을 진행할 계정 생성\n\n#master1 계정 생성.\nmysql&gt; create user '리플리케이션 계정명'@'%' identified by '패스워드';\nmysql&gt; grant replication slave,replication client on *.* to '리플리케이션 계정명'@'%';\nmysql&gt; flush privileges;\n\n\n\n  \n  \n    \n  \n\n\n테스트 DB 생성\n다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.\n\nmysql&gt; CREATE DATABASE testdb1 default CHARACTER SET UTF8;\n\n\n\n  \n  \n    \n  \n\n\nMaster1 정보확인\n이제 리플리케이션 설정에 필요한 Master 정보를 확인합니다.\n\nmysql&gt; show variables like 'server_id';\nmysql&gt; show master status;\n\n\n\n[show master status] 명령으로 확인한 [File], [Position] 정보는 아래쪽에서 Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야 합니다.\n\n\n\n  \n  \n    \n  \n\n\nDB 백업 파일 슬레이브 장비로 전송\ntestdb1 DB의 백업파일을 생성하고, 슬레이브 서버로 전송합니다.\n\n~# mkdir /data\n~# cd /data\n~# mysqldump -u root -p --databases testdb1 &gt; /data/test1.sql \n\n#슬레이브 서버에 전송.\n~# scp test1.sql root@10.0.0.8:/data\n\n\n\n  \n  \n    \n  \n\n\nMaster2 장비 구성\n\nMaster2 설정 추가\n\n  /etc/my.cnf에 Master2 설정을 추가합니다.\n\n\n~# vi /etc/my.cnf\n\nserver-id = 2\nlog-bin = mysql-bin\nbinlog_format = mixed\ncharacter-set-server = utf8\n\n#DB를 재시작하여 변경사항 적용.\n~# systemctl restart mysqld\n\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\n리클리케이션 계정 생성\nMySQL 접속 후 리플리케이션을 진행할 계정 생성합니다.\n\n#master2 계정 생성.\nmysql&gt; create user '리플리케이션 계정명'@'%' identified by '패스워드';\nmysql&gt; grant replication slave,replication client on *.* to '리플리케이션 계정명'@'%';\nmysql&gt; flush privileges;\n\n\n\n  \n  \n    \n  \n\n\n테스트 DB 생성\n다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.\n\nmysql&gt; CREATE DATABASE testdb2 default CHARACTER SET UTF8;\n\n\n\n  \n  \n    \n  \n\n\nMaster2 정보확인\n마찬가지로 리플리케이션 설정에 필요한 Master 정보를 확인합니다.\n\nmysql&gt; show variables like 'server_id';\nmysql&gt; show master status;\n\n\n\n[show master status] 명령으로 확인한 [File], [Position] 정보는 아래쪽에서 Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야 합니다.\n\n\n\n  \n  \n    \n  \n\n\nDB 백업 파일 슬레이브 장비로 전송\ntestdb2 DB의 백업파일 생성하고, 슬레이브 서버로 전송합니다.\n\n~# mkdir /data\n~# cd /data\n~# mysqldump -u root -p --databases testdb2 &gt; /data/test2.sql\n\n~# scp test2.sql root@10.0.0.8:/data\n\n\n\n  \n  \n    \n  \n\n\nSlave 장비 구성\n\nSlave 설정 추가\n\n  /etc/my.cnf에 Slave 설정을 추가합니다.\nMySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.\n\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 \n      \n  \n\n\n  \n      \n~# vi /etc/my.cnf\n\n### MySQL5.7 기준 ###\n\nserver-id = 3 \n\n#리플리케이션 대상 디비 설정.\nreplicate-do-db = testdb1\nreplicate-do-db = testdb2\n\n#리플리케이션 제외 디비 설정.\nreplicate-ignore-db = information_schema\nreplicate-ignore-db = mysql\nreplicate-ignore-db = performance_schema\nreplicate-ignore-db = sys\n\nmaster_info_repository = 'TABLE'\nrelay_log_info_repository = 'TABLE'\nslave-skip-errors = all\n\n#DB를 재시작하여 변경사항 적용.\n~# systemctl restart mysqld\n\n\n  \n      \n~# vi /etc/my.cnf\n\n### MySQL 8 기준 ###\n\nserver-id = 3 \n\n# 리플리케이션 대상 디비 설정 (replicate-do-db = 채널명:DB명)\nreplicate-do-db = ch_testdb1:testdb1\nreplicate-do-db = ch_testdb1:testdb2\n\n#리플리케이션 제외 디비 설정.\nreplicate-ignore-db = information_schema\nreplicate-ignore-db = mysql\nreplicate-ignore-db = performance_schema\nreplicate-ignore-db = sys\n\nmaster_info_repository = 'TABLE'\nrelay_log_info_repository = 'TABLE'\nslave-skip-errors = all\n\n#DB를 재시작하여 변경사항 적용.\n~# systemctl restart mysqld\n\n\n  \n\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\nDB 복구 진행\n먼저 복구할 DB를 미리 생성하고 Master1, Master2 장비에서 전송 받은 백업 파일을 사용해 DB를 복구합니다.\n#복구할 DB 생성.\nmysql&gt; create database testdb1;\nmysql&gt; create database testdb2;\nmysql&gt; quit\n\n#DB 복구\n~# mysql -u root -p testdb1 &lt; /data/test1.sql\n~# mysql -u root -p testdb2 &lt; /data/test2.sql\n\n\n\n  \n  \n    \n  \n\n\n\n  백업 파일을 전송 받은 디렉토리로 이동해 백업 파일이 정상적으로 전송되었는지 확인합니다.\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 채널 설정\n리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.\n채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 ~ 8.0.22 \n      \n  \n      \n          MySQL 8.0.23 ~ \n      \n  \n\n\n  \n      \n# MySQL 5.7\nmysql&gt; CHANGE MASTER TO MASTER_HOST='마스터IP', MASTER_PORT=포트번호, MASTER_USER='생성한 리플리케이션 계정명', MASTER_PASSWORD='패스워드', MASTER_LOG_FILE='위에서 확인된 File명', MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL '채널 이름';\n\n\n  \n      \n# MySQL 8.0 ~ 8.0.22\nmysql&gt; CHANGE MASTER TO MASTER_HOST='마스터IP', MASTER_PORT=포트번호, MASTER_USER='생성한 리플리케이션 계정명', MASTER_PASSWORD='패스워드', GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE='위에서 확인된 File명', MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL '채널 이름';\n\n\n  \n      \n# MySQL 8.0.23 이후 버전\nmysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST='마스터IP', SOURCE_PORT=포트번호, SOURCE_USER='생성한 리플리케이션 계정명', SOURCE_PASSWORD='패스워드', GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE='위에서 확인된 File명', SOURCE_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL 'ch_testdb1';\n\n\n  \n\n\n여기에 필요한 정보 중에서 [MASTER_LOG_FILE(SOURCE_LOG_FILE)]과 [MASTER_LOG_POS(SOURCE_LOG_POS)]은 위쪽에서 확인한 Master DB들의 정보에 나타났던 것으로 정리하면 다음과 같습니다.\n\n\n\n\n  \n    \n      DB\n      File\n      Position\n    \n  \n  \n    Master1mysql-bin.0000011321\n    Master2mysql-bin.000002970\n  \n    \n\n\n\nMaster 서버 정보 입력\nSlave 서버에 Master 서버 정보를 하나씩 입력합니다.\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 ~ 8.0.22 \n      \n  \n      \n          MySQL 8.0.23 ~ \n      \n  \n\n\n  \n      \n#Master1\nmysql&gt; CHANGE MASTER TO MASTER_HOST='10.0.0.6', MASTER_USER='testuser', MASTER_PORT=3306, MASTER_PASSWORD='Test123$', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=1321 FOR CHANNEL 'ch_testdb1';\n\n#Master2\nmysql&gt; CHANGE MASTER TO MASTER_HOST='10.0.0.7', MASTER_USER='testuser', MASTER_PORT=3306, MASTER_PASSWORD='Test123$', MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=970 FOR CHANNEL 'ch_testdb2';\n\nmysql&gt; FLUSH PRIVILEGES;\n\n\n  \n      \n#Master1\nmysql&gt; CHANGE MASTER TO MASTER_HOST='10.0.0.6', MASTER_USER='testuser', MASTER_PORT=3306, MASTER_PASSWORD='Test123$', GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=1321 FOR CHANNEL 'ch_testdb1';\n\n#Master2\nmysql&gt; CHANGE MASTER TO MASTER_HOST='10.0.0.7', MASTER_USER='testuser', MASTER_PORT=3306, MASTER_PASSWORD='Test123$', GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=970 FOR CHANNEL 'ch_testdb2';\n\nmysql&gt; FLUSH PRIVILEGES;\n\n\n  \n      \n#Master1\nmysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST='10.0.0.6', SOURCE_PORT=3306, SOURCE_USER='testuser', SOURCE_PASSWORD='Test!@123', GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE='mysql-bin.000001', SOURCE_LOG_POS=1321 FOR CHANNEL 'ch_testdb1';\n\n#Master2\nmysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST='10.0.0.7', SOURCE_PORT=3306, SOURCE_USER='testuser', SOURCE_PASSWORD='Test!@123', GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE='mysql-bin.000001', SOURCE_LOG_POS=970 FOR CHANNEL 'ch_testdb2';\n\nmysql&gt; FLUSH PRIVILEGES;\n\n\n  \n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 채널 시작\n리플리케이션 시작 후 에러가 없는지 확인합니다.\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 \n      \n  \n\n\n  \n      \n#MySQL 5.7 기준\nmysql&gt; start slave for channel 'ch_testdb1'; \nmysql&gt; start slave for channel 'ch_testdb2';\n\nmysql&gt; show slave status for channel 'ch_testdb1'\\G \nmysql&gt; show slave status for channel 'ch_testdb2'\\G\n\n\n  \n      \n#MySQL 8 기준\nmysql&gt; start replica for channel 'ch_testdb1'; \nmysql&gt; start replica for channel 'ch_testdb2';\n\nmysql&gt; show replica status for channel 'ch_testdb1'\\G \nmysql&gt; show replica status for channel 'ch_testdb2'\\G\n\n\n  \n\n\n\n  Master1\n상태 확인에서는 [Slave_IO_State], [Slave_IO_Running], [Slave_SQL_Running] 항목들이 아래와 같이 되어 있으면 정상입니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Master2\n상태 확인에서는 [Slave_IO_State], [Slave_IO_Running], [Slave_SQL_Running] 항목들이 아래와 같이 되어 있으면 정상입니다.\n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 테스트\n리플리케이션 설정을 모두 마친 후에 Master 서버들에서 DB 작업을 진행하고, Slave 서버에 해당 내용이 복제되는지 확인해보겠습니다.\n\n\n  Master1 서버 작업\nMaster1 서버에 테스트를 위한 [sampletable] Table을 생성합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Slave 서버 확인\nSlave 서버에서 testdb1 DB에 sampletable Table이 복제되었는지 확인합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Master2 서버 작업\nMaster2 서버에 테스트를 위한 [sampletable] Table을 생성합니다.\n\n\n  \n  \n    \n  \n\n\n\n  Slave 서버 확인\nSlave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인합니다.\n\n\n  \n  \n    \n  \n\n\n버전별 명령어 비교\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 ~ 8.0.22 \n      \n  \n      \n          MySQL 8.0.23 ~ \n      \n  \n\n\n  \n      \n\n\n  \n    \n      MySQL 5.7\n      리플리케이션 명령어\n    \n  \n  \n    \n      채널 설정\n      CHANGE MASTER TO MASTER_HOST='마스터IP', MASTER_PORT=포트번호, MASTER_USER='생성한 리플리케이션 계정명', MASTER_PASSWORD='패스워드', MASTER_LOG_FILE='위에서 확인된 File명', MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL '채널 이름';\n    \n    채널 시작START SLAVE FOR CHANNEL \"채널이름\";\n    채널 중지STOP SLAVE FOR CHANNEL \"채널이름\";\n    채널 상태 확인SHOW SLAVE STATUS FOR CHANNEL \"채널이름\";\n    채널 정보 삭제RESET SLAVE ALL FOR CHANNEL \"채널이름\";\n  \n  \n\n\n  \n      \n\n\n  \n    \n      MySQL 5.7\n      리플리케이션 명령어\n    \n  \n  \n    \n      채널 설정\n      CHANGE MASTER TO MASTER_HOST='마스터IP', MASTER_PORT=포트번호, MASTER_USER='생성한 리플리케이션 계정명', MASTER_PASSWORD='패스워드', GET_Master_PUBLIC_KEY=1, MASTER_LOG_FILE='위에서 확인된 File명', MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL '채널 이름';\n    \n    채널 시작START SLAVE FOR CHANNEL \"채널이름\";\n    채널 중지STOP SLAVE FOR CHANNEL \"채널이름\";\n    채널 상태 확인SHOW SLAVE STATUS FOR CHANNEL \"채널이름\";\n    채널 정보 삭제RESET SLAVE ALL FOR CHANNEL \"채널이름\";\n  \n  \n\n\n  \n      \n\n\n  \n    \n      MySQL 8.0\n      리플리케이션 명령어\n    \n  \n  \n    \n      채널 설정\n      CHANGE REPLICATION SOURCE TO SOURCE_HOST='마스터IP', SOURCE_PORT=포트번호, SOURCE_USER='생성한 리플리케이션 계정명', SOURCE_PASSWORD='패스워드', GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE='위에서 확인된 File명', SOURCE_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL 'ch_testdb1';\n    \n    채널 시작START REPLICA FOR CHANNEL \"채널이름\";\n    채널 중지STOP REPLICA FOR CHANNEL \"채널이름\";\n    채널 상태 확인SHOW REPLICA STATUS FOR CHANNEL \"채널이름\";\n    채널 정보 삭제RESET REPLICA ALL FOR CHANNEL \"채널이름\";\n  \n  \n\n\n  \n\n\n참고 URL\n\n  MySQL 5.7 Multi-Source Replication 가이드\n    \n      https://dev.mysql.com/doc/refman/5.7/en/replication-multi-source.html\n    \n  \n  MySQL 8.0 Multi-Source Replication 가이드\n    \n      https://dev.mysql.com/doc/refman/8.0/en/replication-multi-source.html"
+						"content": "개요\n\nn대의 마스터 DB와 1대의 슬레이브 DB를 연결하여 마스터 DB들의 데이터를 슬레이브 DB 한곳에 모아 조회할 수 있는  MySQL Multi-Source-Replication(MSR)을 구성하는 방법을 정리해보겠습니다.\n\n테스트 준비\n\n\n  마스터 서버 2대, 슬레이브 서버 1대 준비\n  각 서버에 MySQL 5.7 이상 설치\n  MySQL 리플리케이션작업 진행 시 마스터 서버의 데이터베이스에 쓰기 작업 금지\n\n\n\n  \n  \n    \n  \n\n\nACG 설정\n서버 준비가 끝났으면 우선 마스터 서버  슬레이브 서버로 디비 백업 파일 복사과 복제 구성에 필요한 22, 3306 포트를 오픈해야 합니다.\n오픈 할 때 규칙은 마스터 서버와 슬레이브 서버의 공통 ACG에 사설 IP 대역 전체를 지정할 수도 있고, 슬레이브 서버 전용 ACG에 마스터 서버 IP만 등록하는 방법도 있습니다.\n\n\n  \n  \n    \n  \n\n\nSlave 장비에 백업 디렉토리 생성\n먼저 Slave 장비에 Master 장비들로 부터 DB 복원용 덤프 파일을 전송 받을 백업 디렉토리를 생성하는 것 부터 시작하겠습니다.\n\n~# mkdir /data\n~# cd /data\n\n\n\n  \n  \n    \n  \n\n\nMaster1 장비 구성\n\nmaster1 설정 추가\n\n  /etc/my.cnf에 Master1 설정을 추가합니다.\n\n\n~# vi /etc/my.cnf\n\nserver-id = 1\nlog-bin = mysql-bin\nbinlog_format = mixed\ncharacter-set-server = utf8\n\n#MySQL을 재시작해 변경사항 적용.\n~# systemctl restart mysqld\n\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 계정 생성\nMySQL 접속 후 리플리케이션을 진행할 계정 생성\n\n#master1 계정 생성.\nmysql&gt; create user '리플리케이션 계정명'@'%' identified by '패스워드';\nmysql&gt; grant replication slave,replication client on *.* to '리플리케이션 계정명'@'%';\nmysql&gt; flush privileges;\n\n\n\n  \n  \n    \n  \n\n\n테스트 DB 생성\n다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.\n\nmysql&gt; CREATE DATABASE testdb1 default CHARACTER SET UTF8;\n\n\n\n  \n  \n    \n  \n\n\nMaster1 정보확인\n이제 리플리케이션 설정에 필요한 Master 정보를 확인합니다.\n\nmysql&gt; show variables like 'server_id';\nmysql&gt; show master status;\n\n\n\n[show master status] 명령으로 확인한 [File], [Position] 정보는 아래쪽에서 Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야 합니다.\n\n\n\n  \n  \n    \n  \n\n\nDB 백업 파일 슬레이브 장비로 전송\ntestdb1 DB의 백업파일을 생성하고, 슬레이브 서버로 전송합니다.\n\n~# mkdir /data\n~# cd /data\n~# mysqldump -u root -p --databases testdb1 &gt; /data/test1.sql \n\n#슬레이브 서버에 전송.\n~# scp test1.sql root@10.0.0.8:/data\n\n\n\n  \n  \n    \n  \n\n\nMaster2 장비 구성\n\nMaster2 설정 추가\n\n  /etc/my.cnf에 Master2 설정을 추가합니다.\n\n\n~# vi /etc/my.cnf\n\nserver-id = 2\nlog-bin = mysql-bin\nbinlog_format = mixed\ncharacter-set-server = utf8\n\n#DB를 재시작하여 변경사항 적용.\n~# systemctl restart mysqld\n\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 계정 생성\nMySQL 접속 후 리플리케이션을 진행할 계정 생성합니다.\n\n#master2 계정 생성.\nmysql&gt; create user '리플리케이션 계정명'@'%' identified by '패스워드';\nmysql&gt; grant replication slave,replication client on *.* to '리플리케이션 계정명'@'%';\nmysql&gt; flush privileges;\n\n\n\n  \n  \n    \n  \n\n\n테스트 DB 생성\n다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.\n\nmysql&gt; CREATE DATABASE testdb2 default CHARACTER SET UTF8;\n\n\n\n  \n  \n    \n  \n\n\nMaster2 정보확인\n마찬가지로 리플리케이션 설정에 필요한 Master 정보를 확인합니다.\n\nmysql&gt; show variables like 'server_id';\nmysql&gt; show master status;\n\n\n\n[show master status] 명령으로 확인한 [File], [Position] 정보는 아래쪽에서 Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야 합니다.\n\n\n\n  \n  \n    \n  \n\n\nDB 백업 파일 슬레이브 장비로 전송\ntestdb2 DB의 백업파일 생성하고, 슬레이브 서버로 전송합니다.\n\n~# mkdir /data\n~# cd /data\n~# mysqldump -u root -p --databases testdb2 &gt; /data/test2.sql\n\n~# scp test2.sql root@10.0.0.8:/data\n\n\n\n  \n  \n    \n  \n\n\nSlave 장비 구성\n\nSlave 설정 추가\n\n  /etc/my.cnf에 Slave 설정을 추가합니다.\nMySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.\n\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 \n      \n  \n\n\n  \n      \n~# vi /etc/my.cnf\n\n### MySQL5.7 기준 ###\n\nserver-id = 3 \n\n#리플리케이션 대상 디비 설정.\nreplicate-do-db = testdb1\nreplicate-do-db = testdb2\n\n#리플리케이션 제외 디비 설정.\nreplicate-ignore-db = information_schema\nreplicate-ignore-db = mysql\nreplicate-ignore-db = performance_schema\nreplicate-ignore-db = sys\n\nmaster_info_repository = 'TABLE'\nrelay_log_info_repository = 'TABLE'\nslave-skip-errors = all\n\n#DB를 재시작하여 변경사항 적용.\n~# systemctl restart mysqld\n\n\n  \n      \n~# vi /etc/my.cnf\n\n### MySQL 8 기준 ###\n\nserver-id = 3 \n\n# 리플리케이션 대상 디비 설정 (replicate-do-db = 채널명:DB명)\nreplicate-do-db = ch_testdb1:testdb1\nreplicate-do-db = ch_testdb1:testdb2\n\n#리플리케이션 제외 디비 설정.\nreplicate-ignore-db = information_schema\nreplicate-ignore-db = mysql\nreplicate-ignore-db = performance_schema\nreplicate-ignore-db = sys\n\nslave-skip-errors = all\n\n#DB를 재시작하여 변경사항 적용.\n~# systemctl restart mysqld\n\n\n  \n\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\nDB 복구 진행\n먼저 복구할 DB를 미리 생성하고 Master1, Master2 장비에서 전송 받은 백업 파일을 사용해 DB를 복구합니다.\n#복구할 DB 생성.\nmysql&gt; create database testdb1;\nmysql&gt; create database testdb2;\nmysql&gt; quit\n\n#DB 복구\n~# mysql -u root -p testdb1 &lt; /data/test1.sql\n~# mysql -u root -p testdb2 &lt; /data/test2.sql\n\n\n\n  \n  \n    \n  \n\n\n\n  백업 파일을 전송 받은 디렉토리로 이동해 백업 파일이 정상적으로 전송되었는지 확인합니다.\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 채널 설정\n리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.\n채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 ~ 8.0.22 \n      \n  \n      \n          MySQL 8.0.23 ~ \n      \n  \n\n\n  \n      \n# MySQL 5.7\nmysql&gt; CHANGE MASTER TO MASTER_HOST='마스터IP', MASTER_PORT=포트번호, MASTER_USER='생성한 리플리케이션 계정명', MASTER_PASSWORD='패스워드', MASTER_LOG_FILE='위에서 확인된 File명', MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL '채널 이름';\n\n\n  \n      \n# MySQL 8.0 ~ 8.0.22\nmysql&gt; CHANGE MASTER TO MASTER_HOST='마스터IP', MASTER_PORT=포트번호, MASTER_USER='생성한 리플리케이션 계정명', MASTER_PASSWORD='패스워드', GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE='위에서 확인된 File명', MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL '채널 이름';\n\n\n  \n      \n# MySQL 8.0.23 이후 버전\nmysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST='마스터IP', SOURCE_PORT=포트번호, SOURCE_USER='생성한 리플리케이션 계정명', SOURCE_PASSWORD='패스워드', GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE='위에서 확인된 File명', SOURCE_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL 'ch_testdb1';\n\n\n  \n\n\n여기에 필요한 정보 중에서 [MASTER_LOG_FILE(SOURCE_LOG_FILE)]과 [MASTER_LOG_POS(SOURCE_LOG_POS)]은 위쪽에서 확인한 Master DB들의 정보에 나타났던 것으로 정리하면 다음과 같습니다.\n\n\n\n\n  \n    \n      DB\n      File\n      Position\n    \n  \n  \n    Master1mysql-bin.0000011321\n    Master2mysql-bin.000002970\n  \n    \n\n\n\nMaster 서버 정보 입력\nSlave 서버에 Master 서버 정보를 하나씩 입력합니다.\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 ~ 8.0.22 \n      \n  \n      \n          MySQL 8.0.23 ~ \n      \n  \n\n\n  \n      \n#Master1\nmysql&gt; CHANGE MASTER TO MASTER_HOST='10.0.0.6', MASTER_USER='testuser', MASTER_PORT=3306, MASTER_PASSWORD='Test123$', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=1321 FOR CHANNEL 'ch_testdb1';\n\n#Master2\nmysql&gt; CHANGE MASTER TO MASTER_HOST='10.0.0.7', MASTER_USER='testuser', MASTER_PORT=3306, MASTER_PASSWORD='Test123$', MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=970 FOR CHANNEL 'ch_testdb2';\n\nmysql&gt; FLUSH PRIVILEGES;\n\n\n  \n      \n#Master1\nmysql&gt; CHANGE MASTER TO MASTER_HOST='10.0.0.6', MASTER_USER='testuser', MASTER_PORT=3306, MASTER_PASSWORD='Test123$', GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=1321 FOR CHANNEL 'ch_testdb1';\n\n#Master2\nmysql&gt; CHANGE MASTER TO MASTER_HOST='10.0.0.7', MASTER_USER='testuser', MASTER_PORT=3306, MASTER_PASSWORD='Test123$', GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=970 FOR CHANNEL 'ch_testdb2';\n\nmysql&gt; FLUSH PRIVILEGES;\n\n\n  \n      \n#Master1\nmysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST='10.0.0.6', SOURCE_PORT=3306, SOURCE_USER='testuser', SOURCE_PASSWORD='Test!@123', GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE='mysql-bin.000001', SOURCE_LOG_POS=1321 FOR CHANNEL 'ch_testdb1';\n\n#Master2\nmysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST='10.0.0.7', SOURCE_PORT=3306, SOURCE_USER='testuser', SOURCE_PASSWORD='Test!@123', GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE='mysql-bin.000001', SOURCE_LOG_POS=970 FOR CHANNEL 'ch_testdb2';\n\nmysql&gt; FLUSH PRIVILEGES;\n\n\n  \n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 채널 시작\n리플리케이션 시작 후 에러가 없는지 확인합니다.\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 \n      \n  \n\n\n  \n      \n#MySQL 5.7 기준\nmysql&gt; start slave for channel 'ch_testdb1'; \nmysql&gt; start slave for channel 'ch_testdb2';\n\nmysql&gt; show slave status for channel 'ch_testdb1'\\G \nmysql&gt; show slave status for channel 'ch_testdb2'\\G\n\n\n  \n      \n#MySQL 8 기준\nmysql&gt; start replica for channel 'ch_testdb1'; \nmysql&gt; start replica for channel 'ch_testdb2';\n\nmysql&gt; show replica status for channel 'ch_testdb1'\\G \nmysql&gt; show replica status for channel 'ch_testdb2'\\G\n\n\n  \n\n\n\n  Master1\n상태 확인에서는 [Slave_IO_State], [Slave_IO_Running], [Slave_SQL_Running] 항목들이 아래와 같이 되어 있으면 정상입니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Master2\n상태 확인에서는 [Slave_IO_State], [Slave_IO_Running], [Slave_SQL_Running] 항목들이 아래와 같이 되어 있으면 정상입니다.\n\n\n\n  \n  \n    \n  \n\n\n리플리케이션 테스트\n리플리케이션 설정을 모두 마친 후에 Master 서버들에서 DB 작업을 진행하고, Slave 서버에 해당 내용이 복제되는지 확인해보겠습니다.\n\n\n  Master1 서버 작업\nMaster1 서버에 테스트를 위한 [sampletable] Table을 생성합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Slave 서버 확인\nSlave 서버에서 testdb1 DB에 sampletable Table이 복제되었는지 확인합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Master2 서버 작업\nMaster2 서버에 테스트를 위한 [sampletable] Table을 생성합니다.\n\n\n  \n  \n    \n  \n\n\n\n  Slave 서버 확인\nSlave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인합니다.\n\n\n  \n  \n    \n  \n\n\n버전별 명령어 비교\n\n\n  \n      \n          MySQL 5.7 \n      \n  \n      \n          MySQL 8.0 ~ 8.0.22 \n      \n  \n      \n          MySQL 8.0.23 ~ \n      \n  \n\n\n  \n      \n\n\n  \n    \n      MySQL 5.7\n      리플리케이션 명령어\n    \n  \n  \n    \n      채널 설정\n      CHANGE MASTER TO MASTER_HOST='마스터IP', MASTER_PORT=포트번호, MASTER_USER='생성한 리플리케이션 계정명', MASTER_PASSWORD='패스워드', MASTER_LOG_FILE='위에서 확인된 File명', MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL '채널 이름';\n    \n    채널 시작START SLAVE FOR CHANNEL \"채널이름\";\n    채널 중지STOP SLAVE FOR CHANNEL \"채널이름\";\n    채널 상태 확인SHOW SLAVE STATUS FOR CHANNEL \"채널이름\";\n    채널 정보 삭제RESET SLAVE ALL FOR CHANNEL \"채널이름\";\n  \n  \n\n\n  \n      \n\n\n  \n    \n      MySQL 5.7\n      리플리케이션 명령어\n    \n  \n  \n    \n      채널 설정\n      CHANGE MASTER TO MASTER_HOST='마스터IP', MASTER_PORT=포트번호, MASTER_USER='생성한 리플리케이션 계정명', MASTER_PASSWORD='패스워드', GET_Master_PUBLIC_KEY=1, MASTER_LOG_FILE='위에서 확인된 File명', MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL '채널 이름';\n    \n    채널 시작START SLAVE FOR CHANNEL \"채널이름\";\n    채널 중지STOP SLAVE FOR CHANNEL \"채널이름\";\n    채널 상태 확인SHOW SLAVE STATUS FOR CHANNEL \"채널이름\";\n    채널 정보 삭제RESET SLAVE ALL FOR CHANNEL \"채널이름\";\n  \n  \n\n\n  \n      \n\n\n  \n    \n      MySQL 8.0\n      리플리케이션 명령어\n    \n  \n  \n    \n      채널 설정\n      CHANGE REPLICATION SOURCE TO SOURCE_HOST='마스터IP', SOURCE_PORT=포트번호, SOURCE_USER='생성한 리플리케이션 계정명', SOURCE_PASSWORD='패스워드', GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE='위에서 확인된 File명', SOURCE_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL 'ch_testdb1';\n    \n    채널 시작START REPLICA FOR CHANNEL \"채널이름\";\n    채널 중지STOP REPLICA FOR CHANNEL \"채널이름\";\n    채널 상태 확인SHOW REPLICA STATUS FOR CHANNEL \"채널이름\";\n    채널 정보 삭제RESET REPLICA ALL FOR CHANNEL \"채널이름\";\n  \n  \n\n\n  \n\n\n참고 URL\n\n  MySQL 5.7 Multi-Source Replication 가이드\n    \n      https://dev.mysql.com/doc/refman/5.7/en/replication-multi-source.html\n    \n  \n  MySQL 8.0 Multi-Source Replication 가이드\n    \n      https://dev.mysql.com/doc/refman/8.0/en/replication-multi-source.html"
 					}
 					
 				
@@ -4318,7 +4321,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-         Site last generated: 2023-04-11 <br />        
+         Site last generated: 2023-04-18 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -4330,29 +4333,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container -->
         </div>
-    <!-- /.row -->
-</div>
-<!-- /.container -->
-</div>
-
-    <div class="side-banner-right">    
+        
+          <div class="side-banner-right">    
     <a href="https://hyphen.im/benefit/navercloud-event" id="side-banner-right-01" target="_blank" class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
-</div>  
-
-<!-- /#main -->
-    </div>
-<script>
-    $(function() {
-        $('svg').click(function() {
+</div>
+        
+        <!-- /#main -->
+      </div>
+      <script>
+        $(function() {
+          $('svg').click(function() {
             $(this).parent('form').submit();
+          });
         });
-    });
-</script>
+      </script>
 
-
-  
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+      
+        
+          <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4Q6RVEFJ3S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -4362,10 +4365,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   gtag('config', 'G-4Q6RVEFJ3S');
 </script>
 
-  
+        
 
-  
-  <!-- NCloud Real User Analytics -->
+        
+          <!-- NCloud Real User Analytics -->
 <script>
   (function() {
     var s = document.getElementsByTagName('script')[0]
@@ -4377,9 +4380,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   })();
 </script>
 
-  
-
-</body>
+        
+      
+    </body>
+  </body>
 </html>
-
 
