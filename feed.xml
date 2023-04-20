@@ -5,10 +5,413 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 18 Apr 2023 14:20:31 +0900</pubDate>
-        <lastBuildDate>Tue, 18 Apr 2023 14:20:31 +0900</lastBuildDate>
+        <pubDate>Thu, 20 Apr 2023 10:50:16 +0900</pubDate>
+        <lastBuildDate>Thu, 20 Apr 2023 10:50:16 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>MariaDB Multi Source Replication 구성 가이드</title>
+            <description>## 개요
+
+n대의 마스터 DB와 1대의 슬레이브 DB를 연결하여 마스터 DB들의 데이터를 슬레이브 DB 한곳에 모아 조회할 수 있는 Multi-Source-Replication(MSR)을 MariaDB에서 구성하는 방법을 정리해보겠습니다.
+
+## 테스트 준비
+
+- 마스터 서버 2대, 슬레이브 서버 1대 준비
+- 각 서버에 MariaDB 10.3 이상 설치
+- MariaDB 리플리케이션작업 진행 시 마스터 서버의 데이터베이스에 쓰기 작업 금지
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+## ACG 설정
+서버 준비가 끝났으면 우선 마스터 서버 &lt;i class=&quot;fa-solid fa-arrow-right&quot;&gt;&lt;/i&gt; 슬레이브 서버로 디비 백업 파일 복사과 복제 구성에 필요한 22, 3306 포트를 오픈해야 합니다.  
+오픈 할 때 규칙은 마스터 서버와 슬레이브 서버의 공통 ACG에 사설 IP 대역 전체를 지정할 수도 있고, 슬레이브 서버 전용 ACG에 마스터 서버 IP만 등록하는 방법도 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## Slave 장비에 백업 디렉토리 생성
+먼저 Slave 장비에 Master 장비들로 부터 DB 복원용 덤프 파일을 전송 받을 백업 디렉토리를 생성하는 것 부터 시작하겠습니다.
+
+```bash
+~# mkdir /data
+~# cd /data
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## Master1 장비 구성
+
+### Master1 설정 추가
+- **/etc/my.cnf.d/mariadb-server.cnf**에 Master1 설정을 추가합니다.
+- MariaDB 버전에 따라서는 **/etc/my.cnf.d/server.cnf** 인 경우도 있습니다.
+
+{% tabs master1_my_cnf %}
+
+{% tab master1_my_cnf MySQL 호환 %}
+```bash
+~# vi /etc/my.cnf.d/mariadb-server.cnf
+
+server-id = 1
+log-bin = mariadb-bin
+binlog_format = mixed
+character-set-server = utf8
+
+#MariaDB를 재시작해 변경사항 적용.
+~# systemctl restart mariadb
+```
+{% endtab %}
+
+{% tab master1_my_cnf MariaDB 전용 %}
+```bash
+~# vi /etc/my.cnf.d/mariadb-server.cnf
+
+log-bin
+server_id = 1
+log-basename = mariadb
+binlog-format = mixed
+character-set-server = utf8
+
+#MariaDB을 재시작해 변경사항 적용.
+~# systemctl restart mariadb
+```
+{% endtab %}
+
+{% endtabs %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-03.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-04.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### 리플리케이션 계정 생성
+MariaDB 접속 후 리플리케이션을 진행할 계정 생성
+
+```bash
+#master1 계정 생성.
+MariaDB [(none)]&gt; create user &apos;리플리케이션 계정명&apos;@&apos;%&apos; identified by &apos;패스워드&apos;;
+MariaDB [(none)]&gt; grant replication slave on *.* to &apos;리플리케이션 계정명&apos;@&apos;%&apos;;
+MariaDB [(none)]&gt; flush privileges;
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### 테스트 DB 생성
+다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.
+
+```bash
+MariaDB [(none)]&gt; CREATE DATABASE testdb1 default CHARACTER SET UTF8;
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### Master1 정보확인
+이제 리플리케이션 설정에 필요한 Master 정보를 확인합니다.
+
+```bash
+MariaDB [(none)]&gt; show variables like &apos;server_id&apos;;
+MariaDB [(none)]&gt; show master status;
+```
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
+[**show master status**] 명령으로 확인한 [**File**], [**Position**] 정보는 아래쪽에서 `Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야` 합니다.
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-06.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+### DB 백업 파일 슬레이브 장비로 전송
+testdb1 DB의 백업파일을 생성하고, 슬레이브 서버로 전송합니다.
+
+```bash
+~# mkdir /data
+~# cd /data
+~# mysqldump -u root -p --databases testdb1 &gt; /data/test1.sql 
+
+#슬레이브 서버에 전송.
+~# scp test1.sql root@10.0.0.8:/data
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## Master2 장비 구성
+
+### Master2 설정 추가
+- **/etc/my.cnf.d/mariadb-server.cnf**에 Master2 설정을 추가합니다.
+- MariaDB 버전에 따라서는 **/etc/my.cnf.d/server.cnf** 인 경우도 있습니다.
+
+{% tabs master2_my_cnf %}
+
+{% tab master2_my_cnf MySQL 호환 %}
+```bash
+~# vi /etc/my.cnf.d/mariadb-server.cnf
+
+server-id = 2
+log-bin = mariadb-bin
+binlog_format = mixed
+character-set-server = utf8
+
+#MariaDB을 재시작해 변경사항 적용.
+~# systemctl restart mariadb
+```
+{% endtab %}
+
+{% tab master2_my_cnf MariaDB 전용 %}
+```bash
+~# vi /etc/my.cnf.d/mariadb-server.cnf
+
+log-bin
+server_id = 2
+log-basename = mariadb
+binlog-format = mixed
+character-set-server = utf8
+
+#MariaDB을 재시작해 변경사항 적용.
+~# systemctl restart mariadb
+```
+{% endtab %}
+
+{% endtabs %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-09.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-10.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### 리플리케이션 계정 생성
+MariaDB 접속 후 리플리케이션을 진행할 계정 생성합니다.
+
+```bash
+#master2 계정 생성.
+MariaDB [(none)]&gt; create user &apos;리플리케이션 계정명&apos;@&apos;%&apos; identified by &apos;패스워드&apos;;
+MariaDB [(none)]&gt; grant replication slave on *.* to &apos;리플리케이션 계정명&apos;@&apos;%&apos;;
+MariaDB [(none)]&gt; flush privileges;
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### 테스트 DB 생성
+다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.
+
+```bash
+MariaDB [(none)]&gt; CREATE DATABASE testdb2 default CHARACTER SET UTF8;
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+### Master2 정보확인
+마찬가지로 리플리케이션 설정에 필요한 Master 정보를 확인합니다.
+
+```bash
+MariaDB [(none)]&gt; show variables like &apos;server_id&apos;;
+MariaDB [(none)]&gt; show master status;
+```
+
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
+[**show master status**] 명령으로 확인한 [**File**], [**Position**] 정보는 아래쪽에서 `Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야` 합니다.
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-12.png&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+### DB 백업 파일 슬레이브 장비로 전송
+testdb2 DB의 백업파일 생성하고, 슬레이브 서버로 전송합니다.
+
+```bash
+~# mkdir /data
+~# cd /data
+~# mysqldump -u root -p --databases testdb2 &gt; /data/test2.sql
+
+~# scp test2.sql root@10.0.0.8:/data
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## Slave 장비 구성
+
+### Slave 설정 추가
+- **/etc/my.cnf.d/mariadb-server.cnf**에 Slave 설정을 추가합니다.  
+- MariaDB 버전에 따라서는 **/etc/my.cnf.d/server.cnf** 인 경우도 있습니다.
+
+```bash
+~# vi /etc/my.cnf.d/mariadb-server.cnf
+
+server-id = 3 
+
+#리플리케이션 대상 디비 설정.
+replicate-do-db = testdb1
+replicate-do-db = testdb2
+
+#리플리케이션 제외 디비 설정.
+replicate-ignore-db = information_schema
+replicate-ignore-db = mysql
+replicate-ignore-db = performance_schema
+replicate-ignore-db = sys
+
+slave-skip-errors = all
+
+#DB를 재시작하여 변경사항 적용.
+~# systemctl restart mariadb
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-16.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-17.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+### DB 복구 진행
+먼저 복구할 DB를 미리 생성하고 Master1, Master2 장비에서 전송 받은 백업 파일을 사용해 DB를 복구합니다.
+```bash
+#복구할 DB 생성.
+MariaDB [(none)]&gt; create database testdb1;
+MariaDB [(none)]&gt; create database testdb2;
+MariaDB [(none)]&gt; quit
+
+#DB 복구
+~# mysql -u root -p testdb1 &lt; /data/test1.sql
+~# mysql -u root -p testdb2 &lt; /data/test2.sql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+- 백업 파일을 전송 받은 디렉토리로 이동해 백업 파일이 정상적으로 전송되었는지 확인합니다.
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-19.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+- 백업 파일을 사용해 DB를 복구합니다.
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## 리플리케이션 채널 설정
+리플리케이션 채널을 설정하는 쿼리문은 다음과 같은데, MySQL과는 일부 다른 부분이 있으니 잘 확인하고 사용해야 합니다.
+
+```bash
+MariaDB [(none)]&gt; CHANGE MASTER &apos;커넥션 이름&apos; TO MASTER_HOST=&apos;마스터IP&apos;, MASTER_PORT=포트번호, MASTER_USER=&apos;생성한 리플리케이션 계정명&apos;, MASTER_PASSWORD=&apos;패스워드&apos;, MASTER_LOG_FILE=&apos;위에서 확인된 File명&apos;, MASTER_LOG_POS=위에서 확인된 Position 번호;
+```
+
+
+여기에 필요한 정보 중에서 [**MASTER_LOG_FILE**]과 [**MASTER_LOG_POS**]은 위쪽에서 확인한 Master DB들의 정보에 나타났던 것으로 정리하면 다음과 같습니다.
+
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;div class=&quot;col-sm-6&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;DB&lt;/th&gt;
+      &lt;th&gt;File&lt;/th&gt;
+      &lt;th&gt;Position&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Master1&lt;/td&gt;&lt;td&gt;mariadb-bin.000001&lt;/td&gt;&lt;td&gt;939&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Master2&lt;/td&gt;&lt;td&gt;mariadb-bin.000002&lt;/td&gt;&lt;td&gt;939&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;    
+&lt;/div&gt;
+&lt;/div&gt;
+
+### Master 서버 정보 입력
+다음의 예시처럼 Slave 서버에 Master 서버 정보를 하나씩 입력합니다.
+
+```bash
+#Master1 예시
+MariaDB [(none)]&gt; CHANGE MASTER &apos;ch_testdb1&apos; TO MASTER_HOST=&apos;10.0.0.6&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, MASTER_LOG_FILE=&apos;mariadb-bin.000001&apos;, MASTER_LOG_POS=939;
+
+#Master2 예시
+MariaDB [(none)]&gt; CHANGE MASTER &apos;ch_testdb2&apos; TO MASTER_HOST=&apos;10.0.0.7&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, MASTER_LOG_FILE=&apos;mariadb-bin.000002&apos;, MASTER_LOG_POS=939;
+
+MariaDB [(none)]&gt; FLUSH PRIVILEGES;
+```
+
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-21.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+
+### 리플리케이션 채널 시작
+리플리케이션 시작 후 에러가 없는지 확인합니다.  
+
+```bash
+# start slave &apos;커넥션명&apos;;
+MariaDB [(none)]&gt; start slave &apos;ch_testdb1&apos;; 
+MariaDB [(none)]&gt; start slave &apos;ch_testdb2&apos;;
+
+# show slave &apos;커넥션명&apos; status\G
+MariaDB [(none)]&gt; show slave &apos;ch_testdb1&apos; status\G 
+MariaDB [(none)]&gt; show slave &apos;ch_testdb2&apos; status\G
+```
+
+
+- Master1  
+상태 확인에서는 [**Slave_IO_State**], [**Slave_IO_Running**], [**Slave_SQL_Running**] 항목들이 아래와 같이 되어 있으면 정상입니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-22.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+- Master2  
+상태 확인에서는 [**Slave_IO_State**], [**Slave_IO_Running**], [**Slave_SQL_Running**] 항목들이 아래와 같이 되어 있으면 정상입니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-23.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## 리플리케이션 테스트
+리플리케이션 설정을 모두 마친 후에 Master 서버들에서 DB 작업을 진행하고, Slave 서버에 해당 내용이 복제되는지 확인해보겠습니다.
+
+- Master1 서버 작업  
+Master1 서버에 테스트를 위한 [**sampletable1**] Table을 생성합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-24.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+-  Slave 서버 확인  
+Slave 서버에서 testdb1 DB에 sampletable1 Table이 복제되었는지 확인합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-25.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+-  Master2 서버 작업  
+Master2 서버에 테스트를 위한 [**sampletable2**] Table을 생성합니다.
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-26.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+- Slave 서버 확인  
+Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인합니다.
+{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-27.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
+
+## 리플리케이션 명령어 모음
+
+&lt;div&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th width=&quot;110px&quot;&gt;&lt;/th&gt;
+      &lt;th&gt;리플리케이션 명령어&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;채널 설정&lt;/td&gt;
+      &lt;td style=&quot;font-size:0.75em;line-height:130%;&quot;&gt;CHANGE MASTER &apos;커넥션 이름&apos; TO MASTER_HOST=&apos;마스터IP&apos;, MASTER_PORT=포트번호, MASTER_USER=&apos;생성한 리플리케이션 계정명&apos;, MASTER_PASSWORD=&apos;패스워드&apos;, MASTER_LOG_FILE=&apos;위에서 확인된 File명&apos;, MASTER_LOG_POS=위에서 확인된 Position 번호;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 시작&lt;/td&gt;&lt;td&gt;START SLAVE &quot;커넥션 이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 중지&lt;/td&gt;&lt;td&gt;STOP SLAVE &quot;커넥션 이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 상태 확인&lt;/td&gt;&lt;td&gt;SHOW SLAVE &quot;커넥션 이름&quot; STATUS\G&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;채널 정보 삭제&lt;/td&gt;&lt;td&gt;RESET SLAVE &quot;커넥션 이름&quot;;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+
+## 참고 URL
+1. MariaDB Replication 기본 설정 가이드
+	- &lt;a href=&quot;https://mariadb.com/kb/en/setting-up-replication/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mariadb.com/kb/en/setting-up-replication/&lt;/a&gt;
+
+1. MariaDB Multi-Source Replication 가이드
+	- &lt;a href=&quot;https://mariadb.com/kb/en/multi-source-replication/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mariadb.com/kb/en/multi-source-replication/&lt;/a&gt;  </description>
+            <pubDate>Thu, 20 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/database/ncloud-database-mariadb-multi-source-replication.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mariadb-multi-source-replication.html</guid>
+            
+            <category>database</category>
+            
+            <category>backup</category>
+            
+            <category>mariadb</category>
+            
+            
+        </item>
         
         <item>
             <title>Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법</title>
@@ -2050,262 +2453,6 @@ composer require aws/aws-sdk-php
             <pubDate>Mon, 06 Mar 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-bucket-cors-setting-api-sdk-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-bucket-cors-setting-api-sdk-guide.html</guid>
-            
-            <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Object Storage Bucket에 CORS 설정하기</title>
-            <description>## 개요 
-Object Storage를 이용해 서비스 개발을 하다 보면 CORS 와 관련된 오류와 종종 마주치게 되는데, 테스트 버킷과 사이트를 생성해서 해결 방법을 알아보겠습니다.
-그리고, Ncloud(네이버 클라우드) Object Storage의 CORS 설정은 콘솔이 아닌, CLI와 외부 Client Tool 등을 사용해야 하는데 각각의 방법을 차례로 소개합니다.
-
-{% include tip.html title=&quot;CORS&quot; content=&quot;CORS(Cross-Origin Resource Sharing)는 웹 애플리케션이 서비스되는 도메인에서 다른 도메인에 있는 리소스를 접근해야 할 때 리소스에 대한 접근 허용, 제한 등에 대한 방법을 정의합니다.&quot; %}
-
-## 테스트 방법
-1. Object Storage에 **cors-test** 라는 이름의 버킷 생성
-2. **http://cors-test.com** 라는 테스트 사이트 준비
-3. 버킷에 **http://cors-test.com** 도메인에서 접속 가능하도록 CORS 설정
-4. Javascript를 이용해 **cors-test** 버킷에 있는 파일이 호출되는지 확인
-5. 버킷 CORS 설정을 변경하여 **http://cors-test.com** 도메인에서는 접속하지 못하게 설정
-6. **cors-test** 버킷에 있는 파일 호출이 차단되는지 확인
-
-
-## CORS 구성 요소
-CORS는 아래와 같은 요소들로 구성되어 있습니다.
-
-- AllowedHeader : 리소스를 요청할 때 사용할 수 있는 Header
-- AllowedMethod : 리소스를 요청할 때 허용된 Method
-- AllowedOrigin : 접근 허용된 Origin 도메인
-- ExposeHeader : 응답에서 접근이 허용된 Header
-- MaxAgeSeconds : 지정한 리소스에 해당하는 프리플라이트(pre-flight) OPTIONS 요청에 대한 최대 응답 시간 
-
-## CLI 사용
-Ncloud는 Object Storage CLI 접속 시 AWS CLI를 이용해 접속하게 되는데, 자세한 사용 방법은 아래 링크 문서에서 확인 가능합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/storage/ncloud_storage_object_storage_aws_cli_connect.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;AWS CLI를 이용한 Object Storage 접속 방법&lt;/a&gt;
-&quot; %}
-
-### json 파일 생성
-CLI를 사용하기 위해 먼저 간단하게 GET, PUT Method로 접근가능 하게 하는 CORS 설정을 입력한 별도의 json 파일을 생성 합니다. 여기서는 cors-test.json 이라는 이름으로 저장하겠습니다.
-
-``` json
-{
-  &quot;CORSRules&quot;: 
-  [
-    {
-      &quot;AllowedHeaders&quot;: [
-        &quot;*&quot;
-      ],
-      &quot;AllowedMethods&quot;: [
-        &quot;GET&quot;,
-        &quot;PUT&quot;
-      ],
-      &quot;AllowedOrigins&quot;: [
-        &quot;http://cors-test.com&quot;
-      ],           
-      &quot;MaxAgeSeconds&quot;: 3000
-    }
-  ]
-}
-```
-
-json 형식에 대해서는 아래의 링크를 참조 합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/ManageCorsUsing.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;AWS - CORS 구성&lt;/a&gt;
-&quot; %}
-
-json파일을 생성 하였으면 아래와 같은 형식으로 **CORS 규칙 설정을 버킷에 적용하는 명령어**를 입력 합니다. 여기서는 테스트를 위해 미리 [**cors-test**] 라는 이름의 버킷을 생성해두었습니다.
-
-```bash
-# CORS 설정 입력 명령어 형식
-aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-bucket-cors --bucket &lt;버킷이름&gt; --cors-configuration file://&lt;json파일 경로&gt;
-
-# 예제
-aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-bucket-cors --bucket cors-test --cors-configuration file://cors-test.json
-```
-
-그런 다음 제대로 적용되었는지 확인 하기 위해 **버킷의 CORS 설정을 확인하는 명령어**를 실행합니다.
-
-``` bash
-# CORS 설정 조회 명령어 형식
-aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --bucket &lt;버킷이름&gt;
-
-# 예제
-aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --bucket cors-test
-```
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## S3 Browser 사용 
-외부 Client Tool중에서 CORS 설정이 가능한 것은 S3 Browser 이며, 자세한 사용 방법은 아래의 링크 문서를 참고하시기 바랍니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/storage/ncloud_storage_object_storage_s3_client_s3browser.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Object Storage 접속용 Windows Client Tool - S3 Browser&lt;/a&gt;
-&quot; %}
-
-S3 브라우저에 접속 하신다음 CORS 설정 대상의 버킷에서 오른쪽 마우스 버튼을 클릭 합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-CORS Configuration 클릭하여 CORS 설정을 오픈하면 처음에는 아무 값도 설정되어 있지 않습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-04.png&quot; width=&quot;645&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### XML 형식의 설정 준비
-마찬가지로 GET, PUT Method로 접근 가능한 설정을 이번에는 XML 형식으로 입력하고 [**Apply**] 버튼을 클릭해서 적용합니다.
-
-``` xml
-&lt;CORSConfiguration&gt;
-  &lt;CORSRule&gt;
-    &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
-    &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;
-    &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;    
-    &lt;AllowedOrigin&gt;http://cors-test.com&lt;/AllowedOrigin&gt;        
-    &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
-  &lt;/CORSRule&gt;
-&lt;/CORSConfiguration&gt;
-```
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-05.png&quot; width=&quot;645&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 접속 테스트
-
-### 정상 접속 확인
-설정을 마친 후 Javascript를 사용해서 cors-test 버킷에 있는 파일을 호출해보면 아래와 같이 문제 없이 접속되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### CORS 변경
-접속 차단을 테스트 하기 위해 CORS 설정에서 AllowedOrigin 값을 임의의 **http://example.com** 으로 변경하겠습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-02.png&quot; width=&quot;645&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 접속 차단 확인
-설정을 변경한 후에 접속을 해보면 이전과는 다르게 아래와 같은 메시지가 나타나면서 접속이 차단된 것을 확인할 수 있습니다.
-
-{% include warning.html title=&quot;error&quot; content=&quot;
-Access to XMLHttpRequest at &apos;https://kr.object.ncloudstorage.com/cors-test/cors-test.txt&apos; from origin &lt;br /&gt;&apos;**http://cors-test.com**&apos; **has been blocked by CORS policy**: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.
-&quot; %}
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-bucket-cors-setting-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## CORS 예시
-
-### 예시 1
-아래 예시는 http://*.cors-test.com 즉, cors-test.com 도메인을 가진 모든 하위 도메인에 대해 허용할 요청 Method와 허용할 응답 헤더 값을 정의했습니다.
-
-``` json
-{
-  &quot;CORSRules&quot;: 
-  [
-    {    
-      &quot;AllowedHeaders&quot;: [
-        &quot;*&quot;
-      ],
-      &quot;AllowedMethods&quot;: [
-        &quot;PUT&quot;,
-        &quot;POST&quot;,
-        &quot;DELETE&quot;
-      ],
-      &quot;AllowedOrigins&quot;: [
-        &quot;http://*.cors-test.com&quot;
-      ],
-      &quot;ExposeHeaders&quot;: [
-        &quot;x-amz-server-side-encryption&quot;,
-        &quot;x-amz-request-id&quot;,
-        &quot;x-amz-id-2&quot;
-      ],
-      &quot;MaxAgeSeconds&quot;: 3000
-    }
-  ]
-}
-```
-
-``` xml
-&lt;CORSConfiguration&gt;
-  &lt;CORSRule&gt;
-    &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;   
-    &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
-    &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
-    &lt;AllowedMethod&gt;DELETE&lt;/AllowedMethod&gt;
-    &lt;AllowedOrigin&gt;http://*.cors-test.com&lt;/AllowedOrigin&gt;   
-    &lt;ExposeHeader&gt;x-amz-server-side-encryption&lt;/ExposeHeader&gt;
-    &lt;ExposeHeader&gt;x-amz-request-id&lt;/ExposeHeader&gt;
-    &lt;ExposeHeader&gt;x-amz-id-2&lt;/ExposeHeader&gt;
-    &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
-  &lt;/CORSRule&gt;
-&lt;/CORSConfiguration&gt;
-```
-
-### 예제 2
-아래 예제 2는 2가지 도메인에 대해 각각 다른 규칙을 정의했습니다.  
-먼저 http로 접속하는 www.cors-test.com 도메인에 대해서는 GET 방식의 요청만 허용하고,  
-다음 https로 접속하는 api.cors-test.com 도메인에 대해서는 PUT, POST, DELETE 요청을 허용하는 규칙입니다.
-
-``` json
-{
-  &quot;CORSRules&quot;: 
-  [
-    {
-      &quot;AllowedHeaders&quot;: [
-        &quot;*&quot;
-      ],
-      &quot;AllowedMethods&quot;: [
-        &quot;PUT&quot;,
-        &quot;POST&quot;,
-        &quot;DELETE&quot;
-      ],
-      &quot;AllowedOrigins&quot;: [
-        &quot;https://api.cors-test.com&quot;
-      ]
-    },
-    {
-      &quot;AllowedMethods&quot;: [
-        &quot;GET&quot;
-      ],
-      &quot;AllowedOrigins&quot;: [
-        &quot;http://www.cors-test.com&quot;
-      ]
-    }
-  ]
-}
-```
-
-``` xml
-&lt;CORSConfiguration&gt;
-  &lt;CORSRule&gt;
-    &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
-    &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
-    &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
-    &lt;AllowedMethod&gt;DELETE&lt;/AllowedMethod&gt;
-    &lt;AllowedOrigin&gt;http://api.cors-test.com&lt;/AllowedOrigin&gt;
-  &lt;/CORSRule&gt;
-  &lt;CORSRule&gt;
-    &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;
-    &lt;AllowedOrigin&gt;http://www.cors-test.com&lt;/AllowedOrigin&gt;
-  &lt;/CORSRule&gt;
-&lt;/CORSConfiguration&gt;
-```
-
-
-## 참고 URL
-1. Object Storage CLI 가이드
-	- &lt;a href=&quot;https://cli.ncloud-docs.com/docs/guide-objectstorage&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://cli.ncloud-docs.com/docs/guide-objectstorage&lt;/a&gt;
-
-2. AWS CLI를 이용한 Object Storage 접속 방법
-	- &lt;a href=&quot;/storage/ncloud_storage_object_storage_aws_cli_connect.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_aws_cli_connect.html&lt;/a&gt;	
-
-3. Object Storage 접속용 Windows Client Tool - S3 Browser
-	- &lt;a href=&quot;/storage/ncloud_storage_object_storage_s3_client_s3browser.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html&lt;/a&gt;		</description>
-            <pubDate>Thu, 23 Feb 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-bucket-cors-setting-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-bucket-cors-setting-guide.html</guid>
             
             <category>storage</category>
             

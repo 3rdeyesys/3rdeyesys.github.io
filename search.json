@@ -292,6 +292,17 @@
 
 
 {
+"title": "MariaDB Multi Source Replication 구성 가이드",
+"tags": "databasebackupmariadb",
+"keywords": "Database, 복제, Backup, 이중화, 고가용성, Master, Slave",
+"url": "/database/ncloud-database-mariadb-multi-source-replication.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Rocky Linux 서버에 MySQL 5.7 설치하는 방법",
 "tags": "databasemysqlinstall",
 "keywords": "Database, 록키 리눅스, 디비, install",
