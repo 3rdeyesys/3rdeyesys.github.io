@@ -134,13 +134,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
 
     
-      
-        <script
+      <script
   async
   src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933218466698885"
   crossorigin="anonymous"></script>
-      
     
+
 
   </head>
   <body>
@@ -1773,9 +1772,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Content Column -->
             <div class="col-md-9" id="tg-sb-content">
               <div class="post-header">
-
-   <h1 class="post-title-main">MariaDB Multi Source Replication 구성 가이드</h1>
-
+  
+    <h1 class="post-title-main">MariaDB Multi Source Replication 구성 가이드</h1>
+  
 </div>
 
 
@@ -1783,13 +1782,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="post-content" >
 
-   
-   
-    <div class="summary">Ncloud에서 MariaDB Multi Source Replication 구성하는 방법에 대한 상세 가이드입니다</div>
-   
-   
-
+  
     
+      <div class="summary">Ncloud에서 MariaDB Multi Source Replication 구성하는 방법에 대한 상세 가이드입니다</div>
+    
+  
+
+  
     
 <!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
 <script>
@@ -1822,9 +1821,9 @@ $("#toc_onoff").click(function() {
 
 
 
-    
+  
 
-   <h2 id="개요">개요</h2>
+  <h2 id="개요">개요</h2>
 
 <p>n대의 마스터 DB와 1대의 슬레이브 DB를 연결하여 마스터 DB들의 데이터를 슬레이브 DB 한곳에 모아 조회할 수 있는 Multi-Source-Replication(MSR)을 MariaDB에서 구성하는 방법을 정리해보겠습니다.</p>
 
@@ -1876,7 +1875,7 @@ $("#toc_onoff").click(function() {
   <li>MariaDB 버전에 따라서는 <strong>/etc/my.cnf.d/server.cnf</strong> 인 경우도 있습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="a3af51ac-2d50-45db-a7e0-d57297279f6f" data-name="master1_my_cnf">
+<ul class="tab" data-tab="602f41c0-389a-4831-b7fc-369005b314c3" data-name="master1_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 호환 </a>
@@ -1887,7 +1886,7 @@ $("#toc_onoff").click(function() {
       </li>
   
 </ul>
-<ul class="tab-content" id="a3af51ac-2d50-45db-a7e0-d57297279f6f" data-name="master1_my_cnf">
+<ul class="tab-content" id="602f41c0-389a-4831-b7fc-369005b314c3" data-name="master1_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf.d/mariadb-server.cnf
@@ -2005,7 +2004,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]&gt;</span> show master s
   <li>MariaDB 버전에 따라서는 <strong>/etc/my.cnf.d/server.cnf</strong> 인 경우도 있습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="d8217279-80fc-4d53-a5d3-194837e6b79e" data-name="master2_my_cnf">
+<ul class="tab" data-tab="6aafd34c-508a-4368-b6b4-90a6ffb7053c" data-name="master2_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 호환 </a>
@@ -2016,7 +2015,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]&gt;</span> show master s
       </li>
   
 </ul>
-<ul class="tab-content" id="d8217279-80fc-4d53-a5d3-194837e6b79e" data-name="master2_my_cnf">
+<ul class="tab-content" id="6aafd34c-508a-4368-b6b4-90a6ffb7053c" data-name="master2_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf.d/mariadb-server.cnf
@@ -2373,31 +2372,53 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
   </li>
 </ol>
 
-   
+  
     <div class="tags">
-        
-        <b>Tags: </b>
-        
-        
-        
-        <a href="/tag/tag_database.html" class="btn btn-default navbar-btn cursorNorm" role="button">database</a>
+      
+        <b>Tags:
+        </b>
         
         
+          
+            <a
+              href="/tag/tag_database.html"
+              class="btn btn-default navbar-btn cursorNorm"
+              role="button">database</a>
+          
         
-        <a href="/tag/tag_backup.html" class="btn btn-default navbar-btn cursorNorm" role="button">backup</a>
+          
+            <a
+              href="/tag/tag_backup.html"
+              class="btn btn-default navbar-btn cursorNorm"
+              role="button">backup</a>
+          
         
+          
+            <a
+              href="/tag/tag_mariadb.html"
+              class="btn btn-default navbar-btn cursorNorm"
+              role="button">mariadb</a>
+          
         
-        
-        <a href="/tag/tag_mariadb.html" class="btn btn-default navbar-btn cursorNorm" role="button">mariadb</a>
-        
-        
-        
+      
     </div>
-   
+  
 
 </div>
 
 <hr class="shaded"/>
+
+<!-- docs-body-bottom -->
+<ins
+  class="adsbygoogle"
+  style="display:block"
+  data-ad-client="ca-pub-6933218466698885"
+  data-ad-slot="6166392790"
+  data-ad-format="auto"
+  data-full-width-responsive="true"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <footer>
     <div class="row">
@@ -2425,13 +2446,12 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-20<br/> Site last generated: 2023-04-20 <br />        
+        <span>Page last updated:</span> 2023-04-20<br/> Site last generated: 2023-04-24 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
     </div>
 </footer>
-
 
 
 
@@ -2443,8 +2463,25 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
           <!-- /.container -->
         </div>
         
-          <div class="side-banner-right">    
-    <a href="https://hyphen.im/benefit/navercloud-event" id="side-banner-right-01" target="_blank" class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
+          <div class="side-banner-left">
+  <!-- docs-sidebar-left -->
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-6933218466698885"
+    data-ad-slot="3163156637"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+          <div class="side-banner-right">
+  <a
+    href="https://hyphen.im/benefit/navercloud-event"
+    id="side-banner-right-01"
+    target="_blank"
+    class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
 </div>
         
         <!-- /#main -->

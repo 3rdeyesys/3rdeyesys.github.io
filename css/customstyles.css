@@ -1561,13 +1561,15 @@ height: 250px;
 }
 .carousel-title a { color:#FFF; text-decoration:none}
 
-.side-banner-right{
-    /* 
+.side-banner-left{   
     position:fixed;
-    top:100px;
-    right:50px;
+    top: 100px;
+    margin-left: -300px;
+    text-align: center;
     width:230px;
-    */
+}
+
+.side-banner-right{   
     position:fixed;
     top: 100px;
     margin-left: 1150px;
