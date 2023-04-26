@@ -5,117 +5,736 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 24 Apr 2023 11:49:14 +0900</pubDate>
-        <lastBuildDate>Mon, 24 Apr 2023 11:49:14 +0900</lastBuildDate>
+        <pubDate>Wed, 26 Apr 2023 11:31:49 +0900</pubDate>
+        <lastBuildDate>Wed, 26 Apr 2023 11:31:49 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
         <item>
-            <title>Ncloud 방화벽 ACG 설정 기본 가이드</title>
+            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
             <description>## 개요
-ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스로 AWS에서는 비슷하게 Security Group이라는 것이 있습니다.
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
 
-## 제한 사항
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
 
-### VPC 환경
-- VPC당 최대 **500개**까지 ACG 생성 가능
-- **NIC당 3개의 ACG**를 허용
-- Inbound / Outbound 각각 **50개의 규칙** 생성 가능
+## SSL VPN 서비스 위치
+Ncloud 콘솔에서 SSL VPN의 위치는 [**Services**] - [**Security**] - [**SSL VPN**]에 있습니다.
 
-### Classic 환경
-- 계정당 최대 **100개**까지 ACG를 생성 가능
-- 각 ACG에는 최대 **100개**까지의 규칙을 설정할 수 있음
-- 서버는 **최대 5개**의 ACG에 중복 포함될 수 있음
-- 서버가 생성될 시 선택한 ACG는 변경이 불가하며, 반납 전까지 해당 ACG 규칙을 적용 받게 됨
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
-{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;Classic 환경에서는 서버 자체에 할당되는 개념이었으나 VPC에는 NIC 즉, 네트워크 카드에 할당되는 개념이어서 VPC 환경에서는 **NIC 당 최대 3개**까지 ACG를 적용할 수 있습니다.&quot; %}
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
 
-## ACG 위치
-Ncloud 콘솔에서 ACG의 위치는 [**Services**] - [**Compute**] - [**Server**] - [**ACG**]에 있습니다.
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
-### VPC 환경
-{% include image.html file=&quot;security/ncloud-security-acg-guide-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
+VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
 
-{% include image.html file=&quot;security/ncloud-security-acg-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-03.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
-### Classic 환경
-{% include image.html file=&quot;security/ncloud-security-acg-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
+생성 완료까지 걸리는 시간은 **약 10~20분 이내** 이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
 
-{% include image.html file=&quot;security/ncloud-security-acg-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
+## SSL VPN 생성 완료 {#connection-url-check}
+SSL VPN 생성이 완료되면 아래와 같이 [**IP POOL**]과 [**접속 URL**] 정보를 확인할 수 있는데 SSL VPN Agent 접속 시에 중요한 정보이니 잘 확인해야 합니다.
 
-
-## 기본 규칙
-
-### Default ACG
-기본적으로 추가되는 ACG
-
-- 모든 들어오는 연결(inbound traffic)을 차단함
-- 모든 나가는 연결(outbound traffic)을 허용함
-- Default ACG 내 속한 서버들끼리의 네트워크 양방향 통신(TCP, UDP, ICMP)이 허용됨
-- 원격 접속 기본 포트 (**Linux - 22, Windows - 3389**)에 대한 TCP 허용됨
-
-#### VPC 화면
-
-##### Inbound (기본 설정)
-{% include image.html file=&quot;security/ncp_security_acg_vpc_inbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
-
-##### Inbound (권장 설정)
-{% include image.html file=&quot;security/ncp_security_acg_vpc_inbound_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-##### Outbound
-{% include image.html file=&quot;security/ncp_security_acg_vpc_outbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-#### Classic 화면 (기본 설정)
-{% include image.html file=&quot;security/ncp_security_acg_classic.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
-
-#### Classic 화면 (권장 설정)
-{% include image.html file=&quot;security/ncp_security_acg_classic_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-### Custom ACG
-Default ACG 이외에 사용자가 추가하는 ACG
-
-- 모든 inbound traffic을 차단함(규칙으로 명시되어 있지 않음)
-- 모든 outbound traffic을 허용함(규칙으로 명시되어 있지 않음)
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
 
-## 접근소스 설정
-ACG를 설정할 때 접근 소스 항목은 보통 IP주소를 입력하게 됩니다. 
-하지만 특수한 경우로 Load Balancer를 지정하거나 ACG 이름을 지정하는 경우도 있습니다. 
-이 중에서 다른 ACG를 접근 소스 항목으로 지정하는 경우는 해당 ACG가 적용된 서버들이 접근할 수 있도록 규칙을 설정하는 것인데, 아래 예시를 이용해 정리해보겠습니다.
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
 
-### ACG-1
-- 적용서버 : SVR-1, SVR-2
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
-### ACG-2
-- 적용서버 : SVR-3
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.  
+VPC 환경은 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
 
-### ACG-2 적용 규칙
-- 프로토콜 :  TCP
-- 접근소스 :  ACG-1
-- 허용포트 : 80
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
-{% include note.html content=&quot;위와 같은 경우 ACG-1이 적용된 SVR-1, SVR-2 서버에서 ACG-2가 적용된 SVR-3 서버로 80포트를 이용한 접근을 허용한다는 의미입니다.&quot; %}
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;VPC 환경에서 ACG를 접근소스를 설정할 때는 동일한 VPC에 생성된 ACG만 접근소스로 설정할 수 있습니다.&quot; %}
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Route Table 설정
+네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 SSL VPN의 [**IP POOL**]을 등록해야 합니다.  
+
+- **접속할 서버 정보 확인**  
+아래와 같이 접속할 서버의 정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[**VPC**] - [**Route Table**]에서 해당 VPC의 Private Subnet을 선택하고 [**Routes 설정**] 버튼을 클릭합니다.  
+(Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.)
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[**Destination**]에 생성된 SSL VPN 정보에서 확인한 [**IP POOL**] 정보를 등록하고, [**Target Type**]은 SSLVPN을 선택, [**Target Name**]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+다음으로 서버에 적용된 ACG에 SSL VPN의 [**IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 [**ACG 수정**] 버튼을 클릭해서 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[**Server**] - [**ACG**]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
 
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-download&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;SSL VPN Agent 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다. 
+서버 선택 창에 위에서 생성했던 SSL VPN 정보에서 확인했던 [**접속 URL**] 주소를 입력하고, [다음] 버튼을 클릭합니다.
+
+{% include tip.html content=&quot;
+[접속 URL 확인하는 방법 &lt;i class=&apos;fa-solid fa-arrow-up-from-bracket&apos;&gt;&lt;/i&gt;](#connection-url-check)&lt;br /&gt;
+&quot; %}
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+그리고 도착한 OTP 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-18.png&quot; width=&quot;710&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-20.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-21.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-22.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-23.png&quot; width=&quot;777&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## 설정 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [SSL VPN 설정 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### ID 개수 변경
+3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-25.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### 인증 로그 수집
+Ncloud SSN VPN은 이용자가 SSN VPN에 접속 인증한 로그를 수집할 수 있습니다. [**설정**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-26.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+인증 로그 수집을 활성화 하면 [**Cloud Log Analytics**]에 로그를 전달하여 저장합니다. 해당 상품을 미사용중이면 Cloud Log Analytics 상품 이용 신청을 한 후에 사용하시면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-27.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
+Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-29.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
 ## 참고 URL
-&lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-2-3&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-2-3.html&lt;/a&gt;
+1. Ncloud SSL VPN 개요
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-overview&lt;/a&gt;
+
+2. Ncloud SSL VPN 사용 가이드 - VPC
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&lt;/a&gt;
 </description>
-            <pubDate>Thu, 20 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</guid>
+            <pubDate>Wed, 26 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</guid>
             
-            <category>acg</category>
+            <category>vpc</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
+다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
+그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
+&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
+&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
+&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1. Ncloud SSL VPN 개요
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-overview&lt;/a&gt;
+
+2. Ncloud SSL VPN 사용 가이드 - Classic
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-start-classic&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-start-classic&lt;/a&gt;
+</description>
+            <pubDate>Tue, 25 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</guid>
             
             <category>classic</category>
             
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
+다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
+그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
+&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
+&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
+&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(Classic)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Mon, 24 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
+            
+            <category>classic</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성 요청
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
+VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_07.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
+생성 완료까지 걸리는 기간은 **업무일 기준 2~3일** 정도이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_03.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+아래와 같이 생성 요청을 하고 나면 상태가 [생성중] 상태로 표시 됩니다. 2~3일 후 생성 완료 안내 메일이 도착할때까지 기다리시면 됩니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## SSL VPN 생성 완료
+SSL VPN 생성이 완료되면 아래와 같은 메일을 받을 수 있습니다.   
+메일 내용에는 [**SSL VPN IP POOL**] 정보와 접속 경로 정보가 포함되어 있으니 잘 확인해야 합니다.
+
+{% include warning.html title=&quot;IP POOL&quot; content=&quot;특히 [**SSL VPN IP POOL**] 정보는 Ncloud 콘솔에서 확인할 수 없고, 오로지 생성 완료 메일에서만 확인 가능하니 잘 보관해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_05.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+생성 완료 메일 확인 후에 콘솔에 접속하면 아래와 같이 [운영중] 으로 상태 메시지가 바뀐 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.  
+VPC 환경은 Classic 환경과 달리 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Route Table 설정
+네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+아래와 같이 접속할 서버의 상세정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭합니다.  
+Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_12.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Destination]에 SSL VPN 생성 완료 메일에서 확인한 [**SSL VPN IP POOL**] 정보를 등록하고, [Target Type]은 SSLVPN을 선택, [Target Name]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_13.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+다음으로 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_14.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_17.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, VPC 환경 SSL VPN 서버 주소로 바꾸기 위해 [연결끊기] 클릭해서 연결을 끊고, [서버 변경] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_18.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+서버 선택 창에 **https://sslvpn-kr-vpc-01.ncloud.com** 주소를 입력하고, [다음] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_19.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+그리고 도착한 OTP 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_24.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_25.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_26.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_27.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_28.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_29.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
+Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_31.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(VPC)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-2&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-2&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Mon, 24 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</guid>
+            
             <category>vpc</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
             
             
         </item>
@@ -519,6 +1138,116 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
             <category>backup</category>
             
             <category>mariadb</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Ncloud 방화벽 ACG 설정 기본 가이드</title>
+            <description>## 개요
+ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스로 AWS에서는 비슷하게 Security Group이라는 것이 있습니다.
+
+## 제한 사항
+
+### VPC 환경
+- VPC당 최대 **500개**까지 ACG 생성 가능
+- **NIC당 3개의 ACG**를 허용
+- Inbound / Outbound 각각 **50개의 규칙** 생성 가능
+
+### Classic 환경
+- 계정당 최대 **100개**까지 ACG를 생성 가능
+- 각 ACG에는 최대 **100개**까지의 규칙을 설정할 수 있음
+- 서버는 **최대 5개**의 ACG에 중복 포함될 수 있음
+- 서버가 생성될 시 선택한 ACG는 변경이 불가하며, 반납 전까지 해당 ACG 규칙을 적용 받게 됨
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;Classic 환경에서는 서버 자체에 할당되는 개념이었으나 VPC에는 NIC 즉, 네트워크 카드에 할당되는 개념이어서 VPC 환경에서는 **NIC 당 최대 3개**까지 ACG를 적용할 수 있습니다.&quot; %}
+
+## ACG 위치
+Ncloud 콘솔에서 ACG의 위치는 [**Services**] - [**Compute**] - [**Server**] - [**ACG**]에 있습니다.
+
+### VPC 환경
+{% include image.html file=&quot;security/ncloud-security-acg-guide-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;security/ncloud-security-acg-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+### Classic 환경
+{% include image.html file=&quot;security/ncloud-security-acg-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;security/ncloud-security-acg-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+
+
+## 기본 규칙
+
+### Default ACG
+기본적으로 추가되는 ACG
+
+- 모든 들어오는 연결(inbound traffic)을 차단함
+- 모든 나가는 연결(outbound traffic)을 허용함
+- Default ACG 내 속한 서버들끼리의 네트워크 양방향 통신(TCP, UDP, ICMP)이 허용됨
+- 원격 접속 기본 포트 (**Linux - 22, Windows - 3389**)에 대한 TCP 허용됨
+
+#### VPC 화면
+
+##### Inbound (기본 설정)
+{% include image.html file=&quot;security/ncp_security_acg_vpc_inbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
+
+##### Inbound (권장 설정)
+{% include image.html file=&quot;security/ncp_security_acg_vpc_inbound_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+##### Outbound
+{% include image.html file=&quot;security/ncp_security_acg_vpc_outbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+#### Classic 화면 (기본 설정)
+{% include image.html file=&quot;security/ncp_security_acg_classic.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
+
+#### Classic 화면 (권장 설정)
+{% include image.html file=&quot;security/ncp_security_acg_classic_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+### Custom ACG
+Default ACG 이외에 사용자가 추가하는 ACG
+
+- 모든 inbound traffic을 차단함(규칙으로 명시되어 있지 않음)
+- 모든 outbound traffic을 허용함(규칙으로 명시되어 있지 않음)
+
+
+## 접근소스 설정
+ACG를 설정할 때 접근 소스 항목은 보통 IP주소를 입력하게 됩니다. 
+하지만 특수한 경우로 Load Balancer를 지정하거나 ACG 이름을 지정하는 경우도 있습니다. 
+이 중에서 다른 ACG를 접근 소스 항목으로 지정하는 경우는 해당 ACG가 적용된 서버들이 접근할 수 있도록 규칙을 설정하는 것인데, 아래 예시를 이용해 정리해보겠습니다.
+
+### ACG-1
+- 적용서버 : SVR-1, SVR-2
+
+### ACG-2
+- 적용서버 : SVR-3
+
+### ACG-2 적용 규칙
+- 프로토콜 :  TCP
+- 접근소스 :  ACG-1
+- 허용포트 : 80
+
+{% include note.html content=&quot;위와 같은 경우 ACG-1이 적용된 SVR-1, SVR-2 서버에서 ACG-2가 적용된 SVR-3 서버로 80포트를 이용한 접근을 허용한다는 의미입니다.&quot; %}
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;VPC 환경에서 ACG를 접근소스를 설정할 때는 동일한 VPC에 생성된 ACG만 접근소스로 설정할 수 있습니다.&quot; %}
+
+
+
+## 참고 URL
+&lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-2-3&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-2-3.html&lt;/a&gt;
+</description>
+            <pubDate>Thu, 20 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</guid>
+            
+            <category>acg</category>
+            
+            <category>classic</category>
+            
+            <category>vpc</category>
             
             
         </item>
@@ -1553,826 +2282,6 @@ var player = new ncplayer(&apos;divVideoPlayer&apos;, {
             <category>media</category>
             
             <category>object_storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud Video Player Enhancement 사용 가이드</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) [**Video Player Enhancement**]는 웹/앱에서 비디오 또는 오디오와 같은 미디어 재생을 위한 서비스로, Live Station, VOD Station과 연동을 통해, 다양한 디바이스 환경에서 시청자에게 최고 품질의 경험을 제공합니다.
-
-## 특징
-Video Player Enhancement 서비스의 특징은 다음과 같습니다.
-
-- **Live Station** &amp; **VOD Station**과 손쉽게 연동 가능
-- **HTML5 표준** : HTML5 표준에 맞게 제작된 SaaS 기반의 서비스로 별도의 APP 설치 없이 모든 디바이스 및 OS Browser에서 재생 가능
-- **사용자가 직접 커스터마이징** : Console 에서 UI &amp; UX 패널 제공하여 고객이 직접 커스터마이징을 할 수 있음 (유료 버전)
-- **개발 시간 단축** : 스크립트 코드 예제를 통해 플레이어를 웹페이지 내 손쉽게 임베디드가 가능하며 완성된 코드 제공을 통해 개발 시간을 단축 시킬 수 있음
-
-## 제공 기능
-VOD Station이 제공하는 기능은 다음과 같은 것들이 있습니다.
-
-- 다양한 재생 옵션 설정을 위한 기능
-- **콘텐츠 보안**: MultiDRM (FairPlay, Widevine, PlayReady) 및 Visible Watermark 기능 제공
-- **모바일 SDK**: Native SDK 제공 (AOS - Kotlin, iOS - Swift)
-- **커스터마이징**: 콘솔에 UI/UX 설정을 위한 기능 제공
-- **CMAF LL-HLS** 지원
-
-## 사전 준비 사항
-[**Video Player Enhancement**]을 테스트 하기 위해 [**VOD Station**]에 스트리밍 가능한 영상 파일을 미리 등록해 두겠습니다.  
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- [**VOD Station**] 사용 방법은 아래 가이드 문서에서 확인할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/media/ncloud-media-vod-station-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; VOD Station 생성 가이드&lt;/a&gt;
-&quot; %}
-
-## 서비스 위치
-Ncloud Console에서 [**Video Player Enhancement**] 서비스 위치는 아래와 같이 [**Media**] - [**Video Player Enhancement**]에 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-## 서비스 신청
-[**Video Player Enhancement**] 서비스를 사용하기 위해서는 먼저 [서비스 신청] 버튼을 클릭해 서비스를 신청해야 합니다.
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-### 서비스 선택
-[**Video Player Enhancement**] 서비스는 무료 서비스인 Basic 버전과 유료 서비스인 Standard 버전이 있습니다. 각각이 제공하는 기능이 다르므로 잘 살펴보고 선택하시면 됩니다.
-
-{% include warning.html title=&quot;주의&quot; content=&quot;서비스를 유료로 신청 또는 무료에서 유료로 전환 후에는 다시 무료로 전환이 불가합니다.&quot; %}
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-- 서비스 신청이 끝났으면 플레이어를 생성해야 합니다.
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-## 플레이어 생성
-플레이어 생성 화면에서는 현재 계약된 정보가 표시되며, 무료인 경우 [**유료 전환**] 버튼도 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-### 기본 설정
-기본 설정에서는 플레이어를 사용할 [**사이트 도메인**] 또는 [**앱 패키지 ID**]를 입력해야 합니다.
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; 사이트 도메인은 플레이어가 노출될 사이트 도메인에 대한 유효성을 확인하기 위함입니다.&lt;br /&gt;
-&amp;#8259; 등록된 도메인이 아닐 경우 플레이어가 동작하지 않습니다.&lt;br /&gt;
-&amp;#8259; 사이트 도메인은 5개까지 입력 가능합니다.&lt;br /&gt;
-&amp;#8259; 5개 이상 입력이 필요할 경우 네이버 클라우드 영업팀에 별도 문의 부탁 드립니다.
-&quot; %}
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-## 플레이어 옵션
-플레이어가 생성되면 플레이어 옵션 미리보기를 할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-### 미리보기
-미리 보기 화면에서 플레이어의 기본 스크립트를 확인할 수 있는데 [복사] 버튼을 클릭해서 스크립트를 가져옵니다.
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-## 플레이어 스크립트 기본 템플릿
-위에서 복사해 온 플레이어 스크립트는 기본적으로 다음과 같은 형태로 구성되어 있습니다.
-
-``` html
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://player.vpe.naverncp.com/ncplayer.js?access_key={Access Key}&quot;&gt;&lt;/script&gt;
-
-&lt;div id=&quot;video&quot;&gt;&lt;/div&gt;
-
-&lt;script&gt;
-  let player = new ncplayer(&apos;video&apos;,{		
-    playlist:[
-      {
-       file:&quot;{재생 파일 URL}&quot;,
-        poster:&quot;{썸네일 이미지 URL}&quot;    
-      }		
-    ],		
-  });
-&lt;/script&gt;
-```
-
-### 플레이어 샘플 예제
-[**VOD Station**]에 등록한 스트리밍 파일을 이용한 샘플 스크립트 예제는 다음과 같습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/media/ncloud-media-vod-station-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; VOD Station 생성 가이드&lt;/a&gt;
-&quot; %}
-
-``` html
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://player.vpe.naverncp.com/ncplayer.js?access_key=1b***d7&quot;&gt;&lt;/script&gt;
-
-&lt;div id=&quot;video&quot;&gt;&lt;/div&gt;
-
-&lt;script&gt;
-  let player = new ncplayer(&apos;video&apos;,{
-    autostart: true,
-    muted: true,			
-    aspectRatio: &apos;16/9&apos;,
-    repeat: true,
-    playlist:[
-      {
-        file:&quot;https://fv***47.cdn.ntruss.com/hls/OS***E8_/test-category/VOD-Station_***_30fps.mp4/index.m3u8&quot;,
-        poster:&quot;https://kr***08.cdn.ntruss.com/test-category/VOD-Station_02.jpg&quot;,				
-      }			
-    ],		
-  });
-&lt;/script&gt;
-```
-
-## 플레이어 실행 화면
-위 스크립트로 생성한 플레이어를 실행하면 아래와 같이 영상이 플레이 되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-{% include warning.html title=&quot;음소거 옵션&quot; content=&quot;autostart: true 상태에서 muted 옵션과 관계없이 무조건 음소거 상태로 나타나는 경우가 많은데, 이것은 웹브라우저의 자체 정책으로 인해 영상의 자동재생이 차단되는 것을 막기 위해 음소거 상태로 플레이됩니다. &quot; %}
-
-## 플레이어 상세 옵션
-
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;프로퍼티&lt;/th&gt;
-      &lt;th&gt;유형&lt;/th&gt;
-      &lt;th&gt;설명&lt;/th&gt;
-      &lt;th&gt;기본값&lt;/th&gt;
-      &lt;th&gt;옵션값&lt;/th&gt;
-      &lt;th&gt;라이선스&lt;/th&gt;
-      &lt;th&gt;필수여부&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;*playlist&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;&lt;td&gt;플레이리스트&lt;/td&gt;&lt;td&gt;없음&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;O&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;autostart&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;자동재생여부&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;muted&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;음소거&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;keyboardShortcut&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;키보드 단축키&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;controls&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;컨트롤바 사용 여부&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;ui&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;UI 설정&lt;/td&gt;&lt;td&gt;all&lt;/td&gt;&lt;td&gt;all, mobile , pc&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;**controlBtn&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;&lt;td&gt;컨트롤바 버튼 on/off&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;progressBarColor&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;컨트롤바 컬러&lt;/td&gt;&lt;td&gt;#4299f5&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;controlActiveTime&lt;/td&gt;&lt;td&gt;number&lt;/td&gt;&lt;td&gt;컨트롤바 활성 시간(ms)&lt;/td&gt;&lt;td&gt;3000&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;startMutedInfoNotVisible&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;음소거 알림&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;aspectRatio&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;화면비&lt;/td&gt;&lt;td&gt;16/9&lt;/td&gt;&lt;td&gt;16/9 , 4/3 , 1/1 , 9/16 , 21/9&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;objectFit&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;영상 화면 맞춤&lt;/td&gt;&lt;td&gt;contain&lt;/td&gt;&lt;td&gt;contain , cover , fill&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;playRateSetting&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;&lt;td&gt;배속 선택 옵션&lt;/td&gt;&lt;td&gt;[0.5,0.75,1,1.5,2]&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;seekingPreview&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;영상 구간 이동 미리보기&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;autoPause&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;탭 비활성화 시 자동멈춤&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;repeat&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;영상 반복&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;touchGestures&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;터치 제스처&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;descriptionNotVisible&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;영상 메타 데이터&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;lang&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;UI 언어설정&lt;/td&gt;&lt;td&gt;auto&lt;/td&gt;&lt;td&gt;auto , ko , en , ja , zh&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;lowLatencyMode&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;CMAF LL-HLS&lt;/td&gt;&lt;td&gt;FALSE&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-### \*playlist 상세 속성
-
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;프로퍼티&lt;/th&gt;
-      &lt;th&gt;유형&lt;/th&gt;
-      &lt;th&gt;설명&lt;/th&gt;
-      &lt;th&gt;기본값&lt;/th&gt;
-      &lt;th&gt;옵션값&lt;/th&gt;
-      &lt;th&gt;라이선스&lt;/th&gt;
-      &lt;th&gt;필수여부&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;재생하고자 하는 video 정보&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sources&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;
-      &lt;td&gt;
-        video에 여러가지 해상도를 제공하는 경우 사용
-        &lt;br /&gt;&lt;br /&gt;
-        &lt;table class=&quot;simple_table&quot;&gt;
-          &lt;tbody&gt;
-            &lt;tr&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;해상도별 video 파일 경로&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td&gt;label&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;해상도 조절 컨트롤에 표시되는 텍스트&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td&gt;default&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;기본 해상도로 적용&lt;/td&gt;&lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt; 
-      &lt;/td&gt;
-      &lt;td&gt;&lt;/td&gt;&lt;td&gt;file로 대체 가능&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;poster&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;video 재생 전 표시할 이미지&lt;/td&gt;&lt;td&gt;없음&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;무료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;description&lt;/td&gt;&lt;td&gt;array&lt;/td&gt;
-      &lt;td&gt;
-        Player 상단에 표시할 메타데이터
-        &lt;br /&gt;&lt;br /&gt;
-        &lt;table class=&quot;simple_table&quot;&gt;          
-          &lt;tbody&gt;
-            &lt;tr&gt;&lt;td&gt;title &lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;제목 표시&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td&gt;created_at &lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;날짜 표시&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td&gt;profile_name &lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;채널명 or 업로더 닉네임&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td&gt;profile_image &lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;td&gt;채널이미지 or 업로더 프로필 이미지&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td&gt;callback &lt;/td&gt;&lt;td&gt;function&lt;/td&gt;&lt;td&gt;메타데이터 클릭시 발생시킬 이벤트&lt;/td&gt;&lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt; 
-      &lt;/td&gt;
-      &lt;td&gt;없음&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td style=&quot;color:#FF0000&quot;&gt;유료&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;   
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-### \*\*controlBtn 상세 속성
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;div class=&quot;col-sm-6&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;프로퍼티&lt;/th&gt;
-      &lt;th&gt;유형&lt;/th&gt;
-      &lt;th&gt;설명&lt;/th&gt;
-      &lt;th&gt;기본값&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;play&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;플레이버튼&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;fullscreen&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;전체화면 전환&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;volume&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;볼륨컨트롤&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;times&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;시간정보 UI&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;pictureInPicture&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;미니플레이어&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;setting&lt;/td&gt;&lt;td&gt;boolean&lt;/td&gt;&lt;td&gt;세팅 버튼&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;    
-&lt;/div&gt;
-&lt;/div&gt;
-
-## 통계
-[**Player Statistics**] 화면에서는 플레이어 사용량 등의 통계를 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-10.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-11.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1. Ncloud Video Player Enhancement 개요
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/videoplayerenhancement-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/videoplayerenhancement-overview&lt;/a&gt;
-
-2. Ncloud Video Player Enhancement 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/videoplayerenhancement-user-guide&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/videoplayerenhancement-user-guide&lt;/a&gt;  
-</description>
-            <pubDate>Wed, 22 Mar 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/media/ncloud-media-video-player-enhancement-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/media/ncloud-media-video-player-enhancement-guide.html</guid>
-            
-            <category>media</category>
-            
-            <category>object_storage</category>
-            
-            <category>cdn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>VPC 환경에서 NAT Gateway 설정하기</title>
-            <description>## 개요
-NAT Gateway는 비공인 IP를 가진 다수의 서버들이 대표 공인 IP를 이용해 외부와 통신을 할 수 있도록 도와주는 네트워킹 서비스입니다.  
-그리고, 일반적으로 서버에 직접 공인 IP를 부여하는 것과 달리 외부에서 서버로의 직접 접근은 허용하지 않기 때문에 높은 수준의 보안을 유지할 수 있는 것이 특징입니다.  
-여기서는 VPC 환경에서 NAT Gateway를 어떻게 구성하고, NAT Gateway를 적용하기 전과 후의 외부와 통신 상태에 대해 확인해보도록 하겠습니다.
-
-## 생성개수 제한
-우선 VPC는 리전별로 계정당 3개씩 생성 가능하고, **NAT Gateway는 각 VPC별로 Zone당 1개씩 생성 가능**합니다.  
-현재 한국 리전에는 KR-1, KR-2 이렇게 2개의 Zone이 있으므로 한국 리전 기준으로 VPC당 최대 2개, **계정당 최대 6개의 NAT Gateway를 생성**할 수 있습니다.
-
-## VPC 서비스 위치
-[**VPC**] 서비스는 [**Console**] - [**Networking**]에 위치해 있습니다.  
-
-그리고, 아래 스샷에서 확인할 수 있듯이 [**VPC**]에는 [**VPC**], [**Subnet**], [**Network ACL**], [**NAT Gateway**], [**Route Table**], [**VPC Peering**], [**Virtual Private Gateway**] 등의 하부 서비스 메뉴가 있습니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-natgw-routetb-00.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## VPC 생성
-먼저 VPC를 생성합니다. IP주소 범위는 10.0.0.0/16으로 정하겠습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_01.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## Subnet 생성
-NAT Gateway 동작 테스트를 위해 Public, Private 이렇게 2가지 Subnet을 생성하겠습니다.
-
-### Public Subnet 생성
-Public Subnet의 IP 범위는 **10.0.0.0/24**로 설정하겠습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_02.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Private Subnet 생성
-Private Subnet의 IP 범위는 **10.0.0.1/24**로 설정하겠습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_03.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-테스트를 위한 ACG (Access Control Group)를 생성하고 설정합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_04.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Inbound 설정
-Inbound 규칙에는 Public, Private Subnet과 SSH 접속을 위한 로컬PC IP를 허용하고, Ping 테스트를 위한 ICMP도 허용합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_05.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Outbound 설정
-Outbound 규칙은 TCP, UDP, ICMP 모두 전체 허용으로 추가합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## 서버 생성
-테스트를 위해 Public, Private 각각의 Subnet에 1대씩 서버를 설정하고 Public 서버에는 공인 IP도 할당합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_07.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Public -&gt; Private 서버 접속 확인
-Public Subnet에 있는 서버에서 Private Subnet에 있는 서버로 통신이 가능한 것을 확인할 수 있습니다.  
-다음 단계에서 Private 서버로 SSH로 접속하기 위한 사전 확인 단계입니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_08.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Private 서버 외부 접속 여부 확인
-Public 서버에서 Private 서버로 SSH로 접속한 후에 Private 서버에서 외부로 통신이 되는 것을 확인해보면 불가능한 것을 확인할 수 있습니다.  
-이후 단계에서 NAT Gateway를 설정하고 Private 서버에서 외부와 통신이 가능한지 확인해보겠습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_09.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## Route Table 설정 확인
-NAT Gateway를 위한 Route Table 설정을 추가하기 전에 현재 상태의 Route Table 설정을 확인해보겠습니다.
-
-### Public Subnet의 Route Table 설정 확인
-위에서 Public Subnet의 서버와 Private Subnet의 서버가 통신이 가능했던 것은 VPC와 Subnet이 생성될때 Route Table이 생성되면서 VPC 내부 통신을 위한 규칙 (10.0.0.0/16 LOCAL)이 기본으로 설정되기 때문입니다.  
-그리고 Public의 경우 외부 통신을 위한 INTERNET GATEWAY가 추가되어 있는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_10.jpg&quot; width=&quot;780&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Private Subnet의 Route Table 설정 확인
-반면에 Private의 경우는 VPC 내부 통신을 위한 LOCAL만 설정된 것을 확인 할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_11.jpg&quot; width=&quot;780&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-Route Table 설정 화면에 들어가도 Target Type에 LOCAL만 선택할 수 있는 것을 확인할 수 있습니다.
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_14.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## NAT Gateway 생성
-[**NAT Gateway**]는 별도의 메뉴가 있지 않고, [**Networking**] - [**VPC**] 서비스 내에 하부 서비스로 존재합니다. 그러면 이제 [**NAT Gateway 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-이름을 입력하고 VPC와 Zone을 선택하고 NAT Gateway를 생성합니다. 그리고 마지막으로 Route Table에 NATGW 설정을 추가해야 완료되는데, 관련 설정은 아래에서 확인 가능합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_16.jpg&quot; width=&quot;650&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Route Table 설정
-앞에서 LOCAL 항목만 존재했던 Private Subnet의 Route Table 설정 화면에 가보면 Target Type에 NATGW가 추가된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_18.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-목적지(Destination)에 0.0.0.0/0을 입력하고, Target Type을 NATGW를 선택하고 생성 버튼을 클릭합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## 외부 접속 테스트
-마지막으로 다시 한번 Private 서버에서 외부 통신이 가능한지 ping 테스트를 해보면, 아래 화면과 같이 정상적으로 통신이 되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_20.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-
-## 고려사항
-{% include warning.html title=&quot;요금&quot; content=&quot;NAT Gateway는 사용하지 않고 생성만 해두어도 요금이 부과됩니다. (데이터 처리요금 별도)&quot; %}
-  
-생성 후 보유 시간에 따라 요금이 부과되는데 1개당 56원/시간 입니다. 그러므로 1달간 보유하고만 있다고 가정할 때 비용을 계산해보면 
-**24시간 * 30일 * 56원 = 40,320원** 그러므로 사용하지 않는 NAT Gatway는 반드시 삭제하기를 추천드립니다.
-
-
-
-## 참고 URL
-1. NAT Gateway 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/networking-vpc-vpcdetailenatgw&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/networking-vpc-vpcdetailenatgw&lt;/a&gt;
-
-2. NAT Gateway 특징과 비교
-	- &lt;a href=&quot;https://m.blog.naver.com/n_cloudplatform/221173116642&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://m.blog.naver.com/n_cloudplatform/221173116642&lt;/a&gt;
-</description>
-            <pubDate>Tue, 21 Mar 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_natgw_routetb.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_natgw_routetb.html</guid>
-            
-            <category>vpc</category>
-            
-            <category>natgateway</category>
-            
-            <category>routetable</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud VOD Station 생성 가이드</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) VOD Station은 저장된 영상을 다양한 디바이스에서 시청할 수 있도록 변환하는 **인코딩 기능**과 동영상 파일을 패킷타이징하여 네트워크를 효율적으로 사용할 수 있는 **스트리밍 기능**을 제공하는 VOD 전용 서비스입니다.
-
-## 특징
-VOD Station 서비스의 특징은 다음과 같습니다.
-
-- **하나의 서비스로 인코딩과 송출 가능**: 여러 가지 VOD 서비스를 고민할 필요 없이 VOD Station 하나로 인코딩과 스트리밍이 가능합니다.
-- **영상의 길이와 해상도에 따른 합리적 과금**: 영상의 길이와 코딩 후 변환된 해상도에 따라 요금이 책정되므로 합리적인 비용으로 서비스를 이용할 수 있습니다.
-- **고품질의 안정적인 스트리밍**: Progressive Download 방식이 아닌 영상을 패킷타이징하여 송출하는 방식이므로 안정적인 품질로 스트리밍을 제공할 수 있습니다.
-- **간편한 CDN 생성**: CDN(Content Delivery Network) 선택 옵션을 통해 VOD 스트리밍 서비스에 최적화된 CDN을 쉽게 생성할 수 있습니다.
-- **서비스 간의 유연한 연동**: 인코딩, 보안, 비디오 플레이어와의 연동 등 VOD 서비스에 필요한 유연한 연동을 제공합니다.
-
-## 제공 기능
-VOD Station이 제공하는 기능은 다음과 같은 것들이 있습니다.
-
-- 인코딩
-- On-the-fly 패킷타이징
-- 템플릿 인코딩 설정
-- DRM
-- 썸네일 추출저장
-- 최적의 CDN 생성(선택 옵션)
-
-## 사전 준비 사항
-VOD Station을 이용하기 위해서는 반드시 필요한 것이 2가지 있는데 다음과 같습니다.
-
-- **Object Storage**: 원본 미디어 파일과 변환된 영상 파일을 저장하기 위한 공간
-- **CDN**: 영상 배포를 위한 콘텐츠 스트리밍 플랫폼
-
-## 서비스 위치
-Ncloud Console에서 [**VOD Station**] 서비스 위치는 아래와 같이 [**Media**] - [**VOD Station**]에 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-## Object Storage Bucket 생성
-VOD Station을 좀 더 편하게 생성하려면 VOD Station 생성 전에 `먼저 Object Storage에 Bucket을 생성하는 것이 좋습니다`.
-
-### Bucket 생성
-예를 들어 아래와 같이 용도별 Bucket 3개를 생성합니다.
-
-- **vod-station-input**: 동영상 원본 파일을 저장할 Bucket
-- **vod-station-output**: 인코딩이 완료된 동영상을 저장할 Bucket
-- **vod-station-thumbnail**: 동영상에서 추출한 썸네일 이미지를 저장할 Bucket
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- 아래와 같이 Bucket 3개를 생성했습니다.
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-### 파일 업로드
-Bucket 생성 후에 [**vod-station-input**] Bucket에 테스트할 동영상 파일을 업로드 합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-## 이용 신청
-다음으로 [**VOD Station**] - [**Subscription**]에서 **이용 신청**을 합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-이용 신청이 끝나면 [**Category**]를 생성하라는 안내 팝업이 나타납니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-05.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-## 카테고리 생성
-카테고리 생성 화면은 다음과 같은데 아래쪽에서 차례대로 살펴보겠습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-### 인코딩 설정
-인코딩 설정 방법은 미리 지정된 템플릿을 이용해서 간편하게 설정할 수도 있고, 원하는 옵션으로 직접 설정할 수도 있는데, 여기서는 [**템플릿 간편 설정**]으로 진행하겠습니다.
-
-- **템플릿 간편 설정**  
-템플릿 간편 설정에는 [**실속형 콘텐츠**], [**비즈니스 콘텐츠**], [**초고화질 콘텐츠**] 등의 3가지 옵션이 있는데, 아래쪽에서 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **인코딩 템플릿**  
-인코딩 템플릿의 상세 옵션을 확인하려면 [**템플릿 간편 설정**] 옆에 있는 &lt;i class=&quot;fa-regular fa-circle-question&quot;&gt;&lt;/i&gt; 아이콘을 클릭하면 아래와 같이 자세히 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-- **직접 설정**  
-템플릿을 사용하지 않고 상세 옵션을 직접 설정하려면 [**설정함**] 옵션을 선택하고 [**추가**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **상세 옵션**  
-인코딩 옵션을 직접 설정하는 경우 아래와 같이 **17개의 Video 옵션**과 **4개의 Audio 옵션** 중에서 최대 5개를 선택할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-### 파일 경로 설정
-가능하면 썸네일은 설정함을 선택하고, [**+ 선택**] 버튼을 클릭해 **아웃풋 파일 경로**와 **썸네일 아웃풋 파일 경로**를 설정하도록 하겠습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **아웃풋 파일 경로 설정**  
-파일 경로 설정 팝업에서 미리 생성해 둔 [**vod-station-output**] Bucket을 선택합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-12.png&quot; width=&quot;698&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **썸네일 아웃풋 파일 경로 설정**
-마찬가지로 썸네일 경로 설정 팝업에서 미리 생성해 둔 [**vod-station-thumbnail**] Bucket을 선택합니다.
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-13.png&quot; width=&quot;698&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-### 고급 설정
-고급 설정에서는 [**재생구간 설정**]과 [**워터마크 이미지**]를 추가할 수 있는데, 서비스 상황에 맞에 선택하시면 되고, 여기서는 설정하지 않고 완료하겠습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-### 최종 확인
-위에서 설정한 값들을 최종 확인한 후에 이상이 없으면 [**생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-## 파일 인코딩
-이제 생성된 카테고리 리스트에서 [**신규파일 인코딩**] 버튼을 클릭해 인코딩할 파일을 등록합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **파일 경로 선택**  
-인풋 파일 경로는 [**오브젝트 스토리지**]와 별도의 [**HTTP 다운로드 URL**]을 선택할 수 있는데 여기서는 앞에서 생성한 오브젝트 스토리지를 선택하겠습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-18.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **파일 선택**  
-오브젝트 스토리지 버킷에서 앞에서 업로드한 인코딩할 파일을 선택합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **인코딩 시작**  
-선택한 파일이 맞는지 최종 확인하고 이상이 없으면 [**확인**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-20.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-### 인코딩 상태 확인
-위에서 선택한 파일의 인코딩 상태 확인은 [**VOD Station**] - [**Status**]에서 확인 가능합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-21.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-### 썸네일 파일 확인
-썸네일 파일은 앞에서 생성하고 선택했던 오브젝트 스토리지 [**vod-station-thumbnail**] 버킷에서 아래와 같이 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-33.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-## 채널 생성
-인코딩이 끝났으면, 이제 스트리밍을 위한 채널을 생성해야 합니다.  
-[**VOD Station**] - [**Channel**]에서 [**채널 생성**] 버튼을 클릭해 VOD Streaming을 구성하기 위한 새로운 채널을 생성합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-22.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-### 채널 생성 구성 항목
-채널 생성 시에 입력 또는 선택이 필요한 항목들을 차례대로 살펴보겠습니다.
-
-- **Object Storage Bucket 선택**  
-Streaming할 파일의 위치는 위에서 설정했던 인코딩된 파일의 위치인 [**vod-station-output**] 버킷을 선택합니다.
-
-- **Object Storage 비공개 파일 접근**  
-Object Storage 비공개 파일 접근 설정은 [**허용**]을 선택하는 것을 추천합니다. 
-VOD Station은 Object Storage 의 &quot;**공개 안함**&quot; 권한을 가진 파일도 스트리밍할 수 있는 기능을 제공하므로 Object Storage 에 있는 원본 파일의 권한을 &quot;공개&quot; 대신 &quot;**공개 안함**&quot; 으로 설정함으로써 컨텐츠의 보안 수준을 높일 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-23.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **Protocol**  
-Protocol은 [**HLS**], [**DASH**] 중에서 선택하거나 두 가지 모두 선택할 수 있습니다.
-
-- **Segment 설정**  
-Segment 설정도 서비스 상황에 맞에 선택하시면 됩니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **CDN 설정**  
-`VOD Station은 CDN 연동이 필수인 상품`으로 [**신규 생성**]을 선택해 VOD Station에 최적화된 CDN을 자동 생성하거나, 기존 CDN 연동 또는 차후 별도의 CDN을 생성할 수도 있지만, 
-가급적 [**신규 생성**] 옵션을 선택하는 것을 추천드립니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-25.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **콘텐츠 보호 설정**  
-DRM 등의 콘텐츠 보호 설정이 필요할 경우 관련된 설정을 추가할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-26.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **채널 생성 완료**  
-채널은 생성과 함께 운영상태로 전환되고, 그에 따라 과금이 발생하게 됩니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-27.png&quot; width=&quot;485&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **생성된 채널 확인**  
-채널이 생성되면 아래와 같이 파일리스트와 채널 정보를 확인할 수 있습니다. 자세한 채널 정보는 상단에 있는 [**채널 정보**] 버튼을 클릭하면 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-## 채널 정보
-위에서 확인한 채널 리스트에서 [**채널 정보**] 버튼을 클릭하면 아래와 같은 채널 정보를 확인할 수 있는데, 이 채널 정보 중에서 중요한 항목은 아래에 표시한 3가지 입니다.
-
-- **Object Storage Bucket (암호화명)**
-- **Protocol**
-- **CDN 재생경로**
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-29.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-## 재생 경로 URL 확인
-CDN에 위치한 VOD의 재생 경로 URL은 다음과 같은 요소로 구성되어 있습니다.
-
-{% include note.html title=&quot;URL Template&quot; content=&quot;https://[CDN Domain]/[Protocol]/[EncryptedBucketName]/[Path]/[Video Filename]/[Manifest]&quot; %}
-
-| Domain | Protocol | BucketName | Path | FileName | Manifest |
-| :----: | :----: | :-----: | :-----: | :-----: | :-----: | :-----: |
-| &lt;br /&gt;example.cdn.ntruss.com | &lt;br /&gt;~aiEihf7l39&amp;#42;&amp;#42;&amp;#42;&amp;#42;&amp;#42;&amp;#42;fs890ilkjlkfts_ | /hls&lt;br /&gt;&lt;br /&gt;/dash | &lt;br /&gt;/example_category | &lt;br /&gt;/example.mp4 | /index.m3u8&lt;br /&gt;&lt;br /&gt;/manifest.mpd |
-| CDN 도메인 | 암호화된 Bucket 이름 | 스트리밍&lt;br /&gt;프로토콜 | 카테고리 이름으로&lt;br /&gt;구성된 폴더 경로 | 파일명 | 스트리밍을 위한&lt;br /&gt;Manifest 파일 |
-
-
-### URL 예시
-Channel에서 확인했던 파일 하나를 선택해서 재생 URL이 어떻게 구성되는지 예시를 들어보겠습니다.
-
-{% include tip.html title=&quot;파일명 예시&quot; content=&quot;test-category/VOD-Station_AVC_HD_1Pass_30fps.mp4&quot; %}
-
-
-{% include note.html title=&quot;재생 경로 URL&quot; content=&quot;https://yyvs&amp;#42;&amp;#42;&amp;#42;46&amp;#42;&amp;#42;&amp;#42;73.cdn.ntruss.com/hls/~ndO&amp;#42;&amp;#42;&amp;#42;eX~d1Y&amp;#42;&amp;#42;&amp;#42;OfE&amp;#42;&amp;#42;&amp;#42;VRYsO&amp;#42;&amp;#42;&amp;#42;Mgb&amp;#42;&amp;#42;&amp;#42;ri24_/test-category/VOD-Station_AVC_HD_1Pass_30fps.mp4/index.m3u8&quot; %}
-
-
-### 재생 URL 빠르게 확인하기
-재생 경로 URL이 복잡하게 구성되어 있다보니 직접 작성하기 쉽지 않은데, 이럴 때는 아래와 같은 방법으로 빠르게 확인할 수 있습니다.  
-사용하시는 웹브라우저(여기서는 크롬을 사용)에 HLS, DASH 프로토콜 파일을 플레이할 수 있는 기능이 설치되어 있으면 보다 간편하게 확인 가능합니다.  
-
-- **웹브라우저 확장 프로그램 설치**  
-혹시 설치되어 있지 않을 경우 크롬 웹스토어 [**확장 프로그램**]에서 **HLS, DASH Player**를 아래와 같이 검색해서 설치합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-30.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **CDN 재생경로 URL 생성**  
-확장 프로그램이 설치되었으면 [**VOD Station**] - [**Channel**]에서 파일 리스트 오른쪽에 있는 [**HLS URL 생성**] 또는 [**DASH URL 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-32.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-- **CDN 재생경로 URL 확인**  
-그러면 아래와 같이 웹브라우저에서 해당 파일이 재생되면서 주소창에서 재생 URL을 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncloud-media-vod-station-guide-31.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VOD Station 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-
-## Video Player Enhancement
-모든 작업이 완료된 영상을 재생하려면 [**Video Player Enhancement**] 서비스를 이용하면 되는데 자세한 사용 방법은 아래 가이드 문서에서 확인할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/media/ncloud-media-video-player-enhancement-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; Video Player Enhancement 사용 가이드&lt;/a&gt;
-&quot; %}
-
-{% include image.html file=&quot;media/ncloud-media-video-player-enhancement-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1. Ncloud VOD Station 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview&lt;/a&gt;
-</description>
-            <pubDate>Fri, 17 Mar 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/media/ncloud-media-vod-station-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/media/ncloud-media-vod-station-guide.html</guid>
-            
-            <category>media</category>
-            
-            <category>object_storage</category>
-            
-            <category>cdn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>모니터링 서비스 Cloud Insight Rule Template 설정 가이드</title>
-            <description>## 개요
-Cloud Insight를 설정할 때 매번 서버마다 일일이 설정하는 방법도 있지만 [**CPU-메모리-디스크 사용률**] 같은 자주 모니터링하는 항목들을 [**Template**]에 등록해 두면 모니터링을 설정할 때 좀 더 쉽고 정확하게 설정할 수 있는데, 그 방법을 정리해보겠습니다.  
-
-
-
-## Cloud Insight 기본 설정 방법
-Cloud Insight의 기본적인 설정 방법은 아래 링크 문서에서 확인 가능합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/management/ncloud_management_cloud_insight_guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;모니터링 서비스 Cloud Insight 설정 가이드&lt;/a&gt;
-&quot; %}
-
-## Template 설정 항목
-Template 설정할 때 서비스 상황에 따라 여러가지를 설정할 수 있는데, 여기서 예시로 설정해 볼 항목은 다음과 같습니다.
-- 서버 평균 CPU 사용률
-- 서버 메모리 사용률
-- 서버 디스크 사용률
-
-## Rule Template 설정
-먼저 [**Cloud Insight**] - [**Configuration**] - [**Template**]에서 [**Rule Template**] 탭을 선택하고, [**Rule Template 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### CPU 사용률
-[**서버 평균 CPU 사용률**]은  [**SERVER**] 탭에서 [**`SEVER/avg_cpu_used_rto`**] 항목을 선택합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### 메모리 사용률
-[**서버 평균 메모리 사용률**]은 [**Memory**] 탭에서 [**`MEMORY/mem_usert`**] 항목을 선택합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### 디스크별 사용 중인 용량
-[**디스크별 사용 중인 용량**]은  [**FILE STSTEM**] 탭에서 [**`FILE STSTEM/fs_usert`**] 항목을 선택합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-- [**사용 중인 디스크가 2개 이상인 경우**] &lt;br /&gt;
-서버를 생성할 때 자동으로 추가되는 OS용 기본 디스크 말고 별도로 디스크를 추가했을 경우에는 기본 / 영역외에 추가 디스크가 마운트된 영역에 대해서도 항목을 추가해야 합니다.  
-&lt;br /&gt;
-추가 디스크를 **/data 디렉토리로 마운트**했다고 가정했을 경우 아래 스샷처럼 [**`FILE STSTEM/fs_usert`**] 항목 오른쪽에 있는 [**+**] 버튼을 클릭해서 동일한 
-항목을 하나 더 추가하고, 디멘션에서 [**mnt_nm: /data**]를 선택합니다. 다른 곳으로 마운트했을 경우에는 그에 맞는 값을 선택하면 됩니다.
-&quot; %}
-
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-
-
-- 3가지 항목을 모두 선택하고, [다음] 버튼을 클릭하면 아래와 같이 각 항목별로 조건을 설정할 수 있습니다.  
-여기서는 각 수치가 70% 이상일 경우로 설정했고, 몇 분간의 평균값으로 할 것인가는 사용하는 서비스 상황에 따라 조절하시면 됩니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-## Event Rule 설정
-다음으로 [**Cloud Insight**] - [**Configuration**] - [**Event Rule**]에서 [**Event Rule 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### 감시 상품 선택
-Ncloud Cloud Insight에서 모니터링 할 수 있는 상품은 아래와 같은데 그 중에서 여기서는 VPC Server를 선택하겠습니다.
-- Classic Load Balancer Monitor
-- Classic Server
-- VPC Load Balancer Monitor
-- VPC Server
-- Object Storage
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### 감시 대상 설정
-감시 대상은 미리 설정한 그룹이나 Auto Scaling Group에서 선택할 수도 있는데, 여기서는 [**전체 보기**]를 선택해서 미리 만들어둔 테스트용 서버를 선택하겠습니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### 감시 항목 설정
-`여기가 이 가이드 문서의 가장 중요한 단계`인데, 위에서 설정했던 [**Template**]인 [**template-test**]를 감시 항목으로 선택해보겠습니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### 액션 설정
-액션 설정에서 [**통보 대상자**], [**알림 유형**], [**리마인드 알림 주기**], [**종료 알림 여부**]를 설정합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-### 최종 확인
-지금까지 설정한 내역을 최종 확인한 후에 이상이 없으면 [**생성**] 버튼을 클릭해서 Event Rule 생성을 완료합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-13.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-14.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-
-## 기타
-
-### Target Group 생성
-위에서는 [**Rule Template**]만 사용했는데, 여러 대상을 미리 하나의 그룹으로 묶어서 관리할 수도 있습니다.  
-[**Cloud Insight**] - [**Configuration**] - [**Template**]에서 [**Target Group**] 탭을 선택하고, [**Target Group 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-- 그룹 생성화면에서 원하는 [**Product Type**]을 선택하고, 선택 가능한 감시 대상 중에서 Group으로 묶을 대상을 선택하고 아래 쪽으로 이동 시킨 후에 [**생성**] 버튼을 클릭하면 됩니다. 이후에 [**Event Rule**] 생성할 때 [**감시 대상 설정**] 단계에서 여기서 설정한 Group을 선택하면 됩니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-insight-rule-template-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud 모니터링 서비스 Cloud Insight 설정 가이드&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Cloud Insight 소개
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightoverview&lt;/a&gt;
-
-2.  Cloud Insight 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudinsight-cloudinsightconsole&lt;/a&gt;
-
-3.  Cloud Insight 기본 설정 가이드
-	- &lt;a href=&quot;/management/ncloud_management_cloud_insight_guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/management/ncloud_management_cloud_insight_guide.html&lt;/a&gt;</description>
-            <pubDate>Tue, 07 Mar 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/management/ncloud-management-cloud-insight-rule-template-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-cloud-insight-rule-template-guide.html</guid>
-            
-            <category>monitoring</category>
-            
-            <category>log</category>
             
             
         </item>
