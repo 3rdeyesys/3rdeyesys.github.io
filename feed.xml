@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 27 Apr 2023 11:15:26 +0900</pubDate>
-        <lastBuildDate>Thu, 27 Apr 2023 11:15:26 +0900</lastBuildDate>
+        <pubDate>Thu, 27 Apr 2023 17:28:29 +0900</pubDate>
+        <lastBuildDate>Thu, 27 Apr 2023 17:28:29 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -219,6 +219,237 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
         </item>
         
         <item>
+            <title>Rocky Linux에서 NginX 설치, 설정하는 방법</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.  
+
+
+## 서버 환경
+
+{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
+&amp;#8259; NginX: NginX 1.23.1 &lt;br /&gt; 
+&amp;#8259; 테스트 사이트: nginx-test.com
+&quot; %}
+
+## 서버 준비
+Ncloud 콘솔에서 Rocky Linux 8.6 서버를 아래와 같이 준비했습니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## 패키지 업데이트
+우선 패키지 업데이트를 해보겠습니다.
+
+``` bash
+~# dnf -y update
+```
+{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
+Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
+&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## EPEL 저장소 패키지 설치
+다음으로 epel-release 저장소 패키지를 설치하겠습니다.
+
+``` bash
+~# dnf -y install epel-release
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## NginX 버전 선택
+설치할 NginX 버전 버전을 선택합니다.
+
+### NginX 버전 리스트
+우선, Ncloud Rocky Linux 8.6에서 지원하는 NginX 버전을 확인합니다.  
+리스트를 살펴보면 1.14가 기본 버전인 것을 알 수 있습니다.
+
+``` bash
+~# dnf module list nginx
+```
+
+- nginx 1.14 (default)
+- nginx 1.16
+- nginx 1.18
+- nginx 1.20
+- nginx mainline
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 버전 활성화 정보 초기화
+다음으로 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다. 현재 활성화 된 버전이 존재하느냐에 따라 나타나는 메시지가 다릅니다.
+
+``` bash
+~# dnf module reset nginx
+```
+
+- 활성화 된 버전이 없을 때
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+- 활성화 된 버전이 있을 때
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### mainline 버전 활성화
+최신 버전인 mainline 버전을 활성화합니다.
+
+``` bash
+~# dnf module enable nginx:mainline
+```
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NginX는 stable, mainline 두가지 버전이 있습니다. 
+NginX의 공식 설명에 따르면 버그 수정이나 보안 패치 등은 항상 mainline 버전에 먼저 적용되기 때문에 mainline을 사용하는 것을 추천한다고 합니다. &lt;br /&gt;
+stable 버전을 사용하는 주된 경우는 **third-party 모듈**을 사용하고 있어서 신규 버전에서 **호환성 문제**가 발생할 가능성이 걱정될 때라고 합니다.&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## NginX 설치
+NginX를 설치합니다. 설치된 버전은 다음과 같습니다.
+
+``` bash
+~# dnf -y install nginx
+~# nginx -v
+```
+- NginX: 1.23.1
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## 디렉토리 설정
+다음으로 홈으로 사용할 디렉토리를 생성하고, 해당 디렉토리의 소유권을 설정하겠습니다.  
+그리고, NginX가 정상 작동하는지 확인해보기 위해 설치시에 포함된 index.html을 포함한 파일들을 홈 디렉토리로 복사합니다.
+
+``` bash
+# 테스트 사이트 홈 디렉토리 생성
+~# mkdir -p /ncloud/data/www/nginx-test/
+
+# 해당 디렉토리에 nginx에 권한 부여
+~# chown -R nginx:nginx /ncloud/data/www/nginx-test
+
+# nginx 샘플 페이지를 사이트 디렉토리로 복사
+~# cp /usr/share/nginx/html/*.* /ncloud/data/www/nginx-test/
+
+# 복사된 파일들 확인
+~# ls -al /ncloud/data/www/nginx-test/
+```
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## 환경 설정
+기본 환경 설정 파일은 **/etc/nginx/nginx.conf** 입니다.  
+**nginx.conf** 파일을 열어보면 아래와 같이 **server {...}**로 시작되는 사이트 설정에 관련된 부분도 있지만,  
+**include /etc/nginx/conf.d/*.conf** 와 같이 **conf.d** 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.  
+
+물론, 사이트 설정을 **nginx.conf** 파일에 직접 설정해도 되지만, 여러 개의 사이트를 설정해야 하는 경우도 생각해서 **conf.d 디렉토리**에 사이트 이름별로 환경 설정 파일을 별도로 만들어서 진행하도록 하겠습니다. 
+
+``` bash
+~# vi /etc/nginx/nginx.conf
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 기본 설정 주석 처리
+**server {...}** 부분을 모두 주석 처리합니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 환경 설정 파일 생성
+**nginx-test.com** 이라는 도메인의 사이트 설정을 **nginx-test.conf** 설정 파일을 생성해서 저장합니다.
+
+``` bash
+~# vi /etc/nginx/conf.d/nginx-test.conf
+```
+
+``` nginx
+  server {
+    listen    80;
+    listen    [::]:80;
+
+    # 사이트 도메인 설정
+    server_name    nginx-test.com www.nginx-test.com;
+
+    # 홈 디렉토리, 기본 문서 설정
+    root      /ncloud/data/www/nginx-test;
+    index     index.html index.htm;
+
+    # 404 error 페이지 설정
+    error_page 404 /404.html;
+      location = /404.html {
+    }
+
+    # 50x error 페이지 설정
+    error_page 500 502 503 504 /50x.html;
+      location = /50x.html {
+      root    /ncloud/data/www/nginx-test;
+    }
+
+    # .htaccess 파일 접근 금지 설정
+    location ~ /\.ht {
+      deny    all;
+    }
+}
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## NginX 실행
+설정을 모두 마쳤으면 NginX를 시작하고 상태를 확인합니다.
+
+``` bash
+~# systemctl enable nginx
+~# systemctl start nginx
+~# systemctl status nginx
+```
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## hosts 파일 수정
+지금과 같이 테스트용으로 임의 설정한 도메인(**nginx-test.com**)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.  
+`실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에` [다음 단계로 바로 이동&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#https-access-test)하시면 됩니다. 
+
+윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.
+
+1. C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.
+2. 복사한 hosts 파일을 수정해서 123.456.789.123 nginx-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.
+3. 수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.
+4. 덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-14.png&quot; width=&quot;745&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사이트 접속 {#https-access-test}
+NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Rocky Linux NginX 설치 기본 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-mainline/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-mainline/&lt;/a&gt;
+
+2.  Rocky Linux NginX Multi Site 설치 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;</description>
+            <pubDate>Thu, 27 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</guid>
+            
+            <category>rocky-linux</category>
+            
+            <category>lemp</category>
+            
+            <category>nginx</category>
+            
+            <category>install</category>
+            
+            
+        </item>
+        
+        <item>
             <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
             <description>## 개요
 Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
@@ -371,169 +602,6 @@ Agent 창에서 [그래프 보기] 버튼을 클릭합니다.
             <pubDate>Tue, 25 Apr 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</guid>
-            
-            <category>classic</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
-다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
-그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
-&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
-&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
-&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 개인정보 수집 및 이용에 동의해야 합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(Classic)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Mon, 24 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
             
             <category>classic</category>
             
@@ -738,6 +806,279 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
             <category>ssl</category>
             
             <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
+다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
+그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
+&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
+&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
+&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(Classic)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Mon, 24 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
+            
+            <category>classic</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Ncloud 방화벽 ACG 설정 기본 가이드</title>
+            <description>## 개요
+ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스로 AWS에서는 비슷하게 Security Group이라는 것이 있습니다.
+
+## 제한 사항
+
+### VPC 환경
+- VPC당 최대 **500개**까지 ACG 생성 가능
+- **NIC당 3개의 ACG**를 허용
+- Inbound / Outbound 각각 **50개의 규칙** 생성 가능
+
+### Classic 환경
+- 계정당 최대 **100개**까지 ACG를 생성 가능
+- 각 ACG에는 최대 **100개**까지의 규칙을 설정할 수 있음
+- 서버는 **최대 5개**의 ACG에 중복 포함될 수 있음
+- 서버가 생성될 시 선택한 ACG는 변경이 불가하며, 반납 전까지 해당 ACG 규칙을 적용 받게 됨
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;Classic 환경에서는 서버 자체에 할당되는 개념이었으나 VPC에는 NIC 즉, 네트워크 카드에 할당되는 개념이어서 VPC 환경에서는 **NIC 당 최대 3개**까지 ACG를 적용할 수 있습니다.&quot; %}
+
+## ACG 위치
+Ncloud 콘솔에서 ACG의 위치는 [**Services**] - [**Compute**] - [**Server**] - [**ACG**]에 있습니다.
+
+### VPC 환경
+{% include image.html file=&quot;security/ncloud-security-acg-guide-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;security/ncloud-security-acg-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+### Classic 환경
+{% include image.html file=&quot;security/ncloud-security-acg-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;security/ncloud-security-acg-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+
+
+## 기본 규칙
+
+### Default ACG
+기본적으로 추가되는 ACG
+
+- 모든 들어오는 연결(inbound traffic)을 차단함
+- 모든 나가는 연결(outbound traffic)을 허용함
+- Default ACG 내 속한 서버들끼리의 네트워크 양방향 통신(TCP, UDP, ICMP)이 허용됨
+- 원격 접속 기본 포트 (**Linux - 22, Windows - 3389**)에 대한 TCP 허용됨
+
+#### VPC 화면
+
+##### Inbound (기본 설정)
+{% include image.html file=&quot;security/ncp_security_acg_vpc_inbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
+
+##### Inbound (권장 설정)
+{% include image.html file=&quot;security/ncp_security_acg_vpc_inbound_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+##### Outbound
+{% include image.html file=&quot;security/ncp_security_acg_vpc_outbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+#### Classic 화면 (기본 설정)
+{% include image.html file=&quot;security/ncp_security_acg_classic.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
+
+#### Classic 화면 (권장 설정)
+{% include image.html file=&quot;security/ncp_security_acg_classic_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
+
+### Custom ACG
+Default ACG 이외에 사용자가 추가하는 ACG
+
+- 모든 inbound traffic을 차단함(규칙으로 명시되어 있지 않음)
+- 모든 outbound traffic을 허용함(규칙으로 명시되어 있지 않음)
+
+
+## 접근소스 설정
+ACG를 설정할 때 접근 소스 항목은 보통 IP주소를 입력하게 됩니다. 
+하지만 특수한 경우로 Load Balancer를 지정하거나 ACG 이름을 지정하는 경우도 있습니다. 
+이 중에서 다른 ACG를 접근 소스 항목으로 지정하는 경우는 해당 ACG가 적용된 서버들이 접근할 수 있도록 규칙을 설정하는 것인데, 아래 예시를 이용해 정리해보겠습니다.
+
+### ACG-1
+- 적용서버 : SVR-1, SVR-2
+
+### ACG-2
+- 적용서버 : SVR-3
+
+### ACG-2 적용 규칙
+- 프로토콜 :  TCP
+- 접근소스 :  ACG-1
+- 허용포트 : 80
+
+{% include note.html content=&quot;위와 같은 경우 ACG-1이 적용된 SVR-1, SVR-2 서버에서 ACG-2가 적용된 SVR-3 서버로 80포트를 이용한 접근을 허용한다는 의미입니다.&quot; %}
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;VPC 환경에서 ACG를 접근소스를 설정할 때는 동일한 VPC에 생성된 ACG만 접근소스로 설정할 수 있습니다.&quot; %}
+
+
+
+## 참고 URL
+&lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-2-3&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-2-3.html&lt;/a&gt;
+</description>
+            <pubDate>Thu, 20 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</guid>
+            
+            <category>acg</category>
+            
+            <category>classic</category>
+            
+            <category>vpc</category>
             
             
         </item>
@@ -1141,116 +1482,6 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
             <category>backup</category>
             
             <category>mariadb</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud 방화벽 ACG 설정 기본 가이드</title>
-            <description>## 개요
-ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스로 AWS에서는 비슷하게 Security Group이라는 것이 있습니다.
-
-## 제한 사항
-
-### VPC 환경
-- VPC당 최대 **500개**까지 ACG 생성 가능
-- **NIC당 3개의 ACG**를 허용
-- Inbound / Outbound 각각 **50개의 규칙** 생성 가능
-
-### Classic 환경
-- 계정당 최대 **100개**까지 ACG를 생성 가능
-- 각 ACG에는 최대 **100개**까지의 규칙을 설정할 수 있음
-- 서버는 **최대 5개**의 ACG에 중복 포함될 수 있음
-- 서버가 생성될 시 선택한 ACG는 변경이 불가하며, 반납 전까지 해당 ACG 규칙을 적용 받게 됨
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;Classic 환경에서는 서버 자체에 할당되는 개념이었으나 VPC에는 NIC 즉, 네트워크 카드에 할당되는 개념이어서 VPC 환경에서는 **NIC 당 최대 3개**까지 ACG를 적용할 수 있습니다.&quot; %}
-
-## ACG 위치
-Ncloud 콘솔에서 ACG의 위치는 [**Services**] - [**Compute**] - [**Server**] - [**ACG**]에 있습니다.
-
-### VPC 환경
-{% include image.html file=&quot;security/ncloud-security-acg-guide-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;security/ncloud-security-acg-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-### Classic 환경
-{% include image.html file=&quot;security/ncloud-security-acg-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;security/ncloud-security-acg-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-
-
-## 기본 규칙
-
-### Default ACG
-기본적으로 추가되는 ACG
-
-- 모든 들어오는 연결(inbound traffic)을 차단함
-- 모든 나가는 연결(outbound traffic)을 허용함
-- Default ACG 내 속한 서버들끼리의 네트워크 양방향 통신(TCP, UDP, ICMP)이 허용됨
-- 원격 접속 기본 포트 (**Linux - 22, Windows - 3389**)에 대한 TCP 허용됨
-
-#### VPC 화면
-
-##### Inbound (기본 설정)
-{% include image.html file=&quot;security/ncp_security_acg_vpc_inbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
-
-##### Inbound (권장 설정)
-{% include image.html file=&quot;security/ncp_security_acg_vpc_inbound_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-##### Outbound
-{% include image.html file=&quot;security/ncp_security_acg_vpc_outbound.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-#### Classic 화면 (기본 설정)
-{% include image.html file=&quot;security/ncp_security_acg_classic.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&quot; %}
-
-#### Classic 화면 (권장 설정)
-{% include image.html file=&quot;security/ncp_security_acg_classic_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드&quot; caption=&quot;&quot; %}
-
-### Custom ACG
-Default ACG 이외에 사용자가 추가하는 ACG
-
-- 모든 inbound traffic을 차단함(규칙으로 명시되어 있지 않음)
-- 모든 outbound traffic을 허용함(규칙으로 명시되어 있지 않음)
-
-
-## 접근소스 설정
-ACG를 설정할 때 접근 소스 항목은 보통 IP주소를 입력하게 됩니다. 
-하지만 특수한 경우로 Load Balancer를 지정하거나 ACG 이름을 지정하는 경우도 있습니다. 
-이 중에서 다른 ACG를 접근 소스 항목으로 지정하는 경우는 해당 ACG가 적용된 서버들이 접근할 수 있도록 규칙을 설정하는 것인데, 아래 예시를 이용해 정리해보겠습니다.
-
-### ACG-1
-- 적용서버 : SVR-1, SVR-2
-
-### ACG-2
-- 적용서버 : SVR-3
-
-### ACG-2 적용 규칙
-- 프로토콜 :  TCP
-- 접근소스 :  ACG-1
-- 허용포트 : 80
-
-{% include note.html content=&quot;위와 같은 경우 ACG-1이 적용된 SVR-1, SVR-2 서버에서 ACG-2가 적용된 SVR-3 서버로 80포트를 이용한 접근을 허용한다는 의미입니다.&quot; %}
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;VPC 환경에서 ACG를 접근소스를 설정할 때는 동일한 VPC에 생성된 ACG만 접근소스로 설정할 수 있습니다.&quot; %}
-
-
-
-## 참고 URL
-&lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-compute-2-3&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-compute-2-3.html&lt;/a&gt;
-</description>
-            <pubDate>Thu, 20 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_acg_guide.html</guid>
-            
-            <category>acg</category>
-            
-            <category>classic</category>
-            
-            <category>vpc</category>
             
             
         </item>
@@ -2124,167 +2355,6 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
             <category>backup</category>
             
             <category>mysql</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Video Player 구현하기 샘플 예제</title>
-            <description>## Video Player 상품 서비스 종료
-
-{% include warning.html title=&quot;서비스 종료&quot; content=&quot;
-그 동안 네이버 클라우드에서 제공해왔던 Video Player 서비스가 2023년 7월 31일부로 서비스를 종료하게 되었습니다. 
-이후로는 이 보다 업그레이드 된 [**Video Player Enhancement**] 상품을 이용해주시면 감사하겠습니다.
-&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/media/ncloud-media-video-player-enhancement-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; Video Player Enhancement 사용 가이드&lt;/a&gt;
-&quot; %}
-
-## 개요
-네이버 클라우드 비디오 플레이어는 최신의 네이버 미디어 플레이어를 기반으로 개발된 클라우드 전용 상품으로 
-네이버 동영상 서비스에 적용되어 수 많은 성공사례를 가지고 있는 최신의 네이버 플레이어를 손쉽고 빠르게 고객의 미디어 서비스에 적용할 수 있습니다.
-
-## 플레이어 생성하기
-우선은 네이버 클라우드 콘솔에서 js 파일로 구성된 플레이어를 생성하는 과정부터 살펴보겠습니다.
-
-[네이버 클라우드 콘솔] - [Video Player]에서 [플레이어 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;media/ncp_media_video_player_01.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud Video Player 구현하기 샘플 예제&quot; caption=&quot;&quot; %}
-
-플레이어 이름, 유-무료 상품(현재는 무료만 선택 가능), 플레이어 사이즈, 버전, 플레이어가 저장될 Object Storage 위치 등을 선택합니다.
-
-{% include image.html file=&quot;media/ncp_media_video_player_02.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud Video Player 구현하기 샘플 예제&quot; caption=&quot;&quot; %}
-
-재생 속도 조절 등의 기능을 설정하고, 우클릭 메뉴 바로가기를 추가할 수도 있습니다.
-
-{% include image.html file=&quot;media/ncp_media_video_player_03.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud Video Player 구현하기 샘플 예제&quot; caption=&quot;&quot; %}
-
-자동 재성이나 대역폭 등의 재생 관련 설정을 선택합니다.
-
-{% include image.html file=&quot;media/ncp_media_video_player_04.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud Video Player 구현하기 샘플 예제&quot; caption=&quot;&quot; %}
-
-마지막으로 현재까지 선택한 설정을 확인하고, 플레이어 미리보기를 한 후에 [플레이어 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;media/ncp_media_video_player_05.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud Video Player 구현하기 샘플 예제&quot; caption=&quot;&quot; %}
-
-생성된 플레이어 js 파일의 경로를 확인할 수 있습니다.
-
-{% include image.html file=&quot;media/ncp_media_video_player_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud Video Player 구현하기 샘플 예제&quot; caption=&quot;&quot; %}
-
-js 파일이 저장된 Object Storage에서도 확인 가능합니다.
-
-{% include image.html file=&quot;media/ncp_media_video_player_07.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud Video Player 구현하기 샘플 예제&quot; caption=&quot;&quot; %}
-
-
-## 플레이어 구현하기
-생성된 플레이어는 자바스크립트 js 파일이므로 html 파일을 만들어서 플레이어를 구현해야 합니다.
-
-### 플레이어 JavaScript 소스 예시
-
-``` javascript
-  var player = new ncplayer(&apos;divVideoPlayer&apos;, {
-    playlist: &quot;http://example.com/myVideo.mp4&quot;
-  });
-
-  player.play();
-```
-&lt;br /&gt;
-### 플레이어 html 소스 예시
-아래 예시에서는  컨트롤러 표시, 자동 재생 안함, 음소거, 가로 크기 1024로 옵션을 설정했습니다. 상세한 옵션을 아래쪽에서 다시 살펴보겠습니다.
-
-``` html
-&lt;!doctype html&gt;
-&lt;html lang=&quot;kr&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-    &lt;title&gt;Video Player Sample&lt;/title&gt;
-
-    &lt;script src=&quot;https://kr.object.ncloudstorage.com/플레이어 파일명.js&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-
-  &lt;body&gt;
-
-    &lt;div style=&quot;text-align:center&quot;&gt;
-      &lt;div id=&quot;divVideoPlayer&quot; name=&quot;divVideoPlayer&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-
-     &lt;script&gt;
-
-      var player = new ncplayer(&apos;divVideoPlayer&apos;, {
-        controls: true,
-        autostart: false,
-        mute: true,
-        width: 1024,
-        playlist: [
-        {
-          file: &apos;https://kr.object.ncloudstorage.com/재생할 동영상 파일명.mp4&apos;,
-        },
-        ],
-      });
-
-      player.play();
-
-     &lt;/script&gt;
-
-   &lt;/body&gt;
-&lt;/html&gt;
-```
-
-## 플레이어 구현 예시
-위 html 소스대로 플레이어를 구현해서 웹브라우져에서 확인해보면 다음과 같이 나타납니다.
-
-{% include image.html file=&quot;media/ncp_media_video_player_08.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud Video Player 구현하기 샘플 예제&quot; caption=&quot;&quot; %}
-
-
-## 플레이어 상세 옵션
-플레이어 상세 옵션을 간단하게 정리해보겠습니다. 좀 더 자세한 설명은 아래 링크에 있는 네이버 클라우드 가이드 문서를 참고하시면 됩니다.
-
-``` javascript
-
-var player = new ncplayer(&apos;divVideoPlayer&apos;, {
-  controls: true,
-  autostart: false,
-  mute: true,
-  width: 1024,
-  playlist: [
-    { file: &apos;https://CDN도메인/example_video_01.mp4&apos; },
-    { file: &apos;https://CDN도메인/example_video_02.mp4&apos; },
-    { file: &apos;https://CDN도메인/example_video_03.mp4/index.m3u8&apos; }
-  ],
-  });
-
-```
-
-| PROPERTY | TYPE | DESCRIPTION | DEFAULT |
-| :---: | :---: | :---: | :---: |
-| playlist | string/array | 재생하고자 하는 video 정보 (단일 경로 또는, 여러 경로를 전달) | - |
-| autostart | boolean | player 시작 시, video를 자동으로 재생 (브라우저의 자동재생 정책을 따름) | false |
-| mute | boolean | player 시작 시, video를 자동으로 음소거 상태로 설정 | false |
-| controls | boolean | player 제어를 위한 컨트롤의 표시 여부 결정 | true |
-| autoPause | boolean | 창이 전환되거나 최소화되었을 때, 자동으로 player를 정지 상태로 만듦 | false |
-| aspectRatio | string | player의 가로X세로 비율 지정, &quot;width:height&quot; 형식으로 전달해야 합니다. | - |
-| width | number | player의 가로 사이즈 고정 | - |
-| height | number | player의 세로 사이즈 고정 | - |
-| playbackRate | boolean | video 의 재생속도 조절, 1.0보다 낮으면 느려지고, 1.0보다 높으면 빠르게 재생 | 1.0 |
-| repeat | boolean | video의 반복 재생 여부 결정 | false |
-| about | object | 마우스 우클릭 시 표시되는 바로가기 정보 수정 | false |
-
-
-## 참고 URL
-1. Video Player 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/videoplayer-videoplayerguide&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/videoplayer-videoplayerguide&lt;/a&gt;
-
-2. Video Player Demo 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/videoplayer-videoplayerdemo&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/videoplayer-videoplayerdemo&lt;/a&gt;</description>
-            <pubDate>Fri, 24 Mar 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/media/ncloud_media_video_player_sample.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/media/ncloud_media_video_player_sample.html</guid>
-            
-            <category>media</category>
-            
-            <category>object_storage</category>
             
             
         </item>

@@ -490,13 +490,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
-                  <li><a title="CentOS에서 NginX 설치, 설정" href="/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html">CentOS에서 NginX 설치, 설정</a></li>
+                  <li><a title="CentOS에 NginX 설치, 설정" href="/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html">CentOS에 NginX 설치, 설정</a></li>
                   
                   
                   
                   
                   
-                  <li><a title="Ubuntu에서 NginX 설치, 설정" href="/compute/ncloud_compute_lemp_nginx_install_setting_ubuntu_guide.html">Ubuntu에서 NginX 설치, 설정</a></li>
+                  <li><a title="Ubuntu에 NginX 설치, 설정" href="/compute/ncloud_compute_lemp_nginx_install_setting_ubuntu_guide.html">Ubuntu에 NginX 설치, 설정</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Rocky Linux에 NginX 설치, 설정" href="/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html">Rocky Linux에 NginX 설치, 설정</a></li>
                   
                   
                   
@@ -1868,7 +1874,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   
 </figure>
 
-<h2 id="저장소-패키지-설치">저장소 패키지 설치</h2>
+<h2 id="epel-저장소-패키지-설치">EPEL 저장소 패키지 설치</h2>
 <p>다음으로 epel-release 저장소 패키지를 설치하겠습니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>epel-release
@@ -2000,7 +2006,8 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 </figure>
 
 <h3 id="버전-활성화-정보-초기화-1">버전 활성화 정보 초기화</h3>
-<p>우선 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다.</p>
+<p>우선 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다.<br />
+혹시 활성화된 버전이 없을 경우에는 별다른 변화 없이 과정이 완료됩니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf module reset nginx
 </code></pre></div></div>
