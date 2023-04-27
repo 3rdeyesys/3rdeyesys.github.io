@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 26 Apr 2023 11:45:47 +0900</pubDate>
-        <lastBuildDate>Wed, 26 Apr 2023 11:45:47 +0900</lastBuildDate>
+        <pubDate>Thu, 27 Apr 2023 11:15:26 +0900</pubDate>
+        <lastBuildDate>Thu, 27 Apr 2023 11:15:26 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -174,6 +174,9 @@ Ncloud SSN VPN은 이용자가 SSN VPN에 접속 인증한 로그를 수집할 �
 
 {% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-27.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
 
+- Cloud Log Analytics에서 인증 로그 확인
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-30.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
 
 ## 주의사항
 {% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
@@ -202,7 +205,7 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
 2. Ncloud SSL VPN 사용 가이드 - VPC
 	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&lt;/a&gt;
 </description>
-            <pubDate>Wed, 26 Apr 2023 00:00:00 +0900</pubDate>
+            <pubDate>Thu, 27 Apr 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</guid>
             

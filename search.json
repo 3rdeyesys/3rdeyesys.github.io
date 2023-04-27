@@ -1475,7 +1475,7 @@
 "tags": "classicsslvpn",
 "keywords": "암호화 통신, 보안접속",
 "url": "/security/ncloud_security_ssl_vpn_classic_guide.html",
-"summary": "Ncloud Classic 환경에서 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 설정하고 접속하는 방법입니다"
+"summary": ""
 }
 ,
 
@@ -1486,7 +1486,7 @@
 "tags": "vpcsslvpn",
 "keywords": "암호화 통신, 보안접속",
 "url": "/security/ncloud_security_ssl_vpn_vpc_guide.html",
-"summary": "Ncloud VPC 환경에서 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 설정하고 접속하는 방법입니다"
+"summary": ""
 }
 ,
 

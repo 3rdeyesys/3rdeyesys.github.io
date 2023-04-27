@@ -2042,7 +2042,11 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 </figure>
 
 <h3 id="접속화면-1">접속화면</h3>
-<p>설치 완료 후에 웹브라우저로 접속해보면 다음과 같이 NGINX 로고가 포함된 화면을 확인할 수 있습니다.</p>
+<p>설치 완료 후에 nginx를 실행 시키고, 웹브라우저로 접속해보면 다음과 같이 NGINX 로고가 포함된 화면을 확인할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl <span class="nb">enable </span>nginx
+~# systemctl start nginx
+</code></pre></div></div>
 
 <figure>
   <img class="docimage" src="/images/compute/ncloud-compute-server-rocky-linux-guide-09.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
@@ -2319,7 +2323,7 @@ It is recommended to rather remove all installed content from the module, and re
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-01-10<br/> Site last generated: 2023-04-26 <br />        
+        <span>Page last updated:</span> 2023-01-10<br/> Site last generated: 2023-04-27 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
