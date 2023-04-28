@@ -12,7 +12,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법입니다">
-<meta name="keywords" content="rocky-linux, lemp, nginx, install,  Linux, LEMP, LAMP, 록키 리눅스">
+<meta name="keywords" content="rocky_linux, lemp, nginx, install,  Linux, LEMP, LAMP, 록키 리눅스">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="Rocky Linux에서 NginX 설치, 설정하는 방법" />
@@ -853,28 +853,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="MySQL, mariadb my.cnf 위치" href="/database/ncloud_database_mysql_mariadb_config_my_cnf.html" >MySQL, mariadb my.cnf 위치</a></li>          
+          <li><a title="MySQL, MariaDB my.cnf 위치" href="/database/ncloud_database_mysql_mariadb_config_my_cnf.html" >MySQL, MariaDB my.cnf 위치</a></li>          
                     
           
           
           
           
           
-          <li><a title="MySQL, mariadb bind-address 위치" href="/database/ncloud_database_mysql_mariadb_config_bind_address.html" >MySQL, mariadb bind-address 위치</a></li>          
+          <li><a title="MySQL, MariaDB bind-address 위치" href="/database/ncloud_database_mysql_mariadb_config_bind_address.html" >MySQL, MariaDB bind-address 위치</a></li>          
                     
           
           
           
           
           
-          <li><a title="CentOS에서 mariaDB 외부접속 허용" href="/database/ncloud_database_mariadb_access_from_remote_centos.html" >CentOS에서 mariaDB 외부접속 허용</a></li>          
+          <li><a title="CentOS에서 MariaDB 외부접속 허용" href="/database/ncloud_database_mariadb_access_from_remote_centos.html" >CentOS에서 MariaDB 외부접속 허용</a></li>          
                     
           
           
           
           
           
-          <li><a title="Ubuntu에서 mariaDB 외부접속 허용" href="/database/ncloud_database_mariadb_access_from_remote_ubuntu.html" >Ubuntu에서 mariaDB 외부접속 허용</a></li>          
+          <li><a title="Ubuntu에서 MariaDB 외부접속 허용" href="/database/ncloud_database_mariadb_access_from_remote_ubuntu.html" >Ubuntu에서 MariaDB 외부접속 허용</a></li>          
                     
           
           
@@ -1988,7 +1988,22 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
 </figure>
 
 <h2 id="환경-설정">환경 설정</h2>
-<p>기본 환경 설정 파일은 <strong>/etc/nginx/nginx.conf</strong> 입니다.<br />
+
+<h3 id="설정-파일-위치">설정 파일 위치</h3>
+<p>NginX 환경 설정 파일의 위치는 <strong>/etc/nginx/</strong> 디렉토리입니다. <strong>tree</strong> 명령으로 해당 디렉토리에서 <strong>conf</strong>와 관련된 파일 리스트와 디렉토리 구조를 확인하면 다음과 같습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# tree <span class="nt">-P</span> <span class="k">*</span>conf<span class="k">*</span> /etc/nginx/
+</code></pre></div></div>
+
+<figure>
+  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-16.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="기본-설정-파일">기본 설정 파일</h3>
+<p>위에서 확인할 수 있는 파일들 중에서 기본 환경 설정 파일은 <strong>/etc/nginx/nginx.conf</strong> 입니다.<br />
 <strong>nginx.conf</strong> 파일을 열어보면 아래와 같이 <strong>server {…}</strong>로 시작되는 사이트 설정에 관련된 부분도 있지만,<br />
 <strong>include /etc/nginx/conf.d/*.conf</strong> 와 같이 <strong>conf.d</strong> 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.</p>
 
@@ -2136,6 +2151,11 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
         
         
           
+            <a
+              href="/tag/tag_rocky_linux.html"
+              class="btn btn-default navbar-btn cursorNorm"
+              role="button">rocky_linux</a>
+          
         
           
             <a
@@ -2206,7 +2226,7 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-27<br/> Site last generated: 2023-04-27 <br />        
+        <span>Page last updated:</span> 2023-04-27<br/> Site last generated: 2023-04-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

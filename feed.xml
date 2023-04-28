@@ -5,10 +5,175 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 27 Apr 2023 17:40:51 +0900</pubDate>
-        <lastBuildDate>Thu, 27 Apr 2023 17:40:51 +0900</lastBuildDate>
+        <pubDate>Fri, 28 Apr 2023 17:28:54 +0900</pubDate>
+        <lastBuildDate>Fri, 28 Apr 2023 17:28:54 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Mysql, MariaDB 환경설정 파일 my.cnf 위치</title>
+            <description>## 개요
+Ncloud (네이버 클라우드)에서 Mysql MariaDB 환경설정 파일인 my.cnf 파일이 CentOS, Ubuntu, Rocky Linux OS 별로 어떤 경로에 위치하고 있는지 정리해보겠습니다.
+
+## CentOS
+우선 CentOS 부터 살펴보겠습니다.
+
+### MySQL
+MySQL은 **my.cnf** 파일이 **/etc/** 바로 밑에 위치합니다.
+
+``` bash
+/etc/my.cnf
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-centos-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+
+### MariaDB
+MariaDB에서도 **my.cnf** 파일이 **/etc/** 바로 밑에 위치하기는 하지만, 실제로 **/etc/my.cnf** 파일을 열어보면 다음과 같이 **my.cnf.d** 디렉토리에 있는 파일을 include만 하게 되어 있습니다.  
+즉, **my.cnf** 파일에 설정을 추가해도 되지만 가능하면 하위의 각각의 설정 파일에 추가하는 것이 좋습니다.
+
+``` bash
+/etc/my.cnf.d/server.cnf
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-centos-01.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-centos-02.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+- **/etc/my.cnf.d/server.cnf** 파일을 열어 보면 다음과 같이 구성 되어 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-centos-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+## Ubuntu 
+Ubuntu에서는 **my.cnf** 파일이 **/etc/mysql** 밑에 위치합니다.
+
+``` bash
+/etc/mysql/my.cnf
+```
+
+### MySQL
+Ubuntu 20.04, MySQL 8.0에서는 아래의 3가지 파일을 주로 확인하면 되겠습니다.
+
+``` bash
+/etc/mysql/my.cnf
+/etc/mysql/mysql.conf.d/mysql.cnf
+/etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+먼저 **/etc/mysql/my.cnf** 파일을 열어 보면 다음과 같이 **conf.d** 디렉토리와 **mysql.conf.d** 디렉토리에 있는 파일을 include 하도록 되어 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+**/etc/mysql/** 디렉토리의 파일과 서브 디렉토리 구조를 살펴보면 다음과 같습니다. 여기서 **mysql.conf.d** 디렉토리에 있는 **mysql.cnf** 파일과 **mysqld.cnf** 파일을 살펴보겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+- **/etc/mysql/mysql.conf.d/mysql.cnf**  
+이 파일을 열어 보면 다음과 같이 [**The MySQL database client configuration file**]이라고 되어 있습니다.  
+즉, **MySQL Client 관련 설정**은 이곳에 지정하면 되겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+- **/etc/mysql/mysql.conf.d/mysqld.cnf**  
+이 파일을 열어 보면 다음과 같이 [**The MySQL database server configuration file**]이라고 되어 있습니다.  
+즉, **MySQL Server 관련 설정**은 이곳에 지정하면 되겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+### MariaDB
+Ubuntu 20.04, MariaDB 10.3에서는 아래의 4가지 파일을 주로 확인하면 되겠습니다.
+
+``` bash
+/etc/mysql/my.cnf
+/etc/mysql/mariadb.cnf
+/etc/mysql/mariadb.conf.d/50-client.cnf
+/etc/mysql/mariadb.conf.d/50-server.cnf
+```
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+그런데, **/etc/mysql/my.cnf** 파일의 정보를 확인해보면 결국 **/etc/mysql/mariadb.cnf** 파일의 심볼릭 링크라는 것을 알 수 있습니다. 그러므로 **/etc/mysql/mariadb.cnf** 파일을 살펴보겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+**/etc/mysql/mariadb.cnf** 파일을 열어 보면 다음과 같이 **conf.d** 디렉토리와 **mariadb.conf.d** 디렉토리에 있는 파일을 include 하도록 되어 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+**/etc/mysql/** 디렉토리의 파일과 서브 디렉토리 구조를 살펴보면 다음과 같습니다.  
+여기서 **mariadb.conf.d** 디렉토리에 있는 **50-client.cnf** 파일과 **50-server.cnf** 파일을 살펴보겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+- **/etc/mysql/mariadb.conf.d/50-client.cnf**  
+이 파일을 열어 보면 다음과 같이 [**This group is read by the client library**]이라고 되어 있습니다.  
+즉, **MariaDB Client 관련 설정**은 이곳에 지정하면 되겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+- **/etc/mysql/mariadb.conf.d/50-server.cnf**  
+이 파일을 열어 보면 다음과 같이 [**These groups are read by MariaDB server**]이라고 되어 있습니다.  
+즉, **MariaDB Server 관련 설정**은 이곳에 지정하면 되겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+## Rocky Linux
+
+### MySQL
+Rocky Linux도 MySQL은 my.cnf 파일이 /etc/ 바로 밑에 위치합니다.
+
+``` bash
+/etc/my.cnf
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+
+### MariaDB
+Rocky Linux에서는 **mariadb-server.cnf** 파일입니다.
+
+``` bash
+/etc/my.cnf.d/mariadb-server.cnf
+```
+
+MariaDB에서도 **my.cnf** 파일이 **/etc/** 바로 밑에 위치하기는 하지만, 실제로 **/etc/my.cnf** 파일을 열어보면 다음과 같이 **my.cnf.d** 디렉토리에 있는 파일을 include만 하게 되어 있습니다.  
+즉, **my.cnf** 파일에 설정을 추가해도 되지만 가능하면 하위의 각각의 설정 파일에 추가하는 것이 좋습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-rocky-linux-01.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-rocky-linux-02.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+- **/etc/my.cnf.d/mariadb-server.cnf** 파일을 열어 보면 다음과 같이 구성 되어 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1. Ncloud MySQL 서버 이미지 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-1-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-1-1&lt;/a&gt;
+
+2. Ncloud MariaDB 서버 이미지 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-7-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-7-1&lt;/a&gt; 
+</description>
+            <pubDate>Fri, 28 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/database/ncloud_database_mysql_mariadb_config_my_cnf.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud_database_mysql_mariadb_config_my_cnf.html</guid>
+            
+            <category>database</category>
+            
+            <category>mysql</category>
+            
+            <category>mariadb</category>
+            
+            <category>centos</category>
+            
+            <category>ubuntu</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
         
         <item>
             <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
@@ -337,7 +502,18 @@ NginX를 설치합니다. 설치된 버전은 다음과 같습니다.
 
 
 ## 환경 설정
-기본 환경 설정 파일은 **/etc/nginx/nginx.conf** 입니다.  
+
+### 설정 파일 위치
+NginX 환경 설정 파일의 위치는 **/etc/nginx/** 디렉토리입니다. **tree** 명령으로 해당 디렉토리에서 **conf**와 관련된 파일 리스트와 디렉토리 구조를 확인하면 다음과 같습니다.
+
+``` bash
+~# tree -P *conf* /etc/nginx/
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 기본 설정 파일
+위에서 확인할 수 있는 파일들 중에서 기본 환경 설정 파일은 **/etc/nginx/nginx.conf** 입니다.  
 **nginx.conf** 파일을 열어보면 아래와 같이 **server {...}**로 시작되는 사이트 설정에 관련된 부분도 있지만,  
 **include /etc/nginx/conf.d/*.conf** 와 같이 **conf.d** 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.  
 
@@ -438,7 +614,7 @@ NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 
             <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</guid>
             
-            <category>rocky-linux</category>
+            <category>rocky_linux</category>
             
             <category>lemp</category>
             
@@ -602,6 +778,169 @@ Agent 창에서 [그래프 보기] 버튼을 클릭합니다.
             <pubDate>Tue, 25 Apr 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_classic_guide.html</guid>
+            
+            <category>classic</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
+다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
+그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
+&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
+&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
+&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(Classic)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Mon, 24 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
             
             <category>classic</category>
             
@@ -802,169 +1141,6 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
             <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</guid>
             
             <category>vpc</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
-다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
-그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
-&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
-&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
-&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 개인정보 수집 및 이용에 동의해야 합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(Classic)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Mon, 24 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
-            
-            <category>classic</category>
             
             <category>ssl</category>
             
@@ -1669,6 +1845,8 @@ MySQL 8.0 서버를 설치합니다.
             
             <category>install</category>
             
+            <category>rocky_linux</category>
+            
             
         </item>
         
@@ -1844,517 +2022,7 @@ MySQL 5.7 서버를 설치합니다.
             
             <category>install</category>
             
-            
-        </item>
-        
-        <item>
-            <title>MySQL Multi Source Replication 구성 가이드</title>
-            <description>## 개요
-
-n대의 마스터 DB와 1대의 슬레이브 DB를 연결하여 마스터 DB들의 데이터를 슬레이브 DB 한곳에 모아 조회할 수 있는  MySQL Multi-Source-Replication(MSR)을 구성하는 방법을 정리해보겠습니다.
-
-## 테스트 준비
-
-- 마스터 서버 2대, 슬레이브 서버 1대 준비
-- 각 서버에 MySQL 5.7 이상 설치
-- MySQL 리플리케이션작업 진행 시 마스터 서버의 데이터베이스에 쓰기 작업 금지
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## ACG 설정
-서버 준비가 끝났으면 우선 마스터 서버 &lt;i class=&quot;fa-solid fa-arrow-right&quot;&gt;&lt;/i&gt; 슬레이브 서버로 디비 백업 파일 복사과 복제 구성에 필요한 22, 3306 포트를 오픈해야 합니다.  
-오픈 할 때 규칙은 마스터 서버와 슬레이브 서버의 공통 ACG에 사설 IP 대역 전체를 지정할 수도 있고, 슬레이브 서버 전용 ACG에 마스터 서버 IP만 등록하는 방법도 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## Slave 장비에 백업 디렉토리 생성
-먼저 Slave 장비에 Master 장비들로 부터 DB 복원용 덤프 파일을 전송 받을 백업 디렉토리를 생성하는 것 부터 시작하겠습니다.
-
-```bash
-~# mkdir /data
-~# cd /data
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## Master1 장비 구성
-
-### master1 설정 추가
-- /etc/my.cnf에 Master1 설정을 추가합니다.
-
-```bash
-~# vi /etc/my.cnf
-
-server-id = 1
-log-bin = mysql-bin
-binlog_format = mixed
-character-set-server = utf8
-
-#MySQL을 재시작해 변경사항 적용.
-~# systemctl restart mysqld
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-03.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-04.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### 리플리케이션 계정 생성
-MySQL 접속 후 리플리케이션을 진행할 계정 생성
-
-```bash
-#master1 계정 생성.
-mysql&gt; create user &apos;리플리케이션 계정명&apos;@&apos;%&apos; identified by &apos;패스워드&apos;;
-mysql&gt; grant replication slave,replication client on *.* to &apos;리플리케이션 계정명&apos;@&apos;%&apos;;
-mysql&gt; flush privileges;
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### 테스트 DB 생성
-다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.
-
-```bash
-mysql&gt; CREATE DATABASE testdb1 default CHARACTER SET UTF8;
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### Master1 정보확인
-이제 리플리케이션 설정에 필요한 Master 정보를 확인합니다.
-
-```bash
-mysql&gt; show variables like &apos;server_id&apos;;
-mysql&gt; show master status;
-```
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-[**show master status**] 명령으로 확인한 [**File**], [**Position**] 정보는 아래쪽에서 `Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야` 합니다.
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-06.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### DB 백업 파일 슬레이브 장비로 전송
-testdb1 DB의 백업파일을 생성하고, 슬레이브 서버로 전송합니다.
-
-```bash
-~# mkdir /data
-~# cd /data
-~# mysqldump -u root -p --databases testdb1 &gt; /data/test1.sql 
-
-#슬레이브 서버에 전송.
-~# scp test1.sql root@10.0.0.8:/data
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## Master2 장비 구성
-
-### Master2 설정 추가
-- /etc/my.cnf에 Master2 설정을 추가합니다.
-
-```bash
-~# vi /etc/my.cnf
-
-server-id = 2
-log-bin = mysql-bin
-binlog_format = mixed
-character-set-server = utf8
-
-#DB를 재시작하여 변경사항 적용.
-~# systemctl restart mysqld
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-09.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-10.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### 리플리케이션 계정 생성
-MySQL 접속 후 리플리케이션을 진행할 계정 생성합니다.
-
-```bash
-#master2 계정 생성.
-mysql&gt; create user &apos;리플리케이션 계정명&apos;@&apos;%&apos; identified by &apos;패스워드&apos;;
-mysql&gt; grant replication slave,replication client on *.* to &apos;리플리케이션 계정명&apos;@&apos;%&apos;;
-mysql&gt; flush privileges;
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### 테스트 DB 생성
-다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.
-
-```bash
-mysql&gt; CREATE DATABASE testdb2 default CHARACTER SET UTF8;
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### Master2 정보확인
-마찬가지로 리플리케이션 설정에 필요한 Master 정보를 확인합니다.
-
-```bash
-mysql&gt; show variables like &apos;server_id&apos;;
-mysql&gt; show master status;
-```
-
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-[**show master status**] 명령으로 확인한 [**File**], [**Position**] 정보는 아래쪽에서 `Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야` 합니다.
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-12.png&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### DB 백업 파일 슬레이브 장비로 전송
-testdb2 DB의 백업파일 생성하고, 슬레이브 서버로 전송합니다.
-
-```bash
-~# mkdir /data
-~# cd /data
-~# mysqldump -u root -p --databases testdb2 &gt; /data/test2.sql
-
-~# scp test2.sql root@10.0.0.8:/data
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## Slave 장비 구성
-
-### Slave 설정 추가
-- /etc/my.cnf에 Slave 설정을 추가합니다.  
-MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.
-
-{% tabs slave_my_cnf %}
-
-{% tab slave_my_cnf MySQL 5.7 %}
-```bash
-~# vi /etc/my.cnf
-
-### MySQL5.7 기준 ###
-
-server-id = 3 
-
-#리플리케이션 대상 디비 설정.
-replicate-do-db = testdb1
-replicate-do-db = testdb2
-
-#리플리케이션 제외 디비 설정.
-replicate-ignore-db = information_schema
-replicate-ignore-db = mysql
-replicate-ignore-db = performance_schema
-replicate-ignore-db = sys
-
-master_info_repository = &apos;TABLE&apos;
-relay_log_info_repository = &apos;TABLE&apos;
-slave-skip-errors = all
-
-#DB를 재시작하여 변경사항 적용.
-~# systemctl restart mysqld
-```
-{% endtab %}
-
-{% tab slave_my_cnf MySQL 8.0 %}
-```bash
-~# vi /etc/my.cnf
-
-### MySQL 8 기준 ###
-
-server-id = 3 
-
-# 리플리케이션 대상 디비 설정 (replicate-do-db = 채널명:DB명)
-replicate-do-db = ch_testdb1:testdb1
-replicate-do-db = ch_testdb1:testdb2
-
-#리플리케이션 제외 디비 설정.
-replicate-ignore-db = information_schema
-replicate-ignore-db = mysql
-replicate-ignore-db = performance_schema
-replicate-ignore-db = sys
-
-slave-skip-errors = all
-
-#DB를 재시작하여 변경사항 적용.
-~# systemctl restart mysqld
-```
-{% endtab %}
-
-{% endtabs %}
-
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-16.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-17.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### DB 복구 진행
-먼저 복구할 DB를 미리 생성하고 Master1, Master2 장비에서 전송 받은 백업 파일을 사용해 DB를 복구합니다.
-```bash
-#복구할 DB 생성.
-mysql&gt; create database testdb1;
-mysql&gt; create database testdb2;
-mysql&gt; quit
-
-#DB 복구
-~# mysql -u root -p testdb1 &lt; /data/test1.sql
-~# mysql -u root -p testdb2 &lt; /data/test2.sql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-- 백업 파일을 전송 받은 디렉토리로 이동해 백업 파일이 정상적으로 전송되었는지 확인합니다.
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-19.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## 리플리케이션 채널 설정
-리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.  
-채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.
-
-{% tabs config_channel %}
-
-{% tab config_channel MySQL 5.7 %}
-```bash
-# MySQL 5.7
-mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;마스터IP&apos;, MASTER_PORT=포트번호, MASTER_USER=&apos;생성한 리플리케이션 계정명&apos;, MASTER_PASSWORD=&apos;패스워드&apos;, MASTER_LOG_FILE=&apos;위에서 확인된 File명&apos;, MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;채널 이름&apos;;
-```
-{% endtab %}
-
-{% tab config_channel MySQL 8.0 ~ 8.0.22 %}
-```bash
-# MySQL 8.0 ~ 8.0.22
-mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;마스터IP&apos;, MASTER_PORT=포트번호, MASTER_USER=&apos;생성한 리플리케이션 계정명&apos;, MASTER_PASSWORD=&apos;패스워드&apos;, GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE=&apos;위에서 확인된 File명&apos;, MASTER_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;채널 이름&apos;;
-```
-{% endtab %}
-
-{% tab config_channel MySQL 8.0.23 ~ %}
-```bash
-# MySQL 8.0.23 이후 버전
-mysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST=&apos;마스터IP&apos;, SOURCE_PORT=포트번호, SOURCE_USER=&apos;생성한 리플리케이션 계정명&apos;, SOURCE_PASSWORD=&apos;패스워드&apos;, GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE=&apos;위에서 확인된 File명&apos;, SOURCE_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;ch_testdb1&apos;;
-```
-{% endtab %}
-
-{% endtabs %}
-
-여기에 필요한 정보 중에서 [**MASTER_LOG_FILE**(**SOURCE_LOG_FILE**)]과 [**MASTER_LOG_POS**(**SOURCE_LOG_POS**)]은 위쪽에서 확인한 Master DB들의 정보에 나타났던 것으로 정리하면 다음과 같습니다.
-
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;div class=&quot;col-sm-6&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;DB&lt;/th&gt;
-      &lt;th&gt;File&lt;/th&gt;
-      &lt;th&gt;Position&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;Master1&lt;/td&gt;&lt;td&gt;mysql-bin.000001&lt;/td&gt;&lt;td&gt;1321&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;Master2&lt;/td&gt;&lt;td&gt;mysql-bin.000002&lt;/td&gt;&lt;td&gt;970&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;    
-&lt;/div&gt;
-&lt;/div&gt;
-
-### Master 서버 정보 입력
-Slave 서버에 Master 서버 정보를 하나씩 입력합니다.
-
-{% tabs config_channel_sample %}
-
-{% tab config_channel_sample MySQL 5.7 %}
-```bash
-#Master1
-mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.6&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, MASTER_LOG_FILE=&apos;mysql-bin.000001&apos;, MASTER_LOG_POS=1321 FOR CHANNEL &apos;ch_testdb1&apos;;
-
-#Master2
-mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.7&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, MASTER_LOG_FILE=&apos;mysql-bin.000002&apos;, MASTER_LOG_POS=970 FOR CHANNEL &apos;ch_testdb2&apos;;
-
-mysql&gt; FLUSH PRIVILEGES;
-```
-{% endtab %}
-
-{% tab config_channel_sample MySQL 8.0 ~ 8.0.22 %}
-```bash
-#Master1
-mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.6&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE=&apos;mysql-bin.000001&apos;, MASTER_LOG_POS=1321 FOR CHANNEL &apos;ch_testdb1&apos;;
-
-#Master2
-mysql&gt; CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.7&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, GET_MASTER_PUBLIC_KEY=1, MASTER_LOG_FILE=&apos;mysql-bin.000002&apos;, MASTER_LOG_POS=970 FOR CHANNEL &apos;ch_testdb2&apos;;
-
-mysql&gt; FLUSH PRIVILEGES;
-```
-{% endtab %}
-
-{% tab config_channel_sample MySQL 8.0.23 ~ %}
-```bash
-#Master1
-mysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST=&apos;10.0.0.6&apos;, SOURCE_PORT=3306, SOURCE_USER=&apos;testuser&apos;, SOURCE_PASSWORD=&apos;Test!@123&apos;, GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE=&apos;mysql-bin.000001&apos;, SOURCE_LOG_POS=1321 FOR CHANNEL &apos;ch_testdb1&apos;;
-
-#Master2
-mysql&gt; CHANGE REPLICATION SOURCE TO SOURCE_HOST=&apos;10.0.0.7&apos;, SOURCE_PORT=3306, SOURCE_USER=&apos;testuser&apos;, SOURCE_PASSWORD=&apos;Test!@123&apos;, GET_SOURCE_PUBLIC_KEY=1, SOURCE_LOG_FILE=&apos;mysql-bin.000001&apos;, SOURCE_LOG_POS=970 FOR CHANNEL &apos;ch_testdb2&apos;;
-
-mysql&gt; FLUSH PRIVILEGES;
-```
-{% endtab %}
-
-{% endtabs %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-21.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### 리플리케이션 채널 시작
-리플리케이션 시작 후 에러가 없는지 확인합니다.  
-
-{% tabs start_channel %}
-
-{% tab start_channel MySQL 5.7 %}
-```bash
-#MySQL 5.7 기준
-mysql&gt; start slave for channel &apos;ch_testdb1&apos;; 
-mysql&gt; start slave for channel &apos;ch_testdb2&apos;;
-
-mysql&gt; show slave status for channel &apos;ch_testdb1&apos;\G 
-mysql&gt; show slave status for channel &apos;ch_testdb2&apos;\G
-```
-{% endtab %}
-
-{% tab start_channel MySQL 8.0 %}
-```bash
-#MySQL 8 기준
-mysql&gt; start replica for channel &apos;ch_testdb1&apos;; 
-mysql&gt; start replica for channel &apos;ch_testdb2&apos;;
-
-mysql&gt; show replica status for channel &apos;ch_testdb1&apos;\G 
-mysql&gt; show replica status for channel &apos;ch_testdb2&apos;\G
-```
-{% endtab %}
-
-{% endtabs %}
-
-
-- Master1  
-상태 확인에서는 [**Slave_IO_State**], [**Slave_IO_Running**], [**Slave_SQL_Running**] 항목들이 아래와 같이 되어 있으면 정상입니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-22.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-- Master2  
-상태 확인에서는 [**Slave_IO_State**], [**Slave_IO_Running**], [**Slave_SQL_Running**] 항목들이 아래와 같이 되어 있으면 정상입니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-23.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## 리플리케이션 테스트
-리플리케이션 설정을 모두 마친 후에 Master 서버들에서 DB 작업을 진행하고, Slave 서버에 해당 내용이 복제되는지 확인해보겠습니다.
-
-- Master1 서버 작업  
-Master1 서버에 테스트를 위한 [**sampletable**] Table을 생성합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-24.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
--  Slave 서버 확인  
-Slave 서버에서 testdb1 DB에 sampletable Table이 복제되었는지 확인합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-25.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
--  Master2 서버 작업  
-Master2 서버에 테스트를 위한 [**sampletable**] Table을 생성합니다.
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-26.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-- Slave 서버 확인  
-Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인합니다.
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-27.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MySQL Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## 버전별 명령어 비교
-
-{% tabs replication_command %}
-
-{% tab replication_command MySQL 5.7 %}
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th width=&quot;110px&quot;&gt;MySQL 5.7&lt;/th&gt;
-      &lt;th&gt;리플리케이션 명령어&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;채널 설정&lt;/td&gt;
-      &lt;td style=&quot;font-size:0.8em;line-height:130%;&quot;&gt;CHANGE &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt; TO &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_HOST=&apos;마스터IP&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_PORT=포트번호, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_USER=&apos;생성한 리플리케이션 계정명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_PASSWORD=&apos;패스워드&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_LOG_FILE=&apos;위에서 확인된 File명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;채널 이름&apos;;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 시작&lt;/td&gt;&lt;td&gt;START &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 중지&lt;/td&gt;&lt;td&gt;STOP &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 상태 확인&lt;/td&gt;&lt;td&gt;SHOW &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; STATUS FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 정보 삭제&lt;/td&gt;&lt;td&gt;RESET &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; ALL FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-{% endtab %}
-
-{% tab replication_command MySQL 8.0 ~ 8.0.22 %}
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th width=&quot;110px&quot;&gt;MySQL 5.7&lt;/th&gt;
-      &lt;th&gt;리플리케이션 명령어&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;채널 설정&lt;/td&gt;
-      &lt;td style=&quot;font-size:0.8em;line-height:130%;&quot;&gt;CHANGE &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt; TO &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_HOST=&apos;마스터IP&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_PORT=포트번호, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_USER=&apos;생성한 리플리케이션 계정명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_PASSWORD=&apos;패스워드&apos;, GET_&lt;span style=&quot;font-weight:bolder&quot;&gt;Master&lt;/span&gt;_PUBLIC_KEY=1, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_LOG_FILE=&apos;위에서 확인된 File명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;MASTER&lt;/span&gt;_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;채널 이름&apos;;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 시작&lt;/td&gt;&lt;td&gt;START &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 중지&lt;/td&gt;&lt;td&gt;STOP &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 상태 확인&lt;/td&gt;&lt;td&gt;SHOW &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; STATUS FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 정보 삭제&lt;/td&gt;&lt;td&gt;RESET &lt;span style=&quot;font-weight:bolder&quot;&gt;SLAVE&lt;/span&gt; ALL FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-{% endtab %}
-
-{% tab replication_command MySQL 8.0.23 ~ %}
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th width=&quot;110px&quot;&gt;MySQL 8.0&lt;/th&gt;
-      &lt;th&gt;리플리케이션 명령어&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;채널 설정&lt;/td&gt;
-      &lt;td style=&quot;font-size:0.8em;line-height:130%;&quot;&gt;CHANGE &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICATION SOURCE&lt;/span&gt; TO &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_HOST=&apos;마스터IP&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_PORT=포트번호, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_USER=&apos;생성한 리플리케이션 계정명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_PASSWORD=&apos;패스워드&apos;, GET_&lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_PUBLIC_KEY=1, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_LOG_FILE=&apos;위에서 확인된 File명&apos;, &lt;span style=&quot;font-weight:bolder&quot;&gt;SOURCE&lt;/span&gt;_LOG_POS=위에서 확인된 Position 번호 FOR CHANNEL &apos;ch_testdb1&apos;;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 시작&lt;/td&gt;&lt;td&gt;START &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICA&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 중지&lt;/td&gt;&lt;td&gt;STOP &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICA&lt;/span&gt; FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 상태 확인&lt;/td&gt;&lt;td&gt;SHOW &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICA&lt;/span&gt; STATUS FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 정보 삭제&lt;/td&gt;&lt;td&gt;RESET &lt;span style=&quot;font-weight:bolder&quot;&gt;REPLICA&lt;/span&gt; ALL FOR CHANNEL &quot;채널이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-{% endtab %}
-
-{% endtabs %}
-
-
-## 참고 URL
-1. MySQL 5.7 Multi-Source Replication 가이드
-	- &lt;a href=&quot;https://dev.mysql.com/doc/refman/5.7/en/replication-multi-source.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/doc/refman/5.7/en/replication-multi-source.html&lt;/a&gt;
-
-1. MySQL 8.0 Multi-Source Replication 가이드
-	- &lt;a href=&quot;https://dev.mysql.com/doc/refman/8.0/en/replication-multi-source.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/doc/refman/8.0/en/replication-multi-source.html&lt;/a&gt;  </description>
-            <pubDate>Wed, 05 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-mysql-multi-source-replication.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mysql-multi-source-replication.html</guid>
-            
-            <category>database</category>
-            
-            <category>backup</category>
-            
-            <category>mysql</category>
+            <category>rocky_linux</category>
             
             
         </item>
