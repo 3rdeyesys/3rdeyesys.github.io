@@ -15,21 +15,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="keywords" content="linux, storage,  Storage, Linux">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="스토리지 추가 생성 기본 가이드" />
+<meta property="og:title" content="Linux 스토리지 추가 생성 기본 가이드" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:description" content="Ncloud Linux서버 스토리지 추가 생성 기본 가이드입니다" />
 <link rel="canonical" href="https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-11-19T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-05-03T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="스토리지 추가 생성 기본 가이드" />
+<meta property="twitter:title" content="Linux 스토리지 추가 생성 기본 가이드" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Linux서버 스토리지 추가 생성 기본 가이드입니다","headline":"스토리지 추가 생성 기본 가이드","url":"https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Linux서버 스토리지 추가 생성 기본 가이드입니다","headline":"Linux 스토리지 추가 생성 기본 가이드","url":"https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html"}</script>
 <!-- End Jekyll SEO tag -->
 
-<title>스토리지 추가 생성 기본 가이드 | 써드아이시스템 기술문서</title>
+<title>Linux 스토리지 추가 생성 기본 가이드 | 써드아이시스템 기술문서</title>
 <link rel="stylesheet" href="/css/syntax.css">
 
 <link
@@ -1775,7 +1775,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="col-md-9" id="tg-sb-content">
               <div class="post-header">
   
-    <h1 class="post-title-main">스토리지 추가 생성 기본 가이드</h1>
+    <h1 class="post-title-main">Linux 스토리지 추가 생성 기본 가이드</h1>
   
 </div>
 
@@ -1846,11 +1846,43 @@ $("#toc_onoff").click(function() {
 ⁃ CentOS 5.x: mkfs.ext3 /dev/xvdb1 <br />
 ⁃ CentOS 6.x: mkfs.ext4 /dev/xvdb1 <br />
 ⁃ CentOS 7.x: mkfs.xfs /dev/xvdb1 <br />
+⁃ Rocky Linux: mkfs.xfs /dev/xvdb1 <br />
 ⁃ Ubuntu Server / Desktop: mkfs.ext4 /dev/xvdb1 <br />
 </div>
 
+<h2 id="ext4-vs-xfs-명령어-비교">ext4 vs XFS 명령어 비교</h2>
+
+<div>
+<table class="simple_table">
+  <thead>
+    <tr>
+      <th>항목</th>
+      <th>ext4</th>
+      <th>XFS</th>
+    </tr>
+  </thead>
+  <tbody>    
+    <tr><td>포맷</td><td>mkfs.ext4</td><td>mkfs.xfs</td></tr>
+    <tr><td>마운트</td><td>mount</td><td>mount</td></tr>
+    <tr><td>리사이즈</td><td>resize2fs</td><td>xfs_growfs</td></tr>
+    <tr><td>복구</td><td>e2fsck</td><td>xfs_repair</td></tr>
+    <tr><td>라벨 변경</td><td>e2label</td><td>xfs_admin -L</td></tr>
+    <tr><td>디버깅</td><td>debugfs</td><td>xfs_db</td></tr>
+    <tr><td>할당량 설정</td><td>quota</td><td>quota</td></tr>
+  </tbody>
+</table>  
+</div>
+
+<div class="alert alert-success" role="alert"><i class="far fa-check-square"></i> <b>Tip:</b> xfs_growfs 명령어는 파일 시스템의 크기를 줄일 수는 없고 늘릴 수만 있습니다.</div>
+
 <h2 id="참고-url">참고 URL</h2>
-<p><a href="https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2.html</a></p>
+<ol>
+  <li>Ncloud 블록 스토리지 사용 가이드
+    <ul>
+      <li><a href="https://guide.ncloud-docs.com/docs/blockstorage-use-vpc" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/blockstorage-use-vpc</a></li>
+    </ul>
+  </li>
+</ol>
 
   
     <div class="tags">
@@ -1921,7 +1953,7 @@ $("#toc_onoff").click(function() {
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2020-11-19<br/> Site last generated: 2023-04-28 <br />        
+        <span>Page last updated:</span> 2023-05-03<br/> Site last generated: 2023-05-03 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
