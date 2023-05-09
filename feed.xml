@@ -5,10 +5,145 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 03 May 2023 16:47:09 +0900</pubDate>
-        <lastBuildDate>Wed, 03 May 2023 16:47:09 +0900</lastBuildDate>
+        <pubDate>Tue, 09 May 2023 15:27:33 +0900</pubDate>
+        <lastBuildDate>Tue, 09 May 2023 15:27:33 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.  
+그래서 Object Storage에 접속, 관리할 때 AWS의 CLI(Command Line Interface)를 사용할 수 있는데 그 중에서 AWS CLI 버전 2의 설치와 사용방법에 대해 정리해보겠습니다.
+
+## AWS CLI 버전 2 설치 {#awscliinstall}
+
+{% include note.html content=&quot;AWS CLI 버전 1에서는 설치와 실행에 Python과 PIP를 이용하는 방법이 주로 사용되었지만, AWS CLI 버전 2에서는 Python 임베디드 버전이 포함되어 있어 별도로 설치할 필요가 없기에 설치 파일도 ZIP 압축 파일 형태로 제공됩니다.&quot; %}
+
+### 설치 파일 다운로드
+AWS CLI 버전 2 설치 파일을 awscliv2.zip 이름으로 다운로드 합니다.
+
+``` bash
+~# curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
+```
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-01.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### 압축 풀기
+unzip으로 압축을 풀겠습니다.
+
+``` bash
+~# unzip awscliv2.zip
+```
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-02.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### 설치
+아래 명령으로 쉽게 설치할 수 있습니다.
+
+``` bash
+~# ./aws/install
+```
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-03.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### 버전 확인
+설치가 완료된 후 버전을 확인해보면 아래와 같이 AWS CLI 버전과 임베디드된 Python 버전도 확인할 수 있습니다.
+
+``` bash
+~# aws --version
+```
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-04.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## API 인증키 생성
+다음으로 접속에 필요한 인증키를 Ncloud (네이버 클라우드) 포탈 - 마이페이지 - 계정관리 - 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
+
+{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성 방법&quot; caption=&quot;&quot; %}
+
+## AWS CLI 환경 설정
+이제 AWS CLI로 접속하기 위해 환경설정을 해야 합니다.  
+위 단계에서 확인한 Access Key ID와 Secret Key를 아래 화면에서 입력하고 나머지 2가지 항목은 입력하지 않으셔도 됩니다.
+``` bash
+~# aws configure
+
+AWS Access Key ID [None]: 3frEtFjfkdsj89243nkfv89s
+AWS Secret Access Key [None]: 0kr23-0vsijr2390fw:L?K23-0vcdsjr2390fchnr123[]vl/fwsh
+Default region name [None]: [Enter]
+Default output format [None]: [Enter]
+```
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-05.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Object Storage 접속
+이제 Object Storage로 접속해보겠습니다. 얼핏 명령어만 보면 AWS에 접속하는 것처럼 보입니다. 그래서 네이버 클라우드로 접속하기 위한 --endpoint-url= 로 시작하는 옵션이 반드시 필요합니다.
+``` bash
+# Object Storage에 존재하는 전체 버킷 리스트를 조회하는 명령어입니다.
+~# aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls
+
+# s3 ls 명령으로 Object Storage에 존재하는 aws-cli-test 버킷에 있는 오브젝트 리스트를 조회하는 예시입니다.
+~# aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://aws-cli-test
+
+# 로컬에 백업된 데이터를 Object Storage에 백업-동기화하는 명령어 예시입니다.
+~# aws --endpoint-url=https://kr.object.ncloudstorage.com s3 sync /data_backup/ s3://data-back-up/
+```
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-06.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## AWS CLI 업데이트
+설치된 AWS CLI를 최신 버전으로 업데이트 하려면 아래 명령어를 사용하면 됩니다. 최신 버전이 설치된 상태에서는 아래 스샷처럼 이미 최신 버전과 동일한 버전이 설치되어 있다는 메시지가 나타납니다.
+
+``` bash
+~# ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+```
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-07.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## AWS CLI 삭제
+설치된 AWS CLI를 삭제하려면 아래의 단계대로 진행하시면 됩니다.
+
+### symlink 삭제
+``` bash
+~# rm /usr/local/bin/aws
+~# rm /usr/local/bin/aws_completer
+```
+
+### 설치 디렉토리 삭제
+``` bash
+~# rm -rf /usr/local/aws-cli
+```
+
+### 설정 정보 삭제 (선택 사항)
+AWS CLI 환경 설정 정보는 서버 내의 모든 AWS SDK 및 AWS CLI에서 공유되므로 더 이상 사용하지 않는다면 삭제하시면 됩니다.
+
+``` bash
+~# rm -rf ~/.aws/
+```
+
+{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-08.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+
+1.  AWS CLI 버전 2 가이드
+	- &lt;a href=&quot;https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/cli-chap-welcome.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/cli-chap-welcome.html&lt;/a&gt;
+
+2.  Ncloud Object Storage CLI 가이드
+	- &lt;a href=&quot;https://cli.ncloud-docs.com/docs/guide-objectstorage&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://cli.ncloud-docs.com/docs/guide-objectstorage&lt;/a&gt;	
+</description>
+            <pubDate>Tue, 09 May 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_aws_cli_connect.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_aws_cli_connect.html</guid>
+            
+            <category>aws</category>
+            
+            <category>s3</category>
+            
+            <category>object_storage</category>
+            
+            <category>cli</category>
+            
+            <category>api</category>
+            
+            <category>auth</category>
+            
+            
+        </item>
         
         <item>
             <title>Linux 스토리지 추가 생성 기본 가이드</title>
@@ -855,169 +990,6 @@ Agent 창에서 [그래프 보기] 버튼을 클릭합니다.
         </item>
         
         <item>
-            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-
-## SSL VPN 생성
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
-다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
-그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
-&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
-&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
-&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 개인정보 수집 및 이용에 동의해야 합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
-Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
-
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스펙 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1.  SSL VPN 사용 가이드(Classic)
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
-
-2. SSL VPN 요금
-	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
-</description>
-            <pubDate>Mon, 24 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
-            
-            <category>classic</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
             <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
             <description>## 개요
 Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
@@ -1207,6 +1179,169 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
             <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</guid>
             
             <category>vpc</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다. Classic 환경에서는 3개, 5개, 10개 상품만 선택 가능합니다. 
+다음으로 인증 방식은 ID/PW 만으로 접속하는 일차인증과 OTP까지 사용하는 이차 인증 중에서 원하는 방식을 선택합니다. 
+그리고 이차인증을 선택했을 경우에는 SMS와 Email 어떤 것을 이용할 것인지도 선택하게 됩니다.
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; 인증방식과 OTP 전송 방식은 SSL VPN 생성 시에 한번 선택하면 변경할 수 없으니 주의해야 합니다. &lt;br /&gt;
+&amp;#8259; 만약 변경 하고 싶을 경우에는 SSL VPN을 새로 생성해야 합니다. &lt;br /&gt;
+&amp;#8259; Classic 환경에서는 이차인증을 선택하면 별도의 이용요금이 부과됩니다.
+&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 개인정보 수집 및 이용에 동의해야 합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN이 생성되면 다음과 같이 리스트에 서 확인 가능하며 여기서 [**SSL VPN IP POOL**]은 뒤쪽에서 네트워크 접근 제한을 설정할 때 필요한 중요한 정보입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_05.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_07.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+SSL VPN을 사용하려면 서버에 적용된 ACG에 [**SSL VPN IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_08.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**SSL VPN IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_10.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-windowsdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;윈도우 용 다운로드&lt;/a&gt;
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-5-1-macdownload&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;맥 용 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다.  
+Agent에는 Classic 환경 SSL VPN 서버(Ncloud-kr-01)가 기본으로 설정되어 있는데, 혹시 빠져 있다면 [서버 변경] 버튼을 클릭해서 **https://sslvpn-kr-01.ncloud.com**을 입력하고 연결 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_12.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_13.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+OTP 접속도 설정했다면 도착한 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_14.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**SSL VPN IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include important.html title=&quot;IP 입력&quot; content=&quot;이때 혹시나 포트 포워딩이나 공인 IP를 설정하고 그 IP를 입력하는 일이 없도록 주의해야 합니다.&quot; %}
+
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_16.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_18.png&quot; width=&quot;560&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 스펙 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [스펙 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+3개, 5개, 10개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud(네이버 클라우드) Classic 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  SSL VPN 사용 가이드(Classic)
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/security-security-5-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/security-security-5-1&lt;/a&gt;
+
+2. SSL VPN 요금
+	- &lt;a href=&quot;https://www.ncloud.com/product/security/sslVpn&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/sslVpn&lt;/a&gt;
+</description>
+            <pubDate>Mon, 24 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</guid>
+            
+            <category>classic</category>
             
             <category>ssl</category>
             
@@ -1724,194 +1859,6 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
             <category>backup</category>
             
             <category>mariadb</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법</title>
-            <description>## 개요
-록키 리눅스(Rocky Linux)는 기본 데이터베이스가 MariaDB인데, 상황에 따라 MySQL이 필요한 경우가 있습니다. 이번에는 그 중에서 MySQL 8.0 최신 버전을 설치하는 방법을 정리해보겠습니다.
-
-## 서버 준비
-우선 Rocky Linux 서버를 준비합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### Rocky Linux 소개
-록키 리눅스에 대한 간략한 소개는 아래 문서에서 확인할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/compute/ncloud-compute-server-rocky-linux-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개&lt;/a&gt;
-&quot; %}
-
-## 패키지 업데이트
-우선 패키지 업데이트를 해보겠습니다.
-
-``` bash
-~# dnf update
-```
-{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
-Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL Community 최신 패키지 확인
-MySQL Community Yum(Dnf) 최신 패키지는 아래 주소에서 확인할 수 있습니다.  
-Rocky Linux는 CentOS 8 기반으로 만들어졌으므로 아래 다운로드 페이지에서 Red Hat Enterprise Linux 8 기반의 mysql80-community-release-el8-{버전}.noarch.rpm 리파지토리 버전을 확인합니다.  
-**2023-04-10** 기준으로는 [**mysql80-community-release-el8-5.noarch.rpm**] 인것을 확인할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;https://dev.mysql.com/downloads/repo/yum/&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; https://dev.mysql.com/downloads/repo/yum/&lt;/a&gt;
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-
-## MySQL Community 패키지 설치
-위에서 확인한 MySQL 8.0의 최신 Repository 설치 패키지는 [**mysql80-community-release-el8-5.noarch.rpm**] 입니다.
-
-``` bash
-~# dnf -y install https://dev.mysql.com/get/mysql80-community-release-el8-5.noarch.rpm
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-
-## MySQL 8.0 버전 리포지토리 활성화
-
-### 버전 활성화 정보 초기화
-
-``` bash
-~# dnf module reset mysql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-
-### 기본 MySQL 버전 비활성화
-
-``` bash
-~# dnf module disable mysql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-
-### MySQL 8.0 버전 확인
-설치된 MySQL Community 패키지에 포함된 MySQL 버전을 확인해보겠습니다.  
-mysql80-community-release-el8-{버전}.noarch.rpm 버전부터는 8.0 버전만 있고, 5.7 버전은 포함되어 있지 않습니다.
-
-``` bash
-~# dnf repolist all | grep mysql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 8.0 설치
-MySQL 8.0 서버를 설치합니다.
-
-``` bash
-~# dnf -y install mysql-community-server
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 초기화
-아래 명령어로 기본 데이터베이스 생성 등의 초기화 작업을 진행합니다. 다만 여기서는 초기화 할 때 --initialize-insecure 옵션으로 비밀번호는 설정하지 않고 아래쪽 MySQL 보안 설정 단계에서 [**mysql_secure_installation**] 명령으로 설정하도록 하겠습니다.
-
-``` bash
-~# mysqld --initialize-insecure --user=mysql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 데몬 시작
-초기화를 마쳤으면 MySQL 데몬을 시작합니다.
-
-``` bash
-~# systemctl start mysqld
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 보안 설정
-[**mysql_secure_installation**]은 MySQL의 기본 보안을 설정하는 명령으로, 설정되는 항목은 다음과 같습니다.
-
-- root 계정 패스워드 설정
-- 원격 호스트에서 root 계정 접속 차단
-- 익명 계정 삭제
-- 테스트 DB 등 삭제
-
-``` bash
-~# mysql_secure_installation
-```
-
-- 비밀번호를 설정할 때 비밀번호 유효성 검사 플러그인을 사용할 것인지 선택할 수 있는데 [**Y**]를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 비밀번호 정책 수준 선택
-제공되는 비밀번호 정책 수준은 [**LOW**], [**MEDIUM**], [**STRONG**]의 3가지가 있습니다.
-- LOW: 8자 이상
-- MEDIUM: 8자 이상, 숫자-대소문자-특수문자 포함
-- STRONG: 8자 이상, 숫자-대소문자-특수문자 포함, dictionary file에 포함된 단어 사용 불가
-
-여기서는 1을 입력해서 MEDIUM을 선택하겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-- 패스워드를 입력하면 패스워드의 복잡성 강도를 점수로 측정해주는데 이번 테스트에서는 100점을 받았습니다.  
-그리고, 방금 입력했던 패스워드를 그대로 사용할 것인지 확인하는데 [**Y**]를 입력합니다.  
-(혹시 입력했던 비밀번호를 변경하고 싶을 경우는 [**N**]를 입력합니다.)
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 익명 계정 삭제
-다음으로 Anonymous Users 즉, 익명 계정들을 삭제할 것인지 묻는데 [**Y**]를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 원격 호스트에서 root 계정 접속 차단
-다음은 로컬이 아닌 원격에서 root 계정 로그인을 차단할 것인지 묻는데 [**Y**]를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 테스트 DB 등 삭제
-테스트 DB 등을 삭제할 것인지 묻는데 여기서도 [**Y**]를 입력합니다.
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 설정 저장
-마지막으로 지금까지 선택한 설정을 모두 적용할 것인지 묻는데 [**Y**]를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 접속
-위에서 설정했던 비번으로 접속해보면 [**8.0.32 MySQL Community Server**]인 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1. MySQL Yum Repository 다운로드 페이지
-	- &lt;a href=&quot;https://dev.mysql.com/downloads/repo/yum/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/downloads/repo/yum/&lt;/a&gt;
-
-2. Installing MySQL on Linux Using the MySQL Yum Repository
-	- &lt;a href=&quot;https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html&lt;/a&gt;  
-
-3. Rocky Linux 서버에 MySQL 5.7 설치하는 방법
-	- &lt;a href=&quot;/database/ncloud-database-mysql-57-install-on-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html&lt;/a&gt;      </description>
-            <pubDate>Tue, 11 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html</guid>
-            
-            <category>database</category>
-            
-            <category>mysql</category>
-            
-            <category>install</category>
-            
-            <category>rocky_linux</category>
             
             
         </item>

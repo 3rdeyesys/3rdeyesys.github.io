@@ -1561,11 +1561,11 @@
 
 
 {
-"title": "AWS CLI를 이용한 Object Storage 접속 방법",
+"title": "AWS CLI 버전 2를 이용한 Object Storage 접속 방법",
 "tags": "awss3object_storagecliapiauth",
 "keywords": "오브젝트 스토리지, 아마존, API",
 "url": "/storage/ncloud_storage_object_storage_aws_cli_connect.html",
-"summary": "AWS CLI를 이용해 Ncloud Object Storage에 접속하는 방법입니다"
+"summary": ""
 }
 ,
 
