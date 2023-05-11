@@ -479,6 +479,17 @@
 
 
 {
+"title": "로드밸런서(Application Load Balancer) 접속 로그 확인하는 방법",
+"tags": "vpcload_balancer",
+"keywords": "LoadBalancer, Log, Cloud Log Analytics, CLA",
+"url": "/networking/ncloud-networking-load-balancer-application-lb-access-log.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Proxy Protocol을 이용해 Client IP 확인하기 | CentOS",
 "tags": "vpcload_balancerproxy",
 "keywords": "LoadBalancer, 로드밸런스, 프록시, 프록시 프로토콜",
