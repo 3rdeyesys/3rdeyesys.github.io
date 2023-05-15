@@ -5,10 +5,270 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 11 May 2023 10:48:48 +0900</pubDate>
-        <lastBuildDate>Thu, 11 May 2023 10:48:48 +0900</lastBuildDate>
+        <pubDate>Mon, 15 May 2023 16:29:59 +0900</pubDate>
+        <lastBuildDate>Mon, 15 May 2023 16:29:59 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Linux</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 **Linux 환경에서 제어하는 방법**에 대해 소개합니다.
+
+## 쿠버네티스란?
+쿠버네티스(Kubernetes, K8S)는 배포, 스케일링, 그리고 컨테이너화된 애플리케이션의 관리를 자동화 해주는 오픈 소스 컨테이너 오케스트레이션 엔진으로 
+구글에서 처음 개발하기 시작했으나 현재는 구글이 오픈소스 프로젝트로 공개한 상태입니다.
+
+## 특징
+쿠버네티스는 다음과 같은 특징이 있으며, 자세한 내용은 쿠버네티스 공식 페이지를 참고하시기 바랍니다.
+
+&lt;a href=&quot;https://kubernetes.io/ko/docs/home/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://kubernetes.io/ko/docs/home/&lt;/a&gt;
+
+- 서비스 디스커버리와 로드 밸런싱
+- 스토리지 오케스트레이션
+- 자동화된 롤아웃과 롤백
+- 자동화된 빈 패킹(bin packing)
+- 자동화된 복구(self-healing)
+- 시크릿과 구성 관리
+
+
+## 사전 준비
+먼저 쿠버네티스 클러스터에 사용할 **전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet**이 필요합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-36.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;IP 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /17~/26 범위의 Subnet, 로드밸런서 전용 Subnet이 필요합니다.&lt;br/&gt;&lt;br/&gt;
+Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내의 Private Subnet, 로드밸런서 전용Subnet은 선택할 수 없습니다.&quot; %}
+
+## 쿠버네티스 서비스 위치
+Ncloud 쿠버네티스 서비스는 [콘솔] - [Services] - [Containers]에 위치하고 있습니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-33.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 클러스터 생성 
+
+VPC와 Subnet이 준비되었다면, 다음으로 [Kubernetes Sevice] - [Cluster]에서 생성하기를 클릭합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 클러스터 설정
+생성할 클러스터의 정보를 설정해줍니다. 
+**네트워크 타입은 Private과 Public 중에서 선택**할 수 있습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Kubernetes Service를 위한 ACG는 자동으로 생성됩니다.&quot; %}
+{% include callout-v2.html type=&quot;primary&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 Kubernetes 버전은 [**1.24.0**], [**1.25.8**] 입니다.&quot;%}
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-35.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+### NAT Gateway 생성
+`Private Subnet을 선택했을 경우`에는 아래와 같이 NAT Gateway 생성 안내 팝업이 나타나는데,  
+NAT Gateway를 생성해야 아웃바운드 트래픽을 활성화할 수 있기 때문입니다.
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_10.jpg&quot; width=&quot;490&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+팝업에서 링크를 클릭해서 NAT Gateway 화면으로 이동해 NAT Gateway를 생성합니다.
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_11.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 노드풀 설정
+노드풀 이름을 입력하고, 서버 이미지와 서버 타입을 선택하고 [추가] 버튼을 클릭합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 OS는 [**ubuntu 16.04**], [**ubuntu 18.04**], [**ubuntu 20.04**] 입니다.&quot;%}
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-37.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 인증키 설정
+다음으로 워커노드의 인증키를 설정 합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-38.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 최종 확인
+설정 정보를 최종적으로 확인한 후 생성버튼을 클릭하여 클러스터를 생성합니다.
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;쿠버네티스 클러스터 생성은 20분 정도 소요되므로 여유를 갖고 기다리시면 됩니다.&quot;%}
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_04.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 생성 완료
+생성이 완료되면 아래와 같이 클러스터와 노드풀의 정보를 확인할 수 있습니다.  
+클러스터 정보 중에서 클러스터 **UUID는 아래쪽에서 IAM 인증 Kubeconifg 파일을 생성할 때 필요**하니 확인해두시기 바랍니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] 메뉴에 가면 노드풀 설정에 따라 생성된 서버를 확인할 수 있습니다.  
+(서버 이름은 노드풀 이름으로 입력한 문자열 기준으로 생성되는데, 여기서는 test123-O-OOO 이런 식으로 생성되었습니다.)
+
+그리고, 추가로 테스트를 위한 CentOS 서버(k8s-test)를 생성했습니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## IAM 인증 설정
+클러스터를 제어하기 위해서는 네이버 클라우드 쿠버네티스 서비스에서 제공하는 IAM 인증을 설정해야 합니다.
+
+### ncp-iam-authenticator 설치
+Ncloud에서 제공하는 ncp-iam-authenticator 바이너리를 통해 iam 인증 config 파일을 생성 할 수 있습니다.
+
+- ncp-iam-authenticator 바이너리를 다운로드 합니다.
+
+```bash
+~# curl -o ncp-iam-authenticator https://kr.object.ncloudstorage.com/nks-download/ncp-iam-authenticator/v1.0.5/linux/amd64/ncp-iam-authenticator
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+- 다운받은 바이너리에 실행 권한을 추가 합니다.
+
+```bash
+~# chmod +x ./ncp-iam-authenticator
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+- bin/ncp-iam-authenticator 파일을 생성하고  $PATH에 추가합니다.
+- bash Profile에 추가 합니다.
+
+```bash
+~# mkdir -p $HOME/bin &amp;&amp; cp ./ncp-iam-authenticator $HOME/bin/ncp-iam-authenticator &amp;&amp; export PATH=$PATH:$HOME/bin
+```
+```bash
+~# echo &apos;export PATH=$PATH:$HOME/bin&apos; &gt;&gt; ~/.bash_profile
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+- ncp-iam-authenticator가 정상 작동 하는지 테스트 합니다. 
+
+```bash
+~# ncp-iam-authenticator help
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## API 인증키 생성
+네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
+
+{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성 방법&quot; caption=&quot;&quot; %}
+
+## Kubeconfig 파일 생성
+
+### 환경변수 설정
+API 인증키를 2가지 방법 중 하나를 이용해 환경변수에 등록합니다.  
+  
+- **첫번째 방법: OS 환경 변수 설정**
+
+```bash
+~# export NCLOUD_ACCESS_KEY={Ncloud API AccessKey}
+~# export NCLOUD_SECRET_KEY={Ncloud API SecretKey}
+~# export NCLOUD_API_GW=https://ncloud.apigw.ntruss.com
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+- **두번째 방법: 사용자 환경 홈 디렉터리에 configure 설정**
+
+```bash
+~# mkdir .ncloud 
+~# cat &lt;&lt; EOF &gt; .ncloud/configure
+[DEFAULT]
+ncloud_access_key_id = {Ncloud API AccessKey}
+ncloud_secret_access_key = {Ncloud API SecretKey}
+ncloud_api_url = https://ncloud.apigw.ntruss.com
+EOF
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-19.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+### Kubeconifg 파일 생성
+환경변수에 등록이 되었다면 파일을 생성 할 차례입니다.  
+아래 명령어로 클러스터에 대한 IAM 인증 Kubeconifg 파일을 생성합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;클러러스터 UUID 값은 클러스터 상세보기의 [클러스터 이름 (UUID)] 에서  확인 할수 있습니다.&quot; %}
+
+``` bash
+~# ncp-iam-authenticator create-kubeconfig --region &lt;region-code&gt; --clusterUuid &lt;cluster-uuid&gt; --output &lt;FileName&gt;.yaml
+
+## 예시
+~# ncp-iam-authenticator create-kubeconfig --region KR --clusterUuid 12345678-1234-1234-1234-1234567890 --output kubeconfig.yaml
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## kubectl 설치
+쿠버네티스 클러스터를 제어할 kubectl을 설치하기 위해 필요한 파일을 다운로드 받습니다.
+
+``` bash
+~# curl -LO &quot;https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl&quot;
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-21.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+다운 받은 파일을 설치합니다.
+
+``` bash
+~# sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# 버전 확인
+~# kubectl version --client --output=yaml
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-22.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## kubectl 실행
+생성한 IAM 인증 kubeconfig 파일을 이용하여 kubectl 명령어를 테스트하여 정상 동작 하는지 확인 합니다.  
+실행하면 아래와 같이 현재 동작 중인 노드 서버 리스트를 확인할 수 있습니다.
+
+```bash
+~# kubectl get node --kubeconfig kubeconfig.yaml
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-23.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+### 실행 명령어 단축
+위와 같은 kubectl 명령은 뒤쪽에 kubeconfig 환경 설정 파일까지 입력해야 해서 다소 불편한데, 간단하게 줄일 수 있는 방법이 있습니다.  
+
+우선 만들어진 kubeconfig.yaml 파일을 .kube/ 디렉토리 아래에 config로 이름을 바꾸어 이동 혹은 복사 합니다.
+
+```bash
+~# cp kubeconfig.yaml .kube/config
+```
+
+이렇게 하면 Kubectl을 사용 시 아래와 같이 --kuebeconfig 명령어 없이 사용 할 수 있습니다.
+
+```bash
+~# kubectl get node
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-24.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1. 쿠버네티스 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8soverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8soverview&lt;/a&gt;
+
+2. 클러스터 이용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&lt;/a&gt;
+
+3. kubectl 설치 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl%EC%84%A4%EC%B9%98&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl&lt;/a&gt;
+
+4. Windows 환경에서 쿠버네티스 제어하기
+	- &lt;a href=&quot;/containers/ncloud-containers-kubernetes-service-start-guide-windows.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html&lt;/a&gt;  	
+</description>
+            <pubDate>Mon, 15 May 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html</guid>
+            
+            <category>kubernetes</category>
+            
+            <category>vpc</category>
+            
+            
+        </item>
         
         <item>
             <title>로드밸런서(Application Load Balancer) 접속 로그 확인하는 방법</title>
@@ -431,214 +691,6 @@ MariaDB에서도 **my.cnf** 파일이 **/etc/** 바로 밑에 위치하기는 �
         </item>
         
         <item>
-            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
-
-## SSL VPN이란?
-- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
-- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
-- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
-
-## SSL VPN 서비스 위치
-Ncloud 콘솔에서 SSL VPN의 위치는 [**Services**] - [**Security**] - [**SSL VPN**]에 있습니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## SSL VPN 생성
-[SSL VPN 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
-VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-03.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
-생성 완료까지 걸리는 시간은 **약 10~20분 이내** 이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## SSL VPN 생성 완료 {#connection-url-check}
-SSL VPN 생성이 완료되면 아래와 같이 [**IP POOL**]과 [**접속 URL**] 정보를 확인할 수 있는데 SSL VPN Agent 접속 시에 중요한 정보이니 잘 확인해야 합니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사용자 설정
-SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.  
-VPC 환경은 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Route Table 설정
-네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 SSL VPN의 [**IP POOL**]을 등록해야 합니다.  
-
-- **접속할 서버 정보 확인**  
-아래와 같이 접속할 서버의 정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[**VPC**] - [**Route Table**]에서 해당 VPC의 Private Subnet을 선택하고 [**Routes 설정**] 버튼을 클릭합니다.  
-(Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.)
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[**Destination**]에 생성된 SSL VPN 정보에서 확인한 [**IP POOL**] 정보를 등록하고, [**Target Type**]은 SSLVPN을 선택, [**Target Name**]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-다음으로 서버에 적용된 ACG에 SSL VPN의 [**IP POOL**]을 등록해야 합니다.  
-우선 SSL VPN을 통해서 접속할 서버를 선택하고 [**ACG 수정**] 버튼을 클릭해서 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[**Server**] - [**ACG**]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-ACG 규칙 설정 화면에서 위에서 확인했던 [**IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
-기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 다운로드
-SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
-
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-download&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;SSL VPN Agent 다운로드&lt;/a&gt;
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Agent 접속
-Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다. 
-서버 선택 창에 위에서 생성했던 SSL VPN 정보에서 확인했던 [**접속 URL**] 주소를 입력하고, [다음] 버튼을 클릭합니다.
-
-{% include tip.html content=&quot;
-[접속 URL 확인하는 방법 &lt;i class=&apos;fa-solid fa-arrow-up-from-bracket&apos;&gt;&lt;/i&gt;](#connection-url-check)&lt;br /&gt;
-&quot; %}
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-그리고 도착한 OTP 인증 번호를 입력합니다. 
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-18.png&quot; width=&quot;710&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 서버 접속
-이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
-PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
-이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-20.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Agent 기타 설정
-SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
-
-### 트래픽 그래프
-Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-21.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-22.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-23.png&quot; width=&quot;777&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-
-## 설정 변경
-처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [SSL VPN 설정 변경] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### ID 개수 변경
-3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-25.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### 인증 로그 수집
-Ncloud SSN VPN은 이용자가 SSN VPN에 접속 인증한 로그를 수집할 수 있습니다. [**설정**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-26.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-인증 로그 수집을 활성화 하면 [**Cloud Log Analytics**]에 로그를 전달하여 저장합니다. 해당 상품을 미사용중이면 Cloud Log Analytics 상품 이용 신청을 한 후에 사용하시면 됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-27.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- Cloud Log Analytics에서 인증 로그 확인
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-30.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 주의사항
-{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 삭제
-삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
-
-{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
-Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-29.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1. Ncloud SSL VPN 개요
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-overview&lt;/a&gt;
-
-2. Ncloud SSL VPN 사용 가이드 - VPC
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&lt;/a&gt;
-</description>
-            <pubDate>Thu, 27 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</guid>
-            
-            <category>vpc</category>
-            
-            <category>ssl</category>
-            
-            <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
             <title>Rocky Linux에서 NginX 설치, 설정하는 방법</title>
             <description>## 개요
 Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.  
@@ -876,6 +928,214 @@ NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 
             <category>nginx</category>
             
             <category>install</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+## SSL VPN 서비스 위치
+Ncloud 콘솔에서 SSL VPN의 위치는 [**Services**] - [**Security**] - [**SSL VPN**]에 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## SSL VPN 생성
+[SSL VPN 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
+VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-03.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
+생성 완료까지 걸리는 시간은 **약 10~20분 이내** 이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## SSL VPN 생성 완료 {#connection-url-check}
+SSL VPN 생성이 완료되면 아래와 같이 [**IP POOL**]과 [**접속 URL**] 정보를 확인할 수 있는데 SSL VPN Agent 접속 시에 중요한 정보이니 잘 확인해야 합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [추가] 버튼을 클릭합니다.  
+VPC 환경은 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Route Table 설정
+네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 SSL VPN의 [**IP POOL**]을 등록해야 합니다.  
+
+- **접속할 서버 정보 확인**  
+아래와 같이 접속할 서버의 정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[**VPC**] - [**Route Table**]에서 해당 VPC의 Private Subnet을 선택하고 [**Routes 설정**] 버튼을 클릭합니다.  
+(Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.)
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[**Destination**]에 생성된 SSL VPN 정보에서 확인한 [**IP POOL**] 정보를 등록하고, [**Target Type**]은 SSLVPN을 선택, [**Target Name**]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+다음으로 서버에 적용된 ACG에 SSL VPN의 [**IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 [**ACG 수정**] 버튼을 클릭해서 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[**Server**] - [**ACG**]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-download&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;SSL VPN Agent 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다. 
+서버 선택 창에 위에서 생성했던 SSL VPN 정보에서 확인했던 [**접속 URL**] 주소를 입력하고, [다음] 버튼을 클릭합니다.
+
+{% include tip.html content=&quot;
+[접속 URL 확인하는 방법 &lt;i class=&apos;fa-solid fa-arrow-up-from-bracket&apos;&gt;&lt;/i&gt;](#connection-url-check)&lt;br /&gt;
+&quot; %}
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+그리고 도착한 OTP 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-18.png&quot; width=&quot;710&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-20.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-21.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-22.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-23.png&quot; width=&quot;777&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## 설정 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [SSL VPN 설정 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### ID 개수 변경
+3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-25.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### 인증 로그 수집
+Ncloud SSN VPN은 이용자가 SSN VPN에 접속 인증한 로그를 수집할 수 있습니다. [**설정**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-26.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+인증 로그 수집을 활성화 하면 [**Cloud Log Analytics**]에 로그를 전달하여 저장합니다. 해당 상품을 미사용중이면 Cloud Log Analytics 상품 이용 신청을 한 후에 사용하시면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-27.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+- Cloud Log Analytics에서 인증 로그 확인
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-30.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
+Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-29.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1. Ncloud SSL VPN 개요
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-overview&lt;/a&gt;
+
+2. Ncloud SSL VPN 사용 가이드 - VPC
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&lt;/a&gt;
+</description>
+            <pubDate>Thu, 27 Apr 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
             
             
         </item>
@@ -1400,409 +1660,6 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
             <category>ssl</category>
             
             <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>MariaDB Multi Source Replication 구성 가이드</title>
-            <description>## 개요
-
-n대의 마스터 DB와 1대의 슬레이브 DB를 연결하여 마스터 DB들의 데이터를 슬레이브 DB 한곳에 모아 조회할 수 있는 Multi-Source-Replication(MSR)을 MariaDB에서 구성하는 방법을 정리해보겠습니다.
-
-## 테스트 준비
-
-- 마스터 서버 2대, 슬레이브 서버 1대 준비
-- 각 서버에 MariaDB 10.3 이상 설치
-- MariaDB 리플리케이션작업 진행 시 마스터 서버의 데이터베이스에 쓰기 작업 금지
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## ACG 설정
-서버 준비가 끝났으면 우선 마스터 서버 &lt;i class=&quot;fa-solid fa-arrow-right&quot;&gt;&lt;/i&gt; 슬레이브 서버로 디비 백업 파일 복사과 복제 구성에 필요한 22, 3306 포트를 오픈해야 합니다.  
-오픈 할 때 규칙은 마스터 서버와 슬레이브 서버의 공통 ACG에 사설 IP 대역 전체를 지정할 수도 있고, 슬레이브 서버 전용 ACG에 마스터 서버 IP만 등록하는 방법도 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-multi-source-replication-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## Slave 장비에 백업 디렉토리 생성
-먼저 Slave 장비에 Master 장비들로 부터 DB 복원용 덤프 파일을 전송 받을 백업 디렉토리를 생성하는 것 부터 시작하겠습니다.
-
-```bash
-~# mkdir /data
-~# cd /data
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## Master1 장비 구성
-
-### Master1 설정 추가
-- **/etc/my.cnf.d/mariadb-server.cnf**에 Master1 설정을 추가합니다.
-- MariaDB 버전에 따라서는 **/etc/my.cnf.d/server.cnf** 인 경우도 있습니다.
-
-{% tabs master1_my_cnf %}
-
-{% tab master1_my_cnf MySQL 호환 %}
-```bash
-~# vi /etc/my.cnf.d/mariadb-server.cnf
-
-server-id = 1
-log-bin = mariadb-bin
-binlog_format = mixed
-character-set-server = utf8
-
-#MariaDB를 재시작해 변경사항 적용.
-~# systemctl restart mariadb
-```
-{% endtab %}
-
-{% tab master1_my_cnf MariaDB 전용 %}
-```bash
-~# vi /etc/my.cnf.d/mariadb-server.cnf
-
-log-bin
-server_id = 1
-log-basename = mariadb
-binlog-format = mixed
-character-set-server = utf8
-
-#MariaDB을 재시작해 변경사항 적용.
-~# systemctl restart mariadb
-```
-{% endtab %}
-
-{% endtabs %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-03.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-04.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### 리플리케이션 계정 생성
-MariaDB 접속 후 리플리케이션을 진행할 계정 생성
-
-```bash
-#master1 계정 생성.
-MariaDB [(none)]&gt; create user &apos;리플리케이션 계정명&apos;@&apos;%&apos; identified by &apos;패스워드&apos;;
-MariaDB [(none)]&gt; grant replication slave on *.* to &apos;리플리케이션 계정명&apos;@&apos;%&apos;;
-MariaDB [(none)]&gt; flush privileges;
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### 테스트 DB 생성
-다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.
-
-```bash
-MariaDB [(none)]&gt; CREATE DATABASE testdb1 default CHARACTER SET UTF8;
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### Master1 정보확인
-이제 리플리케이션 설정에 필요한 Master 정보를 확인합니다.
-
-```bash
-MariaDB [(none)]&gt; show variables like &apos;server_id&apos;;
-MariaDB [(none)]&gt; show master status;
-```
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-[**show master status**] 명령으로 확인한 [**File**], [**Position**] 정보는 아래쪽에서 `Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야` 합니다.
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-06.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### DB 백업 파일 슬레이브 장비로 전송
-testdb1 DB의 백업파일을 생성하고, 슬레이브 서버로 전송합니다.
-
-```bash
-~# mkdir /data
-~# cd /data
-~# mysqldump -u root -p --databases testdb1 &gt; /data/test1.sql 
-
-#슬레이브 서버에 전송.
-~# scp test1.sql root@10.0.0.8:/data
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## Master2 장비 구성
-
-### Master2 설정 추가
-- **/etc/my.cnf.d/mariadb-server.cnf**에 Master2 설정을 추가합니다.
-- MariaDB 버전에 따라서는 **/etc/my.cnf.d/server.cnf** 인 경우도 있습니다.
-
-{% tabs master2_my_cnf %}
-
-{% tab master2_my_cnf MySQL 호환 %}
-```bash
-~# vi /etc/my.cnf.d/mariadb-server.cnf
-
-server-id = 2
-log-bin = mariadb-bin
-binlog_format = mixed
-character-set-server = utf8
-
-#MariaDB을 재시작해 변경사항 적용.
-~# systemctl restart mariadb
-```
-{% endtab %}
-
-{% tab master2_my_cnf MariaDB 전용 %}
-```bash
-~# vi /etc/my.cnf.d/mariadb-server.cnf
-
-log-bin
-server_id = 2
-log-basename = mariadb
-binlog-format = mixed
-character-set-server = utf8
-
-#MariaDB을 재시작해 변경사항 적용.
-~# systemctl restart mariadb
-```
-{% endtab %}
-
-{% endtabs %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-09.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-10.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### 리플리케이션 계정 생성
-MariaDB 접속 후 리플리케이션을 진행할 계정 생성합니다.
-
-```bash
-#master2 계정 생성.
-MariaDB [(none)]&gt; create user &apos;리플리케이션 계정명&apos;@&apos;%&apos; identified by &apos;패스워드&apos;;
-MariaDB [(none)]&gt; grant replication slave on *.* to &apos;리플리케이션 계정명&apos;@&apos;%&apos;;
-MariaDB [(none)]&gt; flush privileges;
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### 테스트 DB 생성
-다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.
-
-```bash
-MariaDB [(none)]&gt; CREATE DATABASE testdb2 default CHARACTER SET UTF8;
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-### Master2 정보확인
-마찬가지로 리플리케이션 설정에 필요한 Master 정보를 확인합니다.
-
-```bash
-MariaDB [(none)]&gt; show variables like &apos;server_id&apos;;
-MariaDB [(none)]&gt; show master status;
-```
-
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-[**show master status**] 명령으로 확인한 [**File**], [**Position**] 정보는 아래쪽에서 `Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야` 합니다.
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-12.png&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### DB 백업 파일 슬레이브 장비로 전송
-testdb2 DB의 백업파일 생성하고, 슬레이브 서버로 전송합니다.
-
-```bash
-~# mkdir /data
-~# cd /data
-~# mysqldump -u root -p --databases testdb2 &gt; /data/test2.sql
-
-~# scp test2.sql root@10.0.0.8:/data
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## Slave 장비 구성
-
-### Slave 설정 추가
-- **/etc/my.cnf.d/mariadb-server.cnf**에 Slave 설정을 추가합니다.  
-- MariaDB 버전에 따라서는 **/etc/my.cnf.d/server.cnf** 인 경우도 있습니다.
-
-```bash
-~# vi /etc/my.cnf.d/mariadb-server.cnf
-
-server-id = 3 
-
-#리플리케이션 대상 디비 설정.
-replicate-do-db = testdb1
-replicate-do-db = testdb2
-
-#리플리케이션 제외 디비 설정.
-replicate-ignore-db = information_schema
-replicate-ignore-db = mysql
-replicate-ignore-db = performance_schema
-replicate-ignore-db = sys
-
-slave-skip-errors = all
-
-#DB를 재시작하여 변경사항 적용.
-~# systemctl restart mariadb
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-16.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-17.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### DB 복구 진행
-먼저 복구할 DB를 미리 생성하고 Master1, Master2 장비에서 전송 받은 백업 파일을 사용해 DB를 복구합니다.
-```bash
-#복구할 DB 생성.
-MariaDB [(none)]&gt; create database testdb1;
-MariaDB [(none)]&gt; create database testdb2;
-MariaDB [(none)]&gt; quit
-
-#DB 복구
-~# mysql -u root -p testdb1 &lt; /data/test1.sql
-~# mysql -u root -p testdb2 &lt; /data/test2.sql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-- 백업 파일을 전송 받은 디렉토리로 이동해 백업 파일이 정상적으로 전송되었는지 확인합니다.
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-19.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-- 백업 파일을 사용해 DB를 복구합니다.
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## 리플리케이션 채널 설정
-리플리케이션 채널을 설정하는 쿼리문은 다음과 같은데, MySQL과는 일부 다른 부분이 있으니 잘 확인하고 사용해야 합니다.
-
-```bash
-MariaDB [(none)]&gt; CHANGE MASTER &apos;커넥션 이름&apos; TO MASTER_HOST=&apos;마스터IP&apos;, MASTER_PORT=포트번호, MASTER_USER=&apos;생성한 리플리케이션 계정명&apos;, MASTER_PASSWORD=&apos;패스워드&apos;, MASTER_LOG_FILE=&apos;위에서 확인된 File명&apos;, MASTER_LOG_POS=위에서 확인된 Position 번호;
-```
-
-
-여기에 필요한 정보 중에서 [**MASTER_LOG_FILE**]과 [**MASTER_LOG_POS**]은 위쪽에서 확인한 Master DB들의 정보에 나타났던 것으로 정리하면 다음과 같습니다.
-
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;div class=&quot;col-sm-6&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;DB&lt;/th&gt;
-      &lt;th&gt;File&lt;/th&gt;
-      &lt;th&gt;Position&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;Master1&lt;/td&gt;&lt;td&gt;mariadb-bin.000001&lt;/td&gt;&lt;td&gt;939&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;Master2&lt;/td&gt;&lt;td&gt;mariadb-bin.000002&lt;/td&gt;&lt;td&gt;939&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;    
-&lt;/div&gt;
-&lt;/div&gt;
-
-### Master 서버 정보 입력
-다음의 예시처럼 Slave 서버에 Master 서버 정보를 하나씩 입력합니다.
-
-```bash
-#Master1 예시
-MariaDB [(none)]&gt; CHANGE MASTER &apos;ch_testdb1&apos; TO MASTER_HOST=&apos;10.0.0.6&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, MASTER_LOG_FILE=&apos;mariadb-bin.000001&apos;, MASTER_LOG_POS=939;
-
-#Master2 예시
-MariaDB [(none)]&gt; CHANGE MASTER &apos;ch_testdb2&apos; TO MASTER_HOST=&apos;10.0.0.7&apos;, MASTER_USER=&apos;testuser&apos;, MASTER_PORT=3306, MASTER_PASSWORD=&apos;Test123$&apos;, MASTER_LOG_FILE=&apos;mariadb-bin.000002&apos;, MASTER_LOG_POS=939;
-
-MariaDB [(none)]&gt; FLUSH PRIVILEGES;
-```
-
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-21.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-
-### 리플리케이션 채널 시작
-리플리케이션 시작 후 에러가 없는지 확인합니다.  
-
-```bash
-# start slave &apos;커넥션명&apos;;
-MariaDB [(none)]&gt; start slave &apos;ch_testdb1&apos;; 
-MariaDB [(none)]&gt; start slave &apos;ch_testdb2&apos;;
-
-# show slave &apos;커넥션명&apos; status\G
-MariaDB [(none)]&gt; show slave &apos;ch_testdb1&apos; status\G 
-MariaDB [(none)]&gt; show slave &apos;ch_testdb2&apos; status\G
-```
-
-
-- Master1  
-상태 확인에서는 [**Slave_IO_State**], [**Slave_IO_Running**], [**Slave_SQL_Running**] 항목들이 아래와 같이 되어 있으면 정상입니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-22.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-- Master2  
-상태 확인에서는 [**Slave_IO_State**], [**Slave_IO_Running**], [**Slave_SQL_Running**] 항목들이 아래와 같이 되어 있으면 정상입니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-23.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## 리플리케이션 테스트
-리플리케이션 설정을 모두 마친 후에 Master 서버들에서 DB 작업을 진행하고, Slave 서버에 해당 내용이 복제되는지 확인해보겠습니다.
-
-- Master1 서버 작업  
-Master1 서버에 테스트를 위한 [**sampletable1**] Table을 생성합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-24.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
--  Slave 서버 확인  
-Slave 서버에서 testdb1 DB에 sampletable1 Table이 복제되었는지 확인합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-25.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
--  Master2 서버 작업  
-Master2 서버에 테스트를 위한 [**sampletable2**] Table을 생성합니다.
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-26.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-- Slave 서버 확인  
-Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인합니다.
-{% include image.html file=&quot;database/ncloud-database-mariadb-multi-source-replication-guide-27.png&quot; width=&quot;840&quot; alt=&quot;Ncloud에서 MariaDB Multi Source Replication 구성하는 방법&quot; caption=&quot;&quot; %}
-
-## 리플리케이션 명령어 모음
-
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th width=&quot;110px&quot;&gt;&lt;/th&gt;
-      &lt;th&gt;리플리케이션 명령어&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;채널 설정&lt;/td&gt;
-      &lt;td style=&quot;font-size:0.75em;line-height:130%;&quot;&gt;CHANGE MASTER &apos;커넥션 이름&apos; TO MASTER_HOST=&apos;마스터IP&apos;, MASTER_PORT=포트번호, MASTER_USER=&apos;생성한 리플리케이션 계정명&apos;, MASTER_PASSWORD=&apos;패스워드&apos;, MASTER_LOG_FILE=&apos;위에서 확인된 File명&apos;, MASTER_LOG_POS=위에서 확인된 Position 번호;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 시작&lt;/td&gt;&lt;td&gt;START SLAVE &quot;커넥션 이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 중지&lt;/td&gt;&lt;td&gt;STOP SLAVE &quot;커넥션 이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 상태 확인&lt;/td&gt;&lt;td&gt;SHOW SLAVE &quot;커넥션 이름&quot; STATUS\G&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;채널 정보 삭제&lt;/td&gt;&lt;td&gt;RESET SLAVE &quot;커넥션 이름&quot;;&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-
-## 참고 URL
-1. MariaDB Replication 기본 설정 가이드
-	- &lt;a href=&quot;https://mariadb.com/kb/en/setting-up-replication/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mariadb.com/kb/en/setting-up-replication/&lt;/a&gt;
-
-1. MariaDB Multi-Source Replication 가이드
-	- &lt;a href=&quot;https://mariadb.com/kb/en/multi-source-replication/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mariadb.com/kb/en/multi-source-replication/&lt;/a&gt;  </description>
-            <pubDate>Thu, 20 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-mariadb-multi-source-replication.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mariadb-multi-source-replication.html</guid>
-            
-            <category>database</category>
-            
-            <category>backup</category>
-            
-            <category>mariadb</category>
             
             
         </item>
