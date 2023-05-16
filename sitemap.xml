@@ -4,9 +4,9 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</loc>
+    <loc>https://docs.3rdeyesys.com/networking/ncloud_networking_natgw_routetb.html</loc>
   
-    <lastmod>2025-05-15T00:00:00+09:00</lastmod>
+    <lastmod>2023-05-16T00:00:00+09:00</lastmod>
     
   
     <priority>0.7</priority>
@@ -17,6 +17,18 @@
   
   <url>
     <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html</loc>
+  
+    <lastmod>2023-05-15T00:00:00+09:00</lastmod>
+    
+  
+    <priority>0.7</priority>
+   
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</loc>
   
     <lastmod>2023-05-15T00:00:00+09:00</lastmod>
     
@@ -112,7 +124,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</loc>
+    <loc>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</loc>
   
     <lastmod>2023-04-24T00:00:00+09:00</lastmod>
     
@@ -124,7 +136,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_vpc_guide.html</loc>
+    <loc>https://docs.3rdeyesys.com/networking/ncloud_networking_ssl_vpn_classic_guide.html</loc>
   
     <lastmod>2023-04-24T00:00:00+09:00</lastmod>
     
@@ -211,18 +223,6 @@
     <loc>https://docs.3rdeyesys.com/media/ncloud-media-video-player-enhancement-guide.html</loc>
   
     <lastmod>2023-03-22T00:00:00+09:00</lastmod>
-    
-  
-    <priority>0.7</priority>
-   
-  </url>
-  
-  
-  
-  <url>
-    <loc>https://docs.3rdeyesys.com/networking/ncloud_networking_natgw_routetb.html</loc>
-  
-    <lastmod>2023-03-21T00:00:00+09:00</lastmod>
     
   
     <priority>0.7</priority>
