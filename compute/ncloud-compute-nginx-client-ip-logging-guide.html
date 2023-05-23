@@ -11,29 +11,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법입니다">
-<meta name="keywords" content="rocky_linux, lemp, nginx, install,  Linux, LEMP, LAMP, 록키 리눅스">
+<meta name="description" content="Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입니다">
+<meta name="keywords" content="lemp, nginx, log,  Linux, LEMP, LAMP, X-Forwarded-For, CentOS, Ubuntu">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="Rocky Linux에서 NginX 설치, 설정하는 방법" />
+<meta property="og:title" content="Load Balancer에 연동된 NginX에서 Client IP 기록하고 확인하는 방법" />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:description" content="Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법입니다" />
-<link rel="canonical" href="https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html" />
-<meta property="og:url" content="https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html" />
+<meta property="og:description" content="Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입니다" />
+<link rel="canonical" href="https://docs.3rdeyesys.com/compute/ncloud-compute-nginx-client-ip-logging-guide.html" />
+<meta property="og:url" content="https://docs.3rdeyesys.com/compute/ncloud-compute-nginx-client-ip-logging-guide.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
-<meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png" />
-<meta property="og:image:alt" content="Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법" />
+<meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/lemp/ncloud-server-nginx-access-client-ip-log-03.png" />
+<meta property="og:image:alt" content="Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-04-27T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-05-23T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://docs.3rdeyesys.com/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png" />
-<meta name="twitter:image:alt" content="Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법" />
-<meta property="twitter:title" content="Rocky Linux에서 NginX 설치, 설정하는 방법" />
+<meta property="twitter:image" content="https://docs.3rdeyesys.com/images/compute/lemp/ncloud-server-nginx-access-client-ip-log-03.png" />
+<meta name="twitter:image:alt" content="Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법" />
+<meta property="twitter:title" content="Load Balancer에 연동된 NginX에서 Client IP 기록하고 확인하는 방법" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법입니다","headline":"Rocky Linux에서 NginX 설치, 설정하는 방법","image":{"alt":"Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법","url":"https://docs.3rdeyesys.com/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입니다","headline":"Load Balancer에 연동된 NginX에서 Client IP 기록하고 확인하는 방법","image":{"alt":"Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법","url":"https://docs.3rdeyesys.com/images/compute/lemp/ncloud-server-nginx-access-client-ip-log-03.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/compute/ncloud-compute-nginx-client-ip-logging-guide.html"}</script>
 <!-- End Jekyll SEO tag -->
 
-<title>Rocky Linux에서 NginX 설치, 설정하는 방법 | 써드아이시스템 기술문서</title>
+<title>Load Balancer에 연동된 NginX에서 Client IP 기록하고 확인하는 방법 | 써드아이시스템 기술문서</title>
 <link rel="stylesheet" href="/css/syntax.css">
 
 <link
@@ -509,7 +509,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
-                  <li class="active"><a title="Rocky Linux에 NginX 설치, 설정" href="/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html">Rocky Linux에 NginX 설치, 설정</a></li>
+                  <li><a title="Rocky Linux에 NginX 설치, 설정" href="/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html">Rocky Linux에 NginX 설치, 설정</a></li>
                   
                   
                   
@@ -527,7 +527,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
-                  <li><a title="로드밸런서 환경 Client IP 확인" href="/compute/ncloud-compute-nginx-client-ip-logging-guide.html">로드밸런서 환경 Client IP 확인</a></li>
+                  <li class="active"><a title="로드밸런서 환경 Client IP 확인" href="/compute/ncloud-compute-nginx-client-ip-logging-guide.html">로드밸런서 환경 Client IP 확인</a></li>
                   
                   
                   
@@ -1800,7 +1800,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="col-md-9" id="tg-sb-content">
               <div class="post-header">
   
-    <h1 class="post-title-main">Rocky Linux에서 NginX 설치, 설정하는 방법</h1>
+    <h1 class="post-title-main">Load Balancer에 연동된 NginX에서 Client IP 기록하고 확인하는 방법</h1>
   
 </div>
 
@@ -1811,7 +1811,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   
     
-      <div class="summary">Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법입니다</div>
+      <div class="summary">Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입니다</div>
     
   
 
@@ -1851,300 +1851,50 @@ $("#toc_onoff").click(function() {
   
 
   <h2 id="개요">개요</h2>
-<p>Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.</p>
+<p>Ncloud (네이버 클라우드)에서 Load Balancer에 연동된 NginX 웹서버를 사용할 때 Load Balancer IP가 아닌 실제 Client IP를 기록하고 확인하는 방법을 알아보겠습니다.
+결론부터 이야기 하자면 <code class="language-plaintext highlighter-rouge">NginX에서는 Apache와 달리 별도의 모듈 설치나 환경 설정 파일 수정 없이도 자동으로 실제 Client IP와 Load Balancer IP가 동시에 모두 기록</code>됩니다. 어떻게 기록되는지 테스트 결과를 보면서 확인해보겠습니다.</p>
 
-<h2 id="서버-환경">서버 환경</h2>
+<h2 id="테스트-환경">테스트 환경</h2>
 
 <div class="bs-callout-v2 bs-callout-v2-secondary bs-callout-v2-level-2">
-⁃ OS: Rocky Linux 8.6 <br />
+⁃ Server-1: CentOS 7.8 <br />
+⁃ Server-2: Ubuntu 20.04 <br />
 ⁃ NginX: NginX 1.23.1 <br /> 
-⁃ 테스트 사이트: nginx-test.com
 </div>
 
 <h2 id="서버-준비">서버 준비</h2>
-<p>Ncloud 콘솔에서 Rocky Linux 8.6 서버를 아래와 같이 준비했습니다.</p>
+<p>Ncloud 콘솔에서 CentOS 7.8, Ubuntu 20.04 두 대의 서버를 아래와 같이 준비했습니다.</p>
 
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-01.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법" style="width: 845px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h2 id="패키지-업데이트">패키지 업데이트</h2>
-<p>우선 패키지 업데이트를 해보겠습니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> update
-</code></pre></div></div>
-<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>dnf:</b> Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
-Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
+<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-2">NginX를 설치하는 방법은 아래 문서를 참고하시기 바랍니다. <br /><br />
+- <a href="/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html" target="_blank">CentOS에 NginX 설치하기</a><br />
+- <a href="/compute/ncloud_compute_lemp_nginx_install_setting_ubuntu_guide.html" target="_blank">Ubuntu에 NginX 설치하기</a>
 </div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-02.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-access-client-ip-log-01.png" alt="Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
-<h2 id="epel-저장소-패키지-설치">EPEL 저장소 패키지 설치</h2>
-<p>다음으로 epel-release 저장소 패키지를 설치하겠습니다.</p>
+<h2 id="load-balancer-준비">Load Balancer 준비</h2>
+<p>Load Balancer도 [<strong>Application Load Balancer</strong>]를 [<strong>10.0.4.0</strong>] 대역으로 설정해서 준비했습니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>epel-release
-</code></pre></div></div>
+<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-2">Application Load Blancer 의 생성 가이드는 아래 문서를 참고하시기 바랍니다. <br /><br />
+- <a href="/networking/ncloud_networking_load_balancer_application_lb.html" target="_blank">VPC 환경에서 Application Load Balancer 생성하기</a></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-03.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-access-client-ip-log-02.png" alt="Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
-<h2 id="nginx-버전-선택">NginX 버전 선택</h2>
-<p>설치할 NginX 버전 버전을 선택합니다.</p>
-
-<h3 id="nginx-버전-리스트">NginX 버전 리스트</h3>
-<p>우선, Ncloud Rocky Linux 8.6에서 지원하는 NginX 버전을 확인합니다.<br />
-리스트를 살펴보면 1.14가 기본 버전인 것을 알 수 있습니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf module list nginx
-</code></pre></div></div>
-
-<ul>
-  <li>nginx 1.14 (default)</li>
-  <li>nginx 1.16</li>
-  <li>nginx 1.18</li>
-  <li>nginx 1.20</li>
-  <li>nginx mainline</li>
-</ul>
+<h2 id="access-log-확인">Access Log 확인</h2>
+<p>Ncloud의 상품인 [<strong>Cloud Log Analytics</strong>]에서 NginX의 로그를 확인해보면 아래와 같이 Log 내용에 앞쪽에는 [<strong>Load Balancer IP</strong>]가 기록되어 있고, 제일 뒤쪽에는 [<strong>실제 Client IP</strong>]가 기록되어 있는 것을 확인할 수 있습니다. 해당 서버들에는 오로지 NginX만 설치했고, 다른 모듈을 설치하거나 환경 설정 파일을 변경하지 않은 상태입니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-04.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h3 id="버전-활성화-정보-초기화">버전 활성화 정보 초기화</h3>
-<p>다음으로 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다. 현재 활성화 된 버전이 존재하느냐에 따라 나타나는 메시지가 다릅니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf module reset nginx
-</code></pre></div></div>
-
-<ul>
-  <li>활성화 된 버전이 없을 때</li>
-</ul>
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-05.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<ul>
-  <li>활성화 된 버전이 있을 때</li>
-</ul>
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-15.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h3 id="mainline-버전-활성화">mainline 버전 활성화</h3>
-<p>최신 버전인 mainline 버전을 활성화합니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf module <span class="nb">enable </span>nginx:mainline
-</code></pre></div></div>
-
-<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-2">NginX는 stable, mainline 두가지 버전이 있습니다. 
-NginX의 공식 설명에 따르면 버그 수정이나 보안 패치 등은 항상 mainline 버전에 먼저 적용되기 때문에 mainline을 사용하는 것을 추천한다고 합니다. <br />
-stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</strong>을 사용하고 있어서 신규 버전에서 <strong>호환성 문제</strong>가 발생할 가능성이 걱정될 때라고 합니다.</div>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-06.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h2 id="nginx-설치">NginX 설치</h2>
-<p>NginX를 설치합니다. 설치된 버전은 다음과 같습니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>nginx
-~# nginx <span class="nt">-v</span>
-</code></pre></div></div>
-<ul>
-  <li>NginX: 1.23.1</li>
-</ul>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-07.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h2 id="디렉토리-설정">디렉토리 설정</h2>
-<p>다음으로 홈으로 사용할 디렉토리를 생성하고, 해당 디렉토리의 소유권을 설정하겠습니다.<br />
-그리고, NginX가 정상 작동하는지 확인해보기 위해 설치시에 포함된 index.html을 포함한 파일들을 홈 디렉토리로 복사합니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 테스트 사이트 홈 디렉토리 생성</span>
-~# <span class="nb">mkdir</span> <span class="nt">-p</span> /ncloud/data/www/nginx-test/
-
-<span class="c"># 해당 디렉토리에 nginx에 권한 부여</span>
-~# <span class="nb">chown</span> <span class="nt">-R</span> nginx:nginx /ncloud/data/www/nginx-test
-
-<span class="c"># nginx 샘플 페이지를 사이트 디렉토리로 복사</span>
-~# <span class="nb">cp</span> /usr/share/nginx/html/<span class="k">*</span>.<span class="k">*</span> /ncloud/data/www/nginx-test/
-
-<span class="c"># 복사된 파일들 확인</span>
-~# <span class="nb">ls</span> <span class="nt">-al</span> /ncloud/data/www/nginx-test/
-</code></pre></div></div>
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-08.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h2 id="환경-설정">환경 설정</h2>
-
-<h3 id="설정-파일-위치">설정 파일 위치</h3>
-<p>NginX 환경 설정 파일의 위치는 <strong>/etc/nginx/</strong> 디렉토리입니다. <strong>tree</strong> 명령으로 해당 디렉토리에서 <strong>conf</strong>와 관련된 파일 리스트와 디렉토리 구조를 확인하면 다음과 같습니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# tree <span class="nt">-P</span> <span class="k">*</span>conf<span class="k">*</span> /etc/nginx/
-</code></pre></div></div>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-16.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h3 id="기본-설정-파일">기본 설정 파일</h3>
-<p>위에서 확인할 수 있는 파일들 중에서 기본 환경 설정 파일은 <strong>/etc/nginx/nginx.conf</strong> 입니다.<br />
-<strong>nginx.conf</strong> 파일을 열어보면 아래와 같이 <strong>server {…}</strong>로 시작되는 사이트 설정에 관련된 부분도 있지만,<br />
-<strong>include /etc/nginx/conf.d/*.conf</strong> 와 같이 <strong>conf.d</strong> 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.</p>
-
-<p>물론, 사이트 설정을 <strong>nginx.conf</strong> 파일에 직접 설정해도 되지만, 여러 개의 사이트를 설정해야 하는 경우도 생각해서 <strong>conf.d 디렉토리</strong>에 사이트 이름별로 환경 설정 파일을 별도로 만들어서 진행하도록 하겠습니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/nginx/nginx.conf
-</code></pre></div></div>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-09.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h3 id="기본-설정-주석-처리">기본 설정 주석 처리</h3>
-<p><strong>server {…}</strong> 부분을 모두 주석 처리합니다.</p>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-10.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h3 id="환경-설정-파일-생성">환경 설정 파일 생성</h3>
-<p><strong>nginx-test.com</strong> 이라는 도메인의 사이트 설정을 <strong>nginx-test.conf</strong> 설정 파일을 생성해서 저장합니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/nginx/conf.d/nginx-test.conf
-</code></pre></div></div>
-
-<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">server</span> <span class="p">{</span>
-    <span class="kn">listen</span>    <span class="mi">80</span><span class="p">;</span>
-    <span class="kn">listen</span>    <span class="s">[::]:80</span><span class="p">;</span>
-
-    <span class="c1"># 사이트 도메인 설정</span>
-    <span class="kn">server_name</span>    <span class="s">nginx-test.com</span> <span class="s">www.nginx-test.com</span><span class="p">;</span>
-
-    <span class="c1"># 홈 디렉토리, 기본 문서 설정</span>
-    <span class="kn">root</span>      <span class="n">/ncloud/data/www/nginx-test</span><span class="p">;</span>
-    <span class="kn">index</span>     <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
-
-    <span class="c1"># 404 error 페이지 설정</span>
-    <span class="kn">error_page</span> <span class="mi">404</span> <span class="n">/404.html</span><span class="p">;</span>
-      <span class="kn">location</span> <span class="p">=</span> <span class="n">/404.html</span> <span class="p">{</span>
-    <span class="p">}</span>
-
-    <span class="c1"># 50x error 페이지 설정</span>
-    <span class="kn">error_page</span> <span class="mi">500</span> <span class="mi">502</span> <span class="mi">503</span> <span class="mi">504</span> <span class="n">/50x.html</span><span class="p">;</span>
-      <span class="kn">location</span> <span class="p">=</span> <span class="n">/50x.html</span> <span class="p">{</span>
-      <span class="kn">root</span>    <span class="n">/ncloud/data/www/nginx-test</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="c1"># .htaccess 파일 접근 금지 설정</span>
-    <span class="kn">location</span> <span class="p">~</span> <span class="sr">/\.ht</span> <span class="p">{</span>
-      <span class="kn">deny</span>    <span class="s">all</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-11.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h2 id="nginx-실행">NginX 실행</h2>
-<p>설정을 모두 마쳤으면 NginX를 시작하고 상태를 확인합니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl <span class="nb">enable </span>nginx
-~# systemctl start nginx
-~# systemctl status nginx
-</code></pre></div></div>
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-12.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h2 id="hosts-파일-수정">hosts 파일 수정</h2>
-<p>지금과 같이 테스트용으로 임의 설정한 도메인(<strong>nginx-test.com</strong>)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.<br />
-<code class="language-plaintext highlighter-rouge">실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에</code> <a href="#https-access-test">다음 단계로 바로 이동<i class="fa-solid fa-turn-down"></i></a>하시면 됩니다.</p>
-
-<p>윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.</p>
-
-<ol>
-  <li>C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.</li>
-  <li>복사한 hosts 파일을 수정해서 123.456.789.123 nginx-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.</li>
-  <li>수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.</li>
-  <li>덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.</li>
-</ol>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-14.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 745px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png" alt="Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법" style="width: 710px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png" alt="Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법" style="width: 710px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<h2 id="https-access-test">사이트 접속</h2>
-<p>NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 수 있습니다.</p>
-
-<figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-access-client-ip-log-03.png" alt="Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2173,13 +1923,6 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
         
           
             <a
-              href="/tag/tag_rocky_linux.html"
-              class="btn btn-default navbar-btn cursorNorm"
-              role="button">rocky_linux</a>
-          
-        
-          
-            <a
               href="/tag/tag_lemp.html"
               class="btn btn-default navbar-btn cursorNorm"
               role="button">lemp</a>
@@ -2194,9 +1937,9 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
         
           
             <a
-              href="/tag/tag_install.html"
+              href="/tag/tag_log.html"
               class="btn btn-default navbar-btn cursorNorm"
-              role="button">install</a>
+              role="button">log</a>
           
         
       
@@ -2247,7 +1990,7 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-27<br/> Site last generated: 2023-05-23 <br />        
+        <span>Page last updated:</span> 2023-05-23<br/> Site last generated: 2023-05-23 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
