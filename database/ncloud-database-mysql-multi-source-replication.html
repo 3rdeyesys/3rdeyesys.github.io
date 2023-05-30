@@ -932,7 +932,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="Cloud DB MySQL Public 도메인 접속" href="/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html" >Cloud DB MySQL Public 도메인 접속</a></li>          
+          <li><a title="&nbsp;&nbsp; L &nbsp; MySQL Public 도메인 접속" href="/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html" >&nbsp;&nbsp; L &nbsp; MySQL Public 도메인 접속</a></li>          
                     
           
           
@@ -940,6 +940,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li><a title="VPC 환경 Cloud DB for MSSQL 생성" href="/database/ncloud-database-cloud-db-for-mssql-guide.html" >VPC 환경 Cloud DB for MSSQL 생성</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="&nbsp;&nbsp; L &nbsp; MSSQL Public 도메인 접속" href="/database/ncloud-database-cloud-db-for-mssql-public-domain-guide.html" >&nbsp;&nbsp; L &nbsp; MSSQL Public 도메인 접속</a></li>          
                     
           
           
@@ -2102,7 +2109,7 @@ mysql&gt; show master status<span class="p">;</span>
 MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="307fd2b6-9eb6-4793-8dc3-6647f88821b2" data-name="slave_my_cnf">
+<ul class="tab" data-tab="bf3d9822-fe0e-4678-b969-4af1f7c63212" data-name="slave_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2113,7 +2120,7 @@ MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 
       </li>
   
 </ul>
-<ul class="tab-content" id="307fd2b6-9eb6-4793-8dc3-6647f88821b2" data-name="slave_my_cnf">
+<ul class="tab-content" id="bf3d9822-fe0e-4678-b969-4af1f7c63212" data-name="slave_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf
@@ -2221,7 +2228,7 @@ mysql&gt; quit
 <p>리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.<br />
 채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.</p>
 
-<ul class="tab" data-tab="e687c9b4-4676-45fe-998b-5fc45ae693f8" data-name="config_channel">
+<ul class="tab" data-tab="e56efce8-9ffe-4384-9e6d-8703b035c2a1" data-name="config_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2236,7 +2243,7 @@ mysql&gt; quit
       </li>
   
 </ul>
-<ul class="tab-content" id="e687c9b4-4676-45fe-998b-5fc45ae693f8" data-name="config_channel">
+<ul class="tab-content" id="e56efce8-9ffe-4384-9e6d-8703b035c2a1" data-name="config_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># MySQL 5.7</span>
@@ -2281,7 +2288,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
 <h3 id="master-서버-정보-입력">Master 서버 정보 입력</h3>
 <p>Slave 서버에 Master 서버 정보를 하나씩 입력합니다.</p>
 
-<ul class="tab" data-tab="e202a354-9f0e-4a89-a4d8-261ba165aebc" data-name="config_channel_sample">
+<ul class="tab" data-tab="457a7583-2855-49b7-ae24-e801f06142fa" data-name="config_channel_sample">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2296,7 +2303,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
       </li>
   
 </ul>
-<ul class="tab-content" id="e202a354-9f0e-4a89-a4d8-261ba165aebc" data-name="config_channel_sample">
+<ul class="tab-content" id="457a7583-2855-49b7-ae24-e801f06142fa" data-name="config_channel_sample">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Master1</span>
@@ -2343,7 +2350,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
 <h3 id="리플리케이션-채널-시작">리플리케이션 채널 시작</h3>
 <p>리플리케이션 시작 후 에러가 없는지 확인합니다.</p>
 
-<ul class="tab" data-tab="edf24dd3-14ef-43ad-b4f2-1b3f5f4005c9" data-name="start_channel">
+<ul class="tab" data-tab="036cc611-fa83-46ad-81df-cc687712b60e" data-name="start_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2354,7 +2361,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
       </li>
   
 </ul>
-<ul class="tab-content" id="edf24dd3-14ef-43ad-b4f2-1b3f5f4005c9" data-name="start_channel">
+<ul class="tab-content" id="036cc611-fa83-46ad-81df-cc687712b60e" data-name="start_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#MySQL 5.7 기준</span>
@@ -2453,7 +2460,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
 
 <h2 id="버전별-명령어-비교">버전별 명령어 비교</h2>
 
-<ul class="tab" data-tab="59b5c5bf-f2e5-4723-9f4f-a8eeafb4ba77" data-name="replication_command">
+<ul class="tab" data-tab="8bd030c4-f060-4009-aebb-bfc2abc20e09" data-name="replication_command">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2468,7 +2475,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
       </li>
   
 </ul>
-<ul class="tab-content" id="59b5c5bf-f2e5-4723-9f4f-a8eeafb4ba77" data-name="replication_command">
+<ul class="tab-content" id="8bd030c4-f060-4009-aebb-bfc2abc20e09" data-name="replication_command">
   
       <li class="active">
 <div>
@@ -2631,7 +2638,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-05-26 <br />        
+        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-05-30 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

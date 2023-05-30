@@ -927,7 +927,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="Cloud DB MySQL Public 도메인 접속" href="/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html" >Cloud DB MySQL Public 도메인 접속</a></li>          
+          <li><a title="&nbsp;&nbsp; L &nbsp; MySQL Public 도메인 접속" href="/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html" >&nbsp;&nbsp; L &nbsp; MySQL Public 도메인 접속</a></li>          
                     
           
           
@@ -935,6 +935,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           <li><a title="VPC 환경 Cloud DB for MSSQL 생성" href="/database/ncloud-database-cloud-db-for-mssql-guide.html" >VPC 환경 Cloud DB for MSSQL 생성</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="&nbsp;&nbsp; L &nbsp; MSSQL Public 도메인 접속" href="/database/ncloud-database-cloud-db-for-mssql-public-domain-guide.html" >&nbsp;&nbsp; L &nbsp; MSSQL Public 도메인 접속</a></li>          
                     
           
           
@@ -2169,6 +2176,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						"categories": "",
 						"url": " /database/ncloud-database-cloud-db-for-mssql-guide.html",
 						"content": "개요\nNcloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Cloud DB for MSSQL 생성 및 접속 방법에 대하여 정리해보겠습니다.\n\n테스트 환경\n\n  VPC와 Private Subnet\n  Cloud DB for MSSQL 15.0.4.198.2 Standard Edition (MSSQL 2019)\n  DB 접속 테스트용 서버 windows 2019 64bit en\n\n\nCloud DB for MSSQL 서비스 위치\n[콘솔] - [Services] - [Database]에서  [Cloud DB for MSSQL]을 찾을 수 있습니다.\n\n\n  \n  \n    \n  \n\n\nCloud DB for MSSQL 서버 생성\n[Cloud DB for MSSQL] - [DB Server]에서 [DB server 생성] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n서버 설정\n생성할 서버의 스펙 선택 및 세부정보를 입력합니다.\n\n\n  \n  \n    \n  \n\n\n Subnet 선택 주의사항: 서버를 생성 후에는 Subnet 변경이 불가합니다. 내부 서버를 통해 접근하거나 SSL VPN을 이용해 접속할 경우는 Private Subnet으로 설정하고, 회사 PC 등 외부에서 접근이 필요하실 경우는 ACG에서 IP 제한을 적용한 후 Public Subnet으로 설정하면 됩니다. \n\n여기서는 내부 서버를 통해 접근하는 방식을 테스트할 예정이므로 Private Subnet을 선택합니다.\n\n\n  \n  \n    \n  \n\n\nCloud DB for MSSQL의 스토리지 용량은 최소 100GB부터 10GB씩 자동 증가되며 최대 2TB까지 사용 가능합니다. \n\nDB 설정\n다음으로 계정 정보와 DB 접속 포트 등을 입력하고, Backup 관련 설정을 선택합니다.\n\n\n  \n  \n    \n  \n\n\nBackup 파일 보관 기간은 최소 1일 부터 최대 30일까지 선택 가능하며 FullBackup만 지원하고 있습니다. Backup 시간은 자동 또는 수동모드로 변경하여 시간 지정이 가능합니다.\n\nDB 생성 완료\n생성될 서버의 최종 정보를 확인하고 서버를 생성하면 아래와 같이 기본 옵션으로 선택했던 고가용성에 해당하는 Principal, Mirror 이렇게 2대의 서버가 생성된 것을 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n테스트용 Windows 서버 생성\nCloud DB for MSSQL 서버에 접속할 테스트 용도의 Windows 서버를 생성하고, 서버 정보에서 ACG 설정에 필요한 사설(비공인) IP를 확인합니다. 이 비공인 IP는 아래쪽 ACG 설정에서 사용하게 됩니다.\n\n\n  \n  \n    \n  \n\n\nACG 설정\n이제 테스트용 Windows 서버에서 Cloud DB for MSSQL로 접속할 수 있도록 ACG를 설정해야 합니다.\n\n생성된 MSSQL DB 서버의 상세 정보를 살펴보면 DB 생성 과정에서 ACG가 자동으로 생성, 적용되어 있는 것을 아래와 같이 확인할 수 있습니다.\n\n  ACG 옆에 있는 아이콘을 클릭해서 ACG 화면으로 이동합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  위에서 확인했던 Cloud DB for MSSQL의 ACG [cloud-mssql-***]를 선택 후 ACG 설정을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Inbound 규칙에 위에서 확인했던 테스트용 Windows 서버의 비공인 IP를 접근 소스로 등록하고 허용 포트 1433을 추가합니다.\n\n\n\n  \n  \n    \n  \n\n\nDB 서버 접속\n\nSQL Server Management Studio 설치\n테스트용 Windows 서버에 할당된 공인IP로 접속해 MSSQL Client인 SSMS (SQL Server Management Studio)를 다운로드하고 설치합니다.\n\n\n⁃  SSMS (SQL Server Management Studio) 다운로드\n\n\n\n  \n  \n    \n  \n\n\n설치된 SSMS (SQL Server Management Studio)를 찾아서 실행합니다.\n\n\n  \n  \n    \n  \n\n\nDB Server Private 도메인 확인\nCloud DB for MSSQL 서버에 접속하기 위해서는 DB 서버 생성 시에 설정된 Private 도메인을 이용해야 하는데, 아래 화면처럼 DB 서버 상세 정보에서 Private 도메인을 확인할 수 있습니다. 해당 Private 도메인 주소를 복사해서 다음 단계인 DB 로그인 창에 입력하면 됩니다.\n\n\n  \n  \n    \n  \n\n\nDB 로그인\n로그인 접속 화면에서 정보를 입력하고 접속합니다.\n\n\n  Server name : {MSSQL DB Server의 Private 도메인}, {접속 포트} (쉼표로 구분하여 입력)\n  Authentication : [SQL Server Authentication] 으로 변경합니다.\n  Login 및 Password : DB 서버 생성과정에서 입력한 유저 정보를 입력합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  정상적으로 접속된 것을 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n참고 URL\n\n  Ncloud Cloud DB for MSSQL 기본 가이드\n    \n      https://guide.ncloud-docs.com/docs/clouddbformssql-start-vpc\n    \n  \n  SSMS (SQL Server Management Studio) 다운로드\n    \n      https://learn.microsoft.com/ko-kr/sql/ssms/download-sql-server-management-studio-ssms"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"database-ncloud-database-cloud-db-for-mssql-public-domain-guide-html": {
+						"id": "database-ncloud-database-cloud-db-for-mssql-public-domain-guide-html",
+						"title": "Cloud DB for MSSQL 생성후 Public 도메인으로 접속하기",
+						"categories": "",
+						"url": " /database/ncloud-database-cloud-db-for-mssql-public-domain-guide.html",
+						"content": "개요\nNcloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Cloud DB for MSSQL 생성 Public 도메인으로 접속하는 방법에 대하여 정리해보겠습니다.\n\n테스트 환경\n\n  VPC와 Public Subnet\n  Cloud DB for MSSQL 15.0.4.198.2 Standard Edition (MSSQL 2019)\n\n\nCloud DB for MSSQL 서비스 위치\n[콘솔] - [Services] - [Database]에서  [Cloud DB for MSSQL]을 찾을 수 있습니다.\n\n\n  \n  \n    \n  \n\n\nCloud DB for MSSQL 서버 생성\n[Cloud DB for MSSQL] - [DB Server]에서 [DB server 생성] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n서버 설정\n생성할 서버의 스펙 선택 및 세부정보를 입력합니다.\n\n\n  \n  \n    \n  \n\n\n Subnet 선택 주의사항: 서버를 생성 후에는 Subnet 변경이 불가합니다. 회사 PC 등 외부에서 접근이 필요하실 경우는 ACG에서 IP 제한을 적용한 후 Public Subnet으로 설정하고, 내부 서버를 통해 접근하거나 SSL VPN을 이용해 접속할 경우는 Private Subnet으로 설정하면 됩니다. \n\n여기서는 외부에서 접근하는 방식을 테스트할 예정이므로 Public Subnet을 선택합니다.\n\n\n  \n  \n    \n  \n\n\nCloud DB for MSSQL의 스토리지 용량은 최소 100GB부터 10GB씩 자동 증가되며 최대 2TB까지 사용 가능합니다. \n\nDB 설정\n다음으로 계정 정보와 DB 접속 포트 등을 입력하고, Backup 관련 설정을 선택합니다.\n\n\n  \n  \n    \n  \n\n\nBackup 파일 보관 기간은 최소 1일 부터 최대 30일까지 선택 가능하며 FullBackup만 지원하고 있습니다. Backup 시간은 자동 또는 수동모드로 변경하여 시간 지정이 가능합니다.\n\nDB 생성 완료\n생성될 서버의 최종 정보를 확인하고 서버를 생성하면 아래와 같이 기본 옵션으로 선택했던 고가용성에 해당하는 Principal, Mirror 이렇게 2대의 서버가 생성된 것을 확인할 수 있습니다. 또한 Subnet도 [Public Subnet]으로 설정된 것을 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\nACG 설정\n이제 외부에서 Cloud DB for MSSQL로 접속할 수 있도록 ACG를 설정해야 합니다.\n\n생성된 MSSQL DB 서버의 상세 정보를 살펴보면 DB 생성 과정에서 ACG가 자동으로 생성, 적용되어 있는 것을 아래와 같이 확인할 수 있습니다.\n\n  ACG 옆에 있는 아이콘을 클릭해서 ACG 화면으로 이동합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  위에서 확인했던 Cloud DB for MSSQL의 ACG [cloud-mssql-***]를 선택 후 ACG 설정을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Inbound 규칙에서 접근 소스는 [myIp] 버튼을 클릭해서 현재 IP 즉, 사무실 IP 등을 등록하고 허용 포트 1433을 추가합니다.\n\n\n\n  \n  \n    \n  \n\n\nPublic 도메인 할당\n다음으로, 사무실 등의 외부에서 Cloud DB에 접속하려면 Public 도메인을 추가로 할당해야 합니다.  [DB 관리] - [Public 도메인 관리] 메뉴를 클릭해 Public 도메인을 신청합니다.\n\n\n  \n  \n    \n  \n\n\n\n  Public 도메인 신청 팝업을 확인하고 [예] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\n\n  신청 후 잠시 기다렸다 Cloud DB for MSSQL 서버의 상세 정보를 살펴보면 아래와 같이 [Public 도메인]이 할당된 것을 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\nDB 서버 접속\n\nSQL Server Management Studio 설치\n사무실 PC에 MSSQL Client인 SSMS (SQL Server Management Studio)를 다운로드하고 설치합니다.\n\n\n⁃  SSMS (SQL Server Management Studio) 다운로드\n\n\n\n  \n  \n    \n  \n\n\n\n  설치된 SSMS (SQL Server Management Studio)를 찾아서 실행합니다.\n\n\n\n  \n  \n    \n  \n\n\nDB Server Public 도메인 확인\n아래 화면처럼 DB 서버 상세 정보에서 확인한 Public 도메인 주소를 복사해서 다음 단계인 DB 로그인 창에 입력하면 됩니다.\n\n\n  \n  \n    \n  \n\n\nDB 로그인\n로그인 접속 화면에서 정보를 입력하고 접속합니다.\n\n\n  서버 이름 : {MSSQL DB Server의 Public 도메인}, {접속 포트} (쉼표로 구분하여 입력)\n  인증 : [SQL Server 인증] 으로 변경합니다.\n  로그인 및 암호 : DB 서버 생성과정에서 입력한 유저 정보를 입력합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  정상적으로 접속된 것을 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n참고 URL\n\n  Ncloud Cloud DB for MSSQL 기본 가이드\n    \n      https://guide.ncloud-docs.com/docs/clouddbformssql-start-vpc\n    \n  \n  SSMS (SQL Server Management Studio) 다운로드\n    \n      https://learn.microsoft.com/ko-kr/sql/ssms/download-sql-server-management-studio-ssms"
 					}
 					
 				
@@ -4459,7 +4481,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-         Site last generated: 2023-05-26 <br />        
+         Site last generated: 2023-05-30 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
