@@ -948,6 +948,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
           
           
+          
+          
+          
+          <li><a title="&nbsp;&nbsp; L &nbsp; MSSQL 메뉴와 기능 소개" href="/database/ncloud-database-cloud-db-for-mssql-setting-manage-guide.html" >&nbsp;&nbsp; L &nbsp; MSSQL 메뉴와 기능 소개</a></li>          
+                    
+          
+          
           <li class="subfolders">
               <a title="Replication - MySQL, MariaDB" href="#">Replication - MySQL, MariaDB</a>
               <ul>                  
@@ -1902,6 +1909,8 @@ $("#toc_onoff").click(function() {
   
 </figure>
 
+<div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">Cloud DB for MSSQL은 <strong>고가용성(HA) 기능 즉, 서버 이중화를 기본으로 지원</strong>합니다. 운영 중인 Principal Server에서 장애가 발생하여 정상적인 서비스가 불가능한 경우 Mirror Server로 자동 Failover 합니다. DNS 방식으로 이중화를 구성하므로 별도의 애플리케이션 변경이 필요 없습니다.</div>
+
 <div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <b>Subnet 선택 주의사항:</b> 서버를 생성 후에는 Subnet 변경이 불가합니다. 내부 서버를 통해 접근하거나 SSL VPN을 이용해 접속할 경우는 Private Subnet으로 설정하고, 회사 PC 등 외부에서 접근이 필요하실 경우는 ACG에서 IP 제한을 적용한 후 Public Subnet으로 설정하면 됩니다. </div>
 
 <div class="bs-callout-v2 bs-callout-v2-success bs-callout-v2-level-2">여기서는 내부 서버를 통해 접근하는 방식을 테스트할 예정이므로 <strong>Private Subnet</strong>을 선택합니다.</div>
@@ -1926,6 +1935,8 @@ $("#toc_onoff").click(function() {
 </figure>
 
 <div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-2">Backup 파일 보관 기간은 최소 1일 부터 최대 30일까지 선택 가능하며 FullBackup만 지원하고 있습니다. Backup 시간은 자동 또는 수동모드로 변경하여 시간 지정이 가능합니다.</div>
+
+<div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">Cloud DB for MSSQL 서버는 고가용성을 선택할 경우 서버 생성까지 대략 <strong>1시간</strong> 정도가 소요되니 여유를 갖고 기다리시면 됩니다.</div>
 
 <h3 id="db-생성-완료">DB 생성 완료</h3>
 <p>생성될 서버의 최종 정보를 확인하고 서버를 생성하면 아래와 같이 기본 옵션으로 선택했던 고가용성에 해당하는 Principal, Mirror 이렇게 2대의 서버가 생성된 것을 확인할 수 있습니다.</p>
@@ -2143,7 +2154,7 @@ $("#toc_onoff").click(function() {
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-05-26<br/> Site last generated: 2023-05-30 <br />        
+        <span>Page last updated:</span> 2023-05-26<br/> Site last generated: 2023-06-01 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

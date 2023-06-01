@@ -5,10 +5,190 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 30 May 2023 16:30:02 +0900</pubDate>
-        <lastBuildDate>Tue, 30 May 2023 16:30:02 +0900</lastBuildDate>
+        <pubDate>Thu, 01 Jun 2023 10:56:26 +0900</pubDate>
+        <lastBuildDate>Thu, 01 Jun 2023 10:56:26 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 소개</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개를 정리해보겠습니다.
+
+## 테스트 환경
+- VPC와 Private Subnet
+- Cloud DB for MSSQL 15.0.4.198.2 Standard Edition (MSSQL 2019)
+
+## Cloud DB for MSSQL 서비스 위치
+[**Cloud DB for MSSQL**]은 [**콘솔**] - [**Services**] - [**Database**]에서 찾을 수 있습니다.  
+
+그리고 Cloud DB for MSSQL에는 다음과 같은 메뉴들이 있는데, 자세한 내용은 아래쪽에서 메뉴별로 하나씩 소개해보겠습니다.
+- DB Server
+- Monitoring
+- Backup
+- Event
+- Config Group
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
+
+## DB Server 메뉴
+DB Server 메뉴에서는 MSSQL Server를 생성, 삭제하거나 운영 중인 MSSQL Server 목록을 확인할 수 있습니다. 또한 운영 중인 MSSQL Server의 스펙을 변경하거나 관리자(User) 계정 등을 관리할 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+### 재시작
+서버를 재시작합니다. 정지 기능은 제공하지 않습니다.
+
+### DB Server 삭제
+DB Server를 삭제합니다. 동시에 Mirror 도 같이 삭제 되며, 삭제하는 DB Server의 모든 데이터는 삭제됩니다.  
+이때, `백업된 데이터도 같이 삭제되고 삭제 이후에는 복구 할 수 없으니` 만약의 경우를 대비하여 백업 데이터를 별도로 보관하는 것도 좋은 방법입니다.
+
+### Monitoring
+DB Dashboard, Performance, DB Logs, Audit Logs 등의 메뉴를 제공하여 각 종 로그와 성능 지표를 확인할 수 있도록 Monitoring 서비스 항목으로 이동합니다.
+
+### DB 관리
+
+- **DB Server 상세보기**
+    - DB Config 관리: DB Config Croup 변경이 가능합니다.
+    - Database 관리:  Databases를 생성 및 삭제할 수 있습니다.
+    - Db User 관리: 관리자용 DB 계정의 비밀번호를 변경할 수 있습니다.
+    - Backup 설정관리: Backup 파일의 보관 기간 및 Backup 시간을 관리합니다.
+    - DB 스펙변경: DB Server의 스펙을 변경합니다.
+    - Audit 설정 관리: Audit 설정을 활성화 하면 DB 서버의 로그인 기록 및 데이터베이스 내 오브젝트 생성, 변경, 삭제 기록(DDL)을 남길 수 있습니다.
+    - Log 다운로드: Error Log, Default Trace File, Agent Log, Audit Log 파일을 다운로드 할 수 있습니다.
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;**DB 스펙 변경**은 **동일한 DB 서비스 이름**으로 서비스 되는 모든 서버(**Principle, Mirror, Slave** 등)가 똑같이 변경되며 DB Server가 재시작 됩니다. 또한, 재시작 동안에는 DB Server 접속할 수 없습니다.&quot; %}
+    
+- **Slave 추가** : 선택한 DB Service의 Slave DB Server를 추가합니다.
+- **읽기가능 시간 조정** : 매일 정해진 시간에 읽기 가능하도록 설정하여 batch 등에 사용할 수 있습니다. (Slave DB 생성 후 적용가능)
+- **고가용성 설정 변경** : DB Server를 Stand Alone 또는 고가용성 구성으로 변경하며, 이때 서버 스펙, DB 설정 정보는 동일하게 설정됩니다.
+- **Public 도메인 관리** : 외부에서 접근할 수 있는 Public 도메인을 신청할 수 있습니다.
+- **MSSQL Engine Upgrade** : DB Server Engine 버전을 업그레이드 합니다.
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;**MSSQL Engine Upgrade**는 리스트에 있는 전체 서버의 버전이 변경되고, **버전 업그레이드 중인 서버는 접근이 차단**됩니다.고가용성 사용중인 경우 **업그레이드 작업은 1대씩 순차적으로 진행**되고, Server 1대에 1분 내외로 작업 시간이 소요됩니다. (작업 순서 : Recovery -&gt; Slave -&gt; Principal)&quot; %}
+
+## Monitoring 메뉴
+
+MSSQL Server 성능 및 이력에 대한 모니터링 정보를 확인할 수 있습니다. Monitoring은 별도의 추가 비용 없이 사용이 가능합니다. 
+
+### DB Dashboard
+Monitoring에서 제공하고 있는 대시보드는 여러 개의 그래픽 차트로 구성되어 있으며, 사용자는 서버별로 확인하고 싶은 대시보드에서 원하는 정보만 디스플레이하여 직관적으로 확인할 수 있습니다. 대시보드에서 보여주는 정보는 매분 수집하여 표시하되 평균값을 보여줍니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+### Performance
+운영 중인 MSSQL Server의 성능 관련 모니터링 정보를 보여줍니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+### DB Logs
+운영 중인 MSSQL Server에서 발생한 모든 로그의 발생 시간 및 내용을 기록하여 보여줍니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+## Backup 메뉴
+Backup에서는 Cloud DB for MSSQL을 사용 중인 사용자의 캐시 데이터를 안전하게 보관하기 위해 서버별로 설정해놓은 백업 정보를 확인할 수 있습니다. 또한 장애가 발생하여 캐시 데이터가 손실된 경우 보관 중이던 백업 파일로 복원을 진행할 수도 있으며, 고가용성 설정을 사용하는 서버 뿐만 아니라 Stand Alone Server도 백업 및 복원 기능을 사용할 수 있습니다.
+
+### 기본 수행 규칙
+백업과 복원을 사용하기 위해서 우선 Cloud DB for MSSQL에서 제공하고 있는 백업에 대한 기본 수행 규칙을 이해하는 것이 좋습니다. 
+
+- 백업 수행 방식
+  - 풀백업: 하루 한 번씩 매일 수행
+  - 자동 설정과 사용자 정의 설정 가운데 선택
+    - 자동 설정: MSSQL Server 생성 시 임의의 시간이 지정되며, 이후 처음 백업된 시간과 유사한 시간에 백업 수행
+    - 사용자 정의 설정: 사용자가 선택한 시간 +15분 내 백업 수행 시작
+  - 로그백업: 15분 간격으로 자동 수행. 시간 설정 불가
+
+- 백업 파일
+  - 보관 기간: 사용자 설정에 따라 최대 30일까지 보관 가능
+  - 저장 위치: 별도의 데이터 스토리지(백업 파일 크기에 따라 스토리지 계약 진행)
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-05.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+- **DB 서비스 이름**: 사용자가 지정한 DB Service 이름
+- **Backup 보관일**: 백업 파일을 데이터 스토리지에 저장하여 보관하는 최대 일수
+- **FullBackup 시작 시간**: 매일 1회 풀백업을 수행하는 시간
+- **보관중인 Backup 데이터 크기**: 완료된 백업 파일의 총 크기 (풀백업과 로그백업 파일의 합)
+- **FullBackup 데이터 크기**: 풀백업 파일의 크기
+- **Log Backup 데이터 크기**: 풀백업 이후에 생성된 로그백업의 크기
+- **Log Backup 수**: 풀백업 이후에 생성된 로그백업의 개수
+- **상세정보 보기**: 서버별 생성된 백업 파일 목록의 상세 정보 및 복원
+
+### Backup 리스트 확인
+[Backup] - [상세정보 보기] - [상세내역]에서 백업 수행을 완료하여 서버별로 생성된 백업 파일 목록을 확인하고 복원할 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-06.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+- **DB 이름**: 백업된 DB 이름
+- **FullBackup 시작시간**: 백업이 시작된 시간
+- **FullBackup 종료시간**: 백업이 완료된 시간
+- **FullBackup 크기**: 백업 파일의 사이즈
+- **연관된 Log Backup 크기**: 풀백업 이후 생성된 로그백업의 사이즈
+
+### 복원
+[Backup] - [상세정보 보기] - [상세내역] - [복원하기] 기능으로 보관되어 있는 백업 파일 목록 가운데 원하는 백업 파일을 선택하여 MSSQL Server를 복원할 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-07.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+Backup 파일 보관 기간 내의 원하는 시간으로 DB 복원이 가능합니다. 복원 요청 시 신규 DB Server가 생성되며, 선택한 시간으로 DB 데이터가 복원됩니다. 그리고, 생성된 DB Server는 **Stand Alone 모드로 복원**됩니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-08.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+## Event 메뉴
+Cloud DB for MSSQL 서버에서 발생한 이벤트 이력을 확인할 수 있습니다. 알람 항목과 임계치를 지정하여 이벤트를 생성하면 해당 이벤트가 발생할 때 메일과 SMS로 통보받을 수 있습니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-09.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+이벤트 알림 설정은 [Event Rule 설정(Cloud Insight)]을 클릭하여 Cloud Insight 서비스로 이동하여 설정 가능합니다.
+
+Cloud Insight 설정 방법은 아래 링크를 참조합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/management/ncloud_management_cloud_insight_guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; 모니터링 서비스 Cloud Insight 설정 가이드&lt;/a&gt;&lt;br /&gt;
+&amp;#8259; &lt;a href=&apos;/management/ncloud-management-cloud-insight-rule-template-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; 모니터링 서비스 Cloud Insight Rule Template 설정 가이드&lt;/a&gt;
+&quot; %}
+
+
+## Config Group 메뉴
+Config Group에서는 생성한 MSSQL Server를 그룹핑하여 그룹에 속한 서버들에 동일한 설정값을 지정하여 효율적으로 관리할 수 있고 생성, 변경, 삭제할 수 있습니다. 생성된 Config Group은 여러 MSSQL Service에 적용이 가능하며 MSSQL 설치 기본값이 포함된 Config Group이 기본 제공됩니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-10.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+### Config Group 생성
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-11.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+### Config 변경
+`기본 Config Group는 임의로 변경할 수 없으며`, 추가로 생성한 Config Group만 변경이 가능합니다.
+
+{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-setting-manage-guide-12.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개&quot; caption=&quot;&quot; %}
+
+### 삭제
+기본 Config Group은 삭제가 불가능 합니다. 추가로 생성한 Config Group만 삭제가 가능합니다.
+
+
+
+## 참고 URL
+1. Ncloud Cloud DB for MSSQL 기본 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/clouddbformssql-start-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/clouddbformssql-start-vpc&lt;/a&gt;
+
+2. Ncloud Cloud DB for MSSQL 기능 상세 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/clouddbformssql-dbserver-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/clouddbformssql-dbserver-vpc&lt;/a&gt;
+</description>
+            <pubDate>Wed, 31 May 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mssql-setting-manage-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mssql-setting-manage-guide.html</guid>
+            
+            <category>database</category>
+            
+            <category>mssql</category>
+            
+            <category>clouddb</category>
+            
+            <category>vpc</category>
+            
+            
+        </item>
         
         <item>
             <title>Cloud DB for MSSQL 생성후 Public 도메인으로 접속하기</title>
@@ -34,6 +214,8 @@ Ncloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Clo
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-18.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
 
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL은 **고가용성(HA) 기능 즉, 서버 이중화를 기본으로 지원**합니다. 운영 중인 Principal Server에서 장애가 발생하여 정상적인 서비스가 불가능한 경우 Mirror Server로 자동 Failover 합니다. DNS 방식으로 이중화를 구성하므로 별도의 애플리케이션 변경이 필요 없습니다.&quot; %}
+
 {% include warning.html title=&quot;Subnet 선택 주의사항&quot; content=&quot;서버를 생성 후에는 Subnet 변경이 불가합니다. 회사 PC 등 외부에서 접근이 필요하실 경우는 ACG에서 IP 제한을 적용한 후 Public Subnet으로 설정하고, 내부 서버를 통해 접근하거나 SSL VPN을 이용해 접속할 경우는 Private Subnet으로 설정하면 됩니다. &quot; %}
 
 {% include callout-v2.html type=&quot;success&quot; level=&quot;2&quot; content=&quot;여기서는 외부에서 접근하는 방식을 테스트할 예정이므로 **Public Subnet**을 선택합니다.&quot; %}
@@ -48,6 +230,8 @@ Ncloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Clo
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-05.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
 
 {% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Backup 파일 보관 기간은 최소 1일 부터 최대 30일까지 선택 가능하며 FullBackup만 지원하고 있습니다. Backup 시간은 자동 또는 수동모드로 변경하여 시간 지정이 가능합니다.&quot; %}
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL 서버는 고가용성을 선택할 경우 서버 생성까지 대략 **1시간** 정도가 소요되니 여유를 갖고 기다리시면 됩니다.&quot; %}
 
 ### DB 생성 완료
 생성될 서버의 최종 정보를 확인하고 서버를 생성하면 아래와 같이 기본 옵션으로 선택했던 고가용성에 해당하는 Principal, Mirror 이렇게 2대의 서버가 생성된 것을 확인할 수 있습니다. 또한 Subnet도 [**Public Subnet**]으로 설정된 것을 확인할 수 있습니다.
@@ -170,6 +354,8 @@ Ncloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Clo
 
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL은 **고가용성(HA) 기능 즉, 서버 이중화를 기본으로 지원**합니다. 운영 중인 Principal Server에서 장애가 발생하여 정상적인 서비스가 불가능한 경우 Mirror Server로 자동 Failover 합니다. DNS 방식으로 이중화를 구성하므로 별도의 애플리케이션 변경이 필요 없습니다.&quot; %}
+
 {% include warning.html title=&quot;Subnet 선택 주의사항&quot; content=&quot;서버를 생성 후에는 Subnet 변경이 불가합니다. 내부 서버를 통해 접근하거나 SSL VPN을 이용해 접속할 경우는 Private Subnet으로 설정하고, 회사 PC 등 외부에서 접근이 필요하실 경우는 ACG에서 IP 제한을 적용한 후 Public Subnet으로 설정하면 됩니다. &quot; %}
 
 {% include callout-v2.html type=&quot;success&quot; level=&quot;2&quot; content=&quot;여기서는 내부 서버를 통해 접근하는 방식을 테스트할 예정이므로 **Private Subnet**을 선택합니다.&quot; %}
@@ -184,6 +370,8 @@ Ncloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Clo
 {% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-05.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
 
 {% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Backup 파일 보관 기간은 최소 1일 부터 최대 30일까지 선택 가능하며 FullBackup만 지원하고 있습니다. Backup 시간은 자동 또는 수동모드로 변경하여 시간 지정이 가능합니다.&quot; %}
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL 서버는 고가용성을 선택할 경우 서버 생성까지 대략 **1시간** 정도가 소요되니 여유를 갖고 기다리시면 됩니다.&quot; %}
 
 ### DB 생성 완료
 생성될 서버의 최종 정보를 확인하고 서버를 생성하면 아래와 같이 기본 옵션으로 선택했던 고가용성에 해당하는 Principal, Mirror 이렇게 2대의 서버가 생성된 것을 확인할 수 있습니다.
@@ -551,240 +739,6 @@ Route Table 설정 화면에 들어가도 Target Type에 LOCAL만 선택할 수 
         </item>
         
         <item>
-            <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Windows</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 **Windows 환경에서 제어하는 방법**에 대해 소개합니다.
-
-## 쿠버네티스란?
-쿠버네티스(Kubernetes, K8S)는 배포, 스케일링, 그리고 컨테이너화된 애플리케이션의 관리를 자동화 해주는 오픈 소스 컨테이너 오케스트레이션 엔진으로 
-구글에서 처음 개발하기 시작했으나 현재는 구글이 오픈소스 프로젝트로 공개한 상태입니다.
-
-## 특징
-쿠버네티스는 다음과 같은 특징이 있으며, 자세한 내용은 쿠버네티스 공식 페이지를 참고하시기 바랍니다.
-
-&lt;a href=&quot;https://kubernetes.io/ko/docs/home/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://kubernetes.io/ko/docs/home/&lt;/a&gt;
-
-- 서비스 디스커버리와 로드 밸런싱
-- 스토리지 오케스트레이션
-- 자동화된 롤아웃과 롤백
-- 자동화된 빈 패킹(bin packing)
-- 자동화된 복구(self-healing)
-- 시크릿과 구성 관리
-
-
-## 사전 준비
-먼저 쿠버네티스 클러스터에 사용할 **전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet**이 필요합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-36.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;IP 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /17~/26 범위의 Subnet, 로드밸런서 전용 Subnet이 필요합니다.&lt;br/&gt;&lt;br/&gt;
-Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내의 Private Subnet, 로드밸런서 전용Subnet은 선택할 수 없습니다.&quot; %}
-
-## 쿠버네티스 서비스 위치
-Ncloud 쿠버네티스 서비스는 [콘솔] - [Services] - [Containers]에 위치하고 있습니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-33.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 클러스터 생성 
-
-VPC와 Subnet이 준비되었다면, 다음으로 [Kubernetes Sevice] - [Cluster]에서 생성하기를 클릭합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 클러스터 설정
-생성할 클러스터의 정보를 설정해줍니다. 
-**네트워크 타입은 Private과 Public 중에서 선택**할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Kubernetes Service를 위한 ACG는 자동으로 생성됩니다.&quot; %}
-{% include callout-v2.html type=&quot;primary&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 Kubernetes 버전은 [**1.24.0**], [**1.25.8**] 입니다.&quot;%}
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-35.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-### NAT Gateway 생성
-`Private Subnet을 선택했을 경우`에는 아래와 같이 NAT Gateway 생성 안내 팝업이 나타나는데,  
-NAT Gateway를 생성해야 아웃바운드 트래픽을 활성화할 수 있기 때문입니다.
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_10.jpg&quot; width=&quot;490&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-팝업에서 링크를 클릭해서 NAT Gateway 화면으로 이동해 NAT Gateway를 생성합니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NAT Gateway 생성 가이드는 아래 문서를 참고하시기 바랍니다. &lt;br /&gt;&lt;br /&gt;
-- &lt;a href=&apos;/networking/ncloud_networking_natgw_routetb.html&apos; target=&apos;_blank&apos;&gt;VPC 환경에서 NAT Gateway 설정하기&lt;/a&gt;&quot; %}
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_11.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 노드풀 설정
-노드풀 이름을 입력하고, 서버 이미지와 서버 타입을 선택하고 [추가] 버튼을 클릭합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 OS는 [**ubuntu 16.04**], [**ubuntu 18.04**], [**ubuntu 20.04**] 입니다.&quot;%}
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-37.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 인증키 설정
-다음으로 워커노드의 인증키를 설정 합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-38.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 최종 확인
-설정 정보를 최종적으로 확인한 후 생성버튼을 클릭하여 클러스터를 생성합니다.
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;쿠버네티스 클러스터 생성은 20분 정도 소요되므로 여유를 갖고 기다리시면 됩니다.&quot;%}
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_04.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 생성 완료
-생성이 완료되면 아래와 같이 클러스터와 노드풀의 정보를 확인할 수 있습니다.  
-클러스터 정보 중에서 클러스터 **UUID는 아래쪽에서 IAM 인증 Kubeconifg 파일을 생성할 때 필요**하니 확인해두시기 바랍니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] 메뉴에 가면 노드풀 설정에 따라 생성된 서버를 확인할 수 있습니다.  
-(서버 이름은 노드풀 이름으로 입력한 문자열 기준으로 생성되는데, 여기서는 test123-O-OOO 이런 식으로 생성되었습니다.)
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## IAM 인증 설정
-클러스터를 제어하기 위해서는 네이버 클라우드 쿠버네티스 서비스에서 제공하는 IAM 인증을 설정해야 합니다.
-
-### ncp-iam-authenticator 설치
-Ncloud에서 제공하는 ncp-iam-authenticator 바이너리를 통해 iam 인증 config 파일을 생성 할 수 있습니다.
-
-- ncp-iam-authenticator 바이너리를 다운로드 합니다.
-
-``` powershell
-&gt; curl -o ncp-iam-authenticator.exe https://kr.object.ncloudstorage.com/nks-download/ncp-iam-authenticator/v1.0.5/windows/amd64/ncp-iam-authenticator.exe
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-25.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-- ncp-iam-authenticator가 정상 작동 하는지 테스트 합니다. 
-
-``` powershell
-&gt; ncp-iam-authenticator help
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-26.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## API 인증키 생성
-네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
-
-{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성 방법&quot; caption=&quot;&quot; %}
-
-## Kubeconfig 파일 생성
-API 인증키를 2가지 방법 중 하나를 이용해 환경변수에 등록합니다.
-
-**1. OS 환경 변수 설정**
-
-``` powershell
-&gt; SET NCLOUD_ACCESS_KEY={Ncloud API AccessKey}
-&gt; SET NCLOUD_SECRET_KEY={Ncloud API SecretKey}
-&gt; SET NCLOUD_API_GW=https://ncloud.apigw.ntruss.com
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-27.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-**2. 사용자 계정 홈 폴더에 configure 설정**  
-Windows 사용자 계정 폴더에 .ncloud 폴더를 만들고 아래와 같은 내용으로 configure 파일을 생성합니다.
-
-``` powershell
-&gt; mkdir C:\Users\{User Account}\.ncloud
-&gt; copy con C:\Users\{User Account}\.ncloud\configure
-[DEFAULT]
-ncloud_access_key_id = {Ncloud API AccessKey}
-ncloud_secret_access_key = {Ncloud API SecretKey}
-ncloud_api_url = https://ncloud.apigw.ntruss.com
-^Z
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-28.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-**3. Kubeconifg 파일 생성**  
-환경변수에 등록이 되었다면 파일을 생성 할 차례입니다.  
-아래 명령어로 클러스터에 대한 IAM 인증 Kubeconifg 파일을 생성합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;클러러스터 UUID 값은 클러스터 상세보기의 [클러스터 이름 (UUID)] 에서  확인 할수 있습니다.&quot; %}
-
-``` powershell
-&gt; ncp-iam-authenticator create-kubeconfig --region &lt;region-code&gt; --clusterUuid &lt;cluster-uuid&gt; --output &lt;FileName&gt;.yaml
-
-## 예시
-&gt; ncp-iam-authenticator create-kubeconfig --region KR --clusterUuid 12345678-1234-1234-1234-1234567890 --output kubeconfig.yaml
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-29.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## kubectl 설치
-쿠버네티스 클러스터를 제어할 kubectl을 설치하기 위해 필요한 파일을 다운로드 받고, 버전 정보를 확인합니다.
-
-아래 두가지 방법 중에 하나를 선택해 다운로드 받으시면 됩니다.
-
-&lt;a href=&quot;https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe&quot; target=&quot;_self&quot; style=&quot;word-break:break-all;&quot;&gt;Download the latest release v1.24.0&lt;/a&gt;
-
-``` bash
-&gt; curl -LO https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe
-```
-
-``` powershell
-&gt; kubectl version --client --output=yaml
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-30.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## kubectl 실행
-생성한 IAM 인증 kubeconfig 파일을 이용하여 kubectl 명령어를 테스트하여 정상 동작 하는지 확인 합니다.  
-실행하면 아래와 같이 현재 동작 중인 노드 서버 리스트를 확인할 수 있습니다.
-
-``` powershell
-&gt; kubectl get node --kubeconfig kubeconfig.yaml
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-31.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-### 실행 명령어 단축
-위와 같은 kubectl 명령은 뒤쪽에 kubeconfig 환경 설정 파일까지 입력해야 해서 다소 불편한데, 간단하게 줄일 수 있는 방법이 있습니다.  
-
-우선 만들어진 kubeconfig.yaml 파일을 .kube/ 디렉토리 아래에 config로 이름을 바꾸어 이동 혹은 복사 합니다.
-
-``` powershell
-&gt; copy kubeconfig.yaml .kube\config
-```
-
-이렇게 하면 Kubectl을 사용 시 아래와 같이 --kuebeconfig 명령어 없이 사용 할 수 있습니다.
-
-``` powershell
-&gt; kubectl get node
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-32.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1. 쿠버네티스 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8soverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8soverview&lt;/a&gt;
-
-2. 클러스터 이용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&lt;/a&gt;
-
-3. kubectl 설치 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl%EC%84%A4%EC%B9%98&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl&lt;/a&gt;
-
-4. Linux 환경에서 쿠버네티스 제어하기
-	- &lt;a href=&quot;/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&lt;/a&gt;    
-</description>
-            <pubDate>Mon, 15 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</guid>
-            
-            <category>kubernetes</category>
-            
-            <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
             <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Linux</title>
             <description>## 개요
 Ncloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 **Linux 환경에서 제어하는 방법**에 대해 소개합니다.
@@ -1048,6 +1002,240 @@ EOF
         </item>
         
         <item>
+            <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Windows</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 **Windows 환경에서 제어하는 방법**에 대해 소개합니다.
+
+## 쿠버네티스란?
+쿠버네티스(Kubernetes, K8S)는 배포, 스케일링, 그리고 컨테이너화된 애플리케이션의 관리를 자동화 해주는 오픈 소스 컨테이너 오케스트레이션 엔진으로 
+구글에서 처음 개발하기 시작했으나 현재는 구글이 오픈소스 프로젝트로 공개한 상태입니다.
+
+## 특징
+쿠버네티스는 다음과 같은 특징이 있으며, 자세한 내용은 쿠버네티스 공식 페이지를 참고하시기 바랍니다.
+
+&lt;a href=&quot;https://kubernetes.io/ko/docs/home/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://kubernetes.io/ko/docs/home/&lt;/a&gt;
+
+- 서비스 디스커버리와 로드 밸런싱
+- 스토리지 오케스트레이션
+- 자동화된 롤아웃과 롤백
+- 자동화된 빈 패킹(bin packing)
+- 자동화된 복구(self-healing)
+- 시크릿과 구성 관리
+
+
+## 사전 준비
+먼저 쿠버네티스 클러스터에 사용할 **전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet**이 필요합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-36.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;IP 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /17~/26 범위의 Subnet, 로드밸런서 전용 Subnet이 필요합니다.&lt;br/&gt;&lt;br/&gt;
+Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내의 Private Subnet, 로드밸런서 전용Subnet은 선택할 수 없습니다.&quot; %}
+
+## 쿠버네티스 서비스 위치
+Ncloud 쿠버네티스 서비스는 [콘솔] - [Services] - [Containers]에 위치하고 있습니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-33.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 클러스터 생성 
+
+VPC와 Subnet이 준비되었다면, 다음으로 [Kubernetes Sevice] - [Cluster]에서 생성하기를 클릭합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 클러스터 설정
+생성할 클러스터의 정보를 설정해줍니다. 
+**네트워크 타입은 Private과 Public 중에서 선택**할 수 있습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Kubernetes Service를 위한 ACG는 자동으로 생성됩니다.&quot; %}
+{% include callout-v2.html type=&quot;primary&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 Kubernetes 버전은 [**1.24.0**], [**1.25.8**] 입니다.&quot;%}
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-35.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+### NAT Gateway 생성
+`Private Subnet을 선택했을 경우`에는 아래와 같이 NAT Gateway 생성 안내 팝업이 나타나는데,  
+NAT Gateway를 생성해야 아웃바운드 트래픽을 활성화할 수 있기 때문입니다.
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_10.jpg&quot; width=&quot;490&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+팝업에서 링크를 클릭해서 NAT Gateway 화면으로 이동해 NAT Gateway를 생성합니다.
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NAT Gateway 생성 가이드는 아래 문서를 참고하시기 바랍니다. &lt;br /&gt;&lt;br /&gt;
+- &lt;a href=&apos;/networking/ncloud_networking_natgw_routetb.html&apos; target=&apos;_blank&apos;&gt;VPC 환경에서 NAT Gateway 설정하기&lt;/a&gt;&quot; %}
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_11.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 노드풀 설정
+노드풀 이름을 입력하고, 서버 이미지와 서버 타입을 선택하고 [추가] 버튼을 클릭합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 OS는 [**ubuntu 16.04**], [**ubuntu 18.04**], [**ubuntu 20.04**] 입니다.&quot;%}
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-37.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 인증키 설정
+다음으로 워커노드의 인증키를 설정 합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-38.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 최종 확인
+설정 정보를 최종적으로 확인한 후 생성버튼을 클릭하여 클러스터를 생성합니다.
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;쿠버네티스 클러스터 생성은 20분 정도 소요되므로 여유를 갖고 기다리시면 됩니다.&quot;%}
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_04.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 생성 완료
+생성이 완료되면 아래와 같이 클러스터와 노드풀의 정보를 확인할 수 있습니다.  
+클러스터 정보 중에서 클러스터 **UUID는 아래쪽에서 IAM 인증 Kubeconifg 파일을 생성할 때 필요**하니 확인해두시기 바랍니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] 메뉴에 가면 노드풀 설정에 따라 생성된 서버를 확인할 수 있습니다.  
+(서버 이름은 노드풀 이름으로 입력한 문자열 기준으로 생성되는데, 여기서는 test123-O-OOO 이런 식으로 생성되었습니다.)
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## IAM 인증 설정
+클러스터를 제어하기 위해서는 네이버 클라우드 쿠버네티스 서비스에서 제공하는 IAM 인증을 설정해야 합니다.
+
+### ncp-iam-authenticator 설치
+Ncloud에서 제공하는 ncp-iam-authenticator 바이너리를 통해 iam 인증 config 파일을 생성 할 수 있습니다.
+
+- ncp-iam-authenticator 바이너리를 다운로드 합니다.
+
+``` powershell
+&gt; curl -o ncp-iam-authenticator.exe https://kr.object.ncloudstorage.com/nks-download/ncp-iam-authenticator/v1.0.5/windows/amd64/ncp-iam-authenticator.exe
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-25.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+- ncp-iam-authenticator가 정상 작동 하는지 테스트 합니다. 
+
+``` powershell
+&gt; ncp-iam-authenticator help
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-26.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## API 인증키 생성
+네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
+
+{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성 방법&quot; caption=&quot;&quot; %}
+
+## Kubeconfig 파일 생성
+API 인증키를 2가지 방법 중 하나를 이용해 환경변수에 등록합니다.
+
+**1. OS 환경 변수 설정**
+
+``` powershell
+&gt; SET NCLOUD_ACCESS_KEY={Ncloud API AccessKey}
+&gt; SET NCLOUD_SECRET_KEY={Ncloud API SecretKey}
+&gt; SET NCLOUD_API_GW=https://ncloud.apigw.ntruss.com
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-27.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+**2. 사용자 계정 홈 폴더에 configure 설정**  
+Windows 사용자 계정 폴더에 .ncloud 폴더를 만들고 아래와 같은 내용으로 configure 파일을 생성합니다.
+
+``` powershell
+&gt; mkdir C:\Users\{User Account}\.ncloud
+&gt; copy con C:\Users\{User Account}\.ncloud\configure
+[DEFAULT]
+ncloud_access_key_id = {Ncloud API AccessKey}
+ncloud_secret_access_key = {Ncloud API SecretKey}
+ncloud_api_url = https://ncloud.apigw.ntruss.com
+^Z
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-28.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+**3. Kubeconifg 파일 생성**  
+환경변수에 등록이 되었다면 파일을 생성 할 차례입니다.  
+아래 명령어로 클러스터에 대한 IAM 인증 Kubeconifg 파일을 생성합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;클러러스터 UUID 값은 클러스터 상세보기의 [클러스터 이름 (UUID)] 에서  확인 할수 있습니다.&quot; %}
+
+``` powershell
+&gt; ncp-iam-authenticator create-kubeconfig --region &lt;region-code&gt; --clusterUuid &lt;cluster-uuid&gt; --output &lt;FileName&gt;.yaml
+
+## 예시
+&gt; ncp-iam-authenticator create-kubeconfig --region KR --clusterUuid 12345678-1234-1234-1234-1234567890 --output kubeconfig.yaml
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-29.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## kubectl 설치
+쿠버네티스 클러스터를 제어할 kubectl을 설치하기 위해 필요한 파일을 다운로드 받고, 버전 정보를 확인합니다.
+
+아래 두가지 방법 중에 하나를 선택해 다운로드 받으시면 됩니다.
+
+&lt;a href=&quot;https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe&quot; target=&quot;_self&quot; style=&quot;word-break:break-all;&quot;&gt;Download the latest release v1.24.0&lt;/a&gt;
+
+``` bash
+&gt; curl -LO https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe
+```
+
+``` powershell
+&gt; kubectl version --client --output=yaml
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-30.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## kubectl 실행
+생성한 IAM 인증 kubeconfig 파일을 이용하여 kubectl 명령어를 테스트하여 정상 동작 하는지 확인 합니다.  
+실행하면 아래와 같이 현재 동작 중인 노드 서버 리스트를 확인할 수 있습니다.
+
+``` powershell
+&gt; kubectl get node --kubeconfig kubeconfig.yaml
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-31.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+### 실행 명령어 단축
+위와 같은 kubectl 명령은 뒤쪽에 kubeconfig 환경 설정 파일까지 입력해야 해서 다소 불편한데, 간단하게 줄일 수 있는 방법이 있습니다.  
+
+우선 만들어진 kubeconfig.yaml 파일을 .kube/ 디렉토리 아래에 config로 이름을 바꾸어 이동 혹은 복사 합니다.
+
+``` powershell
+&gt; copy kubeconfig.yaml .kube\config
+```
+
+이렇게 하면 Kubectl을 사용 시 아래와 같이 --kuebeconfig 명령어 없이 사용 할 수 있습니다.
+
+``` powershell
+&gt; kubectl get node
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-32.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1. 쿠버네티스 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8soverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8soverview&lt;/a&gt;
+
+2. 클러스터 이용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&lt;/a&gt;
+
+3. kubectl 설치 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl%EC%84%A4%EC%B9%98&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl&lt;/a&gt;
+
+4. Linux 환경에서 쿠버네티스 제어하기
+	- &lt;a href=&quot;/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&lt;/a&gt;    
+</description>
+            <pubDate>Mon, 15 May 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</guid>
+            
+            <category>kubernetes</category>
+            
+            <category>vpc</category>
+            
+            
+        </item>
+        
+        <item>
             <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
             <description>## 개요
 Ncloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.  
@@ -1244,171 +1432,6 @@ AWS CLI 환경 설정 정보는 서버 내의 모든 AWS SDK 및 AWS CLI에서 �
             <category>linux</category>
             
             <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Mysql, MariaDB 환경설정 파일 my.cnf 위치</title>
-            <description>## 개요
-Ncloud (네이버 클라우드)에서 Mysql MariaDB 환경설정 파일인 my.cnf 파일이 CentOS, Ubuntu, Rocky Linux OS 별로 어떤 경로에 위치하고 있는지 정리해보겠습니다.
-
-## CentOS
-우선 CentOS 부터 살펴보겠습니다.
-
-### MySQL
-MySQL은 **my.cnf** 파일이 **/etc/** 바로 밑에 위치합니다.
-
-``` bash
-/etc/my.cnf
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-centos-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-
-### MariaDB
-MariaDB에서도 **my.cnf** 파일이 **/etc/** 바로 밑에 위치하기는 하지만, 실제로 **/etc/my.cnf** 파일을 열어보면 다음과 같이 **my.cnf.d** 디렉토리에 있는 파일을 include만 하게 되어 있습니다.  
-즉, **my.cnf** 파일에 설정을 추가해도 되지만 가능하면 하위의 각각의 설정 파일에 추가하는 것이 좋습니다.
-
-``` bash
-/etc/my.cnf.d/server.cnf
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-centos-01.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-centos-02.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-- **/etc/my.cnf.d/server.cnf** 파일을 열어 보면 다음과 같이 구성 되어 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-centos-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-## Ubuntu 
-Ubuntu에서는 **my.cnf** 파일이 **/etc/mysql** 밑에 위치합니다.
-
-``` bash
-/etc/mysql/my.cnf
-```
-
-### MySQL
-Ubuntu 20.04, MySQL 8.0에서는 아래의 3가지 파일을 주로 확인하면 되겠습니다.
-
-``` bash
-/etc/mysql/my.cnf
-/etc/mysql/mysql.conf.d/mysql.cnf
-/etc/mysql/mysql.conf.d/mysqld.cnf
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-먼저 **/etc/mysql/my.cnf** 파일을 열어 보면 다음과 같이 **conf.d** 디렉토리와 **mysql.conf.d** 디렉토리에 있는 파일을 include 하도록 되어 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-**/etc/mysql/** 디렉토리의 파일과 서브 디렉토리 구조를 살펴보면 다음과 같습니다. 여기서 **mysql.conf.d** 디렉토리에 있는 **mysql.cnf** 파일과 **mysqld.cnf** 파일을 살펴보겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-- **/etc/mysql/mysql.conf.d/mysql.cnf**  
-이 파일을 열어 보면 다음과 같이 [**The MySQL database client configuration file**]이라고 되어 있습니다.  
-즉, **MySQL Client 관련 설정**은 이곳에 지정하면 되겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-- **/etc/mysql/mysql.conf.d/mysqld.cnf**  
-이 파일을 열어 보면 다음과 같이 [**The MySQL database server configuration file**]이라고 되어 있습니다.  
-즉, **MySQL Server 관련 설정**은 이곳에 지정하면 되겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-ubuntu-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-### MariaDB
-Ubuntu 20.04, MariaDB 10.3에서는 아래의 4가지 파일을 주로 확인하면 되겠습니다.
-
-``` bash
-/etc/mysql/my.cnf
-/etc/mysql/mariadb.cnf
-/etc/mysql/mariadb.conf.d/50-client.cnf
-/etc/mysql/mariadb.conf.d/50-server.cnf
-```
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-그런데, **/etc/mysql/my.cnf** 파일의 정보를 확인해보면 결국 **/etc/mysql/mariadb.cnf** 파일의 심볼릭 링크라는 것을 알 수 있습니다. 그러므로 **/etc/mysql/mariadb.cnf** 파일을 살펴보겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-**/etc/mysql/mariadb.cnf** 파일을 열어 보면 다음과 같이 **conf.d** 디렉토리와 **mariadb.conf.d** 디렉토리에 있는 파일을 include 하도록 되어 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-**/etc/mysql/** 디렉토리의 파일과 서브 디렉토리 구조를 살펴보면 다음과 같습니다.  
-여기서 **mariadb.conf.d** 디렉토리에 있는 **50-client.cnf** 파일과 **50-server.cnf** 파일을 살펴보겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-- **/etc/mysql/mariadb.conf.d/50-client.cnf**  
-이 파일을 열어 보면 다음과 같이 [**This group is read by the client library**]이라고 되어 있습니다.  
-즉, **MariaDB Client 관련 설정**은 이곳에 지정하면 되겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-- **/etc/mysql/mariadb.conf.d/50-server.cnf**  
-이 파일을 열어 보면 다음과 같이 [**These groups are read by MariaDB server**]이라고 되어 있습니다.  
-즉, **MariaDB Server 관련 설정**은 이곳에 지정하면 되겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-ubuntu-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-## Rocky Linux
-
-### MySQL
-Rocky Linux도 MySQL은 my.cnf 파일이 /etc/ 바로 밑에 위치합니다.
-
-``` bash
-/etc/my.cnf
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-config-my-cnf-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-
-### MariaDB
-Rocky Linux에서는 **mariadb-server.cnf** 파일입니다.
-
-``` bash
-/etc/my.cnf.d/mariadb-server.cnf
-```
-
-MariaDB에서도 **my.cnf** 파일이 **/etc/** 바로 밑에 위치하기는 하지만, 실제로 **/etc/my.cnf** 파일을 열어보면 다음과 같이 **my.cnf.d** 디렉토리에 있는 파일을 include만 하게 되어 있습니다.  
-즉, **my.cnf** 파일에 설정을 추가해도 되지만 가능하면 하위의 각각의 설정 파일에 추가하는 것이 좋습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-rocky-linux-01.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-rocky-linux-02.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-- **/etc/my.cnf.d/mariadb-server.cnf** 파일을 열어 보면 다음과 같이 구성 되어 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mariadb-config-my-cnf-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1. Ncloud MySQL 서버 이미지 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-1-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-1-1&lt;/a&gt;
-
-2. Ncloud MariaDB 서버 이미지 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/database-database-7-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/database-database-7-1&lt;/a&gt; 
-</description>
-            <pubDate>Fri, 28 Apr 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud_database_mysql_mariadb_config_my_cnf.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud_database_mysql_mariadb_config_my_cnf.html</guid>
-            
-            <category>database</category>
-            
-            <category>mysql</category>
-            
-            <category>mariadb</category>
-            
-            <category>centos</category>
-            
-            <category>ubuntu</category>
-            
-            <category>rocky_linux</category>
             
             
         </item>
