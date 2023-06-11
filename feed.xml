@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 01 Jun 2023 10:56:26 +0900</pubDate>
-        <lastBuildDate>Thu, 01 Jun 2023 10:56:26 +0900</lastBuildDate>
+        <pubDate>Sun, 11 Jun 2023 23:54:32 +0900</pubDate>
+        <lastBuildDate>Sun, 11 Jun 2023 23:54:32 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -65,7 +65,7 @@ DB Dashboard, Performance, DB Logs, Audit Logs 등의 메뉴를 제공하여 각
 - **Public 도메인 관리** : 외부에서 접근할 수 있는 Public 도메인을 신청할 수 있습니다.
 - **MSSQL Engine Upgrade** : DB Server Engine 버전을 업그레이드 합니다.
 
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;**MSSQL Engine Upgrade**는 리스트에 있는 전체 서버의 버전이 변경되고, **버전 업그레이드 중인 서버는 접근이 차단**됩니다.고가용성 사용중인 경우 **업그레이드 작업은 1대씩 순차적으로 진행**되고, Server 1대에 1분 내외로 작업 시간이 소요됩니다. (작업 순서 : Recovery -&gt; Slave -&gt; Principal)&quot; %}
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;**MSSQL Engine Upgrade**는 리스트에 있는 전체 서버의 버전이 변경되고, **버전 업그레이드 중에는 DB서버 접근이 차단**됩니다.&quot; %}
 
 ## Monitoring 메뉴
 
@@ -1383,7 +1383,7 @@ AWS CLI 환경 설정 정보는 서버 내의 모든 AWS SDK 및 AWS CLI에서 �
 
 
 ## 추가 가능한 최대 사이즈와 개수
-스토리지는 **최대 2,000GB**를 지원하며, 서버 1대당 **최대 16개**의 스토리지를 이용할 수 있습니다. (단, Local Disk 서버 타입 및 2017년 1월 23일 이전에 생성된 서버에 대해서는 1,000GB까지 지원됩니다.)
+스토리지는 **최대 2,000GB**를 지원하며, 서버 1대당 **최대 15개**의 스토리지를 추가로 생성할 수 있습니다. (단, Local Disk 서버 타입 및 2017년 1월 23일 이전에 생성된 서버에 대해서는 1,000GB까지 지원됩니다.)
 
 
 ## 리눅스 OS 서버 이미지별 포맷 명령어
