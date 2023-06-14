@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 14 Jun 2023 16:23:44 +0900</pubDate>
-        <lastBuildDate>Wed, 14 Jun 2023 16:23:44 +0900</lastBuildDate>
+        <pubDate>Wed, 14 Jun 2023 17:14:37 +0900</pubDate>
+        <lastBuildDate>Wed, 14 Jun 2023 17:14:37 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -92,8 +92,19 @@ Ncloud 서버 생성 콘솔화면은 신규 기능이 업데이트 되면서 2�
 [**서버 이미지 선택**] 단계에서는 Ncloud에서 제공하는 다양한 서버 이미지를 선택할 수 있고, [**최신 서버 이미지**]와 [**내 서버 이미지**]를 따로 볼 수 있는 기능도 제공하고 있습니다. 여기서는 [**최신 서버 이미지**]에서 제공하는 서버 이미지로 서버를 생성해보겠습니다.  
 또한 하이퍼바이저 기준으로 [**XEN**]과 [**KVM**] 2가지 타입이 제공되는데 여기서는 [**XEN**] 타입의 서버로 테스트 해보겠습니다. [**XEN**]과 [**KVM**]에 대한 설명은 아래쪽에서 별도로 살펴보겠습니다. ([XEN 과 KVM 비교&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#xen-vs-kvm))
 
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
+{% tabs server-image-choice %}
 
+{% tab server-image-choice 최신 서버 이미지 %}
+
+{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
+{% endtab %}
+
+{% tab server-image-choice NCP 서버 이미지 %}
+
+{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-23.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
+
+{% endtab %}
+{% endtabs %}
 
 ### 서버 설정 (전체 화면)
 서버 설정 단계에서는 위에서 생성한 [**VPC**]와 [**Subnet**]을 선택하고  [**서버 스펙**]과 [**요금제**], [**Network Interface**], [**공인 IP 할당 여부**] 등을 선택하게 됩니다. 각 항목별 상세한 설명은 아래쪽에서 다시 정리해보겠습니다.
@@ -119,6 +130,8 @@ Ncloud 서버 생성 콘솔화면은 신규 기능이 업데이트 되면서 2�
 {% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-08.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
 
 - [**Network Interface**] 사설 IP 할당  
+사설 IP 할당은 자동 할당과 수동 할당 방법 중에서 선택하시면 됩니다.
+
 {% tabs private-ip-assign %}
 
 {% tab private-ip-assign 사설 IP 자동 할당 %}
