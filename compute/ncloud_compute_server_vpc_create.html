@@ -12,24 +12,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Ncloud VPC 환경에서 서버를 생성하는 방법을 간단하게 정리했습니다">
-<meta name="keywords" content="vpc,  VPC, Server">
+<meta name="keywords" content="vpc,  VPC, Server, XEN, KVM">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="VPC 환경에서 서버 생성" />
+<meta property="og:title" content="Ncloud VPC 환경에서 서버 생성하는 방법" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:description" content="Ncloud VPC 환경에서 서버를 생성하는 방법을 간단하게 정리했습니다" />
 <link rel="canonical" href="https://docs.3rdeyesys.com/compute/ncloud_compute_server_vpc_create.html" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/compute/ncloud_compute_server_vpc_create.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-01-12T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-14T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="VPC 환경에서 서버 생성" />
+<meta property="twitter:title" content="Ncloud VPC 환경에서 서버 생성하는 방법" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud VPC 환경에서 서버를 생성하는 방법을 간단하게 정리했습니다","headline":"VPC 환경에서 서버 생성","url":"https://docs.3rdeyesys.com/compute/ncloud_compute_server_vpc_create.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud VPC 환경에서 서버를 생성하는 방법을 간단하게 정리했습니다","headline":"Ncloud VPC 환경에서 서버 생성하는 방법","url":"https://docs.3rdeyesys.com/compute/ncloud_compute_server_vpc_create.html"}</script>
 <!-- End Jekyll SEO tag -->
 
-<title>VPC 환경에서 서버 생성 | 써드아이시스템 기술문서</title>
+<title>Ncloud VPC 환경에서 서버 생성하는 방법 | 써드아이시스템 기술문서</title>
 <link rel="stylesheet" href="/css/syntax.css">
 
 <link
@@ -43,7 +43,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"--> <link rel="stylesheet" href="/css/customstyles.css"> <link rel="stylesheet" href="/css/boxshadowproperties.css">
 <!-- most color styles are extracted out to here -->
 <link rel="stylesheet" href="/css/theme-ncloud.css">
-
+<link rel="stylesheet" href="/css/tabs.css">
 
 <script src="/js/jquery.341.min.js"></script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script-->
@@ -61,6 +61,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script-->
 <script src="/js/toc.js"></script>
 <script src="/js/customscripts.js"></script>
+
+  <script src="/js/tabs.js"></script>
 
 
 
@@ -274,7 +276,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li class="active"><a title="VPC 환경에서 서버 생성" href="/compute/ncloud_compute_server_vpc_create.html" >VPC 환경에서 서버 생성</a></li>
+          <li class="active"><a title="VPC 환경에서 서버 생성하는 방법" href="/compute/ncloud_compute_server_vpc_create.html" >VPC 환경에서 서버 생성하는 방법</a></li>
                     
           
           
@@ -1817,7 +1819,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="col-md-9" id="tg-sb-content">
               <div class="post-header">
   
-    <h1 class="post-title-main">VPC 환경에서 서버 생성</h1>
+    <h1 class="post-title-main">Ncloud VPC 환경에서 서버 생성하는 방법</h1>
   
 </div>
 
@@ -1868,84 +1870,460 @@ $("#toc_onoff").click(function() {
   
 
   <h2 id="개요">개요</h2>
-<p>네이버 클라우드 VPC환경에서 서버를 생성하는 순서를 정리해보겠습니다.<br />
-아래 순서는 굳이 기억하지 않아도 필요한 부분은 그때그때  안내가 잘 되어 있기 때문에 별 문제는 없지만 그래도 어떤 것들이 필요한 가에 대해 어느 정도 알아둘 필요는 있어 보입니다.</p>
+<p>Ncloud (네이버 클라우드) VPC환경에서 서버를 생성하는 순서를 정리해보겠습니다.<br />
+아래 순서는 굳이 기억하지 않아도 필요한 부분은 그때그때  안내가 잘 되어 있기 때문에 별 문제는 없지만 그래도 어떤 것들이 필요한 가에 대해 자세히 살펴보겠습니다.</p>
 
-<h2 id="vpc-생성">VPC 생성</h2>
+<h2 id="서버-생성-순서">서버 생성 순서</h2>
+<p>VPC 환경에서 서버를 생성하려면 Subnet 설정 등 사전에 미리 설정해야 하는 것과 서버 생성 후에 설정해야 하는 것들이 있는데, 순서대로 정리하고 아래쪽에서 차례대로 살펴보겠습니다.</p>
+
+<ol>
+  <li>VPC 설정</li>
+  <li>Subnet 설정</li>
+  <li>서버 생성<br />
+  3-1. 서버 인증키 설정</li>
+  <li>ACG (방화벽) 설정</li>
+</ol>
+
+<h2 id="vpc-설정">VPC 설정</h2>
 <p>VPC (Virtual Private Cloud) 즉, 클라우드 상에서 논리적으로 격리된 고객 전용 네트워크 공간을 먼저 생성하고 해당 공간에 서버를 생성하게 됩니다.<br />
 VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있으며, 각 VPC는 최대 넷마스크 0.0.255.255/16 (IP 65,536개) 크기의 네트워크 주소 공간을 제공합니다.</p>
 
-<ul>
-  <li>VPC 이름 입력</li>
-  <li>IP 주소 범위 입력</li>
-</ul>
+<h3 id="vpc-서비스-위치">VPC 서비스 위치</h3>
+<p>[VPC] 서비스는 [Console] - [Services] - [Networking]에 위치해 있습니다.</p>
 
-<p class="success">VPC의 IP 주소 범위는, private 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /16~/28 범위</p>
+<p>그리고, 아래 스샷에서 확인할 수 있듯이 [VPC]에는 [VPC], [Subnet], [Network ACL], [NAT Gateway], [Route Table], [VPC Peering], [Virtual Private Gateway] 등의 하부 서비스 메뉴가 있습니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_vpc_create_02.jpg" alt="VPC 환경에서 서버 생성" style="width: 850px; max-width: 100%" />
+  <img class="docimage" src="/images/networking/ncloud-networking-vpc-subnet-create-01.png" alt="Ncloud VPC 환경에서 VPC, Subnet 생성" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
+
+<h2 id="vpc-생성">VPC 생성</h2>
+<p>[<strong>VPC</strong>] - [<strong>VPC Management</strong>] [<strong>VPC 생성</strong>] 버튼을 클릭합니다.</p>
+
+<figure>
+  <img class="docimage" src="/images/networking/ncloud-networking-vpc-subnet-create-02.png" alt="Ncloud VPC 환경에서 VPC, Subnet 생성" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>VPC 생성 화면에서 [<strong>VPC 이름</strong>]과 [<strong>IP 주소 범위</strong>]를 입력합니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/networking/ncloud-networking-vpc-subnet-create-03.png" alt="Ncloud VPC 환경에서 VPC, Subnet 생성" style="width: 685px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">
+VPC의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) 내에서 /16~/28 범위여야 합니다.<br />
+- 예시: 10.0.0.0/16, 172.16.0.0/16, 192.168.0.0/16
+</div>
 
 <h2 id="subnet-생성">Subnet 생성</h2>
-<ul>
-  <li>Subnet 이름 입력</li>
-  <li>VPC 선택</li>
-  <li>IP 주소 범위 입력</li>
-  <li>Zone 선택</li>
-  <li>Network ACL 선택</li>
-  <li>Internet Gateway 전용여부 선택 (Public or Private)</li>
-</ul>
+<p>[<strong>VPC</strong>] - [<strong>Subnet Management</strong>]에서 [<strong>Subnet 생성</strong>] 버튼을 클릭합니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_vpc_create_03.jpg" alt="VPC 환경에서 서버 생성" style="width: 850px; max-width: 100%" />
+  <img class="docimage docimage-no-bottom" src="/images/networking/ncloud-networking-vpc-subnet-create-04.png" alt="Ncloud VPC 환경에서 VPC, Subnet 생성" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
-<h2 id="서버-설정">서버 설정</h2>
 <ul>
-  <li>VPC 선택</li>
-  <li>Subnet 선택</li>
-  <li>스토리지 종류 선택</li>
-  <li>서버 세대 선택</li>
-  <li>서버 타입 선택</li>
-  <li>요금제 선택</li>
-  <li>서버 개수 입력</li>
-  <li>서버 이름 입력</li>
-  <li>Network Interface 추가</li>
-  <li>물리 배치 그룹 여부 선택</li>
-  <li>반납 보호 여부 선택</li>
+  <li>[<strong>Subnet 이름</strong>]을 적절하게 입력하고, 위에서 생성했던 [<strong>VPC</strong>]를 선택하고, Subnet에서 사용할 [<strong>IP 주소 범위</strong>]를 입력합니다.</li>
+  <li>[<strong>Internet Gateway 전용여부</strong>]는 외부와 인터넷 연결이 필요할 경우에는 [<strong>Public</strong>], 내부 서버끼리만 통신할 경우에는 [<strong>Private</strong>]을 선택합니다.</li>
+  <li>[<strong>용도</strong>]는 일반 서버일 경우에는 [<strong>일반</strong>]을 선택하면 됩니다.</li>
 </ul>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_vpc_create_01.jpg" alt="VPC 환경에서 서버 생성" style="width: 850px; max-width: 100%" />
+  <img class="docimage docimage-no-bottom" src="/images/networking/ncloud-networking-vpc-subnet-create-05.png" alt="Ncloud VPC 환경에서 VPC, Subnet 생성" style="width: 685px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">
+Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) 내에서 /16~/28 범위여야 합니다.<br />
+- 예시: 10.0.1.0/24, 172.16.10.0/24, 192.168.101.0/24
+</div>
+
+<h2 id="서버-생성">서버 생성</h2>
+<p>[<strong>VPC</strong>]와 [<strong>Subnet</strong>] 설정을 마쳤으니 이제 서버(Server)를 설정해보겠습니다.</p>
+
+<h3 id="server-서비스-위치">Server 서비스 위치</h3>
+<p>[Server] 서비스는 [Console] - [Services] - [Compute]에 위치해 있습니다.</p>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-01.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>Server</strong>] - [<strong>Server</strong>]에서 [<strong>서버 생성</strong>] 버튼을 클릭합니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-02.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="서버-생성-콘솔-선택">서버 생성 콘솔 선택</h3>
+<p>Ncloud 서버 생성 콘솔화면은 신규 기능이 업데이트 되면서 2가지를 선택할 수 있습니다. 여기서는 [<strong>신규 콘솔 화면</strong>]으로 진행하겠습니다.</p>
+
+<ul>
+  <li>기존 콘솔 화면: <strong>XEN, RHV</strong> 하이퍼바이저 기반의 서버(g1,g2)를 생성할 수 있습니다.</li>
+  <li>신규 콘솔 화면: <strong>XEN, RHV</strong> 하이퍼바이저 기반의 서버(g1,g2)뿐만 아니라 <strong>KVM</strong> 기반 및 다양한 성능을 제공하는 기본 스토리지로 서버(<strong>g3</strong>)를 생성할 수 있습니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-03.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 685px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="서버-이미지-선택">서버 이미지 선택</h3>
+<p>[<strong>서버 이미지 선택</strong>] 단계에서는 Ncloud에서 제공하는 다양한 서버 이미지를 선택할 수 있고, [<strong>최신 서버 이미지</strong>]와 [<strong>내 서버 이미지</strong>]를 따로 볼 수 있는 기능도 제공하고 있습니다. 여기서는 [<strong>최신 서버 이미지</strong>]에서 제공하는 서버 이미지로 서버를 생성해보겠습니다.<br />
+또한 하이퍼바이저 기준으로 [<strong>XEN</strong>]과 [<strong>KVM</strong>] 2가지 타입이 제공되는데 여기서는 [<strong>XEN</strong>] 타입의 서버로 테스트 해보겠습니다. [<strong>XEN</strong>]과 [<strong>KVM</strong>]에 대한 설명은 아래쪽에서 별도로 살펴보겠습니다. (<a href="#xen-vs-kvm">XEN 과 KVM 비교<i class="fa-solid fa-turn-down"></i></a>)</p>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-04.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="서버-설정-전체-화면">서버 설정 (전체 화면)</h3>
+<p>서버 설정 단계에서는 위에서 생성한 [<strong>VPC</strong>]와 [<strong>Subnet</strong>]을 선택하고  [<strong>서버 스펙</strong>]과 [<strong>요금제</strong>], [<strong>Network Interface</strong>], [<strong>공인 IP 할당 여부</strong>] 등을 선택하게 됩니다. 각 항목별 상세한 설명은 아래쪽에서 다시 정리해보겠습니다.</p>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-05.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="서버-설정-상세-설명">서버 설정 (상세 설명)</h3>
+<p>그러면 이제부터 서버 설정 항목별로 상세하게 살펴보겠습니다.</p>
+
+<ul>
+  <li>[<strong>VPC</strong>], [<strong>Subnet</strong>] 선택<br />
+위에서 생성했던 [<strong>VPC</strong>]와 [<strong>Subnet</strong>] 선택합니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-06.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>서버 스펙</strong>]<br />
+[<strong>서버 스펙</strong>]은 [<strong>High-CPU</strong>], [<strong>CPU-Intensive</strong>], [<strong>Standard</strong>], [<strong>High-Memory</strong>] 등의 타입 중에서 원하는 타입을 선택하고, 각 타입별로 서비스에 적절한 vCPU와 Memory를 선택하시면 됩니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-07.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>요금제 선택</strong>], [<strong>서버 개수</strong>], [<strong>서버 이름</strong>]<br />
+요금제는 [<strong>월요금제</strong>]와 [<strong>시간 요금제</strong>] 중에서 선택하시고, 한번에 생성할 서버 개수와 서버 이름을 입력합니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-08.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>Network Interface</strong>] 사설 IP 할당</li>
+</ul>
+<ul class="tab" data-tab="aaf6ceb3-e0ff-4132-ac7b-21906eab7149" data-name="private-ip-assign">
+  
+      <li class="active">
+          <a href="#">사설 IP 자동 할당 </a>
+      </li>
+  
+      <li>
+          <a href="#">사설 IP 수동 할당 </a>
+      </li>
+  
+</ul>
+<ul class="tab-content" id="aaf6ceb3-e0ff-4132-ac7b-21906eab7149" data-name="private-ip-assign">
+  
+      <li class="active">
+<p><br />
+[<strong>Network Interface</strong>]에 할당되는 사설 IP는 아래와 같이 IP 입력 칸에 아무것도 입력하지 않으면 자동할당 됩니다.</p>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-09.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-10.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+</li>
+  
+      <li>
+<p><br />
+IP 입력 칸에 선택된 [<strong>Subnet</strong>] 범위 내의 원하는 IP를 입력해서 수동으로 할당할 수도 있습니다.</p>
+
+<figure>
+  <img class="docimage docimage-no-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-11.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-12.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+</li>
+  
+</ul>
+
+<ul>
+  <li>[<strong>공인 IP 할당</strong>]<br />
+Public Subnet을 선택했고 서버에 공인 IP가 필요할 경우에는 [<strong>새로운 공인 IP 할당</strong>]을 선택하시면 됩니다.</li>
+</ul>
+
+<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-1">
+⁃ 공인 IP는 요금이 과금되므로, 사용하지 않을 때는 반납하기를 권장합니다. (월 이용료: 4,032원 ) <br />
+⁃ 서버 생성시 공인 IP를 함께 생성하려면 Subnet 타입은 Public Subnet, 서버 개수는 1개여야 합니다.
+</div>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-13.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>물리 배치 그룹</strong>] 설정
+물리 배치 그룹 설정은 서버들을 하나의 그룹으로 묶어서 해당 그룹에 속한 서버들을 클러스터에 배치할 때 어떻게 할 것인지 결정할 수 있습니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-14.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>물리 배치 그룹</strong>]을 사용하게 되면 배치 그룹명과 배치 종류를 선택할 수 있습니다.</li>
+</ul>
+
+<div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-1">[<strong>Anti-Affinity (분산 배치)</strong>]의 경우 같은 배치 그룹에 소속된 서버들은 가급적 서로 다른 클러스터에 배치됩니다. 다만 그 결과가 엄격히 보장되지 않는 Best effort 방식입니다.</div>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-15.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>반납 보호</strong>]<br />
+반납 보호를 설정하면 실수로 서버를 반납하여, 서버가 삭제되는 사고를 방지할 수 있습니다.</li>
+</ul>
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-16.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-17.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 485px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>Script 선택</strong>]<br />
+서버가 켜질 때 자동으로 실행되어야 하는 스크립트가 있다면 [<strong>Server</strong>] - [<strong>Init Script</strong>] 메뉴에서 미리 Script를 등록한 후에 적용할 수 있습니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-18.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h2 id="스토리지-설정">스토리지 설정</h2>
+<p>하이퍼바이저 [<strong>XEN</strong>] 타입의 서버는 서버 생성이 완료된 이후에 추가 스토리지를 설정할 수 있으므로 이번 단계는 그냥 넘어가겠습니다.</p>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-19.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
 <h2 id="인증키-설정">인증키 설정</h2>
+<p>인증키 이름을 입력하고, [<strong>인증키 생성 및 저장</strong>] 버튼을 클릭해서 인증키를 로컬 PC에 다운로드 받아서 안전한 곳에 보관해야 합니다. 기존에 사용하고 있던 인증키가 있을 경우에는 [<strong>보유하고 있는 인증키 이용</strong>]을 선택하면 됩니다.</p>
+
+<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <b>인증키:</b> 인증키는 해당 서버의 <strong>관리자 비밀번호</strong>를 확인하는데 사용되므로 <strong>안전한 곳에 잘 보관</strong>해야 합니다.</div>
+
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_vpc_create_04.jpg" alt="VPC 환경에서 서버 생성" style="width: 850px; max-width: 100%" />
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-20.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
-<h2 id="네트워크-접근-설정-acl">네트워크 접근 설정 (ACL)</h2>
+<h2 id="네트워크-접근-설정">네트워크 접근 설정</h2>
+<p>네트워크 접근은 [<strong>ACG</strong>]로 설정하게 되는데, <code class="language-plaintext highlighter-rouge">ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스</code>로, 서버에 별도의 복잡한 방화벽 구축없이 간단하게 서버에 대한 네트워크 접근 제어를 할 수 있습니다.<br />
+[<strong>VPC</strong>]를 생성하면 자동으로 생성되는 <strong>기본 ACG</strong>를 선택하거나 별도로 생성한 ACG가 있을 경우 해당 ACG를 선택하면 됩니다. <strong>적용할 ACG는 최대 3개</strong>까지 선택할 수 있습니다.</p>
+
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_vpc_create_05.jpg" alt="VPC 환경에서 서버 생성" style="width: 850px; max-width: 100%" />
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-21.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
+
+<h2 id="서버-생성-완료">서버 생성 완료</h2>
+<p>모든 단계를 마치고 나면 아래와 같이 서버가 생성된 것을 확인할 수 있습니다.</p>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-22.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h2 id="xen-vs-kvm">XEN vs KVM</h2>
+<p>Ncloud (네이버 클라우드)에서 제공하는 하이퍼바이저의 종류는 XEN, KVM이 있으며, 각각의 특징은 다음과 같습니다.</p>
+
+<div>
+<table class="simple_table">
+  <thead>
+    <tr>
+      <th>하이퍼바이저</th>
+      <th>서버 세대</th>
+      <th>서버 타입</th>
+      <th>서버 이미지</th>
+      <th>스토리지 타입</th>
+    </tr>
+  </thead>
+  <tbody>    
+    <tr>
+      <td>XEN</td>
+      <td>g1, g2</td>
+      <td>Micro, Standard, CPU-Intensive, High-CPU, High-Memory</td>
+      <td></td>
+      <td>HDD, SDD</td>
+    </tr> 
+    <tr>
+      <td>KVM</td>
+      <td>g3</td>
+      <td>Micro
+        <br />(Standard, CPU-Intensive, High-CPU, High-Memory 는 출시 예정)
+      </td>
+      <td>KVM 기반 서버 이미지</td>
+      <td>FB1, CB1</td>
+    </tr>    
+  </tbody>
+</table>  
+</div>
+
+<h3 id="스토리지-특징">스토리지 특징</h3>
+
+<div>
+<table class="simple_table">
+  <thead>
+    <tr>
+      <th>하이퍼바이저</th>      
+      <th>스토리지 타입</th>
+      <th>미디어 타입</th>
+      <th>최소 크기</th>
+      <th>최대 크기</th>
+      <th>추가 가능 개수</th>
+    </tr>
+  </thead>
+  <tbody>    
+    <tr>
+      <td rowspan="2">XEN</td>
+      <td>HDD</td>
+      <td>HDD</td>
+      <td>10GB</td>
+      <td>2TB</td>
+      <td>15개</td>
+    </tr>  
+    <tr>     
+      <td>SSD</td>
+      <td>SSD</td>
+      <td>10GB</td>
+      <td>2TB</td>
+      <td>15개</td>
+    </tr> 
+    <tr>
+      <td rowspan="2">KVM</td>
+      <td>FB1</td>
+      <td>HDD</td>
+      <td>100GB</td>
+      <td>16TB</td>
+      <td>20개</td>
+    </tr>  
+    <tr>     
+      <td>CB1</td>
+      <td>SSD</td>
+      <td>10GB</td>
+      <td>16TB</td>
+      <td>20개</td>
+    </tr>        
+  </tbody>
+</table>  
+</div>
 
 <h2 id="참고-url">참고 URL</h2>
-<p><a href="https://guide.ncloud-docs.com/docs/compute-compute-1-1-v2" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/compute-compute-1-1-v2.html</a></p>
+<ol>
+  <li>Ncloud VPC 서버 생성 가이드
+    <ul>
+      <li><a href="https://guide.ncloud-docs.com/docs/server-create-new-vpc" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/server-create-new-vpc</a></li>
+    </ul>
+  </li>
+  <li>Ncloud 하이퍼바이저 개요
+    <ul>
+      <li><a href="https://guide.ncloud-docs.com/docs/hypervisor-info" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/hypervisor-info</a></li>
+    </ul>
+  </li>
+</ol>
+
 
   
     <div class="tags">
@@ -2009,7 +2387,7 @@ VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-01-12<br/> Site last generated: 2023-06-11 <br />        
+        <span>Page last updated:</span> 2023-06-14<br/> Site last generated: 2023-06-14 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
