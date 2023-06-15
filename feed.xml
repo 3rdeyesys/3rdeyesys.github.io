@@ -5,10 +5,87 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 14 Jun 2023 17:14:37 +0900</pubDate>
-        <lastBuildDate>Wed, 14 Jun 2023 17:14:37 +0900</lastBuildDate>
+        <pubDate>Thu, 15 Jun 2023 10:44:16 +0900</pubDate>
+        <lastBuildDate>Thu, 15 Jun 2023 10:44:16 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Windows 서버 스토리지(디스크) 추가 상세 가이드</title>
+            <description>## 개요
+**Ncloud (네이버 클라우드)는** 스토리지 당 **최대 2TB**까지 확장할 수 있으며, **최대 16개**의 스토리지를 이용할 수 있습니다.  
+이번에는 Windows 서버에 스토리지 즉, 디스크를 추가하는 방법에 대해 정리해보겠습니다.
+
+## 테스트 환경
+Windows Server 2016 (64-bit) English Edition 으로 진행 되었습니다. 추가 스토리지는 총 10G disk 총 4개 입니다.
+
+## 스토리지 생성
+
+- 서버 &gt; 서버 관리 및 설정 변경 &gt; 스토리지생성
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_01.png&quot; width=&quot;745&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+
+
+- 스토리지 생성에 필요한 내용을 입력합니다.
+- 크기는 스토리지 하나 당 **10GB~2000GB까지** 사용할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_02.png&quot; width=&quot;695&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- 사용 될 추가디스크를 생성합니다.
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_03.png&quot; width=&quot;680&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 윈도우 서버 디스크 관리
+
+- 디스크관리(윈도우키+r) : diskmgmt.msc
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_04.png&quot; width=&quot;450&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+### 디스크 초기화
+- initializeDisk를 선택하여 디스크를 초기화 합니다.
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_05.png&quot; width=&quot;805&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+### 초기화 방식 선택
+- 두 가지 방식 중 하나를 선택합니다.
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_06.png&quot; width=&quot;805&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+#### MBR과  GPT 차이
+
+| MBR | GTP |
+| :---: | :---: |
+| 주파티션을 4개까지 생성 가능 | 주 파티션을 128개까지 생성 가능 |
+| 디스크 용량 최대 2TB까지 인식 | 디스크 용량 최대 9.4ZB까지 인식 |
+| BIOS가 설치된 PC에서 사용 | UEFI 또는 EFI가 설치된 PC에서 사용 가능 |
+| Windows 32비트와 64비트 사용 가능 | Windows 32비트 사용 불가 |
+
+
+### 볼륨 생성
+- 새 단순 볼륨 생성하기
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_09.png&quot; width=&quot;805&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- 추가한 총 4개의 디스크 단순 볼륨 생성을 하였습니다.
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_10.png&quot; width=&quot;805&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+
+## 디스크 추가 확인
+- 아래와 같이 추가 생성한 디스크 추가가 완료되었습니다.
+
+{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_11.png&quot; width=&quot;837&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}</description>
+            <pubDate>Thu, 15 Jun 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_windows_storage_add_detail_process.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_windows_storage_add_detail_process.html</guid>
+            
+            <category>windows</category>
+            
+            <category>storage</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud VPC 환경에서 서버 생성하는 방법</title>
@@ -1041,6 +1118,240 @@ Route Table 설정 화면에 들어가도 Target Type에 LOCAL만 선택할 수 
         </item>
         
         <item>
+            <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Windows</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 **Windows 환경에서 제어하는 방법**에 대해 소개합니다.
+
+## 쿠버네티스란?
+쿠버네티스(Kubernetes, K8S)는 배포, 스케일링, 그리고 컨테이너화된 애플리케이션의 관리를 자동화 해주는 오픈 소스 컨테이너 오케스트레이션 엔진으로 
+구글에서 처음 개발하기 시작했으나 현재는 구글이 오픈소스 프로젝트로 공개한 상태입니다.
+
+## 특징
+쿠버네티스는 다음과 같은 특징이 있으며, 자세한 내용은 쿠버네티스 공식 페이지를 참고하시기 바랍니다.
+
+&lt;a href=&quot;https://kubernetes.io/ko/docs/home/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://kubernetes.io/ko/docs/home/&lt;/a&gt;
+
+- 서비스 디스커버리와 로드 밸런싱
+- 스토리지 오케스트레이션
+- 자동화된 롤아웃과 롤백
+- 자동화된 빈 패킹(bin packing)
+- 자동화된 복구(self-healing)
+- 시크릿과 구성 관리
+
+
+## 사전 준비
+먼저 쿠버네티스 클러스터에 사용할 **전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet**이 필요합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-36.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;IP 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /17~/26 범위의 Subnet, 로드밸런서 전용 Subnet이 필요합니다.&lt;br/&gt;&lt;br/&gt;
+Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내의 Private Subnet, 로드밸런서 전용Subnet은 선택할 수 없습니다.&quot; %}
+
+## 쿠버네티스 서비스 위치
+Ncloud 쿠버네티스 서비스는 [콘솔] - [Services] - [Containers]에 위치하고 있습니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-33.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 클러스터 생성 
+
+VPC와 Subnet이 준비되었다면, 다음으로 [Kubernetes Sevice] - [Cluster]에서 생성하기를 클릭합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 클러스터 설정
+생성할 클러스터의 정보를 설정해줍니다. 
+**네트워크 타입은 Private과 Public 중에서 선택**할 수 있습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Kubernetes Service를 위한 ACG는 자동으로 생성됩니다.&quot; %}
+{% include callout-v2.html type=&quot;primary&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 Kubernetes 버전은 [**1.24.0**], [**1.25.8**] 입니다.&quot;%}
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-35.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+### NAT Gateway 생성
+`Private Subnet을 선택했을 경우`에는 아래와 같이 NAT Gateway 생성 안내 팝업이 나타나는데,  
+NAT Gateway를 생성해야 아웃바운드 트래픽을 활성화할 수 있기 때문입니다.
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_10.jpg&quot; width=&quot;490&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+팝업에서 링크를 클릭해서 NAT Gateway 화면으로 이동해 NAT Gateway를 생성합니다.
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NAT Gateway 생성 가이드는 아래 문서를 참고하시기 바랍니다. &lt;br /&gt;&lt;br /&gt;
+- &lt;a href=&apos;/networking/ncloud_networking_natgw_routetb.html&apos; target=&apos;_blank&apos;&gt;VPC 환경에서 NAT Gateway 설정하기&lt;/a&gt;&quot; %}
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_11.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 노드풀 설정
+노드풀 이름을 입력하고, 서버 이미지와 서버 타입을 선택하고 [추가] 버튼을 클릭합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 OS는 [**ubuntu 16.04**], [**ubuntu 18.04**], [**ubuntu 20.04**] 입니다.&quot;%}
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-37.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 인증키 설정
+다음으로 워커노드의 인증키를 설정 합니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-38.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## 최종 확인
+설정 정보를 최종적으로 확인한 후 생성버튼을 클릭하여 클러스터를 생성합니다.
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;쿠버네티스 클러스터 생성은 20분 정도 소요되므로 여유를 갖고 기다리시면 됩니다.&quot;%}
+
+{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_04.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 생성 완료
+생성이 완료되면 아래와 같이 클러스터와 노드풀의 정보를 확인할 수 있습니다.  
+클러스터 정보 중에서 클러스터 **UUID는 아래쪽에서 IAM 인증 Kubeconifg 파일을 생성할 때 필요**하니 확인해두시기 바랍니다.
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+[Server] 메뉴에 가면 노드풀 설정에 따라 생성된 서버를 확인할 수 있습니다.  
+(서버 이름은 노드풀 이름으로 입력한 문자열 기준으로 생성되는데, 여기서는 test123-O-OOO 이런 식으로 생성되었습니다.)
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## IAM 인증 설정
+클러스터를 제어하기 위해서는 네이버 클라우드 쿠버네티스 서비스에서 제공하는 IAM 인증을 설정해야 합니다.
+
+### ncp-iam-authenticator 설치
+Ncloud에서 제공하는 ncp-iam-authenticator 바이너리를 통해 iam 인증 config 파일을 생성 할 수 있습니다.
+
+- ncp-iam-authenticator 바이너리를 다운로드 합니다.
+
+``` powershell
+&gt; curl -o ncp-iam-authenticator.exe https://kr.object.ncloudstorage.com/nks-download/ncp-iam-authenticator/v1.0.5/windows/amd64/ncp-iam-authenticator.exe
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-25.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+- ncp-iam-authenticator가 정상 작동 하는지 테스트 합니다. 
+
+``` powershell
+&gt; ncp-iam-authenticator help
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-26.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+## API 인증키 생성
+네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
+
+{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성 방법&quot; caption=&quot;&quot; %}
+
+## Kubeconfig 파일 생성
+API 인증키를 2가지 방법 중 하나를 이용해 환경변수에 등록합니다.
+
+**1. OS 환경 변수 설정**
+
+``` powershell
+&gt; SET NCLOUD_ACCESS_KEY={Ncloud API AccessKey}
+&gt; SET NCLOUD_SECRET_KEY={Ncloud API SecretKey}
+&gt; SET NCLOUD_API_GW=https://ncloud.apigw.ntruss.com
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-27.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+**2. 사용자 계정 홈 폴더에 configure 설정**  
+Windows 사용자 계정 폴더에 .ncloud 폴더를 만들고 아래와 같은 내용으로 configure 파일을 생성합니다.
+
+``` powershell
+&gt; mkdir C:\Users\{User Account}\.ncloud
+&gt; copy con C:\Users\{User Account}\.ncloud\configure
+[DEFAULT]
+ncloud_access_key_id = {Ncloud API AccessKey}
+ncloud_secret_access_key = {Ncloud API SecretKey}
+ncloud_api_url = https://ncloud.apigw.ntruss.com
+^Z
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-28.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+**3. Kubeconifg 파일 생성**  
+환경변수에 등록이 되었다면 파일을 생성 할 차례입니다.  
+아래 명령어로 클러스터에 대한 IAM 인증 Kubeconifg 파일을 생성합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;클러러스터 UUID 값은 클러스터 상세보기의 [클러스터 이름 (UUID)] 에서  확인 할수 있습니다.&quot; %}
+
+``` powershell
+&gt; ncp-iam-authenticator create-kubeconfig --region &lt;region-code&gt; --clusterUuid &lt;cluster-uuid&gt; --output &lt;FileName&gt;.yaml
+
+## 예시
+&gt; ncp-iam-authenticator create-kubeconfig --region KR --clusterUuid 12345678-1234-1234-1234-1234567890 --output kubeconfig.yaml
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-29.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## kubectl 설치
+쿠버네티스 클러스터를 제어할 kubectl을 설치하기 위해 필요한 파일을 다운로드 받고, 버전 정보를 확인합니다.
+
+아래 두가지 방법 중에 하나를 선택해 다운로드 받으시면 됩니다.
+
+&lt;a href=&quot;https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe&quot; target=&quot;_self&quot; style=&quot;word-break:break-all;&quot;&gt;Download the latest release v1.24.0&lt;/a&gt;
+
+``` bash
+&gt; curl -LO https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe
+```
+
+``` powershell
+&gt; kubectl version --client --output=yaml
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-30.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## kubectl 실행
+생성한 IAM 인증 kubeconfig 파일을 이용하여 kubectl 명령어를 테스트하여 정상 동작 하는지 확인 합니다.  
+실행하면 아래와 같이 현재 동작 중인 노드 서버 리스트를 확인할 수 있습니다.
+
+``` powershell
+&gt; kubectl get node --kubeconfig kubeconfig.yaml
+```
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-31.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+### 실행 명령어 단축
+위와 같은 kubectl 명령은 뒤쪽에 kubeconfig 환경 설정 파일까지 입력해야 해서 다소 불편한데, 간단하게 줄일 수 있는 방법이 있습니다.  
+
+우선 만들어진 kubeconfig.yaml 파일을 .kube/ 디렉토리 아래에 config로 이름을 바꾸어 이동 혹은 복사 합니다.
+
+``` powershell
+&gt; copy kubeconfig.yaml .kube\config
+```
+
+이렇게 하면 Kubectl을 사용 시 아래와 같이 --kuebeconfig 명령어 없이 사용 할 수 있습니다.
+
+``` powershell
+&gt; kubectl get node
+```
+
+{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-32.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1. 쿠버네티스 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8soverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8soverview&lt;/a&gt;
+
+2. 클러스터 이용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&lt;/a&gt;
+
+3. kubectl 설치 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl%EC%84%A4%EC%B9%98&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl&lt;/a&gt;
+
+4. Linux 환경에서 쿠버네티스 제어하기
+	- &lt;a href=&quot;/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&lt;/a&gt;    
+</description>
+            <pubDate>Mon, 15 May 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</guid>
+            
+            <category>kubernetes</category>
+            
+            <category>vpc</category>
+            
+            
+        </item>
+        
+        <item>
             <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Linux</title>
             <description>## 개요
 Ncloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 **Linux 환경에서 제어하는 방법**에 대해 소개합니다.
@@ -1299,375 +1610,6 @@ EOF
             <category>kubernetes</category>
             
             <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Windows</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 **Windows 환경에서 제어하는 방법**에 대해 소개합니다.
-
-## 쿠버네티스란?
-쿠버네티스(Kubernetes, K8S)는 배포, 스케일링, 그리고 컨테이너화된 애플리케이션의 관리를 자동화 해주는 오픈 소스 컨테이너 오케스트레이션 엔진으로 
-구글에서 처음 개발하기 시작했으나 현재는 구글이 오픈소스 프로젝트로 공개한 상태입니다.
-
-## 특징
-쿠버네티스는 다음과 같은 특징이 있으며, 자세한 내용은 쿠버네티스 공식 페이지를 참고하시기 바랍니다.
-
-&lt;a href=&quot;https://kubernetes.io/ko/docs/home/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://kubernetes.io/ko/docs/home/&lt;/a&gt;
-
-- 서비스 디스커버리와 로드 밸런싱
-- 스토리지 오케스트레이션
-- 자동화된 롤아웃과 롤백
-- 자동화된 빈 패킹(bin packing)
-- 자동화된 복구(self-healing)
-- 시크릿과 구성 관리
-
-
-## 사전 준비
-먼저 쿠버네티스 클러스터에 사용할 **전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet**이 필요합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-36.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;IP 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /17~/26 범위의 Subnet, 로드밸런서 전용 Subnet이 필요합니다.&lt;br/&gt;&lt;br/&gt;
-Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내의 Private Subnet, 로드밸런서 전용Subnet은 선택할 수 없습니다.&quot; %}
-
-## 쿠버네티스 서비스 위치
-Ncloud 쿠버네티스 서비스는 [콘솔] - [Services] - [Containers]에 위치하고 있습니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-33.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 클러스터 생성 
-
-VPC와 Subnet이 준비되었다면, 다음으로 [Kubernetes Sevice] - [Cluster]에서 생성하기를 클릭합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 클러스터 설정
-생성할 클러스터의 정보를 설정해줍니다. 
-**네트워크 타입은 Private과 Public 중에서 선택**할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Kubernetes Service를 위한 ACG는 자동으로 생성됩니다.&quot; %}
-{% include callout-v2.html type=&quot;primary&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 Kubernetes 버전은 [**1.24.0**], [**1.25.8**] 입니다.&quot;%}
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-35.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-### NAT Gateway 생성
-`Private Subnet을 선택했을 경우`에는 아래와 같이 NAT Gateway 생성 안내 팝업이 나타나는데,  
-NAT Gateway를 생성해야 아웃바운드 트래픽을 활성화할 수 있기 때문입니다.
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_10.jpg&quot; width=&quot;490&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-팝업에서 링크를 클릭해서 NAT Gateway 화면으로 이동해 NAT Gateway를 생성합니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NAT Gateway 생성 가이드는 아래 문서를 참고하시기 바랍니다. &lt;br /&gt;&lt;br /&gt;
-- &lt;a href=&apos;/networking/ncloud_networking_natgw_routetb.html&apos; target=&apos;_blank&apos;&gt;VPC 환경에서 NAT Gateway 설정하기&lt;/a&gt;&quot; %}
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_11.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 노드풀 설정
-노드풀 이름을 입력하고, 서버 이미지와 서버 타입을 선택하고 [추가] 버튼을 클릭합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 OS는 [**ubuntu 16.04**], [**ubuntu 18.04**], [**ubuntu 20.04**] 입니다.&quot;%}
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-37.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 인증키 설정
-다음으로 워커노드의 인증키를 설정 합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-38.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 최종 확인
-설정 정보를 최종적으로 확인한 후 생성버튼을 클릭하여 클러스터를 생성합니다.
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;쿠버네티스 클러스터 생성은 20분 정도 소요되므로 여유를 갖고 기다리시면 됩니다.&quot;%}
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_04.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 생성 완료
-생성이 완료되면 아래와 같이 클러스터와 노드풀의 정보를 확인할 수 있습니다.  
-클러스터 정보 중에서 클러스터 **UUID는 아래쪽에서 IAM 인증 Kubeconifg 파일을 생성할 때 필요**하니 확인해두시기 바랍니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] 메뉴에 가면 노드풀 설정에 따라 생성된 서버를 확인할 수 있습니다.  
-(서버 이름은 노드풀 이름으로 입력한 문자열 기준으로 생성되는데, 여기서는 test123-O-OOO 이런 식으로 생성되었습니다.)
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## IAM 인증 설정
-클러스터를 제어하기 위해서는 네이버 클라우드 쿠버네티스 서비스에서 제공하는 IAM 인증을 설정해야 합니다.
-
-### ncp-iam-authenticator 설치
-Ncloud에서 제공하는 ncp-iam-authenticator 바이너리를 통해 iam 인증 config 파일을 생성 할 수 있습니다.
-
-- ncp-iam-authenticator 바이너리를 다운로드 합니다.
-
-``` powershell
-&gt; curl -o ncp-iam-authenticator.exe https://kr.object.ncloudstorage.com/nks-download/ncp-iam-authenticator/v1.0.5/windows/amd64/ncp-iam-authenticator.exe
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-25.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-- ncp-iam-authenticator가 정상 작동 하는지 테스트 합니다. 
-
-``` powershell
-&gt; ncp-iam-authenticator help
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-26.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## API 인증키 생성
-네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
-
-{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성 방법&quot; caption=&quot;&quot; %}
-
-## Kubeconfig 파일 생성
-API 인증키를 2가지 방법 중 하나를 이용해 환경변수에 등록합니다.
-
-**1. OS 환경 변수 설정**
-
-``` powershell
-&gt; SET NCLOUD_ACCESS_KEY={Ncloud API AccessKey}
-&gt; SET NCLOUD_SECRET_KEY={Ncloud API SecretKey}
-&gt; SET NCLOUD_API_GW=https://ncloud.apigw.ntruss.com
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-27.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-**2. 사용자 계정 홈 폴더에 configure 설정**  
-Windows 사용자 계정 폴더에 .ncloud 폴더를 만들고 아래와 같은 내용으로 configure 파일을 생성합니다.
-
-``` powershell
-&gt; mkdir C:\Users\{User Account}\.ncloud
-&gt; copy con C:\Users\{User Account}\.ncloud\configure
-[DEFAULT]
-ncloud_access_key_id = {Ncloud API AccessKey}
-ncloud_secret_access_key = {Ncloud API SecretKey}
-ncloud_api_url = https://ncloud.apigw.ntruss.com
-^Z
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-28.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-**3. Kubeconifg 파일 생성**  
-환경변수에 등록이 되었다면 파일을 생성 할 차례입니다.  
-아래 명령어로 클러스터에 대한 IAM 인증 Kubeconifg 파일을 생성합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;클러러스터 UUID 값은 클러스터 상세보기의 [클러스터 이름 (UUID)] 에서  확인 할수 있습니다.&quot; %}
-
-``` powershell
-&gt; ncp-iam-authenticator create-kubeconfig --region &lt;region-code&gt; --clusterUuid &lt;cluster-uuid&gt; --output &lt;FileName&gt;.yaml
-
-## 예시
-&gt; ncp-iam-authenticator create-kubeconfig --region KR --clusterUuid 12345678-1234-1234-1234-1234567890 --output kubeconfig.yaml
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-29.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## kubectl 설치
-쿠버네티스 클러스터를 제어할 kubectl을 설치하기 위해 필요한 파일을 다운로드 받고, 버전 정보를 확인합니다.
-
-아래 두가지 방법 중에 하나를 선택해 다운로드 받으시면 됩니다.
-
-&lt;a href=&quot;https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe&quot; target=&quot;_self&quot; style=&quot;word-break:break-all;&quot;&gt;Download the latest release v1.24.0&lt;/a&gt;
-
-``` bash
-&gt; curl -LO https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe
-```
-
-``` powershell
-&gt; kubectl version --client --output=yaml
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-30.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## kubectl 실행
-생성한 IAM 인증 kubeconfig 파일을 이용하여 kubectl 명령어를 테스트하여 정상 동작 하는지 확인 합니다.  
-실행하면 아래와 같이 현재 동작 중인 노드 서버 리스트를 확인할 수 있습니다.
-
-``` powershell
-&gt; kubectl get node --kubeconfig kubeconfig.yaml
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-31.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-### 실행 명령어 단축
-위와 같은 kubectl 명령은 뒤쪽에 kubeconfig 환경 설정 파일까지 입력해야 해서 다소 불편한데, 간단하게 줄일 수 있는 방법이 있습니다.  
-
-우선 만들어진 kubeconfig.yaml 파일을 .kube/ 디렉토리 아래에 config로 이름을 바꾸어 이동 혹은 복사 합니다.
-
-``` powershell
-&gt; copy kubeconfig.yaml .kube\config
-```
-
-이렇게 하면 Kubectl을 사용 시 아래와 같이 --kuebeconfig 명령어 없이 사용 할 수 있습니다.
-
-``` powershell
-&gt; kubectl get node
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-32.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1. 쿠버네티스 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8soverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8soverview&lt;/a&gt;
-
-2. 클러스터 이용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&lt;/a&gt;
-
-3. kubectl 설치 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl%EC%84%A4%EC%B9%98&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl&lt;/a&gt;
-
-4. Linux 환경에서 쿠버네티스 제어하기
-	- &lt;a href=&quot;/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&lt;/a&gt;    
-</description>
-            <pubDate>Mon, 15 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</guid>
-            
-            <category>kubernetes</category>
-            
-            <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.  
-그래서 Object Storage에 접속, 관리할 때 AWS의 CLI(Command Line Interface)를 사용할 수 있는데 그 중에서 AWS CLI 버전 2의 설치와 사용방법에 대해 정리해보겠습니다.
-
-## AWS CLI 버전 2 설치 {#awscliinstall}
-
-{% include note.html content=&quot;AWS CLI 버전 1에서는 설치와 실행에 Python과 PIP를 이용하는 방법이 주로 사용되었지만, AWS CLI 버전 2에서는 Python 임베디드 버전이 포함되어 있어 별도로 설치할 필요가 없기에 설치 파일도 ZIP 압축 파일 형태로 제공됩니다.&quot; %}
-
-### 설치 파일 다운로드
-AWS CLI 버전 2 설치 파일을 awscliv2.zip 이름으로 다운로드 합니다.
-
-``` bash
-~# curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
-```
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-01.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### 압축 풀기
-unzip으로 압축을 풀겠습니다.
-
-``` bash
-~# unzip awscliv2.zip
-```
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-02.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### 설치
-아래 명령으로 쉽게 설치할 수 있습니다.
-
-``` bash
-~# ./aws/install
-```
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-03.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### 버전 확인
-설치가 완료된 후 버전을 확인해보면 아래와 같이 AWS CLI 버전과 임베디드된 Python 버전도 확인할 수 있습니다.
-
-``` bash
-~# aws --version
-```
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-04.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## API 인증키 생성
-다음으로 접속에 필요한 인증키를 Ncloud (네이버 클라우드) 포탈 - 마이페이지 - 계정관리 - 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
-
-{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성 방법&quot; caption=&quot;&quot; %}
-
-## AWS CLI 환경 설정
-이제 AWS CLI로 접속하기 위해 환경설정을 해야 합니다.  
-위 단계에서 확인한 Access Key ID와 Secret Key를 아래 화면에서 입력하고 나머지 2가지 항목은 입력하지 않으셔도 됩니다.
-``` bash
-~# aws configure
-
-AWS Access Key ID [None]: 3frEtFjfkdsj89243nkfv89s
-AWS Secret Access Key [None]: 0kr23-0vsijr2390fw:L?K23-0vcdsjr2390fchnr123[]vl/fwsh
-Default region name [None]: [Enter]
-Default output format [None]: [Enter]
-```
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-05.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Object Storage 접속
-이제 Object Storage로 접속해보겠습니다. 얼핏 명령어만 보면 AWS에 접속하는 것처럼 보입니다. 그래서 네이버 클라우드로 접속하기 위한 --endpoint-url= 로 시작하는 옵션이 반드시 필요합니다.
-``` bash
-# Object Storage에 존재하는 전체 버킷 리스트를 조회하는 명령어입니다.
-~# aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls
-
-# s3 ls 명령으로 Object Storage에 존재하는 aws-cli-test 버킷에 있는 오브젝트 리스트를 조회하는 예시입니다.
-~# aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://aws-cli-test
-
-# 로컬에 백업된 데이터를 Object Storage에 백업-동기화하는 명령어 예시입니다.
-~# aws --endpoint-url=https://kr.object.ncloudstorage.com s3 sync /data_backup/ s3://data-back-up/
-```
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-06.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## AWS CLI 업데이트
-설치된 AWS CLI를 최신 버전으로 업데이트 하려면 아래 명령어를 사용하면 됩니다. 최신 버전이 설치된 상태에서는 아래 스샷처럼 이미 최신 버전과 동일한 버전이 설치되어 있다는 메시지가 나타납니다.
-
-``` bash
-~# ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
-```
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-07.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## AWS CLI 삭제
-설치된 AWS CLI를 삭제하려면 아래의 단계대로 진행하시면 됩니다.
-
-### symlink 삭제
-``` bash
-~# rm /usr/local/bin/aws
-~# rm /usr/local/bin/aws_completer
-```
-
-### 설치 디렉토리 삭제
-``` bash
-~# rm -rf /usr/local/aws-cli
-```
-
-### 설정 정보 삭제 (선택 사항)
-AWS CLI 환경 설정 정보는 서버 내의 모든 AWS SDK 및 AWS CLI에서 공유되므로 더 이상 사용하지 않는다면 삭제하시면 됩니다.
-
-``` bash
-~# rm -rf ~/.aws/
-```
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-aws-cli-guide-08.png&quot; width=&quot;840&quot; alt=&quot;AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-
-1.  AWS CLI 버전 2 가이드
-	- &lt;a href=&quot;https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/cli-chap-welcome.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/cli-chap-welcome.html&lt;/a&gt;
-
-2.  Ncloud Object Storage CLI 가이드
-	- &lt;a href=&quot;https://cli.ncloud-docs.com/docs/guide-objectstorage&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://cli.ncloud-docs.com/docs/guide-objectstorage&lt;/a&gt;	
-</description>
-            <pubDate>Tue, 09 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_aws_cli_connect.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_aws_cli_connect.html</guid>
-            
-            <category>aws</category>
-            
-            <category>s3</category>
-            
-            <category>object_storage</category>
-            
-            <category>cli</category>
-            
-            <category>api</category>
-            
-            <category>auth</category>
             
             
         </item>
