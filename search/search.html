@@ -374,6 +374,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="Linux 서버 SSH Key로 접속하는 방법" href="/compute/ncloud-compute-server-connect-by-ssh-key.html" >Linux 서버 SSH Key로 접속하는 방법</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="X-Forwarded-For로 Client IP 기록하기" href="/compute/ncloud_compute_server_x_forwarded_for_client_ip_logging_guide.html" >X-Forwarded-For로 Client IP 기록하기</a></li>          
                     
           
@@ -2130,6 +2137,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						"categories": "",
 						"url": " /compute/ncloud-compute-server-change-authentication-key.html",
 						"content": "개요\nNcloud (네이버 클라우드) 서버의 인증키는 서버의 [관리자 비밀번호 확인], [비밀번호 초기화] 등에 꼭 필요한 *.pem 형태의 파일입니다. \n그런데 만약 인증키를 분실했을 경우에는 다른 인증키로 변경해야 하는데, 어떻게 변경하는지 정리해보겠습니다.\n\n인증키 변경\n인증키를 변경하려면 먼저 서버를 정지시키고, 서버를 선택한 후에 [서버 관리 및 설정 변경] - [서버 인증키 변경] 메뉴를 선택하면 됩니다.\n\n[서버 인증키 변경] 기능은 마스터 계정에서만 가능합니다. 서브 어카운트에서는 메뉴가 활성화 되지 않습니다.\n\n[서버 인증키 변경] 기능은 서버를 [정지] 시킨 상태에서만 가능합니다.\n\n\n  \n  \n    \n  \n\n\n사용자 확인\n인증키를 변경하려면 먼저 사용자 확인을 해야 하므로, [인증 메일 발송] 버튼을 클릭하면 등록된 메일주소로 인증 메일이 발송됩니다.\n\n\n  \n  \n    \n  \n\n\n\n  \n  \n    \n  \n\n\n인증 메일 확인\n메일을 열어보면 아래와 같이 인증 메시지를 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n인증 메시지 입력\n메일에서 확인한 인증 메시지를 입력하면 인증이 완료됩니다.\n\n\n  \n  \n    \n  \n\n\n인증키 선택\n변경할 인증키는 기존에 있는 다른 인증키를 선택할 수도 있고, 새로운 인증키를 생성할 수도 있습니다.\n여기서는 [새로운 인증키]를 생성해보겠습니다.\n\n\n  \n  \n    \n  \n\n\n인증키 생성 및 저장\n새로운 인증키 이름을 입력하고 [인증키 생성 및 저장] 버튼을 클릭하면 인증키가 다운로드 됩니다.\n인증키 다운로드 완료 후에 [변경] 버튼을 클릭하면 인증키가 변경됩니다.\n\n\n  \n  \n    \n  \n\n\n인증키 변경 완료\n서버 인증키가 변경되고 나면 정지 상태인 서버를 [지금 시작]할 것인지, [나중에 시작]할 것인지 묻는 창이 나타납니다.\n여기서는 [지금 시작] 버튼을 선택하겠습니다.\n\nLinux\n\n  \n  \n    \n  \n\n\nWindows\n\n  \n  \n    \n  \n\n\n비밀번호 확인\n변경된 인증키로 서버 관리자 비밀번호를 확인해보겠습니다.\n\n\n  \n  \n    \n  \n\n\nLinux\n\n  \n  \n    \n  \n\n\nWindows\n\n  \n  \n    \n  \n\n\n참고 URL\n\n  Ncloud 서버 정보 확인 및 서버 관리 가이드\n    \n      https://guide.ncloud-docs.com/docs/compute-server-manage-vpc\n    \n  \n  Ncloud 서버 관리자 비밀번호 초기화하는 방법\n    \n      https://docs.3rdeyesys.com/compute/ncloud-compute-server-admin-password-reset.html"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"compute-ncloud-compute-server-connect-by-ssh-key-html": {
+						"id": "compute-ncloud-compute-server-connect-by-ssh-key-html",
+						"title": "Ncloud 서버에 SSH Key를 이용해 접속하는 방법",
+						"categories": "",
+						"url": " /compute/ncloud-compute-server-connect-by-ssh-key.html",
+						"content": "개요\n리눅스 서버에 접속하는 방법은 [아이디-패스워드]로 접속하는 방법과 [SSH Key]를 이용해 접속하는 방법이 있습니다.\nNcloud (네이버 클라우드)에서는 기본으로 [아이디-패스워드]로 접속하는 방법을 제공하고 있으므로 여기서는 다른 방법인 [SSH Key]를 이용해 서버에 접속하는 방법을 정리해보게겠습니다.\n\n테스트 서버 준비\n테스트로 사용할 서버는 [Rocky Linux 8.6] 서버로 생성했습니다.\n\n\n  \n  \n    \n  \n\n\nSSH Key 생성\n우선 Ncloud 제공하는 [아이디-패스워드] 방식으로 서버에 접속한 후, 아래의 명령으로 SSH key를 생성합니다.\n\n~# ssh-keygen -t rsa -m pem\n\n\n\n  \n  \n    \n  \n\n\n상세 설명\n위의 SSH Key 생성 화면에서 몇가지를 좀 더 자세히 살펴보겠습니다.\n\n\n  Key 저장 위치 설정\n아래 스샷처럼 생성된 [SSH Key]를 어느 위치에 저장할 것인지 확인하는 단계입니다. 아무것도 입력하지 않고 Enter 키를 입력하면 기본 저장 위치인 [/root/.ssh/id_rsa]에 저장됩니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Key 파일 암호 설정\n보안을 좀 더 강화하려면 [SSH Key]를 사용할 때 암호(passphrase)를 입력하도록 설정할 수 있습니다. 아무것도 입력하지 않으면 암호 없이 사용하게 됩니다.\n\n\n\n  \n  \n    \n  \n\n\n생성된 Key 확인\nKey가 생성된 디렉토리로 이동해서 살펴보면 [id_rsa], [id_rsa.pub] 이렇게 2개의 파일이 생성된 것을 확인할 수 있습니다.\n\n\n  id_rsa: Private Key\n  id_rsa.pub: Public Key\n\n\n\n  \n  \n    \n  \n\n\nKey 파일명 변경\nmv 명령어를 사용해 [SSH Key] 인증에서 사용할 파일명으로 변경 합니다.\n\n~# mv id_rsa id_rsa.pem\n~# mv id_rsa.pub authorized_keys\n\n\n  \n  \n    \n  \n\n\nPrivate Key 복사\n위에서 생성된 [Private Key]인 [id_rsa.pem] 파일을 로컬 PC로 가져오는 방법은 크게 2가지가 있는데 편하신 방법을 사용하면 되겠습니다.\n\n\n  암호화 텍스트로 구성된 파일의 내용을 복사해서 로컬 PC 텍스트 편집기에 붙여넣고 새로운 파일로 저장하는 방법\n  [WinSCP], [FileZilla] 등의 SFTP 프로그램을 이용해서 파일을 로컬 PC로 전송하는 방법\n\n\n방법 1: 텍스트 복사\n[id_rsa.pem] 파일은 암호화된 텍스트로 구성된 파일이므로 파일 내용을 확인해서 복사합니다.\n\n\n  \n  \n    \n  \n\n\n\n  복사한 내용을 로컬 PC의 텍스트 편집기에 붙여 넣고 저장합니다.\n\n\n\n  \n  \n    \n  \n\n\n방법 2: WinSCP 접속\n[WinSCP]로 서버에 접속하면 처음에는 파일이나 디렉토리가 전혀 보이지 않습니다. 즉, 인증키 파일이 저장된 [.ssh] 디렉토리가 숨겨진 디렉토리이기 때문입니다.\n\n\n  \n  \n    \n  \n\n\n\n  숨겨진 디렉토리를 확인하기 위해 [옵션] - [설정] 메뉴에 들어갑니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  [설정] 창에서 [패널]을 선택하면 위쪽에 [숨김 파일 표시] 옵션이 있는데 이 옵션을 체크하고 [확인] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\nKey 전송\n[숨김 파일 표시] 옵션을 체크하면 아래와 같이 [.ssh] 디렉토리를 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n\n  [.ssh] 디렉토리에 들어가서 [id_rsa.pem] 파일을 로컬 PC로 전송합니다.\n\n\n\n  \n  \n    \n  \n\n\nPPK 파일 변환\n[SSH Key] 인증으로 서버에 접속할 때 주로 사용하는 프로그램이 [PuTTY]인데, [Putty]에서는 [PEM] 파일이 아니라 [PPK]파일을 사용하기 때문에 [PEM] 파일을 [PPK]파일로 변환해야 합니다. 이럴 때 사용하는 것이 [PuTTY Key Generator] 즉, [PuTTYgen]인데, [PuTTY] 통합 설치 파일에 포함되어 있습니다.\n\nPuTTY 설치\n[PuTTYgen] 사이트에 접속해서 [PuTTY]를 다운로드 받고 설치합니다.\n\n  https://www.puttygen.com/\n\n\n\n  \n  \n    \n  \n\n\n\n  설치가 완료되었으면 로컬 PC에서 [PuTTYgen]을 찾아서 실행합니다.\n\n\n\n  \n  \n    \n  \n\n\nKey 변환\n우선 위에서 로컬 PC로 전송받았던 [id_rsa.pem]을 파일을 불러오기 위해 [PuTTYgen] 화면에서 가운데에 있는 [Load] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n\n  파일 선택창에서 파일 확장자를 [All Files]로 선택 하고 [id_rsa.pem] 파일을 선택하고 [열기] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  [Notice] 팝업에서 [확인] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  [Save private key] 버튼을 눌러 PPK 파일로 변환합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  Key 파일에 암호 즉, [passphrase]가 없을 경우 경고 팝업이 뜨는데 [예] 버튼을 클릭해서 다음 단계로 넘어 갑니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  파일명을 입력 후 [저장] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n서버 접속\n이제 위에서 변환 저장한 Key 파일로 서버에 접속해보겠습니다.\n\nPuTTY 설정\n우선, [PuTTY] 프로그램을 실행합니다.\n\n\n  \n  \n    \n  \n\n\n\n  [Host Name (or IP address)]에 접속할 서버의 IP를 입력합니다. 또는 [계정@서버IP] 형식으로 미리 로그인 계정을 입력해두는 방법도 있습니다. \n(예: 123.456.789.012 또는 root@123.456.789.012)\n\n\n\n  \n      \n          IP만 입력 \n      \n  \n      \n          계정@IP 입력 \n      \n  \n\n\n  \n      \n\n  \n  \n    \n  \n\n\n\n  \n      \n\n  \n  \n    \n  \n\n\n\n  \n\n\n\n  좌측의 Category에서 [Conncetion] - [SSH] - [Auth] - [Credentials] 설정 메뉴에서 [Private key file for authentication] 항목에 위에서 변환 저장했던 파일을 선택하기 위해 [Browser] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  위에서 저장했던 test-key.PPK 파일을 선택 합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  다음으로 아래쪽에 있는 [Open] 버튼을 클릭해서 서버에 접속합니다.\n\n\n\n  \n  \n    \n  \n\n\n서버 접속 완료\n그러면 아래와 같이 비밀번호 입력 없이 [Authenticating with public key “imported-openssh-key”]라는 메시지가 나타나면서 서버에 접속됩니다.\n(PuTTY 접속 설정 [Host Name]에 IP만 입력했을 경우에는 [login as]에 로그인 계정을 입력해야 합니다.)\n\n\n  \n      \n          IP만 입력 \n      \n  \n      \n          계정@IP 입력 \n      \n  \n\n\n  \n      \n\n  \n  \n    \n  \n\n\n\n  \n      \n\n  \n  \n    \n  \n\n\n\n  \n\n\n참고 URL\n\n  Ncloud 서버 접속 가이드\n    \n      https://guide.ncloud-docs.com/docs/server-access-vpc\n    \n  \n  Ncloud 서버 인증키 변경하는 방법\n    \n      https://docs.3rdeyesys.com/compute/ncloud-compute-server-change-authentication-key.html"
 					}
 					
 				
@@ -4510,7 +4532,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-         Site last generated: 2023-06-15 <br />        
+         Site last generated: 2023-06-19 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

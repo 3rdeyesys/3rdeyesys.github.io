@@ -215,6 +215,17 @@
 
 
 {
+"title": "Ncloud 서버에 SSH Key를 이용해 접속하는 방법",
+"tags": "linuxwindowspassword",
+"keywords": "Linux, Password, Windows, Admin",
+"url": "/compute/ncloud-compute-server-connect-by-ssh-key.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개",
 "tags": "linuxapachephpnginxmysqlmariadbrocky_linux",
 "keywords": "Linux, Rocky Linux",
