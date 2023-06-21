@@ -5,10 +5,169 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 19 Jun 2023 16:58:14 +0900</pubDate>
-        <lastBuildDate>Mon, 19 Jun 2023 16:58:14 +0900</lastBuildDate>
+        <pubDate>Wed, 21 Jun 2023 11:30:18 +0900</pubDate>
+        <lastBuildDate>Wed, 21 Jun 2023 11:30:18 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud VPC 환경에서 무료 서버(Micro Type) 이용하는 방법</title>
+            <description>## 개요 
+Ncloud (네이버 클라우드)는 체험 및 테스트 용도로 **최초 결제 수단 등록 월부터 1년간 무료**로 사용할 수 있는 Micro 타입 서버를 제공하고 있습니다. 전에는 Classic 환경에서만 이용할 수 있었는데, 최근 업데이트 이후 VPC 환경에서도 이용할 수 있게 되었기에, VPC 환경에서 무료 서버인 Micro 타입 서버를 생성하는 과정을 정리해보겠습니다.
+
+## Micro 타입 서버 특징
+- 스펙: vCPU 1개, 메모리 1GB
+- `계정당 1대`만 이용 가능
+- 체험용으로 가용성 및 성능 보장 불가
+- 거주지 국가가 한국인 경우만 제공
+- `신규 가입 후 최초 결제 수단 등록 월부터 1년간 무료` 제공, 1년이 지나면 **월요금제**로 과금
+- 최초 결제 수단 등록 월은 포털 마이페이지 &gt; 결제수단 관리에서 확인
+- Network Interface는 1개만 이용 가능
+- 3세대(g3) 서버로 **KVM** 하이퍼바이저 기반의 서버만 제공
+- 기본 스토리지는 **10 GB까지만 무료**이며, 용량을 늘리거나 추가하는 스토리지의 경우 유료 과금
+
+
+## 서버 생성
+[**VPC**] 환경에서 서버(Server)를 생성하려면 사전에 [**VPC**]와 [**Subnet**]이 생성되어 있어야 하는데, 혹시 처음 [**VPC**] 환경에 접속하셔서 [**VPC**]와 [**Subnet**]이 존재하지 않는 경우는 아래 문서를 보고 미리 생성하고 오셔야 합니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&lt;a href=&apos;/compute/ncloud_compute_server_vpc_create.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;VPC 환경에서 서버 생성하는 방법 (VPC, Subnet 생성 포함)&lt;/a&gt;
+&quot; %}
+
+## Server 서비스 위치
+[**Server**] 서비스는 [**Console**] - [**Services**] - [**Compute**]에 위치해 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
+
+- [**Server**] - [**Server**]에서 [**서버 생성**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
+
+## 서버 생성 콘솔 선택
+Ncloud 서버 생성 콘솔화면은 신규 기능이 업데이트 되면서 2가지를 선택할 수 있습니다. Micro 타입 서버는 **KVM** 하이퍼바이저 기반의 서버이므로  [**신규 콘솔 화면**]으로 진행하겠습니다.
+
+- 기존 콘솔 화면: **XEN, RHV** 하이퍼바이저 기반의 서버(g1,g2)를 생성할 수 있습니다.
+- 신규 콘솔 화면: **XEN, RHV** 하이퍼바이저 기반의 서버(g1,g2)뿐만 아니라 **KVM** 기반 및 다양한 성능을 제공하는 기본 스토리지로 서버(**g3**)를 생성할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-03.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
+
+## 서버 이미지 선택
+Micro 타입 서버를 생성하려면 하이퍼바이저 기준으로 [**KVM**] 서버 이미지를 선택하면 됩니다. 현재 Ncloud에서 제공되는 [**KVM**] 서버 이미지는 아래와 같이 [**CentOS 7.8**], [**Ubuntu 20.04**] 이렇게 2가지 입니다. 여기서는 Ubuntu 20.04로 생성해보겠습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-micro-type-server-create-vpc-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법&quot; caption=&quot;&quot; %}
+
+## 서버 설정
+서버 설정 단계에서는 [**VPC**]와 [**Subnet**]을 선택하고  [**서버 스펙**]과 [**요금제**], [**Network Interface**], [**공인 IP 할당 여부**] 등을 선택하게 됩니다. `서버는 1년간 무료이지만, 공인 IP를 할당하게 되면 공인 IP 비용이 청구됩니다.`
+
+{% include image.html file=&quot;compute/ncloud-compute-micro-type-server-create-vpc-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법&quot; caption=&quot;&quot; %}
+
+## 스토리지 설정
+KVM 하이퍼바이저 기반인 Micro 타입서버는 기본 스토리지 10GB까지만 무료로 제공되며, 용량을 늘릴 경우 비용이 발생합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-micro-type-server-create-vpc-guide-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법&quot; caption=&quot;&quot; %}
+
+## 인증키 설정
+인증키 이름을 입력하고, [**인증키 생성 및 저장**] 버튼을 클릭해서 인증키를 로컬 PC에 다운로드 받아서 안전한 곳에 보관해야 합니다. 기존에 사용하고 있던 인증키가 있을 경우에는 [**보유하고 있는 인증키 이용**]을 선택하면 됩니다.
+
+{% include warning.html title=&quot;인증키&quot; content=&quot;인증키는 해당 서버의 **관리자 비밀번호**를 확인하는데 사용되므로 **안전한 곳에 잘 보관**해야 합니다.&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-20.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
+
+## 네트워크 접근 설정
+네트워크 접근은 [**ACG**]로 설정하게 되는데, `ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스`로, 서버에 별도의 복잡한 방화벽 구축없이 간단하게 서버에 대한 네트워크 접근 제어를 할 수 있습니다.  
+[**VPC**]를 생성하면 자동으로 생성되는 **기본 ACG**를 선택하거나 별도로 생성한 ACG가 있을 경우 해당 ACG를 선택하면 됩니다. **적용할 ACG는 최대 3개**까지 선택할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-micro-type-server-create-vpc-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법&quot; caption=&quot;&quot; %}
+
+## 서버 생성 완료
+모든 단계를 마치고 나면 아래와 같이 서버가 생성된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-micro-type-server-create-vpc-guide-05.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법&quot; caption=&quot;&quot; %}
+
+## 서버 접속
+생성된 서버에 접속해서 vCPU와 Memory 상태를 확인해보면 다음과 같습니다.
+
+``` bash
+~# grep -c processor /proc/cpuinfo
+~# free
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-micro-type-server-create-vpc-guide-06.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Ncloud 서버 접속 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/server-access-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/server-access-vpc&lt;/a&gt;
+
+2.  Ncloud 서버 인증키 변경하는 방법
+	- &lt;a href=&quot;/compute/ncloud-compute-server-change-authentication-key.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-change-authentication-key.html&lt;/a&gt;
+</description>
+            <pubDate>Wed, 21 Jun 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-micro-type-server-create-vpc.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-micro-type-server-create-vpc.html</guid>
+            
+            <category>linux</category>
+            
+            <category>vpc</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Classic 환경 Micro 타입 서버에서 사용할 수 없는 서비스</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Classic 환경에서 제공하는 서버 타입 중에서 Micro 타입의 서버는 신규 가입 후 최초 결제수단 등록월부터 1년간 무료로 제공되는 체험용 서버입니다.
+계정당 1대만 이용 가능하며 1년이 지나면 유료로 전환됩니다.
+
+## 제한되는 서비스
+Classic 환경 Micro 타입의 서버에서 사용할 수 없는 서비스는 다음과 같습니다.
+
+- mssql
+- LAMP, WordPress, LEMP 등
+- Network Interface
+- Private Subnet
+
+
+### MSSQL 
+mssql 중에서 mssql 2017 Express은 무료로 제공되는 서비스이지만, mssql이 1년 무료제공 서버인 Micro서버에서는 설치가 되지 않기 때문에, compact 이상의 유료 서버를 이용해야 합니다.
+즉, mssql 2017 Express는 무료이나 서버와 그에 따른 하드 디스크 비용은 유료입니다.
+
+### LAMP
+LAMP (Linux + Apache, Mysql, PHP)의 경우 Micro 타입의 서버에 설치를 할 수 없고, Standard 이상의 서버에서만 설치할 수 있는데, 대신 네이버 클라우드에서는 LAMP 등 많이 사용되는 오픈 소스 소프트웨어가 설치된 서버를 쉽게 이용할 수 있도록 해주는 서비스인 Application Server Launcher를 제공하고 있습니다.
+
+Application Server Launcher에서는 원하는 소프트웨어의 이미지를 선택하기만 하면 쉽게 Micro 타입의 서버를 세팅하고 이용할 수 있습니다.
+
+{% include callout_v2.html type=&quot;success&quot; level=&quot;2&quot; content=&quot;다만, Application Server Launcher에서 생성한 서버도 Micro 타입의 서버이기 때문에 계정당 1개만 제공되는 Micro 타입 서버 기준에 따라 Micro 타입의 서버는 더 이상 추가할 수 없습니다.&quot; %}
+
+
+Application Server Launcher에서 OS버전(CentOS, Ubuntu)별로 제공되는 애플리케이션은 다음과 같습니다.
+
+- Drupal (CMS)
+- Joomla! (CMS)
+- Magento (E-Commerce)
+- Shadowsocks (VPN)
+- LAMP (Web Stack)
+- WordPress (CMS)
+- Jenkins (Dev Tools)
+
+
+### Private Subnet
+Private Subnet을 구성해서 서버환경을 만들려고 해도 Micro 서버 타입은 Network Interface를 추가할 수 없고, 그에 따라 Private Subnet도 적용할 수 없습니다.
+
+
+## 참고 URL
+1.  Ncloud 서버 사용 준비 - 제공되는 서버 스펙
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/server-spec&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/server-spec&lt;/a&gt;
+
+</description>
+            <pubDate>Tue, 20 Jun 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_micro_type_limit.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_micro_type_limit.html</guid>
+            
+            <category>limit</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud 서버에 SSH Key를 이용해 접속하는 방법</title>
@@ -1166,393 +1325,6 @@ Ncloud (네이버 클라우드) VPC 환경의 대표적인 로드밸런서(Load 
             <category>vpc</category>
             
             <category>load_balancer</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>VPC 환경에서 NAT Gateway 설정하기</title>
-            <description>## 개요
-NAT Gateway는 비공인 IP를 가진 다수의 서버들이 대표 공인 IP를 이용해 외부와 통신을 할 수 있도록 도와주는 네트워킹 서비스입니다.  
-그리고, 일반적으로 서버에 직접 공인 IP를 부여하는 것과 달리 외부에서 서버로의 직접 접근은 허용하지 않기 때문에 높은 수준의 보안을 유지할 수 있는 것이 특징입니다.  
-여기서는 VPC 환경에서 NAT Gateway를 어떻게 구성하고, NAT Gateway를 적용하기 전과 후의 외부와 통신 상태에 대해 확인해보도록 하겠습니다.
-
-## NAT Gateway 특징
-[**NAT Gateway**]는 생성 시 [**공인 NAT Gateway**]와 [**사설 NAT Gateway**]를 선택할 수 있습니다. **존당 5개까지 생성이 가능**하며, 각 NAT Gateway의 특징은 다음과 같습니다.
-
-### 공인 NAT Gateway
-- 사설 IP와 공인 IP를 둘 다 가지고 있습니다.
-- 인터넷 outbound 통신을 할 때 Public IP에서 할당된 공인 IP를 사용합니다.
-- VPC 내부에서 NAT Gateway를 통해 통신할 경우 할당된 사설 IP를 사용합니다.
-- 할당된 공인 IP는 NAT Gateway를 삭제 시 재사용이 가능합니다.
-
-### 사설 NAT Gateway
-- 사설 IP만 가지고 있습니다.
-- VPC 내부에서 NAT Gateway를 통해 통신할 경우 할당된 사설 IP를 사용합니다.
-
-## VPC 서비스 위치
-[**VPC**] 서비스는 [**Console**] - [**Networking**]에 위치해 있습니다.  
-
-그리고, 아래 스샷에서 확인할 수 있듯이 [**VPC**]에는 [**VPC**], [**Subnet**], [**Network ACL**], [**NAT Gateway**], [**Route Table**], [**VPC Peering**], [**Virtual Private Gateway**] 등의 하부 서비스 메뉴가 있습니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-natgw-routetb-00.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## VPC 생성
-먼저 VPC를 생성합니다. IP주소 범위는 10.0.0.0/16으로 정하겠습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_01.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## Subnet 생성
-Subnet은 아래와 같이 총 3가지를 준비하겠습니다.
-- NAT Gateway 동작 테스트를 위해 서버용 Public, Private Subnet
-- NAT Gateway를 배치할 **NAT Gateway 전용 Subnet** 
-
-### Public Subnet 생성
-Public Subnet의 IP 범위는 **10.0.0.0/24**로 설정하겠습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_02.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Private Subnet 생성
-Private Subnet의 IP 범위는 **10.0.1.0/24**로 설정하겠습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_03.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### NAT Gateway 전용 Subnet
-NAT Gateway 전용 Subnet은 Subnet 생성 화면에서 아래쪽 용도 설정에서 [**NatGateway**]를 선택합니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-natgw-routetb-01.png&quot; width=&quot;685&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-테스트를 위한 ACG (Access Control Group)를 생성하고 설정합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_04.jpg&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Inbound 설정
-Inbound 규칙에는 Public, Private Subnet과 SSH 접속을 위한 로컬PC IP를 허용하고, Ping 테스트를 위한 ICMP도 허용합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_05.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Outbound 설정
-Outbound 규칙은 TCP, UDP, ICMP 모두 전체 허용으로 추가합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_06.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## 서버 생성
-테스트를 위해 Public, Private 각각의 Subnet에 1대씩 서버를 설정하고 Public 서버에는 공인 IP도 할당합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_07.jpg&quot; width=&quot;772&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Public -&gt; Private 서버 접속 확인
-Public Subnet에 있는 서버에서 Private Subnet에 있는 서버로 통신이 가능한 것을 확인할 수 있습니다.  
-다음 단계에서 Private 서버로 SSH로 접속하기 위한 사전 확인 단계입니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_08.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Private 서버 외부 접속 여부 확인
-Public 서버에서 Private 서버로 SSH로 접속한 후에 Private 서버에서 외부로 통신이 되는 것을 확인해보면 불가능한 것을 확인할 수 있습니다.  
-이후 단계에서 NAT Gateway를 설정하고 Private 서버에서 외부와 통신이 가능한지 확인해보겠습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_09.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## Route Table 설정 확인
-NAT Gateway를 위한 Route Table 설정을 추가하기 전에 현재 상태의 Route Table 설정을 확인해보겠습니다.
-
-### Public Subnet의 Route Table 설정 확인
-위에서 Public Subnet의 서버와 Private Subnet의 서버가 통신이 가능했던 것은 VPC와 Subnet이 생성될때 Route Table이 생성되면서 VPC 내부 통신을 위한 규칙 (10.0.0.0/16 LOCAL)이 기본으로 설정되기 때문입니다.  
-그리고 Public의 경우 외부 통신을 위한 INTERNET GATEWAY가 추가되어 있는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_10.jpg&quot; width=&quot;780&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Private Subnet의 Route Table 설정 확인
-반면에 Private의 경우는 VPC 내부 통신을 위한 LOCAL만 설정된 것을 확인 할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_11.jpg&quot; width=&quot;780&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-Route Table 설정 화면에 들어가도 Target Type에 LOCAL만 선택할 수 있는 것을 확인할 수 있습니다.
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_14.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## NAT Gateway 생성
-[**NAT Gateway**]는 별도의 메뉴가 있지 않고, [**Networking**] - [**VPC**] 서비스 내에 하부 서비스로 존재합니다. 그러면 이제 [**NAT Gateway 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-이름을 입력하고 서비스 상황에 따라 유형을 [**공인**] 또는 [**사설**]을 선택한 후, VPC와 위에서 생성했던 **전용 Subnet**을 선택하고, NAT Gateway를 생성합니다. 그리고 마지막으로 Route Table에 NATGW 설정을 추가해야 완료되는데, 관련 설정은 아래에서 확인 가능합니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-natgw-routetb-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-### Route Table 설정
-앞에서 LOCAL 항목만 존재했던 Private Subnet의 Route Table 설정 화면에 가보면 Target Type에 NATGW가 추가된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_18.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-목적지(Destination)에 0.0.0.0/0을 입력하고, Target Type을 NATGW를 선택하고 생성 버튼을 클릭합니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_19.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-## 외부 접속 테스트
-마지막으로 다시 한번 Private 서버에서 외부 통신이 가능한지 ping 테스트를 해보면, 아래 화면과 같이 정상적으로 통신이 되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncp_networking_natgw_routetb_20.jpg&quot; width=&quot;670&quot; alt=&quot;Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드&quot; caption=&quot;&quot; %}
-
-
-## 고려사항
-{% include warning.html title=&quot;요금&quot; content=&quot;NAT Gateway는 사용하지 않고 생성만 해두어도 요금이 부과됩니다. (데이터 처리요금 별도)&quot; %}
-  
-생성 후 보유 시간에 따라 요금이 부과되는데 1개당 56원/시간 입니다. 그러므로 1달간 보유하고만 있다고 가정할 때 비용을 계산해보면 
-**24시간 * 30일 * 56원 = 40,320원** 그러므로 사용하지 않는 NAT Gatway는 반드시 삭제하기를 추천드립니다.
-
-
-
-## 참고 URL
-1. NAT Gateway 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/networking-vpc-vpcdetailenatgw&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/networking-vpc-vpcdetailenatgw&lt;/a&gt;
-
-2. NAT Gateway 특징과 비교
-	- &lt;a href=&quot;https://m.blog.naver.com/n_cloudplatform/221173116642&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://m.blog.naver.com/n_cloudplatform/221173116642&lt;/a&gt;
-</description>
-            <pubDate>Tue, 16 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_natgw_routetb.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_natgw_routetb.html</guid>
-            
-            <category>vpc</category>
-            
-            <category>natgateway</category>
-            
-            <category>routetable</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Windows</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 **Windows 환경에서 제어하는 방법**에 대해 소개합니다.
-
-## 쿠버네티스란?
-쿠버네티스(Kubernetes, K8S)는 배포, 스케일링, 그리고 컨테이너화된 애플리케이션의 관리를 자동화 해주는 오픈 소스 컨테이너 오케스트레이션 엔진으로 
-구글에서 처음 개발하기 시작했으나 현재는 구글이 오픈소스 프로젝트로 공개한 상태입니다.
-
-## 특징
-쿠버네티스는 다음과 같은 특징이 있으며, 자세한 내용은 쿠버네티스 공식 페이지를 참고하시기 바랍니다.
-
-&lt;a href=&quot;https://kubernetes.io/ko/docs/home/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://kubernetes.io/ko/docs/home/&lt;/a&gt;
-
-- 서비스 디스커버리와 로드 밸런싱
-- 스토리지 오케스트레이션
-- 자동화된 롤아웃과 롤백
-- 자동화된 빈 패킹(bin packing)
-- 자동화된 복구(self-healing)
-- 시크릿과 구성 관리
-
-
-## 사전 준비
-먼저 쿠버네티스 클러스터에 사용할 **전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet**이 필요합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-36.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;IP 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /17~/26 범위의 Subnet, 로드밸런서 전용 Subnet이 필요합니다.&lt;br/&gt;&lt;br/&gt;
-Docker Bridge 대역의 충돌을 방지하기 위해 172.17.0.0/16 범위 내의 Private Subnet, 로드밸런서 전용Subnet은 선택할 수 없습니다.&quot; %}
-
-## 쿠버네티스 서비스 위치
-Ncloud 쿠버네티스 서비스는 [콘솔] - [Services] - [Containers]에 위치하고 있습니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-33.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 클러스터 생성 
-
-VPC와 Subnet이 준비되었다면, 다음으로 [Kubernetes Sevice] - [Cluster]에서 생성하기를 클릭합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 클러스터 설정
-생성할 클러스터의 정보를 설정해줍니다. 
-**네트워크 타입은 Private과 Public 중에서 선택**할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Kubernetes Service를 위한 ACG는 자동으로 생성됩니다.&quot; %}
-{% include callout-v2.html type=&quot;primary&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 Kubernetes 버전은 [**1.24.0**], [**1.25.8**] 입니다.&quot;%}
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-35.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-### NAT Gateway 생성
-`Private Subnet을 선택했을 경우`에는 아래와 같이 NAT Gateway 생성 안내 팝업이 나타나는데,  
-NAT Gateway를 생성해야 아웃바운드 트래픽을 활성화할 수 있기 때문입니다.
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_10.jpg&quot; width=&quot;490&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-팝업에서 링크를 클릭해서 NAT Gateway 화면으로 이동해 NAT Gateway를 생성합니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NAT Gateway 생성 가이드는 아래 문서를 참고하시기 바랍니다. &lt;br /&gt;&lt;br /&gt;
-- &lt;a href=&apos;/networking/ncloud_networking_natgw_routetb.html&apos; target=&apos;_blank&apos;&gt;VPC 환경에서 NAT Gateway 설정하기&lt;/a&gt;&quot; %}
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_11.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 노드풀 설정
-노드풀 이름을 입력하고, 서버 이미지와 서버 타입을 선택하고 [추가] 버튼을 클릭합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;현재 지원되고 있는 OS는 [**ubuntu 16.04**], [**ubuntu 18.04**], [**ubuntu 20.04**] 입니다.&quot;%}
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-37.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 인증키 설정
-다음으로 워커노드의 인증키를 설정 합니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-38.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## 최종 확인
-설정 정보를 최종적으로 확인한 후 생성버튼을 클릭하여 클러스터를 생성합니다.
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;쿠버네티스 클러스터 생성은 20분 정도 소요되므로 여유를 갖고 기다리시면 됩니다.&quot;%}
-
-{% include image.html file=&quot;compute/kubernetes/ncp_server_kubernetes_start_guide_04.jpg&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 생성 완료
-생성이 완료되면 아래와 같이 클러스터와 노드풀의 정보를 확인할 수 있습니다.  
-클러스터 정보 중에서 클러스터 **UUID는 아래쪽에서 IAM 인증 Kubeconifg 파일을 생성할 때 필요**하니 확인해두시기 바랍니다.
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-[Server] 메뉴에 가면 노드풀 설정에 따라 생성된 서버를 확인할 수 있습니다.  
-(서버 이름은 노드풀 이름으로 입력한 문자열 기준으로 생성되는데, 여기서는 test123-O-OOO 이런 식으로 생성되었습니다.)
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## IAM 인증 설정
-클러스터를 제어하기 위해서는 네이버 클라우드 쿠버네티스 서비스에서 제공하는 IAM 인증을 설정해야 합니다.
-
-### ncp-iam-authenticator 설치
-Ncloud에서 제공하는 ncp-iam-authenticator 바이너리를 통해 iam 인증 config 파일을 생성 할 수 있습니다.
-
-- ncp-iam-authenticator 바이너리를 다운로드 합니다.
-
-``` powershell
-&gt; curl -o ncp-iam-authenticator.exe https://kr.object.ncloudstorage.com/nks-download/ncp-iam-authenticator/v1.0.5/windows/amd64/ncp-iam-authenticator.exe
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-25.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-- ncp-iam-authenticator가 정상 작동 하는지 테스트 합니다. 
-
-``` powershell
-&gt; ncp-iam-authenticator help
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-26.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-## API 인증키 생성
-네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
-
-{% include image.html file=&quot;api/ncloud_api_auth_key_create.png&quot; width=&quot;770&quot; alt=&quot;Ncloud API 인증키 생성 방법&quot; caption=&quot;&quot; %}
-
-## Kubeconfig 파일 생성
-API 인증키를 2가지 방법 중 하나를 이용해 환경변수에 등록합니다.
-
-**1. OS 환경 변수 설정**
-
-``` powershell
-&gt; SET NCLOUD_ACCESS_KEY={Ncloud API AccessKey}
-&gt; SET NCLOUD_SECRET_KEY={Ncloud API SecretKey}
-&gt; SET NCLOUD_API_GW=https://ncloud.apigw.ntruss.com
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-27.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-**2. 사용자 계정 홈 폴더에 configure 설정**  
-Windows 사용자 계정 폴더에 .ncloud 폴더를 만들고 아래와 같은 내용으로 configure 파일을 생성합니다.
-
-``` powershell
-&gt; mkdir C:\Users\{User Account}\.ncloud
-&gt; copy con C:\Users\{User Account}\.ncloud\configure
-[DEFAULT]
-ncloud_access_key_id = {Ncloud API AccessKey}
-ncloud_secret_access_key = {Ncloud API SecretKey}
-ncloud_api_url = https://ncloud.apigw.ntruss.com
-^Z
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-28.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-**3. Kubeconifg 파일 생성**  
-환경변수에 등록이 되었다면 파일을 생성 할 차례입니다.  
-아래 명령어로 클러스터에 대한 IAM 인증 Kubeconifg 파일을 생성합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;클러러스터 UUID 값은 클러스터 상세보기의 [클러스터 이름 (UUID)] 에서  확인 할수 있습니다.&quot; %}
-
-``` powershell
-&gt; ncp-iam-authenticator create-kubeconfig --region &lt;region-code&gt; --clusterUuid &lt;cluster-uuid&gt; --output &lt;FileName&gt;.yaml
-
-## 예시
-&gt; ncp-iam-authenticator create-kubeconfig --region KR --clusterUuid 12345678-1234-1234-1234-1234567890 --output kubeconfig.yaml
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-29.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## kubectl 설치
-쿠버네티스 클러스터를 제어할 kubectl을 설치하기 위해 필요한 파일을 다운로드 받고, 버전 정보를 확인합니다.
-
-아래 두가지 방법 중에 하나를 선택해 다운로드 받으시면 됩니다.
-
-&lt;a href=&quot;https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe&quot; target=&quot;_self&quot; style=&quot;word-break:break-all;&quot;&gt;Download the latest release v1.24.0&lt;/a&gt;
-
-``` bash
-&gt; curl -LO https://dl.k8s.io/release/v1.24.0/bin/windows/amd64/kubectl.exe
-```
-
-``` powershell
-&gt; kubectl version --client --output=yaml
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-30.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## kubectl 실행
-생성한 IAM 인증 kubeconfig 파일을 이용하여 kubectl 명령어를 테스트하여 정상 동작 하는지 확인 합니다.  
-실행하면 아래와 같이 현재 동작 중인 노드 서버 리스트를 확인할 수 있습니다.
-
-``` powershell
-&gt; kubectl get node --kubeconfig kubeconfig.yaml
-```
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-31.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-### 실행 명령어 단축
-위와 같은 kubectl 명령은 뒤쪽에 kubeconfig 환경 설정 파일까지 입력해야 해서 다소 불편한데, 간단하게 줄일 수 있는 방법이 있습니다.  
-
-우선 만들어진 kubeconfig.yaml 파일을 .kube/ 디렉토리 아래에 config로 이름을 바꾸어 이동 혹은 복사 합니다.
-
-``` powershell
-&gt; copy kubeconfig.yaml .kube\config
-```
-
-이렇게 하면 Kubectl을 사용 시 아래와 같이 --kuebeconfig 명령어 없이 사용 할 수 있습니다.
-
-``` powershell
-&gt; kubectl get node
-```
-
-{% include image.html file=&quot;containers/ncloud-containers-kubernetes-start-guide-32.png&quot; width=&quot;843&quot; alt=&quot;Ncloud Kubernetes Service 클러스터 생성 및 제어하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1. 쿠버네티스 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8soverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8soverview&lt;/a&gt;
-
-2. 클러스터 이용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8suse-cluster&lt;/a&gt;
-
-3. kubectl 설치 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl%EC%84%A4%EC%B9%98&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/k8s-k8sstart#Kubectl&lt;/a&gt;
-
-4. Linux 환경에서 쿠버네티스 제어하기
-	- &lt;a href=&quot;/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html&lt;/a&gt;    
-</description>
-            <pubDate>Mon, 15 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</guid>
-            
-            <category>kubernetes</category>
-            
-            <category>vpc</category>
             
             
         </item>

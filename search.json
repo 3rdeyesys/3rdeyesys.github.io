@@ -182,6 +182,17 @@
 
 
 {
+"title": "Ncloud VPC 환경에서 무료 서버(Micro Type) 이용하는 방법",
+"tags": "linuxvpc",
+"keywords": "Linux, Free, VPC",
+"url": "/compute/ncloud-compute-micro-type-server-create-vpc.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Load Balancer에 연동된 NginX에서 Client IP 기록하고 확인하는 방법",
 "tags": "lempnginxlog",
 "keywords": "Linux, LEMP, LAMP, X-Forwarded-For, CentOS, Ubuntu",
@@ -976,11 +987,11 @@
 
 
 {
-"title": "Micro 타입 서버에서 사용할 수 없는 서비스",
+"title": "Classic 환경 Micro 타입 서버에서 사용할 수 없는 서비스",
 "tags": "limit",
 "keywords": "limit",
 "url": "/compute/ncloud_compute_server_micro_type_limit.html",
-"summary": "Ncloud Micro 타입 서버에서 사용할 수 없는 서비스입니다"
+"summary": ""
 }
 ,
 
