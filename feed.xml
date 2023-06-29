@@ -5,10 +5,167 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 21 Jun 2023 11:30:18 +0900</pubDate>
-        <lastBuildDate>Wed, 21 Jun 2023 11:30:18 +0900</lastBuildDate>
+        <pubDate>Thu, 29 Jun 2023 11:09:46 +0900</pubDate>
+        <lastBuildDate>Thu, 29 Jun 2023 11:09:46 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
+            <description>## 개요  
+Ncloud (네이버 클라우드)에서 록키 리눅스(Rocky Linux) 8.6 서버를 제공하고 있는데, 패키지를 설치할 때 간혹 패키지 다운로드 사이트 또는 미러 사이트에서 8.6 버전에 대한 패키지 정보를 찾을 수 없다는 메시지가 나타나면서 패키지를 설치할 수 없는 경우가 있습니다.   
+그렇다면 왜 이런 문제가 생기는지와 어떻게 하면 해결할 수 있는지를 정리해보겠습니다.
+
+## 오류 상황
+테스트로 아파치를 설치해보려고 했는데, 오류 메시지가 나타나면서 설치를 할 수 없었습니다. 또한 리포지토리 미러 사이트도 Ncloud 내부 서버가 아닌 록키 리눅스 공식 미러 사이트로 연결하려고 시도한 것을 확인할 수 있습니다.
+
+``` bash
+~# dnf -y install httpd
+
+Rocky Linux 8.6 - Extras                                 5.4 kB/s |  20 kB     00:03
+Errors during downloading metadata for repository &apos;extras&apos;:
+  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
+  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 146.75.94.132)
+Error: Failed to download metadata for repo &apos;extras&apos;: Cannot prepare internal mirrorlist: Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 미러 사이트 확인
+오류 메시지에 나온 공식 미리 사이트에 접속해보니 [**AppStream**], [**extras**] 등 모든 8.6 버전에 대한 정보가 사라진 것을 확인할 수 있었습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 오류 상황 요약 정리
+현재 확인되는 오류 상황을 정리해보면 다음과 같습니다.
+
+1. 패키지를 검색하는 저장소가 [**AppStream**] 이나 [**BaseOS**]가 아닌 [**Extras**]로 변경되어 있다.
+2. 리포지토리 미러 사이트를 Ncloud 내부 서버가 아닌 외부에 있는 록키 리눅스 공식 미러 사이트로 접속시도 하고 있다.
+3. 외부에 있는 록키 리눅스 공식 미러 사이트에서는 공식 지원이 종료되는 8.6 버전에 대한 데이터가 이미 삭제되어 있다. 
+
+## 원인 분석
+원인 분석을 하기 위해 서버의 리포지토리 설정을 확인해보겠습니다.
+
+### 리포지토리 설정 - 오류 서버
+[**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 아래와 같이 다수의 파일이 존재하는 것을 확인할 수 있습니다.
+
+``` bash
+~# ls -al /etc/yum.repos.d/
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 위에서 확인한 설정 파일들 중에서 [**Rocky-Extras.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, Ncloud 내부 서버가 아닌 아래와 같이 록키 리눅스 공식 사이트로 설정되어 있는 것을 알 수 있습니다.
+
+``` bash
+~# vi /etc/yum.repos.d/Rocky-Extras.repo
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+### 리포지토리 설정 - 정상 서버
+그렇다면 아무 문제 없는 정상적인 서버의 경우는 어떤지 비교해서 살펴보겠습니다.  
+
+마찬가지로 [**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 오류가 발생한 서버와 달리 아래와 같이 [**Rocky-AppStream.repo**], [**Rocky-BaseOS.repo**] 이렇게 2가지 파일만 존재하는 것을 확인할 수 있습니다.
+
+``` bash
+~# ls -al /etc/yum.repos.d/
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 또한 2가지 설정 파일들 중에서 [**Rocky-AppStream.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, 록키 리눅스 공식 사이트는 주석 처리가 되어 있고, [**baseurl**]이 [**repo.ncloud.com**] 이라는 Ncloud 내부 서버로 설정되어 있는 것을 알 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+### 원인 추적
+오류가 발생한 서버와 정상적인 서버의 차이점을 비교 추적해보니 오류가 발생한 서버에서는 서버 생성 후에 `패키지 업데이트`가 진행된 것을 알 수 있었습니다. 
+서버 생성 후에 설치된 패키지들의 업데이트를 적용하기 위해 [**dnf upgrade**]를 실행했고, 그에 따라 리포지토리 정보가 변경되었다는 것을 알 수 있었습니다.
+
+``` bash
+~# dnf -y upgrade
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+[**dnf upgrade**]와 [**dnf update**]의 차이점에 대해 [**man dnf**] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [**dnf upgrade**]이며, [**dnf update**]는 더 이상 사용되지 않는 별칭이라고 합니다.
+&quot; %}
+
+``` bash
+~# man dnf
+#--- 중략 ---#
+Upgrade Command
+       Command: upgrade
+       Aliases: up
+       Deprecated aliases: update, upgrade-to, update-to, localupdate
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+## 해결 방법
+이 문제를 해결하는 방법은 몇가지가 있는데 차례대로 정리해보겠습니다.
+
+### 방법-1
+첫번째 방법은 [**Rocky-Extras.repo**] 리포지토리 설정파일의 주소를 Ncloud 내부 서버로 변경하는 방법입니다.
+
+``` conf
+# Rocky-Extras.repo
+
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=AppStream-$releasever
+baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 주소를 변경 후에 아파치를 설치해보면 문제 없이 잘 설치 되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+### 방법-2
+두번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
+
+``` bash
+~# dnf -y install httpd --disablerepo=extras
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 사전 예방책
+위 방법들은 패키지 업데이트 후에 문제를 해결하는 방법이므로, 사전에 이런 문제가 생기지 않도록 하는 것도 선택지 중의 하나입니다. 가능한 방법은 다음 2가지 입니다.
+- 패키지 업데이트를 진행하지 않는 방법
+- 보안-버그 수정 사항만 최소한으로 업데이트 하는 방법
+
+### 패키지 최소 업데이트
+보안-버그 수정 사항만 최소한으로 업데이트 하는 [**upgrade-minimal**] 옵션으로 업데이트를 했을 경우에는 아래와 같이 리포지토리 파일에 변화가 없어서 이후 패키지 설치에 오류가 생기지 않습니다.
+
+``` bash
+~# dnf -y upgrade-minimal
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-12.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-13.png&quot; sub-class=&quot;docimage-no-top&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Rocky Linux 서버 소개
+	- &lt;a href=&quot;/compute/ncloud-compute-server-rocky-linux-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html&lt;/a&gt;
+
+2.  Rocky Linux 미러 사이트 리스트
+	- &lt;a href=&quot;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&lt;/a&gt;
+</description>
+            <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</guid>
+            
+            <category>linux</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud VPC 환경에서 무료 서버(Micro Type) 이용하는 방법</title>
@@ -367,8 +524,6 @@ mv 명령어를 사용해 [**SSH Key**] 인증에서 사용할 파일명으로 �
             <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-connect-by-ssh-key.html</guid>
             
             <category>linux</category>
-            
-            <category>windows</category>
             
             <category>password</category>
             
@@ -1256,75 +1411,6 @@ Ncloud의 상품인 [**Cloud Log Analytics**]에서 NginX의 로그를 확인해
             <category>nginx</category>
             
             <category>log</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>로드밸런서(Application Load Balancer) 접속 로그 확인하는 방법</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) VPC 환경의 대표적인 로드밸런서(Load Balancer)인 **애플리케이션 로드밸런서(Application Load Balancer)의 접속 로그**를 확인하는 방법에 대해 정리해보겠습니다.  
-
-## 테스트 준비
-- 서버 생성: **록키 리눅스 (Rocky Linux 8.6)**
-- 로드밸런서 생성: **애플리케이션 로드밸런서(Application Load Balancer)**
-- 서버와 로드밸런서 연결
-
-## 서버 생성
-테스트용 서버는 **Rocky Linux 8.6 서버**로 생성했습니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-load-balancer-access-log-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 Application Load Balancer의 접속 로그 확인하는 방법&quot; caption=&quot;&quot; %}
-
-## 로드밸런서 생성
-**Application Load Balancer**를 생성하고 테스트용 서버와 연결까지 마쳤습니다.
-
-{% include callout_v2.html type=&quot;info&quot;  content=&quot;Application Load Blancer 의 생성 가이드는 아래 문서를 참고하시기 바랍니다. &lt;br /&gt;&lt;br /&gt;
-- &lt;a href=&apos;/networking/ncloud_networking_load_balancer_application_lb.html&apos; target=&apos;_blank&apos;&gt;VPC 환경에서 Application Load Balancer 생성하기&lt;/a&gt;&quot; %}
-
-{% include image.html file=&quot;networking/ncloud-networking-load-balancer-access-log-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 Application Load Balancer의 접속 로그 확인하는 방법&quot; caption=&quot;&quot; %}
-
-## 접속 로그 수집 활성화
-로드밸런서의 접속 로그를 수집하려면 접속 로그 수집 기능을 활성화 해야 합니다. 생성된 로드밸런서를 선택하고 [**로드밸런서 설정 변경**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-load-balancer-access-log-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 Application Load Balancer의 접속 로그 확인하는 방법&quot; caption=&quot;&quot; %}
-
-- [**로드밸런서 설정 변경**] 팝업창에서 [**액세스 로그 수집**] 항목이 [**비활성**] 상태인 것을 확인할 수 있습니다. 여기서 [**설정**] 버튼을 클릭합니다.
-{% include image.html file=&quot;networking/ncloud-networking-load-balancer-access-log-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 Application Load Balancer의 접속 로그 확인하는 방법&quot; caption=&quot;&quot; %}
-
-- [**액세스 로그 수집**]을 활성화할 것인지 한번 더 확인하는 창이 뜨는데 [**확인**] 버튼을 클릭합니다.
-{% include image.html file=&quot;networking/ncloud-networking-load-balancer-access-log-07.png&quot; width=&quot;485&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 Application Load Balancer의 접속 로그 확인하는 방법&quot; caption=&quot;&quot; %}
-
-- [**로드밸런서 설정 변경**] 팝업창에서 [**액세스 로그 수집**] 항목이 [**활성**] 상태로 변경된 것을 확인할 수 있습니다.
-{% include image.html file=&quot;networking/ncloud-networking-load-balancer-access-log-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 Application Load Balancer의 접속 로그 확인하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 접속 테스트
-웹브라우저에서 로드밸런서 주소로 접속해서 정상 작동하는지 확인했습니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-load-balancer-access-log-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 Application Load Balancer의 접속 로그 확인하는 방법&quot; caption=&quot;&quot; %}
-
-## 로드밸런서 접속 로그 확인
-로드밸런서 접속 로그는 Ncloud 서비스 중에서 [**Cloud Log Analytics**]에서 확인할 수 있습니다.  
-
-[**Cloud Log Analytics**] - [**Search**] - [**로그 종류 선택**]에서 [**application_loadbalancer_access**] 필드를 선택하고 [**Log 발생시간**]을 상황에 맞에 선택한 후에 검색을 하면 아래 스샷과 같이 접속로그를 확인할 수 있습니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-load-balancer-access-log-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) VPC 환경에서 Application Load Balancer의 접속 로그 확인하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1. VPC 환경에서 Application Load Balancer 생성하기
-	- &lt;a href=&quot;/networking/ncloud_networking_load_balancer_application_lb.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html&lt;/a&gt;
-
-2. Cloud Log Analytics 설정 가이드
-	- &lt;a href=&quot;/analytics/ncloud_analytics_cloud_log_analytics_guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/analytics/ncloud_analytics_cloud_log_analytics_guide.html&lt;/a&gt;
-</description>
-            <pubDate>Fri, 19 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/networking/ncloud-networking-load-balancer-application-lb-access-log.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud-networking-load-balancer-application-lb-access-log.html</guid>
-            
-            <category>vpc</category>
-            
-            <category>load_balancer</category>
             
             
         </item>

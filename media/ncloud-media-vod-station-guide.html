@@ -421,6 +421,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
           
           
+          
+          
+          
+          <li><a title="Rocky Linux 미러 사이트 문제 해결" href="/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html" >Rocky Linux 미러 사이트 문제 해결</a></li>          
+                    
+          
+          
           <li class="subfolders">
               <a title="AutoScaling" href="#">AutoScaling</a>
               <ul>                  
@@ -2291,52 +2298,65 @@ DRM 등의 콘텐츠 보호 설정이 필요할 경우 관련된 설정을 추�
 
 <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>URL Template:</b> https://[CDN Domain]/[Protocol]/[EncryptedBucketName]/[Path]/[Video Filename]/[Manifest]</div>
 
-<table>
+<div>
+<table class="simple_table">
   <thead>
     <tr>
-      <th style="text-align: center">Domain</th>
-      <th style="text-align: center">Protocol</th>
-      <th style="text-align: center">BucketName</th>
-      <th style="text-align: center">Path</th>
-      <th style="text-align: center">FileName</th>
-      <th style="text-align: center">Manifest</th>
+      <th>Domain</th>
+      <th>Protocol</th>
+      <th>BucketName</th>
+      <th>Path</th>
+      <th>FileName</th>
+	  <th>Manifest</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody>    
     <tr>
-      <td style="text-align: center"><br />example.cdn.ntruss.com</td>
-      <td style="text-align: center"><br />~aiEihf7l39******fs890ilkjlkfts_</td>
-      <td style="text-align: center">/hls<br /><br />/dash</td>
-      <td style="text-align: center"><br />/example_category</td>
-      <td style="text-align: center"><br />/example.mp4</td>
-      <td style="text-align: center">/index.m3u8<br /><br />/manifest.mpd</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">CDN 도메인</td>
-      <td style="text-align: center">암호화된 Bucket 이름</td>
-      <td style="text-align: center">스트리밍<br />프로토콜</td>
-      <td style="text-align: center">카테고리 이름으로<br />구성된 폴더 경로</td>
-      <td style="text-align: center">파일명</td>
-      <td style="text-align: center">스트리밍을 위한<br />Manifest 파일</td>
-    </tr>
+	  <td rowspan="2">example.cdn.ntruss.com</td>
+	  <td rowspan="2">~aiEihf7l39&#42;&#42;&#42;&#42;&#42;&#42;fs890ilkjlkfts_</td>
+	  <td>/hls</td>
+	  <td rowspan="2">/example_category</td>
+	  <td rowspan="2">/example.mp4</td>
+	  <td>/index.m3u8</td>
+	</tr>
+	<tr>
+		<td>/dash</td>
+		<td>/manifest.mpd</td>
+	</tr>
   </tbody>
+  <tfoot>
+	<tr>
+	  <td>CDN 도메인</td>
+	  <td>암호화된 Bucket 이름</td>
+	  <td>스트리밍<br />프로토콜</td>
+	  <td>카테고리 이름으로<br />구성된 폴더 경로</td>
+	  <td>파일명</td>
+	  <td>스트리밍을 위한<br />Manifest 파일</td>
+	</tr>
+  </tfoot>
 </table>
 
-<h3 id="url-예시">URL 예시</h3>
-<p>Channel에서 확인했던 파일 하나를 선택해서 재생 URL이 어떻게 구성되는지 예시를 들어보겠습니다.</p>
+### URL 예시
+Channel에서 확인했던 파일 하나를 선택해서 재생 URL이 어떻게 구성되는지 예시를 들어보겠습니다.
 
 <div class="alert alert-success" role="alert"><i class="far fa-check-square"></i> <b>파일명 예시:</b> test-category/VOD-Station_AVC_HD_1Pass_30fps.mp4</div>
 
+
+
+
+
 <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>재생 경로 URL:</b> https://yyvs***46***73.cdn.ntruss.com/hls/~ndO***eX~d1Y***OfE***VRYsO***Mgb***ri24_/test-category/VOD-Station_AVC_HD_1Pass_30fps.mp4/index.m3u8</div>
 
-<h3 id="재생-url-빠르게-확인하기">재생 URL 빠르게 확인하기</h3>
-<p>재생 경로 URL이 복잡하게 구성되어 있다보니 직접 작성하기 쉽지 않은데, 이럴 때는 아래와 같은 방법으로 빠르게 확인할 수 있습니다.<br />
-사용하시는 웹브라우저(여기서는 크롬을 사용)에 HLS, DASH 프로토콜 파일을 플레이할 수 있는 기능이 설치되어 있으면 보다 간편하게 확인 가능합니다.</p>
 
-<ul>
-  <li><strong>웹브라우저 확장 프로그램 설치</strong><br />
-혹시 설치되어 있지 않을 경우 크롬 웹스토어 [<strong>확장 프로그램</strong>]에서 <strong>HLS, DASH Player</strong>를 아래와 같이 검색해서 설치합니다.</li>
-</ul>
+
+
+
+### 재생 URL 빠르게 확인하기
+재생 경로 URL이 복잡하게 구성되어 있다보니 직접 작성하기 쉽지 않은데, 이럴 때는 아래와 같은 방법으로 빠르게 확인할 수 있습니다.  
+사용하시는 웹브라우저(여기서는 크롬을 사용)에 HLS, DASH 프로토콜 파일을 플레이할 수 있는 기능이 설치되어 있으면 보다 간편하게 확인 가능합니다.  
+
+- **웹브라우저 확장 프로그램 설치**  
+혹시 설치되어 있지 않을 경우 크롬 웹스토어 [**확장 프로그램**]에서 **HLS, DASH Player**를 아래와 같이 검색해서 설치합니다.
 
 <figure>
   <img class="docimage" src="/images/media/ncloud-media-vod-station-guide-30.png" alt="Ncloud (네이버 클라우드) VOD Station 생성 가이드" style="width: 845px; " />
@@ -2345,10 +2365,10 @@ DRM 등의 콘텐츠 보호 설정이 필요할 경우 관련된 설정을 추�
   
 </figure>
 
-<ul>
-  <li><strong>CDN 재생경로 URL 생성</strong><br />
-확장 프로그램이 설치되었으면 [<strong>VOD Station</strong>] - [<strong>Channel</strong>]에서 파일 리스트 오른쪽에 있는 [<strong>HLS URL 생성</strong>] 또는 [<strong>DASH URL 생성</strong>] 버튼을 클릭합니다.</li>
-</ul>
+
+
+- **CDN 재생경로 URL 생성**  
+확장 프로그램이 설치되었으면 [**VOD Station**] - [**Channel**]에서 파일 리스트 오른쪽에 있는 [**HLS URL 생성**] 또는 [**DASH URL 생성**] 버튼을 클릭합니다.
 
 <figure>
   <img class="docimage" src="/images/media/ncloud-media-vod-station-guide-32.png" alt="Ncloud (네이버 클라우드) VOD Station 생성 가이드" style="width: 845px; " />
@@ -2357,10 +2377,10 @@ DRM 등의 콘텐츠 보호 설정이 필요할 경우 관련된 설정을 추�
   
 </figure>
 
-<ul>
-  <li><strong>CDN 재생경로 URL 확인</strong><br />
-그러면 아래와 같이 웹브라우저에서 해당 파일이 재생되면서 주소창에서 재생 URL을 확인할 수 있습니다.</li>
-</ul>
+
+
+- **CDN 재생경로 URL 확인**  
+그러면 아래와 같이 웹브라우저에서 해당 파일이 재생되면서 주소창에서 재생 URL을 확인할 수 있습니다.
 
 <figure>
   <img class="docimage" src="/images/media/ncloud-media-vod-station-guide-31.png" alt="Ncloud (네이버 클라우드) VOD Station 생성 가이드" style="width: 845px; " />
@@ -2369,12 +2389,20 @@ DRM 등의 콘텐츠 보호 설정이 필요할 경우 관련된 설정을 추�
   
 </figure>
 
-<h2 id="video-player-enhancement">Video Player Enhancement</h2>
-<p>모든 작업이 완료된 영상을 재생하려면 [<strong>Video Player Enhancement</strong>] 서비스를 이용하면 되는데 자세한 사용 방법은 아래 가이드 문서에서 확인할 수 있습니다.</p>
+
+
+
+
+## Video Player Enhancement
+모든 작업이 완료된 영상을 재생하려면 [**Video Player Enhancement**] 서비스를 이용하면 되는데 자세한 사용 방법은 아래 가이드 문서에서 확인할 수 있습니다.
 
 <div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-1">
 ⁃ <a href="/media/ncloud-media-video-player-enhancement-guide.html" target="_blank" style="word-break:break-all;"> Video Player Enhancement 사용 가이드</a>
 </div>
+
+
+
+
 
 <figure>
   <img class="docimage" src="/images/media/ncloud-media-video-player-enhancement-guide-09.png" alt="Ncloud (네이버 클라우드) Video Player Enhancement 사용 가이드" style="width: 845px; " />
@@ -2383,14 +2411,12 @@ DRM 등의 콘텐츠 보호 설정이 필요할 경우 관련된 설정을 추�
   
 </figure>
 
-<h2 id="참고-url">참고 URL</h2>
-<ol>
-  <li>Ncloud VOD Station 가이드
-    <ul>
-      <li><a href="https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview</a></li>
-    </ul>
-  </li>
-</ol>
+
+
+## 참고 URL
+1. Ncloud VOD Station 가이드
+	- <a href="https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/ko/vodstation-vodstationoverview</a>
+</div>
 
   
     <div class="tags">
@@ -2468,7 +2494,7 @@ DRM 등의 콘텐츠 보호 설정이 필요할 경우 관련된 설정을 추�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-03-17<br/> Site last generated: 2023-06-21 <br />        
+        <span>Page last updated:</span> 2023-03-17<br/> Site last generated: 2023-06-29 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
