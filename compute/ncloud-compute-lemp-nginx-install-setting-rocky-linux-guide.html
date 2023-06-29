@@ -24,7 +24,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png" />
 <meta property="og:image:alt" content="Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-04-27T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png" />
 <meta name="twitter:image:alt" content="Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법" />
@@ -1921,16 +1921,42 @@ $("#toc_onoff").click(function() {
 </figure>
 
 <h2 id="패키지-업데이트">패키지 업데이트</h2>
-<p>우선 패키지 업데이트를 해보겠습니다.</p>
+<p>우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> update
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> upgrade-minimal
 </code></pre></div></div>
 <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>dnf:</b> Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
 </div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-02.png" alt="Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-rocky-linux-guide-03.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="리포지토지-설정-파일-추가">리포지토지 설정 파일 추가</h3>
+<p>NginX 최신버전(mainline)을 설치하기 위해서는 epel-release 리포지토리 패키지가 필요하고, epel-release 리포지토리 패키지를 설치하기 위해서는 Extras 저장소 설정 파일이 필요합니다.<br />
+우선, Extras 저장소 설정 파일을 준비합니다. 이미 생성되어 있는 경우에는 다음 단계로 넘어가도 되고, 그렇지 않을 경우 아래와 같은 내용으로 파일을 생성합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/yum.repos.d/Rocky-Exras.repo
+</code></pre></div></div>
+
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Rocky-Extras.repo
+</span>
+[<span class="n">extras</span>]
+<span class="n">name</span>=<span class="n">Rocky</span> <span class="n">Linux</span> $<span class="n">releasever</span> - <span class="n">Extras</span>
+<span class="c">#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
+</span><span class="n">baseurl</span>=<span class="n">http</span>://<span class="n">repo</span>.<span class="n">ncloud</span>.<span class="n">com</span>/<span class="n">rocky</span>/$<span class="n">releasever</span>/<span class="n">extras</span>/$<span class="n">basearch</span>/<span class="n">os</span>/
+<span class="n">gpgcheck</span>=<span class="m">1</span>
+<span class="n">enabled</span>=<span class="m">1</span>
+<span class="n">countme</span>=<span class="m">1</span>
+<span class="n">gpgkey</span>=<span class="n">file</span>:///<span class="n">etc</span>/<span class="n">pki</span>/<span class="n">rpm</span>-<span class="n">gpg</span>/<span class="n">RPM</span>-<span class="n">GPG</span>-<span class="n">KEY</span>-<span class="n">rockyofficial</span>
+</code></pre></div></div>
+
+<figure>
+  <img class="docimage" src="/images/compute/ncloud-compute-server-rocky-linux-guide-28.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2296,7 +2322,7 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-27<br/> Site last generated: 2023-06-29 <br />        
+        <span>Page last updated:</span> 2023-06-29<br/> Site last generated: 2023-06-29 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

@@ -5,10 +5,327 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 29 Jun 2023 11:09:46 +0900</pubDate>
-        <lastBuildDate>Thu, 29 Jun 2023 11:09:46 +0900</lastBuildDate>
+        <pubDate>Thu, 29 Jun 2023 15:12:55 +0900</pubDate>
+        <lastBuildDate>Thu, 29 Jun 2023 15:12:55 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
+            <description>## 개요
+Rocky Linux (록키 리눅스)는 CentOS의 서비스 지원 종료로 대안으로 떠오른 CentOS 기반의 리눅스 OS입니다.  
+Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 선정되어 국내에서 록키 리눅스 인프라와 기술지원을 위해 협력해왔고, 드디어 Ncloud 콘솔에서 록키 리눅스를 제공하기 시작했기에 간단하게 소개해보려고 합니다.
+
+## 제공 버전
+Ncloud에서는 현재 Rocky Linux 8.6 버전을 VPC 환경에서 제공하고 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## 설치할 소프트웨어
+록키 리눅스 서버를 실행하고 보통 자주 사용하게 되는 아래의 소프트웨어들을 설치하고 확인해보겠습니다.
+- Apache
+- PHP
+- NGINX
+- MariaDB (MySQL)
+
+## 접속 화면
+서버를 생성하고 접속하면 아래와 같이 Ncloud 로고가 크게 표시된 화면을 볼 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## 패키지 업데이트
+우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.
+
+``` bash
+~# dnf -y upgrade-minimal
+```
+{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
+Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
+&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## Apache, PHP 설치
+설치할 소프트웨어 중에서 Apache와 PHP를 동시에 설치해보겠습니다.  
+
+``` bash
+~# dnf -y install httpd php
+```
+
+설치된 버전은 다음과 같습니다.
+- Apache: 2.4.37
+- PHP: 7.2.24
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 접속화면
+설치 완료 후에 웹브라우저로 접속해보면 다음과 같이 Apache 로고가 포함된 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### PHP 버전 리스트
+Ncloud Rocky Linux 8.6에서 지원하는 PHP 버전은 다음과 같이 확인해볼 수 있습니다.  
+리스트를 확인해보면 7.2버전이 기본이고, 현재 활성화된 버전도 7.2버전인 것을 알 수 있습니다.
+
+``` bash
+~# dnf module list php
+```
+
+- PHP 7.2 (default)
+- PHP 7.3
+- PHP 7.4
+- PHP 8.0
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-19.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## PHP 버전 변경
+기본으로 설치된 **7.2** 버전에서 다른 버전으로 변경하는 방법에 대해 알아보겠습니다. 여기서는 **8.0**으로 변경해보겠습니다.
+
+### 버전 활성화 정보 초기화
+우선 위에서 확인했던 php 버전 활성화 정보를 초기화 합니다.
+
+``` bash
+~# dnf module reset php
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+
+### PHP 8.0 활성화
+다음으로 8.0 버전을 활성화 합니다.
+
+``` bash
+~# dnf module enable php:8.0
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-21.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### PHP 8.0 설치
+마지막으로 8.0 버전을 설치하고 버전을 확인해봅니다.
+
+``` bash
+~# dnf -y install php
+~# php -v
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-22.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## NginX 설치
+다음으로 NginX 최신버전(mainline)으로 설치해보겠습니다.  
+NginX 최신버전(mainline)을 설치하기 위해서는 epel-release 리포지토리 패키지가 필요하고, epel-release 리포지토리 패키지를 설치하기 위해서는 Extras 저장소 설정 파일이 필요합니다.
+
+### 리포지토지 설정 파일 추가
+우선, Extras 저장소 설정 파일 준비합니다. 이미 생성되어 있는 경우에는 다음 단계로 넘어가도 되고, 그렇지 않을 경우 아래와 같은 내용으로 파일을 생성합니다.
+
+``` bash
+~# vi /etc/yum.repos.d/Rocky-Exras.repo
+```
+
+``` conf
+# Rocky-Extras.repo
+
+[extras]
+name=Rocky Linux $releasever - Extras
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
+baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
+gpgcheck=1
+enabled=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### EPEL 리포지토리 패키지 설치
+다음으로, NginX 최신 버전을 설치하기 위해 epel-release 리포지토리 패키지를 설치하겠습니다.
+
+``` bash
+~# dnf -y install epel-release
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### NginX 버전 리스트
+위 준비사항이 모두 완료되었으면, Ncloud Rocky Linux 8.6에서 지원하는 NginX 버전을 확인합니다.  
+리스트를 살펴보면 1.14가 기본 버전이고, 현재 활성화된 버전도 1.14인 것을 알 수 있습니다.
+
+``` bash
+~# dnf module list nginx
+```
+
+- nginx 1.14 (default)
+- nginx 1.16
+- nginx 1.18
+- nginx 1.20
+- nginx mainline
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-23.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 버전 활성화 정보 초기화
+우선 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다.  
+혹시 활성화된 버전이 없을 경우에는 별다른 변화 없이 과정이 완료됩니다.
+
+``` bash
+~# dnf module reset nginx
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-24.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### mainline 버전 활성화
+최신 버전인 mainline 버전을 활성화합니다.
+
+``` bash
+~# dnf module enable nginx:mainline
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 설치
+NginX 설치합니다. 설치된 버전은 다음과 같습니다.
+
+``` bash
+~# dnf -y install nginx
+~# nginx -v
+```
+- NGINX: 1.23.1
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 접속화면
+설치 완료 후에 nginx를 실행 시키고, 웹브라우저로 접속해보면 다음과 같이 NGINX 로고가 포함된 화면을 확인할 수 있습니다.
+
+``` bash
+~# systemctl enable nginx
+~# systemctl start nginx
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## MariaDB (MySQL) 설치
+
+### MariaDB 버전 리스트
+우선, Ncloud Rocky Linux 8.6에서 지원하는 MariaDB 버전을 확인합니다.  
+리스트를 살펴보면 10.3이 기본 버전인 것을 알 수 있습니다.
+
+``` bash
+~# dnf module list mariadb
+```
+
+- mariadb 10.3 (default)
+- mariadb 10.5
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-27.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 설치
+Rocky Linux에서는 기본 DB가 MariaDB이고, 설치할 때도 [**mariadb-server**]로 설치하게 됩니다.  
+여기서는 기본 버전으로 설치하겠습니다.
+
+``` bash
+~# dnf -y install mariadb-server
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+MariaDB 데몬을 시작합니다.  
+그런데 자세히 보시면 생성된 symlink가 [**mysql.service**]인 것을 확인할 수 있습니다. 즉, MariaDB를 실행할 때는 [**mysql**] 명령을 입력하면 된다는 뜻입니다.
+
+``` bash
+~# systemctl enable mariadb
+~# systemctl start mariadb
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### DB 접속
+[**mysql**] 명령을 입력하면 아래와 같이 MariaDB 서버에 접속됩니다.  
+설치된 DB 서버 버전은 다음과 같습니다.
+- MariaDB: 10.3.32
+
+``` bash
+~# mysql
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+
+## 웹 콘솔
+Rocky Linux는 웹브라우저에서 서버에 접속해서 서버를 관리할 수 있는 웹 콘솔을 제공하는데, 처음 서버에 접속했던 콘솔화면을 보면 아래와 같이 웹 콘솔을 활성화하는 방법이 안내되어 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+아래 명령어를 입력하면 [**9090**] 포트로 접속할 수 있는 웹 콘솔이 활성화됩니다.
+``` bash
+~# systemctl enable --now cockpit.socket
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 웹 콘솔 접속
+먼저, ACG에서 [**9090**] 포트를 오픈하고, [**https://{서버 IP}:9090**]으로 접속하면 아래와 같은 화면을 볼 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 웹 콘솔 화면
+웹 콘솔에 접속하면 서버 상태와 시스템 정보, CPU-메모리 사용량 등을 확인할 수 있고, 그 외에도 여러 가지 기능을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-18.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+
+## 버전 활성화 오류 해결 방법
+[dnf module enable &lt;module_name&gt;] 명령으로 다른 버전을 활성화하려고 할 때 아래와 같은 오류가 발생하는 경우가 있습니다.  
+오류 메시지 하단에 보면 [**dnf module reset &lt;module_name&gt;**] 명령을 입력하면 해결된다 합니다.
+
+{% include warning.html title=&quot;Error&quot; content=&quot;It is not possible to switch enabled streams of a module unless explicitly enabled via configuration option module_stream_switch. 
+It is recommended to rather remove all installed content from the module, and reset the module using &apos;**dnf module reset \&lt;module_name\&gt;**&apos; command. After you reset the module, you can install the other stream.
+&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-25.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+
+명령을 입력하고 처리가 완료되면 [**dnf module enable \&lt;module_name\&gt;:\&lt;module_version\&gt;**] 명령을 다시 입력하면 됩니다.
+``` bash
+#예시
+~# dnf module reset php
+~# dnf module reset nginx
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-26.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Rocky Linux 공식 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/&lt;/a&gt;
+
+2.  Rocky Linux Apache 설정
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/apache-sites-enabled/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/apache-sites-enabled/&lt;/a&gt;
+
+2.  Rocky Linux NGINX 설정
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;
+
+2.  Rocky Linux MariaDB 설치
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/database/database_mariadb-server/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/database/database_mariadb-server/&lt;/a&gt;		
+</description>
+            <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html</guid>
+            
+            <category>linux</category>
+            
+            <category>apache</category>
+            
+            <category>php</category>
+            
+            <category>nginx</category>
+            
+            <category>mysql</category>
+            
+            <category>mariadb</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
@@ -163,6 +480,271 @@ baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
             <category>linux</category>
             
             <category>rocky_linux</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Rocky Linux에서 NginX 설치, 설정하는 방법</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.  
+
+
+## 서버 환경
+
+{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
+&amp;#8259; NginX: NginX 1.23.1 &lt;br /&gt; 
+&amp;#8259; 테스트 사이트: nginx-test.com
+&quot; %}
+
+## 서버 준비
+Ncloud 콘솔에서 Rocky Linux 8.6 서버를 아래와 같이 준비했습니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## 패키지 업데이트
+우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.
+
+``` bash
+~# dnf -y upgrade-minimal
+```
+{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
+Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
+&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 리포지토지 설정 파일 추가
+NginX 최신버전(mainline)을 설치하기 위해서는 epel-release 리포지토리 패키지가 필요하고, epel-release 리포지토리 패키지를 설치하기 위해서는 Extras 저장소 설정 파일이 필요합니다.  
+우선, Extras 저장소 설정 파일을 준비합니다. 이미 생성되어 있는 경우에는 다음 단계로 넘어가도 되고, 그렇지 않을 경우 아래와 같은 내용으로 파일을 생성합니다.
+
+``` bash
+~# vi /etc/yum.repos.d/Rocky-Exras.repo
+```
+
+``` conf
+# Rocky-Extras.repo
+
+[extras]
+name=Rocky Linux $releasever - Extras
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
+baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
+gpgcheck=1
+enabled=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## EPEL 저장소 패키지 설치
+다음으로 epel-release 저장소 패키지를 설치하겠습니다.
+
+``` bash
+~# dnf -y install epel-release
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## NginX 버전 선택
+설치할 NginX 버전 버전을 선택합니다.
+
+### NginX 버전 리스트
+우선, Ncloud Rocky Linux 8.6에서 지원하는 NginX 버전을 확인합니다.  
+리스트를 살펴보면 1.14가 기본 버전인 것을 알 수 있습니다.
+
+``` bash
+~# dnf module list nginx
+```
+
+- nginx 1.14 (default)
+- nginx 1.16
+- nginx 1.18
+- nginx 1.20
+- nginx mainline
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 버전 활성화 정보 초기화
+다음으로 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다. 현재 활성화 된 버전이 존재하느냐에 따라 나타나는 메시지가 다릅니다.
+
+``` bash
+~# dnf module reset nginx
+```
+
+- 활성화 된 버전이 없을 때
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+- 활성화 된 버전이 있을 때
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### mainline 버전 활성화
+최신 버전인 mainline 버전을 활성화합니다.
+
+``` bash
+~# dnf module enable nginx:mainline
+```
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NginX는 stable, mainline 두가지 버전이 있습니다. 
+NginX의 공식 설명에 따르면 버그 수정이나 보안 패치 등은 항상 mainline 버전에 먼저 적용되기 때문에 mainline을 사용하는 것을 추천한다고 합니다. &lt;br /&gt;
+stable 버전을 사용하는 주된 경우는 **third-party 모듈**을 사용하고 있어서 신규 버전에서 **호환성 문제**가 발생할 가능성이 걱정될 때라고 합니다.&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## NginX 설치
+NginX를 설치합니다. 설치된 버전은 다음과 같습니다.
+
+``` bash
+~# dnf -y install nginx
+~# nginx -v
+```
+- NginX: 1.23.1
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## 디렉토리 설정
+다음으로 홈으로 사용할 디렉토리를 생성하고, 해당 디렉토리의 소유권을 설정하겠습니다.  
+그리고, NginX가 정상 작동하는지 확인해보기 위해 설치시에 포함된 index.html을 포함한 파일들을 홈 디렉토리로 복사합니다.
+
+``` bash
+# 테스트 사이트 홈 디렉토리 생성
+~# mkdir -p /ncloud/data/www/nginx-test/
+
+# 해당 디렉토리에 nginx에 권한 부여
+~# chown -R nginx:nginx /ncloud/data/www/nginx-test
+
+# nginx 샘플 페이지를 사이트 디렉토리로 복사
+~# cp /usr/share/nginx/html/*.* /ncloud/data/www/nginx-test/
+
+# 복사된 파일들 확인
+~# ls -al /ncloud/data/www/nginx-test/
+```
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## 환경 설정
+
+### 설정 파일 위치
+NginX 환경 설정 파일의 위치는 **/etc/nginx/** 디렉토리입니다. **tree** 명령으로 해당 디렉토리에서 **conf**와 관련된 파일 리스트와 디렉토리 구조를 확인하면 다음과 같습니다.
+
+``` bash
+~# tree -P *conf* /etc/nginx/
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 기본 설정 파일
+위에서 확인할 수 있는 파일들 중에서 기본 환경 설정 파일은 **/etc/nginx/nginx.conf** 입니다.  
+**nginx.conf** 파일을 열어보면 아래와 같이 **server {...}**로 시작되는 사이트 설정에 관련된 부분도 있지만,  
+**include /etc/nginx/conf.d/*.conf** 와 같이 **conf.d** 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.  
+
+물론, 사이트 설정을 **nginx.conf** 파일에 직접 설정해도 되지만, 여러 개의 사이트를 설정해야 하는 경우도 생각해서 **conf.d 디렉토리**에 사이트 이름별로 환경 설정 파일을 별도로 만들어서 진행하도록 하겠습니다. 
+
+``` bash
+~# vi /etc/nginx/nginx.conf
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 기본 설정 주석 처리
+**server {...}** 부분을 모두 주석 처리합니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 환경 설정 파일 생성
+**nginx-test.com** 이라는 도메인의 사이트 설정을 **nginx-test.conf** 설정 파일을 생성해서 저장합니다.
+
+``` bash
+~# vi /etc/nginx/conf.d/nginx-test.conf
+```
+
+``` nginx
+  server {
+    listen    80;
+    listen    [::]:80;
+
+    # 사이트 도메인 설정
+    server_name    nginx-test.com www.nginx-test.com;
+
+    # 홈 디렉토리, 기본 문서 설정
+    root      /ncloud/data/www/nginx-test;
+    index     index.html index.htm;
+
+    # 404 error 페이지 설정
+    error_page 404 /404.html;
+      location = /404.html {
+    }
+
+    # 50x error 페이지 설정
+    error_page 500 502 503 504 /50x.html;
+      location = /50x.html {
+      root    /ncloud/data/www/nginx-test;
+    }
+
+    # .htaccess 파일 접근 금지 설정
+    location ~ /\.ht {
+      deny    all;
+    }
+}
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## NginX 실행
+설정을 모두 마쳤으면 NginX를 시작하고 상태를 확인합니다.
+
+``` bash
+~# systemctl enable nginx
+~# systemctl start nginx
+~# systemctl status nginx
+```
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## hosts 파일 수정
+지금과 같이 테스트용으로 임의 설정한 도메인(**nginx-test.com**)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.  
+`실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에` [다음 단계로 바로 이동&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#https-access-test)하시면 됩니다. 
+
+윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.
+
+1. C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.
+2. 복사한 hosts 파일을 수정해서 123.456.789.123 nginx-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.
+3. 수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.
+4. 덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-14.png&quot; width=&quot;745&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사이트 접속 {#https-access-test}
+NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Rocky Linux NginX 설치 기본 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-mainline/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-mainline/&lt;/a&gt;
+
+2.  Rocky Linux NginX Multi Site 설치 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;</description>
+            <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</guid>
+            
+            <category>rocky_linux</category>
+            
+            <category>lemp</category>
+            
+            <category>nginx</category>
+            
+            <category>install</category>
             
             
         </item>
@@ -1224,193 +1806,6 @@ Ncloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Clo
             <category>clouddb</category>
             
             <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>VPC환경에서 Cloud DB for MSSQL 생성하기</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Cloud DB for MSSQL 생성 및 접속 방법에 대하여 정리해보겠습니다.
-
-## 테스트 환경
-- VPC와 Private Subnet
-- Cloud DB for MSSQL 15.0.4.198.2 Standard Edition (MSSQL 2019)
-- DB 접속 테스트용 서버 windows 2019 64bit en
-
-## Cloud DB for MSSQL 서비스 위치
-[**콘솔**] - [**Services**] - [**Database**]에서  [**Cloud DB for MSSQL**]을 찾을 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## Cloud DB for MSSQL 서버 생성
-[**Cloud DB for MSSQL**] - [**DB Server**]에서 [**DB server 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 설정
-생성할 서버의 스펙 선택 및 세부정보를 입력합니다. 
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL은 **고가용성(HA) 기능 즉, 서버 이중화를 기본으로 지원**합니다. 운영 중인 Principal Server에서 장애가 발생하여 정상적인 서비스가 불가능한 경우 Mirror Server로 자동 Failover 합니다. DNS 방식으로 이중화를 구성하므로 별도의 애플리케이션 변경이 필요 없습니다.&quot; %}
-
-{% include warning.html title=&quot;Subnet 선택 주의사항&quot; content=&quot;서버를 생성 후에는 Subnet 변경이 불가합니다. 내부 서버를 통해 접근하거나 SSL VPN을 이용해 접속할 경우는 Private Subnet으로 설정하고, 회사 PC 등 외부에서 접근이 필요하실 경우는 ACG에서 IP 제한을 적용한 후 Public Subnet으로 설정하면 됩니다. &quot; %}
-
-{% include callout-v2.html type=&quot;success&quot; level=&quot;2&quot; content=&quot;여기서는 내부 서버를 통해 접근하는 방식을 테스트할 예정이므로 **Private Subnet**을 선택합니다.&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL의 스토리지 용량은 최소 100GB부터 10GB씩 자동 증가되며 최대 2TB까지 사용 가능합니다. &quot; %}
-
-### DB 설정
-다음으로 계정 정보와 DB 접속 포트 등을 입력하고, Backup 관련 설정을 선택합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-05.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Backup 파일 보관 기간은 최소 1일 부터 최대 30일까지 선택 가능하며 FullBackup만 지원하고 있습니다. Backup 시간은 자동 또는 수동모드로 변경하여 시간 지정이 가능합니다.&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL 서버는 고가용성을 선택할 경우 서버 생성까지 대략 **1시간** 정도가 소요되니 여유를 갖고 기다리시면 됩니다.&quot; %}
-
-### DB 생성 완료
-생성될 서버의 최종 정보를 확인하고 서버를 생성하면 아래와 같이 기본 옵션으로 선택했던 고가용성에 해당하는 Principal, Mirror 이렇게 2대의 서버가 생성된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-06.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 테스트용 Windows 서버 생성
-Cloud DB for MSSQL 서버에 접속할 테스트 용도의 Windows 서버를 생성하고, 서버 정보에서 ACG 설정에 필요한 사설(비공인) IP를 확인합니다. 이 비공인 IP는 아래쪽 ACG 설정에서 사용하게 됩니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-07.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG 설정
-이제 테스트용 Windows 서버에서 Cloud DB for MSSQL로 접속할 수 있도록 ACG를 설정해야 합니다.
-
-생성된 MSSQL DB 서버의 상세 정보를 살펴보면 DB 생성 과정에서 ACG가 자동으로 생성, 적용되어 있는 것을 아래와 같이 확인할 수 있습니다. 
-- ACG 옆에 있는 아이콘을 클릭해서 ACG 화면으로 이동합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-08.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-- 위에서 확인했던 Cloud DB for MSSQL의 ACG [cloud-mssql-\*\*\*]를 선택 후 ACG 설정을 클릭합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-10.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- Inbound 규칙에 위에서 확인했던 테스트용 Windows 서버의 비공인 IP를 접근 소스로 등록하고 허용 포트 1433을 추가합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-11.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## DB 서버 접속
-
-### SQL Server Management Studio 설치
-테스트용 Windows 서버에 할당된 공인IP로 접속해 MSSQL Client인 SSMS (SQL Server Management Studio)를 다운로드하고 설치합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;https://learn.microsoft.com/ko-kr/sql/ssms/download-sql-server-management-studio-ssms&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; SSMS (SQL Server Management Studio) 다운로드&lt;/a&gt;
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-16.png&quot; width=&quot;844&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-설치된 SSMS (SQL Server Management Studio)를 찾아서 실행합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-17.png&quot; width=&quot;844&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### DB Server Private 도메인 확인
-Cloud DB for MSSQL 서버에 접속하기 위해서는 DB 서버 생성 시에 설정된 **Private 도메인**을 이용해야 하는데, 아래 화면처럼 DB 서버 상세 정보에서 **Private 도메인**을 확인할 수 있습니다. 해당 **Private 도메인** 주소를 복사해서 다음 단계인 DB 로그인 창에 입력하면 됩니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-09.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### DB 로그인
-로그인 접속 화면에서 정보를 입력하고 접속합니다.
-
-- Server name : {MSSQL DB Server의 **Private 도메인**}, {접속 포트} (쉼표로 구분하여 입력)
-- Authentication : [SQL Server Authentication] 으로 변경합니다.
-- Login 및 Password : DB 서버 생성과정에서 입력한 유저 정보를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-13.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- 정상적으로 접속된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-14.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1. Ncloud Cloud DB for MSSQL 기본 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/clouddbformssql-start-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/clouddbformssql-start-vpc&lt;/a&gt;
-
-2. SSMS (SQL Server Management Studio) 다운로드
-	- &lt;a href=&quot;https://learn.microsoft.com/ko-kr/sql/ssms/download-sql-server-management-studio-ssms&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://learn.microsoft.com/ko-kr/sql/ssms/download-sql-server-management-studio-ssms&lt;/a&gt;
-</description>
-            <pubDate>Fri, 26 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mssql-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mssql-guide.html</guid>
-            
-            <category>database</category>
-            
-            <category>mssql</category>
-            
-            <category>clouddb</category>
-            
-            <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Load Balancer에 연동된 NginX에서 Client IP 기록하고 확인하는 방법</title>
-            <description>## 개요
-Ncloud (네이버 클라우드)에서 Load Balancer에 연동된 NginX 웹서버를 사용할 때 Load Balancer IP가 아닌 실제 Client IP를 기록하고 확인하는 방법을 알아보겠습니다.
-결론부터 이야기 하자면 `NginX에서는 Apache와 달리 별도의 모듈 설치나 환경 설정 파일 수정 없이도 자동으로 실제 Client IP와 Load Balancer IP가 동시에 모두 기록`됩니다. 어떻게 기록되는지 테스트 결과를 보면서 확인해보겠습니다.
-
-## 테스트 환경
-
-{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; Server-1: CentOS 7.8 &lt;br /&gt;
-&amp;#8259; Server-2: Ubuntu 20.04 &lt;br /&gt;
-&amp;#8259; NginX: NginX 1.23.1 &lt;br /&gt; 
-&quot; %}
-
-## 서버 준비
-Ncloud 콘솔에서 CentOS 7.8, Ubuntu 20.04 두 대의 서버를 아래와 같이 준비했습니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NginX를 설치하는 방법은 아래 문서를 참고하시기 바랍니다. &lt;br /&gt;&lt;br /&gt;
-- &lt;a href=&apos;/compute/ncloud_compute_lemp_nginx_install_setting_centos_guide.html&apos; target=&apos;_blank&apos;&gt;CentOS에 NginX 설치하기&lt;/a&gt;&lt;br /&gt;
-- &lt;a href=&apos;/compute/ncloud_compute_lemp_nginx_install_setting_ubuntu_guide.html&apos; target=&apos;_blank&apos;&gt;Ubuntu에 NginX 설치하기&lt;/a&gt;
-&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-access-client-ip-log-01.png&quot; width=&quot;845&quot; alt=&quot;Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입&quot; caption=&quot;&quot; %}
-
-## Load Balancer 준비
-Load Balancer도 [**Application Load Balancer**]를 [**10.0.4.0**] 대역으로 설정해서 준비했습니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Application Load Blancer 의 생성 가이드는 아래 문서를 참고하시기 바랍니다. &lt;br /&gt;&lt;br /&gt;
-- &lt;a href=&apos;/networking/ncloud_networking_load_balancer_application_lb.html&apos; target=&apos;_blank&apos;&gt;VPC 환경에서 Application Load Balancer 생성하기&lt;/a&gt;&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-access-client-ip-log-02.png&quot; width=&quot;845&quot; alt=&quot;Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입&quot; caption=&quot;&quot; %}
-
-## Access Log 확인
-Ncloud의 상품인 [**Cloud Log Analytics**]에서 NginX의 로그를 확인해보면 아래와 같이 Log 내용에 앞쪽에는 [**Load Balancer IP**]가 기록되어 있고, 제일 뒤쪽에는 [**실제 Client IP**]가 기록되어 있는 것을 확인할 수 있습니다. 해당 서버들에는 오로지 NginX만 설치했고, 다른 모듈을 설치하거나 환경 설정 파일을 변경하지 않은 상태입니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-access-client-ip-log-03.png&quot; width=&quot;845&quot; alt=&quot;Load Balancer에 연동된 NginX 웹서버에서 Client IP 기록하고 확인하는 방법입&quot; caption=&quot;&quot; %}
-
-
-
-## 참고 URL
-1.  Rocky Linux NginX 설치 기본 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-mainline/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-mainline/&lt;/a&gt;
-
-2.  Rocky Linux NginX Multi Site 설치 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;</description>
-            <pubDate>Tue, 23 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-nginx-client-ip-logging-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-nginx-client-ip-logging-guide.html</guid>
-            
-            <category>lemp</category>
-            
-            <category>nginx</category>
-            
-            <category>log</category>
             
             
         </item>
