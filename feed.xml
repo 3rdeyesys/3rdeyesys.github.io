@@ -5,10 +5,427 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 29 Jun 2023 15:29:19 +0900</pubDate>
-        <lastBuildDate>Thu, 29 Jun 2023 15:29:19 +0900</lastBuildDate>
+        <pubDate>Mon, 03 Jul 2023 15:27:52 +0900</pubDate>
+        <lastBuildDate>Mon, 03 Jul 2023 15:27:52 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Jenkins 서버 설치 가이드 | Rocky Linux</title>
+            <description>## 개요
+Ncloud (네이버 클라우드)의 Classic 환경에서는 Jekins 서버 이미지를 제공하고 있지만, VPC 환경에서는 제공하지 않기에 VPC 환경 Rocky Linux 서버에 Jekins 서버를 설치하는 과정을 정리해보겠습니다.
+
+## Jenkins란
+Jenkins는 지속적 통합(Continuous Integration, CI)과 지속적 배포(Continuous Delivery, CD)를 위한 대표적인 도구로 빌드, 테스트, 배포 프로세스를 자동화하여 소프트웨어 품질 향상과 개발 생산성 향상에 도움을 주는 도구입니다.
+
+## Jenkins 특징
+
+- 지속적 통합을 사용하여 빌드, 테스트, 배포 과정을 자동화하여 개발 생산성을 향상할 수 있습니다.
+- 자동화 테스트를 통하여 소프트웨어 품질을 향상할 수 있습니다.
+- 지속적인 통합을 통해 안정적인 릴리즈를 빠르게 배포할 수 있습니다.
+
+
+## 설치 과정 
+
+### 패키지 저장소 추가
+먼저 Jenkins의 패키지 저장소를 추가합니다.
+
+```bash
+~# wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+```
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+### GPG 키 추카
+그런 다음 Jenkins GPG 키를 다음과 같이 추가 합니다.
+
+```bash
+~# rpm --import \
+    https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+```
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+## 패키지 업데이트
+그리고, 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 진행합니다.
+
+``` bash
+~# dnf -y upgrade-minimal
+```
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+### JAVA 설치
+Jenkins를 구동하기 위해서 필요한 JAVA 11 버전을 설치합니다.
+
+```bash
+~# dnf -y install java-11-openjdk
+```
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+### JAVA 버전 선택 {#java-version-select}
+현재 시스템에 설치된 JAVA는 기본 설치 버전인 [**java-1.8.0**]과 좀 전에 설치한 [**java-11**] 이렇게 2가지인데, Jenkins는 [**java-11**] 버전을 사용하므로 다음 명령어로 [**java-11**] 버전이 기본으로 적용되도록 설정을 변경하겠습니다.  
+명령어 입력 후 나타난 선택화면에서 [**java-11**] 버전에 해당하는 2번을 입력합니다. 그리고, 변경이 제대로 되었는지 java 버전을 확인합니다.
+
+``` bash
+~# update-alternatives --config java
+~# java -version
+```
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+### Jenkins 설치
+모든 준비가 끝났으면 Jenkins를 설치합니다.
+
+```bash
+~# dnf -y install jenkins
+```
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+### Jenkins 서비스 시작
+Jekins 서비스를 시작하고 정상 작동을하고 있는지 다음과 같이 확인합니다.
+
+``` bash
+~# systemctl daemon-reload
+~# systemctl enable jenkins
+~# systemctl start jenkins
+~# systemctl status jenkins
+```
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-07.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-08.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 방화벽 ACG 설정
+Jekins 서버가 사용하는 기본 포트는 8080 입니다. Ncloud 방화벽 ACG에서 8080 포트를 허용해줍니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 초기 설정
+
+### Port 변경
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Jenkins의 기본 접속 Port는 8080인데 /etc/sysconfig/jenkins 의 JENKINS_PORT= 항목에서 변경 할 수 있습니다.&quot; %} 
+
+``` bash
+~# vi /etc/sysconfig/jenkins
+```
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+### 초기 패스워드 확인
+
+설치가 완료 되면 http://{서버 IP주소}:8080 으로 접속하면 아래의 스크린샷처럼 초기 어드민 패스워드를 입력하는 화면이 나타납니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+초기 어드민 패스워드는 **/var/lib/jenkins/secrets/initialAdminPassword** 파일에 기록되어 있습니다.  
+cat 명령어로 초기 패스워드를 확인합니다.
+
+```bash
+~# cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+## 플러그인 설치
+플러그인 설치는 추천 플러그인을 설치하는 옵션과 직접 선택해서 설치하는 옵션이 있습니다. 일단 여기서는 추천 플러그인을 선택하겠습니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+추천 플러그인을 선택하면 아래와 같이 설치과정이 나타납니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+직접 플러그인을 선택할 경우 아래와 같이 여러 플러그인 중에서 설치하고 싶은 플러그인을 선택할 수 있습니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 어드민 계정 정보 입력
+플러그인 설치를 마치면 아래와 같이 어드민 계정 정보를 입력하게 됩니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 설치 완료
+필요한 정보를 모두 입력하고 나면 마지막으로 Jekins URL을 확정하고 저장합니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+설치가 모두 끝났습니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-18.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+이제 Jekins에 접속하면 아래와 같은 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 오류 상황
+위 순서대로 설치를 진행했다면 문제 없이 설치가 되겠지만, 혹시나 설치 중에 중요한 과정을 빠뜨렸을 경우 아래아 같이 [**Jenkins**]를 시작하려고 할 때 오류가 발생하게 됩니다.
+
+```  bash
+~# systemctl start jenkins
+
+Job for jenkins.service failed because the control process exited with error code.
+See &quot;systemctl status jenkins.service&quot; and &quot;journalctl -xe&quot; for details.
+```
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+### 오류 원인 분석 
+위 오류 메시지에서 2가지 방법으로 상세한 오류 내용을 확인해보겠습니다.
+
+- 우선 첫번째 명령 [**systemctl status jenkins.service**]으로 확인을 해보았으나 별다른 내용은 나오지 않습니다.
+
+``` bash
+~# systemctl status jenkins.service
+
+● jenkins.service - Jenkins Continuous Integration Server
+   Loaded: loaded (/usr/lib/systemd/system/jenkins.service; enabled; vendor preset: disabled)
+   Active: failed (Result: exit-code) since Fri 2023-06-30 17:08:01 KST; 1min 25s ago
+  Process: 6494 ExecStart=/usr/bin/jenkins (code=exited, status=1/FAILURE)
+ Main PID: 6494 (code=exited, status=1/FAILURE)
+
+Jun 30 17:08:01 jenkins-test systemd[1]: Failed to start Jenkins Continuous Integration Server.
+Jun 30 17:08:01 jenkins-test systemd[1]: jenkins.service: Service RestartSec=100ms expired, scheduling restart
+Jun 30 17:08:01 jenkins-test systemd[1]: jenkins.service: Scheduled restart job, restart counter is at 5.
+Jun 30 17:08:01 jenkins-test systemd[1]: Stopped Jenkins Continuous Integration Server.
+Jun 30 17:08:01 jenkins-test systemd[1]: jenkins.service: Start request repeated too quickly.
+Jun 30 17:08:01 jenkins-test systemd[1]: jenkins.service: Failed with result &apos;exit-code&apos;.
+Jun 30 17:08:01 jenkins-test systemd[1]: Failed to start Jenkins Continuous Integration Server.
+Jun 30 17:08:03 jenkins-test systemd[1]: jenkins.service: Start request repeated too quickly.
+Jun 30 17:08:03 jenkins-test systemd[1]: jenkins.service: Failed with result &apos;exit-code&apos;.
+Jun 30 17:08:03 jenkins-test systemd[1]: Failed to start Jenkins Continuous Integration Server.
+```
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-21.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+- 다음으로 [**journalctl -xe**] 명령을 입력해보니 상당히 긴 로그가 나오는데, 차근차근 살펴보다 보니 원인을 찾을 수 있었는데, 그 부분만 발췌해보면 아래와 같습니다.
+
+``` bash
+~# journalctl -xe
+
+#------------- 중간 생략 --------------#
+-- Unit jenkins.service has begun starting up.
+Jun 30 17:37:41 jenkins-test jenkins[7588]: jenkins: invalid Java version: openjdk version &quot;1.8.0_352&quot;
+Jun 30 17:37:41 jenkins-test jenkins[7588]: OpenJDK Runtime Environment (build 1.8.0_352-b08)
+Jun 30 17:37:41 jenkins-test jenkins[7588]: OpenJDK 64-Bit Server VM (build 25.352-b08, mixed mode)
+Jun 30 17:37:41 jenkins-test systemd[1]: jenkins.service: Main process exited, code=exited, status=1/FAILURE
+Jun 30 17:37:41 jenkins-test systemd[1]: jenkins.service: Failed with result &apos;exit-code&apos;.
+-- Subject: Unit failed
+-- Defined-By: systemd
+-- Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+--
+-- The unit jenkins.service has entered the &apos;failed&apos; state with result &apos;exit-code&apos;.
+Jun 30 17:37:41 jenkins-test systemd[1]: Failed to start Jenkins Continuous Integration Server.
+-- Subject: Unit jenkins.service has failed
+-- Defined-By: systemd
+-- Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+--
+-- Unit jenkins.service has failed.
+--
+-- The result is failed.
+#------------- 중간 생략 --------------#
+```
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
+오류 로그 중에서 핵심이 되는 부분은 바로 이 문장입니다. &lt;br /&gt;
+**`jenkins: invalid Java version: openjdk version &apos;1.8.0_352&apos;`**
+&quot; %}
+
+{% include image.html file=&quot;dev-tools/ncloud-dev-tools-jenkins-install-guide-rocky-linux-22.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 Rocky Linux에 Jenkins 서버를 설치하는 방법&quot; caption=&quot;&quot; %}
+
+### 오류 해결
+즉, **오류 원인은 JAVA 버전**이었습니다. 현재의 Jenkins는 [java-11] 버전을 사용하는데, `[java-11]을 설치하지 않았거나` 현재 시스템에 JAVA가 [java-11] 뿐만 아니라 [java-1.8.0] 버전도 함께 설치되어 있는데, `[java-1.8.0] 버전이 기본 버전으로 설정된 상태여서 생기는 문제`입니다.  
+
+위쪽 설치 단계에서 확인했던 아래 명령으로 JAVA 기본 버전을 [java-11]로 변경해주고 Jenkins를 시작하면 문제가 없습니다. 
+
+- **[JAVA 기본 버전 변경하기 &lt;i class=&quot;fa-solid fa-arrow-up-from-bracket&quot;&gt;&lt;/i&gt;](#java-version-select)**
+
+``` bash
+~# update-alternatives --config java
+~# java -version
+```
+
+
+
+## 참고 URL
+1. Jeins Redhat Packages
+    - &lt;a href=&quot;https://pkg.jenkins.io/redhat-stable/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;https://pkg.jenkins.io/redhat-stable/&lt;/a&gt;
+
+2. Jenkins User Documentation
+    - &lt;a href=&quot;https://www.jenkins.io/doc/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all&quot;&gt;https://www.jenkins.io/doc/&lt;/a&gt;
+
+
+</description>
+            <pubDate>Mon, 03 Jul 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/dev-tools/ncloud-dev-tools-jenkins-server-install-guide-rocky-linux.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/dev-tools/ncloud-dev-tools-jenkins-server-install-guide-rocky-linux.html</guid>
+            
+            <category>github</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Ncloud Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
+            <description>## 개요  
+Ncloud (네이버 클라우드)에서 록키 리눅스(Rocky Linux) 8.6 서버를 제공하고 있는데, 패키지를 설치할 때 간혹 패키지 다운로드 사이트 또는 미러 사이트에서 8.6 버전에 대한 패키지 정보를 찾을 수 없다는 메시지가 나타나면서 패키지를 설치할 수 없는 경우가 있습니다.   
+그렇다면 왜 이런 문제가 생기는지와 어떻게 하면 해결할 수 있는지를 정리해보겠습니다.
+
+## 오류 상황
+테스트로 아파치를 설치해보려고 했는데, 오류 메시지가 나타나면서 설치를 할 수 없었습니다. 또한 리포지토리 미러 사이트도 Ncloud 내부 서버가 아닌 록키 리눅스 공식 미러 사이트로 연결하려고 시도한 것을 확인할 수 있습니다.
+
+``` bash
+~# dnf -y install httpd
+
+Rocky Linux 8.6 - Extras                                 5.4 kB/s |  20 kB     00:03
+Errors during downloading metadata for repository &apos;extras&apos;:
+  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
+  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 146.75.94.132)
+Error: Failed to download metadata for repo &apos;extras&apos;: Cannot prepare internal mirrorlist: Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 미러 사이트 확인
+오류 메시지에 나온 공식 미리 사이트에 접속해보니 [**AppStream**], [**extras**] 등 모든 8.6 버전에 대한 정보가 사라진 것을 확인할 수 있었습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 오류 상황 요약 정리
+현재 확인되는 오류 상황을 정리해보면 다음과 같습니다.
+
+1. 패키지를 검색하는 저장소가 [**AppStream**] 이나 [**BaseOS**]가 아닌 [**Extras**]로 변경되어 있다.
+2. 리포지토리 미러 사이트를 Ncloud 내부 서버가 아닌 외부에 있는 록키 리눅스 공식 미러 사이트로 접속시도 하고 있다.
+3. 외부에 있는 록키 리눅스 공식 미러 사이트에서는 공식 지원이 종료되는 8.6 버전에 대한 데이터가 이미 삭제되어 있다. 
+
+## 원인 분석
+원인 분석을 하기 위해 서버의 리포지토리 설정을 확인해보겠습니다.
+
+### 리포지토리 설정 - 오류 서버
+[**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 아래와 같이 다수의 파일이 존재하는 것을 확인할 수 있습니다.
+
+``` bash
+~# ls -al /etc/yum.repos.d/
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 위에서 확인한 설정 파일들 중에서 [**Rocky-Extras.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, Ncloud 내부 서버가 아닌 아래와 같이 록키 리눅스 공식 사이트로 설정되어 있는 것을 알 수 있습니다.
+
+``` bash
+~# vi /etc/yum.repos.d/Rocky-Extras.repo
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+### 리포지토리 설정 - 정상 서버
+그렇다면 아무 문제 없는 정상적인 서버의 경우는 어떤지 비교해서 살펴보겠습니다.  
+
+마찬가지로 [**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 오류가 발생한 서버와 달리 아래와 같이 [**Rocky-AppStream.repo**], [**Rocky-BaseOS.repo**] 이렇게 2가지 파일만 존재하는 것을 확인할 수 있습니다.
+
+``` bash
+~# ls -al /etc/yum.repos.d/
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 또한 2가지 설정 파일들 중에서 [**Rocky-AppStream.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, 록키 리눅스 공식 사이트는 주석 처리가 되어 있고, [**baseurl**]이 [**repo.ncloud.com**] 이라는 Ncloud 내부 서버로 설정되어 있는 것을 알 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+### 원인 추적
+오류가 발생한 서버와 정상적인 서버의 차이점을 비교 추적해보니 오류가 발생한 서버에서는 서버 생성 후에 `패키지 업데이트`가 진행된 것을 알 수 있었습니다. 
+서버 생성 후에 설치된 패키지들의 업데이트를 적용하기 위해 [**dnf upgrade**]를 실행했고, 그에 따라 리포지토리 정보가 변경되었다는 것을 알 수 있었습니다.
+
+``` bash
+~# dnf -y upgrade
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+[**dnf upgrade**]와 [**dnf update**]의 차이점에 대해 [**man dnf**] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [**dnf upgrade**]이며, [**dnf update**]는 더 이상 사용되지 않는 별칭이라고 합니다.
+&quot; %}
+
+``` bash
+~# man dnf
+#--- 중략 ---#
+Upgrade Command
+       Command: upgrade
+       Aliases: up
+       Deprecated aliases: update, upgrade-to, update-to, localupdate
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+## 해결 방법
+이 문제를 해결하는 방법은 몇가지가 있는데 차례대로 정리해보겠습니다.
+
+### 방법-1
+첫번째 방법은 [**Rocky-Extras.repo**] 리포지토리 설정파일의 주소를 Ncloud 내부 서버로 변경하는 방법입니다.
+
+``` conf
+# Rocky-Extras.repo
+
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=AppStream-$releasever
+baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 주소를 변경 후에 아파치를 설치해보면 문제 없이 잘 설치 되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+### 방법-2
+두번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
+
+``` bash
+~# dnf -y install httpd --disablerepo=extras
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 사전 예방책
+위 방법들은 패키지 업데이트 후에 문제를 해결하는 방법이므로, 사전에 이런 문제가 생기지 않도록 하는 것도 선택지 중의 하나입니다. 가능한 방법은 다음 2가지 입니다.
+- 패키지 업데이트를 진행하지 않는 방법
+- 보안-버그 수정 사항만 최소한으로 업데이트 하는 방법
+
+### 패키지 최소 업데이트
+보안-버그 수정 사항만 최소한으로 업데이트 하는 [**upgrade-minimal**] 옵션으로 업데이트를 했을 경우에는 아래와 같이 리포지토리 파일에 변화가 없어서 이후 패키지 설치에 오류가 생기지 않습니다.
+
+``` bash
+~# dnf -y upgrade-minimal
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-12.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-13.png&quot; sub-class=&quot;docimage-no-top&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Rocky Linux 서버 소개
+	- &lt;a href=&quot;/compute/ncloud-compute-server-rocky-linux-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html&lt;/a&gt;
+
+2.  Rocky Linux 미러 사이트 리스트
+	- &lt;a href=&quot;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&lt;/a&gt;
+</description>
+            <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</guid>
+            
+            <category>linux</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
@@ -321,163 +738,6 @@ It is recommended to rather remove all installed content from the module, and re
             <category>mysql</category>
             
             <category>mariadb</category>
-            
-            <category>rocky_linux</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
-            <description>## 개요  
-Ncloud (네이버 클라우드)에서 록키 리눅스(Rocky Linux) 8.6 서버를 제공하고 있는데, 패키지를 설치할 때 간혹 패키지 다운로드 사이트 또는 미러 사이트에서 8.6 버전에 대한 패키지 정보를 찾을 수 없다는 메시지가 나타나면서 패키지를 설치할 수 없는 경우가 있습니다.   
-그렇다면 왜 이런 문제가 생기는지와 어떻게 하면 해결할 수 있는지를 정리해보겠습니다.
-
-## 오류 상황
-테스트로 아파치를 설치해보려고 했는데, 오류 메시지가 나타나면서 설치를 할 수 없었습니다. 또한 리포지토리 미러 사이트도 Ncloud 내부 서버가 아닌 록키 리눅스 공식 미러 사이트로 연결하려고 시도한 것을 확인할 수 있습니다.
-
-``` bash
-~# dnf -y install httpd
-
-Rocky Linux 8.6 - Extras                                 5.4 kB/s |  20 kB     00:03
-Errors during downloading metadata for repository &apos;extras&apos;:
-  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
-  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 146.75.94.132)
-Error: Failed to download metadata for repo &apos;extras&apos;: Cannot prepare internal mirrorlist: Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-## 미러 사이트 확인
-오류 메시지에 나온 공식 미리 사이트에 접속해보니 [**AppStream**], [**extras**] 등 모든 8.6 버전에 대한 정보가 사라진 것을 확인할 수 있었습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-## 오류 상황 요약 정리
-현재 확인되는 오류 상황을 정리해보면 다음과 같습니다.
-
-1. 패키지를 검색하는 저장소가 [**AppStream**] 이나 [**BaseOS**]가 아닌 [**Extras**]로 변경되어 있다.
-2. 리포지토리 미러 사이트를 Ncloud 내부 서버가 아닌 외부에 있는 록키 리눅스 공식 미러 사이트로 접속시도 하고 있다.
-3. 외부에 있는 록키 리눅스 공식 미러 사이트에서는 공식 지원이 종료되는 8.6 버전에 대한 데이터가 이미 삭제되어 있다. 
-
-## 원인 분석
-원인 분석을 하기 위해 서버의 리포지토리 설정을 확인해보겠습니다.
-
-### 리포지토리 설정 - 오류 서버
-[**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 아래와 같이 다수의 파일이 존재하는 것을 확인할 수 있습니다.
-
-``` bash
-~# ls -al /etc/yum.repos.d/
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-- 위에서 확인한 설정 파일들 중에서 [**Rocky-Extras.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, Ncloud 내부 서버가 아닌 아래와 같이 록키 리눅스 공식 사이트로 설정되어 있는 것을 알 수 있습니다.
-
-``` bash
-~# vi /etc/yum.repos.d/Rocky-Extras.repo
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-### 리포지토리 설정 - 정상 서버
-그렇다면 아무 문제 없는 정상적인 서버의 경우는 어떤지 비교해서 살펴보겠습니다.  
-
-마찬가지로 [**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 오류가 발생한 서버와 달리 아래와 같이 [**Rocky-AppStream.repo**], [**Rocky-BaseOS.repo**] 이렇게 2가지 파일만 존재하는 것을 확인할 수 있습니다.
-
-``` bash
-~# ls -al /etc/yum.repos.d/
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-- 또한 2가지 설정 파일들 중에서 [**Rocky-AppStream.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, 록키 리눅스 공식 사이트는 주석 처리가 되어 있고, [**baseurl**]이 [**repo.ncloud.com**] 이라는 Ncloud 내부 서버로 설정되어 있는 것을 알 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-### 원인 추적
-오류가 발생한 서버와 정상적인 서버의 차이점을 비교 추적해보니 오류가 발생한 서버에서는 서버 생성 후에 `패키지 업데이트`가 진행된 것을 알 수 있었습니다. 
-서버 생성 후에 설치된 패키지들의 업데이트를 적용하기 위해 [**dnf upgrade**]를 실행했고, 그에 따라 리포지토리 정보가 변경되었다는 것을 알 수 있었습니다.
-
-``` bash
-~# dnf -y upgrade
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-[**dnf upgrade**]와 [**dnf update**]의 차이점에 대해 [**man dnf**] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [**dnf upgrade**]이며, [**dnf update**]는 더 이상 사용되지 않는 별칭이라고 합니다.
-&quot; %}
-
-``` bash
-~# man dnf
-#--- 중략 ---#
-Upgrade Command
-       Command: upgrade
-       Aliases: up
-       Deprecated aliases: update, upgrade-to, update-to, localupdate
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-## 해결 방법
-이 문제를 해결하는 방법은 몇가지가 있는데 차례대로 정리해보겠습니다.
-
-### 방법-1
-첫번째 방법은 [**Rocky-Extras.repo**] 리포지토리 설정파일의 주소를 Ncloud 내부 서버로 변경하는 방법입니다.
-
-``` conf
-# Rocky-Extras.repo
-
-#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=AppStream-$releasever
-baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-- 주소를 변경 후에 아파치를 설치해보면 문제 없이 잘 설치 되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-### 방법-2
-두번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
-
-``` bash
-~# dnf -y install httpd --disablerepo=extras
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-## 사전 예방책
-위 방법들은 패키지 업데이트 후에 문제를 해결하는 방법이므로, 사전에 이런 문제가 생기지 않도록 하는 것도 선택지 중의 하나입니다. 가능한 방법은 다음 2가지 입니다.
-- 패키지 업데이트를 진행하지 않는 방법
-- 보안-버그 수정 사항만 최소한으로 업데이트 하는 방법
-
-### 패키지 최소 업데이트
-보안-버그 수정 사항만 최소한으로 업데이트 하는 [**upgrade-minimal**] 옵션으로 업데이트를 했을 경우에는 아래와 같이 리포지토리 파일에 변화가 없어서 이후 패키지 설치에 오류가 생기지 않습니다.
-
-``` bash
-~# dnf -y upgrade-minimal
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-12.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-13.png&quot; sub-class=&quot;docimage-no-top&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Rocky Linux 서버 소개
-	- &lt;a href=&quot;/compute/ncloud-compute-server-rocky-linux-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html&lt;/a&gt;
-
-2.  Rocky Linux 미러 사이트 리스트
-	- &lt;a href=&quot;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&lt;/a&gt;
-</description>
-            <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</guid>
-            
-            <category>linux</category>
             
             <category>rocky_linux</category>
             
@@ -1659,145 +1919,6 @@ Config Group에서는 생성한 MSSQL Server를 그룹핑하여 그룹에 속한
             <pubDate>Wed, 31 May 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mssql-setting-manage-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mssql-setting-manage-guide.html</guid>
-            
-            <category>database</category>
-            
-            <category>mssql</category>
-            
-            <category>clouddb</category>
-            
-            <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Cloud DB for MSSQL 생성후 Public 도메인으로 접속하기</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Cloud DB for MSSQL 생성 Public 도메인으로 접속하는 방법에 대하여 정리해보겠습니다.
-
-## 테스트 환경
-- VPC와 Public Subnet
-- Cloud DB for MSSQL 15.0.4.198.2 Standard Edition (MSSQL 2019)
-
-## Cloud DB for MSSQL 서비스 위치
-[**콘솔**] - [**Services**] - [**Database**]에서  [**Cloud DB for MSSQL**]을 찾을 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-## Cloud DB for MSSQL 서버 생성
-[**Cloud DB for MSSQL**] - [**DB Server**]에서 [**DB server 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 설정
-생성할 서버의 스펙 선택 및 세부정보를 입력합니다. 
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-18.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL은 **고가용성(HA) 기능 즉, 서버 이중화를 기본으로 지원**합니다. 운영 중인 Principal Server에서 장애가 발생하여 정상적인 서비스가 불가능한 경우 Mirror Server로 자동 Failover 합니다. DNS 방식으로 이중화를 구성하므로 별도의 애플리케이션 변경이 필요 없습니다.&quot; %}
-
-{% include warning.html title=&quot;Subnet 선택 주의사항&quot; content=&quot;서버를 생성 후에는 Subnet 변경이 불가합니다. 회사 PC 등 외부에서 접근이 필요하실 경우는 ACG에서 IP 제한을 적용한 후 Public Subnet으로 설정하고, 내부 서버를 통해 접근하거나 SSL VPN을 이용해 접속할 경우는 Private Subnet으로 설정하면 됩니다. &quot; %}
-
-{% include callout-v2.html type=&quot;success&quot; level=&quot;2&quot; content=&quot;여기서는 외부에서 접근하는 방식을 테스트할 예정이므로 **Public Subnet**을 선택합니다.&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL의 스토리지 용량은 최소 100GB부터 10GB씩 자동 증가되며 최대 2TB까지 사용 가능합니다. &quot; %}
-
-### DB 설정
-다음으로 계정 정보와 DB 접속 포트 등을 입력하고, Backup 관련 설정을 선택합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-05.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;Backup 파일 보관 기간은 최소 1일 부터 최대 30일까지 선택 가능하며 FullBackup만 지원하고 있습니다. Backup 시간은 자동 또는 수동모드로 변경하여 시간 지정이 가능합니다.&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Cloud DB for MSSQL 서버는 고가용성을 선택할 경우 서버 생성까지 대략 **1시간** 정도가 소요되니 여유를 갖고 기다리시면 됩니다.&quot; %}
-
-### DB 생성 완료
-생성될 서버의 최종 정보를 확인하고 서버를 생성하면 아래와 같이 기본 옵션으로 선택했던 고가용성에 해당하는 Principal, Mirror 이렇게 2대의 서버가 생성된 것을 확인할 수 있습니다. 또한 Subnet도 [**Public Subnet**]으로 설정된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## ACG 설정
-이제 외부에서 Cloud DB for MSSQL로 접속할 수 있도록 ACG를 설정해야 합니다.
-
-생성된 MSSQL DB 서버의 상세 정보를 살펴보면 DB 생성 과정에서 ACG가 자동으로 생성, 적용되어 있는 것을 아래와 같이 확인할 수 있습니다. 
-- ACG 옆에 있는 아이콘을 클릭해서 ACG 화면으로 이동합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-20.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-- 위에서 확인했던 Cloud DB for MSSQL의 ACG [**cloud-mssql-\*\*\***]를 선택 후 ACG 설정을 클릭합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-21.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- Inbound 규칙에서 접근 소스는 [**myIp**] 버튼을 클릭해서 현재 IP 즉, 사무실 IP 등을 등록하고 허용 포트 1433을 추가합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-22.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Public 도메인 할당
-다음으로, 사무실 등의 외부에서 Cloud DB에 접속하려면 Public 도메인을 추가로 할당해야 합니다.  [**DB 관리**] - [**Public 도메인 관리**] 메뉴를 클릭해 Public 도메인을 신청합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-23.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- Public 도메인 신청 팝업을 확인하고 [**예**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-24.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-25.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- 신청 후 잠시 기다렸다 Cloud DB for MSSQL 서버의 상세 정보를 살펴보면 아래와 같이 [**Public 도메인**]이 할당된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-26.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## DB 서버 접속
-
-### SQL Server Management Studio 설치
-사무실 PC에 MSSQL Client인 SSMS (SQL Server Management Studio)를 다운로드하고 설치합니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;https://learn.microsoft.com/ko-kr/sql/ssms/download-sql-server-management-studio-ssms&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; SSMS (SQL Server Management Studio) 다운로드&lt;/a&gt;
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-27.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- 설치된 SSMS (SQL Server Management Studio)를 찾아서 실행합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### DB Server Public 도메인 확인
-아래 화면처럼 DB 서버 상세 정보에서 확인한 **Public 도메인** 주소를 복사해서 다음 단계인 DB 로그인 창에 입력하면 됩니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-26.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-### DB 로그인
-로그인 접속 화면에서 정보를 입력하고 접속합니다.
-
-- 서버 이름 : {MSSQL DB Server의 **Public 도메인**}, {접속 포트} (쉼표로 구분하여 입력)
-- 인증 : [SQL Server 인증] 으로 변경합니다.
-- 로그인 및 암호 : DB 서버 생성과정에서 입력한 유저 정보를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-29.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-- 정상적으로 접속된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/ncloud-database-cloud-db-for-mssql-30.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC환경에서 Cloud DB for MSSQL 생성후 Public 도메인으로 접속하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1. Ncloud Cloud DB for MSSQL 기본 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/clouddbformssql-start-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/clouddbformssql-start-vpc&lt;/a&gt;
-
-2. SSMS (SQL Server Management Studio) 다운로드
-	- &lt;a href=&quot;https://learn.microsoft.com/ko-kr/sql/ssms/download-sql-server-management-studio-ssms&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://learn.microsoft.com/ko-kr/sql/ssms/download-sql-server-management-studio-ssms&lt;/a&gt;
-</description>
-            <pubDate>Tue, 30 May 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mssql-public-domain-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-cloud-db-for-mssql-public-domain-guide.html</guid>
             
             <category>database</category>
             
