@@ -2151,7 +2151,7 @@ mysql&gt; show master status<span class="p">;</span>
 MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="e53da484-3fb6-40ee-8ade-f3a08ef706a5" data-name="slave_my_cnf">
+<ul class="tab" data-tab="a27badeb-7414-42a7-8f13-e3a01373e776" data-name="slave_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2162,7 +2162,7 @@ MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 
       </li>
   
 </ul>
-<ul class="tab-content" id="e53da484-3fb6-40ee-8ade-f3a08ef706a5" data-name="slave_my_cnf">
+<ul class="tab-content" id="a27badeb-7414-42a7-8f13-e3a01373e776" data-name="slave_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf
@@ -2270,7 +2270,7 @@ mysql&gt; quit
 <p>리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.<br />
 채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.</p>
 
-<ul class="tab" data-tab="3848eac6-aa93-49d2-b87b-d3baa72796b8" data-name="config_channel">
+<ul class="tab" data-tab="301e31a6-0196-4e2f-83ac-17c20196a27d" data-name="config_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2285,7 +2285,7 @@ mysql&gt; quit
       </li>
   
 </ul>
-<ul class="tab-content" id="3848eac6-aa93-49d2-b87b-d3baa72796b8" data-name="config_channel">
+<ul class="tab-content" id="301e31a6-0196-4e2f-83ac-17c20196a27d" data-name="config_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># MySQL 5.7</span>
@@ -2330,7 +2330,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
 <h3 id="master-서버-정보-입력">Master 서버 정보 입력</h3>
 <p>Slave 서버에 Master 서버 정보를 하나씩 입력합니다.</p>
 
-<ul class="tab" data-tab="f914f535-9434-4c0f-8237-ee04a5b75474" data-name="config_channel_sample">
+<ul class="tab" data-tab="a8519808-2cee-4433-83e4-af8b3dff7d86" data-name="config_channel_sample">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2345,7 +2345,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
       </li>
   
 </ul>
-<ul class="tab-content" id="f914f535-9434-4c0f-8237-ee04a5b75474" data-name="config_channel_sample">
+<ul class="tab-content" id="a8519808-2cee-4433-83e4-af8b3dff7d86" data-name="config_channel_sample">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Master1</span>
@@ -2392,7 +2392,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
 <h3 id="리플리케이션-채널-시작">리플리케이션 채널 시작</h3>
 <p>리플리케이션 시작 후 에러가 없는지 확인합니다.</p>
 
-<ul class="tab" data-tab="f72a0dcc-08cb-4162-8c8d-9482cdb4b058" data-name="start_channel">
+<ul class="tab" data-tab="fbdd3ba5-d600-4bc3-82af-c82533ff54b3" data-name="start_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2403,7 +2403,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
       </li>
   
 </ul>
-<ul class="tab-content" id="f72a0dcc-08cb-4162-8c8d-9482cdb4b058" data-name="start_channel">
+<ul class="tab-content" id="fbdd3ba5-d600-4bc3-82af-c82533ff54b3" data-name="start_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#MySQL 5.7 기준</span>
@@ -2502,7 +2502,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
 
 <h2 id="버전별-명령어-비교">버전별 명령어 비교</h2>
 
-<ul class="tab" data-tab="20443e3f-6ab0-46b9-bc38-da6984083c2b" data-name="replication_command">
+<ul class="tab" data-tab="9098a109-e3c7-4dbf-8bb6-ab1bf3abce6d" data-name="replication_command">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2517,7 +2517,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
       </li>
   
 </ul>
-<ul class="tab-content" id="20443e3f-6ab0-46b9-bc38-da6984083c2b" data-name="replication_command">
+<ul class="tab-content" id="9098a109-e3c7-4dbf-8bb6-ab1bf3abce6d" data-name="replication_command">
   
       <li class="active">
 <div>
