@@ -5,124 +5,339 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 05 Jul 2023 15:42:10 +0900</pubDate>
-        <lastBuildDate>Wed, 05 Jul 2023 15:42:10 +0900</lastBuildDate>
+        <pubDate>Mon, 10 Jul 2023 14:56:20 +0900</pubDate>
+        <lastBuildDate>Mon, 10 Jul 2023 14:56:20 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
         <item>
-            <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu</title>
+            <title>Rocky Linux에서 Apache SSL 인증서 설정하는 방법</title>
             <description>## 개요
-웹사이트 SSL 인증서를 설치하고 https 접속을 유도할 때 http로 접속하면 https로 강제로 리다이렉트 시키는 방법을 사용하는 경우가 많습니다.  
-웹페이지 소스에서 http 접속 여부를 판단해서 redirect 시키는 방법 등 여러가지 있을 수 있는데 여기서는 Apache 설정으로 쉽게 할 수 있는 방법을 소개합니다.  
+Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 Apache 웹서버를 설치하고, HTTPS 접속을 위한 SSL 인증서 설정하고, HTTP로 접속 시에 HTTPS로 리다이렉트하는 방법까지 정리해보겠습니다. 
 
-SSL 인증서가 설치되어 있다는 가정하에 우선 Linux Ubuntu에서 설정하는 방법을 확인해보겠습니다.
+## 서버 환경
+테스트에 사용할 서버 환경은 다음과 같습니다.
 
-## Rewrite 모듈 설치
-혹시 Apache에 이미 `mod_rewrite` 가 로드 되어 있다면 설치하지 않아도 됩니다.
+{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
+&amp;#8259; 웹서버: Apache 2.4 &lt;br /&gt; 
+&amp;#8259; 테스트 사이트:  rocky-https-test.com
+&quot; %}
+
+## 서버 준비
+Ncloud 콘솔에서 [**Rocky Linux 8.6**] 서버를 아래와 같이 준비했습니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-00.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## 패키지 업데이트
+우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.
 
 ``` bash
-~# a2enmod rewrite
+~# dnf -y upgrade-minimal
+```
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+[**dnf upgrade-minimal**]과 [**dnf update-minimal**]의 차이점에 대해 [**man dnf**] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [**dnf upgrade-minimal**]이며, [**dnf update-minimal**]는 더 이상 사용되지 않는 별칭이라고 합니다.
+&quot; %}
+
+``` bash
+~# man dnf
+#--- 중략 ---#
+Upgrade-Minimal Command
+       Command: upgrade-minimal
+       Aliases: up-min
+       Deprecated aliases: update-minimal
 ```
 
-## Apache conf 파일 수정
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
 
-**/etc/apache2/sites-enabled/000-default.conf** 의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.
-``` apache
-RewriteEngine On
-RewriteCond %{HTTPS} !on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+
+## Apache 설치
+
+### Apache 버전 확인
+[**Rocky Linux 8.6**]에서 기본으로 지원하는 Apache 버전을 확인해보면 [**Apache 2.4**]인 것을 확인할 수 있습니다.
+
+``` bash
+~# dnf module list httpd
 ```
 
-000-default.conf 파일에 실제로 적용하면 다음과 비슷한 모습이 되겠습니다.
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### Apache 2.4 설치
+
+``` bash
+~# dnf -y install httpd
+```
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### Apache 실행, 상태 확인
+설치를 마쳤으면 Apache를 실행하고 상태를 확인합니다.
+
+``` bash
+~# systemctl start httpd
+~# systemctl status httpd
+```
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## 테스트용 웹사이트 생성
+테스트에 필요한 웹사이트 홈 디렉토리와 웹페이지를 생성합니다.
+
+``` bash
+~# mkdir -p  /ncloud/data/www/rocky-https-test.com/
+~# vim /ncloud/data/www/rocky-https-test.com/index.html
+```
+``` html
+&lt;!doctype html&gt;
+&lt;html lang=&quot;kr&quot;&gt;
+ &lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Rocky Linux HTTPS Test Site&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+    &lt;h1&gt;Rocky Linux HTTPS Test Site&lt;/h1&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## Apache 환경 설정 파일 생성
+rocky-https-test.com 웹사이트에 대한 Apache 환경 설정 파일을 생성하고, HTTP 접속에 필요한 80 포트용 설정을 추가합니다.
+
+``` bash
+~# vim /etc/httpd/conf.d/rocky-https-test.com.conf
+```
+
 ``` apache
 &lt;VirtualHost *:80&gt;
-	DocumentRoot &quot;/ncp/data/www/&quot;
-	ServerName www.test.com
+    ServerName rocky-https-test.com
+    DocumentRoot /ncloud/data/www/rocky-https-test.com
+    DirectoryIndex index.htm index.html
 
-	RewriteEngine On
-	RewriteCond %{HTTPS} !on
-	RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+    CustomLog &quot;/var/log/httpd/rocky-https-test.com-access_log&quot; combined
+    ErrorLog  &quot;/var/log/httpd/rocky-https-test.com-error_log&quot;
+
+    &lt;Directory /ncloud/data/www/rocky-https-test.com&gt;
+        Options None
+        AllowOverride None
+        Require all granted
+    &lt;/Directory&gt;
 &lt;/VirtualHost&gt;
 ```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
 
-### 리다이렉트 HTTP 상태코드 설정
-https로 리다이렉트 시킬때 HTTP 상태코드를 설정할 수 있습니다. 보통은 [**301, 영구 리다이렉션**]을 사용하지만 서비스 상황에 따라서는 다른 상태코드로 설정해야 하는 경우가 있습니다.  
-설정하는 방법은 위에서 확인한 [**000-default.conf**] 설정값 중에서 아래 [**HTTP 상태코드**] 부분을 수정하면 됩니다.
+- 설정 파일을 저장한 후에 Apache 데몬을 재시작합니다.
 
-``` apache
-# 설정 방법
-RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=HTTP 상태코드,L]
-
-# 302 리다이렉트
-RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=302,L]
-
-# 307 리다이렉트
-RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=307,L]
-```
-
-
-## Apache 재시작
 ``` bash
-~# systemctl restart apache2
+~# systemctl restart httpd
 ```
-이렇게 재시작하고 http로 접속을 해보면 https로 전환되는 것을 확인할 수 있습니다.
 
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
 
-## Apache 재시작 오류 - SSLEngine
-위 내용처럼 아파치 재시작 명령어를 입력하면 끝입니다만, 재시작이 되지 않고 오류 메시지가 뜨는 경우가 있습니다.
+## hosts 파일 수정
+지금과 같이 테스트용으로 임의 설정한 도메인(**rocky-https-test.com**)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.  
+`실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에` [다음 단계로 바로 이동&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#https-access-test)하시면 됩니다. 
+
+윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.
+
+1. C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.
+2. 복사한 hosts 파일을 수정해서 123.456.789.123 rocky-https-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.
+3. 수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.
+4. 덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG (방화벽) 설정
+테스트로 생성했던 서버를 선택하고 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-23.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+- ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+- [Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-25.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 내부 테스트용 ACG 설정
+내부 테스트용 설정은 ACG 규칙 설정 화면에서 [**Inbound**] 탭에서 [**myIp**] 버튼을 클릭해서 현재 접속한 PC나 회사 IP를 입력하고, HTTP용 80포트와 HTTPS용 443포트를 추가합니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 라이브 서비스용 ACG 설정
+라이브 서비스용 설정은 접근 소스에는 [**0.0.0.0/0**]을 입력하고, 마찬가지로 HTTP용 80포트와 HTTPS용 443포트를 추가합니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## HTTP 접속 테스트
+ACG 설정을 마쳤으면 웹브라우저에 테스트용 사이트의 주소 [**http://rocky-https-test.com**]으로 접속을 해보면 문제 없이 잘 접속되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## SSL 인증서 설정
+
+### mod_ssl 설치
+
 ``` bash
-~# systemctl restart apache2
-Job for apache2.service failed because the control process exited with error code. 
-See &quot;systemctl status apache2.service&quot; and &quot;journalctl -xe&quot; for details.
+~# dnf -y install mod_ssl
+```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+- 우선 인증서 저장용 디렉토리를 생성합니다.
+
+``` bash
+~# mkdir -p /root/ssl/
 ```
 
-오류 메시지에 나온 것 처럼 상세 내용을 확인해봅니다.
-``` bash
-~# systemctl status apache2.service
-```
-상세 오류 메시지 중에서 핵심 내용만 살펴보면 다음과 같습니다.
-``` bash
-Dec 04 16:09:44 test-lamp apachectl[11924]: AH00526: Syntax error on line 36 of /etc/apache2/sites-enabled/000-default.conf:
-Dec 04 16:09:44 test-lamp apachectl[11924]: Invalid command &apos;SSLEngine&apos;, perhaps misspelled or defined by a module not included in the server configuration
-```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
 
-위 오류 메시지에 나온 /etc/apache2/sites-enabled/000-default.conf 파일을 찾아가서 SSLEngine을 확인해보면 다음과 같습니다.
+### SSL 테스트 인증서 생성
+여기서는 테스트용 인증서를 생성해서 사용하게 되는데, 정식 서비스의 경우 SSL 인증서 발급 기관에서 정식 인증서를 발급 받아 사용하게 됩니다.  
+정식 인증서를 사용하는 경우에는 테스트 인증서 생성 단계는 건너띄고 다음 단계로 이동하시면 되겠습니다.
+
+``` bash
+~# openssl req -newkey rsa:2048 \
+-nodes -keyout /root/ssl/rocky-https-test.com.key \
+-x509 -days 365 -out /root/ssl/rocky-https-test.com.crt
+```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+- 인증서 파일이 제대로 생성되었는지 확인합니다.
+
+``` bash
+~# ls -al /root/ssl/
+```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### HTTPS용 환경 설정 추가
+앞에서 생성했던 환경 설정 파일 [**rocky-https-test.com.conf**]에 HTTPS용 설정을 추가합니다.
+
+``` bash
+~# vim /etc/httpd/conf.d/rocky-https-test.com.conf
+```
 ``` apache
 &lt;VirtualHost *:443&gt;
-    ServerName www.test.com
-    ServerAdmin web@test.com
+    ServerName rocky-https-test.com
+    DocumentRoot /ncloud/data/www/rocky-https-test.com
+    DirectoryIndex index.htm index.html
 
-    {==SSLEngine on==}
-    SSLCertificateFile /etc/******/server.crt
-    SSLCertificateKeyFile /etc/******/server.key
+    CustomLog &quot;/var/log/httpd/rocky-https-test.com-ssl-access_log&quot; combined
+    ErrorLog  &quot;/var/log/httpd/rocky-https-test.com-ssl-error_log&quot;
 
-    ###중략###
+    SSLEngine on
+    SSLProtocol -all +TLSv1.2 +TLSv1.3 
+    SSLHonorCipherOrder on
+    SSLCipherSuite PROFILE=SYSTEM
+
+    SSLCertificateFile /root/ssl/rocky-https-test.com.crt
+    SSLCertificateKeyFile /root/ssl/rocky-https-test.com.key
+
+    &lt;Directory /ncloud/data/www/rocky-https-test.com&gt;
+        Options None
+        AllowOverride None
+        Require all granted
+    &lt;/Directory&gt;
 &lt;/VirtualHost&gt;
 ```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-16.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
 
-확인해보면 SSLEngine on 명령어가 제대로 동작하지 못해서 생긴 문제라는 것을 알 수 있습니다.     
-즉, SSL 모듈이 제대로 활성화 되지 않았기에 활성화 해주면 문제가 해결됩니다.  
-(나중에 살펴보면 socache_shmcb 모듈이 활성화되지 않았기 때문임을 알 수 있습니다)
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+- **SSLProtocol**: SSL Protocol에 대한 설정은 [TLS v1.2], [TLS v1.3] 만 허용하고, 나머지 Protocol은 모두 거부하도록 설정했습니다. &lt;br /&gt;
+- **정식 인증서**에서는 [SSLCertificateFile], [SSLCertificateKeyFile] 외에도 [SSLCertificateChainFile], [SSLCACertificateFile] 등의 키 설정이 필요하게 되는데, 자세한 내용은 인증서 발급 대행사에서 인증서를 발급 받을 때 포함되어 있는 가이드 문서를 참고하시면 됩니다.
+&quot; %}
+&lt;br /&gt;
+- 설정 파일을 저장한 후에 Apache 데몬을 재시작합니다.
 
-## SSL 엔진 모듈 활성화
 ``` bash
-~# a2enmod ssl
+~# systemctl restart httpd
 ```
 
-그리고 나서 다시 Apache를 재시작 하면 됩니다.
-``` bash
-~# systemctl restart apache2
-```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
 
-이제 http로 접속하셔서 https로 전환되는지 확인해보시기 바랍니다.</description>
-            <pubDate>Wed, 05 Jul 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</guid>
+## HTTPS 접속 테스트
+설정을 마쳤으면 웹브라우저에서 HTTPS로 [https://rocky-https-test.com]에 접속을 해보면 문제 없이 잘 접속되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 인증서 확인
+HTTPS로 테스트 사이트에 접속 후에 인증서를 확인해보면 위에서 테스트로 생성했던 정보가 제대로 설정되어 있는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-21.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-22.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## HTTP 접속 시 HTTPS로 리다이렉트
+이제 HTTPS 설정까지 마쳤으니 HTTP로 접속하는 경우에 HTTPS로 리다이렉트 시키는 설정을 적용해보겠습니다.  
+
+### 방법 - 1
+첫번째 방법은 [**Redirect**] 옵션을 이용하는 방법입니다.  
+앞에서 설정한 HTTP용 환경 설정에서 [**ServerName**]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.
+
+- `301` 리다이렉트: **Redirect** `permanent` / https://rocky-https-test.com/
+- `302` 리다이렉트: **Redirect** / https://rocky-https-test.com/
+
+``` bash
+~# vim /etc/httpd/conf.d/rocky-https-test.com.conf
+```
+``` apache
+&lt;VirtualHost *:80&gt;
+    ServerName rocky-https-test.com
+
+    Redirect permanent / https://rocky-https-test.com/
+&lt;/VirtualHost&gt;    
+```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 리다이렉트 여부 확인
+웹브라우저에서 [**F12**] 키로 개발자 모드로 변경한 후에 [**http://rocky-https-test.com/**]로 접속을 해보면 아래 스샷처럼 HTTP 301 상태코드를 반환하면서 [**https://rocky-https-test.com/**]로 리다이렉트된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 방법 - 2
+두번째 방법은 [**RewirteRule**] 옵션을 이용하는 방법입니다.  
+첫번째 방법이 더 간편하기는 하지만, [**301**], [**302**] 외에 [**307**], [**308**] 등 다양한 HTTP 상태코드를 설정해야 하는 경우에는 [**RewirteRule**]을 이용하는 두번째 방법을 사용해야 합니다.  
+
+아래 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다. 
+- `301` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`301`,L]
+- `302` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`302`,L]
+- `307` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`307`,L]
+- `308` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`308`,L]
+
+``` apache
+&lt;VirtualHost *:80&gt;
+    ServerName rocky-https-test.com
+
+    RewriteEngine On
+    RewriteCond %{HTTPS} !on
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+&lt;/VirtualHost&gt; 
+```
+{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+
+
+## 참고 URL
+1.  Rocky Linux Apache Multiple Site 설정 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/apache-sites-enabled/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/apache-sites-enabled/&lt;/a&gt;
+
+2.  Rocky Linux Apache with &apos;mod_ssl&apos; 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/mod_SSL_apache/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/mod_SSL_apache/&lt;/a&gt;</description>
+            <pubDate>Mon, 10 Jul 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html</guid>
+            
+            <category>rocky_linux</category>
+            
+            <category>lamp</category>
             
             <category>apache</category>
             
-            <category>ubuntu</category>
+            <category>install</category>
             
             
         </item>
@@ -263,6 +478,123 @@ Complete!
             <category>apache</category>
             
             <category>centos</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu</title>
+            <description>## 개요
+웹사이트 SSL 인증서를 설치하고 https 접속을 유도할 때 http로 접속하면 https로 강제로 리다이렉트 시키는 방법을 사용하는 경우가 많습니다.  
+웹페이지 소스에서 http 접속 여부를 판단해서 redirect 시키는 방법 등 여러가지 있을 수 있는데 여기서는 Apache 설정으로 쉽게 할 수 있는 방법을 소개합니다.  
+
+SSL 인증서가 설치되어 있다는 가정하에 우선 Linux Ubuntu에서 설정하는 방법을 확인해보겠습니다.
+
+## Rewrite 모듈 설치
+혹시 Apache에 이미 `mod_rewrite` 가 로드 되어 있다면 설치하지 않아도 됩니다.
+
+``` bash
+~# a2enmod rewrite
+```
+
+## Apache conf 파일 수정
+
+**/etc/apache2/sites-enabled/000-default.conf** 의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.
+``` apache
+RewriteEngine On
+RewriteCond %{HTTPS} !on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+```
+
+000-default.conf 파일에 실제로 적용하면 다음과 비슷한 모습이 되겠습니다.
+``` apache
+&lt;VirtualHost *:80&gt;
+	DocumentRoot &quot;/ncp/data/www/&quot;
+	ServerName www.test.com
+
+	RewriteEngine On
+	RewriteCond %{HTTPS} !on
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+&lt;/VirtualHost&gt;
+```
+
+### 리다이렉트 HTTP 상태코드 설정
+https로 리다이렉트 시킬때 HTTP 상태코드를 설정할 수 있습니다. 보통은 [**301, 영구 리다이렉션**]을 사용하지만 서비스 상황에 따라서는 다른 상태코드로 설정해야 하는 경우가 있습니다.  
+설정하는 방법은 위에서 확인한 [**000-default.conf**] 설정값 중에서 아래 [**HTTP 상태코드**] 부분을 수정하면 됩니다.
+
+``` apache
+# 설정 방법
+RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=HTTP 상태코드,L]
+
+# 302 리다이렉트
+RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=302,L]
+
+# 307 리다이렉트
+RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=307,L]
+```
+
+
+## Apache 재시작
+``` bash
+~# systemctl restart apache2
+```
+이렇게 재시작하고 http로 접속을 해보면 https로 전환되는 것을 확인할 수 있습니다.
+
+
+## Apache 재시작 오류 - SSLEngine
+위 내용처럼 아파치 재시작 명령어를 입력하면 끝입니다만, 재시작이 되지 않고 오류 메시지가 뜨는 경우가 있습니다.
+``` bash
+~# systemctl restart apache2
+Job for apache2.service failed because the control process exited with error code. 
+See &quot;systemctl status apache2.service&quot; and &quot;journalctl -xe&quot; for details.
+```
+
+오류 메시지에 나온 것 처럼 상세 내용을 확인해봅니다.
+``` bash
+~# systemctl status apache2.service
+```
+상세 오류 메시지 중에서 핵심 내용만 살펴보면 다음과 같습니다.
+``` bash
+Dec 04 16:09:44 test-lamp apachectl[11924]: AH00526: Syntax error on line 36 of /etc/apache2/sites-enabled/000-default.conf:
+Dec 04 16:09:44 test-lamp apachectl[11924]: Invalid command &apos;SSLEngine&apos;, perhaps misspelled or defined by a module not included in the server configuration
+```
+
+위 오류 메시지에 나온 /etc/apache2/sites-enabled/000-default.conf 파일을 찾아가서 SSLEngine을 확인해보면 다음과 같습니다.
+``` apache
+&lt;VirtualHost *:443&gt;
+    ServerName www.test.com
+    ServerAdmin web@test.com
+
+    {==SSLEngine on==}
+    SSLCertificateFile /etc/******/server.crt
+    SSLCertificateKeyFile /etc/******/server.key
+
+    ###중략###
+&lt;/VirtualHost&gt;
+```
+
+확인해보면 SSLEngine on 명령어가 제대로 동작하지 못해서 생긴 문제라는 것을 알 수 있습니다.     
+즉, SSL 모듈이 제대로 활성화 되지 않았기에 활성화 해주면 문제가 해결됩니다.  
+(나중에 살펴보면 socache_shmcb 모듈이 활성화되지 않았기 때문임을 알 수 있습니다)
+
+## SSL 엔진 모듈 활성화
+``` bash
+~# a2enmod ssl
+```
+
+그리고 나서 다시 Apache를 재시작 하면 됩니다.
+``` bash
+~# systemctl restart apache2
+```
+
+이제 http로 접속하셔서 https로 전환되는지 확인해보시기 바랍니다.</description>
+            <pubDate>Wed, 05 Jul 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</guid>
+            
+            <category>apache</category>
+            
+            <category>ubuntu</category>
             
             
         </item>
@@ -528,266 +860,158 @@ Jun 30 17:37:41 jenkins-test systemd[1]: Failed to start Jenkins Continuous Inte
         </item>
         
         <item>
-            <title>Rocky Linux에서 NginX 설치, 설정하는 방법</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.  
+            <title>Ncloud Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
+            <description>## 개요  
+Ncloud (네이버 클라우드)에서 록키 리눅스(Rocky Linux) 8.6 서버를 제공하고 있는데, 패키지를 설치할 때 간혹 패키지 다운로드 사이트 또는 미러 사이트에서 8.6 버전에 대한 패키지 정보를 찾을 수 없다는 메시지가 나타나면서 패키지를 설치할 수 없는 경우가 있습니다.   
+그렇다면 왜 이런 문제가 생기는지와 어떻게 하면 해결할 수 있는지를 정리해보겠습니다.
 
-
-## 서버 환경
-
-{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
-&amp;#8259; NginX: NginX 1.23.1 &lt;br /&gt; 
-&amp;#8259; 테스트 사이트: nginx-test.com
-&quot; %}
-
-## 서버 준비
-Ncloud 콘솔에서 Rocky Linux 8.6 서버를 아래와 같이 준비했습니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-## 패키지 업데이트
-우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.
+## 오류 상황
+테스트로 아파치를 설치해보려고 했는데, 오류 메시지가 나타나면서 설치를 할 수 없었습니다. 또한 리포지토리 미러 사이트도 Ncloud 내부 서버가 아닌 록키 리눅스 공식 미러 사이트로 연결하려고 시도한 것을 확인할 수 있습니다.
 
 ``` bash
-~# dnf -y upgrade-minimal
+~# dnf -y install httpd
+
+Rocky Linux 8.6 - Extras                                 5.4 kB/s |  20 kB     00:03
+Errors during downloading metadata for repository &apos;extras&apos;:
+  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
+  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 146.75.94.132)
+Error: Failed to download metadata for repo &apos;extras&apos;: Cannot prepare internal mirrorlist: Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
 ```
-{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
-Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
-&quot; %}
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+## 미러 사이트 확인
+오류 메시지에 나온 공식 미리 사이트에 접속해보니 [**AppStream**], [**extras**] 등 모든 8.6 버전에 대한 정보가 사라진 것을 확인할 수 있었습니다.
 
-### 리포지토리 설정 파일 추가
-NginX 최신버전(mainline)을 설치하기 위해서는 epel-release 리포지토리 패키지가 필요하고, epel-release 리포지토리 패키지를 설치하기 위해서는 Extras 저장소 설정 파일이 필요합니다.  
-우선, Extras 저장소 설정 파일을 준비합니다. 이미 생성되어 있는 경우에는 다음 단계로 넘어가도 되고, 그렇지 않을 경우 아래와 같은 내용으로 파일을 생성합니다.
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 오류 상황 요약 정리
+현재 확인되는 오류 상황을 정리해보면 다음과 같습니다.
+
+1. 패키지를 검색하는 저장소가 [**AppStream**] 이나 [**BaseOS**]가 아닌 [**Extras**]로 변경되어 있다.
+2. 리포지토리 미러 사이트를 Ncloud 내부 서버가 아닌 외부에 있는 록키 리눅스 공식 미러 사이트로 접속시도 하고 있다.
+3. 외부에 있는 록키 리눅스 공식 미러 사이트에서는 공식 지원이 종료되는 8.6 버전에 대한 데이터가 이미 삭제되어 있다. 
+
+## 원인 분석
+원인 분석을 하기 위해 서버의 리포지토리 설정을 확인해보겠습니다.
+
+### 리포지토리 설정 - 오류 서버
+[**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 아래와 같이 다수의 파일이 존재하는 것을 확인할 수 있습니다.
+
+``` bash
+~# ls -al /etc/yum.repos.d/
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 위에서 확인한 설정 파일들 중에서 [**Rocky-Extras.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, Ncloud 내부 서버가 아닌 아래와 같이 록키 리눅스 공식 사이트로 설정되어 있는 것을 알 수 있습니다.
 
 ``` bash
 ~# vi /etc/yum.repos.d/Rocky-Extras.repo
 ```
 
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+### 리포지토리 설정 - 정상 서버
+그렇다면 아무 문제 없는 정상적인 서버의 경우는 어떤지 비교해서 살펴보겠습니다.  
+
+마찬가지로 [**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 오류가 발생한 서버와 달리 아래와 같이 [**Rocky-AppStream.repo**], [**Rocky-BaseOS.repo**] 이렇게 2가지 파일만 존재하는 것을 확인할 수 있습니다.
+
+``` bash
+~# ls -al /etc/yum.repos.d/
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 또한 2가지 설정 파일들 중에서 [**Rocky-AppStream.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, 록키 리눅스 공식 사이트는 주석 처리가 되어 있고, [**baseurl**]이 [**repo.ncloud.com**] 이라는 Ncloud 내부 서버로 설정되어 있는 것을 알 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+### 원인 추적
+오류가 발생한 서버와 정상적인 서버의 차이점을 비교 추적해보니 오류가 발생한 서버에서는 서버 생성 후에 `패키지 업데이트`가 진행된 것을 알 수 있었습니다. 
+서버 생성 후에 설치된 패키지들의 업데이트를 적용하기 위해 [**dnf upgrade**]를 실행했고, 그에 따라 리포지토리 정보가 변경되었다는 것을 알 수 있었습니다.
+
+``` bash
+~# dnf -y upgrade
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+[**dnf upgrade**]와 [**dnf update**]의 차이점에 대해 [**man dnf**] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [**dnf upgrade**]이며, [**dnf update**]는 더 이상 사용되지 않는 별칭이라고 합니다.
+&quot; %}
+
+``` bash
+~# man dnf
+#--- 중략 ---#
+Upgrade Command
+       Command: upgrade
+       Aliases: up
+       Deprecated aliases: update, upgrade-to, update-to, localupdate
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+## 해결 방법
+이 문제를 해결하는 방법은 몇가지가 있는데 차례대로 정리해보겠습니다.
+
+### 방법-1
+첫번째 방법은 [**Rocky-Extras.repo**] 리포지토리 설정파일의 주소를 Ncloud 내부 서버로 변경하는 방법입니다.
+
 ``` conf
 # Rocky-Extras.repo
 
-[extras]
-name=Rocky Linux $releasever - Extras
-#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=AppStream-$releasever
 baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
-gpgcheck=1
-enabled=1
-countme=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial
 ```
 
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
 
-## EPEL 저장소 패키지 설치
-다음으로 epel-release 저장소 패키지를 설치하겠습니다.
+- 주소를 변경 후에 아파치를 설치해보면 문제 없이 잘 설치 되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+
+### 방법-2
+두번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
 
 ``` bash
-~# dnf -y install epel-release
+~# dnf -y install httpd --disablerepo=extras
 ```
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+## 사전 예방책
+위 방법들은 패키지 업데이트 후에 문제를 해결하는 방법이므로, 사전에 이런 문제가 생기지 않도록 하는 것도 선택지 중의 하나입니다. 가능한 방법은 다음 2가지 입니다.
+- 패키지 업데이트를 진행하지 않는 방법
+- 보안-버그 수정 사항만 최소한으로 업데이트 하는 방법
 
-## NginX 버전 선택
-설치할 NginX 버전 버전을 선택합니다.
-
-### NginX 버전 리스트
-우선, Ncloud Rocky Linux 8.6에서 지원하는 NginX 버전을 확인합니다.  
-리스트를 살펴보면 1.14가 기본 버전인 것을 알 수 있습니다.
+### 패키지 최소 업데이트
+보안-버그 수정 사항만 최소한으로 업데이트 하는 [**upgrade-minimal**] 옵션으로 업데이트를 했을 경우에는 아래와 같이 리포지토리 파일에 변화가 없어서 이후 패키지 설치에 오류가 생기지 않습니다.
 
 ``` bash
-~# dnf module list nginx
+~# dnf -y upgrade-minimal
 ```
 
-- nginx 1.14 (default)
-- nginx 1.16
-- nginx 1.18
-- nginx 1.20
-- nginx mainline
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-12.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
 
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### 버전 활성화 정보 초기화
-다음으로 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다. 현재 활성화 된 버전이 존재하느냐에 따라 나타나는 메시지가 다릅니다.
-
-``` bash
-~# dnf module reset nginx
-```
-
-- 활성화 된 버전이 없을 때
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-- 활성화 된 버전이 있을 때
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### mainline 버전 활성화
-최신 버전인 mainline 버전을 활성화합니다.
-
-``` bash
-~# dnf module enable nginx:mainline
-```
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NginX는 stable, mainline 두가지 버전이 있습니다. 
-NginX의 공식 설명에 따르면 버그 수정이나 보안 패치 등은 항상 mainline 버전에 먼저 적용되기 때문에 mainline을 사용하는 것을 추천한다고 합니다. &lt;br /&gt;
-stable 버전을 사용하는 주된 경우는 **third-party 모듈**을 사용하고 있어서 신규 버전에서 **호환성 문제**가 발생할 가능성이 걱정될 때라고 합니다.&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-
-## NginX 설치
-NginX를 설치합니다. 설치된 버전은 다음과 같습니다.
-
-``` bash
-~# dnf -y install nginx
-~# nginx -v
-```
-- NginX: 1.23.1
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-## 디렉토리 설정
-다음으로 홈으로 사용할 디렉토리를 생성하고, 해당 디렉토리의 소유권을 설정하겠습니다.  
-그리고, NginX가 정상 작동하는지 확인해보기 위해 설치시에 포함된 index.html을 포함한 파일들을 홈 디렉토리로 복사합니다.
-
-``` bash
-# 테스트 사이트 홈 디렉토리 생성
-~# mkdir -p /ncloud/data/www/nginx-test/
-
-# 해당 디렉토리에 nginx에 권한 부여
-~# chown -R nginx:nginx /ncloud/data/www/nginx-test
-
-# nginx 샘플 페이지를 사이트 디렉토리로 복사
-~# cp /usr/share/nginx/html/*.* /ncloud/data/www/nginx-test/
-
-# 복사된 파일들 확인
-~# ls -al /ncloud/data/www/nginx-test/
-```
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-
-
-## 환경 설정
-
-### 설정 파일 위치
-NginX 환경 설정 파일의 위치는 **/etc/nginx/** 디렉토리입니다. **tree** 명령으로 해당 디렉토리에서 **conf**와 관련된 파일 리스트와 디렉토리 구조를 확인하면 다음과 같습니다.
-
-``` bash
-~# tree -P *conf* /etc/nginx/
-```
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### 기본 설정 파일
-위에서 확인할 수 있는 파일들 중에서 기본 환경 설정 파일은 **/etc/nginx/nginx.conf** 입니다.  
-**nginx.conf** 파일을 열어보면 아래와 같이 **server {...}**로 시작되는 사이트 설정에 관련된 부분도 있지만,  
-**include /etc/nginx/conf.d/*.conf** 와 같이 **conf.d** 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.  
-
-물론, 사이트 설정을 **nginx.conf** 파일에 직접 설정해도 되지만, 여러 개의 사이트를 설정해야 하는 경우도 생각해서 **conf.d 디렉토리**에 사이트 이름별로 환경 설정 파일을 별도로 만들어서 진행하도록 하겠습니다. 
-
-``` bash
-~# vi /etc/nginx/nginx.conf
-```
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### 기본 설정 주석 처리
-**server {...}** 부분을 모두 주석 처리합니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### 환경 설정 파일 생성
-**nginx-test.com** 이라는 도메인의 사이트 설정을 **nginx-test.conf** 설정 파일을 생성해서 저장합니다.
-
-``` bash
-~# vi /etc/nginx/conf.d/nginx-test.conf
-```
-
-``` nginx
-  server {
-    listen    80;
-    listen    [::]:80;
-
-    # 사이트 도메인 설정
-    server_name    nginx-test.com www.nginx-test.com;
-
-    # 홈 디렉토리, 기본 문서 설정
-    root      /ncloud/data/www/nginx-test;
-    index     index.html index.htm;
-
-    # 404 error 페이지 설정
-    error_page 404 /404.html;
-      location = /404.html {
-    }
-
-    # 50x error 페이지 설정
-    error_page 500 502 503 504 /50x.html;
-      location = /50x.html {
-      root    /ncloud/data/www/nginx-test;
-    }
-
-    # .htaccess 파일 접근 금지 설정
-    location ~ /\.ht {
-      deny    all;
-    }
-}
-```
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-
-## NginX 실행
-설정을 모두 마쳤으면 NginX를 시작하고 상태를 확인합니다.
-
-``` bash
-~# systemctl enable nginx
-~# systemctl start nginx
-~# systemctl status nginx
-```
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-## hosts 파일 수정
-지금과 같이 테스트용으로 임의 설정한 도메인(**nginx-test.com**)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.  
-`실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에` [다음 단계로 바로 이동&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#https-access-test)하시면 됩니다. 
-
-윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.
-
-1. C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.
-2. 복사한 hosts 파일을 수정해서 123.456.789.123 nginx-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.
-3. 수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.
-4. 덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-14.png&quot; width=&quot;745&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사이트 접속 {#https-access-test}
-NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-13.png&quot; sub-class=&quot;docimage-no-top&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
 
 
 ## 참고 URL
-1.  Rocky Linux NginX 설치 기본 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-mainline/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-mainline/&lt;/a&gt;
+1.  Rocky Linux 서버 소개
+	- &lt;a href=&quot;/compute/ncloud-compute-server-rocky-linux-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html&lt;/a&gt;
 
-2.  Rocky Linux NginX Multi Site 설치 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;</description>
+2.  Rocky Linux 미러 사이트 리스트
+	- &lt;a href=&quot;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&lt;/a&gt;
+</description>
             <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</guid>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</guid>
+            
+            <category>linux</category>
             
             <category>rocky_linux</category>
-            
-            <category>lemp</category>
-            
-            <category>nginx</category>
-            
-            <category>install</category>
             
             
         </item>
@@ -1110,158 +1334,266 @@ It is recommended to rather remove all installed content from the module, and re
         </item>
         
         <item>
-            <title>Ncloud Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
-            <description>## 개요  
-Ncloud (네이버 클라우드)에서 록키 리눅스(Rocky Linux) 8.6 서버를 제공하고 있는데, 패키지를 설치할 때 간혹 패키지 다운로드 사이트 또는 미러 사이트에서 8.6 버전에 대한 패키지 정보를 찾을 수 없다는 메시지가 나타나면서 패키지를 설치할 수 없는 경우가 있습니다.   
-그렇다면 왜 이런 문제가 생기는지와 어떻게 하면 해결할 수 있는지를 정리해보겠습니다.
+            <title>Rocky Linux에서 NginX 설치, 설정하는 방법</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.  
 
-## 오류 상황
-테스트로 아파치를 설치해보려고 했는데, 오류 메시지가 나타나면서 설치를 할 수 없었습니다. 또한 리포지토리 미러 사이트도 Ncloud 내부 서버가 아닌 록키 리눅스 공식 미러 사이트로 연결하려고 시도한 것을 확인할 수 있습니다.
 
-``` bash
-~# dnf -y install httpd
+## 서버 환경
 
-Rocky Linux 8.6 - Extras                                 5.4 kB/s |  20 kB     00:03
-Errors during downloading metadata for repository &apos;extras&apos;:
-  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
-  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 146.75.94.132)
-Error: Failed to download metadata for repo &apos;extras&apos;: Cannot prepare internal mirrorlist: Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
+&amp;#8259; NginX: NginX 1.23.1 &lt;br /&gt; 
+&amp;#8259; 테스트 사이트: nginx-test.com
+&quot; %}
 
-## 미러 사이트 확인
-오류 메시지에 나온 공식 미리 사이트에 접속해보니 [**AppStream**], [**extras**] 등 모든 8.6 버전에 대한 정보가 사라진 것을 확인할 수 있었습니다.
+## 서버 준비
+Ncloud 콘솔에서 Rocky Linux 8.6 서버를 아래와 같이 준비했습니다.
 
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
 
-## 오류 상황 요약 정리
-현재 확인되는 오류 상황을 정리해보면 다음과 같습니다.
-
-1. 패키지를 검색하는 저장소가 [**AppStream**] 이나 [**BaseOS**]가 아닌 [**Extras**]로 변경되어 있다.
-2. 리포지토리 미러 사이트를 Ncloud 내부 서버가 아닌 외부에 있는 록키 리눅스 공식 미러 사이트로 접속시도 하고 있다.
-3. 외부에 있는 록키 리눅스 공식 미러 사이트에서는 공식 지원이 종료되는 8.6 버전에 대한 데이터가 이미 삭제되어 있다. 
-
-## 원인 분석
-원인 분석을 하기 위해 서버의 리포지토리 설정을 확인해보겠습니다.
-
-### 리포지토리 설정 - 오류 서버
-[**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 아래와 같이 다수의 파일이 존재하는 것을 확인할 수 있습니다.
+## 패키지 업데이트
+우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.
 
 ``` bash
-~# ls -al /etc/yum.repos.d/
+~# dnf -y upgrade-minimal
 ```
+{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
+Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
+&quot; %}
 
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
 
-- 위에서 확인한 설정 파일들 중에서 [**Rocky-Extras.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, Ncloud 내부 서버가 아닌 아래와 같이 록키 리눅스 공식 사이트로 설정되어 있는 것을 알 수 있습니다.
+### 리포지토리 설정 파일 추가
+NginX 최신버전(mainline)을 설치하기 위해서는 epel-release 리포지토리 패키지가 필요하고, epel-release 리포지토리 패키지를 설치하기 위해서는 Extras 저장소 설정 파일이 필요합니다.  
+우선, Extras 저장소 설정 파일을 준비합니다. 이미 생성되어 있는 경우에는 다음 단계로 넘어가도 되고, 그렇지 않을 경우 아래와 같은 내용으로 파일을 생성합니다.
 
 ``` bash
 ~# vi /etc/yum.repos.d/Rocky-Extras.repo
 ```
 
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-### 리포지토리 설정 - 정상 서버
-그렇다면 아무 문제 없는 정상적인 서버의 경우는 어떤지 비교해서 살펴보겠습니다.  
-
-마찬가지로 [**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 오류가 발생한 서버와 달리 아래와 같이 [**Rocky-AppStream.repo**], [**Rocky-BaseOS.repo**] 이렇게 2가지 파일만 존재하는 것을 확인할 수 있습니다.
-
-``` bash
-~# ls -al /etc/yum.repos.d/
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-- 또한 2가지 설정 파일들 중에서 [**Rocky-AppStream.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, 록키 리눅스 공식 사이트는 주석 처리가 되어 있고, [**baseurl**]이 [**repo.ncloud.com**] 이라는 Ncloud 내부 서버로 설정되어 있는 것을 알 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-### 원인 추적
-오류가 발생한 서버와 정상적인 서버의 차이점을 비교 추적해보니 오류가 발생한 서버에서는 서버 생성 후에 `패키지 업데이트`가 진행된 것을 알 수 있었습니다. 
-서버 생성 후에 설치된 패키지들의 업데이트를 적용하기 위해 [**dnf upgrade**]를 실행했고, 그에 따라 리포지토리 정보가 변경되었다는 것을 알 수 있었습니다.
-
-``` bash
-~# dnf -y upgrade
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-[**dnf upgrade**]와 [**dnf update**]의 차이점에 대해 [**man dnf**] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [**dnf upgrade**]이며, [**dnf update**]는 더 이상 사용되지 않는 별칭이라고 합니다.
-&quot; %}
-
-``` bash
-~# man dnf
-#--- 중략 ---#
-Upgrade Command
-       Command: upgrade
-       Aliases: up
-       Deprecated aliases: update, upgrade-to, update-to, localupdate
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-## 해결 방법
-이 문제를 해결하는 방법은 몇가지가 있는데 차례대로 정리해보겠습니다.
-
-### 방법-1
-첫번째 방법은 [**Rocky-Extras.repo**] 리포지토리 설정파일의 주소를 Ncloud 내부 서버로 변경하는 방법입니다.
-
 ``` conf
 # Rocky-Extras.repo
 
-#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=AppStream-$releasever
+[extras]
+name=Rocky Linux $releasever - Extras
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
 baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
+gpgcheck=1
+enabled=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial
 ```
 
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
 
-- 주소를 변경 후에 아파치를 설치해보면 문제 없이 잘 설치 되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-### 방법-2
-두번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
+## EPEL 저장소 패키지 설치
+다음으로 epel-release 저장소 패키지를 설치하겠습니다.
 
 ``` bash
-~# dnf -y install httpd --disablerepo=extras
+~# dnf -y install epel-release
 ```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
 
-## 사전 예방책
-위 방법들은 패키지 업데이트 후에 문제를 해결하는 방법이므로, 사전에 이런 문제가 생기지 않도록 하는 것도 선택지 중의 하나입니다. 가능한 방법은 다음 2가지 입니다.
-- 패키지 업데이트를 진행하지 않는 방법
-- 보안-버그 수정 사항만 최소한으로 업데이트 하는 방법
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
 
-### 패키지 최소 업데이트
-보안-버그 수정 사항만 최소한으로 업데이트 하는 [**upgrade-minimal**] 옵션으로 업데이트를 했을 경우에는 아래와 같이 리포지토리 파일에 변화가 없어서 이후 패키지 설치에 오류가 생기지 않습니다.
+## NginX 버전 선택
+설치할 NginX 버전 버전을 선택합니다.
+
+### NginX 버전 리스트
+우선, Ncloud Rocky Linux 8.6에서 지원하는 NginX 버전을 확인합니다.  
+리스트를 살펴보면 1.14가 기본 버전인 것을 알 수 있습니다.
 
 ``` bash
-~# dnf -y upgrade-minimal
+~# dnf module list nginx
 ```
 
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-12.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+- nginx 1.14 (default)
+- nginx 1.16
+- nginx 1.18
+- nginx 1.20
+- nginx mainline
 
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-13.png&quot; sub-class=&quot;docimage-no-top&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 버전 활성화 정보 초기화
+다음으로 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다. 현재 활성화 된 버전이 존재하느냐에 따라 나타나는 메시지가 다릅니다.
+
+``` bash
+~# dnf module reset nginx
+```
+
+- 활성화 된 버전이 없을 때
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+- 활성화 된 버전이 있을 때
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### mainline 버전 활성화
+최신 버전인 mainline 버전을 활성화합니다.
+
+``` bash
+~# dnf module enable nginx:mainline
+```
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NginX는 stable, mainline 두가지 버전이 있습니다. 
+NginX의 공식 설명에 따르면 버그 수정이나 보안 패치 등은 항상 mainline 버전에 먼저 적용되기 때문에 mainline을 사용하는 것을 추천한다고 합니다. &lt;br /&gt;
+stable 버전을 사용하는 주된 경우는 **third-party 모듈**을 사용하고 있어서 신규 버전에서 **호환성 문제**가 발생할 가능성이 걱정될 때라고 합니다.&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## NginX 설치
+NginX를 설치합니다. 설치된 버전은 다음과 같습니다.
+
+``` bash
+~# dnf -y install nginx
+~# nginx -v
+```
+- NginX: 1.23.1
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## 디렉토리 설정
+다음으로 홈으로 사용할 디렉토리를 생성하고, 해당 디렉토리의 소유권을 설정하겠습니다.  
+그리고, NginX가 정상 작동하는지 확인해보기 위해 설치시에 포함된 index.html을 포함한 파일들을 홈 디렉토리로 복사합니다.
+
+``` bash
+# 테스트 사이트 홈 디렉토리 생성
+~# mkdir -p /ncloud/data/www/nginx-test/
+
+# 해당 디렉토리에 nginx에 권한 부여
+~# chown -R nginx:nginx /ncloud/data/www/nginx-test
+
+# nginx 샘플 페이지를 사이트 디렉토리로 복사
+~# cp /usr/share/nginx/html/*.* /ncloud/data/www/nginx-test/
+
+# 복사된 파일들 확인
+~# ls -al /ncloud/data/www/nginx-test/
+```
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## 환경 설정
+
+### 설정 파일 위치
+NginX 환경 설정 파일의 위치는 **/etc/nginx/** 디렉토리입니다. **tree** 명령으로 해당 디렉토리에서 **conf**와 관련된 파일 리스트와 디렉토리 구조를 확인하면 다음과 같습니다.
+
+``` bash
+~# tree -P *conf* /etc/nginx/
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 기본 설정 파일
+위에서 확인할 수 있는 파일들 중에서 기본 환경 설정 파일은 **/etc/nginx/nginx.conf** 입니다.  
+**nginx.conf** 파일을 열어보면 아래와 같이 **server {...}**로 시작되는 사이트 설정에 관련된 부분도 있지만,  
+**include /etc/nginx/conf.d/*.conf** 와 같이 **conf.d** 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.  
+
+물론, 사이트 설정을 **nginx.conf** 파일에 직접 설정해도 되지만, 여러 개의 사이트를 설정해야 하는 경우도 생각해서 **conf.d 디렉토리**에 사이트 이름별로 환경 설정 파일을 별도로 만들어서 진행하도록 하겠습니다. 
+
+``` bash
+~# vi /etc/nginx/nginx.conf
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 기본 설정 주석 처리
+**server {...}** 부분을 모두 주석 처리합니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 환경 설정 파일 생성
+**nginx-test.com** 이라는 도메인의 사이트 설정을 **nginx-test.conf** 설정 파일을 생성해서 저장합니다.
+
+``` bash
+~# vi /etc/nginx/conf.d/nginx-test.conf
+```
+
+``` nginx
+  server {
+    listen    80;
+    listen    [::]:80;
+
+    # 사이트 도메인 설정
+    server_name    nginx-test.com www.nginx-test.com;
+
+    # 홈 디렉토리, 기본 문서 설정
+    root      /ncloud/data/www/nginx-test;
+    index     index.html index.htm;
+
+    # 404 error 페이지 설정
+    error_page 404 /404.html;
+      location = /404.html {
+    }
+
+    # 50x error 페이지 설정
+    error_page 500 502 503 504 /50x.html;
+      location = /50x.html {
+      root    /ncloud/data/www/nginx-test;
+    }
+
+    # .htaccess 파일 접근 금지 설정
+    location ~ /\.ht {
+      deny    all;
+    }
+}
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## NginX 실행
+설정을 모두 마쳤으면 NginX를 시작하고 상태를 확인합니다.
+
+``` bash
+~# systemctl enable nginx
+~# systemctl start nginx
+~# systemctl status nginx
+```
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## hosts 파일 수정
+지금과 같이 테스트용으로 임의 설정한 도메인(**nginx-test.com**)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.  
+`실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에` [다음 단계로 바로 이동&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#https-access-test)하시면 됩니다. 
+
+윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.
+
+1. C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.
+2. 복사한 hosts 파일을 수정해서 123.456.789.123 nginx-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.
+3. 수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.
+4. 덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-14.png&quot; width=&quot;745&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사이트 접속 {#https-access-test}
+NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
 
 
 ## 참고 URL
-1.  Rocky Linux 서버 소개
-	- &lt;a href=&quot;/compute/ncloud-compute-server-rocky-linux-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html&lt;/a&gt;
+1.  Rocky Linux NginX 설치 기본 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-mainline/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-mainline/&lt;/a&gt;
 
-2.  Rocky Linux 미러 사이트 리스트
-	- &lt;a href=&quot;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&lt;/a&gt;
-</description>
+2.  Rocky Linux NginX Multi Site 설치 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;</description>
             <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</guid>
-            
-            <category>linux</category>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</guid>
             
             <category>rocky_linux</category>
+            
+            <category>lemp</category>
+            
+            <category>nginx</category>
+            
+            <category>install</category>
             
             
         </item>
@@ -1625,83 +1957,6 @@ mv 명령어를 사용해 [**SSH Key**] 인증에서 사용할 파일명으로 �
             <category>linux</category>
             
             <category>password</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Windows 서버 스토리지(디스크) 추가 상세 가이드</title>
-            <description>## 개요
-**Ncloud (네이버 클라우드)는** 스토리지 당 **최대 2TB**까지 확장할 수 있으며, **최대 16개**의 스토리지를 이용할 수 있습니다.  
-이번에는 Windows 서버에 스토리지 즉, 디스크를 추가하는 방법에 대해 정리해보겠습니다.
-
-## 테스트 환경
-Windows Server 2016 (64-bit) English Edition 으로 진행 되었습니다. 추가 스토리지는 총 10G disk 총 4개 입니다.
-
-## 스토리지 생성
-
-- 서버 &gt; 서버 관리 및 설정 변경 &gt; 스토리지생성
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_01.png&quot; width=&quot;745&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-
-
-- 스토리지 생성에 필요한 내용을 입력합니다.
-- 크기는 스토리지 하나 당 **10GB~2000GB까지** 사용할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_02.png&quot; width=&quot;695&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- 사용 될 추가디스크를 생성합니다.
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_03.png&quot; width=&quot;680&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 윈도우 서버 디스크 관리
-
-- 디스크관리(윈도우키+r) : diskmgmt.msc
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_04.png&quot; width=&quot;450&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-### 디스크 초기화
-- initializeDisk를 선택하여 디스크를 초기화 합니다.
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_05.png&quot; width=&quot;805&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-### 초기화 방식 선택
-- 두 가지 방식 중 하나를 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_06.png&quot; width=&quot;805&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-#### MBR과  GPT 차이
-
-| MBR | GTP |
-| :---: | :---: |
-| 주파티션을 4개까지 생성 가능 | 주 파티션을 128개까지 생성 가능 |
-| 디스크 용량 최대 2TB까지 인식 | 디스크 용량 최대 9.4ZB까지 인식 |
-| BIOS가 설치된 PC에서 사용 | UEFI 또는 EFI가 설치된 PC에서 사용 가능 |
-| Windows 32비트와 64비트 사용 가능 | Windows 32비트 사용 불가 |
-
-
-### 볼륨 생성
-- 새 단순 볼륨 생성하기
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_09.png&quot; width=&quot;805&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- 추가한 총 4개의 디스크 단순 볼륨 생성을 하였습니다.
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_10.png&quot; width=&quot;805&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-
-## 디스크 추가 확인
-- 아래와 같이 추가 생성한 디스크 추가가 완료되었습니다.
-
-{% include image.html file=&quot;compute/ncloud_compute_server_windows_storage_add_detail_process_11.png&quot; width=&quot;837&quot; alt=&quot;cloud Windows 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}</description>
-            <pubDate>Thu, 15 Jun 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_windows_storage_add_detail_process.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_windows_storage_add_detail_process.html</guid>
-            
-            <category>windows</category>
-            
-            <category>storage</category>
             
             
         </item>
