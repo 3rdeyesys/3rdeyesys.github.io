@@ -12,7 +12,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Ncloud에서 http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu입니다">
-<meta name="keywords" content="apache, ubuntu,  redirect, 아파치">
+<meta name="keywords" content="apache, ubuntu,  redirect, 아파치, SSL">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:url" content="https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-07-05T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-07-12T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu" />
 <script type="application/ld+json">
@@ -396,14 +396,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="https로 리다이렉트 - Apache/CentOS" href="/compute/ncloud_compute_server_http_to_https_centos.html" >https로 리다이렉트 - Apache/CentOS</a></li>          
+          <li><a title="https 리다이렉트 - Apache/CentOS" href="/compute/ncloud_compute_server_http_to_https_centos.html" >https 리다이렉트 - Apache/CentOS</a></li>          
                     
           
           
           
           
           
-          <li class="active"><a title="https로 리다이렉트 - Apache/Ubuntu" href="/compute/ncloud_compute_server_http_to_https_ubuntu.html" >https로 리다이렉트 - Apache/Ubuntu</a></li>
+          <li class="active"><a title="https 리다이렉트 - Apache/Ubuntu" href="/compute/ncloud_compute_server_http_to_https_ubuntu.html" >https 리다이렉트 - Apache/Ubuntu</a></li>
+                    
+          
+          
+          
+          
+          
+          <li><a title="https 리다이렉트-Apache/Rocky Linux" href="/compute/ncloud-compute-server-http-to-https-rocky-linux.html" >https 리다이렉트-Apache/Rocky Linux</a></li>          
                     
           
           
@@ -1914,24 +1921,57 @@ $("#toc_onoff").click(function() {
 
 <p>SSL 인증서가 설치되어 있다는 가정하에 우선 Linux Ubuntu에서 설정하는 방법을 확인해보겠습니다.</p>
 
-<h2 id="rewrite-모듈-설치">Rewrite 모듈 설치</h2>
-<p>혹시 Apache에 이미 <code class="language-plaintext highlighter-rouge">mod_rewrite</code> 가 로드 되어 있다면 설치하지 않아도 됩니다.</p>
+<h2 id="테스트-환경">테스트 환경</h2>
+<p>테스트에 사용한 서버 환경은 다음과 같습니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# a2enmod rewrite
+<div class="bs-callout-v2 bs-callout-v2-secondary bs-callout-v2-level-2">
+⁃ OS: Ubuntu 20.04 <br />
+⁃ 웹서버: Apache 2.4 
+</div>
+
+<h2 id="ssl-엔진-모듈-활성화">SSL 엔진 모듈 활성화</h2>
+<p>먼저, SSL 엔진 모듈을 활성화 해야 HTTPS 접속을 할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# a2enmod ssl
+~# systemctl restart apache2
 </code></pre></div></div>
 
 <h2 id="apache-conf-파일-수정">Apache conf 파일 수정</h2>
+<p><strong>/etc/apache2/sites-enabled/000-default.conf</strong> 파일의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.</p>
 
-<p><strong>/etc/apache2/sites-enabled/000-default.conf</strong> 의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.</p>
-<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">RewriteEngine</span> <span class="ss">On</span>
-<span class="nc">RewriteCond</span> %{HTTPS} !on
-<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+<h2 id="방법1--redirect-옵션">방법1 : Redirect 옵션</h2>
+<p>첫번째 방법은 [<strong>Redirect</strong>] 옵션을 이용하는 방법입니다.<br />
+HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.</p>
+
+<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nl">VirtualHost</span><span class="sr"> *:80</span><span class="p">&gt;
+</span>    <span class="nc">ServerName</span> 사이트_도메인
+
+    <span class="nc">Redirect</span> <span class="ss">permanent</span> / https://사이트_도메인/    
+&lt;/VirtualHost&gt; 
 </code></pre></div></div>
 
-<p>000-default.conf 파일에 실제로 적용하면 다음과 비슷한 모습이 되겠습니다.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">permanent</code> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: <strong>Redirect</strong> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">301</code> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">302</code> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">307</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">307</code> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">308</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">308</code> / https://사이트_도메인/</li>
+</ul>
+
+<h2 id="방법2--rewirterule-옵션">방법2 : RewirteRule 옵션</h2>
+<p>두번째 방법은 [<strong>RewirteRule</strong>] 옵션을 이용하는 방법입니다.<br />
+첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [<strong>RewirteRule</strong>]을 이용하는 두번째 방법을 사용해야 합니다.</p>
+
+<h3 id="rewrite-모듈-설치">Rewrite 모듈 설치</h3>
+<p>우선, RewirteRule 옵션을 사용하려면 Rewrite 모듈을 활성화 해야합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# a2enmod rewrite
+~# systemctl restart apache2
+</code></pre></div></div>
+
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nl">VirtualHost</span><span class="sr"> *:80</span><span class="p">&gt;
-</span>	<span class="nc">DocumentRoot</span> "/ncp/data/www/"
-	<span class="nc">ServerName</span> www.test.com
+</span>	<span class="nc">ServerName</span> 사이트_도메인
 
 	<span class="nc">RewriteEngine</span> <span class="ss">On</span>
 	<span class="nc">RewriteCond</span> %{HTTPS} !on
@@ -1939,66 +1979,32 @@ $("#toc_onoff").click(function() {
 <span class="p">&lt;/</span><span class="nl">VirtualHost</span><span class="p">&gt;
 </span></code></pre></div></div>
 
-<h3 id="리다이렉트-http-상태코드-설정">리다이렉트 HTTP 상태코드 설정</h3>
-<p>https로 리다이렉트 시킬때 HTTP 상태코드를 설정할 수 있습니다. 보통은 [<strong>301, 영구 리다이렉션</strong>]을 사용하지만 서비스 상황에 따라서는 다른 상태코드로 설정해야 하는 경우가 있습니다.<br />
-설정하는 방법은 위에서 확인한 [<strong>000-default.conf</strong>] 설정값 중에서 아래 [<strong>HTTP 상태코드</strong>] 부분을 수정하면 됩니다.</p>
-
-<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 설정 방법</span>
-<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}$1 [R=HTTP 상태코드,L]
-
-<span class="c"># 302 리다이렉트</span>
-<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}$1 [R=302,L]
-
-<span class="c"># 307 리다이렉트</span>
-<span class="nc">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}$1 [R=307,L]
-</code></pre></div></div>
+<p>위 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">301</code>,L]</li>
+  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">302</code>,L]</li>
+  <li><code class="language-plaintext highlighter-rouge">307</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">307</code>,L]</li>
+  <li><code class="language-plaintext highlighter-rouge">308</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">308</code>,L]</li>
+</ul>
 
 <h2 id="apache-재시작">Apache 재시작</h2>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl restart apache2
 </code></pre></div></div>
 <p>이렇게 재시작하고 http로 접속을 해보면 https로 전환되는 것을 확인할 수 있습니다.</p>
 
-<h2 id="apache-재시작-오류---sslengine">Apache 재시작 오류 - SSLEngine</h2>
-<p>위 내용처럼 아파치 재시작 명령어를 입력하면 끝입니다만, 재시작이 되지 않고 오류 메시지가 뜨는 경우가 있습니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl restart apache2
-Job <span class="k">for </span>apache2.service failed because the control process exited with error code. 
-See <span class="s2">"systemctl status apache2.service"</span> and <span class="s2">"journalctl -xe"</span> <span class="k">for </span>details.
-</code></pre></div></div>
-
-<p>오류 메시지에 나온 것 처럼 상세 내용을 확인해봅니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl status apache2.service
-</code></pre></div></div>
-<p>상세 오류 메시지 중에서 핵심 내용만 살펴보면 다음과 같습니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dec 04 16:09:44 test-lamp apachectl[11924]: AH00526: Syntax error on line 36 of /etc/apache2/sites-enabled/000-default.conf:
-Dec 04 16:09:44 test-lamp apachectl[11924]: Invalid <span class="nb">command</span> <span class="s1">'SSLEngine'</span>, perhaps misspelled or defined by a module not included <span class="k">in </span>the server configuration
-</code></pre></div></div>
-
-<p>위 오류 메시지에 나온 /etc/apache2/sites-enabled/000-default.conf 파일을 찾아가서 SSLEngine을 확인해보면 다음과 같습니다.</p>
-<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nl">VirtualHost</span><span class="sr"> *:443</span><span class="p">&gt;
-</span>    <span class="nc">ServerName</span> www.test.com
-    <span class="nc">ServerAdmin</span> web@test.com
-
-    <span class="err">{==</span><span class="nc">SSLEngine</span> on==}
-    <span class="nc">SSLCertificateFile</span> /etc/******/server.crt
-    <span class="nc">SSLCertificateKeyFile</span> /etc/******/server.key
-
-    <span class="c">###중략###</span>
-<span class="p">&lt;/</span><span class="nl">VirtualHost</span><span class="p">&gt;
-</span></code></pre></div></div>
-
-<p>확인해보면 SSLEngine on 명령어가 제대로 동작하지 못해서 생긴 문제라는 것을 알 수 있습니다.   <br />
-즉, SSL 모듈이 제대로 활성화 되지 않았기에 활성화 해주면 문제가 해결됩니다.<br />
-(나중에 살펴보면 socache_shmcb 모듈이 활성화되지 않았기 때문임을 알 수 있습니다)</p>
-
-<h2 id="ssl-엔진-모듈-활성화">SSL 엔진 모듈 활성화</h2>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# a2enmod ssl
-</code></pre></div></div>
-
-<p>그리고 나서 다시 Apache를 재시작 하면 됩니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl restart apache2
-</code></pre></div></div>
-
-<p>이제 http로 접속하셔서 https로 전환되는지 확인해보시기 바랍니다.</p>
+<h2 id="참고-url">참고 URL</h2>
+<ol>
+  <li>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Rocky Linux
+    <ul>
+      <li><a href="/compute/ncloud-compute-server-http-to-https-rocky-linux.html" target="_blank" style="word-break:break-all;">https://docs.3rdeyesys.com/compute/ncloud-compute-server-http-to-https-rocky-linux.html</a></li>
+    </ul>
+  </li>
+  <li>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS
+    <ul>
+      <li><a href="/compute/ncloud_compute_server_http_to_https_centos.html" target="_blank" style="word-break:break-all;">https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html</a></li>
+    </ul>
+  </li>
+</ol>
 
   
     <div class="tags">
@@ -2069,7 +2075,7 @@ Dec 04 16:09:44 test-lamp apachectl[11924]: Invalid <span class="nb">command</sp
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-07-05<br/> Site last generated: 2023-07-10 <br />        
+        <span>Page last updated:</span> 2023-07-12<br/> Site last generated: 2023-07-12 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

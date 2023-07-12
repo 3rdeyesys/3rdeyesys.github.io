@@ -248,6 +248,17 @@
 
 
 {
+"title": "http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Rocky Linux",
+"tags": "rocky_linuxlampapacheinstall",
+"keywords": "Linux, LEMP, LAMP, 록키 리눅스, 아파치, HTTPS",
+"url": "/compute/ncloud-compute-server-http-to-https-rocky-linux.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개",
 "tags": "linuxapachephpnginxmysqlmariadbrocky_linux",
 "keywords": "Linux, Rocky Linux",
@@ -989,7 +1000,7 @@
 {
 "title": "http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS",
 "tags": "apachecentos",
-"keywords": "redirect, 아파치",
+"keywords": "redirect, 아파치, SSL",
 "url": "/compute/ncloud_compute_server_http_to_https_centos.html",
 "summary": ""
 }
@@ -1000,7 +1011,7 @@
 {
 "title": "http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu",
 "tags": "apacheubuntu",
-"keywords": "redirect, 아파치",
+"keywords": "redirect, 아파치, SSL",
 "url": "/compute/ncloud_compute_server_http_to_https_ubuntu.html",
 "summary": ""
 }

@@ -400,14 +400,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="https로 리다이렉트 - Apache/CentOS" href="/compute/ncloud_compute_server_http_to_https_centos.html" >https로 리다이렉트 - Apache/CentOS</a></li>          
+          <li><a title="https 리다이렉트 - Apache/CentOS" href="/compute/ncloud_compute_server_http_to_https_centos.html" >https 리다이렉트 - Apache/CentOS</a></li>          
                     
           
           
           
           
           
-          <li><a title="https로 리다이렉트 - Apache/Ubuntu" href="/compute/ncloud_compute_server_http_to_https_ubuntu.html" >https로 리다이렉트 - Apache/Ubuntu</a></li>          
+          <li><a title="https 리다이렉트 - Apache/Ubuntu" href="/compute/ncloud_compute_server_http_to_https_ubuntu.html" >https 리다이렉트 - Apache/Ubuntu</a></li>          
+                    
+          
+          
+          
+          
+          
+          <li><a title="https 리다이렉트-Apache/Rocky Linux" href="/compute/ncloud-compute-server-http-to-https-rocky-linux.html" >https 리다이렉트-Apache/Rocky Linux</a></li>          
                     
           
           
@@ -1925,7 +1932,7 @@ $("#toc_onoff").click(function() {
 </div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-00.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-00.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -1949,7 +1956,7 @@ Upgrade-Minimal Command
 </code></pre></div></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-01.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-01.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -1957,40 +1964,46 @@ Upgrade-Minimal Command
 
 <h2 id="apache-웹서버-설치">Apache 웹서버 설치</h2>
 
-<h3 id="apache-버전-확인">Apache 버전 확인</h3>
-<p>[<strong>Rocky Linux 8.6</strong>]에서 기본으로 지원하는 Apache 버전을 확인해보면 [<strong>Apache 2.4</strong>]인 것을 확인할 수 있습니다.</p>
+<ul>
+  <li><strong>Apache 버전 확인</strong><br />
+[<strong>Rocky Linux 8.6</strong>]에서 기본으로 지원하는 Apache 버전을 확인해보면 [<strong>Apache 2.4</strong>]인 것을 확인할 수 있습니다.</li>
+</ul>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf module list httpd
 </code></pre></div></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-02.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-02.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
-<h3 id="apache-24-설치">Apache 2.4 설치</h3>
+<ul>
+  <li><strong>Apache 2.4 설치</strong></li>
+</ul>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>httpd
 </code></pre></div></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-03.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-03.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
-<h3 id="apache-실행-상태-확인">Apache 실행, 상태 확인</h3>
-<p>설치를 마쳤으면 Apache를 실행하고 상태를 확인합니다.</p>
+<ul>
+  <li><strong>Apache 실행, 상태 확인</strong><br />
+설치를 마쳤으면 Apache를 실행하고 상태를 확인합니다.</li>
+</ul>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# systemctl start httpd
 ~# systemctl status httpd
 </code></pre></div></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-04.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-04.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2014,7 +2027,7 @@ Upgrade-Minimal Command
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-05.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-05.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2042,7 +2055,7 @@ Upgrade-Minimal Command
 &lt;/</span><span class="nl">VirtualHost</span><span class="p">&gt;
 </span></code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-06.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-06.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2056,7 +2069,7 @@ Upgrade-Minimal Command
 </code></pre></div></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2076,7 +2089,7 @@ Upgrade-Minimal Command
 </ol>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-08.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-08.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2100,7 +2113,7 @@ Upgrade-Minimal Command
 <p>테스트로 생성했던 서버를 선택하고 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-23.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-23.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2111,7 +2124,7 @@ Upgrade-Minimal Command
 </ul>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-24.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-24.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2122,7 +2135,7 @@ Upgrade-Minimal Command
 </ul>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-25.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-25.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2132,7 +2145,7 @@ Upgrade-Minimal Command
 <p>내부 테스트용 설정은 ACG 규칙 설정 화면에서 [<strong>Inbound</strong>] 탭에서 [<strong>myIp</strong>] 버튼을 클릭해서 현재 접속한 PC나 회사 IP를 입력하고, HTTP용 80포트와 HTTPS용 443포트를 추가합니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-09.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-09.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2142,7 +2155,7 @@ Upgrade-Minimal Command
 <p>라이브 서비스용 설정은 접근 소스에는 [<strong>0.0.0.0/0</strong>]을 입력하고, 마찬가지로 HTTP용 80포트와 HTTPS용 443포트를 추가합니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-10.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-10.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2152,7 +2165,7 @@ Upgrade-Minimal Command
 <p>ACG 설정을 마쳤으면 웹브라우저에 테스트용 사이트의 주소 [<strong>http://rocky-https-test.com</strong>]으로 접속을 해보면 문제 없이 잘 접속되는 것을 확인할 수 있습니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-11.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-11.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2165,7 +2178,7 @@ Upgrade-Minimal Command
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>mod_ssl
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-12.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-12.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2179,7 +2192,7 @@ Upgrade-Minimal Command
 </code></pre></div></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-13.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-13.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2194,7 +2207,7 @@ Upgrade-Minimal Command
 <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-out</span> /root/ssl/rocky-https-test.com.crt
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-14.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-14.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2207,7 +2220,7 @@ Upgrade-Minimal Command
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# <span class="nb">ls</span> <span class="nt">-al</span> /root/ssl/
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-15.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-15.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2242,7 +2255,7 @@ Upgrade-Minimal Command
 &lt;/</span><span class="nl">VirtualHost</span><span class="p">&gt;
 </span></code></pre></div></div>
 <figure>
-  <img class="docimage docimage-no-bottom" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-16.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage docimage-no-bottom" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-16.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2262,7 +2275,7 @@ Upgrade-Minimal Command
 </code></pre></div></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2272,7 +2285,7 @@ Upgrade-Minimal Command
 <p>설정을 마쳤으면 웹브라우저에서 HTTPS로 [https://rocky-https-test.com]에 접속을 해보면 문제 없이 잘 접속되는 것을 확인할 수 있습니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-17.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-17.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2282,14 +2295,14 @@ Upgrade-Minimal Command
 <p>HTTPS로 테스트 사이트에 접속 후에 인증서를 확인해보면 위에서 테스트로 생성했던 정보가 제대로 설정되어 있는 것을 확인할 수 있습니다.</p>
 
 <figure>
-  <img class="docimage docimage-no-bottom" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-21.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage docimage-no-bottom" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-21.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
 <figure>
-  <img class="docimage docimage-no-top" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-22.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage docimage-no-top" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-22.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2308,10 +2321,12 @@ Upgrade-Minimal Command
 </span>    <span class="nc">ServerName</span> rocky-https-test.com
 
     <span class="nc">Redirect</span> <span class="ss">permanent</span> / https://rocky-https-test.com/
+    <span class="c"># 또는</span>
+    <span class="c"># Redirect 301 / https://rocky-https-test.com/</span>
 <span class="p">&lt;/</span><span class="nl">VirtualHost</span><span class="p">&gt;</span>    
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-18.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-18.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2321,7 +2336,7 @@ Upgrade-Minimal Command
 <p>웹브라우저에서 [<strong>F12</strong>] 키로 개발자 모드로 변경한 후에 [<strong>http://rocky-https-test.com/</strong>]로 접속을 해보면 아래 스샷처럼 HTTP 301 상태코드를 반환하면서 [<strong>https://rocky-https-test.com/</strong>]로 리다이렉트된 것을 확인할 수 있습니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-19.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 845px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-19.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2329,7 +2344,7 @@ Upgrade-Minimal Command
 
 <h3 id="방법---2">방법 - 2</h3>
 <p>두번째 방법은 [<strong>RewirteRule</strong>] 옵션을 이용하는 방법입니다.<br />
-첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드를 [<strong>301</strong>]외에, [<strong>302</strong>], [<strong>307</strong>], [<strong>308</strong>] 등 다양한 설정이 필요한 경우에는 [<strong>RewirteRule</strong>]을 이용하는 두번째 방법을 사용해야 합니다.</p>
+첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [<strong>RewirteRule</strong>]을 이용하는 두번째 방법을 사용해야 합니다.</p>
 
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nl">VirtualHost</span><span class="sr"> *:80</span><span class="p">&gt;
 </span>    <span class="nc">ServerName</span> rocky-https-test.com
@@ -2340,7 +2355,7 @@ Upgrade-Minimal Command
 <span class="p">&lt;/</span><span class="nl">VirtualHost</span><span class="p">&gt;</span> 
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-20.png" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" style="width: 840px; " />
+  <img class="docimage" src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-20.png" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2443,7 +2458,7 @@ Upgrade-Minimal Command
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-07-10<br/> Site last generated: 2023-07-10 <br />        
+        <span>Page last updated:</span> 2023-07-10<br/> Site last generated: 2023-07-12 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
