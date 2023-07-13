@@ -1935,15 +1935,6 @@ $("#toc_onoff").click(function() {
 <p>첫번째 방법은 [<strong>Redirect</strong>] 옵션을 이용하는 방법입니다.<br />
 HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">permanent</code> / https://사이트_도메인/</li>
-  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: <strong>Redirect</strong> / https://사이트_도메인/</li>
-  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">301</code> / https://사이트_도메인/</li>
-  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">302</code> / https://사이트_도메인/</li>
-  <li><code class="language-plaintext highlighter-rouge">307</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">307</code> / https://사이트_도메인/</li>
-  <li><code class="language-plaintext highlighter-rouge">308</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">308</code> / https://사이트_도메인/</li>
-</ul>
-
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nl">VirtualHost</span><span class="sr"> *:80</span><span class="p">&gt;
 </span>    <span class="nc">ServerName</span> 사이트_도메인
 
@@ -1957,17 +1948,18 @@ HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항�
   
 </figure>
 
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">permanent</code> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: <strong>Redirect</strong> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">301</code> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">302</code> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">307</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">307</code> / https://사이트_도메인/</li>
+  <li><code class="language-plaintext highlighter-rouge">308</code> 리다이렉트: <strong>Redirect</strong> <code class="language-plaintext highlighter-rouge">308</code> / https://사이트_도메인/</li>
+</ul>
+
 <h2 id="방법2--rewirterule-옵션">방법2 : RewirteRule 옵션</h2>
 <p>두번째 방법은 [<strong>RewirteRule</strong>] 옵션을 이용하는 방법입니다.<br />
 첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [<strong>RewirteRule</strong>]을 이용하는 두번째 방법을 사용해야 합니다.</p>
-
-<p>아래 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다.</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">301</code>,L]</li>
-  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">302</code>,L]</li>
-  <li><code class="language-plaintext highlighter-rouge">307</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">307</code>,L]</li>
-  <li><code class="language-plaintext highlighter-rouge">308</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">308</code>,L]</li>
-</ul>
 
 <div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nl">VirtualHost</span><span class="sr"> *:80</span><span class="p">&gt;
 </span>    <span class="nc">ServerName</span> 사이트_도메인
@@ -1984,7 +1976,14 @@ HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항�
   
 </figure>
 
+<p>위 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다.</p>
 <ul>
+  <li><code class="language-plaintext highlighter-rouge">301</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">301</code>,L]</li>
+  <li><code class="language-plaintext highlighter-rouge">302</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">302</code>,L]</li>
+  <li><code class="language-plaintext highlighter-rouge">307</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">307</code>,L]</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">308</code> 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=<code class="language-plaintext highlighter-rouge">308</code>,L]</p>
+  </li>
   <li>설정 파일을 저장한 후에 Apache 데몬을 재시작합니다.</li>
 </ul>
 
@@ -2117,7 +2116,7 @@ HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-07-11<br/> Site last generated: 2023-07-12 <br />        
+        <span>Page last updated:</span> 2023-07-11<br/> Site last generated: 2023-07-13 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

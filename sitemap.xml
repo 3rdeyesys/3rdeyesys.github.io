@@ -4,6 +4,18 @@
   
   
   <url>
+    <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html</loc>
+  
+    <lastmod>2023-07-13T00:00:00+09:00</lastmod>
+    
+  
+    <priority>0.7</priority>
+   
+  </url>
+  
+  
+  
+  <url>
     <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html</loc>
   
     <lastmod>2023-07-12T00:00:00+09:00</lastmod>
@@ -31,18 +43,6 @@
     <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-server-http-to-https-rocky-linux.html</loc>
   
     <lastmod>2023-07-11T00:00:00+09:00</lastmod>
-    
-  
-    <priority>0.7</priority>
-   
-  </url>
-  
-  
-  
-  <url>
-    <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html</loc>
-  
-    <lastmod>2023-07-10T00:00:00+09:00</lastmod>
     
   
     <priority>0.7</priority>
