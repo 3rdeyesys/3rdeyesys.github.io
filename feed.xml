@@ -5,10 +5,224 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 13 Jul 2023 10:54:56 +0900</pubDate>
-        <lastBuildDate>Thu, 13 Jul 2023 10:54:56 +0900</lastBuildDate>
+        <pubDate>Wed, 26 Jul 2023 14:46:56 +0900</pubDate>
+        <lastBuildDate>Wed, 26 Jul 2023 14:46:56 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>VPC 환경에서 SSL VPN 설정하고 접속하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 VPC 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.
+
+## SSL VPN이란?
+- VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다.
+- 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다.
+- 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.
+
+## SSL VPN 서비스 위치
+Ncloud 콘솔에서 SSL VPN의 위치는 [**Services**] - [**Security**] - [**SSL VPN**]에 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## SSL VPN 생성
+[**SSL VPN 생성**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+우선 접근할 서버가 속해 있는 VPC를 선택하고, 등록 가능한 접속 ID 개수에 따른 상품을 선택합니다.  
+VPC 환경에서는 3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 선택 가능합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-03.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+VPC 환경의 SSL VPN은 콘솔에서 자동으로 생성하는 것이 아니라 `생성 요청을 하면 Ncloud 담당자가 직접 생성하고 결과를 안내 받는 구조`로 되어 있습니다. 
+생성 완료까지 걸리는 시간은 **약 10~20분 이내** 이며, 생성이 완료되면 SSL VPN 상태가 [운영중]으로 변경되고, 안내 메일이 도착합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-04.png&quot; width=&quot;485&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## SSL VPN 생성 완료 {#connection-url-check}
+SSL VPN 생성이 완료되면 아래와 같이 [**IP POOL**]과 [**접속 URL**] 정보를 확인할 수 있는데 SSL VPN Agent 접속 시에 중요한 정보이니 잘 확인해야 합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사용자 설정
+SSL VPN에 접속할 사용자 정보를 설정합니다.  리스트에서 SSL VPN을 선택하고 [사용자 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자 정보는 ID, Passowrd, Email, SMS 등을 입력하고 [**추가**] 버튼을 클릭합니다.  
+VPC 환경은 이차인증이 필수이므로  SMS와 Email 정보를 함께 입력합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+사용자가 추가되면 SSL VPN 정보에 사용자 계정 수(등록된 ID 수)에 숫자가 표시되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Route Table 설정
+네트워크 설정에서는 우선 접속할 서버가 속해 있는 VPC Subnet의 Route Table에 SSL VPN으로 접근할 수 있게 SSL VPN의 [**IP POOL**]을 등록해야 합니다.  
+
+- **접속할 서버 정보 확인**  
+아래와 같이 접속할 서버의 정보에서 VPC와 Subnet을 확인합니다. 여기서는 Private Subnet에 생성한 서버에 접속할 예정입니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### VPC 서비스 위치
+[**VPC**] 서비스는 [**Console**] - [**Services**] - [**Networking**]에 위치해 있습니다.  
+그리고, 아래와 같이 [**VPC Management**], [**Subnet Management**], [**Route Table**] 메뉴를 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-vpc-subnet-create-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 VPC, Subnet 생성&quot; caption=&quot;&quot; %}
+
+[**VPC**] - [**Route Table**]에서 해당 VPC의 Private Subnet을 선택하고 [**Routes 설정**] 버튼을 클릭합니다.  
+(Public Subnet에 생성한 서버에 접근해야 할 경우에는 public-table을 선택하고 설정하시면 됩니다.)
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[**Destination**]에 생성된 SSL VPN 정보에서 확인한 [**IP POOL**] 정보를 등록하고, [**Target Type**]은 SSLVPN을 선택, [**Target Name**]은 위에서 생성한 SSL VPN 이름을 선택하고 [생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+다음으로 서버에 적용된 ACG에 SSL VPN의 [**IP POOL**]을 등록해야 합니다.  
+우선 SSL VPN을 통해서 접속할 서버를 선택하고 [**ACG 수정**] 버튼을 클릭해서 적용된 ACG를 확인합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[**Server**] - [**ACG**]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+ACG 규칙 설정 화면에서 위에서 확인했던 [**IP POOL**]을 접근 소스에 입력하고, 필요한 포트들을 등록합니다. 
+기본이 되는 프로토콜과 포트는 리눅스 서버 접속용 TCP 22, 윈도우 서버 접속용 TCP 3389, Ping 확인용 ICMP 등입니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 다운로드
+SSL VPN 접속을 위한 Agent를 다운로드 합니다.  
+
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-download&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;SSL VPN Agent 다운로드&lt;/a&gt;
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## Agent 접속
+Agent 프로그램, BIG-IP Edge Client를 설치하고 실행하면 다음과 같은 화면을 볼 수 있습니다. 
+서버 선택 창에 위에서 생성했던 SSL VPN 정보에서 확인했던 [**접속 URL**] 주소를 입력하고, [다음] 버튼을 클릭합니다.
+
+{% include tip.html content=&quot;
+[접속 URL 확인하는 방법 &lt;i class=&apos;fa-solid fa-arrow-up-from-bracket&apos;&gt;&lt;/i&gt;](#connection-url-check)&lt;br /&gt;
+&quot; %}
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-17.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+주소 변경 후에 [연결] 버튼을 클릭하면 로그인 화면이 나타나는데 위에서 설정했던 VPN 접속용 아이디와 Password를 입력하고 [로그온] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_20.png&quot; width=&quot;650&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+그리고 도착한 OTP 인증 번호를 입력합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-18.png&quot; width=&quot;710&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+SSL VPN에 제대로 연결이 되었는지 확인하기 위해서 cmd 창을 띄워서 ipconfig 명령어를 입력하면 아래 화면처럼 SSL VPN 주소로 설정된 어탭터에  [**IP POOL**]에 해당하는 IP가 할당된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 서버 접속
+이제 SSL VPN이 연결된 상태에서 서버에 접속해보겠습니다.  
+PuTTY 를 실행하고 접속할 서버의 IP를 입력합니다.  
+이때 서버 IP는 콘솔에 있는 서버 정보에서 **비공인 IP**에 표시되는 IP를 입력하면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-20.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Agent 기타 설정
+SSL VPN Agent에는 몇가지 추가 기능이 있는데 아래에서 확인해보겠습니다.
+
+### 트래픽 그래프
+Agent 창에서 [그래프 보기] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-21.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+여기서는 SSL VPN이 연결된 상태의 트래픽을 그래프로 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-22.png&quot; width=&quot;557&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+다음으로 [상세 보기] 버튼을 클릭하면 접속 세부 정보, 로그, 통계, 알림, 라우팅 테이블, IP설정 등의 정보를 확인할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-23.png&quot; width=&quot;777&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## 설정 변경
+처음에 설정한 접속 가능 ID 개수를 변경하고 싶을 경우 SSL VPN을 선택하고 [SSL VPN 설정 변경] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### ID 개수 변경
+3, 5, 10, 20, 30, 50, 100, 200, 300, 400, 500개 상품 중에서 원하는 개수로 변경할 수 있습니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-25.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+### 인증 로그 수집
+Ncloud SSN VPN은 이용자가 SSN VPN에 접속 인증한 로그를 수집할 수 있습니다. [**설정**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-26.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+인증 로그 수집을 활성화 하면 [**Cloud Log Analytics**]에 로그를 전달하여 저장합니다. 해당 상품을 미사용중이면 Cloud Log Analytics 상품 이용 신청을 한 후에 사용하시면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-27.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+- Cloud Log Analytics에서 인증 로그 확인
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-30.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 주의사항
+{% include warning.html title=&quot;접속 오류&quot; content=&quot;SSL VPN이 연결된 상태에서 새로운 서버를 생성하고 접속을 시도하면 아래와 같은 오류 메시지가 뜨면서 서버 접속이 되지 않습니다.  이때는 SSL VPN의 연결을 끊었다가 다시 연결해야 새로 생성한 서버에 접속할 수 있습니다.&quot; %}
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_classic_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 삭제
+삭제를 원할 경우 SSL VPN을 선택하고 상단의 [삭제] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+하지만, 바로 삭제가 되지 않고 다음과 같이 &quot;Route Table에서 Target으로 지정된 Route 정보를 모두 삭제해야 삭제가 가능합니다&quot;라는 메시지가 뜹니다. 
+
+{% include image.html file=&quot;security/ncp_security_ssl_vpn_vpc_guide_30.png&quot; width=&quot;500&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+[VPC] - [Route Table]에서 해당 VPC의 Private Subnet을 선택하고 [Routes 설정] 버튼을 클릭해서 등록된 설정을 확인하고 [X] 버튼을 클릭해서 설정을 삭제합니다. 
+Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-ssl-vpn-vpc-guide-29.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 SSL VPN 설정하고 접속하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1. Ncloud SSL VPN 개요
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-overview&lt;/a&gt;
+
+2. Ncloud SSL VPN 사용 가이드 - VPC
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/sslvpn-start-vpc&lt;/a&gt;
+</description>
+            <pubDate>Wed, 26 Jul 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud_security_ssl_vpn_vpc_guide.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>ssl</category>
+            
+            <category>vpn</category>
+            
+            
+        </item>
         
         <item>
             <title>Rocky Linux에서 Apache SSL 인증서 설정하는 방법</title>
@@ -333,105 +547,6 @@ HTTPS로 테스트 사이트에 접속 후에 인증서를 확인해보면 위�
         </item>
         
         <item>
-            <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu</title>
-            <description>## 개요
-웹사이트 SSL 인증서를 설치하고 https 접속을 유도할 때 http로 접속하면 https로 강제로 리다이렉트 시키는 방법을 사용하는 경우가 많습니다.  
-웹페이지 소스에서 http 접속 여부를 판단해서 redirect 시키는 방법 등 여러가지 있을 수 있는데 여기서는 Apache 설정으로 쉽게 할 수 있는 방법을 소개합니다.  
-
-SSL 인증서가 설치되어 있다는 가정하에 우선 Linux Ubuntu에서 설정하는 방법을 확인해보겠습니다.
-
-## 테스트 환경
-테스트에 사용한 서버 환경은 다음과 같습니다.
-
-{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; OS: Ubuntu 20.04 &lt;br /&gt;
-&amp;#8259; 웹서버: Apache 2.4 
-&quot; %}
-
-
-## SSL 엔진 모듈 활성화
-먼저, SSL 엔진 모듈을 활성화 해야 HTTPS 접속을 할 수 있습니다.
-
-``` bash
-~# a2enmod ssl
-~# systemctl restart apache2
-```
-
-## Apache conf 파일 수정
-**/etc/apache2/sites-enabled/000-default.conf** 파일의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.
-
-## 방법1 : Redirect 옵션
-첫번째 방법은 [**Redirect**] 옵션을 이용하는 방법입니다.  
-HTTP 환경 설정에서 [**ServerName**]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.
-
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName 사이트_도메인
-
-    Redirect permanent / https://사이트_도메인/    
-&lt;/VirtualHost&gt; 
-```
-
-- `301` 리다이렉트: **Redirect** `permanent` / https://사이트_도메인/
-- `302` 리다이렉트: **Redirect** / https://사이트_도메인/
-- `301` 리다이렉트: **Redirect** `301` / https://사이트_도메인/
-- `302` 리다이렉트: **Redirect** `302` / https://사이트_도메인/
-- `307` 리다이렉트: **Redirect** `307` / https://사이트_도메인/
-- `308` 리다이렉트: **Redirect** `308` / https://사이트_도메인/
-
-## 방법2 : RewirteRule 옵션
-두번째 방법은 [**RewirteRule**] 옵션을 이용하는 방법입니다.  
-첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [**RewirteRule**]을 이용하는 두번째 방법을 사용해야 합니다.  
-
-### Rewrite 모듈 설치
-우선, RewirteRule 옵션을 사용하려면 Rewrite 모듈을 활성화 해야합니다.
-
-``` bash
-~# a2enmod rewrite
-~# systemctl restart apache2
-```
-
-``` apache
-&lt;VirtualHost *:80&gt;
-	ServerName 사이트_도메인
-
-	RewriteEngine On
-	RewriteCond %{HTTPS} !on
-	RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
-&lt;/VirtualHost&gt;
-```
-
-위 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다. 
-- `301` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`301`,L]
-- `302` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`302`,L]
-- `307` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`307`,L]
-- `308` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`308`,L]
-
-
-## Apache 재시작
-``` bash
-~# systemctl restart apache2
-```
-이렇게 재시작하고 http로 접속을 해보면 https로 전환되는 것을 확인할 수 있습니다.
-
-## 참고 URL
-1.  http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Rocky Linux
-	- &lt;a href=&quot;/compute/ncloud-compute-server-http-to-https-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-http-to-https-rocky-linux.html&lt;/a&gt;
-
-2.  http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS
-	- &lt;a href=&quot;/compute/ncloud_compute_server_http_to_https_centos.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html&lt;/a&gt;</description>
-            <pubDate>Wed, 12 Jul 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</guid>
-            
-            <category>apache</category>
-            
-            <category>ubuntu</category>
-            
-            
-        </item>
-        
-        <item>
             <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS</title>
             <description>## 개요
 웹사이트 SSL 인증서를 설치하고 https 접속을 유도할 때 http로 접속하면 https로 강제로 리다이렉트 시키는 방법을 사용하는 경우가 많습니다. 웹페이지 소스에서 http 접속 여부를 판단해서 redirect 시키는 방법 등 여러가지 있을 수 있는데 여기서는 Apache 설정으로 쉽게 할 수 있는 방법을 소개합니다.  
@@ -544,6 +659,105 @@ Complete!
             <category>apache</category>
             
             <category>centos</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu</title>
+            <description>## 개요
+웹사이트 SSL 인증서를 설치하고 https 접속을 유도할 때 http로 접속하면 https로 강제로 리다이렉트 시키는 방법을 사용하는 경우가 많습니다.  
+웹페이지 소스에서 http 접속 여부를 판단해서 redirect 시키는 방법 등 여러가지 있을 수 있는데 여기서는 Apache 설정으로 쉽게 할 수 있는 방법을 소개합니다.  
+
+SSL 인증서가 설치되어 있다는 가정하에 우선 Linux Ubuntu에서 설정하는 방법을 확인해보겠습니다.
+
+## 테스트 환경
+테스트에 사용한 서버 환경은 다음과 같습니다.
+
+{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; OS: Ubuntu 20.04 &lt;br /&gt;
+&amp;#8259; 웹서버: Apache 2.4 
+&quot; %}
+
+
+## SSL 엔진 모듈 활성화
+먼저, SSL 엔진 모듈을 활성화 해야 HTTPS 접속을 할 수 있습니다.
+
+``` bash
+~# a2enmod ssl
+~# systemctl restart apache2
+```
+
+## Apache conf 파일 수정
+**/etc/apache2/sites-enabled/000-default.conf** 파일의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.
+
+## 방법1 : Redirect 옵션
+첫번째 방법은 [**Redirect**] 옵션을 이용하는 방법입니다.  
+HTTP 환경 설정에서 [**ServerName**]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.
+
+``` apache
+&lt;VirtualHost *:80&gt;
+    ServerName 사이트_도메인
+
+    Redirect permanent / https://사이트_도메인/    
+&lt;/VirtualHost&gt; 
+```
+
+- `301` 리다이렉트: **Redirect** `permanent` / https://사이트_도메인/
+- `302` 리다이렉트: **Redirect** / https://사이트_도메인/
+- `301` 리다이렉트: **Redirect** `301` / https://사이트_도메인/
+- `302` 리다이렉트: **Redirect** `302` / https://사이트_도메인/
+- `307` 리다이렉트: **Redirect** `307` / https://사이트_도메인/
+- `308` 리다이렉트: **Redirect** `308` / https://사이트_도메인/
+
+## 방법2 : RewirteRule 옵션
+두번째 방법은 [**RewirteRule**] 옵션을 이용하는 방법입니다.  
+첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [**RewirteRule**]을 이용하는 두번째 방법을 사용해야 합니다.  
+
+### Rewrite 모듈 설치
+우선, RewirteRule 옵션을 사용하려면 Rewrite 모듈을 활성화 해야합니다.
+
+``` bash
+~# a2enmod rewrite
+~# systemctl restart apache2
+```
+
+``` apache
+&lt;VirtualHost *:80&gt;
+	ServerName 사이트_도메인
+
+	RewriteEngine On
+	RewriteCond %{HTTPS} !on
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+&lt;/VirtualHost&gt;
+```
+
+위 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다. 
+- `301` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`301`,L]
+- `302` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`302`,L]
+- `307` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`307`,L]
+- `308` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`308`,L]
+
+
+## Apache 재시작
+``` bash
+~# systemctl restart apache2
+```
+이렇게 재시작하고 http로 접속을 해보면 https로 전환되는 것을 확인할 수 있습니다.
+
+## 참고 URL
+1.  http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Rocky Linux
+	- &lt;a href=&quot;/compute/ncloud-compute-server-http-to-https-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-http-to-https-rocky-linux.html&lt;/a&gt;
+
+2.  http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS
+	- &lt;a href=&quot;/compute/ncloud_compute_server_http_to_https_centos.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html&lt;/a&gt;</description>
+            <pubDate>Wed, 12 Jul 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</guid>
+            
+            <category>apache</category>
+            
+            <category>ubuntu</category>
             
             
         </item>
@@ -1067,271 +1281,6 @@ baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
         </item>
         
         <item>
-            <title>Rocky Linux에서 NginX 설치, 설정하는 방법</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.  
-
-
-## 서버 환경
-
-{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
-&amp;#8259; NginX: NginX 1.23.1 &lt;br /&gt; 
-&amp;#8259; 테스트 사이트: nginx-test.com
-&quot; %}
-
-## 서버 준비
-Ncloud 콘솔에서 Rocky Linux 8.6 서버를 아래와 같이 준비했습니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-## 패키지 업데이트
-우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.
-
-``` bash
-~# dnf -y upgrade-minimal
-```
-{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
-Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
-&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-### 리포지토리 설정 파일 추가
-NginX 최신버전(mainline)을 설치하기 위해서는 epel-release 리포지토리 패키지가 필요하고, epel-release 리포지토리 패키지를 설치하기 위해서는 Extras 저장소 설정 파일이 필요합니다.  
-우선, Extras 저장소 설정 파일을 준비합니다. 이미 생성되어 있는 경우에는 다음 단계로 넘어가도 되고, 그렇지 않을 경우 아래와 같은 내용으로 파일을 생성합니다.
-
-``` bash
-~# vi /etc/yum.repos.d/Rocky-Extras.repo
-```
-
-``` conf
-# Rocky-Extras.repo
-
-[extras]
-name=Rocky Linux $releasever - Extras
-#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
-baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
-gpgcheck=1
-enabled=1
-countme=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
-
-## EPEL 저장소 패키지 설치
-다음으로 epel-release 저장소 패키지를 설치하겠습니다.
-
-``` bash
-~# dnf -y install epel-release
-```
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-## NginX 버전 선택
-설치할 NginX 버전 버전을 선택합니다.
-
-### NginX 버전 리스트
-우선, Ncloud Rocky Linux 8.6에서 지원하는 NginX 버전을 확인합니다.  
-리스트를 살펴보면 1.14가 기본 버전인 것을 알 수 있습니다.
-
-``` bash
-~# dnf module list nginx
-```
-
-- nginx 1.14 (default)
-- nginx 1.16
-- nginx 1.18
-- nginx 1.20
-- nginx mainline
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### 버전 활성화 정보 초기화
-다음으로 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다. 현재 활성화 된 버전이 존재하느냐에 따라 나타나는 메시지가 다릅니다.
-
-``` bash
-~# dnf module reset nginx
-```
-
-- 활성화 된 버전이 없을 때
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-- 활성화 된 버전이 있을 때
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### mainline 버전 활성화
-최신 버전인 mainline 버전을 활성화합니다.
-
-``` bash
-~# dnf module enable nginx:mainline
-```
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NginX는 stable, mainline 두가지 버전이 있습니다. 
-NginX의 공식 설명에 따르면 버그 수정이나 보안 패치 등은 항상 mainline 버전에 먼저 적용되기 때문에 mainline을 사용하는 것을 추천한다고 합니다. &lt;br /&gt;
-stable 버전을 사용하는 주된 경우는 **third-party 모듈**을 사용하고 있어서 신규 버전에서 **호환성 문제**가 발생할 가능성이 걱정될 때라고 합니다.&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-
-## NginX 설치
-NginX를 설치합니다. 설치된 버전은 다음과 같습니다.
-
-``` bash
-~# dnf -y install nginx
-~# nginx -v
-```
-- NginX: 1.23.1
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-## 디렉토리 설정
-다음으로 홈으로 사용할 디렉토리를 생성하고, 해당 디렉토리의 소유권을 설정하겠습니다.  
-그리고, NginX가 정상 작동하는지 확인해보기 위해 설치시에 포함된 index.html을 포함한 파일들을 홈 디렉토리로 복사합니다.
-
-``` bash
-# 테스트 사이트 홈 디렉토리 생성
-~# mkdir -p /ncloud/data/www/nginx-test/
-
-# 해당 디렉토리에 nginx에 권한 부여
-~# chown -R nginx:nginx /ncloud/data/www/nginx-test
-
-# nginx 샘플 페이지를 사이트 디렉토리로 복사
-~# cp /usr/share/nginx/html/*.* /ncloud/data/www/nginx-test/
-
-# 복사된 파일들 확인
-~# ls -al /ncloud/data/www/nginx-test/
-```
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-
-
-## 환경 설정
-
-### 설정 파일 위치
-NginX 환경 설정 파일의 위치는 **/etc/nginx/** 디렉토리입니다. **tree** 명령으로 해당 디렉토리에서 **conf**와 관련된 파일 리스트와 디렉토리 구조를 확인하면 다음과 같습니다.
-
-``` bash
-~# tree -P *conf* /etc/nginx/
-```
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### 기본 설정 파일
-위에서 확인할 수 있는 파일들 중에서 기본 환경 설정 파일은 **/etc/nginx/nginx.conf** 입니다.  
-**nginx.conf** 파일을 열어보면 아래와 같이 **server {...}**로 시작되는 사이트 설정에 관련된 부분도 있지만,  
-**include /etc/nginx/conf.d/*.conf** 와 같이 **conf.d** 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.  
-
-물론, 사이트 설정을 **nginx.conf** 파일에 직접 설정해도 되지만, 여러 개의 사이트를 설정해야 하는 경우도 생각해서 **conf.d 디렉토리**에 사이트 이름별로 환경 설정 파일을 별도로 만들어서 진행하도록 하겠습니다. 
-
-``` bash
-~# vi /etc/nginx/nginx.conf
-```
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### 기본 설정 주석 처리
-**server {...}** 부분을 모두 주석 처리합니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-### 환경 설정 파일 생성
-**nginx-test.com** 이라는 도메인의 사이트 설정을 **nginx-test.conf** 설정 파일을 생성해서 저장합니다.
-
-``` bash
-~# vi /etc/nginx/conf.d/nginx-test.conf
-```
-
-``` nginx
-  server {
-    listen    80;
-    listen    [::]:80;
-
-    # 사이트 도메인 설정
-    server_name    nginx-test.com www.nginx-test.com;
-
-    # 홈 디렉토리, 기본 문서 설정
-    root      /ncloud/data/www/nginx-test;
-    index     index.html index.htm;
-
-    # 404 error 페이지 설정
-    error_page 404 /404.html;
-      location = /404.html {
-    }
-
-    # 50x error 페이지 설정
-    error_page 500 502 503 504 /50x.html;
-      location = /50x.html {
-      root    /ncloud/data/www/nginx-test;
-    }
-
-    # .htaccess 파일 접근 금지 설정
-    location ~ /\.ht {
-      deny    all;
-    }
-}
-```
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-
-## NginX 실행
-설정을 모두 마쳤으면 NginX를 시작하고 상태를 확인합니다.
-
-``` bash
-~# systemctl enable nginx
-~# systemctl start nginx
-~# systemctl status nginx
-```
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-## hosts 파일 수정
-지금과 같이 테스트용으로 임의 설정한 도메인(**nginx-test.com**)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.  
-`실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에` [다음 단계로 바로 이동&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#https-access-test)하시면 됩니다. 
-
-윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.
-
-1. C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.
-2. 복사한 hosts 파일을 수정해서 123.456.789.123 nginx-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.
-3. 수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.
-4. 덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-14.png&quot; width=&quot;745&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 사이트 접속 {#https-access-test}
-NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Rocky Linux NginX 설치 기본 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-mainline/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-mainline/&lt;/a&gt;
-
-2.  Rocky Linux NginX Multi Site 설치 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;</description>
-            <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</guid>
-            
-            <category>rocky_linux</category>
-            
-            <category>lemp</category>
-            
-            <category>nginx</category>
-            
-            <category>install</category>
-            
-            
-        </item>
-        
-        <item>
             <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
             <description>## 개요
 Rocky Linux (록키 리눅스)는 CentOS의 서비스 지원 종료로 대안으로 떠오른 CentOS 기반의 리눅스 OS입니다.  
@@ -1649,6 +1598,271 @@ It is recommended to rather remove all installed content from the module, and re
         </item>
         
         <item>
+            <title>Rocky Linux에서 NginX 설치, 설정하는 방법</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.  
+
+
+## 서버 환경
+
+{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
+&amp;#8259; NginX: NginX 1.23.1 &lt;br /&gt; 
+&amp;#8259; 테스트 사이트: nginx-test.com
+&quot; %}
+
+## 서버 준비
+Ncloud 콘솔에서 Rocky Linux 8.6 서버를 아래와 같이 준비했습니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 설치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## 패키지 업데이트
+우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.
+
+``` bash
+~# dnf -y upgrade-minimal
+```
+{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
+Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
+&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+### 리포지토리 설정 파일 추가
+NginX 최신버전(mainline)을 설치하기 위해서는 epel-release 리포지토리 패키지가 필요하고, epel-release 리포지토리 패키지를 설치하기 위해서는 Extras 저장소 설정 파일이 필요합니다.  
+우선, Extras 저장소 설정 파일을 준비합니다. 이미 생성되어 있는 경우에는 다음 단계로 넘어가도 되고, 그렇지 않을 경우 아래와 같은 내용으로 파일을 생성합니다.
+
+``` bash
+~# vi /etc/yum.repos.d/Rocky-Extras.repo
+```
+
+``` conf
+# Rocky-Extras.repo
+
+[extras]
+name=Rocky Linux $releasever - Extras
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
+baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
+gpgcheck=1
+enabled=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-guide-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개&quot; caption=&quot;&quot; %}
+
+## EPEL 저장소 패키지 설치
+다음으로 epel-release 저장소 패키지를 설치하겠습니다.
+
+``` bash
+~# dnf -y install epel-release
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## NginX 버전 선택
+설치할 NginX 버전 버전을 선택합니다.
+
+### NginX 버전 리스트
+우선, Ncloud Rocky Linux 8.6에서 지원하는 NginX 버전을 확인합니다.  
+리스트를 살펴보면 1.14가 기본 버전인 것을 알 수 있습니다.
+
+``` bash
+~# dnf module list nginx
+```
+
+- nginx 1.14 (default)
+- nginx 1.16
+- nginx 1.18
+- nginx 1.20
+- nginx mainline
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 버전 활성화 정보 초기화
+다음으로 위에서 확인했던 nginx 버전 활성화 정보를 초기화 합니다. 현재 활성화 된 버전이 존재하느냐에 따라 나타나는 메시지가 다릅니다.
+
+``` bash
+~# dnf module reset nginx
+```
+
+- 활성화 된 버전이 없을 때
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+- 활성화 된 버전이 있을 때
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### mainline 버전 활성화
+최신 버전인 mainline 버전을 활성화합니다.
+
+``` bash
+~# dnf module enable nginx:mainline
+```
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;NginX는 stable, mainline 두가지 버전이 있습니다. 
+NginX의 공식 설명에 따르면 버그 수정이나 보안 패치 등은 항상 mainline 버전에 먼저 적용되기 때문에 mainline을 사용하는 것을 추천한다고 합니다. &lt;br /&gt;
+stable 버전을 사용하는 주된 경우는 **third-party 모듈**을 사용하고 있어서 신규 버전에서 **호환성 문제**가 발생할 가능성이 걱정될 때라고 합니다.&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## NginX 설치
+NginX를 설치합니다. 설치된 버전은 다음과 같습니다.
+
+``` bash
+~# dnf -y install nginx
+~# nginx -v
+```
+- NginX: 1.23.1
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## 디렉토리 설정
+다음으로 홈으로 사용할 디렉토리를 생성하고, 해당 디렉토리의 소유권을 설정하겠습니다.  
+그리고, NginX가 정상 작동하는지 확인해보기 위해 설치시에 포함된 index.html을 포함한 파일들을 홈 디렉토리로 복사합니다.
+
+``` bash
+# 테스트 사이트 홈 디렉토리 생성
+~# mkdir -p /ncloud/data/www/nginx-test/
+
+# 해당 디렉토리에 nginx에 권한 부여
+~# chown -R nginx:nginx /ncloud/data/www/nginx-test
+
+# nginx 샘플 페이지를 사이트 디렉토리로 복사
+~# cp /usr/share/nginx/html/*.* /ncloud/data/www/nginx-test/
+
+# 복사된 파일들 확인
+~# ls -al /ncloud/data/www/nginx-test/
+```
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## 환경 설정
+
+### 설정 파일 위치
+NginX 환경 설정 파일의 위치는 **/etc/nginx/** 디렉토리입니다. **tree** 명령으로 해당 디렉토리에서 **conf**와 관련된 파일 리스트와 디렉토리 구조를 확인하면 다음과 같습니다.
+
+``` bash
+~# tree -P *conf* /etc/nginx/
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 기본 설정 파일
+위에서 확인할 수 있는 파일들 중에서 기본 환경 설정 파일은 **/etc/nginx/nginx.conf** 입니다.  
+**nginx.conf** 파일을 열어보면 아래와 같이 **server {...}**로 시작되는 사이트 설정에 관련된 부분도 있지만,  
+**include /etc/nginx/conf.d/*.conf** 와 같이 **conf.d** 디렉토리에 있는 설정 파일을 모두 불러오도록 되어 있습니다.  
+
+물론, 사이트 설정을 **nginx.conf** 파일에 직접 설정해도 되지만, 여러 개의 사이트를 설정해야 하는 경우도 생각해서 **conf.d 디렉토리**에 사이트 이름별로 환경 설정 파일을 별도로 만들어서 진행하도록 하겠습니다. 
+
+``` bash
+~# vi /etc/nginx/nginx.conf
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 기본 설정 주석 처리
+**server {...}** 부분을 모두 주석 처리합니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+### 환경 설정 파일 생성
+**nginx-test.com** 이라는 도메인의 사이트 설정을 **nginx-test.conf** 설정 파일을 생성해서 저장합니다.
+
+``` bash
+~# vi /etc/nginx/conf.d/nginx-test.conf
+```
+
+``` nginx
+  server {
+    listen    80;
+    listen    [::]:80;
+
+    # 사이트 도메인 설정
+    server_name    nginx-test.com www.nginx-test.com;
+
+    # 홈 디렉토리, 기본 문서 설정
+    root      /ncloud/data/www/nginx-test;
+    index     index.html index.htm;
+
+    # 404 error 페이지 설정
+    error_page 404 /404.html;
+      location = /404.html {
+    }
+
+    # 50x error 페이지 설정
+    error_page 500 502 503 504 /50x.html;
+      location = /50x.html {
+      root    /ncloud/data/www/nginx-test;
+    }
+
+    # .htaccess 파일 접근 금지 설정
+    location ~ /\.ht {
+      deny    all;
+    }
+}
+```
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## NginX 실행
+설정을 모두 마쳤으면 NginX를 시작하고 상태를 확인합니다.
+
+``` bash
+~# systemctl enable nginx
+~# systemctl start nginx
+~# systemctl status nginx
+```
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+## hosts 파일 수정
+지금과 같이 테스트용으로 임의 설정한 도메인(**nginx-test.com**)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.  
+`실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에` [다음 단계로 바로 이동&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#https-access-test)하시면 됩니다. 
+
+윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.
+
+1. C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.
+2. 복사한 hosts 파일을 수정해서 123.456.789.123 nginx-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.
+3. 수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.
+4. 덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-14.png&quot; width=&quot;745&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 사이트 접속 {#https-access-test}
+NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-install-setting-guide-rocky-linux-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 NginX를 Package로 치하고 기본 설정을 하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Rocky Linux NginX 설치 기본 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-mainline/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-mainline/&lt;/a&gt;
+
+2.  Rocky Linux NginX Multi Site 설치 가이드
+	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/nginx-multisite/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/nginx-multisite/&lt;/a&gt;</description>
+            <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lemp-nginx-install-setting-rocky-linux-guide.html</guid>
+            
+            <category>rocky_linux</category>
+            
+            <category>lemp</category>
+            
+            <category>nginx</category>
+            
+            <category>install</category>
+            
+            
+        </item>
+        
+        <item>
             <title>Ncloud VPC 환경에서 무료 서버(Micro Type) 이용하는 방법</title>
             <description>## 개요 
 Ncloud (네이버 클라우드)는 체험 및 테스트 용도로 **최초 결제 수단 등록 월부터 1년간 무료**로 사용할 수 있는 Micro 타입 서버를 제공하고 있습니다. 전에는 Classic 환경에서만 이용할 수 있었는데, 최근 업데이트 이후 VPC 환경에서도 이용할 수 있게 되었기에, VPC 환경에서 무료 서버인 Micro 타입 서버를 생성하는 과정을 정리해보겠습니다.
@@ -1747,62 +1961,6 @@ KVM 하이퍼바이저 기반인 Micro 타입서버는 기본 스토리지 10GB�
             <category>linux</category>
             
             <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Classic 환경 Micro 타입 서버에서 사용할 수 없는 서비스</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Classic 환경에서 제공하는 서버 타입 중에서 Micro 타입의 서버는 신규 가입 후 최초 결제수단 등록월부터 1년간 무료로 제공되는 체험용 서버입니다.
-계정당 1대만 이용 가능하며 1년이 지나면 유료로 전환됩니다.
-
-## 제한되는 서비스
-Classic 환경 Micro 타입의 서버에서 사용할 수 없는 서비스는 다음과 같습니다.
-
-- mssql
-- LAMP, WordPress, LEMP 등
-- Network Interface
-- Private Subnet
-
-
-### MSSQL 
-mssql 중에서 mssql 2017 Express은 무료로 제공되는 서비스이지만, mssql이 1년 무료제공 서버인 Micro서버에서는 설치가 되지 않기 때문에, compact 이상의 유료 서버를 이용해야 합니다.
-즉, mssql 2017 Express는 무료이나 서버와 그에 따른 하드 디스크 비용은 유료입니다.
-
-### LAMP
-LAMP (Linux + Apache, Mysql, PHP)의 경우 Micro 타입의 서버에 설치를 할 수 없고, Standard 이상의 서버에서만 설치할 수 있는데, 대신 네이버 클라우드에서는 LAMP 등 많이 사용되는 오픈 소스 소프트웨어가 설치된 서버를 쉽게 이용할 수 있도록 해주는 서비스인 Application Server Launcher를 제공하고 있습니다.
-
-Application Server Launcher에서는 원하는 소프트웨어의 이미지를 선택하기만 하면 쉽게 Micro 타입의 서버를 세팅하고 이용할 수 있습니다.
-
-{% include callout_v2.html type=&quot;success&quot; level=&quot;2&quot; content=&quot;다만, Application Server Launcher에서 생성한 서버도 Micro 타입의 서버이기 때문에 계정당 1개만 제공되는 Micro 타입 서버 기준에 따라 Micro 타입의 서버는 더 이상 추가할 수 없습니다.&quot; %}
-
-
-Application Server Launcher에서 OS버전(CentOS, Ubuntu)별로 제공되는 애플리케이션은 다음과 같습니다.
-
-- Drupal (CMS)
-- Joomla! (CMS)
-- Magento (E-Commerce)
-- Shadowsocks (VPN)
-- LAMP (Web Stack)
-- WordPress (CMS)
-- Jenkins (Dev Tools)
-
-
-### Private Subnet
-Private Subnet을 구성해서 서버환경을 만들려고 해도 Micro 서버 타입은 Network Interface를 추가할 수 없고, 그에 따라 Private Subnet도 적용할 수 없습니다.
-
-
-## 참고 URL
-1.  Ncloud 서버 사용 준비 - 제공되는 서버 스펙
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/server-spec&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/server-spec&lt;/a&gt;
-
-</description>
-            <pubDate>Tue, 20 Jun 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_micro_type_limit.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_micro_type_limit.html</guid>
-            
-            <category>limit</category>
             
             
         </item>
