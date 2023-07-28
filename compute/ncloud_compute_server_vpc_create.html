@@ -24,7 +24,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/ncloud-compute-vpc-server-create-guide-04.png" />
 <meta property="og:image:alt" content="Ncloud VPC 환경에서 서버를 생성하는 방법" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-06-14T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-07-28T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/compute/ncloud-compute-vpc-server-create-guide-04.png" />
 <meta name="twitter:image:alt" content="Ncloud VPC 환경에서 서버를 생성하는 방법" />
@@ -2049,7 +2049,7 @@ Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168
 <p>[<strong>서버 이미지 선택</strong>] 단계에서는 Ncloud에서 제공하는 다양한 서버 이미지를 선택할 수 있고, [<strong>최신 서버 이미지</strong>]와 [<strong>내 서버 이미지</strong>]를 따로 볼 수 있는 기능도 제공하고 있습니다. 여기서는 [<strong>최신 서버 이미지</strong>]에서 제공하는 서버 이미지로 서버를 생성해보겠습니다.<br />
 또한 하이퍼바이저 기준으로 [<strong>XEN</strong>]과 [<strong>KVM</strong>] 2가지 타입이 제공되는데 여기서는 [<strong>XEN</strong>] 타입의 서버로 테스트 해보겠습니다. [<strong>XEN</strong>]과 [<strong>KVM</strong>]에 대한 설명은 아래쪽에서 별도로 살펴보겠습니다. (<a href="#xen-vs-kvm">XEN 과 KVM 비교<i class="fa-solid fa-turn-down"></i></a>)</p>
 
-<ul class="tab" data-tab="e4376b70-3a54-4fce-979f-5d7eb5ecd005" data-name="server-image-choice">
+<ul class="tab" data-tab="bdbebc46-7ca2-4883-946f-d51b377e49da" data-name="server-image-choice">
   
       <li class="active">
           <a href="#">최신 서버 이미지 </a>
@@ -2060,7 +2060,7 @@ Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168
       </li>
   
 </ul>
-<ul class="tab-content" id="e4376b70-3a54-4fce-979f-5d7eb5ecd005" data-name="server-image-choice">
+<ul class="tab-content" id="bdbebc46-7ca2-4883-946f-d51b377e49da" data-name="server-image-choice">
   
       <li class="active">
 <figure>
@@ -2138,7 +2138,7 @@ Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168
 사설 IP 할당은 자동 할당과 수동 할당 방법 중에서 선택하시면 됩니다.</li>
 </ul>
 
-<ul class="tab" data-tab="58ebc8a9-6418-4bb7-85cf-220d57a59cab" data-name="private-ip-assign">
+<ul class="tab" data-tab="cdf672b4-39a6-43a6-8a0d-f6aa78bb832a" data-name="private-ip-assign">
   
       <li class="active">
           <a href="#">사설 IP 자동 할당 </a>
@@ -2149,7 +2149,7 @@ Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168
       </li>
   
 </ul>
-<ul class="tab-content" id="58ebc8a9-6418-4bb7-85cf-220d57a59cab" data-name="private-ip-assign">
+<ul class="tab-content" id="cdf672b4-39a6-43a6-8a0d-f6aa78bb832a" data-name="private-ip-assign">
   
       <li class="active">
 <p><br />
@@ -2287,6 +2287,17 @@ Public Subnet을 선택했고 서버에 공인 IP가 필요할 경우에는 [<st
   
 </figure>
 
+<ul>
+  <li>아래와 같이 로컬 PC에 인증키 (PEM) 파일을 저장합니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-24.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
 <h2 id="네트워크-접근-설정">네트워크 접근 설정</h2>
 <p>네트워크 접근은 [<strong>ACG</strong>]로 설정하게 되는데, <code class="language-plaintext highlighter-rouge">ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스</code>로, 서버에 별도의 복잡한 방화벽 구축없이 간단하게 서버에 대한 네트워크 접근 제어를 할 수 있습니다.<br />
 [<strong>VPC</strong>]를 생성하면 자동으로 생성되는 <strong>기본 ACG</strong>를 선택하거나 별도로 생성한 ACG가 있을 경우 해당 ACG를 선택하면 됩니다. <strong>적용할 ACG는 최대 3개</strong>까지 선택할 수 있습니다.</p>
@@ -2303,6 +2314,146 @@ Public Subnet을 선택했고 서버에 공인 IP가 필요할 경우에는 [<st
 
 <figure>
   <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-22.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h2 id="서버-접속">서버 접속</h2>
+<p>이제 생성된 서버에 관리자(root) 계정으로 접속해보겠습니다.</p>
+
+<h3 id="방화벽-acg-설정">방화벽 (ACG) 설정</h3>
+<p>우선 서버 접속을 위한 방화벽 (ACG)을 설정하겠습니다.</p>
+
+<ul>
+  <li>테스트로 생성했던 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.</li>
+</ul>
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-34.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.</li>
+</ul>
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-35.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다.</li>
+</ul>
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-36.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>ACG 규칙 설정 화면 [<strong>Inbound</strong>] 탭에서 [<strong>myIp</strong>] 버튼을 클릭해서 현재 접속한 PC나 회사 IP를 입력하고, 허용 포트에는 SSH 접속을 위한 <code class="language-plaintext highlighter-rouge">22포트를 추가</code>합니다.</li>
+</ul>
+<figure>
+  <img class="docimage docimage-no-top-bottom" src="/images/compute/ncloud-compute-vpc-server-create-guide-37.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="관리자-비밀번호-확인">관리자 비밀번호 확인</h3>
+<p>다음으로, 서버 접속에 필요한 관리자 비밀번호를 확인하려면, 서버를 선택하고 [<strong>서버 관리 및 설정 변경</strong>] 메뉴에서 [<strong>관리자 비밀번호 확인</strong>] 메뉴를 선택합니다.</p>
+
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-25.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>메뉴를 선택하면 다음과 같은 [<strong>관리자 비밀번호 확인</strong>] 팝업이 나타납니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-26.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 685px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>팝업에서 [<strong>마우스로 파일을 끌고 오거나 여기를 클릭하세요</strong>] 부분을 클릭하면 파일 선택 창이 나타나는데, 위에서 저장했던 pem 인증키 파일을 선택합니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-27.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>인증키 파일이 선택된 상태에서 아래쪽에 있는 [<strong>비밀번호 확인</strong>] 버튼을 클릭합니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-28.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 685px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>그러면 아래와 같이 관리자 계정(root)에 대한 비밀번호를 확인할 수 있습니다. 아래쪽에서 서버에 접속할때 사용하기 위해 비밀번호를 복사합니다.</li>
+</ul>
+
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-29.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 485px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="서버-ip-주소-확인">서버 IP 주소 확인</h3>
+<p>다음으로 서버 정보 화면에서 서버의 [<strong>공인 IP 주소</strong>]를 확인하고, 복사합니다. (SSL VPN 등을 사용하는 경우에는 사설 IP 주소를 사용하면 됩니다.)</p>
+
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-30.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="서버-접속-1">서버 접속</h3>
+<p>대표적인 서버 접속 클라이언트인 Putty를 실행하고, 서버의 IP주소를 입력합니다.</p>
+
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-31.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 452px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>처음 연결하는 서버의 경우 아래와 같이 SSH 프로토콜에서 필요한 FingerPrint를 저장할 것인지 묻는데, [<strong>Accept</strong>] (또는 예)를 클릭합니다.</li>
+</ul>
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-32.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>마지막으로 관리자 계정인 [<strong>root</strong>]와 위에서 확인했던 [<strong>관리자 비밀번호</strong>]를 입력하면 서버에 접속됩니다.</li>
+</ul>
+<figure>
+  <img class="docimage docimage-no-top" src="/images/compute/ncloud-compute-vpc-server-create-guide-33.png" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2469,7 +2620,7 @@ Public Subnet을 선택했고 서버에 공인 IP가 필요할 경우에는 [<st
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-06-14<br/> Site last generated: 2023-07-26 <br />        
+        <span>Page last updated:</span> 2023-07-28<br/> Site last generated: 2023-07-28 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
