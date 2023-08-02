@@ -712,6 +712,17 @@
 
 
 {
+"title": "Object Storage 버킷 접근 로그 확인하는 방법",
+"tags": "storagelog",
+"keywords": "BackUp, Storage, Log, Access",
+"url": "/storage/ncloud-storage-object-storage-log-management-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Object Storage에서 html, 이미지 파일이 다운로드되는 문제 해결 방법",
 "tags": "storage",
 "keywords": "BackUp, Storage, MIME Type, Media Type, Content-Type",
