@@ -1372,9 +1372,9 @@
 
 
 {
-"title": "Ncloud Sub Account 생성 가이드",
-"tags": "account",
-"keywords": "account, sub account",
+"title": "Ncloud 서브 계정 (Sub Account) 생성 가이드",
+"tags": "accountapi",
+"keywords": "Account, Sub Account, API Key",
 "url": "/management/ncloud_management_sub_account_guide.html",
 "summary": ""
 }

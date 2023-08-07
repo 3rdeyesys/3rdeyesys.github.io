@@ -5,10 +5,207 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 03 Aug 2023 10:44:28 +0900</pubDate>
-        <lastBuildDate>Thu, 03 Aug 2023 10:44:28 +0900</lastBuildDate>
+        <pubDate>Mon, 07 Aug 2023 15:35:10 +0900</pubDate>
+        <lastBuildDate>Mon, 07 Aug 2023 15:35:10 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud 서브 계정 (Sub Account) 생성 가이드</title>
+            <description>## 개요
+Sub Account(서브 계정)는 네이버 클라우드의 서비스 자원을 여러 사용자가 동시에 이용, 관리해야 할 때 필요한 만큼만 권한을 부여해서 사용할 수 있게 해주는 서비스입니다.  
+Sub Account를 사용하면 사내 담당부서나 담당자별로 지정된 자원에만 접근하도록 하거나, 협력사에게 일부 접근권한을 부여해야 할 때 효과적입니다.
+
+## 특징
+네이버 클라우드의 Sub Account는 다음과 같은 특징이 있습니다.
+
+- 별도의 로그인 페이지를 이용하여 접속
+- 대시보드에서 서브 계정 수, 그룹 수, 정책 수, 접속 페이지 설정을 확인할 수 있음
+- 그룹, 정책, 역할을 생성해 상세한 권한 설정을 할 수 있음
+- Access Key를 별도로 생성해서 사용할 수 있음
+
+
+## 주요 권한
+
+- 네이버 클라우드 메인 계정과 동일한 접근 권한  
+	**NCP_ADMINISTRATOR** 정책을 부여하시면 메인 계정과 동일하게 네이버클라우드플랫폼 내 포털, 콘솔을 접근할 수 있습니다
+
+- 네이버 클라우드 콘솔 내 모든 상품/서비스 접근 권한  
+	**NCP_INFRA_MANAGER** 정책을 부여하시면 메인 계정과 동일하게 콘솔 내 모든 상품/서비스에 접근할 수 있습니다.
+
+- 네이버 클라우드 콘솔 내 각 상품/서비스별 접근 권한  
+	**NCP_상품/서비스명_MANAGER/VIEWER** 정책을 부여하시면 해당 상품/서비스에 접근할 수 있습니다.
+
+- 네이버 클라우드 포털 내 마이페이지 &quot;이용관리&quot; 메뉴 접근 권한  
+	**NCP_FINANCE_MANAGER** 정책을 부여하시면 포털 마이페이지 내 &quot;서비스 이용내역/현황, 프로모션 내역, 청구 내역 추세&quot; 메뉴에 접근할 수 있습니다.
+
+
+## Sub Account 서비스
+[**Sub Account**] 서비스는 [**콘솔**] - [**Services**] - [**Management &amp; Governance**] - [**Sub Account**]에 위치하고 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-26.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+좀 더 쉽게 찾는 방법은 [**콘솔**] - [**Services**]에서 [**검색**] 기능을 이용하면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-27.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 서브 계정 생성
+[**Sub Account**] - [**Sub Accounts**]에서 [**서브 계정 생성**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncp_manage_sub_account_01.jpg&quot; width=&quot;770&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+서브 계정 생성 화면에서는 로그인 아이디, 이름, 이메일 주소를 우선 입력합니다.  
+
+다음으로 접근 유형으로 [Console 접근]과 [API 접근]을 모두 허용할 것인지, 하나만 허용할 것인지 선택하고, 
+Conosole 접근의 경우에 지정한 IP대역에서만 접근하게 할 것인지, 모두 허용할 것인지도 선택합니다.  
+
+휴대폰 문자인증 또는 이메일 인증 등의 2차 인증을 적용할 것인지도 선택합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+### 비밀번호 설정
+
+마지막으로 로그인 비밀번호는 [**자동 생성**] 또는 [**직접 입력**] 중에서 선택할 수 있으며, 해당 서브 계정으로 로그인 시에 비밀번호를 변경하도록 할 것인지 선택할 수 있습니다.
+
+#### 자동 생성
+{% include image.html file=&quot;management/ncloud-management-sub-account-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+- `자동 생성된 비밀번호는 이 화면에서만 확인 가능하므로 반드시 별도 저장해야 합니다.`
+{% include image.html file=&quot;management/ncloud-management-sub-account-05.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+#### 직접 입력
+직접 입력하는 비밀번호는 영문자, 숫자, 특수 문자를 조합하여 8자~16자 이내로 입력하면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-06.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+
+## 계정 정책 추가
+생성된 서브 계정을 클릭하면 서브 계정 상세 설정 화면으로 이동합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-07.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+서브 계정 상세 화면에서는 정책, 그룹, Access Key 등을 추가하고 관리할 수 있습니다.  우선 아래쪽에 있는 [**정책**] 탭에서 [**개별 권한 추가**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-08.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+정책 추가 화면에서는 네이버 클라우드에서 기본으로 제공하는 [관리형 정책]과 사용자가 직접 정의하는 [사용자 정의 정책]이 있습니다.  
+우선 [관리형 정책]에서 필요한 정책을 선택하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+정책이 워낙 많기 때문에 가능하면 위쪽의 검색 기능을 이용해서 정책을 찾는 것을 추천합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-25.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+여기서는 네이버 클라우드의 플랫폼 내 모든 상품을 이용할 수 있는 권한인 [**NCP_INFRA_MANAGER**] 선택했고, 아래와 같이 추가된 것을 확인할 수 있습니다. 
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-09.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 접속 환경 설정
+네이버 클라우드 서브 계정은 별도의 로그인 페이지가 존재하는데, 
+[**Sub Account**] - [**Dashboard**]에서 서브 계정으로 접속하기 위한 페이지 주소를 입력할 수 있습니다.  
+
+우선 서브 계정 로그인 페이지 접속 접속키를 입력합니다. 입력한 접속키를 바탕으로 로그인 페이지 URL이 결정됩니다.  
+
+추천되는 접속키의 형태는 다음과 같습니다.
+- 회사명 + &amp;alpha; (ex: mycompany, samplecomsub)
+- 서비스명 + &amp;alpha; (ex: mygame, testservicesub)
+- 회사명 + 서비스명 + &amp;alpha; (ex: mycompanygame, mycomsamplegamesub)
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;접속키는 영어 소문자와 숫자를 이용해서 3~20자로 구성해야 합니다.&quot; %}
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-20.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+서브 계정 로그인 페이지 URL은 [**주소 복사**] 버튼을 클릭하면 복사할 수 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-21.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 [**미사용 세션 만료 설정**]에서 [**변경**] 버튼을 클릭하면 로그인된 서브 계정이 아무 활동없이 미사용일 경우 지정한 시간 기준으로 자동 로그아웃이 되도록 설정할 수 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-22.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+[**비밀번호 만료 설정**]에서 [**변경**] 버튼을 클릭해서 비밀번호 만료를 활성화할 경우 지정된 만료일을 초과했을 때 비밀번호를 변경해야만 접속 할 수 있습니다. 
+활성화 하지 않았을 경우에는 90일이 지난 후에 비밀번호 변경 안내 팝업만 나타납니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-23.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 접속 - 로그인
+위에서 설정한 접속 페이지 [ **https://www.ncloud.com/nsa/\*\*\*\*\*\***] 에 접속하면 아래와 같이 서브 계정 로그인 화면을 확인할 수 있습니다.  
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-10.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+
+## API Key 설정
+서브 계정에서 API Access Key를 사용해야 할 경우 먼저 API GateWay 접근 권한을 부여하고, 서브 계정 상세 화면 [Access Key]탭에서 [추가] 버튼을 클릭해 생성할 수 있습니다. 
+
+### API Gateway 접근 권한 설정
+우선, 서브 계정 리스트에서 해당 계정을 클릭해서 [**서브 계정 세부 정보**] 화면으로 이동합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-07.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+- [**서브 계정 세부 정보**] 화면에서 [**수정**] 메뉴 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-11.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+- [**서브 계정 정보**] 수정 화면에서 [**접근 권한**]에 있는 [**API Gateway 접근**]을 체크합니다. 그리고, 되도록이면 [**지정된 Source에서만 접근 가능**] 옵션을 선택하고, 지정된 IP 등을 추가하는 것을 권장합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-12.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+- 위 화면에서 [**추가**] 버튼을 클릭하면 아래와 같이 [**접근 가능 Source 지정**] 팝업이 나타나는데, IP를 입력하거나 VPC Server를 선택하면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-13.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+### API Access Key 추가
+위에서 [**API Gateway 접근**] 권한을 추가하면 계정 정보 화면에 아래와 같이 [**Access Key**] 탭이 나타나고 [**추가**] 버튼을 클릭하면 [**Access Key**]와 [**Secret Key**]를 생성할 수 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-14.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 계정 그룹 설정
+여러 개의 서브 계정을 묶어서 하나의 그룹으로 구성하면 해당 그룹의 서브 계정에 동일한 정책을 동시에 적용할 수 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-15.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 사용자 정의 정책 생성
+서브 계정 정책에는 네이버 클라우드에서 기본으로 제공하는 [관리형 정책] 외에도 사용자가 직접 설정하는 [사용자 정의 정책]도 사용할 수 있습니다. 
+[Sub Account] - [Plicies]에서 [정책 생성] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-28.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+### VPC 환경에서 정책 생성
+정책 이름을 입력하고, VPC를 선택 후, 어떤 서비스 상품에 적용할 것인지 선택합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-16.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 Actions 항목에서는 읽기 권한인 View 또는 수정 권한인 Change를 선택하면 아래쪽에 리소스별로 상세한 권한 설정을 할 수 있는 화면이 나타납니다. 
+모든 설정을 마치고, 아래쪽 [적용대상 추가] 버튼을 클릭하면 됩니다. 
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-17.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+### Classic 환경에서 정책 생성
+Classic 환경에서는 리소스별 상세 권한은 설정할 수 없고, View 또는 Change를 선택한 후에 [적용대상 추가] 버튼을 클릭하면 모든 권한이 추가됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-18.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+아래와 같이 선택한 서비스 상품에 대해 모든 리전, 모든 리소스에 선택한 권한이 지정됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-19.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+1.  Sub Account 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/subaccount-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/subaccount-overview&lt;/a&gt;</description>
+            <pubDate>Mon, 07 Aug 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/management/ncloud_management_sub_account_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud_management_sub_account_guide.html</guid>
+            
+            <category>account</category>
+            
+            <category>api</category>
+            
+            
+        </item>
         
         <item>
             <title>Object Storage 버킷 접근 로그 확인하는 방법</title>
@@ -1589,163 +1786,6 @@ Jun 30 17:37:41 jenkins-test systemd[1]: Failed to start Jenkins Continuous Inte
             <guid isPermaLink="true">https://docs.3rdeyesys.com/dev-tools/ncloud-dev-tools-jenkins-server-install-guide-rocky-linux.html</guid>
             
             <category>github</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
-            <description>## 개요  
-Ncloud (네이버 클라우드)에서 록키 리눅스(Rocky Linux) 8.6 서버를 제공하고 있는데, 패키지를 설치할 때 간혹 패키지 다운로드 사이트 또는 미러 사이트에서 8.6 버전에 대한 패키지 정보를 찾을 수 없다는 메시지가 나타나면서 패키지를 설치할 수 없는 경우가 있습니다.   
-그렇다면 왜 이런 문제가 생기는지와 어떻게 하면 해결할 수 있는지를 정리해보겠습니다.
-
-## 오류 상황
-테스트로 아파치를 설치해보려고 했는데, 오류 메시지가 나타나면서 설치를 할 수 없었습니다. 또한 리포지토리 미러 사이트도 Ncloud 내부 서버가 아닌 록키 리눅스 공식 미러 사이트로 연결하려고 시도한 것을 확인할 수 있습니다.
-
-``` bash
-~# dnf -y install httpd
-
-Rocky Linux 8.6 - Extras                                 5.4 kB/s |  20 kB     00:03
-Errors during downloading metadata for repository &apos;extras&apos;:
-  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
-  - Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 146.75.94.132)
-Error: Failed to download metadata for repo &apos;extras&apos;: Cannot prepare internal mirrorlist: Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-## 미러 사이트 확인
-오류 메시지에 나온 공식 미리 사이트에 접속해보니 [**AppStream**], [**extras**] 등 모든 8.6 버전에 대한 정보가 사라진 것을 확인할 수 있었습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-## 오류 상황 요약 정리
-현재 확인되는 오류 상황을 정리해보면 다음과 같습니다.
-
-1. 패키지를 검색하는 저장소가 [**AppStream**] 이나 [**BaseOS**]가 아닌 [**Extras**]로 변경되어 있다.
-2. 리포지토리 미러 사이트를 Ncloud 내부 서버가 아닌 외부에 있는 록키 리눅스 공식 미러 사이트로 접속시도 하고 있다.
-3. 외부에 있는 록키 리눅스 공식 미러 사이트에서는 공식 지원이 종료되는 8.6 버전에 대한 데이터가 이미 삭제되어 있다. 
-
-## 원인 분석
-원인 분석을 하기 위해 서버의 리포지토리 설정을 확인해보겠습니다.
-
-### 리포지토리 설정 - 오류 서버
-[**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 아래와 같이 다수의 파일이 존재하는 것을 확인할 수 있습니다.
-
-``` bash
-~# ls -al /etc/yum.repos.d/
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-- 위에서 확인한 설정 파일들 중에서 [**Rocky-Extras.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, Ncloud 내부 서버가 아닌 아래와 같이 록키 리눅스 공식 사이트로 설정되어 있는 것을 알 수 있습니다.
-
-``` bash
-~# vi /etc/yum.repos.d/Rocky-Extras.repo
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-### 리포지토리 설정 - 정상 서버
-그렇다면 아무 문제 없는 정상적인 서버의 경우는 어떤지 비교해서 살펴보겠습니다.  
-
-마찬가지로 [**/etc/yum.repos.d/**] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 오류가 발생한 서버와 달리 아래와 같이 [**Rocky-AppStream.repo**], [**Rocky-BaseOS.repo**] 이렇게 2가지 파일만 존재하는 것을 확인할 수 있습니다.
-
-``` bash
-~# ls -al /etc/yum.repos.d/
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-- 또한 2가지 설정 파일들 중에서 [**Rocky-AppStream.repo**] 파일을 열어서 미러 사이트 주소를 확인해보면, 록키 리눅스 공식 사이트는 주석 처리가 되어 있고, [**baseurl**]이 [**repo.ncloud.com**] 이라는 Ncloud 내부 서버로 설정되어 있는 것을 알 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-### 원인 추적
-오류가 발생한 서버와 정상적인 서버의 차이점을 비교 추적해보니 오류가 발생한 서버에서는 서버 생성 후에 `패키지 업데이트`가 진행된 것을 알 수 있었습니다. 
-서버 생성 후에 설치된 패키지들의 업데이트를 적용하기 위해 [**dnf upgrade**]를 실행했고, 그에 따라 리포지토리 정보가 변경되었다는 것을 알 수 있었습니다.
-
-``` bash
-~# dnf -y upgrade
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-[**dnf upgrade**]와 [**dnf update**]의 차이점에 대해 [**man dnf**] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [**dnf upgrade**]이며, [**dnf update**]는 더 이상 사용되지 않는 별칭이라고 합니다.
-&quot; %}
-
-``` bash
-~# man dnf
-#--- 중략 ---#
-Upgrade Command
-       Command: upgrade
-       Aliases: up
-       Deprecated aliases: update, upgrade-to, update-to, localupdate
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-## 해결 방법
-이 문제를 해결하는 방법은 몇가지가 있는데 차례대로 정리해보겠습니다.
-
-### 방법-1
-첫번째 방법은 [**Rocky-Extras.repo**] 리포지토리 설정파일의 주소를 Ncloud 내부 서버로 변경하는 방법입니다.
-
-``` conf
-# Rocky-Extras.repo
-
-#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=AppStream-$releasever
-baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-- 주소를 변경 후에 아파치를 설치해보면 문제 없이 잘 설치 되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-### 방법-2
-두번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
-
-``` bash
-~# dnf -y install httpd --disablerepo=extras
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-## 사전 예방책
-위 방법들은 패키지 업데이트 후에 문제를 해결하는 방법이므로, 사전에 이런 문제가 생기지 않도록 하는 것도 선택지 중의 하나입니다. 가능한 방법은 다음 2가지 입니다.
-- 패키지 업데이트를 진행하지 않는 방법
-- 보안-버그 수정 사항만 최소한으로 업데이트 하는 방법
-
-### 패키지 최소 업데이트
-보안-버그 수정 사항만 최소한으로 업데이트 하는 [**upgrade-minimal**] 옵션으로 업데이트를 했을 경우에는 아래와 같이 리포지토리 파일에 변화가 없어서 이후 패키지 설치에 오류가 생기지 않습니다.
-
-``` bash
-~# dnf -y upgrade-minimal
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-12.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-13.png&quot; sub-class=&quot;docimage-no-top&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Rocky Linux 서버 소개
-	- &lt;a href=&quot;/compute/ncloud-compute-server-rocky-linux-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html&lt;/a&gt;
-
-2.  Rocky Linux 미러 사이트 리스트
-	- &lt;a href=&quot;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&lt;/a&gt;
-</description>
-            <pubDate>Thu, 29 Jun 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</guid>
-            
-            <category>linux</category>
-            
-            <category>rocky_linux</category>
             
             
         </item>
