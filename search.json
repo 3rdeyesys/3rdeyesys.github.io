@@ -545,6 +545,17 @@
 
 
 {
+"title": "Ncloud API Key 접근 제한 설정하는 방법",
+"tags": "accountapi",
+"keywords": "Account, Sub Account, API Key",
+"url": "/management/ncloud-management-sub-account-api-gateway-access-control-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Ncloud Video Player Enhancement 사용 가이드",
 "tags": "mediaobject_storagecdn",
 "keywords": "streaming, video, play",

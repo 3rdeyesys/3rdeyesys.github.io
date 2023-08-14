@@ -1515,6 +1515,15 @@ img.docimage-no-top-bottom{
     word-break:break-all;
 }
 
+.simple_table.small_font > thead > tr > th,
+.simple_table.small_font > tbody > tr > th,
+.simple_table.small_font > tfoot > tr > th,
+.simple_table.small_font > thead > tr > td,
+.simple_table.small_font > tbody > tr > td,
+.simple_table.small_font > tfoot > tr > td {    
+    font-size: 0.75em;
+}
+
 
 .section-global-wrapper {
   position: relative;
