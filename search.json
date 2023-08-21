@@ -1189,7 +1189,7 @@
 "tags": "proxyload_balancerlog",
 "keywords": "프록시, 로드밸런서, 클라이언트IP",
 "url": "/compute/ncloud_compute_server_x_forwarded_for_client_ip_logging_guide.html",
-"summary": "Ncloud에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP 기록하기"
+"summary": ""
 }
 ,
 

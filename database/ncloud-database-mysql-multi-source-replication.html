@@ -2178,7 +2178,7 @@ mysql&gt; show master status<span class="p">;</span>
 MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="01308931-0e8e-40e8-8447-72b66d45f575" data-name="slave_my_cnf">
+<ul class="tab" data-tab="85735c97-39e1-47ac-8d2c-8f138ccbacf4" data-name="slave_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2189,7 +2189,7 @@ MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 
       </li>
   
 </ul>
-<ul class="tab-content" id="01308931-0e8e-40e8-8447-72b66d45f575" data-name="slave_my_cnf">
+<ul class="tab-content" id="85735c97-39e1-47ac-8d2c-8f138ccbacf4" data-name="slave_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf
@@ -2297,7 +2297,7 @@ mysql&gt; quit
 <p>리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.<br />
 채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.</p>
 
-<ul class="tab" data-tab="79338e6c-da2a-473c-849c-b7b07895a7b7" data-name="config_channel">
+<ul class="tab" data-tab="126fd0f2-dce2-4c20-b23f-8cf6fae65d24" data-name="config_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2312,7 +2312,7 @@ mysql&gt; quit
       </li>
   
 </ul>
-<ul class="tab-content" id="79338e6c-da2a-473c-849c-b7b07895a7b7" data-name="config_channel">
+<ul class="tab-content" id="126fd0f2-dce2-4c20-b23f-8cf6fae65d24" data-name="config_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># MySQL 5.7</span>
@@ -2357,7 +2357,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
 <h3 id="master-서버-정보-입력">Master 서버 정보 입력</h3>
 <p>Slave 서버에 Master 서버 정보를 하나씩 입력합니다.</p>
 
-<ul class="tab" data-tab="4e7fe083-9b43-442e-ae9c-427cab992db4" data-name="config_channel_sample">
+<ul class="tab" data-tab="d02a63ae-0707-4d4b-b12a-3cb735a5cc84" data-name="config_channel_sample">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2372,7 +2372,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
       </li>
   
 </ul>
-<ul class="tab-content" id="4e7fe083-9b43-442e-ae9c-427cab992db4" data-name="config_channel_sample">
+<ul class="tab-content" id="d02a63ae-0707-4d4b-b12a-3cb735a5cc84" data-name="config_channel_sample">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Master1</span>
@@ -2419,7 +2419,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
 <h3 id="리플리케이션-채널-시작">리플리케이션 채널 시작</h3>
 <p>리플리케이션 시작 후 에러가 없는지 확인합니다.</p>
 
-<ul class="tab" data-tab="aaa835b9-9a6c-4a0c-8780-9740db60a3a1" data-name="start_channel">
+<ul class="tab" data-tab="9b9f4b7f-79de-4505-adf2-c7dac298f2ac" data-name="start_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2430,7 +2430,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
       </li>
   
 </ul>
-<ul class="tab-content" id="aaa835b9-9a6c-4a0c-8780-9740db60a3a1" data-name="start_channel">
+<ul class="tab-content" id="9b9f4b7f-79de-4505-adf2-c7dac298f2ac" data-name="start_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#MySQL 5.7 기준</span>
@@ -2529,7 +2529,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
 
 <h2 id="버전별-명령어-비교">버전별 명령어 비교</h2>
 
-<ul class="tab" data-tab="5b297a26-4b9e-4de1-b8af-cdedac9f6f12" data-name="replication_command">
+<ul class="tab" data-tab="b1084e51-d33b-40d0-80e7-da7d0bd5e406" data-name="replication_command">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2544,7 +2544,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
       </li>
   
 </ul>
-<ul class="tab-content" id="5b297a26-4b9e-4de1-b8af-cdedac9f6f12" data-name="replication_command">
+<ul class="tab-content" id="b1084e51-d33b-40d0-80e7-da7d0bd5e406" data-name="replication_command">
   
       <li class="active">
 <div>
@@ -2707,7 +2707,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-08-14 <br />        
+        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-08-21 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
