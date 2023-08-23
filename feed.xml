@@ -5,10 +5,721 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 21 Aug 2023 16:02:07 +0900</pubDate>
-        <lastBuildDate>Mon, 21 Aug 2023 16:02:07 +0900</lastBuildDate>
+        <pubDate>Wed, 23 Aug 2023 15:35:16 +0900</pubDate>
+        <lastBuildDate>Wed, 23 Aug 2023 15:35:16 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Proxy Protocol을 이용해 Client IP 확인하기 | Rocky Linux</title>
+            <description>## 개요
+Ncloud Load Balancer는 HTTP, HTTPS, TCP, SSL 이렇게 4가지의 프로토콜을 지원합니다.  
+그런데, Load Balancer를 사용하면서 Client IP를 확인하려고 할 때 http, https 통신의 경우 X-Forwarded-For 헤더값이 지원되기에 Client IP를 확인할 수 있지만, 
+TCP 통신의 경우 X-Forwarded-For 헤더를 사용할 수 없기에 Client IP를 확인하기 위해서는 Proxy Protocol 옵션을 활성화 시켜야 합니다.
+
+여기서는 **Ncloud Network Proxy Load Balancer**의 TCP 프로토콜을 사용하면서 `Proxy Protocol 옵션을 활성화`시켜 **Rocky Linux 서버에서 Client IP를 기록**하는 방법을 소개하겠습니다.
+
+## 테스트 환경
+- VPC 환경
+- Rocky Linux 8.6
+- Apache 2.4.6
+- Network Proxy Load Balancer
+- Protocol/Port: TCP/80
+
+
+## Rocky Linux 서버 설치
+서버를 생성하고 Apache 웹서버와 개발용 추가 모듈이 포함된 **httpd-devel 패키지**를 설치하고 간단한 웹페이지를 만들어 접속해 보겠습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/compute/ncloud_compute_server_vpc_create.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;VPC 환경에서 서버 생성하는 방법&lt;/a&gt;
+&quot; %}
+
+```bash
+~# dnf -y install httpd httpd-devel
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-33.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-34.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## Target Group 설정 
+우선 Load Balancer를 생성하기 전에 Load Balancer에서 사용할 Target Group을 [**Load Balancer**] - [**Target Group**]에서 생성합니다.
+
+- **Target Group 생성**  
+Target Group의 이름를 입력하고 Target 유형은 [**VPC Server**]를 선택, 다음으로 VPC 대역을 선택합니다.  
+그리고, `프로토콜은 PROXY_TCP를 선택`하고, 포트는 80포트를 사용하겠습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Health Check 설정**  
+Health Check 할 프로토콜은 TCP를 선택합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Target 추가**  
+앞에서 생성했던 서버를 선택하고 [**적용 Target**]쪽으로 이동시킵니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-35.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **설정 확인**  
+설정 정보를 최종 확인하고 이상이 없으면 Target Group을 생성합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-36.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- 생성된 Target Group를 확인할 수 있습니다.
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-37.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## Network Proxy Load Balancer 생성
+[Load Balancer]에서 [로드밸런서 생성] 버튼을 클릭하고  [네트워크 프록시 로드밸런서]를 선택합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **로드밸런서 설정**  
+필요한 로드밸런서 설정을 선택하는데, 그 중에서 서브넷은 혹시 생성되어 있지 않으면 [서브넷 생성] 버튼을 클릭해 로드밸런서 전용 서브넷을 생성한 후에 다시 돌아옵니다. 여기서는 [10.0.4.0/24] 대역으로 설정했습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **리스너 설정**  
+리스너는 TCP 프로토콜에 80 포트를 선택하고 추가합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Target Group 선택**  
+Target Group는 위쪽에서 생성한 [Proxy-Protocol-TG] 을 선택합니다. 선택하면 해당 Target Group 설정 내용을 바로 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-38.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **설정 확인**  
+선택한 설정을 최종 확인하고 이상이 없으면 [로드밸런서 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-39.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **생성 확인**  
+생성된 로드밸런서의 정보를 확인합니다. 특히 접속 정보와 서브넷은 이후 테스트에 사용되므로 꼭 기억하거나 메모해 두는 것이 좋습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-40.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+로드밸런서 → 서버 접속이 가능하도록 서버 ACG에 규칙을 추가합니다.  
+서버에 적용된 ACG의 규칙 설정 화면에서 프로토콜은 TCP,  접근소스는 로드밸런서 IP 대역인 10.0.4.0/24, 포트는 80을 입력하고 추가합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-32.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 로드밸런서 접속 테스트
+위에서 생성된 로드밸런서 접속 주소로 접속을 해보면 아래와 같은 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-41.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Apache 접속 로그 확인**  
+Apache 접속 로그 파일은 아래의 위치에 존재하고, 원래는 네이버 클라우드 (Ncloud)의 상품 중 하나인 **Cloud Log Analytics**에서 로그를 수집해서 확인해아야 하지만, 
+Rocky Linux는 아직 Cloud Log Analytics Agent를 지원하지 않아 서버에서 직접 로그를 확인해보았습니다.
+
+- Rocky Linux Apache 로그파일 위치 : /var/log/httpd/access_log
+
+Apache 접속 로그를 확인해보면 위에서 설정했던 **Load Balancer의 IP 대역 (10.0.4.xx)**이 기록된 것을 확인할 수 있습니다.  
+
+다음에는 로드밸런서 IP가 아닌 실제 Client IP가 기록되도록 설정을 변경해 보겠습니다.
+
+``` bash
+~# cat /var/log/httpd/access_log
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-42.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Proxy Protocol 설정
+이제 실제 Client IP가 기록되도록 Proxy Protocol을 설정해보겠습니다.  
+[Load Balancer] - [Target Group]에서 위에서 생성했던 Target Group를 선택하고 [TargetGroup 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-43.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+Target Group 설정 화면에서 [ProxyProtocol] 옵션을 체크하고 확인 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-18.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 정상적으로 접속이 되었던 로드밸런서 주소로 접속하면 [Bad Request] 메시지가 뜨는 것을 확인할 수 있습니다.  
+다음으로는 서버 설정을 변경해야 합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-44.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## Apache 모듈 설치
+Proxy Protocol을 사용할 때 필요한 Apache 모듈을 Rocky Linux 서버에 설치하겠습니다.
+
+- **mod_myfixip 모듈 다운로드**  
+아래 명령어로 mod_myfixip.c 파일을 다운로드 받습니다. 정상적으로 다운로드가 완료되면 **&apos;mod_myfixip.c&apos; saved** 라는 메시지를 확인할 수 있습니다.
+
+```bash
+# Apache 2.4
+~# wget --no-check-certificate https://raw.githubusercontent.com/ggrandes/apache24-modules/master/mod_myfixip.c
+
+# Apache 2.2
+# wget --no-check-certificate https://raw.githubusercontent.com/ggrandes/apache22-modules/master/mod_myfixip.c
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-45.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **모듈 설치**  
+이어서 /{아파치가 설치된 경로}/bin/apxs -c -i mod_myfixip.c 명령어로 모듈을 설치합니다.
+
+```bash
+~# /usr/bin/apxs -c -i mod_myfixip.c
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-46.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **httpd.conf 설정 변경**  
+모듈 설치가 완료된 후에 httpd.conf 파일을 열어서 제일 아래쪽에 아래 코드를 추가합니다.  
+RewriteIPAllow 항목에는 로드밸런서 IP 대역 (ex: 192.168.0.0/16, 10.31.0.0/16 등)을 입력합니다.  
+여기서는 위에서 설정했던 로드밸런서 IP 대역인 `10.0.4.0/24`를 입력했습니다. 
+
+``` bash
+~# vim /etc/httpd/conf/httpd.conf
+```
+``` apache
+LoadModule myfixip_module modules/mod_myfixip.so
+
+&lt;IfModule mod_myfixip.c&gt;
+  RewriteIPResetHeader off
+  RewriteIPAllow 10.0.4.0/24
+&lt;/IfModule&gt;
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-47.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Apache 재시작**  
+설정을 마친 후에 Apache를 재시작합니다.
+
+``` bash
+~# systemctl restart httpd
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-48.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 최종 접속 테스트
+모든 설정을 모두 마친 후에 서버에 접속해봅니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-41.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 최종 접속 로그 확인
+Apache 접속 로그를 다시 확인해보면 이번에는 로드밸런서 IP가 아닌 Client IP가 기록된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-49.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+
+1. Proxy Protocol 설정하기
+  - &lt;a href=&quot;https://guide.ncloud-docs.com/docs/loadbalancer-targetgroup-vpc#proxy-protocol-%EC%84%A4%EC%A0%95&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/loadbalancer-targetgroup-vpc#proxy-protocol-%EC%84%A4%EC%A0%95&lt;/a&gt;
+
+2. Ubuntu 서버에서 Proxy Protocol을 이용해 Client IP 확인하기
+  - &lt;a href=&quot;/networking/ncloud-networking-proxy-protocol-client-ip-logging-ubuntu.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-ubuntu.html&lt;/a&gt;
+
+3. CentOS 서버에서 Proxy Protocol을 이용해 Client IP 확인하기
+  - &lt;a href=&quot;/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html&lt;/a&gt;  
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Wed, 23 Aug 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-rocky-linux.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-rocky-linux.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>load_balancer</category>
+            
+            <category>proxy</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Proxy Protocol을 이용해 Client IP 확인하기 | Ubuntu</title>
+            <description>## 개요
+Ncloud Load Balancer는 HTTP, HTTPS, TCP, SSL 이렇게 4가지의 프로토콜을 지원합니다.  
+그런데, Load Balancer를 사용하면서 Client IP를 확인하려고 할 때 http, https 통신의 경우 X-Forwarded-For 헤더값이 지원되기에 Client IP를 확인할 수 있지만, 
+TCP 통신의 경우 X-Forwarded-For 헤더를 사용할 수 없기에 Client IP를 확인하기 위해서는 Proxy Protocol 옵션을 활성화 시켜야 합니다.
+
+여기서는 **Ncloud Network Proxy Load Balancer**의 TCP 프로토콜을 사용하면서 `Proxy Protocol 옵션을 활성화`시켜 **Ubuntu 서버에서 Client IP를 기록**하는 방법을 소개하겠습니다.
+
+## 테스트 환경
+- VPC 환경
+- Ubuntu 18.04
+- Apache 2.4.6
+- Network Proxy Load Balancer
+- Protocol/Port: TCP/80
+
+
+## Ubuntu 서버 설치
+서버를 생성하고 Apache 웹서버와 개발용 추가 모듈이 포함된 **apache2-dev 패키지**를 설치하고 간단한 웹페이지를 만들어 접속해 보았습니다.  
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/compute/ncloud_compute_server_vpc_create.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;VPC 환경에서 서버 생성하는 방법&lt;/a&gt;
+&quot; %}
+
+``` bash
+~# apt-get update
+~# apt-get -y install apache2 apache2-dev
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Target Group 설정 
+우선 Load Balancer를 생성하기 전에 Load Balancer에서 사용할 Target Group을 [Load Balancer] - [Target Group]에서 생성합니다.
+
+- **Target Group 생성**  
+Target Group의 이름를 입력하고 Target 유형은 [VPC Server]를 선택, 다음으로 VPC 대역을 선택합니다.  
+그리고, `프로토콜은 PROXY_TCP를 선택`하고, 포트는 80포트를 사용하겠습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Health Check 설정**  
+Health Check 할 프로토콜은 TCP를 선택합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Target 추가**  
+앞에서 생성했던 서버 2대를 선택하고 [적용 Target]쪽으로 이동시킵니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **설정 확인**  
+설정 정보를 최종 확인하고 이상이 없으면 Target Group을 생성합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+생성된 Target Group를 확인할 수 있습니다.
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## Network Proxy Load Balancer 생성
+[Load Balancer]에서 [로드밸런서 생성] 버튼을 클릭하고  [네트워크 프록시 로드밸런서]를 선택합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **로드밸런서 설정**  
+필요한 로드밸런서 설정을 선택하는데, 그 중에서 서브넷은 혹시 생성되어 있지 않으면 [서브넷 생성] 버튼을 클릭해 로드밸런서 전용 서브넷을 생성한 후에 다시 돌아옵니다. 여기서는 [10.0.4.0/24] 대역으로 설정했습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **리스너 설정**  
+리스너는 TCP 프로토콜에 80 포트를 선택하고 추가합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Target Group 선택**  
+Target Group는 위쪽에서 생성한 [Proxy-Protocol-TG] 을 선택합니다. 선택하면 해당 Target Group 설정 내용을 바로 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **설정 확인**  
+선택한 설정을 최종 확인하고 이상이 없으면 [로드밸런서 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **생성 확인**  
+생성된 로드밸런서의 정보를 확인합니다. 특히 접속 정보와 서브넷은 이후 테스트에 사용되므로 꼭 기억하거나 메모해 두는 것이 좋습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+로드밸런서 → 서버 접속이 가능하도록 서버 ACG에 규칙을 추가합니다.  
+서버에 적용된 ACG의 규칙 설정 화면에서 프로토콜은 TCP,  접근소스는 로드밸런서 IP 대역인 10.0.4.0/24, 포트는 80을 입력하고 추가합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-32.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 로드밸런서 접속 테스트
+위에서 생성된 로드밸런서 접속 주소로 접속을 해보면 아래와 같은 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Apache 접속 로그 확인**  
+Apache 접속 로그 파일은 아래의 위치에 존재하지만, 저희는 네이버 클라우드 (Ncloud)의 상품 중 하나인 **Cloud Log Analytics**에서 로그를 수집해서 확인해보겠습니다. 
+- Ubuntu Apache 로그파일 위치 : /var/log/apache2/access.log
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/analytics/ncloud_analytics_cloud_log_analytics_guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Cloud Log Analytics 설정 가이드&lt;/a&gt;
+&quot; %}
+
+Cloud Log Analytics에서 수집한 로그를 확인해보면 위에서 설정했던 **Load Balancer의 IP 대역 (10.0.4.xx)**이 기록된 것을 확인할 수 있습니다.  
+
+다음으로는 로드밸런서 IP가 아닌 실제 Client IP가 기록되도록 설정을 변경해 보겠습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-16-2.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Proxy Protocol 설정
+이제 실제 Client IP가 기록되도록 Proxy Protocol을 설정해보겠습니다.  
+[Load Balancer] - [Target Group]에서 위에서 생성했던 Target Group를 선택하고 [TargetGroup 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+Target Group 설정 화면에서 [ProxyProtocol] 옵션을 체크하고 확인 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-18.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 정상적으로 접속이 되었던 로드밸런서 주소로 접속하면 [Bad Request] 메시지가 뜨는 것을 확인할 수 있습니다.  
+다음으로는 서버 설정을 변경해야 합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## Apache 모듈 설치
+Proxy Protocol을 사용할 때 필요한 Apache 모듈을 Ubuntu 서버에 설치하겠습니다.
+
+- **mod_myfixip 모듈 다운로드**  
+아래 명령어로 mod_myfixip.c 파일을 다운로드 받습니다. 정상적으로 다운로드가 완료되면 **&apos;mod_myfixip.c&apos; saved** 라는 메시지를 확인할 수 있습니다.
+
+```bash
+~# wget --no-check-certificate https://raw.githubusercontent.com/ggrandes/apache24-modules/master/mod_myfixip.c
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-24.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **모듈 설치**  
+이어서 apxs2 -c -i mod_myfixip.c 명령어로 모듈을 설치합니다.
+
+```bash
+~# apxs2 -c -i mod_myfixip.c
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-25.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **myfixip.load 파일 생성**  
+mod_myfixip 모듈을 로드하기 위한 파일을 생성하고, LoadModule 관련 코드를 추가합니다.
+
+``` bash
+~# vi /etc/apache2/mods-available/myfixip.load
+```
+``` apache
+LoadModule myfixip_module /usr/lib/apache2/modules/mod_myfixip.so
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-26.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **myfixip.conf 파일 생성**  
+mod_myfixip 모듈 환경 설정 파일을 생성하고 모듈 관련 코드를 추가합니다.  
+RewriteIPAllow 항목에는 로드밸런서 IP 대역 (ex: 192.168.0.0/16, 10.31.0.0/16 등)을 입력합니다.  
+여기서는 위에서 설정했던 로드밸런서 IP 대역인 `10.0.4.0/24`를 입력했습니다. 
+
+``` bash
+~# vi /etc/apache2/mods-available/myfixip.conf
+```
+``` apache
+&lt;IfModule mod_myfixip.c&gt;
+  RewriteIPResetHeader off
+  RewriteIPAllow 10.0.4.0/24
+&lt;/IfModule&gt;
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-27.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **모듈 설치, Apache 재시작**  
+다음 명령으로 myfixip 모듈을 설치하고 Apache를 재시작합니다.
+
+``` bash
+~# a2enmod myfixip
+~# systemctl restart apache2
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-28.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 최종 접속 테스트
+모든 설정을 모두 마친 후에 서버에 접속해봅니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 최종 접속 로그 확인
+접속 로그를 다시 확인해보면 이번에는 로드밸런서 IP가 아닌 Client IP가 기록된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-29-2.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고URL
+
+1. Ncloud Proxy Protocol 설정하기 가이드
+  - &lt;a href=&quot;https://guide.ncloud-docs.com/docs/loadbalancer-targetgroup-vpc#proxy-protocol-%EC%84%A4%EC%A0%95&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/loadbalancer-targetgroup-vpc#proxy-protocol-%EC%84%A4%EC%A0%95&lt;/a&gt;
+
+2. CentOS 서버에서 Proxy Protocol을 이용해 Client IP 확인하기
+  - &lt;a href=&quot;/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html&lt;/a&gt;
+
+3. Rocky Linux 서버에서 Proxy Protocol을 이용해 Client IP 확인하기
+  - &lt;a href=&quot;/networking/ncloud-networking-proxy-protocol-client-ip-logging-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-rocky-linux.html&lt;/a&gt;    
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Tue, 22 Aug 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-ubuntu.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-ubuntu.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>load_balancer</category>
+            
+            <category>proxy</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Proxy Protocol을 이용해 Client IP 확인하기 | CentOS</title>
+            <description>## 개요
+Ncloud Load Balancer는 HTTP, HTTPS, TCP, SSL 이렇게 4가지의 프로토콜을 지원합니다.  
+그런데, Load Balancer를 사용하면서 Client IP를 확인하려고 할 때 http, https 통신의 경우 X-Forwarded-For 헤더값이 지원되기에 Client IP를 확인할 수 있지만, 
+TCP 통신의 경우 X-Forwarded-For 헤더를 사용할 수 없기에 Client IP를 확인하기 위해서는 Proxy Protocol 옵션을 활성화 시켜야 합니다.
+
+여기서는 **Ncloud Network Proxy Load Balancer**의 TCP 프로토콜을 사용하면서 `Proxy Protocol 옵션을 활성화`시켜 **CentOS 서버에서 Client IP를 기록**하는 방법을 소개하겠습니다.
+
+## 테스트 환경
+- VPC 환경
+- CentOS 7.8
+- Apache 2.4.6
+- Network Proxy Load Balancer
+- Protocol/Port: TCP/80
+
+
+## CentOS 서버 설치
+서버를 생성하고 Apache 웹서버와 개발용 추가 모듈이 포함된 **httpd-devel 패키지**를 설치하고 간단한 웹페이지를 만들어 접속해 보았습니다.  
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/compute/ncloud_compute_server_vpc_create.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;VPC 환경에서 서버 생성하는 방법&lt;/a&gt;
+&quot; %}
+
+```bash
+~# yum -y install httpd httpd-devel
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## Target Group 설정 
+우선 Load Balancer를 생성하기 전에 Load Balancer에서 사용할 Target Group을 [Load Balancer] - [Target Group]에서 생성합니다.
+
+- **Target Group 생성**  
+Target Group의 이름를 입력하고 Target 유형은 [VPC Server]를 선택, 다음으로 VPC 대역을 선택합니다.  
+그리고, `프로토콜은 PROXY_TCP를 선택`하고, 포트는 80포트를 사용하겠습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Health Check 설정**  
+Health Check 할 프로토콜은 TCP를 선택합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Target 추가**  
+앞에서 생성했던 서버 2대를 선택하고 [적용 Target]쪽으로 이동시킵니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **설정 확인**  
+설정 정보를 최종 확인하고 이상이 없으면 Target Group을 생성합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+생성된 Target Group를 확인할 수 있습니다.
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## Network Proxy Load Balancer 생성
+[Load Balancer]에서 [로드밸런서 생성] 버튼을 클릭하고  [네트워크 프록시 로드밸런서]를 선택합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **로드밸런서 설정**  
+필요한 로드밸런서 설정을 선택하는데, 그 중에서 서브넷은 혹시 생성되어 있지 않으면 [서브넷 생성] 버튼을 클릭해 로드밸런서 전용 서브넷을 생성한 후에 다시 돌아옵니다. 여기서는 [10.0.4.0/24] 대역으로 설정했습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **리스너 설정**  
+리스너는 TCP 프로토콜에 80 포트를 선택하고 추가합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Target Group 선택  
+Target Group는 위쪽에서 생성한 [Proxy-Protocol-TG] 을 선택합니다. 선택하면 해당 Target Group 설정 내용을 바로 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **설정 확인**  
+선택한 설정을 최종 확인하고 이상이 없으면 [로드밸런서 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **생성 확인**  
+생성된 로드밸런서의 정보를 확인합니다. 특히 접속 정보와 서브넷은 이후 테스트에 사용되므로 꼭 기억하거나 메모해 두는 것이 좋습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+로드밸런서 → 서버 접속이 가능하도록 서버 ACG에 규칙을 추가합니다.  
+서버에 적용된 ACG의 규칙 설정 화면에서 프로토콜은 TCP,  접근소스는 로드밸런서 IP 대역인 10.0.4.0/24, 포트는 80을 입력하고 추가합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-32.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 로드밸런서 접속 테스트
+위에서 생성된 로드밸런서 접속 주소로 접속을 해보면 아래와 같은 화면을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Apache 접속 로그 확인**  
+Apache 접속 로그 파일은 아래의 위치에 존재하지만, 저희는 네이버 클라우드 (Ncloud)의 상품 중 하나인 **Cloud Log Analytics**에서 로그를 수집해서 확인해보겠습니다. 
+- CentOS Apache 로그파일 위치 : /var/log/httpd/access_log
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/analytics/ncloud_analytics_cloud_log_analytics_guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Cloud Log Analytics 설정 가이드&lt;/a&gt;
+&quot; %}
+
+Cloud Log Analytics에서 수집한 로그를 확인해보면 위에서 설정했던 **Load Balancer의 IP 대역 (10.0.4.xx)**이 기록된 것을 확인할 수 있습니다.  
+
+다음에는 로드밸런서 IP가 아닌 실제 Client IP가 기록되도록 설정을 변경해 보겠습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-16-1.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+
+## Proxy Protocol 설정
+이제 실제 Client IP가 기록되도록 Proxy Protocol을 설정해보겠습니다.  
+[Load Balancer] - [Target Group]에서 위에서 생성했던 Target Group를 선택하고 [TargetGroup 설정] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+Target Group 설정 화면에서 [ProxyProtocol] 옵션을 체크하고 확인 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-18.png&quot; width=&quot;680&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+위에서 정상적으로 접속이 되었던 로드밸런서 주소로 접속하면 [Bad Request] 메시지가 뜨는 것을 확인할 수 있습니다.  
+다음으로는 서버 설정을 변경해야 합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## Apache 모듈 설치
+Proxy Protocol을 사용할 때 필요한 Apache 모듈을 CentOS 서버에 설치하겠습니다.
+
+- **mod_myfixip 모듈 다운로드**  
+아래 명령어로 mod_myfixip.c 파일을 다운로드 받습니다. 정상적으로 다운로드가 완료되면 **&apos;mod_myfixip.c&apos; saved** 라는 메시지를 확인할 수 있습니다.
+
+```bash
+~# wget --no-check-certificate https://raw.githubusercontent.com/ggrandes/apache24-modules/master/mod_myfixip.c
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **모듈 설치**  
+이어서 /{아파치가 설치된 경로}/bin/apxs -c -i mod_myfixip.c 명령어로 모듈을 설치합니다.
+
+```bash
+~# /usr/bin/apxs -c -i mod_myfixip.c
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-21.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **httpd.conf 설정 변경**  
+모듈 설치가 완료된 후에 httpd.conf 파일을 열어서 제일 아래쪽에 아래 코드를 추가합니다.  
+RewriteIPAllow 항목에는 로드밸런서 IP 대역 (ex: 192.168.0.0/16, 10.31.0.0/16 등)을 입력합니다.  
+여기서는 위에서 설정했던 로드밸런서 IP 대역인 `10.0.4.0/24`를 입력했습니다. 
+
+``` bash
+~# vi /etc/httpd/conf/httpd.conf
+```
+``` apache
+LoadModule myfixip_module modules/mod_myfixip.so
+
+&lt;IfModule mod_myfixip.c&gt;
+  RewriteIPResetHeader off
+  RewriteIPAllow 10.0.4.0/24
+&lt;/IfModule&gt;
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-22.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+- **Apache 재시작**  
+설정을 마친 후에 Apache를 재시작합니다.
+
+``` bash
+~# systemctl restart httpd
+```
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-23.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 최종 접속 테스트
+모든 설정을 모두 마친 후에 서버에 접속해봅니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 최종 접속 로그 확인
+접속 로그를 다시 확인해보면 이번에는 로드밸런서 IP가 아닌 Client IP가 기록된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-proxy-protocol-client-ip-logging-29-1.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Network Proxy Load Balancer에서 
+Proxy Protocol을 이용해 클라이언트 IP 주소를 확인하는 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+
+1. Ncloud Proxy Protocol 설정하기 가이드
+  - &lt;a href=&quot;https://guide.ncloud-docs.com/docs/loadbalancer-targetgroup-vpc#proxy-protocol-%EC%84%A4%EC%A0%95&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/loadbalancer-targetgroup-vpc#proxy-protocol-%EC%84%A4%EC%A0%95&lt;/a&gt;
+
+2. Ubuntu 서버에서 Proxy Protocol을 이용해 Client IP 확인하기
+  - &lt;a href=&quot;/networking/ncloud-networking-proxy-protocol-client-ip-logging-ubuntu.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-ubuntu.html&lt;/a&gt;
+
+3. Rocky Linux 서버에서 Proxy Protocol을 이용해 Client IP 확인하기
+  - &lt;a href=&quot;/networking/ncloud-networking-proxy-protocol-client-ip-logging-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-rocky-linux.html&lt;/a&gt;  
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Tue, 22 Aug 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud-networking-proxy-protocol-client-ip-logging-centos.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>load_balancer</category>
+            
+            <category>proxy</category>
+            
+            
+        </item>
         
         <item>
             <title>X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP 기록하기</title>
@@ -1623,323 +2334,6 @@ HTTPS로 테스트 사이트에 접속 후에 인증서를 확인해보면 위�
             <pubDate>Thu, 13 Jul 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html</guid>
-            
-            <category>rocky_linux</category>
-            
-            <category>lamp</category>
-            
-            <category>apache</category>
-            
-            <category>install</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS</title>
-            <description>## 개요
-웹사이트 SSL 인증서를 설치하고 https 접속을 유도할 때 http로 접속하면 https로 강제로 리다이렉트 시키는 방법을 사용하는 경우가 많습니다. 웹페이지 소스에서 http 접속 여부를 판단해서 redirect 시키는 방법 등 여러가지 있을 수 있는데 여기서는 Apache 설정으로 쉽게 할 수 있는 방법을 소개합니다.  
-
-SSL 인증서가 설치되어 있다는 가정하에 우선 Linux CentOS에서 설정하는 방법을 확인해보겠습니다.
-
-## 테스트 환경
-테스트에 사용한 서버 환경은 다음과 같습니다.
-
-{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; OS: CentOS 7.8 &lt;br /&gt;
-&amp;#8259; 웹서버: Apache 2.4 
-&quot; %}
-
-## Apache conf 파일 수정
-**/etc/httpd/conf/httpd.conf** 또는 별도로 설정한 **/etc/httpd/conf.d/사이트도메인.conf** 등의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.
-
-## 방법1 : Redirect 옵션
-첫번째 방법은 [**Redirect**] 옵션을 이용하는 방법입니다.  
-HTTP 환경 설정에서 [**ServerName**]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.
-
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName 사이트_도메인
-
-    Redirect permanent / https://사이트_도메인/    
-&lt;/VirtualHost&gt; 
-```
-
-- `301` 리다이렉트: **Redirect** `permanent` / https://사이트_도메인/
-- `302` 리다이렉트: **Redirect** / https://사이트_도메인/
-- `301` 리다이렉트: **Redirect** `301` / https://사이트_도메인/
-- `302` 리다이렉트: **Redirect** `302` / https://사이트_도메인/
-- `307` 리다이렉트: **Redirect** `307` / https://사이트_도메인/
-- `308` 리다이렉트: **Redirect** `308` / https://사이트_도메인/
-
-## 방법2 : RewirteRule 옵션
-두번째 방법은 [**RewirteRule**] 옵션을 이용하는 방법입니다.  
-첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [**RewirteRule**]을 이용하는 두번째 방법을 사용해야 합니다.  
-
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName 사이트_도메인
-
-    RewriteEngine On
-    RewriteCond %{HTTPS} !on
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
-&lt;/VirtualHost&gt; 
-```
-
-위 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다. 
-- `301` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`301`,L]
-- `302` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`302`,L]
-- `307` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`307`,L]
-- `308` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`308`,L]
-
-## Apache 재시작
-``` bash
-~# systemctl restart httpd
-```
-이렇게 재시작하고 http로 접속을 해보면 https로 전환되는 것을 확인할 수 있습니다.
-
-
-## SSL 모듈 설치
-혹시 Apache에 mod_ssl 가 설치되어 있지 않다면 설치하셔야 합니다.
-
-``` bash
-~# yum -y install mod_ssl
-```
-
-``` bash
-========================================================================
- Package   Arch       Version                 Repository   Size
-========================================================================
-Installing:
- mod_ssl    x86_64   1:2.4.6-97.el7.centos   updates    114 k
-
-Transaction Summary
-========================================================================
-Install  1 Package
-
-Total download size: 114 k
-Installed size: 224 k
-
-Downloading packages:
-mod_ssl-2.4.6-97.el7.centos.x86_64.rpm                    | 114 kB  00:00:00
-Running transaction check
-Running transaction test
-Transaction test succeeded
-Running transaction
-  Installing : 1:mod_ssl-2.4.6-97.el7.centos.x86_64        1/1
-  Verifying  : 1:mod_ssl-2.4.6-97.el7.centos.x86_64        1/1
-
-Installed:
-  mod_ssl.x86_64 1:2.4.6-97.el7.centos
-
-Complete!
-```
-
-## 참고 URL
-1.  http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Rocky Linux
-	- &lt;a href=&quot;/compute/ncloud-compute-server-http-to-https-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-http-to-https-rocky-linux.html&lt;/a&gt;
-
-2.  http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu
-	- &lt;a href=&quot;/compute/ncloud_compute_server_http_to_https_ubuntu.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html&lt;/a&gt;</description>
-            <pubDate>Wed, 12 Jul 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html</guid>
-            
-            <category>apache</category>
-            
-            <category>centos</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Ubuntu</title>
-            <description>## 개요
-웹사이트 SSL 인증서를 설치하고 https 접속을 유도할 때 http로 접속하면 https로 강제로 리다이렉트 시키는 방법을 사용하는 경우가 많습니다.  
-웹페이지 소스에서 http 접속 여부를 판단해서 redirect 시키는 방법 등 여러가지 있을 수 있는데 여기서는 Apache 설정으로 쉽게 할 수 있는 방법을 소개합니다.  
-
-SSL 인증서가 설치되어 있다는 가정하에 우선 Linux Ubuntu에서 설정하는 방법을 확인해보겠습니다.
-
-## 테스트 환경
-테스트에 사용한 서버 환경은 다음과 같습니다.
-
-{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; OS: Ubuntu 20.04 &lt;br /&gt;
-&amp;#8259; 웹서버: Apache 2.4 
-&quot; %}
-
-
-## SSL 엔진 모듈 활성화
-먼저, SSL 엔진 모듈을 활성화 해야 HTTPS 접속을 할 수 있습니다.
-
-``` bash
-~# a2enmod ssl
-~# systemctl restart apache2
-```
-
-## Apache conf 파일 수정
-**/etc/apache2/sites-enabled/000-default.conf** 파일의 Vritual host에 다음 코드를 추가하고 Apache를 재시작하면 됩니다.
-
-## 방법1 : Redirect 옵션
-첫번째 방법은 [**Redirect**] 옵션을 이용하는 방법입니다.  
-HTTP 환경 설정에서 [**ServerName**]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.
-
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName 사이트_도메인
-
-    Redirect permanent / https://사이트_도메인/    
-&lt;/VirtualHost&gt; 
-```
-
-- `301` 리다이렉트: **Redirect** `permanent` / https://사이트_도메인/
-- `302` 리다이렉트: **Redirect** / https://사이트_도메인/
-- `301` 리다이렉트: **Redirect** `301` / https://사이트_도메인/
-- `302` 리다이렉트: **Redirect** `302` / https://사이트_도메인/
-- `307` 리다이렉트: **Redirect** `307` / https://사이트_도메인/
-- `308` 리다이렉트: **Redirect** `308` / https://사이트_도메인/
-
-## 방법2 : RewirteRule 옵션
-두번째 방법은 [**RewirteRule**] 옵션을 이용하는 방법입니다.  
-첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [**RewirteRule**]을 이용하는 두번째 방법을 사용해야 합니다.  
-
-### Rewrite 모듈 설치
-우선, RewirteRule 옵션을 사용하려면 Rewrite 모듈을 활성화 해야합니다.
-
-``` bash
-~# a2enmod rewrite
-~# systemctl restart apache2
-```
-
-``` apache
-&lt;VirtualHost *:80&gt;
-	ServerName 사이트_도메인
-
-	RewriteEngine On
-	RewriteCond %{HTTPS} !on
-	RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
-&lt;/VirtualHost&gt;
-```
-
-위 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다. 
-- `301` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`301`,L]
-- `302` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`302`,L]
-- `307` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`307`,L]
-- `308` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`308`,L]
-
-
-## Apache 재시작
-``` bash
-~# systemctl restart apache2
-```
-이렇게 재시작하고 http로 접속을 해보면 https로 전환되는 것을 확인할 수 있습니다.
-
-## 참고 URL
-1.  http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Rocky Linux
-	- &lt;a href=&quot;/compute/ncloud-compute-server-http-to-https-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-http-to-https-rocky-linux.html&lt;/a&gt;
-
-2.  http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS
-	- &lt;a href=&quot;/compute/ncloud_compute_server_http_to_https_centos.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html&lt;/a&gt;</description>
-            <pubDate>Wed, 12 Jul 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</guid>
-            
-            <category>apache</category>
-            
-            <category>ubuntu</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Rocky Linux</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버 Apache 웹서버에서 http 접속 시에 https로 강제 리다이렉트 시키는 방법은 크게 2가지가 있는데 각각에 대해 정리해보겠습니다.
-
-## 테스트 환경
-테스트에 사용한 서버 환경은 다음과 같습니다.
-
-{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
-&amp;#8259; 웹서버: Apache 2.4 &lt;br /&gt; 
-&amp;#8259; 테스트 사이트:  rocky-https-test.com
-&quot; %}
-
-## 방법1 : Redirect 옵션
-첫번째 방법은 [**Redirect**] 옵션을 이용하는 방법입니다.  
-HTTP 환경 설정에서 [**ServerName**]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.
-
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName 사이트_도메인
-
-    Redirect permanent / https://사이트_도메인/    
-&lt;/VirtualHost&gt;    
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- `301` 리다이렉트: **Redirect** `permanent` / https://사이트_도메인/
-- `302` 리다이렉트: **Redirect** / https://사이트_도메인/
-- `301` 리다이렉트: **Redirect** `301` / https://사이트_도메인/
-- `302` 리다이렉트: **Redirect** `302` / https://사이트_도메인/
-- `307` 리다이렉트: **Redirect** `307` / https://사이트_도메인/
-- `308` 리다이렉트: **Redirect** `308` / https://사이트_도메인/
-
-## 방법2 : RewirteRule 옵션
-두번째 방법은 [**RewirteRule**] 옵션을 이용하는 방법입니다.  
-첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [**RewirteRule**]을 이용하는 두번째 방법을 사용해야 합니다.  
-
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName 사이트_도메인
-
-    RewriteEngine On
-    RewriteCond %{HTTPS} !on
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
-&lt;/VirtualHost&gt; 
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-위 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다. 
-- `301` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`301`,L]
-- `302` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`302`,L]
-- `307` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`307`,L]
-- `308` 리다이렉트: RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=`308`,L]
-
-
-- 설정 파일을 저장한 후에 Apache 데몬을 재시작합니다.
-
-``` bash
-~# systemctl restart httpd
-```
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 리다이렉트 여부 확인
-웹브라우저에서 [**F12**] 키로 개발자 모드로 변경한 후에 [**http**]로 접속을 해보면 아래 스샷처럼 HTTP 301 상태코드를 반환하면서 [**https**]로 리다이렉트된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## SSL 모듈 설치
-리다이렉트 설정과 관계없이 SSL 인증서를 설정하고 HTTPS 접속을 하려면 [**mod_ssl**]가 설치되어 있어야 하는데, 혹시나 설치되어 있지 않다면 설치하셔야 합니다.
-
-``` bash
-~# dnf -y install mod_ssl
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-1.  Rocky Linux에서 Apache SSL 인증서 설정하는 방법
-	- &lt;a href=&quot;/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html&lt;/a&gt;
-
-2.  Rocky Linux Apache with &apos;mod_ssl&apos; 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/mod_SSL_apache/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/mod_SSL_apache/&lt;/a&gt;</description>
-            <pubDate>Tue, 11 Jul 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-http-to-https-rocky-linux.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-http-to-https-rocky-linux.html</guid>
             
             <category>rocky_linux</category>
             

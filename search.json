@@ -622,6 +622,17 @@
 
 
 {
+"title": "Proxy Protocol을 이용해 Client IP 확인하기 | Rocky Linux",
+"tags": "vpcload_balancerproxyrocky_linux",
+"keywords": "LoadBalancer, 로드밸런스, 프록시, 프록시 프로토콜",
+"url": "/networking/ncloud-networking-proxy-protocol-client-ip-logging-rocky-linux.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Proxy Protocol을 이용해 Client IP 확인하기 | Ubuntu",
 "tags": "vpcload_balancerproxy",
 "keywords": "LoadBalancer, 로드밸런스, 프록시, 프록시 프로토콜",
