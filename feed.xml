@@ -5,10 +5,98 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 23 Aug 2023 15:35:16 +0900</pubDate>
-        <lastBuildDate>Wed, 23 Aug 2023 15:35:16 +0900</lastBuildDate>
+        <pubDate>Wed, 30 Aug 2023 11:39:30 +0900</pubDate>
+        <lastBuildDate>Wed, 30 Aug 2023 11:39:30 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>로드밸런서(Load Balancer) 인증서 교체하는 방법</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) 로드밸런서(Load Balancer)에는 HTTPS 서비스가 필요할 때 로드밸런서에 인증서를 추가 하여 사용 할 수 있습니다.  
+이때 인증서 만료, 멀티도메인 인증서로 교체 등의 여러가지 이유로 로드밸런서에 있는 기존의 인증서를 새로운 인증서로 교체해야 하는 경우가 있는데 VPC, Classic 환경별로 인증서를 교체하는 방법을 정리해보겠습니다.
+
+
+## 테스트 인증서 준비
+인증서 교체 테스트를 위한 테스트용 인증서 2개를 미리 준비했습니다.
+
+- test1: 현재 적용중인 인증서
+- test2:  새로 교체할 인증서
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+## VPC 환경
+우선 VPC 환경에서 로드밸런서 인증서를 교체하는 방법을 정리해보겠습니다.  
+
+인증서를 변경 할 로드밸런서를 선택한 후 [리스너 설정 변경] 클릭 합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+- 현재 테스트용 &apos;test1&apos; 인증서가 적용되어 있는 리스너를 선택 한 후 [인증서 변경]을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+- [**default 인증서 선택**] 항목에서 교체할 인증서인 test2를 선택한 후 [**변경**] 버튼을 클릭합니다.
+
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+- 인증서 변경 팝업에서 [**변경**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-05.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+- 그런 후에 다시 [**리스너 설정 변경**] 화면으로 돌아오면 아래와 같이 인증서가 test2로 변경된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-06.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+## Classic 환경
+다음으로는 Classic 환경에서 로드밸런서 인증서를 교체하는 방법을 정리해보겠습니다.  
+인증서를 변경할 로드밸런서를 선택 후 [로드밸런서 설정 변경]을 클릭 합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-07.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+- [**SSL Certificate**] 항목을 보면 LB에 적용 되어있는 인증서가 **test1**임을 확인 할 수가 있습니다.  
+이제 새로운 인증서를 적용 하기 위해 [**삭제**] 버튼을 클릭해 기존에 설정 해두었던 로드밸런서 설정을 삭제 합니다. 
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-08.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+- 기존 설정을 삭제하고 나면 [**SSL Certificate**] 항목에 아래와 같이 인증서 정보가 사라진 것을 확인할 수 있습니다.  
+다음으로 기존과 동일한 설정(로드밸런서 포트가 443)을 입력하고 [**추가**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-09.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+- [**추가**] 버튼을 클릭하면 [**SSL Certificate 입력**] 팝업이 나타나는데 여기서 [**SSL Certificate 선택**] 옵션에서 **test2**를 선택하고 [**확인**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-10.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+- 그러면 아래와 같이 기존에 설정되어 있던 &apos;tes1&apos; 인등서가 &apos;test2&apos; 인증서로 변경 되어 있는 것을 확인 할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-load-balancer-certificate-change-11.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) 로드밸런서(Load Balancer) 인증서 교체하는 방법&quot; caption=&quot;&quot; %}
+
+
+
+## 참고 URL
+1. VPC 환경에서 Application Load Balancer 생성하기
+	- &lt;a href=&quot;/networking/ncloud_networking_load_balancer_application_lb.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html&lt;/a&gt;
+
+2. Ncloud Classic 환경에서 Load Balancer 생성하기
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/loadbalancer-classiclb-classic&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/loadbalancer-classiclb-classic&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Wed, 30 Aug 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud-networking-load-balancer-certificate-change.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud-networking-load-balancer-certificate-change.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>classic</category>
+            
+            <category>load_balancer</category>
+            
+            
+        </item>
         
         <item>
             <title>Proxy Protocol을 이용해 Client IP 확인하기 | Rocky Linux</title>
@@ -2020,328 +2108,6 @@ Route Table 정보를 삭제한 후에 SSL VPN을 삭제하시면 됩니다.
             <category>ssl</category>
             
             <category>vpn</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Rocky Linux에서 Apache SSL 인증서 설정하는 방법</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 Apache 웹서버를 설치하고, HTTPS 접속을 위한 SSL 인증서 설정하고, HTTP로 접속 시에 HTTPS로 리다이렉트하는 방법까지 정리해보겠습니다. 
-
-## 테스트 환경
-테스트에 사용할 서버 환경은 다음과 같습니다.
-
-{% include callout_v2.html type=&quot;secondary&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; OS: Rocky Linux 8.6 &lt;br /&gt;
-&amp;#8259; 웹서버: Apache 2.4 &lt;br /&gt; 
-&amp;#8259; 테스트 사이트:  rocky-https-test.com
-&quot; %}
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-00.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 패키지 업데이트
-우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.
-
-``` bash
-~# dnf -y upgrade-minimal
-```
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-[**dnf upgrade-minimal**]과 [**dnf update-minimal**]의 차이점에 대해 [**man dnf**] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [**dnf upgrade-minimal**]이며, [**dnf update-minimal**]는 더 이상 사용되지 않는 별칭이라고 합니다.
-&quot; %}
-
-``` bash
-~# man dnf
-#--- 중략 ---#
-Upgrade-Minimal Command
-       Command: upgrade-minimal
-       Aliases: up-min
-       Deprecated aliases: update-minimal
-```
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Apache 웹서버 설치
-
-- **Apache 버전 확인**  
-[**Rocky Linux 8.6**]에서 기본으로 지원하는 Apache 버전을 확인해보면 [**Apache 2.4**]인 것을 확인할 수 있습니다.
-
-``` bash
-~# dnf module list httpd
-```
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- **Apache 2.4 설치**  
-
-``` bash
-~# dnf -y install httpd
-```
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- **Apache 실행, 상태 확인**  
-설치를 마쳤으면 Apache를 실행하고 상태를 확인합니다.
-
-``` bash
-~# systemctl start httpd
-~# systemctl status httpd
-```
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 테스트용 웹사이트 생성
-테스트에 필요한 웹사이트 홈 디렉토리와 웹페이지를 생성합니다.
-
-``` bash
-~# mkdir -p  /ncloud/data/www/rocky-https-test.com/
-~# vim /ncloud/data/www/rocky-https-test.com/index.html
-```
-``` html
-&lt;!doctype html&gt;
-&lt;html lang=&quot;kr&quot;&gt;
- &lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;title&gt;Rocky Linux HTTPS Test Site&lt;/title&gt;
- &lt;/head&gt;
- &lt;body&gt;
-    &lt;h1&gt;Rocky Linux HTTPS Test Site&lt;/h1&gt;
- &lt;/body&gt;
-&lt;/html&gt;
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## Apache 환경 설정 파일 생성
-rocky-https-test.com 웹사이트에 대한 Apache 환경 설정 파일을 생성하고, HTTP 접속에 필요한 80 포트용 설정을 추가합니다.
-
-``` bash
-~# vim /etc/httpd/conf.d/rocky-https-test.com.conf
-```
-
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName rocky-https-test.com
-    DocumentRoot /ncloud/data/www/rocky-https-test.com
-    DirectoryIndex index.htm index.html
-
-    CustomLog &quot;/var/log/httpd/rocky-https-test.com-access_log&quot; combined
-    ErrorLog  &quot;/var/log/httpd/rocky-https-test.com-error_log&quot;
-
-    &lt;Directory /ncloud/data/www/rocky-https-test.com&gt;
-        Options None
-        AllowOverride None
-        Require all granted
-    &lt;/Directory&gt;
-&lt;/VirtualHost&gt;
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- 설정 파일을 저장한 후에 Apache 데몬을 재시작합니다.
-
-``` bash
-~# systemctl restart httpd
-```
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## hosts 파일 수정
-지금과 같이 테스트용으로 임의 설정한 도메인(**rocky-https-test.com**)으로 접속하게 될 경우에는 hosts 파일을 수정해야 합니다.  
-`실제 도메인을 사용할 경우에는 아래 과정이 필요 없기에` [다음 단계로 바로 이동&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#acg-setting)하시면 됩니다. 
-
-윈도우 10에서 hosts 파일은 C:\Windows\System32\drivers\etc 에 존재하는데 직접 수정할 수가 없으므로 다음과 같은 단계를 거쳐야 합니다.
-
-1. C:\Windows\System32\drivers\etc\hosts 파일을 임의의 작업 폴더 (예: D:\Work)로 복사합니다.
-2. 복사한 hosts 파일을 수정해서 123.456.789.123 rocky-https-test.com 처럼 접속할 IP 주소와 도메인을 추가합니다.
-3. 수정한 파일을 C:\Windows\System32\drivers\etc 위치로 덮어쓰기 합니다.
-4. 덮어쓰기 할 때 관리자 권한이 필요하다는 안내 메시지가 나타나면 [계속] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-05.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/lemp/ncloud-server-nginx-ssl-setting-guide-centos-06.png&quot; width=&quot;710&quot; alt=&quot;Ncloud CentOS 서버에 NginX SSL 인증서를 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## ACG (방화벽) 설정 {#acg-setting}
-테스트로 생성했던 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-23.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- [Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-25.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 내부 테스트용 ACG 설정
-내부 테스트용 설정은 ACG 규칙 설정 화면에서 [**Inbound**] 탭에서 [**myIp**] 버튼을 클릭해서 현재 접속한 PC나 회사 IP를 입력하고, HTTP용 80포트와 HTTPS용 443포트를 추가합니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 라이브 서비스용 ACG 설정
-라이브 서비스용 설정은 접근 소스에는 [**0.0.0.0/0**]을 입력하고, 마찬가지로 HTTP용 80포트와 HTTPS용 443포트를 추가합니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## HTTP 접속 테스트
-ACG 설정을 마쳤으면 웹브라우저에 테스트용 사이트의 주소 [**http://rocky-https-test.com**]으로 접속을 해보면 문제 없이 잘 접속되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## SSL 인증서 설정
-
-### mod_ssl 설치
-
-``` bash
-~# dnf -y install mod_ssl
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- 우선 인증서 저장용 디렉토리를 생성합니다.
-
-``` bash
-~# mkdir -p /root/ssl/
-```
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### SSL 테스트 인증서 생성
-여기서는 테스트용 인증서를 생성해서 사용하게 되는데, 정식 서비스의 경우 SSL 인증서 발급 기관에서 정식 인증서를 발급 받아 사용하게 됩니다.  
-정식 인증서를 사용하는 경우에는 테스트 인증서 생성 단계는 건너띄고 다음 단계로 이동하시면 되겠습니다.
-
-``` bash
-~# openssl req -newkey rsa:2048 \
--nodes -keyout /root/ssl/rocky-https-test.com.key \
--x509 -days 365 -out /root/ssl/rocky-https-test.com.crt
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- 인증서 파일이 제대로 생성되었는지 확인합니다.
-
-``` bash
-~# ls -al /root/ssl/
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### HTTPS용 환경 설정 추가
-앞에서 생성했던 환경 설정 파일 [**rocky-https-test.com.conf**]에 HTTPS용 설정을 추가합니다.
-
-``` bash
-~# vim /etc/httpd/conf.d/rocky-https-test.com.conf
-```
-``` apache
-&lt;VirtualHost *:443&gt;
-    ServerName rocky-https-test.com
-    DocumentRoot /ncloud/data/www/rocky-https-test.com
-    DirectoryIndex index.htm index.html
-
-    CustomLog &quot;/var/log/httpd/rocky-https-test.com-ssl-access_log&quot; combined
-    ErrorLog  &quot;/var/log/httpd/rocky-https-test.com-ssl-error_log&quot;
-
-    SSLEngine on
-    SSLProtocol -all +TLSv1.2 +TLSv1.3 
-    SSLHonorCipherOrder on
-    SSLCipherSuite PROFILE=SYSTEM
-
-    SSLCertificateFile /root/ssl/rocky-https-test.com.crt
-    SSLCertificateKeyFile /root/ssl/rocky-https-test.com.key
-
-    &lt;Directory /ncloud/data/www/rocky-https-test.com&gt;
-        Options None
-        AllowOverride None
-        Require all granted
-    &lt;/Directory&gt;
-&lt;/VirtualHost&gt;
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-16.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-- **SSLProtocol**: SSL Protocol에 대한 설정은 [TLS v1.2], [TLS v1.3] 만 허용하고, 나머지 Protocol은 모두 거부하도록 설정했습니다. &lt;br /&gt;
-- **정식 인증서**에서는 [SSLCertificateFile], [SSLCertificateKeyFile] 외에도 [SSLCertificateChainFile], [SSLCACertificateFile] 등의 키 설정이 필요하게 되는데, 자세한 내용은 인증서 발급 대행사에서 인증서를 발급 받을 때 포함되어 있는 가이드 문서를 참고하시면 됩니다.
-&quot; %}
-&lt;br /&gt;
-- 설정 파일을 저장한 후에 Apache 데몬을 재시작합니다.
-
-``` bash
-~# systemctl restart httpd
-```
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## HTTPS 접속 테스트
-설정을 마쳤으면 웹브라우저에서 HTTPS로 [https://rocky-https-test.com]에 접속을 해보면 문제 없이 잘 접속되는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 인증서 확인
-HTTPS로 테스트 사이트에 접속 후에 인증서를 확인해보면 위에서 테스트로 생성했던 정보가 제대로 설정되어 있는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-21.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-22.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## HTTP 접속 시 HTTPS로 리다이렉트
-이제 HTTPS 설정까지 마쳤으니 HTTP로 접속하는 경우에 HTTPS로 리다이렉트 시키는 설정을 적용해보겠습니다.  
-
-### 방법 - 1
-첫번째 방법은 [**Redirect**] 옵션을 이용하는 방법입니다.  
-앞에서 설정한 HTTP용 환경 설정에서 [**ServerName**]을 제외한 다른 항목들은 모두 삭제하거나 주석처리한 후에 리다이렉트 설정을 추가합니다.
-
-``` bash
-~# vim /etc/httpd/conf.d/rocky-https-test.com.conf
-```
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName rocky-https-test.com
-
-    Redirect permanent / https://rocky-https-test.com/
-    # 또는
-    # Redirect 301 / https://rocky-https-test.com/
-&lt;/VirtualHost&gt;    
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 리다이렉트 여부 확인
-웹브라우저에서 [**F12**] 키로 개발자 모드로 변경한 후에 [**http://rocky-https-test.com/**]로 접속을 해보면 아래 스샷처럼 HTTP 301 상태코드를 반환하면서 [**https://rocky-https-test.com/**]로 리다이렉트된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 방법 - 2
-두번째 방법은 [**RewirteRule**] 옵션을 이용하는 방법입니다.  
-첫번째 방법이 더 간편하기는 하지만, 리다이렉트 시킬 때 HTTP 상태코드 뿐만 아니라 HTTP Header 값 등 다양한 설정이 필요한 경우에는 [**RewirteRule**]을 이용하는 두번째 방법을 사용해야 합니다.  
-
-``` apache
-&lt;VirtualHost *:80&gt;
-    ServerName rocky-https-test.com
-
-    RewriteEngine On
-    RewriteCond %{HTTPS} !on
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
-&lt;/VirtualHost&gt; 
-```
-{% include image.html file=&quot;compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-20.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-
-## 참고 URL
-1.  Rocky Linux Apache Multiple Site 설정 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/apache-sites-enabled/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/apache-sites-enabled/&lt;/a&gt;
-
-2.  Rocky Linux Apache with &apos;mod_ssl&apos; 가이드
-	- &lt;a href=&quot;https://docs.rockylinux.org/guides/web/mod_SSL_apache/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.rockylinux.org/guides/web/mod_SSL_apache/&lt;/a&gt;</description>
-            <pubDate>Thu, 13 Jul 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-lamp-apache-ssl-setting-rocky-linux-guide.html</guid>
-            
-            <category>rocky_linux</category>
-            
-            <category>lamp</category>
-            
-            <category>apache</category>
-            
-            <category>install</category>
             
             
         </item>
