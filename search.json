@@ -1231,9 +1231,9 @@
 {
 "title": "VPC환경에서 Cloud DB for MySQL 생성하기",
 "tags": "databasemysqlclouddbvpc",
-"keywords": "Database, Domain",
+"keywords": "Database, Domain, 관리형 DB",
 "url": "/database/ncloud_database_cloud_db_for_mysql_guide.html",
-"summary": "Ncloud VPC환경에서 Cloud DB for MySQL 생성하는 방법입니다"
+"summary": ""
 }
 ,
 
