@@ -11,24 +11,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드입니다">
+<meta name="description" content="Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드입니다">
 <meta name="keywords" content="database, mysql, install, rocky_linux,  Database, 록키 리눅스, 디비, install">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법" />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:description" content="Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드입니다" />
+<meta property="og:description" content="Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드입니다" />
 <link rel="canonical" href="https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-18.png" />
+<meta property="og:image:alt" content="Ncloud(네이버 클라우드) Rocky Linux 서버에 8.0 최신 버전 설치하는 방법에 대한 가이드" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-04-11T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-09-04T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-18.png" />
+<meta name="twitter:image:alt" content="Ncloud(네이버 클라우드) Rocky Linux 서버에 8.0 최신 버전 설치하는 방법에 대한 가이드" />
 <meta property="twitter:title" content="Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드입니다","headline":"Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법","image":"https://docs.3rdeyesys.com/images/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-18.png","url":"https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드입니다","headline":"Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법","image":{"alt":"Ncloud(네이버 클라우드) Rocky Linux 서버에 8.0 최신 버전 설치하는 방법에 대한 가이드","url":"https://docs.3rdeyesys.com/images/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-18.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title>Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법 | 써드아이시스템 기술문서</title>
@@ -1912,7 +1914,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   
     
-      <div class="summary">Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드입니다</div>
+      <div class="summary">Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드입니다</div>
     
   
 
@@ -1974,7 +1976,7 @@ $("#toc_onoff").click(function() {
 <h2 id="패키지-업데이트">패키지 업데이트</h2>
 <p>우선 패키지 업데이트를 해보겠습니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf update
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> upgrade-minimal
 </code></pre></div></div>
 <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>dnf:</b> Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
@@ -1990,7 +1992,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 <h2 id="mysql-community-최신-패키지-확인">MySQL Community 최신 패키지 확인</h2>
 <p>MySQL Community Yum(Dnf) 최신 패키지는 아래 주소에서 확인할 수 있습니다.<br />
 Rocky Linux는 CentOS 8 기반으로 만들어졌으므로 아래 다운로드 페이지에서 Red Hat Enterprise Linux 8 기반의 mysql80-community-release-el8-{버전}.noarch.rpm 리파지토리 버전을 확인합니다.<br />
-<strong>2023-04-10</strong> 기준으로는 [<strong>mysql80-community-release-el8-5.noarch.rpm</strong>] 인것을 확인할 수 있습니다.</p>
+<strong>2023-09-04</strong> 기준으로는 [<strong>mysql80-community-release-el8-8.noarch.rpm</strong>] 인것을 확인할 수 있습니다.</p>
 
 <div class="bs-callout-v2 bs-callout-v2-info bs-callout-v2-level-1">
 ⁃ <a href="https://dev.mysql.com/downloads/repo/yum/" target="_blank" style="word-break:break-all;"> https://dev.mysql.com/downloads/repo/yum/</a>
@@ -2004,9 +2006,9 @@ Rocky Linux는 CentOS 8 기반으로 만들어졌으므로 아래 다운로드 �
 </figure>
 
 <h2 id="mysql-community-패키지-설치">MySQL Community 패키지 설치</h2>
-<p>위에서 확인한 MySQL 8.0의 최신 Repository 설치 패키지는 [<strong>mysql80-community-release-el8-5.noarch.rpm</strong>] 입니다.</p>
+<p>위에서 확인한 MySQL 8.0의 최신 Repository 설치 패키지는 [<strong>mysql80-community-release-el8-8.noarch.rpm</strong>] 입니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>https://dev.mysql.com/get/mysql80-community-release-el8-5.noarch.rpm
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>https://dev.mysql.com/get/mysql80-community-release-el8-8.noarch.rpm
 </code></pre></div></div>
 
 <figure>
@@ -2189,7 +2191,10 @@ mysql80-community-release-el8-{버전}.noarch.rpm 버전부터는 8.0 버전만 
 </figure>
 
 <h2 id="mysql-접속">MySQL 접속</h2>
-<p>위에서 설정했던 비번으로 접속해보면 [<strong>8.0.32 MySQL Community Server</strong>]인 것을 확인할 수 있습니다.</p>
+<p>위에서 설정했던 비번으로 접속해보면 [<strong>8.0.34 MySQL Community Server</strong>]인 것을 확인할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+</code></pre></div></div>
 
 <figure>
   <img class="docimage" src="/images/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-18.png" alt="Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드" style="width: 840px; " />
@@ -2216,6 +2221,34 @@ mysql80-community-release-el8-{버전}.noarch.rpm 버전부터는 8.0 버전만 
     </ul>
   </li>
 </ol>
+
+<h2 id="문서-업데이트-내역">문서 업데이트 내역</h2>
+<div>
+  <table class="simple_table small_font" style="width:50%">
+    <thead>
+      <tr>
+        <th>날짜</th>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      
+      
+      
+        <tr>
+          <td>2023-04-11</td>
+          <td>문서 최초 생성</td>
+        </tr>
+      
+        <tr>
+          <td>2023-09-04</td>
+          <td>Rocky Linux 8.8 적용, MySQL 8.0.43 적용</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
 
   
     <div class="tags">
@@ -2300,7 +2333,7 @@ mysql80-community-release-el8-{버전}.noarch.rpm 버전부터는 8.0 버전만 
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-11<br/> Site last generated: 2023-09-01 <br />        
+        <span>Page last updated:</span> 2023-09-04<br/> Site last generated: 2023-09-04 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

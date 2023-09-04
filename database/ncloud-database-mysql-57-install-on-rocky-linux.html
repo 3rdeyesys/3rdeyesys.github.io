@@ -11,24 +11,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드입니다">
+<meta name="description" content="Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드입니다">
 <meta name="keywords" content="database, mysql, install, rocky_linux,  Database, 록키 리눅스, 디비, install">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="Rocky Linux 서버에 MySQL 5.7 설치하는 방법" />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:description" content="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드입니다" />
+<meta property="og:description" content="Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드입니다" />
 <link rel="canonical" href="https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/database/ncloud-database-mysql-57-install-on-rocky-linux-18.png" />
+<meta property="og:image:alt" content="Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-04-10T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-09-04T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/database/ncloud-database-mysql-57-install-on-rocky-linux-18.png" />
+<meta name="twitter:image:alt" content="Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" />
 <meta property="twitter:title" content="Rocky Linux 서버에 MySQL 5.7 설치하는 방법" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드입니다","headline":"Rocky Linux 서버에 MySQL 5.7 설치하는 방법","image":"https://docs.3rdeyesys.com/images/database/ncloud-database-mysql-57-install-on-rocky-linux-18.png","url":"https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드입니다","headline":"Rocky Linux 서버에 MySQL 5.7 설치하는 방법","image":{"alt":"Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드","url":"https://docs.3rdeyesys.com/images/database/ncloud-database-mysql-57-install-on-rocky-linux-18.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title>Rocky Linux 서버에 MySQL 5.7 설치하는 방법 | 써드아이시스템 기술문서</title>
@@ -1912,7 +1914,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   
     
-      <div class="summary">Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드입니다</div>
+      <div class="summary">Ncloud(네이버 클라우드) Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드입니다</div>
     
   
 
@@ -1974,7 +1976,7 @@ $("#toc_onoff").click(function() {
 <h2 id="패키지-업데이트">패키지 업데이트</h2>
 <p>우선 패키지 업데이트를 해보겠습니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf update
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> upgrade-minimal
 </code></pre></div></div>
 <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>dnf:</b> Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
@@ -1988,9 +1990,9 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 </figure>
 
 <h2 id="mysql-community-패키지-설치">MySQL Community 패키지 설치</h2>
-<p>MySQL 5.7 버전이 포함된 가장 최근의 Repository 설치 패키지는 mysql80-community-release-el7-7.noarch.rpm 입니다.</p>
+<p>MySQL 5.7 버전이 포함된 가장 최근의 Repository 설치 패키지는 mysql80-community-release-el7-10.noarch.rpm 입니다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf <span class="nt">-y</span> <span class="nb">install </span>https://dev.mysql.com/get/mysql80-community-release-el7-10.noarch.rpm
 </code></pre></div></div>
 
 <figure>
@@ -2021,6 +2023,19 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 
 <figure>
   <img class="docimage" src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-06.png" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="mysql-버전-확인">MySQL 버전 확인</h3>
+<p>설치된 리포지토리에서 MySQL 버전을 확인해보면 5.7과 8.0이 존재하는 것을 확인할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# dnf repolist all | <span class="nb">grep </span>mysql
+</code></pre></div></div>
+
+<figure>
+  <img class="docimage" src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-19.png" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2173,7 +2188,10 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 </figure>
 
 <h2 id="mysql-접속">MySQL 접속</h2>
-<p>위에서 설정했던 비번으로 접속해보면 [<strong>5.7.41 MySQL Community Server</strong>]인 것을 확인할 수 있습니다.</p>
+<p>위에서 설정했던 비번으로 접속해보면 [<strong>5.7.43 MySQL Community Server</strong>]인 것을 확인할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+</code></pre></div></div>
 
 <figure>
   <img class="docimage" src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-18.png" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" style="width: 840px; " />
@@ -2200,6 +2218,34 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
     </ul>
   </li>
 </ol>
+
+<h2 id="문서-업데이트-내역">문서 업데이트 내역</h2>
+<div>
+  <table class="simple_table small_font" style="width:50%">
+    <thead>
+      <tr>
+        <th>날짜</th>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      
+      
+      
+        <tr>
+          <td>2023-04-10</td>
+          <td>문서 최초 생성</td>
+        </tr>
+      
+        <tr>
+          <td>2023-09-04</td>
+          <td>Rocky Linux 8.8 적용, MySQL 5.7.43 적용</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
 
   
     <div class="tags">
@@ -2284,7 +2330,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-10<br/> Site last generated: 2023-09-01 <br />        
+        <span>Page last updated:</span> 2023-09-04<br/> Site last generated: 2023-09-04 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

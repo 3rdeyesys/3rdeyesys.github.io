@@ -5,10 +5,399 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 01 Sep 2023 16:22:38 +0900</pubDate>
-        <lastBuildDate>Fri, 01 Sep 2023 16:22:38 +0900</lastBuildDate>
+        <pubDate>Mon, 04 Sep 2023 18:18:38 +0900</pubDate>
+        <lastBuildDate>Mon, 04 Sep 2023 18:18:38 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Rocky Linux 서버에 MySQL 5.7 설치하는 방법</title>
+            <description>## 개요
+록키 리눅스(Rocky Linux)는 기본 데이터베이스가 MariaDB인데, 상황에 따라 MySQL이 필요한 경우가 있습니다. 이번에는 그 중에서 MySQL 5.7 버전을 설치하는 방법을 정리해보겠습니다.
+
+## 서버 준비
+우선 Rocky Linux 서버를 준비합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### Rocky Linux 소개
+록키 리눅스에 대한 간략한 소개는 아래 문서에서 확인할 수 있습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/compute/ncloud-compute-server-rocky-linux-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개&lt;/a&gt;
+&quot; %}
+
+## 패키지 업데이트
+우선 패키지 업데이트를 해보겠습니다.
+
+``` bash
+~# dnf -y upgrade-minimal
+```
+{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
+Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+
+## MySQL Community 패키지 설치
+MySQL 5.7 버전이 포함된 가장 최근의 Repository 설치 패키지는 mysql80-community-release-el7-10.noarch.rpm 입니다.
+
+``` bash
+~# dnf -y install https://dev.mysql.com/get/mysql80-community-release-el7-10.noarch.rpm
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+
+## MySQL 5.7 버전 리포지토리 활성화
+
+### 버전 활성화 정보 초기화
+
+``` bash
+~# dnf module reset mysql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+
+### 기본 MySQL 버전 비활성화
+
+``` bash
+~# dnf module disable mysql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### MySQL 버전 확인
+설치된 리포지토리에서 MySQL 버전을 확인해보면 5.7과 8.0이 존재하는 것을 확인할 수 있습니다.
+
+``` bash
+~# dnf repolist all | grep mysql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-19.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### MySQL 5.7 버전 활성화
+설치된 MySQL Community 패키지에서 MySQL 8.0 버전은 비활성화 하고, 5.7 버전을 활성화 합니다.
+
+``` bash
+~# dnf config-manager --disable mysql80-community
+~# dnf config-manager --enable mysql57-community
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 5.7 설치
+MySQL 5.7 서버를 설치합니다.
+
+``` bash
+~# dnf -y install mysql-community-server
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 초기화
+아래 명령어로 기본 데이터베이스 생성 등의 초기화 작업을 진행합니다. 다만 여기서는 초기화 할 때 --initialize-insecure 옵션으로 비밀번호는 설정하지 않고 아래쪽 MySQL 보안 설정 단계에서 [**mysql_secure_installation**] 명령으로 설정하도록 하겠습니다.
+
+``` bash
+~# mysqld --initialize-insecure --user=mysql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 데몬 시작
+초기화를 마쳤으면 MySQL 데몬을 시작합니다.
+
+``` bash
+~# systemctl start mysqld
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 보안 설정
+[**mysql_secure_installation**]은 MySQL의 기본 보안을 설정하는 명령으로, 설정되는 항목은 다음과 같습니다.
+
+- root 계정 패스워드 설정
+- 원격 호스트에서 root 계정 접속 차단
+- 익명 계정 삭제
+- 테스트 DB 등 삭제
+
+``` bash
+~# mysql_secure_installation
+```
+
+- 비밀번호를 설정할 때 비밀번호 유효성 검사 플러그인을 사용할 것인지 선택할 수 있는데 [**Y**]를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 비밀번호 정책 수준 선택
+제공되는 비밀번호 정책 수준은 [**LOW**], [**MEDIUM**], [**STRONG**]의 3가지가 있습니다.
+- LOW: 8자 이상
+- MEDIUM: 8자 이상, 숫자-대소문자-특수문자 포함
+- STRONG: 8자 이상, 숫자-대소문자-특수문자 포함, dictionary file에 포함된 단어 사용 불가
+
+여기서는 1을 입력해서 MEDIUM을 선택하겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+- 패스워드를 입력하면 패스워드의 복잡성 강도를 점수로 측정해주는데 이번 테스트에서는 100점을 받았습니다.  
+그리고, 방금 입력했던 패스워드를 그대로 사용할 것인지 확인하는데 [**Y**]를 입력합니다.  
+(혹시 입력했던 비밀번호를 변경하고 싶을 경우는 [**N**]를 입력합니다.)
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 익명 계정 삭제
+다음으로 Anonymous Users 즉, 익명 계정들을 삭제할 것인지 묻는데 [**Y**]를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 원격 호스트에서 root 계정 접속 차단
+다음은 로컬이 아닌 원격에서 root 계정 로그인을 차단할 것인지 묻는데 [**Y**]를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 테스트 DB 등 삭제
+테스트 DB 등을 삭제할 것인지 묻는데 여기서도 [**Y**]를 입력합니다.
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 설정 저장
+마지막으로 지금까지 선택한 설정을 모두 적용할 것인지 묻는데 [**Y**]를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 접속
+위에서 설정했던 비번으로 접속해보면 [**5.7.43 MySQL Community Server**]인 것을 확인할 수 있습니다.
+
+``` bash
+~# mysql -u root -p
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-57-install-on-rocky-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1. MySQL Yum Repository 다운로드 페이지
+	- &lt;a href=&quot;https://dev.mysql.com/downloads/repo/yum/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/downloads/repo/yum/&lt;/a&gt;
+
+2. Installing MySQL on Linux Using the MySQL Yum Repository
+	- &lt;a href=&quot;https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html&lt;/a&gt; 
+
+3. Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법
+	- &lt;a href=&quot;/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html&lt;/a&gt; 	 
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}  	</description>
+            <pubDate>Mon, 04 Sep 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html</guid>
+            
+            <category>database</category>
+            
+            <category>mysql</category>
+            
+            <category>install</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법</title>
+            <description>## 개요
+록키 리눅스(Rocky Linux)는 기본 데이터베이스가 MariaDB인데, 상황에 따라 MySQL이 필요한 경우가 있습니다. 이번에는 그 중에서 MySQL 8.0 최신 버전을 설치하는 방법을 정리해보겠습니다.
+
+## 서버 준비
+우선 Rocky Linux 서버를 준비합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### Rocky Linux 소개
+록키 리눅스에 대한 간략한 소개는 아래 문서에서 확인할 수 있습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;/compute/ncloud-compute-server-rocky-linux-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개&lt;/a&gt;
+&quot; %}
+
+## 패키지 업데이트
+우선 패키지 업데이트를 해보겠습니다.
+
+``` bash
+~# dnf -y upgrade-minimal
+```
+{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
+Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL Community 최신 패키지 확인
+MySQL Community Yum(Dnf) 최신 패키지는 아래 주소에서 확인할 수 있습니다.  
+Rocky Linux는 CentOS 8 기반으로 만들어졌으므로 아래 다운로드 페이지에서 Red Hat Enterprise Linux 8 기반의 mysql80-community-release-el8-{버전}.noarch.rpm 리파지토리 버전을 확인합니다.  
+**2023-09-04** 기준으로는 [**mysql80-community-release-el8-8.noarch.rpm**] 인것을 확인할 수 있습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; &lt;a href=&apos;https://dev.mysql.com/downloads/repo/yum/&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; https://dev.mysql.com/downloads/repo/yum/&lt;/a&gt;
+&quot; %}
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+
+## MySQL Community 패키지 설치
+위에서 확인한 MySQL 8.0의 최신 Repository 설치 패키지는 [**mysql80-community-release-el8-8.noarch.rpm**] 입니다.
+
+``` bash
+~# dnf -y install https://dev.mysql.com/get/mysql80-community-release-el8-8.noarch.rpm
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+
+## MySQL 8.0 버전 리포지토리 활성화
+
+### 버전 활성화 정보 초기화
+
+``` bash
+~# dnf module reset mysql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+
+### 기본 MySQL 버전 비활성화
+
+``` bash
+~# dnf module disable mysql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+
+### MySQL 8.0 버전 확인
+설치된 MySQL Community 패키지에 포함된 MySQL 버전을 확인해보겠습니다.  
+mysql80-community-release-el8-{버전}.noarch.rpm 버전부터는 8.0 버전만 있고, 5.7 버전은 포함되어 있지 않습니다.
+
+``` bash
+~# dnf repolist all | grep mysql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 8.0 설치
+MySQL 8.0 서버를 설치합니다.
+
+``` bash
+~# dnf -y install mysql-community-server
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 초기화
+아래 명령어로 기본 데이터베이스 생성 등의 초기화 작업을 진행합니다. 다만 여기서는 초기화 할 때 --initialize-insecure 옵션으로 비밀번호는 설정하지 않고 아래쪽 MySQL 보안 설정 단계에서 [**mysql_secure_installation**] 명령으로 설정하도록 하겠습니다.
+
+``` bash
+~# mysqld --initialize-insecure --user=mysql
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 데몬 시작
+초기화를 마쳤으면 MySQL 데몬을 시작합니다.
+
+``` bash
+~# systemctl start mysqld
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 보안 설정
+[**mysql_secure_installation**]은 MySQL의 기본 보안을 설정하는 명령으로, 설정되는 항목은 다음과 같습니다.
+
+- root 계정 패스워드 설정
+- 원격 호스트에서 root 계정 접속 차단
+- 익명 계정 삭제
+- 테스트 DB 등 삭제
+
+``` bash
+~# mysql_secure_installation
+```
+
+- 비밀번호를 설정할 때 비밀번호 유효성 검사 플러그인을 사용할 것인지 선택할 수 있는데 [**Y**]를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 비밀번호 정책 수준 선택
+제공되는 비밀번호 정책 수준은 [**LOW**], [**MEDIUM**], [**STRONG**]의 3가지가 있습니다.
+- LOW: 8자 이상
+- MEDIUM: 8자 이상, 숫자-대소문자-특수문자 포함
+- STRONG: 8자 이상, 숫자-대소문자-특수문자 포함, dictionary file에 포함된 단어 사용 불가
+
+여기서는 1을 입력해서 MEDIUM을 선택하겠습니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+- 패스워드를 입력하면 패스워드의 복잡성 강도를 점수로 측정해주는데 이번 테스트에서는 100점을 받았습니다.  
+그리고, 방금 입력했던 패스워드를 그대로 사용할 것인지 확인하는데 [**Y**]를 입력합니다.  
+(혹시 입력했던 비밀번호를 변경하고 싶을 경우는 [**N**]를 입력합니다.)
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 익명 계정 삭제
+다음으로 Anonymous Users 즉, 익명 계정들을 삭제할 것인지 묻는데 [**Y**]를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 원격 호스트에서 root 계정 접속 차단
+다음은 로컬이 아닌 원격에서 root 계정 로그인을 차단할 것인지 묻는데 [**Y**]를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 테스트 DB 등 삭제
+테스트 DB 등을 삭제할 것인지 묻는데 여기서도 [**Y**]를 입력합니다.
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+### 설정 저장
+마지막으로 지금까지 선택한 설정을 모두 적용할 것인지 묻는데 [**Y**]를 입력합니다.
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## MySQL 접속
+위에서 설정했던 비번으로 접속해보면 [**8.0.34 MySQL Community Server**]인 것을 확인할 수 있습니다.
+
+``` bash
+~# mysql -u root -p
+```
+
+{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1. MySQL Yum Repository 다운로드 페이지
+	- &lt;a href=&quot;https://dev.mysql.com/downloads/repo/yum/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/downloads/repo/yum/&lt;/a&gt;
+
+2. Installing MySQL on Linux Using the MySQL Yum Repository
+	- &lt;a href=&quot;https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html&lt;/a&gt;  
+
+3. Rocky Linux 서버에 MySQL 5.7 설치하는 방법
+	- &lt;a href=&quot;/database/ncloud-database-mysql-57-install-on-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html&lt;/a&gt;      
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}  	</description>
+            <pubDate>Mon, 04 Sep 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html</guid>
+            
+            <category>database</category>
+            
+            <category>mysql</category>
+            
+            <category>install</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
         
         <item>
             <title>VPC환경에서 Cloud DB for MySQL 생성하기</title>
@@ -1617,480 +2006,6 @@ Classic 환경에서는 리소스별 상세 권한은 설정할 수 없고, View
             <category>account</category>
             
             <category>api</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Object Storage 버킷 접근 로그 확인하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) Object Storage에 존재하는 오브젝트, 즉 파일을 호출, 접근한 기록이나 오브젝트를 업로드한 로그를 확인하는 방법을 정리해보겠습니다.
-
-
-## 버킷 생성
-우선, 테스트에 사용할 버킷과 로그를 저장할 버킷을 생성하고, 테스트용 버킷에는 파일 몇개를 업로드 해두었습니다.
-
-- object-bucket-test: 테스트용 버킷
-- object-bucket-test-log: 로그를 저장할 버킷
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-## 로그 설정
-로그를 설정하는 방법은 버킷을 선택하고, 옆에 있는 [ &lt;i class=&quot;fa-solid fa-ellipsis-vertical&quot;&gt;&lt;/i&gt; ] 아이콘을 클릭하면 나타나는 메뉴에서 [**로그 관리**]를 선택합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-### 로그 관리 설정
-[**로그 관리**] 설정 팝업에서 로그를 저장할 버킷을 선택하고, 로그 파일의 Prefix를 입력한 후 [**+ 추가**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-03.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-- 설정 항목이 추가 되었으면 [**확인**] 버튼을 클릭해서 설정을 저장합니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-04.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-## 로그 생성 규칙
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-&amp;#8259; 접근 로그 관리를 설정하면 매시간 15~55분에 이전 1시간 동안의 로그가 생성됩니다. &lt;br /&gt;
-&amp;#8259; 예시: 17시 00분 00초~17시 59분 59초의 로그는 18시 15~55분에 생성
-&quot; %}
-
-## 로그 생성
-위에서 확인한 로그 생성 규칙처럼 일정한 시간이 지난 후에 아래와 같이 로그가 생성된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-## 로그 예시
-생성된 로그를 다운로드 받아서 확인해보면 아래와 같은 JSON 형식으로 구성된 것을 확인할 수 있습니다.  
-(로그 내용이 길이서 중요한 부분만 표시하고 나머지는 생략했습니다.)
-
-``` json
-{
-    &quot;container_id&quot;: &quot;5d3******e-9****-***2-a***0-54******f9b&quot;, 
-    &quot;container_name&quot;: &quot;object-bucket-test&quot;, 
-    &quot;container_region&quot;: &quot;KR&quot;, 
-    &quot;format&quot;: 1, 
-    &quot;headers&quot;: { &quot;Accept-Encoding&quot;: [&quot;gzip, deflate, br&quot;] }, 
-    &quot;https&quot;: 
-    {
-        &quot;cipher_suite&quot;: &quot;TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384&quot;, 
-        &quot;protocol&quot;: &quot;TLSv1.2&quot;
-    }, 
-    &quot;object_name&quot;: &quot;3rdeyesys-1.png&quot;,   
-    &quot;remote_address&quot;: &quot;123.123.123.123&quot;, 
-    &quot;stat&quot;: {    }, 
-    &quot;status&quot;: 200, 
-    &quot;user_agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML) Chrome/115.0.0.0&quot;
-}
-```
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 로그 통합 저장
-또한, 여러 버킷의 접근 로그를 하나의 버킷에 통합해서 저장할 수도 있습니다.  
-
-아래와 같이 또 다른 버킷에서 [**로그 관리**] 설정을 추가하면서 로그를 저장할 버킷은 위에서 설정했던 버킷과 동일한 버킷으로 지정했습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-07.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-- 그리고 일정 시간이 지난 후에 확인해보면 아래와 같이 2개의 다른 버킷의 접근 로그가 저장된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-## 로그 설정 삭제
-접근 로그를 더 이상 기록하고 싶지 않을 경우에는 아래와 같이 로그 관리 설정에서 [**삭제**] 버튼을 클릭해서 설정을 모두 지우시면 됩니다.
-
-{% include image.html file=&quot;storage/ncloud-storage-object-storage-log-management-09.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드)의 Object Storage 버킷 이용, 접근 로그를 확인하는 방법&quot; caption=&quot;&quot; %}
-
-## 일본 리전
-일본 리전의 경우 다른 리전과 몇가지 내용들이 다르게 설정, 저장됩니다.
-
-- 로그가 기록되는데에는 10분 ~ 수시간까지 소요될 수 있습니다.
-- 로그에 저장되는 항목 개수가 다른 리전보다 적습니다.
-
-
-
-## 참고 URL
-1.  Ncloud Object Storage 버킷 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/objectstorage-use-bucket&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/objectstorage-use-bucket&lt;/a&gt;
-
-2.  Ncloud Object Storage 버킷 로그 관리 상세 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/objectstorage-use-bucket#%EB%A1%9C%EA%B7%B8-%EA%B4%80%EB%A6%AC&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/objectstorage-use-bucket#%EB%A1%9C%EA%B7%B8-%EA%B4%80%EB%A6%AC&lt;/a&gt;	
-
-
-	</description>
-            <pubDate>Wed, 02 Aug 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-log-management-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud-storage-object-storage-log-management-guide.html</guid>
-            
-            <category>storage</category>
-            
-            <category>log</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud VPC 환경에서 서버 생성하는 방법</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) VPC환경에서 서버를 생성하는 순서를 정리해보겠습니다.  
-얼마전 업데이트에서 서버 생성 콘솔 화면에 큰 변화가 생겼기에 그 내용까지 함께 포함했습니다.
-
-## 서버 생성 순서
-VPC 환경에서 서버를 생성하려면 Subnet 설정 등 사전에 미리 설정해야 하는 것과 서버 생성 후에 설정해야 하는 것들이 있는데, 순서대로 정리하고 아래쪽에서 차례대로 살펴보겠습니다.
-
-1. VPC 설정
-2. Subnet 설정
-3. 서버 생성  
-  3-1. 서버 인증키 설정
-4. ACG (방화벽) 설정
-
-
-## VPC 설정
-VPC (Virtual Private Cloud) 즉, 클라우드 상에서 논리적으로 격리된 고객 전용 네트워크 공간을 먼저 생성하고 해당 공간에 서버를 생성하게 됩니다.  
-VPC는 고객의 계정마다 **최대 3개**를 생성할 수 있으며, 각 VPC는 최대 넷마스크 0.0.255.255/16 (IP 65,536개) 크기의 네트워크 주소 공간을 제공합니다.
-
-### VPC 서비스 위치
-[**VPC**] 서비스는 [**Console**] - [**Services**] - [**Networking**]에 위치해 있습니다.
-
-그리고, 아래 스샷에서 확인할 수 있듯이 [**VPC**]에는 [**VPC Management**], [**Subnet Management**], [**Network ACL**], [**NAT Gateway**], [**Route Table**], [**VPC Peering**], [**Virtual Private Gateway**] 등의 하부 서비스 메뉴가 있습니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-vpc-subnet-create-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 VPC, Subnet 생성&quot; caption=&quot;&quot; %}
-
-
-## VPC 생성
-[**VPC**] - [**VPC Management**] [**VPC 생성**] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;networking/ncloud-networking-vpc-subnet-create-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud VPC 환경에서 VPC, Subnet 생성&quot; caption=&quot;&quot; %}
-
-- VPC 생성 화면에서 [**VPC 이름**]과 [**IP 주소 범위**]를 입력합니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-vpc-subnet-create-03.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 VPC, Subnet 생성&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-VPC의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) 내에서 /16~/28 범위여야 합니다.&lt;br /&gt;
-- 예시: 10.0.0.0/16, 172.16.0.0/16, 192.168.0.0/16
-&quot; %}
-
-## Subnet 생성
-[**VPC**] - [**Subnet Management**]에서 [**Subnet 생성**] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;networking/ncloud-networking-vpc-subnet-create-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 VPC, Subnet 생성&quot; caption=&quot;&quot; %}
-
-- [**Subnet 이름**]을 적절하게 입력하고, 위에서 생성했던 [**VPC**]를 선택하고, Subnet에서 사용할 [**IP 주소 범위**]를 입력합니다.
-- [**Internet Gateway 전용여부**]는 외부와 인터넷 연결이 필요할 경우에는 [**Public**], 내부 서버끼리만 통신할 경우에는 [**Private**]을 선택합니다.
-- [**용도**]는 일반 서버일 경우에는 [**일반**]을 선택하면 됩니다.
-
-{% include image.html file=&quot;networking/ncloud-networking-vpc-subnet-create-05.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 VPC, Subnet 생성&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) 내에서 /16~/28 범위여야 합니다.&lt;br /&gt;
-- 예시: 10.0.1.0/24, 172.16.10.0/24, 192.168.101.0/24
-&quot; %}
-
-## 서버 생성
-[**VPC**]와 [**Subnet**] 설정을 마쳤으니 이제 서버(Server)를 설정해보겠습니다.
-
-### Server 서비스 위치
-[Server] 서비스는 [Console] - [Services] - [Compute]에 위치해 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [**Server**] - [**Server**]에서 [**서버 생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 생성 콘솔 선택
-Ncloud 서버 생성 콘솔화면은 신규 기능이 업데이트 되면서 2가지를 선택할 수 있습니다. 여기서는 [**신규 콘솔 화면**]으로 진행하겠습니다.
-
-- 기존 콘솔 화면: **XEN, RHV** 하이퍼바이저 기반의 서버(g1,g2)를 생성할 수 있습니다.
-- 신규 콘솔 화면: **XEN, RHV** 하이퍼바이저 기반의 서버(g1,g2)뿐만 아니라 **KVM** 기반 및 다양한 성능을 제공하는 기본 스토리지로 서버(**g3**)를 생성할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-03.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 이미지 선택
-[**서버 이미지 선택**] 단계에서는 Ncloud에서 제공하는 다양한 서버 이미지를 선택할 수 있고, [**최신 서버 이미지**]와 [**내 서버 이미지**]를 따로 볼 수 있는 기능도 제공하고 있습니다. 여기서는 [**최신 서버 이미지**]에서 제공하는 서버 이미지로 서버를 생성해보겠습니다.  
-또한 하이퍼바이저 기준으로 [**XEN**]과 [**KVM**] 2가지 타입이 제공되는데 여기서는 [**XEN**] 타입의 서버로 테스트 해보겠습니다. [**XEN**]과 [**KVM**]에 대한 설명은 아래쪽에서 별도로 살펴보겠습니다. ([XEN 과 KVM 비교&lt;i class=&quot;fa-solid fa-turn-down&quot;&gt;&lt;/i&gt;](#xen-vs-kvm))
-
-{% tabs server-image-choice %}
-
-{% tab server-image-choice 최신 서버 이미지 %}
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-{% endtab %}
-
-{% tab server-image-choice NCP 서버 이미지 %}
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-23.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-{% endtabs %}
-
-### 서버 설정 (전체 화면)
-서버 설정 단계에서는 위에서 생성한 [**VPC**]와 [**Subnet**]을 선택하고  [**서버 스펙**]과 [**요금제**], [**Network Interface**], [**공인 IP 할당 여부**] 등을 선택하게 됩니다. 각 항목별 상세한 설명은 아래쪽에서 다시 정리해보겠습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-05.png&quot; width=&quot;845&quot; height=&quot;811&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 설정 (상세 설명)
-그러면 이제부터 서버 설정 항목별로 상세하게 살펴보겠습니다.
-
-- [**VPC**], [**Subnet**] 선택  
-위에서 생성했던 [**VPC**]와 [**Subnet**] 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-06.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [**서버 스펙**]  
-[**서버 스펙**]은 [**High-CPU**], [**CPU-Intensive**], [**Standard**], [**High-Memory**] 등의 타입 중에서 원하는 타입을 선택하고, 각 타입별로 서비스에 적절한 vCPU와 Memory를 선택하시면 됩니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-07.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [**요금제 선택**], [**서버 개수**], [**서버 이름**]  
-요금제는 [**월요금제**]와 [**시간 요금제**] 중에서 선택하시고, 한번에 생성할 서버 개수와 서버 이름을 입력합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-08.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [**Network Interface**] 사설 IP 할당  
-사설 IP 할당은 자동 할당과 수동 할당 방법 중에서 선택하시면 됩니다.
-
-{% tabs private-ip-assign %}
-
-{% tab private-ip-assign 사설 IP 자동 할당 %}
-&lt;br /&gt;
-[**Network Interface**]에 할당되는 사설 IP는 아래와 같이 IP 입력 칸에 아무것도 입력하지 않으면 자동할당 됩니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-09.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-10.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-{% endtab %}
-
-{% tab private-ip-assign 사설 IP 수동 할당 %}
-&lt;br /&gt;
-IP 입력 칸에 선택된 [**Subnet**] 범위 내의 원하는 IP를 입력해서 수동으로 할당할 수도 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-11.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-12.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-{% endtabs %}
-
-- [**공인 IP 할당**]  
-Public Subnet을 선택했고 서버에 공인 IP가 필요할 경우에는 [**새로운 공인 IP 할당**]을 선택하시면 됩니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; 공인 IP는 요금이 과금되므로, 사용하지 않을 때는 반납하기를 권장합니다. (월 이용료: 4,032원 ) &lt;br /&gt;
-&amp;#8259; 서버 생성시 공인 IP를 함께 생성하려면 Subnet 타입은 Public Subnet, 서버 개수는 1개여야 합니다.
-&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-13.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [**물리 배치 그룹**] 설정
-물리 배치 그룹 설정은 서버들을 하나의 그룹으로 묶어서 해당 그룹에 속한 서버들을 클러스터에 배치할 때 어떻게 할 것인지 결정할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-14.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [**물리 배치 그룹**]을 사용하게 되면 배치 그룹명과 배치 종류를 선택할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;[**Anti-Affinity (분산 배치)**]의 경우 같은 배치 그룹에 소속된 서버들은 가급적 서로 다른 클러스터에 배치됩니다. 다만 그 결과가 엄격히 보장되지 않는 Best effort 방식입니다.&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-15.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [**반납 보호**]  
-반납 보호를 설정하면 실수로 서버를 반납하여, 서버가 삭제되는 사고를 방지할 수 있습니다.
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-16.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-17.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [**Script 선택**]  
-서버가 켜질 때 자동으로 실행되어야 하는 스크립트가 있다면 [**Server**] - [**Init Script**] 메뉴에서 미리 Script를 등록한 후에 적용할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-18.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 스토리지 설정
-하이퍼바이저 [**XEN**] 타입의 서버는 서버 생성이 완료된 이후에 추가 스토리지를 설정할 수 있으므로 이번 단계는 그냥 넘어가겠습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-19.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## 인증키 설정
-인증키 이름을 입력하고, [**인증키 생성 및 저장**] 버튼을 클릭해서 인증키를 로컬 PC에 다운로드 받아서 안전한 곳에 보관해야 합니다. 기존에 사용하고 있던 인증키가 있을 경우에는 [**보유하고 있는 인증키 이용**]을 선택하면 됩니다.
-
-{% include warning.html title=&quot;인증키&quot; content=&quot;인증키는 해당 서버의 **관리자 비밀번호**를 확인하는데 사용되므로 **안전한 곳에 잘 보관**해야 합니다.&quot; %}
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-20.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- 아래와 같이 로컬 PC에 인증키 (PEM) 파일을 저장합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-24.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## 네트워크 접근 설정
-네트워크 접근은 [**ACG**]로 설정하게 되는데, `ACG(Access Control Group)는 서버 간 네트워크 접근 제어 및 관리를 할 수 있는 IP/Port 기반 필터링 방화벽 서비스`로, 서버에 별도의 복잡한 방화벽 구축없이 간단하게 서버에 대한 네트워크 접근 제어를 할 수 있습니다.  
-[**VPC**]를 생성하면 자동으로 생성되는 **기본 ACG**를 선택하거나 별도로 생성한 ACG가 있을 경우 해당 ACG를 선택하면 됩니다. **적용할 ACG는 최대 3개**까지 선택할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-21.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## 서버 생성 완료
-모든 단계를 마치고 나면 아래와 같이 서버가 생성된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-22.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-## 서버 접속
-이제 생성된 서버에 관리자(root) 계정으로 접속해보겠습니다.
-
-### 방화벽 (ACG) 설정
-우선 서버 접속을 위한 방화벽 (ACG)을 설정하겠습니다.
-
-- 테스트로 생성했던 서버를 선택하고 [ACG 수정] 버튼을 클릭해서 적용된 ACG를 확인합니다.
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-34.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- ACG 수정 화면에서 현재 적용된 ACG 이름을 확인할 수 있습니다.
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-35.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- [Server] - [ACG]에서 위에서 확인한 ACG를 선택하고 [ACG 설정]을 클릭합니다.
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-36.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- ACG 규칙 설정 화면 [**Inbound**] 탭에서 [**myIp**] 버튼을 클릭해서 현재 접속한 PC나 회사 IP를 입력하고, 허용 포트에는 SSH 접속을 위한 `22포트를 추가`합니다.
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-37.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### 관리자 비밀번호 확인
-다음으로, 서버 접속에 필요한 관리자 비밀번호를 확인하려면, 서버를 선택하고 [**서버 관리 및 설정 변경**] 메뉴에서 [**관리자 비밀번호 확인**] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-25.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- 메뉴를 선택하면 다음과 같은 [**관리자 비밀번호 확인**] 팝업이 나타납니다.
-  
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-26.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- 팝업에서 [**마우스로 파일을 끌고 오거나 여기를 클릭하세요**] 부분을 클릭하면 파일 선택 창이 나타나는데, 위에서 저장했던 pem 인증키 파일을 선택합니다.
-  
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-27.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- 인증키 파일이 선택된 상태에서 아래쪽에 있는 [**비밀번호 확인**] 버튼을 클릭합니다.
-  
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-28.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- 그러면 아래와 같이 관리자 계정(root)에 대한 비밀번호를 확인할 수 있습니다. 아래쪽에서 서버에 접속할때 사용하기 위해 비밀번호를 복사합니다.
-  
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-29.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 IP 주소 확인
-다음으로 서버 정보 화면에서 서버의 [**공인 IP 주소**]를 확인하고, 복사합니다. (SSL VPN 등을 사용하는 경우에는 사설 IP 주소를 사용하면 됩니다.)
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-30.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 접속 
-대표적인 서버 접속 클라이언트인 Putty를 실행하고, 서버의 IP주소를 입력합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-31.png&quot; width=&quot;452&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- 처음 연결하는 서버의 경우 아래와 같이 SSH 프로토콜에서 필요한 FingerPrint를 저장할 것인지 묻는데, [**Accept**] (또는 예)를 클릭합니다.
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-32.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-- 마지막으로 관리자 계정인 [**root**]와 위에서 확인했던 [**관리자 비밀번호**]를 입력하면 서버에 접속됩니다.
-{% include image.html file=&quot;compute/ncloud-compute-vpc-server-create-guide-33.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud VPC 환경에서 서버를 생성하는 방법&quot; caption=&quot;&quot; %}
-
-
-## XEN vs KVM {#xen-vs-kvm}
-Ncloud (네이버 클라우드)에서 제공하는 하이퍼바이저의 종류는 XEN, KVM이 있으며, 각각의 특징은 다음과 같습니다.
-
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;하이퍼바이저&lt;/th&gt;
-      &lt;th&gt;서버 세대&lt;/th&gt;
-      &lt;th&gt;서버 타입&lt;/th&gt;
-      &lt;th&gt;서버 이미지&lt;/th&gt;
-      &lt;th&gt;스토리지 타입&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-      &lt;td&gt;XEN&lt;/td&gt;
-      &lt;td&gt;g1, g2&lt;/td&gt;
-      &lt;td&gt;Micro, Standard, CPU-Intensive, High-CPU, High-Memory&lt;/td&gt;
-      &lt;td&gt;&lt;/td&gt;
-      &lt;td&gt;HDD, SDD&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-      &lt;td&gt;KVM&lt;/td&gt;
-      &lt;td&gt;g3&lt;/td&gt;
-      &lt;td&gt;Micro
-        &lt;br /&gt;(Standard, CPU-Intensive, High-CPU, High-Memory 는 출시 예정)
-      &lt;/td&gt;
-      &lt;td&gt;KVM 기반 서버 이미지&lt;/td&gt;
-      &lt;td&gt;FB1, CB1&lt;/td&gt;
-    &lt;/tr&gt;    
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-### 스토리지 특징
-
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;하이퍼바이저&lt;/th&gt;      
-      &lt;th&gt;스토리지 타입&lt;/th&gt;
-      &lt;th&gt;미디어 타입&lt;/th&gt;
-      &lt;th&gt;최소 크기&lt;/th&gt;
-      &lt;th&gt;최대 크기&lt;/th&gt;
-      &lt;th&gt;추가 가능 개수&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-      &lt;td rowspan=&quot;2&quot;&gt;XEN&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;2TB&lt;/td&gt;
-      &lt;td&gt;15개&lt;/td&gt;
-    &lt;/tr&gt;  
-    &lt;tr&gt;     
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;2TB&lt;/td&gt;
-      &lt;td&gt;15개&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-      &lt;td rowspan=&quot;2&quot;&gt;KVM&lt;/td&gt;
-      &lt;td&gt;FB1&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;100GB&lt;/td&gt;
-      &lt;td&gt;16TB&lt;/td&gt;
-      &lt;td&gt;20개&lt;/td&gt;
-    &lt;/tr&gt;  
-    &lt;tr&gt;     
-      &lt;td&gt;CB1&lt;/td&gt;
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;16TB&lt;/td&gt;
-      &lt;td&gt;20개&lt;/td&gt;
-    &lt;/tr&gt;        
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-## 참고 URL
-1.  Ncloud VPC 서버 생성 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/server-create-new-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/server-create-new-vpc&lt;/a&gt;
-
-2.  Ncloud 하이퍼바이저 개요
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/hypervisor-info&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/hypervisor-info&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}</description>
-            <pubDate>Fri, 28 Jul 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_vpc_create.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_vpc_create.html</guid>
-            
-            <category>vpc</category>
             
             
         </item>
