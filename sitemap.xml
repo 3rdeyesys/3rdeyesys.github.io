@@ -4,6 +4,18 @@
   
   
   <url>
+    <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-micro-type-server-create-vpc.html</loc>
+  
+    <lastmod>2023-09-11T00:00:00+09:00</lastmod>
+    
+  
+    <priority>0.7</priority>
+   
+  </url>
+  
+  
+  
+  <url>
     <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_autoscaling_classic_guide.html</loc>
   
     <lastmod>2023-09-06T00:00:00+09:00</lastmod>
@@ -28,7 +40,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html</loc>
+    <loc>https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html</loc>
   
     <lastmod>2023-09-04T00:00:00+09:00</lastmod>
     
@@ -40,7 +52,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html</loc>
+    <loc>https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html</loc>
   
     <lastmod>2023-09-04T00:00:00+09:00</lastmod>
     
@@ -196,7 +208,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</loc>
+    <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html</loc>
   
     <lastmod>2023-07-12T00:00:00+09:00</lastmod>
     
@@ -208,7 +220,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_centos.html</loc>
+    <loc>https://docs.3rdeyesys.com/compute/ncloud_compute_server_http_to_https_ubuntu.html</loc>
   
     <lastmod>2023-07-12T00:00:00+09:00</lastmod>
     
@@ -244,18 +256,6 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</loc>
-  
-    <lastmod>2023-06-29T00:00:00+09:00</lastmod>
-    
-  
-    <priority>0.7</priority>
-   
-  </url>
-  
-  
-  
-  <url>
     <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html</loc>
   
     <lastmod>2023-06-29T00:00:00+09:00</lastmod>
@@ -280,9 +280,9 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-micro-type-server-create-vpc.html</loc>
+    <loc>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html</loc>
   
-    <lastmod>2023-06-21T00:00:00+09:00</lastmod>
+    <lastmod>2023-06-29T00:00:00+09:00</lastmod>
     
   
     <priority>0.7</priority>
@@ -400,7 +400,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html</loc>
+    <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</loc>
   
     <lastmod>2023-05-15T00:00:00+09:00</lastmod>
     
@@ -412,7 +412,7 @@
   
   
   <url>
-    <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-windows.html</loc>
+    <loc>https://docs.3rdeyesys.com/containers/ncloud-containers-kubernetes-service-start-guide-linux.html</loc>
   
     <lastmod>2023-05-15T00:00:00+09:00</lastmod>
     
