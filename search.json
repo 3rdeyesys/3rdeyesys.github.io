@@ -381,7 +381,7 @@
 
 {
 "title": "VPC환경에서 Cloud DB for PostgreSQL 생성하기 | Ubuntu",
-"tags": "databaseclouddbvpc",
+"tags": "databaseclouddbvpcpostgresql",
 "keywords": "Database, Postgre",
 "url": "/database/ncloud-database-cloud-db-for-postgresql-guide-ubuntu.html",
 "summary": ""
@@ -392,7 +392,7 @@
 
 {
 "title": "Cloud DB for PostgreSQL 생성 후 Public 도메인으로 접속하기",
-"tags": "databaseclouddbvpc",
+"tags": "databaseclouddbvpcpostgresql",
 "keywords": "Database, Postgre",
 "url": "/database/ncloud-database-cloud-db-for-postgresql-public-domain-guide.html",
 "summary": ""
@@ -458,7 +458,7 @@
 
 {
 "title": "설치형 PostgreSQL DB 설치, 접속 가이드 | CentOS",
-"tags": "databasevpc",
+"tags": "databasevpcpostgresql",
 "keywords": "Database, Postgre",
 "url": "/database/ncloud-database-postgresql-install-connect-guide-centos.html",
 "summary": ""
@@ -469,7 +469,7 @@
 
 {
 "title": "설치형 PostgreSQL DB 설치, 접속 가이드 | Ubuntu",
-"tags": "databasevpc",
+"tags": "databasevpcpostgresql",
 "keywords": "Database, Postgre",
 "url": "/database/ncloud-database-postgresql-install-connect-guide-ubuntu.html",
 "summary": ""
@@ -1810,6 +1810,8 @@
 "summary": "Ncloud 서비스와 관련된 새로운 소식들을 알려 드립니다."
 }
 ,
+
+
 
 
 
