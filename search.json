@@ -468,6 +468,17 @@
 
 
 {
+"title": "설치형 PostgreSQL DB 설치, 접속 가이드 | Rocky Linux",
+"tags": "databasevpcpostgresql",
+"keywords": "Database, Postgre",
+"url": "/database/ncloud-database-postgresql-install-connect-guide-rocky-linux.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "설치형 PostgreSQL DB 설치, 접속 가이드 | Ubuntu",
 "tags": "databasevpcpostgresql",
 "keywords": "Database, Postgre",

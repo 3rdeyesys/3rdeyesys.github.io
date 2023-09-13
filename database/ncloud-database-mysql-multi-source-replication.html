@@ -1092,6 +1092,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="설치형 PostgreSQL | Rocky Linux" href="/database/ncloud-database-postgresql-install-connect-guide-rocky-linux.html">설치형 PostgreSQL | Rocky Linux</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -2198,7 +2204,7 @@ mysql&gt; show master status<span class="p">;</span>
 MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="031106b9-1b04-4e9f-83d6-cb15fcc169fc" data-name="slave_my_cnf">
+<ul class="tab" data-tab="4d594f62-494e-48d8-a901-a5d712e3410e" data-name="slave_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2209,7 +2215,7 @@ MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 
       </li>
   
 </ul>
-<ul class="tab-content" id="031106b9-1b04-4e9f-83d6-cb15fcc169fc" data-name="slave_my_cnf">
+<ul class="tab-content" id="4d594f62-494e-48d8-a901-a5d712e3410e" data-name="slave_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf
@@ -2317,7 +2323,7 @@ mysql&gt; quit
 <p>리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.<br />
 채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.</p>
 
-<ul class="tab" data-tab="3d6b6a76-ca17-47e7-82cd-43fc6bd70ecb" data-name="config_channel">
+<ul class="tab" data-tab="b8724714-880b-417e-87b6-f826dd5a31d7" data-name="config_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2332,7 +2338,7 @@ mysql&gt; quit
       </li>
   
 </ul>
-<ul class="tab-content" id="3d6b6a76-ca17-47e7-82cd-43fc6bd70ecb" data-name="config_channel">
+<ul class="tab-content" id="b8724714-880b-417e-87b6-f826dd5a31d7" data-name="config_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># MySQL 5.7</span>
@@ -2377,7 +2383,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
 <h3 id="master-서버-정보-입력">Master 서버 정보 입력</h3>
 <p>Slave 서버에 Master 서버 정보를 하나씩 입력합니다.</p>
 
-<ul class="tab" data-tab="b60cc552-0cbf-4b79-9b39-565e8e396f32" data-name="config_channel_sample">
+<ul class="tab" data-tab="d1cee37f-c5e4-4454-97ad-4bc705800eb0" data-name="config_channel_sample">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2392,7 +2398,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
       </li>
   
 </ul>
-<ul class="tab-content" id="b60cc552-0cbf-4b79-9b39-565e8e396f32" data-name="config_channel_sample">
+<ul class="tab-content" id="d1cee37f-c5e4-4454-97ad-4bc705800eb0" data-name="config_channel_sample">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Master1</span>
@@ -2439,7 +2445,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
 <h3 id="리플리케이션-채널-시작">리플리케이션 채널 시작</h3>
 <p>리플리케이션 시작 후 에러가 없는지 확인합니다.</p>
 
-<ul class="tab" data-tab="7a2913fc-9aec-484a-a8c2-6b58aae9d9d9" data-name="start_channel">
+<ul class="tab" data-tab="6d1e7fb0-1177-43e8-94ba-e10de24cbcbd" data-name="start_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2450,7 +2456,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
       </li>
   
 </ul>
-<ul class="tab-content" id="7a2913fc-9aec-484a-a8c2-6b58aae9d9d9" data-name="start_channel">
+<ul class="tab-content" id="6d1e7fb0-1177-43e8-94ba-e10de24cbcbd" data-name="start_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#MySQL 5.7 기준</span>
@@ -2549,7 +2555,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
 
 <h2 id="버전별-명령어-비교">버전별 명령어 비교</h2>
 
-<ul class="tab" data-tab="65a9bc16-9ab6-4fd0-a4af-1b575ebf8b00" data-name="replication_command">
+<ul class="tab" data-tab="7e83b301-27fb-41e4-a588-ad30cb9fa883" data-name="replication_command">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2564,7 +2570,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
       </li>
   
 </ul>
-<ul class="tab-content" id="65a9bc16-9ab6-4fd0-a4af-1b575ebf8b00" data-name="replication_command">
+<ul class="tab-content" id="7e83b301-27fb-41e4-a588-ad30cb9fa883" data-name="replication_command">
   
       <li class="active">
 <div>
@@ -2727,7 +2733,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-09-12 <br />        
+        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-09-13 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
