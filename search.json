@@ -557,7 +557,7 @@
 
 {
 "title": "Ncloud API Key 접근 제한 설정하는 방법",
-"tags": "accountapi",
+"tags": "accountapisecurity",
 "keywords": "Account, Sub Account, API Key",
 "url": "/management/ncloud-management-sub-account-api-gateway-access-control-guide.html",
 "summary": ""
@@ -667,7 +667,7 @@
 
 {
 "title": "Ncloud 방화벽 ACG 권장설정과 Custom ACG 설정 예시",
-"tags": "acgclassicvpcload_balancer",
+"tags": "acgclassicvpcload_balancersecurity",
 "keywords": "방화벽, Firewall",
 "url": "/security/ncloud-security-acg-setting-sample.html",
 "summary": ""
@@ -681,6 +681,17 @@
 "tags": "sslload_balancer",
 "keywords": "SSL, Secure Socket Layer, HTTPS",
 "url": "/security/ncloud-security-certificate-manager-register-ssl-certificate-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Ncloud Security Monitoring WAF 서비스 요금 정보",
+"tags": "securitymonitoring",
+"keywords": "보안, Security, IDS, IPS, Anti-DDos, Anti-Virus",
+"url": "/security/ncloud-security-security-monitoring-waf-price-info.html",
 "summary": ""
 }
 ,
@@ -1417,7 +1428,7 @@
 
 {
 "title": "Ncloud 서브 계정 (Sub Account) 생성 가이드",
-"tags": "accountapi",
+"tags": "accountapisecurity",
 "keywords": "Account, Sub Account, API Key",
 "url": "/management/ncloud_management_sub_account_guide.html",
 "summary": ""
@@ -1428,7 +1439,7 @@
 
 {
 "title": "STS 기간 제한 임시 API AccessKey 발급하기",
-"tags": "accountapitoken",
+"tags": "accountapitokensecurity",
 "keywords": "account, sub account, Secure Token Service,",
 "url": "/management/ncloud-management-sub-account-sts-temporary-accesskey-create-guide.html",
 "summary": ""
@@ -1615,7 +1626,7 @@
 
 {
 "title": "Ncloud 방화벽 ACG 설정 기본 가이드",
-"tags": "acgclassicvpc",
+"tags": "acgclassicvpcsecurity",
 "keywords": "방화벽, Firewall",
 "url": "/security/ncloud_security_acg_guide.html",
 "summary": ""
@@ -1821,6 +1832,8 @@
 "summary": "Ncloud 서비스와 관련된 새로운 소식들을 알려 드립니다."
 }
 ,
+
+
 
 
 
