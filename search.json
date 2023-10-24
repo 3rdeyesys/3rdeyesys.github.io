@@ -402,6 +402,28 @@
 
 
 {
+"title": "Ncloud 데이터베이스 마이그레이션 서비스 | From MySQL 5.7 To MysQL 5.7",
+"tags": "databasevpcMySQL",
+"keywords": "Database, MySQL, Migration",
+"url": "/database/ncloud-database-db-migration-from-mysql57-to-mysql57-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Ncloud 데이터베이스 마이그레이션 서비스 | From MySQL 5.7 To MysQL 8.0",
+"tags": "databasevpcMySQL",
+"keywords": "Database, MySQL, Migration",
+"url": "/database/ncloud-database-db-migration-from-mysql57-to-mysql80-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "MariaDB Multi Source Replication 구성 가이드",
 "tags": "databasebackupmariadb",
 "keywords": "Database, 복제, Backup, 이중화, 고가용성, Master, Slave",
