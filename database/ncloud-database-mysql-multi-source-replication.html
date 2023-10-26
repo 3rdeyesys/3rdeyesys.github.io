@@ -1074,6 +1074,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="MySQL 8.0 ㅡ> MysQL 8.0" href="/database/ncloud-database-db-migration-from-mysql80-to-mysql80-guide.html">MySQL 8.0 ㅡ> MysQL 8.0</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -1131,31 +1137,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
           
           
+          <li class="subfolders">
+              <a title="Cloud DB MySQL 읽기 부하 분산" href="#">Cloud DB MySQL 읽기 부하 분산</a>
+              <ul>                  
+                  
+                  
+                  
+                  <li><a title="Classic 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing.html">Classic 환경</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Network LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html">Network LB | VPC 환경</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Network Proxy LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html">Network Proxy LB | VPC 환경</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
           
           
           
           <li><a title="MySQL 복구 시 ERROR 1227 해결" href="/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting.html" >MySQL 복구 시 ERROR 1227 해결</a></li>          
-                    
-          
-          
-          
-          
-          
-          <li><a title="Cloud DB MySQL 읽기 부하 분산 | Classic 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing.html" >Cloud DB MySQL 읽기 부하 분산 | Classic 환경</a></li>          
-                    
-          
-          
-          
-          
-          
-          <li><a title="Cloud DB MySQL 읽기 부하 분산 | Network LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html" >Cloud DB MySQL 읽기 부하 분산 | Network LB | VPC 환경</a></li>          
-                    
-          
-          
-          
-          
-          
-          <li><a title="Cloud DB MySQL 읽기 부하 분산 | Network Proxy LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html" >Cloud DB MySQL 읽기 부하 분산 | Network Proxy LB | VPC 환경</a></li>          
                     
           
           
@@ -2232,7 +2244,7 @@ mysql&gt; show master status<span class="p">;</span>
 MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="6a2d8f7a-d115-4fbc-85fe-8f53c89b6e6c" data-name="slave_my_cnf">
+<ul class="tab" data-tab="4c60180b-ce5e-4441-bbee-ab8f8fcc9f04" data-name="slave_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2243,7 +2255,7 @@ MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 
       </li>
   
 </ul>
-<ul class="tab-content" id="6a2d8f7a-d115-4fbc-85fe-8f53c89b6e6c" data-name="slave_my_cnf">
+<ul class="tab-content" id="4c60180b-ce5e-4441-bbee-ab8f8fcc9f04" data-name="slave_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf
@@ -2351,7 +2363,7 @@ mysql&gt; quit
 <p>리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.<br />
 채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.</p>
 
-<ul class="tab" data-tab="157f255a-0735-4865-ab56-3e1e0e77e527" data-name="config_channel">
+<ul class="tab" data-tab="b36639cb-484b-4e66-95c0-58d30ac6581c" data-name="config_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2366,7 +2378,7 @@ mysql&gt; quit
       </li>
   
 </ul>
-<ul class="tab-content" id="157f255a-0735-4865-ab56-3e1e0e77e527" data-name="config_channel">
+<ul class="tab-content" id="b36639cb-484b-4e66-95c0-58d30ac6581c" data-name="config_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># MySQL 5.7</span>
@@ -2411,7 +2423,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
 <h3 id="master-서버-정보-입력">Master 서버 정보 입력</h3>
 <p>Slave 서버에 Master 서버 정보를 하나씩 입력합니다.</p>
 
-<ul class="tab" data-tab="28e6fd17-076e-4bd3-a06d-783c93960b33" data-name="config_channel_sample">
+<ul class="tab" data-tab="afaa2e1b-34b5-47d8-955c-b1e35cb8dbfe" data-name="config_channel_sample">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2426,7 +2438,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
       </li>
   
 </ul>
-<ul class="tab-content" id="28e6fd17-076e-4bd3-a06d-783c93960b33" data-name="config_channel_sample">
+<ul class="tab-content" id="afaa2e1b-34b5-47d8-955c-b1e35cb8dbfe" data-name="config_channel_sample">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Master1</span>
@@ -2473,7 +2485,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
 <h3 id="리플리케이션-채널-시작">리플리케이션 채널 시작</h3>
 <p>리플리케이션 시작 후 에러가 없는지 확인합니다.</p>
 
-<ul class="tab" data-tab="37c435ee-8730-4f6c-929e-6a6b8db401f3" data-name="start_channel">
+<ul class="tab" data-tab="4dc17b41-df8d-4562-8d78-47ad0ef8b19a" data-name="start_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2484,7 +2496,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
       </li>
   
 </ul>
-<ul class="tab-content" id="37c435ee-8730-4f6c-929e-6a6b8db401f3" data-name="start_channel">
+<ul class="tab-content" id="4dc17b41-df8d-4562-8d78-47ad0ef8b19a" data-name="start_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#MySQL 5.7 기준</span>
@@ -2583,7 +2595,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
 
 <h2 id="버전별-명령어-비교">버전별 명령어 비교</h2>
 
-<ul class="tab" data-tab="a38dcb39-8384-40ab-967e-bc7b905beed3" data-name="replication_command">
+<ul class="tab" data-tab="e7b419af-d588-4482-921f-67989cc03e01" data-name="replication_command">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2598,7 +2610,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
       </li>
   
 </ul>
-<ul class="tab-content" id="a38dcb39-8384-40ab-967e-bc7b905beed3" data-name="replication_command">
+<ul class="tab-content" id="e7b419af-d588-4482-921f-67989cc03e01" data-name="replication_command">
   
       <li class="active">
 <div>
@@ -2761,7 +2773,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-10-24 <br />        
+        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-10-26 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

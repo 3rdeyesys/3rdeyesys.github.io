@@ -1076,6 +1076,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="MySQL 8.0 ㅡ> MysQL 8.0" href="/database/ncloud-database-db-migration-from-mysql80-to-mysql80-guide.html">MySQL 8.0 ㅡ> MysQL 8.0</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -1133,31 +1139,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
           
           
+          <li class="subfolders">
+              <a title="Cloud DB MySQL 읽기 부하 분산" href="#">Cloud DB MySQL 읽기 부하 분산</a>
+              <ul>                  
+                  
+                  
+                  
+                  <li><a title="Classic 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing.html">Classic 환경</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Network LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html">Network LB | VPC 환경</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a title="Network Proxy LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html">Network Proxy LB | VPC 환경</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
           
           
           
           <li><a title="MySQL 복구 시 ERROR 1227 해결" href="/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting.html" >MySQL 복구 시 ERROR 1227 해결</a></li>          
-                    
-          
-          
-          
-          
-          
-          <li><a title="Cloud DB MySQL 읽기 부하 분산 | Classic 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing.html" >Cloud DB MySQL 읽기 부하 분산 | Classic 환경</a></li>          
-                    
-          
-          
-          
-          
-          
-          <li><a title="Cloud DB MySQL 읽기 부하 분산 | Network LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb.html" >Cloud DB MySQL 읽기 부하 분산 | Network LB | VPC 환경</a></li>          
-                    
-          
-          
-          
-          
-          
-          <li><a title="Cloud DB MySQL 읽기 부하 분산 | Network Proxy LB | VPC 환경" href="/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb.html" >Cloud DB MySQL 읽기 부하 분산 | Network Proxy LB | VPC 환경</a></li>          
                     
           
           
@@ -2073,7 +2085,7 @@ $("#toc_onoff").click(function() {
   <li>Target DB: Cloud DB for MySQL 8.0.32</li>
 </ul>
 
-<ul class="tab" data-tab="c5b5f7a4-2748-4b84-9d6f-2794dbb705d1" data-name="db-verstion">
+<ul class="tab" data-tab="4b6ff1d6-c146-4bdf-bdb3-318bb7e4cae1" data-name="db-verstion">
   
       <li class="active">
           <a href="#">Source DB </a>
@@ -2084,7 +2096,7 @@ $("#toc_onoff").click(function() {
       </li>
   
 </ul>
-<ul class="tab-content" id="c5b5f7a4-2748-4b84-9d6f-2794dbb705d1" data-name="db-verstion">
+<ul class="tab-content" id="4b6ff1d6-c146-4bdf-bdb3-318bb7e4cae1" data-name="db-verstion">
   
       <li class="active">
 <p>⁃ <strong>Source DB</strong></p>
@@ -2113,7 +2125,7 @@ $("#toc_onoff").click(function() {
 <h3 id="source-db-정보-확인">Source DB 정보 확인</h3>
 <p>테스트에 사용할 Source DB의 버전, Database, DB User 등의 정보를 확인해보겠습니다.</p>
 
-<ul class="tab" data-tab="94701281-8699-4ea1-9d25-6049bfd200e1" data-name="sourcedb-setting">
+<ul class="tab" data-tab="c045f741-40b8-4a7e-9b3f-7b73038317d6" data-name="sourcedb-setting">
   
       <li class="active">
           <a href="#">MySQL 버전 </a>
@@ -2136,7 +2148,7 @@ $("#toc_onoff").click(function() {
       </li>
   
 </ul>
-<ul class="tab-content" id="94701281-8699-4ea1-9d25-6049bfd200e1" data-name="sourcedb-setting">
+<ul class="tab-content" id="c045f741-40b8-4a7e-9b3f-7b73038317d6" data-name="sourcedb-setting">
   
       <li class="active">
 <p>⁃ <strong>MySQL 버전</strong><br />
@@ -2217,7 +2229,7 @@ $("#toc_onoff").click(function() {
   <li>기본 시스템DB를 제외한 사용자가 추가로 생성한 모든 데이터베이스에 대해 권한을 부여합니다.</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'migration_test'</span><span class="o">@</span><span class="s1">'%'</span> <span class="n">IDENTIFIED</span>  <span class="k">BY</span> <span class="s1">'[패스워드]'</span><span class="p">;</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'migration_test'</span><span class="o">@</span><span class="s1">'%'</span> <span class="n">IDENTIFIED</span> <span class="k">WITH</span> <span class="s1">'mysql_native_password'</span>  <span class="k">BY</span> <span class="s1">'[패스워드]'</span><span class="p">;</span>
 <span class="k">GRANT</span> <span class="n">RELOAD</span><span class="p">,</span> <span class="n">PROCESS</span><span class="p">,</span> <span class="k">SHOW</span> <span class="n">DATABASES</span><span class="p">,</span> <span class="n">REPLICATION</span> <span class="n">SLAVE</span><span class="p">,</span> <span class="n">REPLICATION</span> <span class="n">CLIENT</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'migration_test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
 <span class="k">GRANT</span> <span class="k">SELECT</span> <span class="k">ON</span> <span class="n">mysql</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'migration_test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
 <span class="k">GRANT</span> <span class="k">SELECT</span><span class="p">,</span> <span class="k">SHOW</span> <span class="k">VIEW</span><span class="p">,</span> <span class="k">LOCK</span> <span class="n">TABLES</span><span class="p">,</span> <span class="k">TRIGGER</span> <span class="k">ON</span> <span class="p">[</span><span class="err">사용자</span> <span class="err">생성</span> <span class="n">DB</span><span class="p">].</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'migration_test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
@@ -2362,8 +2374,8 @@ Source DB에 이 외의 설정으로 되어 있다면 Character Set을 변경 �
 <h4 id="현재-설정-확인">현재 설정 확인</h4>
 <p>아래 쿼리를 사용해 현재 설정 값을 확인합니다.</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">'log_bin'</span><span class="p">;</span>
-<span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">'server_id'</span><span class="p">;</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">'server_id'</span><span class="p">;</span>
+<span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">'log_bin'</span><span class="p">;</span>
 </code></pre></div></div>
 
 <ul>
@@ -2647,7 +2659,7 @@ log_bin <span class="o">=</span> binlog
 <h4 id="진행-상태-확인-메일">진행 상태 확인 메일</h4>
 <p>진행 상태는 콘솔에서도 확인할 수 있지만, 작업이 오래 걸리는 경우도 대비해서 각 단계가 완료될 때마다 안내 메일이 발송됩니다.</p>
 
-<ul class="tab" data-tab="eff6cc9f-2605-4619-8307-0d5dc6d01380" data-name="migration-status">
+<ul class="tab" data-tab="3d560b7a-2b56-42f4-a0e2-5dcf0ba0438c" data-name="migration-status">
   
       <li class="active">
           <a href="#">Export Completed </a>
@@ -2662,7 +2674,7 @@ log_bin <span class="o">=</span> binlog
       </li>
   
 </ul>
-<ul class="tab-content" id="eff6cc9f-2605-4619-8307-0d5dc6d01380" data-name="migration-status">
+<ul class="tab-content" id="3d560b7a-2b56-42f4-a0e2-5dcf0ba0438c" data-name="migration-status">
   
       <li class="active">
 <p>⁃ <strong>Export Completed</strong></p>
@@ -2959,7 +2971,7 @@ log_bin <span class="o">=</span> binlog
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-10-24<br/> Site last generated: 2023-10-24 <br />        
+        <span>Page last updated:</span> 2023-10-24<br/> Site last generated: 2023-10-26 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
