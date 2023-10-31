@@ -1080,6 +1080,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="MariaDB ㅡ> MysQL 8.0" href="/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html">MariaDB ㅡ> MysQL 8.0</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -1965,39 +1971,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 
   
-    
-<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
-<script>
-$( document ).ready(function() {
-  // Handler for .ready() called.
-
-$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
-
-/* this offset helps account for the space taken up by the floating toolbar. */
-$('#toc').on('click', 'a', function() {
-  var target = $(this.getAttribute('href'))
-    , scroll_target = target.offset().top
-
-  $(window).scrollTop(scroll_target - 10);
-  return false
-});
-
-$("#toc_onoff").click(function() {  
-        $("#toc").toggle();
-        $("#tg-toc-icon").toggleClass('fa-toggle-on');
-        $("#tg-toc-icon").toggleClass('fa-toggle-off');
-
-});
-
-});
-</script>
-
-<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
-<div id="toc"></div>
-
-
-
-  
 
   <h2 id="개요">개요</h2>
 
@@ -2244,7 +2217,7 @@ mysql&gt; show master status<span class="p">;</span>
 MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="4c60180b-ce5e-4441-bbee-ab8f8fcc9f04" data-name="slave_my_cnf">
+<ul class="tab" data-tab="471bcbc7-a55f-4fca-a330-d132c25e013a" data-name="slave_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2255,7 +2228,7 @@ MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 
       </li>
   
 </ul>
-<ul class="tab-content" id="4c60180b-ce5e-4441-bbee-ab8f8fcc9f04" data-name="slave_my_cnf">
+<ul class="tab-content" id="471bcbc7-a55f-4fca-a330-d132c25e013a" data-name="slave_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf
@@ -2363,7 +2336,7 @@ mysql&gt; quit
 <p>리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.<br />
 채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.</p>
 
-<ul class="tab" data-tab="b36639cb-484b-4e66-95c0-58d30ac6581c" data-name="config_channel">
+<ul class="tab" data-tab="8c412538-3296-41a1-9d86-c172eeba8aa2" data-name="config_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2378,7 +2351,7 @@ mysql&gt; quit
       </li>
   
 </ul>
-<ul class="tab-content" id="b36639cb-484b-4e66-95c0-58d30ac6581c" data-name="config_channel">
+<ul class="tab-content" id="8c412538-3296-41a1-9d86-c172eeba8aa2" data-name="config_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># MySQL 5.7</span>
@@ -2423,7 +2396,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
 <h3 id="master-서버-정보-입력">Master 서버 정보 입력</h3>
 <p>Slave 서버에 Master 서버 정보를 하나씩 입력합니다.</p>
 
-<ul class="tab" data-tab="afaa2e1b-34b5-47d8-955c-b1e35cb8dbfe" data-name="config_channel_sample">
+<ul class="tab" data-tab="377248e3-d897-4d4b-a225-7723acc2bdb6" data-name="config_channel_sample">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2438,7 +2411,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
       </li>
   
 </ul>
-<ul class="tab-content" id="afaa2e1b-34b5-47d8-955c-b1e35cb8dbfe" data-name="config_channel_sample">
+<ul class="tab-content" id="377248e3-d897-4d4b-a225-7723acc2bdb6" data-name="config_channel_sample">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Master1</span>
@@ -2485,7 +2458,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
 <h3 id="리플리케이션-채널-시작">리플리케이션 채널 시작</h3>
 <p>리플리케이션 시작 후 에러가 없는지 확인합니다.</p>
 
-<ul class="tab" data-tab="4dc17b41-df8d-4562-8d78-47ad0ef8b19a" data-name="start_channel">
+<ul class="tab" data-tab="2397f001-a53e-47ca-aa8b-d0bd03cee372" data-name="start_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2496,7 +2469,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
       </li>
   
 </ul>
-<ul class="tab-content" id="4dc17b41-df8d-4562-8d78-47ad0ef8b19a" data-name="start_channel">
+<ul class="tab-content" id="2397f001-a53e-47ca-aa8b-d0bd03cee372" data-name="start_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#MySQL 5.7 기준</span>
@@ -2595,7 +2568,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
 
 <h2 id="버전별-명령어-비교">버전별 명령어 비교</h2>
 
-<ul class="tab" data-tab="e7b419af-d588-4482-921f-67989cc03e01" data-name="replication_command">
+<ul class="tab" data-tab="32b7b07d-8708-4ec7-98e3-e44b4b9f417f" data-name="replication_command">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2610,7 +2583,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
       </li>
   
 </ul>
-<ul class="tab-content" id="e7b419af-d588-4482-921f-67989cc03e01" data-name="replication_command">
+<ul class="tab-content" id="32b7b07d-8708-4ec7-98e3-e44b4b9f417f" data-name="replication_command">
   
       <li class="active">
 <div>
@@ -2773,7 +2746,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-10-26 <br />        
+        <span>Page last updated:</span> 2023-04-05<br/> Site last generated: 2023-10-31 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -2805,13 +2778,43 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
   </script>
 </div>
           
-          <div class="side-banner-right">
-  <a
-    href="https://hyphen.im/benefit/navercloud-event"
-    id="side-banner-right-01"
-    target="_blank"
-    class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
+          
+          
+            
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+});
+
+$("#toc_onoff").click(function() {  
+        $("#toc").toggle();
+        $("#tg-toc-icon").toggleClass('fa-toggle-on');
+        $("#tg-toc-icon").toggleClass('fa-toggle-off');
+
+});
+
+});
+</script>
+
+<div  class="side-right-toc">
+<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
+<div id="toc"></div>
 </div>
+
+
+
+          
         
         <!-- /#main -->
       </div>

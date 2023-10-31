@@ -1080,6 +1080,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="MariaDB ㅡ> MysQL 8.0" href="/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html">MariaDB ㅡ> MysQL 8.0</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -1965,39 +1971,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 
   
-    
-<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
-<script>
-$( document ).ready(function() {
-  // Handler for .ready() called.
-
-$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
-
-/* this offset helps account for the space taken up by the floating toolbar. */
-$('#toc').on('click', 'a', function() {
-  var target = $(this.getAttribute('href'))
-    , scroll_target = target.offset().top
-
-  $(window).scrollTop(scroll_target - 10);
-  return false
-});
-
-$("#toc_onoff").click(function() {  
-        $("#toc").toggle();
-        $("#tg-toc-icon").toggleClass('fa-toggle-on');
-        $("#tg-toc-icon").toggleClass('fa-toggle-off');
-
-});
-
-});
-</script>
-
-<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
-<div id="toc"></div>
-
-
-
-  
 
   <h2 id="개요">개요</h2>
 
@@ -2051,7 +2024,7 @@ $("#toc_onoff").click(function() {
   <li>MariaDB 버전에 따라서는 <strong>/etc/my.cnf.d/server.cnf</strong> 인 경우도 있습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="40a6ca12-82d8-42ce-a9e6-04b6adc35ed7" data-name="master1_my_cnf">
+<ul class="tab" data-tab="88a91adf-4ea5-4e66-9907-5f379ddd5327" data-name="master1_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 호환 </a>
@@ -2062,7 +2035,7 @@ $("#toc_onoff").click(function() {
       </li>
   
 </ul>
-<ul class="tab-content" id="40a6ca12-82d8-42ce-a9e6-04b6adc35ed7" data-name="master1_my_cnf">
+<ul class="tab-content" id="88a91adf-4ea5-4e66-9907-5f379ddd5327" data-name="master1_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf.d/mariadb-server.cnf
@@ -2180,7 +2153,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]&gt;</span> show master s
   <li>MariaDB 버전에 따라서는 <strong>/etc/my.cnf.d/server.cnf</strong> 인 경우도 있습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="20e76ef7-41f8-4e80-9ed8-f6e597fd4717" data-name="master2_my_cnf">
+<ul class="tab" data-tab="df66a923-20a1-4cf2-a4ba-ac1d8160bd1d" data-name="master2_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 호환 </a>
@@ -2191,7 +2164,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]&gt;</span> show master s
       </li>
   
 </ul>
-<ul class="tab-content" id="20e76ef7-41f8-4e80-9ed8-f6e597fd4717" data-name="master2_my_cnf">
+<ul class="tab-content" id="df66a923-20a1-4cf2-a4ba-ac1d8160bd1d" data-name="master2_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf.d/mariadb-server.cnf
@@ -2624,7 +2597,7 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-04-20<br/> Site last generated: 2023-10-26 <br />        
+        <span>Page last updated:</span> 2023-04-20<br/> Site last generated: 2023-10-31 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -2656,13 +2629,43 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
   </script>
 </div>
           
-          <div class="side-banner-right">
-  <a
-    href="https://hyphen.im/benefit/navercloud-event"
-    id="side-banner-right-01"
-    target="_blank"
-    class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
+          
+          
+            
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+});
+
+$("#toc_onoff").click(function() {  
+        $("#toc").toggle();
+        $("#tg-toc-icon").toggleClass('fa-toggle-on');
+        $("#tg-toc-icon").toggleClass('fa-toggle-off');
+
+});
+
+});
+</script>
+
+<div  class="side-right-toc">
+<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
+<div id="toc"></div>
 </div>
+
+
+
+          
         
         <!-- /#main -->
       </div>

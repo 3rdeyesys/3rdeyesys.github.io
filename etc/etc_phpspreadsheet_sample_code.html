@@ -1076,6 +1076,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="MariaDB ㅡ> MysQL 8.0" href="/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html">MariaDB ㅡ> MysQL 8.0</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -1961,39 +1967,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 
   
-    
-<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
-<script>
-$( document ).ready(function() {
-  // Handler for .ready() called.
-
-$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
-
-/* this offset helps account for the space taken up by the floating toolbar. */
-$('#toc').on('click', 'a', function() {
-  var target = $(this.getAttribute('href'))
-    , scroll_target = target.offset().top
-
-  $(window).scrollTop(scroll_target - 10);
-  return false
-});
-
-$("#toc_onoff").click(function() {  
-        $("#toc").toggle();
-        $("#tg-toc-icon").toggleClass('fa-toggle-on');
-        $("#tg-toc-icon").toggleClass('fa-toggle-off');
-
-});
-
-});
-</script>
-
-<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
-<div id="toc"></div>
-
-
-
-  
 
   <h2 id="개요">개요</h2>
 <p>PHP에서 Excel 문서를 읽거나 Excel 형태로 문서를 저장해야 할 때 주로 PhpSpreadsheet를 사용하게 됩니다. 
@@ -2279,7 +2252,7 @@ $("#toc_onoff").click(function() {
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-04-03<br/> Site last generated: 2023-10-26 <br />        
+        <span>Page last updated:</span> 2021-04-03<br/> Site last generated: 2023-10-31 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -2311,13 +2284,43 @@ $("#toc_onoff").click(function() {
   </script>
 </div>
           
-          <div class="side-banner-right">
-  <a
-    href="https://hyphen.im/benefit/navercloud-event"
-    id="side-banner-right-01"
-    target="_blank"
-    class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
+          
+          
+            
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+});
+
+$("#toc_onoff").click(function() {  
+        $("#toc").toggle();
+        $("#tg-toc-icon").toggleClass('fa-toggle-on');
+        $("#tg-toc-icon").toggleClass('fa-toggle-off');
+
+});
+
+});
+</script>
+
+<div  class="side-right-toc">
+<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
+<div id="toc"></div>
 </div>
+
+
+
+          
         
         <!-- /#main -->
       </div>

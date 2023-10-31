@@ -1076,6 +1076,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="MariaDB ㅡ> MysQL 8.0" href="/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html">MariaDB ㅡ> MysQL 8.0</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -1961,39 +1967,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 
   
-    
-<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
-<script>
-$( document ).ready(function() {
-  // Handler for .ready() called.
-
-$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
-
-/* this offset helps account for the space taken up by the floating toolbar. */
-$('#toc').on('click', 'a', function() {
-  var target = $(this.getAttribute('href'))
-    , scroll_target = target.offset().top
-
-  $(window).scrollTop(scroll_target - 10);
-  return false
-});
-
-$("#toc_onoff").click(function() {  
-        $("#toc").toggle();
-        $("#tg-toc-icon").toggleClass('fa-toggle-on');
-        $("#tg-toc-icon").toggleClass('fa-toggle-off');
-
-});
-
-});
-</script>
-
-<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
-<div id="toc"></div>
-
-
-
-  
 
   <h2 id="개요">개요</h2>
 <p>업무를 진행하다보면 서버나 서비스에 장애가 발생했을 때 즉시 알림을 받거나 서버 상태 모니터링이나 매출 등의 서비스 이용 지표 등을 매일 자동으로 통보 받는 경우가 있습니다. 
@@ -2302,7 +2275,7 @@ html 스타일을 적용하기 위해서는 전송 파라미터에 <strong>parse
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-11-10<br/> Site last generated: 2023-10-26 <br />        
+        <span>Page last updated:</span> 2021-11-10<br/> Site last generated: 2023-10-31 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -2334,13 +2307,43 @@ html 스타일을 적용하기 위해서는 전송 파라미터에 <strong>parse
   </script>
 </div>
           
-          <div class="side-banner-right">
-  <a
-    href="https://hyphen.im/benefit/navercloud-event"
-    id="side-banner-right-01"
-    target="_blank"
-    class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
+          
+          
+            
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+});
+
+$("#toc_onoff").click(function() {  
+        $("#toc").toggle();
+        $("#tg-toc-icon").toggleClass('fa-toggle-on');
+        $("#tg-toc-icon").toggleClass('fa-toggle-off');
+
+});
+
+});
+</script>
+
+<div  class="side-right-toc">
+<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
+<div id="toc"></div>
 </div>
+
+
+
+          
         
         <!-- /#main -->
       </div>

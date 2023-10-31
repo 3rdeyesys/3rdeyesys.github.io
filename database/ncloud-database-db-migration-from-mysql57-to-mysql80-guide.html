@@ -1082,6 +1082,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="MariaDB ㅡ> MysQL 8.0" href="/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html">MariaDB ㅡ> MysQL 8.0</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -1967,39 +1973,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 
   
-    
-<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
-<script>
-$( document ).ready(function() {
-  // Handler for .ready() called.
-
-$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
-
-/* this offset helps account for the space taken up by the floating toolbar. */
-$('#toc').on('click', 'a', function() {
-  var target = $(this.getAttribute('href'))
-    , scroll_target = target.offset().top
-
-  $(window).scrollTop(scroll_target - 10);
-  return false
-});
-
-$("#toc_onoff").click(function() {  
-        $("#toc").toggle();
-        $("#tg-toc-icon").toggleClass('fa-toggle-on');
-        $("#tg-toc-icon").toggleClass('fa-toggle-off');
-
-});
-
-});
-</script>
-
-<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
-<div id="toc"></div>
-
-
-
-  
 
   <h2 id="개요">개요</h2>
 <p>Ncloud(네이버 클라우드)의 Database Migration Service는 다양한 환경의 데이터베이스를 클라우드 환경으로 손쉽게 마이그레이션하도록 도와주는 서비스로 여기서는 <strong>Public</strong> 환경의 MySQL 5.7을 <strong>Private</strong> 환경의 [<strong>Cloud DB for MySQL 8.0</strong>]으로 마이그레이션하는 방법에 대해 정리해보겠습니다.</p>
@@ -2085,7 +2058,7 @@ $("#toc_onoff").click(function() {
   <li>Target DB: Cloud DB for MySQL 8.0.32</li>
 </ul>
 
-<ul class="tab" data-tab="4b6ff1d6-c146-4bdf-bdb3-318bb7e4cae1" data-name="db-verstion">
+<ul class="tab" data-tab="7854010c-cf4c-4431-a026-d92ac24ae83b" data-name="db-verstion">
   
       <li class="active">
           <a href="#">Source DB </a>
@@ -2096,7 +2069,7 @@ $("#toc_onoff").click(function() {
       </li>
   
 </ul>
-<ul class="tab-content" id="4b6ff1d6-c146-4bdf-bdb3-318bb7e4cae1" data-name="db-verstion">
+<ul class="tab-content" id="7854010c-cf4c-4431-a026-d92ac24ae83b" data-name="db-verstion">
   
       <li class="active">
 <p>⁃ <strong>Source DB</strong></p>
@@ -2125,10 +2098,10 @@ $("#toc_onoff").click(function() {
 <h3 id="source-db-정보-확인">Source DB 정보 확인</h3>
 <p>테스트에 사용할 Source DB의 버전, Database, DB User 등의 정보를 확인해보겠습니다.</p>
 
-<ul class="tab" data-tab="c045f741-40b8-4a7e-9b3f-7b73038317d6" data-name="sourcedb-setting">
+<ul class="tab" data-tab="35c8e02a-9ac7-411b-88c2-0e9a9c7f658a" data-name="sourcedb-setting">
   
       <li class="active">
-          <a href="#">MySQL 버전 </a>
+          <a href="#">MariaDB 버전 </a>
       </li>
   
       <li>
@@ -2147,15 +2120,19 @@ $("#toc_onoff").click(function() {
           <a href="#">Procedure </a>
       </li>
   
+      <li>
+          <a href="#">MySQL 버전 </a>
+      </li>
+  
 </ul>
-<ul class="tab-content" id="c045f741-40b8-4a7e-9b3f-7b73038317d6" data-name="sourcedb-setting">
+<ul class="tab-content" id="35c8e02a-9ac7-411b-88c2-0e9a9c7f658a" data-name="sourcedb-setting">
   
       <li class="active">
-<p>⁃ <strong>MySQL 버전</strong><br />
-테스트에 사용할 DB는 아래에서 확인할 수 있듯이 MySQL 5.7.43입니다.</p>
+<p>⁃ <strong>MariaDB 버전</strong><br />
+테스트에 사용할 DB는 아래에서 확인할 수 있듯이 MariaDB 5.7.43입니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-01.png" alt="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법" style="width: 840px; " />
+  <img class="docimage" src="/images/database/migration/ncloud-database-db-migration-from-mariadb-to-mysql80-guide-01.png" alt="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MariaDB에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2208,6 +2185,19 @@ $("#toc_onoff").click(function() {
 
 <figure>
   <img class="docimage" src="/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-05.png" alt="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+</li>
+  
+      <li>
+<p>⁃ <strong>MySQL 버전</strong><br />
+테스트에 사용할 DB는 아래에서 확인할 수 있듯이 MySQL 5.7.43입니다.</p>
+
+<figure>
+  <img class="docimage" src="/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-01.png" alt="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2308,7 +2298,7 @@ Source DB에 이 외의 설정으로 되어 있다면 Character Set을 변경 �
   <li>Procedure, Function, Trigger 에 대해서만 drop 및 create 구문이 생성된 sql 파일 생성</li>
 </ul>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# mysqldump <span class="nt">-u</span> <span class="o">{</span>사용자명<span class="o">}</span> <span class="nt">-p</span> <span class="nt">--set-gtid-purged</span><span class="o">=</span>OFF <span class="nt">--routines</span> <span class="nt">--triggers</span>  <span class="nt">--no-create-info</span> <span class="nt">--no-data</span> <span class="nt">--no-create-db</span> <span class="nt">--add-drop-trigger</span> <span class="o">{</span>사용자 DB<span class="o">}</span> <span class="o">&gt;</span> backup.sql
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# mysqldump <span class="nt">-u</span> <span class="o">{</span>사용자명<span class="o">}</span> <span class="nt">-p</span> <span class="nt">--set-gtid-purged</span><span class="o">=</span>OFF <span class="nt">--routines</span> <span class="nt">--triggers</span>  <span class="nt">--no-create-info</span> <span class="nt">--no-data</span> <span class="nt">--no-create-db</span> <span class="nt">--add-drop-trigger</span> <span class="nt">--databases</span> <span class="o">{</span>사용자 DB<span class="o">}</span> <span class="o">&gt;</span> backup.sql
 </code></pre></div></div>
 <figure>
   <img class="docimage" src="/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-02.png" alt="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법" style="width: 840px; " />
@@ -2323,10 +2313,10 @@ Source DB에 이 외의 설정으로 되어 있다면 Character Set을 변경 �
 경우에 따라서는 Dump 파일에 [<strong>NO_AUTO_CREATE_USER</strong>] 옵션이 포함되지 않는 경우도 있습니다. 이때는 걱정말고 Dump 파일을 그냥 그대로 적용하면 됩니다.</li>
 </ul>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># vim 명령: %s /NO_AUTO_CREATE_USER, //g</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim 명령: %s /NO_AUTO_CREATE_USER,//g
 
-원본: SET sql_mode <span class="o">=</span> <span class="s1">'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span>  
-수정: SET sql_mode <span class="o">=</span> <span class="s1">'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'</span>
+원본 예시: SET sql_mode <span class="o">=</span> <span class="s1">'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span>  
+수정 예시: SET sql_mode <span class="o">=</span> <span class="s1">'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'</span>
 </code></pre></div></div>
 <figure>
   <img class="docimage" src="/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-03.png" alt="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법" style="width: 840px; " />
@@ -2659,7 +2649,7 @@ log_bin <span class="o">=</span> binlog
 <h4 id="진행-상태-확인-메일">진행 상태 확인 메일</h4>
 <p>진행 상태는 콘솔에서도 확인할 수 있지만, 작업이 오래 걸리는 경우도 대비해서 각 단계가 완료될 때마다 안내 메일이 발송됩니다.</p>
 
-<ul class="tab" data-tab="3d560b7a-2b56-42f4-a0e2-5dcf0ba0438c" data-name="migration-status">
+<ul class="tab" data-tab="9114bb82-0773-4ab6-bee5-eb098b3eb7d4" data-name="migration-status">
   
       <li class="active">
           <a href="#">Export Completed </a>
@@ -2674,7 +2664,7 @@ log_bin <span class="o">=</span> binlog
       </li>
   
 </ul>
-<ul class="tab-content" id="3d560b7a-2b56-42f4-a0e2-5dcf0ba0438c" data-name="migration-status">
+<ul class="tab-content" id="9114bb82-0773-4ab6-bee5-eb098b3eb7d4" data-name="migration-status">
   
       <li class="active">
 <p>⁃ <strong>Export Completed</strong></p>
@@ -2971,7 +2961,7 @@ log_bin <span class="o">=</span> binlog
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-10-24<br/> Site last generated: 2023-10-26 <br />        
+        <span>Page last updated:</span> 2023-10-24<br/> Site last generated: 2023-10-31 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -3003,13 +2993,43 @@ log_bin <span class="o">=</span> binlog
   </script>
 </div>
           
-          <div class="side-banner-right">
-  <a
-    href="https://hyphen.im/benefit/navercloud-event"
-    id="side-banner-right-01"
-    target="_blank"
-    class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
+          
+          
+            
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+});
+
+$("#toc_onoff").click(function() {  
+        $("#toc").toggle();
+        $("#tg-toc-icon").toggleClass('fa-toggle-on');
+        $("#tg-toc-icon").toggleClass('fa-toggle-off');
+
+});
+
+});
+</script>
+
+<div  class="side-right-toc">
+<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
+<div id="toc"></div>
 </div>
+
+
+
+          
         
         <!-- /#main -->
       </div>

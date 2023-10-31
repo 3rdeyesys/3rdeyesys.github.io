@@ -1082,6 +1082,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   
                   
                   
+                  
+                  
+                  <li><a title="MariaDB ㅡ> MysQL 8.0" href="/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html">MariaDB ㅡ> MysQL 8.0</a></li>
+                  
+                  
+                  
               </ul>
           </li>
           
@@ -1967,39 +1973,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 
   
-    
-<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
-<script>
-$( document ).ready(function() {
-  // Handler for .ready() called.
-
-$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
-
-/* this offset helps account for the space taken up by the floating toolbar. */
-$('#toc').on('click', 'a', function() {
-  var target = $(this.getAttribute('href'))
-    , scroll_target = target.offset().top
-
-  $(window).scrollTop(scroll_target - 10);
-  return false
-});
-
-$("#toc_onoff").click(function() {  
-        $("#toc").toggle();
-        $("#tg-toc-icon").toggleClass('fa-toggle-on');
-        $("#tg-toc-icon").toggleClass('fa-toggle-off');
-
-});
-
-});
-</script>
-
-<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
-<div id="toc"></div>
-
-
-
-  
 
   <h2 id="개요">개요</h2>
 <p>Ncloud (네이버 클라우드) VPC환경에서 서버를 생성하는 순서를 정리해보겠습니다.<br />
@@ -2129,7 +2102,7 @@ Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168
 <p>[<strong>서버 이미지 선택</strong>] 단계에서는 Ncloud에서 제공하는 다양한 서버 이미지를 선택할 수 있고, [<strong>최신 서버 이미지</strong>]와 [<strong>내 서버 이미지</strong>]를 따로 볼 수 있는 기능도 제공하고 있습니다. 여기서는 [<strong>최신 서버 이미지</strong>]에서 제공하는 서버 이미지로 서버를 생성해보겠습니다.<br />
 또한 하이퍼바이저 기준으로 [<strong>XEN</strong>]과 [<strong>KVM</strong>] 2가지 타입이 제공되는데 여기서는 [<strong>XEN</strong>] 타입의 서버로 테스트 해보겠습니다. [<strong>XEN</strong>]과 [<strong>KVM</strong>]에 대한 설명은 아래쪽에서 별도로 살펴보겠습니다. (<a href="#xen-vs-kvm">XEN 과 KVM 비교<i class="fa-solid fa-turn-down"></i></a>)</p>
 
-<ul class="tab" data-tab="91e0bf2b-428f-4734-ad93-2a006d70dcb2" data-name="server-image-choice">
+<ul class="tab" data-tab="ff2d001d-22ca-498b-a493-8459ea1cfd39" data-name="server-image-choice">
   
       <li class="active">
           <a href="#">최신 서버 이미지 </a>
@@ -2140,7 +2113,7 @@ Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168
       </li>
   
 </ul>
-<ul class="tab-content" id="91e0bf2b-428f-4734-ad93-2a006d70dcb2" data-name="server-image-choice">
+<ul class="tab-content" id="ff2d001d-22ca-498b-a493-8459ea1cfd39" data-name="server-image-choice">
   
       <li class="active">
 <figure>
@@ -2218,7 +2191,7 @@ Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168
 사설 IP 할당은 자동 할당과 수동 할당 방법 중에서 선택하시면 됩니다.</li>
 </ul>
 
-<ul class="tab" data-tab="cc150e1a-88f1-4125-88e3-c0c2f06959eb" data-name="private-ip-assign">
+<ul class="tab" data-tab="6b152921-6779-4a74-bcca-e12ffdcc5f90" data-name="private-ip-assign">
   
       <li class="active">
           <a href="#">사설 IP 자동 할당 </a>
@@ -2229,7 +2202,7 @@ Subnet의 IP 주소 범위는, private 대역(10.0.0.0/8, 172.16.0.0/12, 192.168
       </li>
   
 </ul>
-<ul class="tab-content" id="cc150e1a-88f1-4125-88e3-c0c2f06959eb" data-name="private-ip-assign">
+<ul class="tab-content" id="6b152921-6779-4a74-bcca-e12ffdcc5f90" data-name="private-ip-assign">
   
       <li class="active">
 <p><br />
@@ -2722,7 +2695,7 @@ Public Subnet을 선택했고 서버에 공인 IP가 필요할 경우에는 [<st
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-07-28<br/> Site last generated: 2023-10-26 <br />        
+        <span>Page last updated:</span> 2023-07-28<br/> Site last generated: 2023-10-31 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -2754,13 +2727,43 @@ Public Subnet을 선택했고 서버에 공인 IP가 필요할 경우에는 [<st
   </script>
 </div>
           
-          <div class="side-banner-right">
-  <a
-    href="https://hyphen.im/benefit/navercloud-event"
-    id="side-banner-right-01"
-    target="_blank"
-    class="no_icon"><img src="/images/slider/banner-hyphen-ncloud-credit-event-02.png" alt="hyphen ncloude event side banner"></a>
+          
+          
+            
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+});
+
+$("#toc_onoff").click(function() {  
+        $("#toc").toggle();
+        $("#tg-toc-icon").toggleClass('fa-toggle-on');
+        $("#tg-toc-icon").toggleClass('fa-toggle-off');
+
+});
+
+});
+</script>
+
+<div  class="side-right-toc">
+<p><span class="label label-warning" style="cursor:pointer" id="toc_onoff"><i id="tg-toc-icon" class="fas fa-toggle-on"></i> ToC</span></p>
+<div id="toc"></div>
 </div>
+
+
+
+          
         
         <!-- /#main -->
       </div>

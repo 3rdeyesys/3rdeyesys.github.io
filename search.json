@@ -402,6 +402,17 @@
 
 
 {
+"title": "Ncloud 데이터베이스 마이그레이션 서비스 | From MariaDB To MySQL 8.0",
+"tags": "databasevpcMariaDB",
+"keywords": "Database, MariaDB, MySQL, Migration",
+"url": "/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Ncloud 데이터베이스 마이그레이션 서비스 | From MySQL 5.7 To MySQL 5.7",
 "tags": "databasevpcMySQL",
 "keywords": "Database, MySQL, Migration",
