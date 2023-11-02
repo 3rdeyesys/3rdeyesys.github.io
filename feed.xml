@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Tue, 31 Oct 2023 15:36:53 +0900</pubDate>
-        <lastBuildDate>Tue, 31 Oct 2023 15:36:53 +0900</lastBuildDate>
+        <pubDate>Thu, 02 Nov 2023 15:17:46 +0900</pubDate>
+        <lastBuildDate>Thu, 02 Nov 2023 15:17:46 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -28,6 +28,11 @@ Database Migration Service는 MySQL 데이터베이스 간 마이그레이션을
 - Source DB는 MariaDB도 가능합니다.
 - Target DB는 MySQL만 가능합니다.
 
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;4&quot; content=&quot;
+&amp;#8259; MariaDB도 마이그레이션이 가능하지만 MySQL 8.0과의 호환성 문제로 마이그레이션이 실패할 수도 있습니다. &lt;br /&gt;
+&amp;#8259; 마이그레이션이 실패했을 경우에는  MariaDB &lt;i class=&apos;fa-solid fa-right-long&apos; &gt;&lt;/i&gt; MySQL 5.7 &lt;i class=&apos;fa-solid fa-right-long&apos; &gt;&lt;/i&gt;  MySQL 8.0 이렇게 2단계로 마이그레이션 하는 방법을 시도해보시기 바랍니다.
+&quot; %}
+
 {% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-41.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
 
 ## 상세 설정 지원 여부
@@ -39,7 +44,8 @@ Source DB의 상세 설정에 따른 지원 여부는 다음과 같습니다.
 
 ### 미지원 항목
 - TABLE ENGINE: MyISAM, BLACKHOLE, FEDERATED, ARCHIVE 미지원
-- 사용자 계정 정보, MySQL Config 항목, Event 마이그레이션 미지원
+- 사용자 계정 정보, MariaDB Config 항목, Event 마이그레이션 미지원
+
 
 ## 마이그레이션 진행 구조
 마이그레이션은 **`Target DB`**&lt;i class=&quot;fa-solid fa-right-long&quot; style=&quot;color: #e43b11;&quot;&gt;&lt;/i&gt; **`Source DB로 접근하여 DB 데이터를 가져오는 방식`**으로 진행됩니다.   
@@ -543,7 +549,7 @@ Source DB의 바이너리 로그 설정 중에서, [server_id], [log_bin] 관련
 ## 문서 업데이트 내역
 {% include doc-history.html width=&quot;50%&quot; %}  
 </description>
-            <pubDate>Tue, 31 Oct 2023 00:00:00 +0900</pubDate>
+            <pubDate>Thu, 02 Nov 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mariadb-to-mysql80-guide.html</guid>
             

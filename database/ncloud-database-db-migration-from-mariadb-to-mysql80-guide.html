@@ -24,7 +24,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-25.png" />
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MariaDB에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-10-31T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-11-02T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-25.png" />
 <meta name="twitter:image:alt" content="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MariaDB에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다" />
@@ -1994,6 +1994,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>Target DB는 MySQL만 가능합니다.</li>
 </ul>
 
+<div class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-4">
+⁃ MariaDB도 마이그레이션이 가능하지만 MySQL 8.0과의 호환성 문제로 마이그레이션이 실패할 수도 있습니다. <br />
+⁃ 마이그레이션이 실패했을 경우에는  MariaDB <i class="fa-solid fa-right-long"></i> MySQL 5.7 <i class="fa-solid fa-right-long"></i>  MySQL 8.0 이렇게 2단계로 마이그레이션 하는 방법을 시도해보시기 바랍니다.
+</div>
+
 <figure>
   <img class="docimage" src="/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-41.png" alt="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법" style="width: 845px; " />
   
@@ -2013,7 +2018,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h3 id="미지원-항목">미지원 항목</h3>
 <ul>
   <li>TABLE ENGINE: MyISAM, BLACKHOLE, FEDERATED, ARCHIVE 미지원</li>
-  <li>사용자 계정 정보, MySQL Config 항목, Event 마이그레이션 미지원</li>
+  <li>사용자 계정 정보, MariaDB Config 항목, Event 마이그레이션 미지원</li>
 </ul>
 
 <h2 id="마이그레이션-진행-구조">마이그레이션 진행 구조</h2>
@@ -2058,7 +2063,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>Target DB: Cloud DB for MySQL 8.0.32</li>
 </ul>
 
-<ul class="tab" data-tab="5a9581eb-3bd9-4e4e-a469-1c81dfb61b2f" data-name="db-verstion">
+<ul class="tab" data-tab="f69b739c-7d3d-450a-ab56-6f2813c6c39d" data-name="db-verstion">
   
       <li class="active">
           <a href="#">Source DB </a>
@@ -2069,7 +2074,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </li>
   
 </ul>
-<ul class="tab-content" id="5a9581eb-3bd9-4e4e-a469-1c81dfb61b2f" data-name="db-verstion">
+<ul class="tab-content" id="f69b739c-7d3d-450a-ab56-6f2813c6c39d" data-name="db-verstion">
   
       <li class="active">
 <p>⁃ <strong>Source DB</strong></p>
@@ -2098,7 +2103,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h3 id="source-db-정보-확인">Source DB 정보 확인</h3>
 <p>테스트에 사용할 Source DB의 버전, Database, DB User 등의 정보를 확인해보겠습니다.</p>
 
-<ul class="tab" data-tab="ce81e35c-f05a-4c08-8f2f-e78842d0eebd" data-name="sourcedb-setting">
+<ul class="tab" data-tab="b441dcdd-20d2-43ba-800e-0d7baec01f5d" data-name="sourcedb-setting">
   
       <li class="active">
           <a href="#">MariaDB 버전 </a>
@@ -2121,7 +2126,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </li>
   
 </ul>
-<ul class="tab-content" id="ce81e35c-f05a-4c08-8f2f-e78842d0eebd" data-name="sourcedb-setting">
+<ul class="tab-content" id="b441dcdd-20d2-43ba-800e-0d7baec01f5d" data-name="sourcedb-setting">
   
       <li class="active">
 <p>⁃ <strong>MariaDB 버전</strong><br />
@@ -2635,7 +2640,7 @@ character-set-server <span class="o">=</span> utf8
 <h4 id="진행-상태-확인-메일">진행 상태 확인 메일</h4>
 <p>진행 상태는 콘솔에서도 확인할 수 있지만, 작업이 오래 걸리는 경우도 대비해서 각 단계가 완료될 때마다 안내 메일이 발송됩니다.</p>
 
-<ul class="tab" data-tab="f9a69899-8e45-46aa-b0d9-a0c8490f157c" data-name="migration-status">
+<ul class="tab" data-tab="220a60fe-643e-42b8-b0f2-03493efe13a1" data-name="migration-status">
   
       <li class="active">
           <a href="#">Export Completed </a>
@@ -2650,7 +2655,7 @@ character-set-server <span class="o">=</span> utf8
       </li>
   
 </ul>
-<ul class="tab-content" id="f9a69899-8e45-46aa-b0d9-a0c8490f157c" data-name="migration-status">
+<ul class="tab-content" id="220a60fe-643e-42b8-b0f2-03493efe13a1" data-name="migration-status">
   
       <li class="active">
 <p>⁃ <strong>Export Completed</strong></p>
@@ -2868,7 +2873,7 @@ character-set-server <span class="o">=</span> utf8
       
       
         <tr>
-          <td>2023-10-31</td>
+          <td>2023-11-02</td>
           <td>문서 최초 생성</td>
         </tr>
       
@@ -2947,7 +2952,7 @@ character-set-server <span class="o">=</span> utf8
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-10-31<br/> Site last generated: 2023-10-31 <br />        
+        <span>Page last updated:</span> 2023-11-02<br/> Site last generated: 2023-11-02 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
