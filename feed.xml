@@ -5,10 +5,333 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 02 Nov 2023 15:17:46 +0900</pubDate>
-        <lastBuildDate>Thu, 02 Nov 2023 15:17:46 +0900</lastBuildDate>
+        <pubDate>Fri, 03 Nov 2023 14:57:03 +0900</pubDate>
+        <lastBuildDate>Fri, 03 Nov 2023 14:57:03 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
+
+## 구성
+WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
+
+
+## 요금
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;상품명&lt;/th&gt;
+      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
+      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
+      &lt;th&gt;비고&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td rowspan=&quot;4&quot;&gt;WAF VM&lt;/td&gt;
+        &lt;td&gt;0 ~ 100 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
+        &lt;td rowspan=&quot;4&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;        
+        &lt;td&gt;100 초과 ~ 300 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+    &lt;/tr&gt; 
+    &lt;tr&gt;        
+        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
+    &lt;/tr&gt;  
+    &lt;tr&gt;
+        &lt;td&gt;WAF LB&lt;/td&gt;
+        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
+    &lt;/tr&gt; 
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+### 과금 구간 기준
+과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
+
+### 서브 도메인의 요금
+- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
+- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
+- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
+
+## 요금 예시
+
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
+      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
+      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
+      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
+      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+        &lt;td&gt;160 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;160 Mbps&lt;/td&gt;        
+        &lt;td&gt;2개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;300 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+        &lt;td&gt;301 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
+
+## WAF 신청 시 주의 사항
+
+### VPC
+
+- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
+- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
+- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
+- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
+- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
+- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
+- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
+
+
+### Classic
+- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
+
+
+
+## 참고 URL
+1. Ncloud Security Monitoring 서비스 안내
+- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
+
+2. Ncloud Security Monitoring 가이드 
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Fri, 03 Nov 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
+            
+            <category>security</category>
+            
+            <category>monitoring</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>VPC Peering 생성 가이드</title>
+            <description>## 개요
+VPC(virtual Private Cloud)는 퍼블릭클라우드상에서 제공되는 사설 가상 네트워크 입니다. 계정당 3개의 VPC를 만들수 있으며 다른 VPC 네트워크와 논리적으로 분리되어 있어 독립적인 네트워크 환경을 구현할 수 있습니다.  
+그런데, 간혹 VPC 환경에서 분리되어 있는 VPC간의 통신이 필요할때가 있는데 이때 사용할 수 있는 서비스가 [**VPC Peering**] 입니다. 
+
+VPC Peering은 공인 아이피를 거치지 않고 Ncloud 내부 네트워크를 이용하여 VPN없이 VPC간 통신을 할수 있게 해주는 서비스 입니다.
+
+## VPC 생성
+우선 테스트에 사용할 VPC로 [test-vpc], [test2-vpc] 이렇게 2개를 준비했습니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_01.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+## Subnet 생성 
+
+이제 각 VPC에 서브넷을 생성합니다. [test-vpc]에는 [test-subnet(192.168.10.0/24)]으로 생성합니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_07.png&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+[test2-vpc]에는 [test2-subnet(172.16.10.0/24)]으로 생성합니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_08.png&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+생성된 Subnet은 다음과 같습니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_09.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+
+## VPC Peering 생성
+네이버 클라우드(Ncloud) 콘솔에서 [Networking] -&gt; [VPC] -&gt; [VPCPeering] 메뉴로 이동해서 [VPC peerig 생성] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_02.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+- ① 이름을 적고
+- ② 요청 VPC는 [testVPC]를 선택
+- ③ 수락 VPC는 [내계정], [test2VPC]를 선택
+
+설정이 끝났으면 생성버튼을 클릭합니다.
+
+{% include callout_v2.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;다른 계정의 VPC와 연결하는 경우는 아래쪽에서 살펴보겠습니다.&quot; %}
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_03.png&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+마지막으로 VPC Peering 요청 내용을 확인하고 [확인] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_17.png&quot; width=&quot;500&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+[test-vpc] -&gt; [test2-vpc]로 설정된 VPC Peering을 아래와 같이 확인할 수 있습니다.  
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_04.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+### 역방향 설정 추가
+그런데 VPC peering은 단방향 통신이기에 TCP, ICMP 등의 양방향 통신을 하는 프로토콜을 이용하려면 역방향 즉, [test2-vpc] -&gt; [test-vpc]로 설정된 VPC Peering도 추가해야 합니다.
+
+- ① 이름을 적고
+- ② 요청 VPC에는 test2VPC를 선택
+- ③ 수락 VPC에는 testVPC를 선택
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_05.png&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+VPC Peering 요청 내용을 확인하고 [확인] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_18.png&quot; width=&quot;500&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+아래와 같이 [test-vpc] -&gt; [test2-vpc] , [test2-vpc] -&gt; [test-vpc] 2가지 VPC Peering을 모두 생성했으므로 양방향 통신이 가능하게 되었습니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_06.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+
+## Route Table 설정
+
+이제 통신할 서브넷 혹은 서버의 아이피를 Route Table 설정에 추가 합니다. 여기서는 서브넷을 추가하도록 하겠습니다.
+
+우선 [VPC] - [Route Table]에서, [test-vpc-default-public-table]의 [Routes 설정]을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_11.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+- Destination에는 [test2-subnet]의 아이피 대역을 입력 (서버의 아이피로 입력해도 됨)  
+- Target Type은 [VPCPEERING]을 선택
+- Target Name은 [test-vpc-peering]을 선택
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_12.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 [test2-vpc-default-public-table]의 [Routes 설정]을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_13.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+- Destination에는 [test-subnet]의 아이피 대역을 입력 (서버의 아이피로 입력해도 됨)  
+- Target Type은 [VPCPEERING]을 선택
+- Target Name은 [test2-vpc-peering]을 선택
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_14.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 서버 준비
+아래와 같이 테스트로 사용할 서버 2대를 준비했습니다.  
+테스트는 [test-vpc]에 위치한 [test-vpc-peering-svr]서버 -&gt; [test2-vpc]에 위치한 [test2-vpc-peering-svr]로 접속 시도를 해보겠습니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_15.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+## ACG 설정
+ACG를 설정하지 않고 [test-vpc-peering-svr] -&gt; [test2-vpc-peering-svr]로 접속 시도를 하면 접속이 되지 않는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_19.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+[test2-vpc-peering-svr]로 접속할 것이므로 해당 서버에 설정된 acg인 [test2-vpc-default-acg]를 선택하고 [ACG 설정] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_20.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+접근소스에는 [test-vpc-peering-svr] 서버의 subnet 대역인 [192.168.10.0/24]를 입력하고, 포트는 22번 포트를 입력하고 추가해서 적용합니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_21.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 접속 테스트 
+ACG 설정까지 완료하고 나서 다시 접속 테스트를 해보면 아래와 같이 접속이 잘 되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_22.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 다른 계정 VPC 연결
+위에서는 동일한 내 계정에 생성된 VPC들 간의 Peering을 살펴보았는데, 아래에서는 다른 계정에 생성된 VPC와 연결할 때의 화면을 살펴보겠습니다.
+
+VPC Peering 생성 화면에서 [다른 계정]을 선택하면 아래와 같이 [로그인 ID (이메일)], [VPC ID], [VPC 이름]을 입력하게 됩니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_23.png&quot; width=&quot;700&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+마찬가지로 VPC Peering 요청 내용을 확인하고 [확인] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_24.png&quot; width=&quot;500&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 수락을 요청받은 다른 계정의 VPC Peering 화면에 가면 요청 내용을 확인할 수 있고, 요청 응답에서 [수락] 버튼을 클릭합니다. 
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_25.png&quot; width=&quot;770&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+한번 더 VPC Peering 연결 요청을 수락할 것인지 확인하는 창이 나타납니다. 
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_26.png&quot; width=&quot;500&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+수락하고 나면 역방향의 VPC Peering 연결을 생성해야 한다는 안내와 함께 역방향 VPC Peering 생성 화면이 나타납니다.  
+역방향은 위의 설정과 반대로 진행하면 되고, 그 이후에는 내 계정에서 설정했던 것과 마찬가지로 설정하시면 완료됩니다.
+
+{% include image.html file=&quot;networking/ncloud_networking_vpc_peering_guide_27.png&quot; width=&quot;500&quot; alt=&quot;Ncloud VPC 환경에서 VPC Peering 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 제한사항
+
+{% include callout_v2.html type=&quot;warning&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; VPC Peering은 연결하려는 VPC들의 IP주소 대역이 달라야 합니다. &lt;br /&gt;
+&amp;#8259; 일치되거나 중첩되는 대역이 있으면 설정되지 않습니다.&quot; %}
+{% include callout_v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; VPC Peering은 단방향입니다. &lt;br /&gt;
+&amp;#8259; TCP등 양방향 통신을 해야 하는 경우에는 요청 / 수락 VPC를 맞바꾸어 역방향 Peering도 추가 생성해야 합니다.&quot; %}
+{% include callout_v2.html type=&quot;danger&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; VPC Peering은 전이적 연결 관계를 지원하지 않습니다. &lt;br /&gt;
+&amp;#8259; 즉, Peering된 VPC를 통하여 다른 VPC 혹은 외부로 통신하는 것은 불가능 합니다.&quot; %}
+{% include callout_v2.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;
+&amp;#8259; VPC Peering은 동일한 리전 내 VPC 끼리만 연결할 수 있습니다.&quot; %}
+
+
+## 참고 URL
+1. VPC Peering 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/networking-vpc-vpcdetailedpeering&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/networking-vpc-vpcdetailedpeering&lt;/a&gt;
+
+2. VPC Peering 설정 시나리오
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/networking-vpc-vpcuserscenario4&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/networking-vpc-vpcuserscenario4&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}  </description>
+            <pubDate>Fri, 03 Nov 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud_networking_vpc_peering_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_vpc_peering_guide.html</guid>
+            
+            <category>vpc</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud 데이터베이스 마이그레이션 서비스 | From MariaDB To MySQL 8.0</title>
@@ -2030,149 +2353,6 @@ Source DB의 바이너리 로그 설정 중에서, [server_id], [log_bin] 관련
         </item>
         
         <item>
-            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
-
-## 구성
-WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
-
-
-## 요금
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;상품명&lt;/th&gt;
-      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
-      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
-      &lt;th&gt;비고&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-        &lt;td rowspan=&quot;4&quot;&gt;WAF VM&lt;/td&gt;
-        &lt;td&gt;0 ~ 100 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
-        &lt;td rowspan=&quot;4&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;        
-        &lt;td&gt;100 초과 ~ 300 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-    &lt;/tr&gt; 
-    &lt;tr&gt;        
-        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
-    &lt;/tr&gt;  
-    &lt;tr&gt;
-        &lt;td&gt;WAF LB&lt;/td&gt;
-        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
-    &lt;/tr&gt; 
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-### 과금 구간 기준
-과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
-
-## 요금 예시
-
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
-      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
-      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
-      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
-      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-        &lt;td&gt;160 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;160 Mbps&lt;/td&gt;        
-        &lt;td&gt;2개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;300 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-        &lt;td&gt;301 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
-
-## WAF 신청 시 주의 사항
-
-### VPC
-
-- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
-- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
-- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
-- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
-- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
-- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
-- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
-
-
-### Classic
-- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
-
-
-
-## 참고 URL
-1. Ncloud Security Monitoring 서비스 안내
-- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
-
-2. Ncloud Security Monitoring 가이드 
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}</description>
-            <pubDate>Mon, 18 Sep 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
-            
-            <category>security</category>
-            
-            <category>monitoring</category>
-            
-            
-        </item>
-        
-        <item>
             <title>설치형 PostgreSQL DB 설치, 접속 가이드 | Rocky Linux</title>
             <description>## 개요
 PostgreSQL은 설치 후에 DB에 접속할 때 MySQL등 다른 DB와 달리 [**OS와 PostgreSQL 양쪽에 동일한 계정을 생성**]하거나 
@@ -3138,202 +3318,6 @@ Auto Scaling에서 사용되는 주요 용어들을 정리해보겠습니다.
             <category>autoscaling</category>
             
             <category>vpc</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법</title>
-            <description>## 개요
-록키 리눅스(Rocky Linux)는 기본 데이터베이스가 MariaDB인데, 상황에 따라 MySQL이 필요한 경우가 있습니다. 이번에는 그 중에서 MySQL 8.0 최신 버전을 설치하는 방법을 정리해보겠습니다.
-
-## 서버 준비
-우선 Rocky Linux 서버를 준비합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### Rocky Linux 소개
-록키 리눅스에 대한 간략한 소개는 아래 문서에서 확인할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/compute/ncloud-compute-server-rocky-linux-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개&lt;/a&gt;
-&quot; %}
-
-## 패키지 업데이트
-우선 패키지 업데이트를 해보겠습니다.
-
-``` bash
-~# dnf -y upgrade-minimal
-```
-{% include note.html title=&quot;dnf&quot; content=&quot;Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 
-Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL Community 최신 패키지 확인
-MySQL Community Yum(Dnf) 최신 패키지는 아래 주소에서 확인할 수 있습니다.  
-Rocky Linux는 CentOS 8 기반으로 만들어졌으므로 아래 다운로드 페이지에서 Red Hat Enterprise Linux 8 기반의 mysql80-community-release-el8-{버전}.noarch.rpm 리파지토리 버전을 확인합니다.  
-**2023-09-04** 기준으로는 [**mysql80-community-release-el8-8.noarch.rpm**] 인것을 확인할 수 있습니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;1&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;https://dev.mysql.com/downloads/repo/yum/&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt; https://dev.mysql.com/downloads/repo/yum/&lt;/a&gt;
-&quot; %}
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-
-## MySQL Community 패키지 설치
-위에서 확인한 MySQL 8.0의 최신 Repository 설치 패키지는 [**mysql80-community-release-el8-8.noarch.rpm**] 입니다.
-
-``` bash
-~# dnf -y install https://dev.mysql.com/get/mysql80-community-release-el8-8.noarch.rpm
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-
-## MySQL 8.0 버전 리포지토리 활성화
-
-### 버전 활성화 정보 초기화
-
-``` bash
-~# dnf module reset mysql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-
-### 기본 MySQL 버전 비활성화
-
-``` bash
-~# dnf module disable mysql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-
-### MySQL 8.0 버전 확인
-설치된 MySQL Community 패키지에 포함된 MySQL 버전을 확인해보겠습니다.  
-mysql80-community-release-el8-{버전}.noarch.rpm 버전부터는 8.0 버전만 있고, 5.7 버전은 포함되어 있지 않습니다.
-
-``` bash
-~# dnf repolist all | grep mysql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 8.0 설치
-MySQL 8.0 서버를 설치합니다.
-
-``` bash
-~# dnf -y install mysql-community-server
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 초기화
-아래 명령어로 기본 데이터베이스 생성 등의 초기화 작업을 진행합니다. 다만 여기서는 초기화 할 때 --initialize-insecure 옵션으로 비밀번호는 설정하지 않고 아래쪽 MySQL 보안 설정 단계에서 [**mysql_secure_installation**] 명령으로 설정하도록 하겠습니다.
-
-``` bash
-~# mysqld --initialize-insecure --user=mysql
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 데몬 시작
-초기화를 마쳤으면 MySQL 데몬을 시작합니다.
-
-``` bash
-~# systemctl start mysqld
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 보안 설정
-[**mysql_secure_installation**]은 MySQL의 기본 보안을 설정하는 명령으로, 설정되는 항목은 다음과 같습니다.
-
-- root 계정 패스워드 설정
-- 원격 호스트에서 root 계정 접속 차단
-- 익명 계정 삭제
-- 테스트 DB 등 삭제
-
-``` bash
-~# mysql_secure_installation
-```
-
-- 비밀번호를 설정할 때 비밀번호 유효성 검사 플러그인을 사용할 것인지 선택할 수 있는데 [**Y**]를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 비밀번호 정책 수준 선택
-제공되는 비밀번호 정책 수준은 [**LOW**], [**MEDIUM**], [**STRONG**]의 3가지가 있습니다.
-- LOW: 8자 이상
-- MEDIUM: 8자 이상, 숫자-대소문자-특수문자 포함
-- STRONG: 8자 이상, 숫자-대소문자-특수문자 포함, dictionary file에 포함된 단어 사용 불가
-
-여기서는 1을 입력해서 MEDIUM을 선택하겠습니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-- 패스워드를 입력하면 패스워드의 복잡성 강도를 점수로 측정해주는데 이번 테스트에서는 100점을 받았습니다.  
-그리고, 방금 입력했던 패스워드를 그대로 사용할 것인지 확인하는데 [**Y**]를 입력합니다.  
-(혹시 입력했던 비밀번호를 변경하고 싶을 경우는 [**N**]를 입력합니다.)
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 익명 계정 삭제
-다음으로 Anonymous Users 즉, 익명 계정들을 삭제할 것인지 묻는데 [**Y**]를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 원격 호스트에서 root 계정 접속 차단
-다음은 로컬이 아닌 원격에서 root 계정 로그인을 차단할 것인지 묻는데 [**Y**]를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-15.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 테스트 DB 등 삭제
-테스트 DB 등을 삭제할 것인지 묻는데 여기서도 [**Y**]를 입력합니다.
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-16.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-### 설정 저장
-마지막으로 지금까지 선택한 설정을 모두 적용할 것인지 묻는데 [**Y**]를 입력합니다.
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-17.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## MySQL 접속
-위에서 설정했던 비번으로 접속해보면 [**8.0.34 MySQL Community Server**]인 것을 확인할 수 있습니다.
-
-``` bash
-~# mysql -u root -p
-```
-
-{% include image.html file=&quot;database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux-18.png&quot; width=&quot;840&quot; alt=&quot;Ncloud Rocky Linux 서버에 MySQL 8.0 최신 버전 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1. MySQL Yum Repository 다운로드 페이지
-	- &lt;a href=&quot;https://dev.mysql.com/downloads/repo/yum/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/downloads/repo/yum/&lt;/a&gt;
-
-2. Installing MySQL on Linux Using the MySQL Yum Repository
-	- &lt;a href=&quot;https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html&lt;/a&gt;  
-
-3. Rocky Linux 서버에 MySQL 5.7 설치하는 방법
-	- &lt;a href=&quot;/database/ncloud-database-mysql-57-install-on-rocky-linux.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/database/ncloud-database-mysql-57-install-on-rocky-linux.html&lt;/a&gt;      
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}  	</description>
-            <pubDate>Mon, 04 Sep 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mysql-8-latest-version-install-on-rocky-linux.html</guid>
-            
-            <category>database</category>
-            
-            <category>mysql</category>
-            
-            <category>install</category>
-            
-            <category>rocky_linux</category>
             
             
         </item>
