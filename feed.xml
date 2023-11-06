@@ -5,155 +5,108 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 03 Nov 2023 14:57:03 +0900</pubDate>
-        <lastBuildDate>Fri, 03 Nov 2023 14:57:03 +0900</lastBuildDate>
+        <pubDate>Mon, 06 Nov 2023 17:39:22 +0900</pubDate>
+        <lastBuildDate>Mon, 06 Nov 2023 17:39:22 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
         <item>
-            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
+            <title>Object Storage 접속용 Windows Client Tool - S3 Browser</title>
             <description>## 개요
-Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
+네이버 클라우드의 Object Storage에 접속, 관리하는 방법은 aws cli 등 여러가지 있지만 Windows PC에서 간편하게 접속해서 관리할 수 있는 클라이언트 툴이 몇개 있습니다.  
+그 중에서 이번에는 S3 Browser의 사용법에 대해 간단히 정리해보겠습니다.
 
-## 구성
-WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
+## S3 Browser
+S3 Browser는 Amazon S3 and Amazon CloudFront를 위한 클라이언트입니다
+이 버전은 무료버전이기는 하지만, 정확히는 **personal use only**, **non-commecial use only**라고 명시되어 있습니다.  
+그래서 라이선스와 관계없이 사용 가능하고, 더 많은 기능이 포함된 유료 버전도 있습니다. 
 
-{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
+상세한 정보와 다운로드는 아래 링크에서 확인하시면 됩니다.
 
-
-## 요금
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;상품명&lt;/th&gt;
-      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
-      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
-      &lt;th&gt;비고&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-        &lt;td rowspan=&quot;4&quot;&gt;WAF VM&lt;/td&gt;
-        &lt;td&gt;0 ~ 100 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
-        &lt;td rowspan=&quot;4&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;        
-        &lt;td&gt;100 초과 ~ 300 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-    &lt;/tr&gt; 
-    &lt;tr&gt;        
-        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
-    &lt;/tr&gt;  
-    &lt;tr&gt;
-        &lt;td&gt;WAF LB&lt;/td&gt;
-        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
-    &lt;/tr&gt; 
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-### 과금 구간 기준
-과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
-
-### 서브 도메인의 요금
-- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
-- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
-- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
-
-## 요금 예시
-
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
-      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
-      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
-      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
-      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-        &lt;td&gt;160 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;160 Mbps&lt;/td&gt;        
-        &lt;td&gt;2개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;300 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-        &lt;td&gt;301 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
-
-## WAF 신청 시 주의 사항
-
-### VPC
-
-- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
-- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
-- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
-- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
-- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
-- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
-- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
+&lt;a href=&quot;https://s3browser.com/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://s3browser.com/&lt;/a&gt;
 
 
-### Classic
-- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
+## 사용법
 
+프로그램을 다운 받아서 설치하고, 실행을 하면 여러 종류의 스토리지 중에서 원하는 것을 선택하게 됩니다.  
+이 클라이언트는 AWS S3를 위한 것으로 CloudBerry Explorer와는 다르게 AWS의 다양한 S3 서비스들만 접속이 가능한데, 이용 가능한 스토리지 리스트는 마지막에서 정리해보겠습니다. 
+
+{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
+
+
+Account Type은  **S3 Compatible Storage**를 선택하면 됩니다.  
+- Account name: 여기는 알아보기 쉬운 이름을 적으면 됩니다. 예를 들어 Naver Cloud
+- REST Endpoint: 여기는 네이버 클라우드의 endpoint-url을 적습니다. **kr.object.ncloudstorage.com**
+- Access Key ID: 여기는 Access Key ID
+- Secret Access Key: 여기는 Secret Key
+
+{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_02.jpg&quot; width=&quot;718&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
+
+{% include callout_v2.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.&quot; %}
+
+
+계정 정보를 입력하고 접속을 하면 버킷 리스트가 나타나고 원하는 버킷을 선택해서 들어가면 다음처럼 파일들을 확인할 수 있습니다.
+
+{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_03.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
+
+
+Object Storage에 있는 파일을 로컬PC로 가져오려면 원하는 파일을 선택하고 마우스 오른쪽 버튼을 눌러서 **Download** 명령을 선택하면 됩니다.
+
+{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_04.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
+
+
+그 외 여러 가지 기능들이 있는데 그리 어려운 기능은 아니므로 직접 사용해보시면 금방 알 수 있습니다.
+
+마지막으로 S3 Browser로 접속 가능한 S3 리스트를 확인해보겠습니다.
+
+{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_05.jpg&quot; width=&quot;717&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
+
+- Amazon S3 Storage
+- S3 Compatible Storage
+- Amazon S3 in China
+- Amazon S3 GovCloud Storage
+- Amazon S3 GovCloud Storage (FIPS 140-2)
+- Amazon S3 via EC2 IAM Role
+- Amazon S3 via AssumeRole
+- Amazon S3 (Credentials from Environment Variables)
+- Amazon S3 (Credentials from AWS Config or Credential file)
+
+
+## 업로드하는 파일 권한 자동 적용
+S3 Browser를 이용해 파일을 업로드할 때 업로드하는 파일의 권한을 자동으로 적용하는 방법에 대해 살펴보겠습니다.
+
+우선 S3 Browser에서 [**Tools**] - [**Option**] 메뉴를 클릭합니다.
+
+{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
+
+- [**Option**] 메뉴에 보면 여러 옵션들이 있는데 아래 스샷에서 표시한 2가지 옵션이 중요합니다. 각각에 대한 설명은 아래쪽에서 다시 정리해보겠습니다.
+{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
+
+### 버킷(Bucket) 권한 상속
+[**Inherit permissions from parent bucket**] 옵션은 버킷(Bucket)에 업로드 되는 파일들은 버킷(Bucket)의 권한을 상속 받게 하는 옵션입니다.  
+예를 들어 버킷(Bucket)의 권한이 [**All User**]에게 [**Read**] 권한이라면 이 옵션을 선택해두면 이 버킷(Bucket)에 업로드 되는 모든 파일은 [**All User**]에게 [**Read**] 권한을 가지게 됩니다.
+
+### 권한 유지
+[**Preserve permissions when overwriting existing files**] 옵션은 이미 버킷(Bucket)에 존재하는 파일을 다시 업로드 해서 덮어 쓰기를 할 경우 기존의 권한을 유지하도록 하는 옵션입니다.
 
 
 ## 참고 URL
-1. Ncloud Security Monitoring 서비스 안내
-- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
+1.  S3 Browser 홈페이지
+	- &lt;a href=&quot;https://s3browser.com/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://s3browser.com/&lt;/a&gt;
 
-2. Ncloud Security Monitoring 가이드 
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
+2.  S3 Browser S3-Compatible Storages 설정 가이드
+	- &lt;a href=&quot;https://s3browser.com/s3-compatible-storage.aspx&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://s3browser.com/s3-compatible-storage.aspx&lt;/a&gt;
 
 
 ## 문서 업데이트 내역
 {% include doc-history.html width=&quot;50%&quot; %}</description>
-            <pubDate>Fri, 03 Nov 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
+            <pubDate>Mon, 06 Nov 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html</guid>
             
-            <category>security</category>
+            <category>object_storage</category>
             
-            <category>monitoring</category>
+            <category>backup</category>
             
             
         </item>
@@ -329,6 +282,154 @@ VPC Peering 생성 화면에서 [다른 계정]을 선택하면 아래와 같이
             <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud_networking_vpc_peering_guide.html</guid>
             
             <category>vpc</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
+
+## 구성
+WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
+
+
+## 요금
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;상품명&lt;/th&gt;
+      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
+      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
+      &lt;th&gt;비고&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td rowspan=&quot;4&quot;&gt;WAF VM&lt;/td&gt;
+        &lt;td&gt;0 ~ 100 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
+        &lt;td rowspan=&quot;4&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;        
+        &lt;td&gt;100 초과 ~ 300 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+    &lt;/tr&gt; 
+    &lt;tr&gt;        
+        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
+    &lt;/tr&gt;  
+    &lt;tr&gt;
+        &lt;td&gt;WAF LB&lt;/td&gt;
+        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
+    &lt;/tr&gt; 
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+### 과금 구간 기준
+과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
+
+### 서브 도메인의 요금
+- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
+- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
+- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
+
+## 요금 예시
+
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
+      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
+      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
+      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
+      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+        &lt;td&gt;160 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;160 Mbps&lt;/td&gt;        
+        &lt;td&gt;2개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;300 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+        &lt;td&gt;301 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
+
+## WAF 신청 시 주의 사항
+
+### VPC
+
+- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
+- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
+- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
+- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
+- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
+- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
+- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
+
+
+### Classic
+- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
+
+
+
+## 참고 URL
+1. Ncloud Security Monitoring 서비스 안내
+- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
+
+2. Ncloud Security Monitoring 가이드 
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Fri, 03 Nov 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
+            
+            <category>security</category>
+            
+            <category>monitoring</category>
             
             
         </item>
@@ -2959,365 +3060,6 @@ Auto Scaling에서 사용되는 주요 용어들을 정리해보겠습니다.
             <category>autoscaling</category>
             
             <category>classic</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>VPC 환경에서 AutoScaling 설정하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드)  VPC 환경에서 AutoScaling 설정하는 방법을 정리해보겠습니다.  
-
-AutoScaling 서비스는 미리 등록한 설정에 따라 서버 수를 자동으로 증가 또는 감소시켜 안정적인 서비스를 유지하면서 비용을 절감할 수 있도록 해주는 서비스입니다. 
-
-그런데, 언제 서버 수를 증가, 감소 시킬 것인 가에 대한 이벤트 설정이 **Classic 환경의 경우 오토스케일 그룹에 속한 서버들의 평균값을 기준**으로 하지만, 
-**VPC 환경의 경우 이 방법 말고도 특정 서버를 지정해서 해당 서버를 기준으로 이벤트 설정을 할 수도** 있습니다.
-
-그래서 여기서는 사전에 준비된 서버를 기준으로 AutoScaling이 작동되는 것을 살펴보겠습니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_42.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 기준 서버 생성
-AutoScaling 이벤트 설정의 기준이 되는 서버 1대를 아래와 같이 미리 생성하겠습니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 설정 순서
-Auto Scaling 설정 순서를 요약하면 다음과 같습니다.
-
-{% include callout_v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;
-1. Auto Scaling Launch Configuration 설정 &lt;br /&gt;
-2. Auto Scaling Group 설정 &lt;br /&gt;
-3. Cloud Insight Monitoring Event Rule 설정 &lt;br /&gt;
-&quot; %}
-
-
-## Launch Configuration 설정
-Auto Scaling 설정은 우선 [Auto Scaling] - [Launch Configuration]에서 [Launch Configuration 생성] 버튼을 클릭하는 것으로 시작합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 이미지 선택
-서버 이미지는 Ncloud(네이버 클라우드) 에서 제공하는 기본 이미지를 선택할 수도 있고, 기존에 사용하던 서버로 만들어 둔 [내 서버 이미지]를 사용할 수도 있습니다. 여기서는 기본 이미지를 사용하는 것으로 하겠습니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;현재 VPC 환경 AutoScaling에서 지원하는 Linux 서버 이미지 버전은 다음과 같습니다. &lt;br /&gt;
-&amp;#8259; CentOS 7.3, 7.8 &lt;br /&gt;
-&amp;#8259; Rocky Linux 8.6, 8.8 &lt;br /&gt;
-&amp;#8259; Ubuntu 16.04, 18.04, 20.04
-&quot; %}
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### Windows 서버 이미지 버전
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;현재 AutoScaling에서 지원하는 Windows 서버 이미지 버전은 다음과 같습니다. &lt;br /&gt;
-&amp;#8259; Windows Server 2016 64bit English Edition &lt;br /&gt;
-&amp;#8259; Windows Server 2019 64bit English Edition
-&quot; %}
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 설정
-스토리지 종류와 서버 타입 등을 선택합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 이름 설정
-Launch Configuration의 이름을 입력합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 인증키 설정
-인증키는 기존에 보유하고 있던 인증키를 이용해도 되고, 새로운 인증키를 설정해도 됩니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 최종 확인
-지금까지 설정한 내용이 이상 없는지 최종 확인을 하고 이상 없으면 [Launch Configuration 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## Auto Scaling Group 설정
-다음으로 Auto Scaling Group을 생성합니다. [Auto Scaling] - [Auto Scaling Group]에서 [Auto Scaling Group 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### Launch Configuration 선택
-위에서 생성했던 Launch Configuration을 선택합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 그룹 설정
-여기서는 VPC와 Subnet 등의 네트워크 환경을 선택하고,  생성될 서버들의 이름과 최소, 최대 개수 등을 설정합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- **서버이름 Prefix** : 최대7자까지 지정할 수 있고, 나머지 이름의 뒷부분은 영문,숫자의 조합으로 무작위로 자동 생성됩니다.
-- **서버 용량** : 최소, 최대, 기대 용량은 서버 대수를 의미하며 각각 **0~30까지 입력 가능**합니다.
-- **쿨다운 기본값** : 새로운 서버가 생성되었다고 해도, init script 실행이나 업데이트 설치 등의 이유로 실제 서비스를 수행할 수 있을 정도로 준비되기까지는 시간이 소요될 수 있습니다. 
-  즉, 쿨다운(Cooldown) 시간이란 실제 Scaling이 수행 중이거나 수행 완료된 이후에 모니터링 이벤트 알람이 발생하더라도 반응하지 않고 무시하도록 설정한 기간입니다.  
-  **값을 입력하지 않으면 기본값인 300초가 적용됩니다**.
-
-- **헬스체크 보류기간** : 서버 인스턴스가 생성되어 상태가 ‘운영 중’으로 바뀌었더라도, 서버의 업데이트 설치 등 작업에 의해서 헬스 체크에 정상 응답하지 못하는 경우가 생길 수 있습니다. 
-  이런 경우 헬스 체크 보류 기간을 지정하면 해당 기간 동안에는 헬스 체크에 실패하더라도 서버에 이상이 있다고 판단하지 않습니다.  
-  **값을 입력하지 않으면 기본값인 300초가 적용됩니다**.
-- **헬스체크 유형** : 헬스체크 유형은 [**서버**]와 [**로드밸런서**] 중에서 선택할 수 있습니다.
-
-### 로드밸런서 연결
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;
-Auto Scaling으로 생성된 서버가 로드밸런서에 자동으로 연결되도록 하려면 [**헬스 체크 유형**]을 [**로드밸런서**]로 선택하고 [**Target Group**] 항목에서 원하는 로드밸런서의 Target Group을 선택하면 됩니다.
-&quot; %}
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_41.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- VPC 환경에서 로드밸런서를 생성하는 방법은 아래 문서를 참고하시면 됩니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/networking/ncloud_networking_load_balancer_application_lb.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;VPC 환경에서 Application Load Balancer 생성하는 방법&lt;/a&gt;
-&quot; %}
-
-### 네트워크 접근 설정
-네트워크 접근에 필요한 ACG를 설정하고 선택합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_11.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 정책/일정 설정
-정책과 일정을 여기서 바로 설정할 수도 있고 나중에 설정할 수도 있는데, 
-우선은 [정책 설정]에서 [서버 수 증가 정책]과 [서버 수 감소 정책]을 설정합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_12.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 통보 설정
-서버가 생성될 때 또는 서버가 반납될 때 언제 통보를 받을 것인지 선택하고, 누가 언제 통보 받을 것인지 설정합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_13.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 통보 대상 설정 
-먼저 [통보대상 관리 그룹]을 선택하고, 다음으로 관리자와 통보 방법을 선택합니다.  
-[통보대상 관리 그룹]이 설정되지 않았을 경우에는 [통보대상관리] 버튼을 클릭해 통보를 받을 대상의 그룹을 설정합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_14.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 최종 확인
-지금까지 설정한 Auto Scaling Group 내역을 확인하고 이상이 없으면 [Auto Scaling Group 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## Event Rule 설정
-지정한 서버를 모니터링 하다가 설정한 조건에 해당되면 즉, 지정한 Event가 발생하면 Auto Scaling 설정을 적용해 서버를 증가시키거나 감소시키기 위한 감시 규칙인 [Event Rule]을 설정합니다.  
-
-### 서버 증가 Event Rule 생성
-VPC에서는 [Cloud Insight]로 모니터링을 하게 되므로 Event Rule 설정도 [Cloud Insight(Monitoring)] - [Configuration] - [Event Rule]에서 [Event Rules 생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_17.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 감시 상품 선택
-Cloud Insight는 Server 뿐만 아니라 Load Balancer, Object Storage도 감시할 수 있는데 여기서는 처음에 생성했던 서버를 감시할 것이니 [Server(VPC)]를 선택합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_18.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 감시 대상 설정
-맨 처음에 생성했던 서버를 선택합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_19.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 감시 항목 및 조건 설정
-감시 항목 설정에서 [전체 보기]를 선택하고, [SERVER] 탭에서 [Metric ID]를 [cpu]로 검색한 후 평균 CPU 사용률 항목인 [SERVER/avg_cpu_used_rto]에서 [Level]과 [Condition], [Method], [Duration]을 선택합니다.
-
-먼저 서버를 증가시키는 경우에 해당하는 감시 항목을 설정하겠습니다.  
-아래의 설정 내용은 &quot;**평균 CPU 사용률이 1분간 50% 이상일 경우 경고 수준으로 이벤트 통보를 한다**&quot;라는 설정입니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_22.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 액션 설정
-앞에서 설정한 이벤트가 발생했을 경우 어떤 액션을 취할 것인지 설정하게 되는데 앞에서 [Auto Scaling Group] 설정에서 생성했던 정책을 선택하면 됩니다.  
-여기서는 [CPU 사용률 50% 이상]인 경우이므로 서버를 증가시키는 정책을 선택합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_23.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 최종 확인
-설정한 내용이 이상 없는지 최종 확인하고, 규칙 이름을 입력한 후에 [생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_24.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 서버 감소 Event Rule 생성
-앞에서 생성한 [서버 증가 Event Rule]과 같은 방식으로 [서버 감소 Event Rule]을 생성합니다.  
-
-아래의 설정 내용은 &quot;**평균 CPU 사용률이 1분간 10% 이하일 경우 정보 알림 수준으로 이벤트 통보를 한다**&quot;라는 설정입니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_25.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 액션 설정
-여기서는 [CPU 사용률 10% 이하]인 경우이므로 서버를 감소시키는 정책을 선택합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_26.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 최종 확인
-설정한 내용이 이상 없는지 최종 확인하고, 규칙 이름을 입력한 후에 [생성] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_27.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### Event Rule 생성 완료
-서버 증가과 감소에 대한 Event Rule 2가지가 모두 생성된 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_28.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## Stress Tool 설정
-CPU 사용률에 따른 Auto Scaling 작동 여부를 테스트 하기 위해 서버에 Stress Tool을 설치해보겠습니다.
-
-### EPEL 리포지토리 설정
-Stress Tool을 설치하기 위해서는 다음 명령어로 [EPEL 리포지토리]를 설정해야 합니다.
-
-``` bash
-~# yum -y install epel-release
-```
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_29.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### Stress Tool 설치
-
-``` bash
-~# yum -y install stress
-```
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_30.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## Stress Tool 실행
-
-### CPU 코어 개수 확인
-CPU에 강제로 부하를 발생 시키기 위해서는 서버의 CPU 코어 개수를 확인해서 모든 코어에 부하를 발생시키는 것이 좋습니다.  
-CPU 코어 개수를 확인하는 방법은 아래 명령어를 입력하면 됩니다.
-
-``` bash
-~# grep -c processor /proc/cpuinfo
-```
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_31.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 명령어 테스트
-CPU에 부하를 주는 명령어를 테스트 해보겠습니다.
-
-``` bash
-~# stress --cpu 2 --timeout 60 --verbose
-```
-
-위 옵션의 내용은 다음과 같습니다.
-
-- cpu: 몇 개의 코어에 부하를 발생 시킬 것인가
-- timeout: 몇 초 동안 부하를 발생 시킬 것인가
-- verbose: 상세 로그를 표시
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_32.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### CPU 부하 발생
-부하 발생 테스트를 마쳤으니 실제 Auto Scaling 테스트를 위해 300초 즉, 5분 동안 부하를 발생 시켜보겠습니다.
-
-``` bash
-~# stress --cpu 2 --timeout 300 --verbose
-```
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_33.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 서버 증가 확인
-Stress Tool로 부하를 발생 시키고 서버 리스트를 확인해보면 아래와 같이 Auto Scaling 설정에서 지정한 대로 서버가 생성되고 있는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_34.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## CPU 사용률 확인
-[Cloud Insight]에서 서버 사용률을 확인해 보면 아래와 같이 5분간 CPU 사용률이 100%까지 올라간 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_35.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 서버 반납 확인
-Stress Tool로 부하를 발생 시키도록 설정한 5분이 지난 후에 서버 리스트를 보면 Auto Scaling으로 생성되었던 서버가 반납되고 있는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_36.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 이벤트 발생 확인
-[Cloud Insight] - [Event]에서 서버 증가, 감소 관련 이벤트가 제대로 발생했는지 아래와 같이 그래프와 리스트로 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_37.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## 이벤트 통보 확인
-이벤트 통보에서 설정한 대로 아래와 같이 Email로 Auto Scaling 이벤트 발생과 완료에 대한 통보 메일이 도착한 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_38.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-
-## 서비스 제한사항
-Auto Scaling 설정과 서버 스펙 등에 대한 제한 사항을 정리해보겠습니다.
-
-### 스펙 및 서비스 환경 제한 사항
-- 총 디스크 사이즈 150GB 이하 서버만 가능
-- Windows OS는 Windows 2016. 2019만 지원
-- 내 서버 이미지의 경우, 원본 서버의 부팅 디스크 크기가 50GB인 경우만 지원(100GB 디스크에 대해서는 추후 지원 예정)
-
-### 설정 제한 사항
-- 고객별 생성 가능한 Auto Scaling Group 최대 수: 10
-- 고객별 생성 가능한 Launch Configuration 최대 수: 100
-- Auto Scaling Group당 생성 가능한 스케줄(Scheduled Action) 최대 수: 100
-- Auto Scaling Group당 생성 가능한 Scaling Policy 최대 수: 10
-- Auto Scaling Group당 생성 가능한 최대 서버 수: 30대
-- Auto Scaling Group당 연결 가능한 Load Balancer 최대 수 : 10
-
-
-## 상세 모니터링
-Ncloud(네이버 클라우드) 에서는 기본 모니터링 외에 [상세 모니터링]도 지원하는데, [상세 모니터링]에서는 좀 더 자세하고 다양한 모니터링 항목 (Extended Metric)을 지원합니다.  
-
-예를 들어 CPU 사용과 관련한 모니터링 항목에서도 아래와 같이 [CPU idle ratio average] 항목들도 확인할 수 있습니다.
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_39.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-또한, 위와 같이 [Server] 탭에서는 CPU들의 평균 값을 모니터링할 수 있는 것에 비해, 상세 모니터링을 적용하면 아래와 같이 [CPU] 탭에서 CPU 코어별로 각각 모니터링을 할 수도 있습니다.
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_40.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### 상세 모니터링 설정
-상세 모니터링을 적용하는 방법은 서버를 선택하고 [서버 관리 및 설정 변경] 메뉴에서 [상세 모니터링 설정 변경] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_20.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-#### 상세 모니터링 신청
-상세 모니터링 신청 팝업에서 [예] 버튼을 클릭하면 상세 모니터링이 적용됩니다. 상세 모니터링 신청 후 실제 데이터가 수집되기까지는 약간의 시간이 소요되므로 잠시 기다렸다 확인해보면 됩니다.
-
-{% include image.html file=&quot;compute/autoscaling/ncloud_server_autoscaling_guide_vpc_21.png&quot; width=&quot;480&quot; alt=&quot;Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 용어 정리
-Auto Scaling에서 사용되는 주요 용어들을 정리해보겠습니다.
-
-| 용어 | | 설명|
-| :----: | :----: | :---- |
-| Scale-in / Scale-out | | Auto Scaling Group을 생성하여 고객이 설정한 Policy에 따라 사용하고 있는 가상 서버의 자동 확장(Scale-out) 및 자동 축소(Scale-in)하도록 제공합니다. |
-| Auto Scaling Group | | 여러 개의 서버 인스턴스들을 Auto Scaling Group 이라는 하나의 그룹으로 묶어 놓게 됩니다. |
-| Launch Configuration | | Auto Scaling Group에서 가상 서버를 시작 구성하는 데 사용하는 템플릿입니다. Auto Scaling Group을 생성할 때는 Launch Configuration을 지정해야 합니다. |
-| Auto Scaling Group의 최소 용량/최대 용량 | | Auto Scaling Group의 최소/최대 서버 수를 말합니다. 최소 서버 수의 경우, 항상 이 값과 같거나 이 값보다 더 큰 서버 수가 유지됩니다. 서버를 한 대도 보유하지 않을 수 있게 하려면 0으로 설정합니다. |
-| 기대 용량 (Desired Capacity) | | 서버의 수는 기대 용량값에 따라서 조정됩니다. 이 값은 최소 용량 이상, 최대 용량 이하여야 합니다. 이 값이 지정되어 있지 않으면 초기에 최소 용량만큼 서버를 생성합니다. |
-| 쿨다운 기본값(초) (Default Cooldown) | | Default Cooldown(초) 새로운 서버가 생성되었다고 해도, Init-Script 실행이나 업데이트 설치 등의 이유로 실제 서비스를 수행할 수 있을 정도로 준비되기까지는 시간이 소요될 수 있습니다. 쿨다운(Cooldown) 시간이란 실제 Scaling이 수행 중이거나 수행 완료된 이후에 모니터링 이벤트 알람이 발생하더라도 무시하도록 설정한 기간입니다. |
-| 헬스체크 | | Auto Scaling Group의 가상 서버에 주기적인 상태 확인을 수행하여 상태가 비정상인 가상 서버를 식별하도록 Health Check를 합니다. |
-| 헬스체크 보류 기간 | |	서버가 생성되어 ‘운영중’으로 변경되었더라도 서버의 업데이트 설치 등 작업에 의해서 헬스 체크에 정상 응답하지 못하는 경우가 생길 수 있습니다. 이런 경우 헬스 체크 보류기간을 지정하면 해당 기간 동안에는 헬스 체크에 실패하더라도 서버 헬스에 이상이 있다고 판단하지 않습니다. |
-| 헬스체크 유형 | | 서버와 Load Balancer 둘 중에 선택할 수 있습니다. Auto Scaling Group 설정에서 Load Balancer 이름을 지정한 경우에는 헬스 체크 유형 역시 Load Balancer로 설정합니다. 이런 경우 Auto Scaling은 Load Balancer 헬스 체크 방식과 기준에 따라 서버의 상태를 판단합니다. |
-| 반납 정책 | | Auto Scaling 과정에서 추가된 서버에 대한 Scale-in 작업에 대해, 고객이 API 질의 형식으로먼저 반납할 서버를 지정할 수 있습니다. 기본 설정은 먼저 생성된 서버부터 반납합니다. |
-| Policy | | Auto Scaling이 일어나는 방식을 정의하고 있는데, 이를 ‘Policy’로 정의하고 있습니다. Auto Scale-out 이 발생할 때, 몇 대의 가상 서버를 늘릴 것인지, 반대로 Scale-in이 발생할 때 몇 대의 가상서버를 줄일 것인지를 정의합니다. 대수로 정의할 수 도 있고, %로 정의할 수도 있습니다. |
-| Basic Metric | | 기본적으로 제공되는 모니터링 항목 |
-| Extended Metric | | 상세모니터링을 신청하면 제공되는 모니터링 항목 |
-
-## 참고 URL
-1.  Ncloud(네이버 클라우드) Auto Scaling 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/compute-autoscaling-autoscalingoverview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/compute-autoscaling-autoscalingoverview&lt;/a&gt;
-
-2. Classic 환경에서 Auto Scaling 설정하기
-    - &lt;a href=&quot;/compute/ncloud_compute_autoscaling_classic_guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud_compute_autoscaling_classic_guide.html&lt;/a&gt;
-
-2. Cloud Insight Basic/Extended Metric 정리
-    - &lt;a href=&quot;https://api.ncloud-docs.com/docs/management-cloudinsight-productinfo&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://api.ncloud-docs.com/docs/management-cloudinsight-productinfo&lt;/a&gt;    
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;60%&quot; %}  	</description>
-            <pubDate>Tue, 05 Sep 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-autoscaling-vpc-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-autoscaling-vpc-guide.html</guid>
-            
-            <category>autoscaling</category>
-            
-            <category>vpc</category>
             
             
         </item>

@@ -21,12 +21,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="canonical" href="https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
+<meta property="og:image" content="https://docs.3rdeyesys.com/images/storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg" />
+<meta property="og:image:alt" content="cloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-08-16T00:00:00+09:00" />
-<meta name="twitter:card" content="summary" />
+<meta property="article:published_time" content="2023-11-06T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://docs.3rdeyesys.com/images/storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg" />
+<meta name="twitter:image:alt" content="cloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" />
 <meta property="twitter:title" content="Object Storage 접속용 Windows Client Tool - S3 Browser" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법입니다","headline":"Object Storage 접속용 Windows Client Tool - S3 Browser","url":"https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법입니다","headline":"Object Storage 접속용 Windows Client Tool - S3 Browser","image":{"alt":"cloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법","url":"https://docs.3rdeyesys.com/images/storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title>Object Storage 접속용 Windows Client Tool - S3 Browser | 써드아이시스템 기술문서</title>
@@ -2051,10 +2055,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>Amazon S3 (Credentials from AWS Config or Credential file)</li>
 </ul>
 
-<h2 id="cloudberry-explorer">CloudBerry Explorer</h2>
-<p>또 다른 클라이언트인 CloudBerry Explorer입니다. 자세한  내용은 아래 링크에서 확인 가능합니다.</p>
+<h2 id="업로드하는-파일-권한-자동-적용">업로드하는 파일 권한 자동 적용</h2>
+<p>S3 Browser를 이용해 파일을 업로드할 때 업로드하는 파일의 권한을 자동으로 적용하는 방법에 대해 살펴보겠습니다.</p>
 
-<p><a href="/storage/ncloud_storage_object_storage_s3_client_cloudberry_explorer.html" target="_blank" style="word-break:break-all;">Object Storage 접속용 Windows Client Tool - CloudBerry Explorer</a></p>
+<p>우선 S3 Browser에서 [<strong>Tools</strong>] - [<strong>Option</strong>] 메뉴를 클릭합니다.</p>
+
+<figure>
+  <img class="docimage" src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_06.png" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<ul>
+  <li>[<strong>Option</strong>] 메뉴에 보면 여러 옵션들이 있는데 아래 스샷에서 표시한 2가지 옵션이 중요합니다. 각각에 대한 설명은 아래쪽에서 다시 정리해보겠습니다.</li>
+</ul>
+<figure>
+  <img class="docimage" src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_07.png" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" style="width: 845px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
+
+<h3 id="버킷bucket-권한-상속">버킷(Bucket) 권한 상속</h3>
+<p>[<strong>Inherit permissions from parent bucket</strong>] 옵션은 버킷(Bucket)에 업로드 되는 파일들은 버킷(Bucket)의 권한을 상속 받게 하는 옵션입니다.<br />
+예를 들어 버킷(Bucket)의 권한이 [<strong>All User</strong>]에게 [<strong>Read</strong>] 권한이라면 이 옵션을 선택해두면 이 버킷(Bucket)에 업로드 되는 모든 파일은 [<strong>All User</strong>]에게 [<strong>Read</strong>] 권한을 가지게 됩니다.</p>
+
+<h3 id="권한-유지">권한 유지</h3>
+<p>[<strong>Preserve permissions when overwriting existing files</strong>] 옵션은 이미 버킷(Bucket)에 존재하는 파일을 다시 업로드 해서 덮어 쓰기를 할 경우 기존의 권한을 유지하도록 하는 옵션입니다.</p>
 
 <h2 id="참고-url">참고 URL</h2>
 <ol>
@@ -2069,6 +2097,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </ul>
   </li>
 </ol>
+
+<h2 id="문서-업데이트-내역">문서 업데이트 내역</h2>
+<div>
+  <table class="simple_table small_font" style="width:50%">
+    <thead>
+      <tr>
+        <th>날짜</th>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      
+      
+      
+        <tr>
+          <td>2022-08-16</td>
+          <td>문서 최초 생성</td>
+        </tr>
+      
+        <tr>
+          <td>2023-11-06</td>
+          <td>파일 업로드할 때 권한 적용 안내 추가</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
 
   
     <div class="tags">
@@ -2139,7 +2195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2022-08-16<br/> Site last generated: 2023-11-03 <br />        
+        <span>Page last updated:</span> 2023-11-06<br/> Site last generated: 2023-11-06 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
