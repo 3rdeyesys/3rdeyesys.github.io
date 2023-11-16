@@ -1340,7 +1340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="&nbsp;&nbsp; L &nbsp; IIS Log 수집하는 방법" href="/management/ncloud-management-cloud-Log-analytics-windows-iis-log-collection-guide.html" >&nbsp;&nbsp; L &nbsp; IIS Log 수집하는 방법</a></li>          
+          <li><a title="&nbsp;&nbsp; L &nbsp; IIS Log 수집하는 방법" href="/management/ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide.html" >&nbsp;&nbsp; L &nbsp; IIS Log 수집하는 방법</a></li>          
                     
           
           
@@ -2819,11 +2819,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				
 					,
 					
-					"management-ncloud-management-cloud-log-analytics-windows-iis-log-collection-guide-html": {
-						"id": "management-ncloud-management-cloud-log-analytics-windows-iis-log-collection-guide-html",
+					"management-ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide-html": {
+						"id": "management-ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide-html",
 						"title": "Cloud Log Analytics에서 Windows IIS Log 수집하는 방법",
 						"categories": "",
-						"url": " /management/ncloud-management-cloud-log-analytics-windows-iis-log-collection-guide.html",
+						"url": " /management/ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide.html",
 						"content": "개요\nNcloud(네이버 클라우드) Cloud Log Analytics 서비스에서 Windows 웹서버인 IIS 로그를 수집하는 방법에 대해 정리해보겠습니다.\n\n테스트 서버\n\n  Windows Server 2019 (64-bit) English Edition\n\n\n수집 설정\n\n  [Cloud Log Analytics] - [Management]에서 서버를 선택하고 [수집 설정] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n[Log 수집 설정] 화면에서 각 설정 항목을 다음과 같이 입력합니다.\n\n  Log Template: Custom Log를 선택합니다.\n  Log Type: 임의의 값을 입력합니다. (예: iislog)\n  Log 경로: 실제 저장되는 로그파일의 경로를 입력합니다.\n\n\n\n  \n  \n    \n  \n\n\nLog 파일 경로 확인\nIIS Log 파일의 경로는 [IIS Manager]를 실행하고, 사이트 정보에서 [Logging] 메뉴를 선택하면 아래와 같이 [Directory] 항목을 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n해당 경로를 찾아가면 아래와 같이 로그 파일이 저장되어 있는 것을 확인할 수 있습니다.\n\n# 예시\nC:\\inetpub\\logs\\LogFiles\\W3SVC1\\u_ex231114.log\n\n\n  \n  \n    \n  \n\n\nLog 파일 경로 입력\n실제 Log 파일은 일별 또는 시간 별로 파일명이 다르게 저장되는 경우가 대부분이므로 [Log 경로]에는 다음과 같이 전체 파일을 수집하도록 입력하면 됩니다. 이제 모든 항목을 입력했으면 [추가] 버튼을 클릭합니다.\n\n# 예시\nC:\\inetpub\\logs\\LogFiles\\W3SVC1\\*.log\n\n\n\n  \n  \n    \n  \n\n\n그리고, 입력한 내용에 이상이 없으면 [적용] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n로그 수집 Agent 설치\n로그 수집 설정을 마치면 [로그 수집 Agent 설치] 방법에 대한 안내 팝업이 나타납니다. 설치 안내 내용 중에서 [로그 수집 agent 설치 명령어] 항목에 있는 [클립보드에 복사하기] 버튼을 클릭해서 설치 명령어를 복사합니다.\n\n\n  \n  \n    \n  \n\n\n서버의 [Windows PowerShell]을 실행시켜서 위에서 복사한 [로그 수집 agent 설치 명령어] 입력합니다. 설치가 정상적으로 완료되면 [Finish Installation] 이라는 메시지를 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n수집된 로그 확인\n설치 후 5분 정도 기다렸다 [Cloud Log Analytics] - [Search] 메뉴에 들어가보면 아래와 같이 수집된 로그를 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n참고 URL\nhttps://guide.ncloud-docs.com/docs/cla-overview\n\n문서 업데이트 내역\n\n  \n    \n      \n        날짜\n        내용\n      \n    \n    \n      \n      \n      \n      \n        \n          2023-11-16\n          문서 최초 생성"
 					}
 					

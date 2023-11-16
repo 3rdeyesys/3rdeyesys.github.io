@@ -1345,7 +1345,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
-          <li><a title="&nbsp;&nbsp; L &nbsp; IIS Log 수집하는 방법" href="/management/ncloud-management-cloud-Log-analytics-windows-iis-log-collection-guide.html" >&nbsp;&nbsp; L &nbsp; IIS Log 수집하는 방법</a></li>          
+          <li><a title="&nbsp;&nbsp; L &nbsp; IIS Log 수집하는 방법" href="/management/ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide.html" >&nbsp;&nbsp; L &nbsp; IIS Log 수집하는 방법</a></li>          
                     
           
           
@@ -2215,7 +2215,7 @@ mysql&gt; show master status<span class="p">;</span>
 MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 수 있게 업데이트 되었습니다.</li>
 </ul>
 
-<ul class="tab" data-tab="1e9a162f-3c6d-4a10-a67c-2f05dab6fd48" data-name="slave_my_cnf">
+<ul class="tab" data-tab="05997c7b-8781-4429-816a-0863e2009d89" data-name="slave_my_cnf">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2226,7 +2226,7 @@ MySQL 8.0 버전 부터는 replicate-do-db 설정에 채널 정보도 추가할 
       </li>
   
 </ul>
-<ul class="tab-content" id="1e9a162f-3c6d-4a10-a67c-2f05dab6fd48" data-name="slave_my_cnf">
+<ul class="tab-content" id="05997c7b-8781-4429-816a-0863e2009d89" data-name="slave_my_cnf">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/my.cnf
@@ -2334,7 +2334,7 @@ mysql&gt; quit
 <p>리플리케이션 채널을 설정하는 쿼리문은 다음과 같습니다.<br />
 채널 설정 구문은 MySQL 버전별로 다르고, 특히 8.0.23 버전부터는 완전히 달라지므로 버전에 맞게 사용하시면 됩니다.</p>
 
-<ul class="tab" data-tab="b7b3068e-c27b-4997-9aba-2addefa9c94c" data-name="config_channel">
+<ul class="tab" data-tab="4de75475-1955-4dda-859b-3bcd0b8557c3" data-name="config_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2349,7 +2349,7 @@ mysql&gt; quit
       </li>
   
 </ul>
-<ul class="tab-content" id="b7b3068e-c27b-4997-9aba-2addefa9c94c" data-name="config_channel">
+<ul class="tab-content" id="4de75475-1955-4dda-859b-3bcd0b8557c3" data-name="config_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># MySQL 5.7</span>
@@ -2394,7 +2394,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
 <h3 id="master-서버-정보-입력">Master 서버 정보 입력</h3>
 <p>Slave 서버에 Master 서버 정보를 하나씩 입력합니다.</p>
 
-<ul class="tab" data-tab="1b4b3817-0d74-4ebe-a978-93a5d65ac94e" data-name="config_channel_sample">
+<ul class="tab" data-tab="1f6585a8-8d67-45f9-9664-05151ecb0b67" data-name="config_channel_sample">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2409,7 +2409,7 @@ mysql&gt; CHANGE REPLICATION SOURCE TO <span class="nv">SOURCE_HOST</span><span 
       </li>
   
 </ul>
-<ul class="tab-content" id="1b4b3817-0d74-4ebe-a978-93a5d65ac94e" data-name="config_channel_sample">
+<ul class="tab-content" id="1f6585a8-8d67-45f9-9664-05151ecb0b67" data-name="config_channel_sample">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Master1</span>
@@ -2456,7 +2456,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
 <h3 id="리플리케이션-채널-시작">리플리케이션 채널 시작</h3>
 <p>리플리케이션 시작 후 에러가 없는지 확인합니다.</p>
 
-<ul class="tab" data-tab="13f6df13-3a3f-481f-acd1-053903aeacea" data-name="start_channel">
+<ul class="tab" data-tab="5ecb8452-7184-4582-aea6-43039fda6c97" data-name="start_channel">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2467,7 +2467,7 @@ mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
       </li>
   
 </ul>
-<ul class="tab-content" id="13f6df13-3a3f-481f-acd1-053903aeacea" data-name="start_channel">
+<ul class="tab-content" id="5ecb8452-7184-4582-aea6-43039fda6c97" data-name="start_channel">
   
       <li class="active">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#MySQL 5.7 기준</span>
@@ -2566,7 +2566,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
 
 <h2 id="버전별-명령어-비교">버전별 명령어 비교</h2>
 
-<ul class="tab" data-tab="4238497f-80bf-4404-8cc0-86223ff9463d" data-name="replication_command">
+<ul class="tab" data-tab="a33d1358-4526-424d-924f-93d9f8f8abab" data-name="replication_command">
   
       <li class="active">
           <a href="#">MySQL 5.7 </a>
@@ -2581,7 +2581,7 @@ Slave 서버에서 testdb2 DB에 sampletable Table이 복제되었는지 확인�
       </li>
   
 </ul>
-<ul class="tab-content" id="4238497f-80bf-4404-8cc0-86223ff9463d" data-name="replication_command">
+<ul class="tab-content" id="a33d1358-4526-424d-924f-93d9f8f8abab" data-name="replication_command">
   
       <li class="active">
 <div>
