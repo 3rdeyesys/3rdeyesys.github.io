@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 16 Nov 2023 10:50:16 +0900</pubDate>
-        <lastBuildDate>Thu, 16 Nov 2023 10:50:16 +0900</lastBuildDate>
+        <pubDate>Thu, 16 Nov 2023 11:02:44 +0900</pubDate>
+        <lastBuildDate>Thu, 16 Nov 2023 11:02:44 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -21,20 +21,20 @@ Ncloud(네이버 클라우드) Cloud Log Analytics 서비스에서 Windows 웹�
 ## 수집 설정
 - [**Cloud Log Analytics**] - [**Management**]에서 서버를 선택하고 [**수집 설정**] 버튼을 클릭합니다.
 
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 [**Log 수집 설정**] 화면에서 각 설정 항목을 다음과 같이 입력합니다.
 - **Log Template**: **Custom Log**를 선택합니다.
 - **Log Type**: 임의의 값을 입력합니다. (예: iislog)
 - **Log 경로**: 실제 저장되는 로그파일의 경로를 입력합니다.
 
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 
 ### Log 파일 경로 확인
 IIS Log 파일의 경로는 [**IIS Manager**]를 실행하고, 사이트 정보에서 [**Logging**] 메뉴를 선택하면 아래와 같이 [**Directory**] 항목을 확인할 수 있습니다.
 
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 해당 경로를 찾아가면 아래와 같이 로그 파일이 저장되어 있는 것을 확인할 수 있습니다. 
 
@@ -42,7 +42,7 @@ IIS Log 파일의 경로는 [**IIS Manager**]를 실행하고, 사이트 정보�
 # 예시
 C:\inetpub\logs\LogFiles\W3SVC1\u_ex231114.log
 ```
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 ### Log 파일 경로 입력
 실제 Log 파일은 일별 또는 시간 별로 파일명이 다르게 저장되는 경우가 대부분이므로 [**Log 경로**]에는 다음과 같이 전체 파일을 수집하도록 입력하면 됩니다. 이제 모든 항목을 입력했으면 [**추가**] 버튼을 클릭합니다.
@@ -52,25 +52,25 @@ C:\inetpub\logs\LogFiles\W3SVC1\u_ex231114.log
 C:\inetpub\logs\LogFiles\W3SVC1\*.log
 ```
 
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 그리고, 입력한 내용에 이상이 없으면 [**적용**] 버튼을 클릭합니다.
 
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 ## 로그 수집 Agent 설치
 로그 수집 설정을 마치면 [**로그 수집 Agent 설치**] 방법에 대한 안내 팝업이 나타납니다. 설치 안내 내용 중에서 [**로그 수집 agent 설치 명령어**] 항목에 있는 [**클립보드에 복사하기**] 버튼을 클릭해서 설치 명령어를 복사합니다.
 
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 서버의 [**Windows PowerShell**]을 실행시켜서 위에서 복사한 [**로그 수집 agent 설치 명령어**] 입력합니다. 설치가 정상적으로 완료되면 [**Finish Installation**] 이라는 메시지를 확인할 수 있습니다.
 
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 ## 수집된 로그 확인
 설치 후 5분 정도 기다렸다 [**Cloud Log Analytics**] - [**Search**] 메뉴에 들어가보면 아래와 같이 수집된 로그를 확인할 수 있습니다.
 
-{% include image.html file=&quot;management/ncloud-management-cloud-Log-analytics-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
+{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
 
 
 ## 참고 URL
@@ -80,8 +80,8 @@ C:\inetpub\logs\LogFiles\W3SVC1\*.log
 ## 문서 업데이트 내역
 {% include doc-history.html width=&quot;50%&quot; %}  </description>
             <pubDate>Thu, 16 Nov 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/management/ncloud-management-cloud-Log-analytics-windows-IIS-Log-collection-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-cloud-Log-analytics-windows-IIS-Log-collection-guide.html</guid>
+            <link>https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-windows-iis-log-collection-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-windows-iis-log-collection-guide.html</guid>
             
             <category>Log</category>
             
