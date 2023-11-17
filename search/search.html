@@ -395,6 +395,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="&nbsp;&nbsp; L &nbsp; Windows IIS에서 IP 기록하기" href="/compute/ncloud-compute-server-x-forwarded-for-client-ip-logging-iis-guide.html" >&nbsp;&nbsp; L &nbsp; Windows IIS에서 IP 기록하기</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="https 리다이렉트 - Apache/CentOS" href="/compute/ncloud_compute_server_http_to_https_centos.html" >https 리다이렉트 - Apache/CentOS</a></li>          
                     
           
@@ -2384,6 +2391,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				
 					,
 					
+					"compute-ncloud-compute-server-x-forwarded-for-client-ip-logging-iis-guide-html": {
+						"id": "compute-ncloud-compute-server-x-forwarded-for-client-ip-logging-iis-guide-html",
+						"title": "IIS에서 X-Forwarded-For를 이용해 Client IP 기록하기",
+						"categories": "",
+						"url": " /compute/ncloud-compute-server-x-forwarded-for-client-ip-logging-iis-guide.html",
+						"content": "개요\nX-Forwarded-For (XFF) 는 HTTP Header 중 하나로 Load Balancer(로드밸런서)나 Proxy Server를 통해 웹서버에 접속하는 Client의 IP 주소를 식별하는 표준 헤더입니다.\n웹서버나 WAS 앞쪽에 Load Balancer 혹은 Proxy Server 등이 위치하게 된다면 서버 접근 로그에는 Client IP가 아닌 Load Balancer 혹은 Proxy Server의 IP 주소가 기록됩니다. \n이때 웹 어플리케이션에서 X-Forwarded-For 헤더를 이용하면 Client IP를 서버 접근 로그에 남길 수 있습니다.\n\n여기서는 Load Balancer와 연동된 Windows Server의 IIS에서 X-Forwarded-For를 이용해 IIS(Internet Information Services) Log에 Clinet의 IP를 기록하는 과정을 살펴보겠습니다.\n\n테스트 환경\n테스트는 Windows 서버를 Load Balancer와 연동한 후 Cloud Log Analytics에서 IIS Log를  수집해 IP 주소를 확인하는 방식으로 진행하겠습니다.\n\nNetwork 환경\n\n  VPC 대역 : 10.0.0.0/16\n  Subnet 대역 (Server) : 10.0.0.0/24\n  Subnet 대역 (Load Balancer) : 10.0.4.0/24\n\n\nServer 환경\n\n  Windows Server 2019 (64-bit) English Edition\n\n\n테스트 서버\n위 서버 환경에서 정리한 대로 Windows 서버를 준비했습니다. VPC 환경에서 서버 생성하는 방법은 아래 문서를 참고하시면 됩니다.\n\n\n⁃ VPC 환경에서 서버 생성하는 방법\n\n\n\n  \n  \n    \n  \n\n\n로드밸런서도 마찬가지로 준비하고, 서버와 연동까지 완료했습니다. VPC 환경에서 로드밸런서를 생성하는 방법은 아래 문서를 참고하시면 됩니다.\n\n\n⁃ VPC 환경에서 Application Load Balancer 생성하는 방법\n\n\n\n  로드밸런서 상세 정보에서 [10.0.4.0/24]로 표시되는 서브넷 정보를 기억했다가 아래쪽에서 테스트할 때 확인해보겠습니다.\n\n\n  \n  \n    \n  \n\n\n설정 전 테스트\n우선, X-Forwarded-For (XFF) 설정을 하기 전에 어떻게 기록이 남는지 확인해보겠습니다.\n\nIIS 접속 로그 확인\nWindows IIS 접속 로그를 [Cloud Log Analytics]에서 확인하는 방법은 아래 문서를 참고하시며 됩니다.\n\n\n⁃ Cloud Log Analytics에서 Windows IIS Log 수집하는 방법\n\n\nCloud Log Analytics에서 수집한 로그를 확인해보면 위에서 설정했던 Load Balancer의 IP 대역 (10.0.4.xx)이 기록된 것을 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\nIIS 설정\n이제 실제 Client IP가 기록 되도록 설정을 변경해보겠습니다.\n\n\n  IIS Manager를 실행시켜서 메뉴 중에 [Logging]을 선택합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  [Logging] 화면에서 [Format]은 기본 값인 [W3C] 그대로 두고 [Log File] 항목의 [Select Fields] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  [W3C Logging Fields] 팝업창에서 [Custom Fields] 항목의 [Add Field] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  [Add Custom Field] 팝업창에서 [Field Name], [Source] 두가지 항목 모두에 [X-Forwarded-For]를 입력하고 [OK] 버튼을 클릭합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  [Custom Fields]에 [X-Forwarded-For] 설정이 추가된 것을 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  팝업창을 닫고 [IIS Manager] - [Logging] 설정 화면 오른쪽에 있는 [Apply]를 클릭해서 변경된 설정을 적용합니다.\n\n\n\n  \n  \n    \n  \n\n\n\n  변경된 설정이 적용되었다는 메시지를 확인할 수 있습니다.\n\n\n\n  \n  \n    \n  \n\n\n설정 후 테스트\n위와 같이 서버에서 설정을 모두 마친 후에 로드 밸런서 URL로 접속합니다.\n이후에 Cloud Log Analytics에서 로그를 확인해보면 아래와 같이 실제 접속한 Client의 IP가 추가로 기록된 것을 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n참고 URL\n\n  X-Forwarded-For 안내\n    \n      https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/X-Forwarded-For\n    \n  \n  Cloud Log Analytics에서 Windows IIS Log 수집하는 방법\n    \n      https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide.html\n    \n  \n\n\n문서 업데이트 내역\n\n  \n    \n      \n        날짜\n        내용\n      \n    \n    \n      \n      \n      \n      \n        \n          2023-11-17\n          문서 최초 생성"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
 					"database-ncloud-database-cloud-db-for-mssql-guide-html": {
 						"id": "database-ncloud-database-cloud-db-for-mssql-guide-html",
 						"title": "VPC환경에서 Cloud DB for MSSQL 생성하기",
@@ -2914,7 +2936,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						"title": "로드밸런서(Application Load Balancer) 접속 로그 확인하는 방법",
 						"categories": "",
 						"url": " /networking/ncloud-networking-load-balancer-application-lb-access-log.html",
-						"content": "개요\nNcloud (네이버 클라우드) VPC 환경의 대표적인 로드밸런서(Load Balancer)인 애플리케이션 로드밸런서(Application Load Balancer)의 접속 로그를 확인하는 방법에 대해 정리해보겠습니다.\n\n테스트 준비\n\n  서버 생성: 록키 리눅스 (Rocky Linux 8.6)\n  로드밸런서 생성: 애플리케이션 로드밸런서(Application Load Balancer)\n  서버와 로드밸런서 연결\n\n\n서버 생성\n테스트용 서버는 Rocky Linux 8.6 서버로 생성했습니다.\n\n\n  \n  \n    \n  \n\n\n로드밸런서 생성\nApplication Load Balancer를 생성하고 테스트용 서버와 연결까지 마쳤습니다.\n\nApplication Load Blancer 의 생성 가이드는 아래 문서를 참고하시기 바랍니다. \n- VPC 환경에서 Application Load Balancer 생성하기\n\n\n  \n  \n    \n  \n\n\n접속 로그 수집 활성화\n로드밸런서의 접속 로그를 수집하려면 접속 로그 수집 기능을 활성화 해야 합니다. 생성된 로드밸런서를 선택하고 [로드밸런서 설정 변경] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n\n  [로드밸런서 설정 변경] 팝업창에서 [액세스 로그 수집] 항목이 [비활성] 상태인 것을 확인할 수 있습니다. 여기서 [설정] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n\n  [액세스 로그 수집]을 활성화할 것인지 한번 더 확인하는 창이 뜨는데 [확인] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n\n  [로드밸런서 설정 변경] 팝업창에서 [액세스 로그 수집] 항목이 [활성] 상태로 변경된 것을 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n접속 테스트\n웹브라우저에서 로드밸런서 주소로 접속해서 정상 작동하는지 확인했습니다.\n\n\n  \n  \n    \n  \n\n\n로드밸런서 접속 로그 확인\n로드밸런서 접속 로그는 Ncloud 서비스 중에서 [Cloud Log Analytics]에서 확인할 수 있습니다.\n\n[Cloud Log Analytics] - [Search] - [로그 종류 선택]에서 [application_loadbalancer_access] 필드를 선택하고 [Log 발생시간]을 상황에 맞에 선택한 후에 검색을 하면 아래 스샷과 같이 접속로그를 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n참고 URL\n\n  VPC 환경에서 Application Load Balancer 생성하기\n    \n      https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html\n    \n  \n  Cloud Log Analytics 설정 가이드\n    \n      https://docs.3rdeyesys.com/analytics/ncloud_analytics_cloud_log_analytics_guide.html"
+						"content": "개요\nNcloud (네이버 클라우드) VPC 환경의 대표적인 로드밸런서(Load Balancer)인 애플리케이션 로드밸런서(Application Load Balancer)의 접속 로그를 확인하는 방법에 대해 정리해보겠습니다.\n\n테스트 준비\n\n  서버 생성: 록키 리눅스 (Rocky Linux 8.6)\n  로드밸런서 생성: 애플리케이션 로드밸런서(Application Load Balancer)\n  서버와 로드밸런서 연결\n\n\n서버 생성\n테스트용 서버는 Rocky Linux 8.6 서버로 생성했습니다.\n\n\n  \n  \n    \n  \n\n\n로드밸런서 생성\nApplication Load Balancer를 생성하고 테스트용 서버와 연결까지 마쳤습니다.\n\nApplication Load Blancer 의 생성 가이드는 아래 문서를 참고하시기 바랍니다. \n- VPC 환경에서 Application Load Balancer 생성하기\n\n\n  \n  \n    \n  \n\n\n접속 로그 수집 활성화\n로드밸런서의 접속 로그를 수집하려면 접속 로그 수집 기능을 활성화 해야 합니다. 생성된 로드밸런서를 선택하고 [로드밸런서 설정 변경] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n\n  [로드밸런서 설정 변경] 팝업창에서 [액세스 로그 수집] 항목이 [비활성] 상태인 것을 확인할 수 있습니다. 여기서 [설정] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n\n  [액세스 로그 수집]을 활성화할 것인지 한번 더 확인하는 창이 뜨는데 [확인] 버튼을 클릭합니다.\n\n\n  \n  \n    \n  \n\n\n\n  [로드밸런서 설정 변경] 팝업창에서 [액세스 로그 수집] 항목이 [활성] 상태로 변경된 것을 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n접속 테스트\n웹브라우저에서 로드밸런서 주소로 접속해서 정상 작동하는지 확인했습니다.\n\n\n  \n  \n    \n  \n\n\n로드밸런서 접속 로그 확인\n로드밸런서 접속 로그는 Ncloud 서비스 중에서 [Cloud Log Analytics]에서 확인할 수 있습니다.\n\n[Cloud Log Analytics] - [Search] - [로그 종류 선택]에서 [application_loadbalancer_access] 필드를 선택하고 [Log 발생시간]을 상황에 맞에 선택한 후에 검색을 하면 아래 스샷과 같이 접속로그를 확인할 수 있습니다.\n\n\n  \n  \n    \n  \n\n\n참고 URL\n\n  VPC 환경에서 Application Load Balancer 생성하기\n    \n      https://docs.3rdeyesys.com/networking/ncloud_networking_load_balancer_application_lb.html\n    \n  \n  Cloud Log Analytics 설정 가이드\n    \n      https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-guide.html"
 					}
 					
 				
@@ -4928,7 +4950,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-         Site last generated: 2023-11-16 <br />        
+         Site last generated: 2023-11-17 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

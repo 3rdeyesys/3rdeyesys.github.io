@@ -303,6 +303,17 @@
 
 
 {
+"title": "IIS에서 X-Forwarded-For를 이용해 Client IP 기록하기",
+"tags": "proxyload_balancerlogwindows",
+"keywords": "프록시, 로드밸런서, 클라이언트IP",
+"url": "/compute/ncloud-compute-server-x-forwarded-for-client-ip-logging-iis-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "VPC환경에서 Cloud DB for MSSQL 생성하기",
 "tags": "databasemssqlclouddbvpc",
 "keywords": "Database, Domain, MicroSoft, SQL Server",
