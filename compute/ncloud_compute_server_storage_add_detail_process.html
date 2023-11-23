@@ -11,22 +11,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드입니다">
+<meta name="description" content="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드">
 <meta name="keywords" content="linux, storage,  Storage, Disk">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="Linux 스토리지(디스크) 추가 상세 가이드" />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:description" content="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드입니다" />
+<meta property="og:description" content="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" />
 <link rel="canonical" href="https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
+<meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/ncloud-compute-server-storage-add-detail-process-01.png" />
+<meta property="og:image:alt" content="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-06-04T00:00:00+09:00" />
-<meta name="twitter:card" content="summary" />
+<meta property="article:published_time" content="2023-11-23T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://docs.3rdeyesys.com/images/compute/ncloud-compute-server-storage-add-detail-process-01.png" />
+<meta name="twitter:image:alt" content="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" />
 <meta property="twitter:title" content="Linux 스토리지(디스크) 추가 상세 가이드" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드입니다","headline":"Linux 스토리지(디스크) 추가 상세 가이드","url":"https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드","headline":"Linux 스토리지(디스크) 추가 상세 가이드","image":{"alt":"Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드","url":"https://docs.3rdeyesys.com/images/compute/ncloud-compute-server-storage-add-detail-process-01.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title>Linux 스토리지(디스크) 추가 상세 가이드 | 써드아이시스템 기술문서</title>
@@ -1967,18 +1971,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   
     
-      <div class="summary">Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드입니다</div>
+      <div class="summary">Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드</div>
     
   
 
   
 
   <h2 id="개요">개요</h2>
-<p>네이버 클라우드에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.</p>
+<p>Ncloud(네이버 클라우드)에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.</p>
 
 <h2 id="전체-과정-요약">전체 과정 요약</h2>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-~# fdisk <span class="nt">-l</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# fdisk <span class="nt">-l</span>
 
 ~# fdisk /dev/xvdb
 
@@ -1987,38 +1990,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   - CentOS 5.x: mkfs.ext3 /dev/xvdb1
   - CentOS 6.x: mkfs.ext4 /dev/xvdb1
   - CentOS 7.x: mkfs.xfs /dev/xvdb1
+  - Rocky Linux: mkfs.xfs /dev/xvdb1
   - Ubuntu : mkfs.ext4 /dev/xvdb1
 
 ~# <span class="nb">mkdir</span> /mnt/data
 
 ~# mount /dev/xvdb1 /mnt/data
 
-~# <span class="nb">df</span> <span class="nt">-k</span>
+~# <span class="nb">df</span> <span class="nt">-hT</span>
 
-~# vi /etc/fstab
+~# vim /etc/fstab
 <span class="c">### =============================</span>
 <span class="nv">UUID</span><span class="o">=</span>1fd5s61f5d-<span class="k">***</span> 중략 <span class="k">***</span><span class="nt">-f84ew13</span> /mnt/data xfs defaults 1 2
 
 <span class="c"># 또는</span>
 /dev/xvdb1 /mnt/data ext4 defaults 1 2
 <span class="c">### =============================</span>
-...
-
 </code></pre></div></div>
 
 <h2 id="스토리지-생성-할당">스토리지 생성, 할당</h2>
 <p>우선은 네이버 클라우드 콘솔 [Server] - [Server]에서 해당 서버를 선택하고 
-[서버 관리 및 설정 변경] - [스토리지 생성]을 선택하거나 [Server] - [Storage]에서 [스토리지 생성]을 클릭합니다.</p>
+[서버 관리 및 설정 변경] - [스토리지 생성]을 선택합니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_01.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_02.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-01.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2027,7 +2022,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>다음으로 [스토리지 생성] 화면에서 스토리지 종류, 이름, 적용서버, 크기 (최소 10GB, 최대 2000GB) 등을 선택하고 [추가] 버튼을 클릭합니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_03.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-02.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 685px; " />
   
     <figcaption></figcaption>
   
@@ -2036,24 +2031,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>앞에서 설정한 스토리지 정보를 다시 살펴보고 이상이 없으면 [확인] 버튼을 클릭합니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_04.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-03.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 845px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
-<p>추가된 스토리지는 [Server] - [Server] 리스트에서 해당 서버를 클릭해 상세정보에서 확인하거나
-[Server] - [Storage] 리스트에서 연결정보까지 포함해서 확인할 수 있습니다.</p>
+<p>추가된 스토리지는 [Server] - [Server] 리스트에서 해당 서버를 클릭해 상세정보에서 확인할 수 있습니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_05.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
-  
-    <figcaption></figcaption>
-  
-</figure>
-
-<figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_06.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-04.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2069,7 +2056,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </code></pre></div></div>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_07.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 660px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-05.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2089,7 +2076,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_08-01.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 660px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-06.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2101,7 +2088,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_08-02.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 660px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-07.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2112,7 +2099,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_08-03.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 660px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-08.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2123,7 +2110,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_08-04.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 660px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-09.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2133,7 +2120,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 디스크가 /dev/xvdb1 장치로 인식된 것을 확인할 수 있습니다.</p>
 
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_09.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 660px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-10.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2147,8 +2134,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 - CentOS 5.x: mkfs.ext3 /dev/xvdb1
 - CentOS 6.x: mkfs.ext4 /dev/xvdb1
 - CentOS 7.x: mkfs.xfs /dev/xvdb1
+- Rocky Linux: mkfs.xfs /dev/xvdb1
 - Ubuntu : mkfs.ext4 /dev/xvdb1
 </code></pre></div></div>
+
+<figure>
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-11.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
+  
+    <figcaption></figcaption>
+  
+</figure>
 
 <h2 id="디스크-마운트">디스크 마운트</h2>
 <p>다음으로 디스크를 마운트할 포인트 즉, 디렉토리를 원하는 이름으로 생성하고 마운트를 합니다.<br />
@@ -2157,18 +2152,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 ~# mount /dev/xvdb1 /mnt/data
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_11-01.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 660px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-12.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
 </figure>
 
-<p><br />
-마운트된 내역을 확인합니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# <span class="nb">df</span> <span class="nt">-k</span>
+<ul>
+  <li>마운트된 내역을 확인합니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# <span class="nb">df</span> <span class="nt">-hT</span>
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_11-02.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 660px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-13.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2184,7 +2181,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# blkid /dev/xvdb1
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_12.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-14.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 840px; " />
   
     <figcaption></figcaption>
   
@@ -2195,7 +2192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~# vi /etc/fstab
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_13.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-15.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2214,7 +2211,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </code></pre></div></div>
 <figure>
-  <img class="docimage" src="/images/compute/ncp_server_storage_add_detail_process_14.jpg" alt="Ncloud Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 770px; " />
+  <img class="docimage" src="/images/compute/ncloud-compute-server-storage-add-detail-process-16.png" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" style="width: 845px; " />
   
     <figcaption></figcaption>
   
@@ -2243,6 +2240,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li>CentOS 5.x : ext3</li>
       <li>CentOS 6.x : ext4</li>
       <li>CentOS 7.x : xfs</li>
+      <li>Rocky Linux : xfs</li>
       <li>Ubuntu Server / Desktop : ext4</li>
     </ul>
   </li>
@@ -2278,7 +2276,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 
 <h2 id="참고-url">참고 URL</h2>
-<p><a href="https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/compute-compute-4-1-v2.html</a></p>
+<ol>
+  <li>Ncloud Block Storage 생성, 추가 가이드
+    <ul>
+      <li><a href="https://guide.ncloud-docs.com/docs/blockstorage-create-vpc" target="_blank" style="word-break:break-all;">https://guide.ncloud-docs.com/docs/blockstorage-create-vpc</a></li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="문서-업데이트-내역">문서 업데이트 내역</h2>
+<div>
+  <table class="simple_table small_font" style="width:50%">
+    <thead>
+      <tr>
+        <th>날짜</th>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      
+      
+      
+        <tr>
+          <td>2021-06-04</td>
+          <td>문서 최초 생성</td>
+        </tr>
+      
+        <tr>
+          <td>2023-11-23</td>
+          <td>스크린샷 업데이트, Rocky Linux 추가</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
 
   
     <div class="tags">
@@ -2349,7 +2381,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-06-04<br/> Site last generated: 2023-11-17 <br />        
+        <span>Page last updated:</span> 2023-11-23<br/> Site last generated: 2023-11-23 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

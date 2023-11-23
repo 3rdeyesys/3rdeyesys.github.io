@@ -5,10 +5,231 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 17 Nov 2023 14:29:21 +0900</pubDate>
-        <lastBuildDate>Fri, 17 Nov 2023 14:29:21 +0900</lastBuildDate>
+        <pubDate>Thu, 23 Nov 2023 17:12:41 +0900</pubDate>
+        <lastBuildDate>Thu, 23 Nov 2023 17:12:41 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Linux 스토리지(디스크) 추가 상세 가이드</title>
+            <description>## 개요
+Ncloud(네이버 클라우드)에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.
+
+## 전체 과정 요약
+``` bash
+~# fdisk -l
+
+~# fdisk /dev/xvdb
+
+~# mkfs.xfs /dev/xvdb1
+
+  - CentOS 5.x: mkfs.ext3 /dev/xvdb1
+  - CentOS 6.x: mkfs.ext4 /dev/xvdb1
+  - CentOS 7.x: mkfs.xfs /dev/xvdb1
+  - Rocky Linux: mkfs.xfs /dev/xvdb1
+  - Ubuntu : mkfs.ext4 /dev/xvdb1
+
+~# mkdir /mnt/data
+
+~# mount /dev/xvdb1 /mnt/data
+
+~# df -hT
+
+~# vim /etc/fstab
+### =============================
+UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
+
+# 또는
+/dev/xvdb1 /mnt/data ext4 defaults 1 2
+### =============================
+```
+
+## 스토리지 생성, 할당
+우선은 네이버 클라우드 콘솔 [Server] - [Server]에서 해당 서버를 선택하고 
+[서버 관리 및 설정 변경] - [스토리지 생성]을 선택합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 [스토리지 생성] 화면에서 스토리지 종류, 이름, 적용서버, 크기 (최소 10GB, 최대 2000GB) 등을 선택하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-02.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+앞에서 설정한 스토리지 정보를 다시 살펴보고 이상이 없으면 [확인] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+추가된 스토리지는 [Server] - [Server] 리스트에서 해당 서버를 클릭해 상세정보에서 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 스토리지 할당 확인
+네이버 클라우드 콘솔에서 할당한 스토리지를 확인하기 위해 putty를 실행해 서버에 접속합니다.  
+이후 과정은 모두 서버에 접속한 상태에서 진행하게 됩니다.
+
+fdisk -l 명령어를 실행해보면 아래 화면처럼 /dev/xvdb 디스크가 할당된 것을 확인할 수 있습니다.
+
+``` bash
+~# fdisk -l
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 디스크 파티션
+다음 명령어를 입력해 할당된 디스크에 파티션을 생성합니다.  
+파티션 설정에는 기본인 MBR 방식과 2TB 이상의 디스크를 인식하기 위해 사용하는 GPT 방식이 있는데, 네이버 클라우드는 최대 2,000GB까지만 지원하므로 여기서는 기본방식인 MBR을 사용하겠습니다.
+``` bash
+~# fdisk /dev/xvdb
+```
+&lt;br /&gt;
+### 파티션 생성
+파티션을 생성할 때는 여러 단계의 옵션이 있습니다. 일반적으로는 아래와 같은 단계로 진행하면 됩니다.
+
+- 파티션을 새로 생성하기 위해 ‘n’을 입력
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- 생성할 파티션 타입에 따라 primary type이면 ‘p’, extended type이면 ‘e’를 입력.  
+  (primary type으로 생성하는 것이 일반적이며, primary 영역의 파티션이 부족할 경우 추가로 extended type으로 생성)
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- 생성할 파티션 번호와 cylinder 영역을 입력 (일반적으로 추가할 disk 전체를 mount하게 되고, 이 경우 default값을 그대로 사용하므로 Enter 입력)
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- ‘w’를 입력해 해당 구성을 적용. 파티션 생성 완료.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+마지막으로 fdisk -l 명령어로 생성된 파티션을 다시 확인합니다.  
+디스크가 /dev/xvdb1 장치로 인식된 것을 확인할 수 있습니다. 
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 디스크 포맷
+다음으로 파티션이 생성된 디스크를 포맷하면 되는데, OS별로 명령어가 다르므로 확인 후에 실행해야 합니다.  
+여기서는 CentOS 7.x 기준으로 mkfs.xfs 명령어를 사용했습니다.
+``` bash
+~# mkfs.xfs /dev/xvdb1
+
+- CentOS 5.x: mkfs.ext3 /dev/xvdb1
+- CentOS 6.x: mkfs.ext4 /dev/xvdb1
+- CentOS 7.x: mkfs.xfs /dev/xvdb1
+- Rocky Linux: mkfs.xfs /dev/xvdb1
+- Ubuntu : mkfs.ext4 /dev/xvdb1
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 디스크 마운트
+다음으로 디스크를 마운트할 포인트 즉, 디렉토리를 원하는 이름으로 생성하고 마운트를 합니다.  
+아래에 있는 마운트 경로 (/mnt/data)는 예시입니다. 원하는 경로를 직접 설정하시면 됩니다.
+``` bash
+~# mkdir /mnt/data
+~# mount /dev/xvdb1 /mnt/data
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- 마운트된 내역을 확인합니다.
+
+``` bash
+~# df -hT
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 마운트 정보 등록
+마운트 정보는 설정에 저장하지 않으면 서버가 리부팅될 때 사라지기 때문에 fstab에 저장합니다.  
+마운트 정보를 등록할 때 장치명을 사용하는 방법과 장치의 UUID를 사용하는 방법이 있는데, 경우에 따라서는 장치명이 변경될 수도 있어, 이를 대비해 가능하면 UUID로 등록합니다.
+
+### UUID 확인
+UUID를 확인하려면 blkid 명령어를 사용합니다.  
+여기서 확인한 UUID를 별도로 복사해두었다가 fstab에 입력하게 됩니다.
+``` bash
+~# blkid /dev/xvdb1
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+vi로 /etc/fstab 파일을 열면 다음과 같습니다.  
+서버 생성과 함께 장착된 기본 디스크도 UUID로 입력된 것을 확인할 수 있습니다.
+``` bash
+~# vi /etc/fstab
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+앞에서 확인하고 복사해둔 추가 디스크의 UUID와 기타 정보를 입력합니다.  
+입력을 완료한 후 fstab 파일을 저장하고 빠져 나옵니다.  
+(fstab에 입력할때 사용하는 디스크 정보 옵션에 대한 정리는 아래에서 다시 확인할 수 있습니다.)
+
+``` bash
+### /etc/fstab
+
+UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
+
+# 또는
+/dev/xvdb1 /mnt/data ext4 defaults 1 2
+
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+
+## fstab 설정 상세정보
+
+/etc/fstab은 부팅 단계에서 마운트되어야 할 볼륨 정보들이 저장되는 곳입니다.  
+(OS 이미지에 따라 파일 시스템이 다르기 때문에 주의해야 합니다.)
+
+파일의 각 항목이 의미하는 바는 아래와 같으며 각 항목은 Tab 또는 Space Bar로 구분합니다.
+
+(장치명) (마운트 포인트) (파일시스템 종류) (옵션) (dump 설정) (fsck 설정)
+
++ 장치명: 장치명은 장치의 UUID를 사용하거나 /dev/xvdb1와 같은 장치이름을 사용합니다.
+
++ 마운트 포인트: 볼륨을 마운트하고자 하는 위치입니다. 예시에서는 /mnt/data 디렉토리에 마운트했습니다.
+
++ 파일시스템 종류: OS별로 기본 파일시스템이 다르므로 알맞게 입력합니다.
+
+  - CentOS 5.x : ext3
+  - CentOS 6.x : ext4
+  - CentOS 7.x : xfs
+  - Rocky Linux : xfs  
+  - Ubuntu Server / Desktop : ext4
+
++ 옵션: 예시에서는 default 옵션을 사용하였으며, 해당 옵션에는 rw, nouser, auto, exec, suid 속성이 포함됩니다.  
+  각 속성의 내용은 다음과 같습니다. (필요한 옵션만 사용할 시, 각 옵션을 쉼표(,)로 구분하여 작성해주시면 됩니다.)
+
+  - auto : 부팅 시 자동 마운트
+  - rw : 읽기, 쓰기 모두 가능하도록 마운트
+  - nouser : root 계정만 마운트 가능
+  - exec : 파일 실행을 허용
+  - suid : SetUID와 SetGID를 허용
+
++ dump 설정: dump 명령으로 백업을 할 것인지에 대한 설정
+
+  - 0: dump되지 않는 파일 시스템
+  - 1: dump 가능한 파일 시스템
+
++ fsck 설정: 부팅시에 fsck 명령으로 파일시스템에 대한 무결성 검사를 할 것인지에 대한 설정
+
+  - 0 : 부팅 시 fsck 실행하지 않음
+  - 1 : 부팅 시 root 파일 시스템을 우선 체크
+  - 2 : 부팅 시 root 이외의 파일 시스템을 우선 체크
+
+## 참고 URL
+1. Ncloud Block Storage 생성, 추가 가이드
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/blockstorage-create-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/blockstorage-create-vpc&lt;/a&gt;
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}
+</description>
+            <pubDate>Thu, 23 Nov 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</guid>
+            
+            <category>linux</category>
+            
+            <category>storage</category>
+            
+            
+        </item>
         
         <item>
             <title>IIS에서 X-Forwarded-For를 이용해 Client IP 기록하기</title>
@@ -1913,549 +2134,6 @@ VPC 환경에서 [**NAT Gateway**]를 생성하는 상세한 방법은 아래 �
             <pubDate>Thu, 26 Oct 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mysql80-to-mysql80-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mysql80-to-mysql80-guide.html</guid>
-            
-            <category>database</category>
-            
-            <category>vpc</category>
-            
-            <category>MySQL</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud 데이터베이스 마이그레이션 서비스 | From MySQL 5.7 To MySQL 8.0</title>
-            <description>## 개요
-Ncloud(네이버 클라우드)의 Database Migration Service는 다양한 환경의 데이터베이스를 클라우드 환경으로 손쉽게 마이그레이션하도록 도와주는 서비스로 여기서는 **Public** 환경의 MySQL 5.7을 **Private** 환경의 [**Cloud DB for MySQL 8.0**]으로 마이그레이션하는 방법에 대해 정리해보겠습니다.
-
-## 서비스에서 제공하는 기능
-- **마이그레이션의 단계별 작업 자동화**: Migration 작업을 생성하여 마이그레이션에 필요한 단계별 작업 자동화
-- **Endpoint 관리 기능**: 손쉽게 Source DB Endpoint 생성 및 관리 가능
-- **연결 테스트 기능**: 마이그레이션 실행 전 Source DB와 Target DB 간 연결 테스트 진행
-- **마이그레이션 작업 내역 모니터링**: 마이그레이션 작업 상태와 내역 조회 가능
-
-## 지원 데이터베이스
-Database Migration Service는 MySQL 데이터베이스 간 마이그레이션을 지원합니다.
-
-- Major 버전이 동일한 데이터베이스 간의 마이그레이션이 권장됩니다.
-- Source DB는 MariaDB도 가능합니다.
-- Target DB는 MySQL만 가능합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-41.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-## 상세 설정 지원 여부
-Source DB의 상세 설정에 따른 지원 여부는 다음과 같습니다.
-
-### 지원 항목
-- 데이터베이스, TABLE의 캐릭터셋(CharacterSet): euckr, utf8(utf8mb3), utf8mb4 지원
-- Table, View, Stored Procedure, Function, Trigger 마이그레이션 지원
-
-### 미지원 항목
-- TABLE ENGINE: MyISAM, BLACKHOLE, FEDERATED, ARCHIVE 미지원
-- 사용자 계정 정보, MySQL Config 항목, Event 마이그레이션 미지원
-
-## 마이그레이션 진행 구조
-마이그레이션은 **`Target DB`**&lt;i class=&quot;fa-solid fa-right-long&quot; style=&quot;color: #e43b11;&quot;&gt;&lt;/i&gt; **`Source DB로 접근하여 DB 데이터를 가져오는 방식`**으로 진행됩니다.   
-
-또한 작업 진행 단계는 다음과 같습니다.
-1. [**Source DB**]에서 [**Export**]
-2. [**Target DB**]로 [**Import**]
-3. 두 DB 간의 **Replication** 완료 상태
-4. 마이그레이션 작업 완료
-
-## 서비스 점검
-마이그레이션 작업을 진행할 때 서비스 점검을 언제할 것인가가 중요한 고려사항이 됩니다. 물론 가장 안전한 방법은 마이그레이션 작업 전에 서비스 점검을 시작하는 것이지만, DB의 용량이 클 경우는 [**Export**], [**Import**] 각각 몇 시간씩 소요될 수 있는데, 오랜 시간 서비스 점검을 하려면 부담이 될 수 밖에 없습니다.  
-그러므로 오랜 시간 동안 서비스 점검을 하기 어려울 경우 다음과 같이 진행하면 되겠습니다.  
-
-마이그레이션에서 [**Export**], [**Import**] 작업이 끝나면 두 DB간의 **Replication** 상태가 유지되는데 이때는 [**Source DB**]에 새로운 데이터가 추가되면 자동으로 [**Target DB**]로 복제가 됩니다. 그러므로 두 DB 간의 **Replication**이 완료 상태에서 서비스 점검을 시작하고 최종 마이그레이션 작업이 완료된 후에 서비스 점검을 종료하면 됩니다. 
-
-1. [**Source DB**]에서 [**Export**]
-2. [**Target DB**]로 [**Import**]
-3. 두 DB 간의 **Replication** 상태
-4. 서비스 점검 시작
-5. 마이그레이션 작업 완료
-6. 서비스 점검 종료
-
-## 테스트 환경
-Source DB는 Ncloud(네이버 클라우드) 외부에 위치한 경우가 많을 것으로 예상되므로 다음과 같은 사항들을 가정하고 테스트 환경을 준비해보겠습니다.
-
-- **Source DB**와 **Target DB**가 사설 네트워크로 접근이 불가능한 **서로 다른 네트워크 환경**에 존재한다.
-- **Source DB**는 외부에서 공인 IP로 접근 가능한 **Public 네트워크 환경**에 존재한다.
-- **Target DB**는 외부에서 접근이 불가능한 **Private 네트워크 환경**에 존재한다.
-- **Target DB**는 `NAT Gateway`를 통해서 **Source DB**에 접근한다.
-
-### DB 버전 정보
-- Source DB: CentOS 7.8, MySQL 5.7.43
-- Target DB: Cloud DB for MySQL 8.0.32
-
-{% tabs db-verstion %}
-
-{% tab db-verstion Source DB %}
-
-&amp;#8259; **Source DB**  
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-00.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% tab db-verstion Target DB %}
-
-&amp;#8259; **Target DB**  
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-06.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% endtabs %}
-
-### Source DB 정보 확인
-테스트에 사용할 Source DB의 버전, Database, DB User 등의 정보를 확인해보겠습니다.
-
-{% tabs sourcedb-setting %}
-
-{% tab sourcedb-setting MySQL 버전 %}
-
-&amp;#8259; **MySQL 버전**  
-테스트에 사용할 DB는 아래에서 확인할 수 있듯이 MySQL 5.7.43입니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% tab sourcedb-setting Database %}
-
-&amp;#8259; **Database**  
-테스트를 위해 testdb1, testdb2 이렇게 2개의 DB를 생성했습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% tab sourcedb-setting 계정 %}
-
-&amp;#8259; **계정**  
-테스트를 위한 abcd1, abcd2 이렇게 2개의 DB User를 생성했습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% tab sourcedb-setting Table %}
-
-&amp;#8259; **Table**  
-테스트용 Database에 sampletable1, sampletable2 이렇게 각각 테이블을 1개씩 생성했습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% tab sourcedb-setting Procedure %}
-
-&amp;#8259; **Procedure**  
-테스트용 Database testdb2에 new_procedure2라는 이름의 Procedure를 생성했습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% endtabs %}
-
-## Source DB 사전 설정
-
-### 마이그레이션 전용 DB User 생성
-마이그레이션을 위한 전용 유저 즉, Target DB에서 Source DB로 접속할 때 사용할 DB User를 아래와 같이 생성합니다.
-
-- 패스워드는 최소 8자 이상, 최대 21 자까지만 입력이 가능합니다.  
-영문 / 특수문자 / 숫자가 포함되어야 합니다.  
-` &amp; + \ &quot; &apos; / 스페이스 는 패스워드로 사용할 수 없습니다.  
-- 기본 시스템DB를 제외한 사용자가 추가로 생성한 모든 데이터베이스에 대해 권한을 부여합니다.
-
-``` sql
-CREATE USER &apos;migration_test&apos;@&apos;%&apos; IDENTIFIED WITH &apos;mysql_native_password&apos;  BY &apos;[패스워드]&apos;;
-GRANT RELOAD, PROCESS, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO &apos;migration_test&apos;@&apos;%&apos;;
-GRANT SELECT ON mysql.* TO &apos;migration_test&apos;@&apos;%&apos;;
-GRANT SELECT, SHOW VIEW, LOCK TABLES, TRIGGER ON [사용자 생성 DB].* TO &apos;migration_test&apos;@&apos;%&apos;;
-FLUSH PRIVILEGES;
-```
-
-- 위쪽에서 Source DB에 테스용으로 [**testdb1**], [**testdb2**] 이렇게 2개를 데이터베이스가 존재하므로 두 개의 데이터베이스 각각에 대해 권한을 부여했습니다.
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-### Character Set 점검
-Target DB로 생성되는 Cloud DB for MySQL은 [**utf8, utf8mb4, euckr**] Character Set만 지원합니다.  
-Source DB에 이 외의 설정으로 되어 있다면 Character Set을 변경 후 마이그레이션을 진행해야 합니다.
-
-- Character Set 점검 쿼리  
-
-``` sql
-SELECT character_set_name
-FROM information_schema.TABLES T, information_schema.COLLATION_CHARACTER_SET_APPLICABILITY CCSA
-WHERE CCSA.collation_name = T.table_collation 
-AND TABLE_SCHEMA NOT IN ( &apos;information_schema&apos;, &apos;mysql&apos;, &apos;performance_schema&apos;, &apos;sys&apos; ) 
-AND CCSA.character_set_name NOT IN ( &apos;utf8&apos;, &apos;utf8mb4&apos;, &apos;euckr&apos; );
-
-SELECT DEFAULT_CHARACTER_SET_NAME
-FROM information_schema.SCHEMATA T
-WHERE SCHEMA_NAME NOT IN ( &apos;information_schema&apos;, &apos;mysql&apos;, &apos;performance_schema&apos;, &apos;sys&apos; ) 
-AND DEFAULT_CHARACTER_SET_NAME NOT IN ( &apos;utf8&apos;, &apos;utf8mb4&apos;, &apos;euckr&apos;);
-```
-
-- Character Set 변경 쿼리 예시 
-
-``` sql
-ALTER DATABASE [데이터베이스명] CHARACTER SET utf8;
-ALTER DATABASE [데이터베이스명] CHARACTER SET utf8 COLLATE utf8_general_ci;
-ALTER TABLE [테이블명] CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
-```
-
-### sql_mode 설정 점검 {#sql_mode}
-MySQL 5.7 버전에서 Default 값으로 지원하는 sql_mode=&apos;NO_AUTO_CREATE_USER&apos; 설정은 MySQL 8.0 버전부터는 지원하지 않기 때문에, Source DB에서 사용된 곳이 있으면 찾아서 해당 옵션을 제거해야 합니다.
-
-#### sql_mode 설정 점검 쿼리
-Procedure, Function 등의 ROUTINE과 TRIGGER에서 사용되므로 아래 쿼리로 [**NO_AUTO_CREATE_USER**] 옵션이 사용된 곳이 있는지 점검합니다.
-
-``` sql
-SELECT ROUTINE_SCHEMA, ROUTINE_NAME, SQL_MODE
-FROM information_schema.routines
-WHERE ROUTINE_SCHEMA NOT IN (&apos;sys&apos;,&apos;mysql&apos;);
-
-SELECT TRIGGER_SCHEMA, TRIGGER_NAME, sql_mode
-FROM information_schema.triggers
-WHERE TRIGGER_SCHEMA NOT IN (&apos;sys&apos;,&apos;mysql&apos;);
-```
-
-- 테스트용 Source DB에서 점검 쿼리를 실행해보면 아래와 같이 [**testdb2**]의 [**new_procedure2**]에 [**NO_AUTO_CREATE_USER**] 옵션이 적용되어 있는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-#### sql_mode 호환성 이슈 조치 방법
-Procedure, Function, Trigger의 Dump 파일을 생성하고 [**NO_AUTO_CREATE_USER**] 옵션을 제거한 후 다시 적용하면 됩니다.
-
-- Procedure, Function, Trigger 에 대해서만 drop 및 create 구문이 생성된 sql 파일 생성  
-
-``` bash
-~# mysqldump -u {사용자명} -p --set-gtid-purged=OFF --routines --triggers  --no-create-info --no-data --no-create-db --add-drop-trigger --databases {사용자 DB} &gt; backup.sql
-```
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- backup.sql 파일내 NO_AUTO_CREATE_USER 구문 모두 제거  
-해당 옵션을 일일이 찾아서 제거하기 힘드니 vim 에디터에서 [**NO_AUTO_CREATE_USER**] 문자를 찾아서 제거하는 명령을 실행합니다.  
-경우에 따라서는 Dump 파일에 [**NO_AUTO_CREATE_USER**] 옵션이 포함되지 않는 경우도 있습니다. 이때는 걱정말고 Dump 파일을 그냥 그대로 적용하면 됩니다.
-
-``` bash   
-vim 명령: %s /NO_AUTO_CREATE_USER,//g
-
-원본 예시: SET sql_mode = &apos;STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&apos;  
-수정 예시: SET sql_mode = &apos;STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION&apos;
-```
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- 적용하기  
-수정된 Dump 파일을 Source DB에 적용합니다.
-
-``` bash
-~# mysql -u {사용자명} -p {사용자 DB} &lt; backup.sql
-```
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-#### sql_mode 설정 변경 확인
-설정이 제대로 변경되었는지 점검 쿼리로 다시 확인해보겠습니다.
-
-``` sql
-SELECT ROUTINE_SCHEMA, ROUTINE_NAME, SQL_MODE
-FROM information_schema.routines
-WHERE ROUTINE_SCHEMA NOT IN (&apos;sys&apos;,&apos;mysql&apos;);
-```
-
-- 아래 스샷처럼 [**NO_AUTO_CREATE_USER**] 옵션이 사라진 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-
-### 바이너리 로그 설정 {#log_bin}
-Source DB의 바이너리 로그 설정 중에서, [**server_id**] 값이 설정되어 있는지와 [**log_bin**]이 ON 상태로 설정되어 있지 확인 후 설정되어 있지 않다면 설정 후에 진행해야 합니다.
-
-#### 현재 설정 확인  
-아래 쿼리를 사용해 현재 설정 값을 확인합니다.  
-
-``` sql
-show variables like &apos;server_id&apos;;
-show variables like &apos;log_bin&apos;;
-```
-
-- 현재 테스트용 Source DB는 두 값이 모두 설정되어 있지 않은 상태입니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-#### 설정 변경
-MySQL의 환경 설정 파일 [**my.cnf**]를 열어서 아래 값을 추가하고, MySQL 데몬을 재시작합니다.
-``` bash
-~# vim /etc/my.cnf
-
-server_id = 1
-log_bin = binlog
-
-~# systemctl restart mysqld
-```
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-12.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-13.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-#### 변경 설정 확인  
-설정 변경 후에 확인해보면 아래와 같이 [**server_id**] 값이 설정되어 있고, [**log_bin**]이 ON 상태로 변경된 것을 알 수 있습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-14.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-## Target DB 사전 설정
-위에서 [Source DB]의 사전 설정이 끝났으므로 이제 [**Target DB**]의 사전 설정이 필요한 항목을 확인해보겠습니다.
-
-### DEFINER 계정 확인 {#DEFINER}
-[**Source DB**]에 [**Procedure**], [**Function**], [**VIEW**] 등이 존재한다면 이 때 사용된 DB User 즉, [**DEFINER**] 계정을 [**Target DB**]에도 미리 추가 생성해 두어야 마이그레이션을 진행할 수 있습니다.
-
-아래 쿼리는 [**Procedure**], [**Function**], [**VIEW**] 등을 생성할 때 사용된 [**DEFINER**] 계정을 확인하는 쿼리입니다.  
-
-``` sql
-SELECT DEFINER FROM information_schema.ROUTINES
-WHERE ROUTINE_SCHEMA NOT IN ( &apos;information_schema&apos;, &apos;mysql&apos;, &apos;performance_schema&apos;, &apos;sys&apos; ) AND SECURITY_TYPE = &apos;DEFINER&apos;;
-
-SELECT DEFINER FROM information_schema.VIEWS
-WHERE table_schema NOT IN ( &apos;information_schema&apos;, &apos;mysql&apos;, &apos;performance_schema&apos;, &apos;sys&apos; ) AND SECURITY_TYPE = &apos;DEFINER&apos; ;
-```
-
-- 위에서 [**Source DB**]에 테스트 환경을 설정하면서 [**Procedure**]를 하나 생성했었는데 그때 사용된 [**DEFINER**] 계정을 확인할 수 있었습니다. 여기서 확인된 DB User를 [**Target DB**]에 미리 추가 생성해 두어야 합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-22.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-top-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;위 단계에서 DEFINER User가 없는 것으로 확인될 경우 DEFINER User 추가 없이 다음 단계로 진행하셔도 됩니다.&quot; %}
-
-### DEFINER 계정 추가
-[**Target DB**]를 선택하고 [**DB 관리**] - [**DB User 관리**] 메뉴를 선택합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-06.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- DB User 관리 화면에서 위에서 확인했던 [**DEFINER**] 계정을 DDL 권한으로 설정해서 추가하고 저장합니다. 
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-24.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-## 접근 권한 설정 {#ACG}
-[**Source DB**], [**Target DB**] 양쪽의 사전 설정을 모두 완료했으면, 다음으로는 양쪽 DB간의 접근 권한을 설정해야 합니다.  
-앞에서도 설명했지만 마이그레이션은 **`Target DB`**&lt;i class=&quot;fa-solid fa-right-long&quot; style=&quot;color: #e43b11;&quot;&gt;&lt;/i&gt; **`Source DB로 접근`**하게 됩니다.
-
-### NAT Gateway 생성
-현재 [**Target DB**]는 [**Private**] 네트워크 환경에 위치해 있으므로 [**Source DB**]로 접근하기 위해서는 [**NAT Gateway**]를 생성해서 외부 통신이 가능하도록 해야 합니다.  
-여기서는 [**NAT Gateway**]가 생성되어 있다고 가정하고, 어떻게 설정하는지 확인해보겠습니다.  
-
-- [**NAT Gateway**] 상세 정보 중에서 [**공인 IP**]는 따로 기록해 두었다가, 아래쪽에서 [**방화벽(ACG) 설정**]에서 사용하게 됩니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-15.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-VPC 환경에서 [**NAT Gateway**]를 생성하는 상세한 방법은 아래 문서를 참고하시면 됩니다.
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; &lt;a href=&apos;/networking/ncloud_networking_natgw_routetb.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;VPC 환경에서 NAT Gateway 생성하는 방법&lt;/a&gt;
-&quot; %}
-
-### Route Table 설정
-다음으로 [**VPC**] - [**Route Table**]에서 [**Target DB**]의 Subnet에 연관된 [**Route Table**]을 선택하고, [**Routes 설정**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-16.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- **Route Table 설정** 화면에서 [**Destination**]에는 [**Source DB**]의 공인 IP를 입력하고, [**Target Type**]은 [**NATGW**], [**Target Name**]은 위에서 생성했던 **NAT Gateway**를 선택하고 [**생성**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-17.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-### 방화벽(ACG) 설정
-**`Target DB`**&lt;i class=&quot;fa-solid fa-right-long&quot; style=&quot;color: #e43b11;&quot;&gt;&lt;/i&gt; **`Source DB로 접근`**하여 DB 데이터를 가져오기 위해 [**Target DB**] 방화벽에서는 [**Outbound**] 규칙을,  [**Source DB**] 방화벽에서는 [**Inbound**] 규칙을 설정해야 합니다.
-
-#### Target DB ACG 설정
-우선 [**Target DB**]의 [**Outbound**] 규칙을 설정해보겠습니다. [**Target DB**]를 선택하면 나타나는 DB 상세 정보 화면에서 [**ACG**]를 클릭합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- [**ACG**] 화면에서 해당 ACG를 선택하고 [**ACG 설정**] 메뉴를 클릭합니다.  
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- [**ACG 규칙 설정**] 팝업에서 [**Outbound**] 탭을 선택하고, [**목적지**]에는 [**Source DB**]의 IP 주소, [**허용 포트**]에는 [**Source DB**]의 포트 번호를 입력한 후 [**추가**]-[**적용**] 버튼을 클릭합니다.  
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-
-#### Source DB 방화벽 설정
-이제 [**Source DB**] 방화벽에 위에서 확인했던 [**NAT Gateway**]의 [**공인 IP**]를 추가해서 [**Taget DB**]가 접근할 수 있도록 설정하겠습니다.
-
-- On Premise 등 Ncloud 외부 서버의 경우 자체 방화벽에 직접 추가하시면 됩니다.  
-
-- Ncloud 내부 서버의 경우 해당 서버의 ACG의 [**Inbound**] 설정에 아래처럼 추가하면 됩니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-18.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-## 마이그레이션 서비스 위치
-이제 모든 준비를 마쳤으면 본격적으로 마이그레이션 작업을 진행해보겠습니다.  
-[**Database Migration**] 서비스는 [**Services**] - [**Database**] - [**Database Migration**]에 있습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-19.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-## 마이그레이션 설정
-[**Source DB**]와 [**Target DB**]에서 사전 준비가 끝났으면 이제 [**Database Migration Service**] 설정을 시작합니다.
-
-### Endpoint 설정 {#Endpoint}
-우선 [**Database Migration Service**] - [**Endpoint Management**] 메뉴에서 [**Endpoint 생성**] 버튼을 클릭합니다.  
-여기서 [**Endpoint**]는 [**Source DB**]를 지칭하는 것으로 [**Source DB**]의 정보를 입력한다고 생각하시면 됩니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-20.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-다음으로 Endpoint 생성화면에서 [**Source DB**] 관련 정보를 입력하고 [**생성**] 버튼을 클릭합니다.
-- **Endpoint URL**: **Source DB의 IP 또는 도메인**을 입력합니다.
-- **DB PORT**: Source DB의 Port를 입력합니다.
-- **DB User**: 위에서 Source DB에 생성했던 **마이그레이션 전용 DB User**를 입력합니다.
-- **DB Password**: 마이그레이션 전용 DB User의 패스워드를 입력합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-21.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-## 마이그레이션 작업 생성
-[**Database Migration Service**] - [**Migration Management**] 메뉴에서 [**Migration 작업생성**] 버튼을 클릭합니다. 
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-25.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-### Test Connection
-[**Source DB**] 항목과 [**Target DB**] 항목을 선택한 후에 [**Test Connection**] 버튼을 클릭해 **`Target DB`**&lt;i class=&quot;fa-solid fa-right-long&quot; style=&quot;color: #e43b11;&quot;&gt;&lt;/i&gt; **`Source DB로 접근`**을 테스트 해봅니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-26.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-### 마이그레이션 작업 시작
-[**Test Connection**]에서 이상이 없을 경우 아래와 같이 옮겨오게 될 [**Source DB**]의 정보를 확인할 수 있습니다. 문제가 없으면 [**Migration 작업시작**] 버튼을 클릭해서 마이그레이션 작업을 시작합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-27.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-### 마이그레이션 작업 진행 상태
-마이그레이션 작업은 [**Exporting**], [**Importing**], [**Replication**] 이렇게 3가지 단계로 진행되는데, 각각의 진행 상태를 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-08.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-09.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-#### 진행 상태 확인 메일
-진행 상태는 콘솔에서도 확인할 수 있지만, 작업이 오래 걸리는 경우도 대비해서 각 단계가 완료될 때마다 안내 메일이 발송됩니다.
-
-{% tabs migration-status %}
-
-{% tab migration-status Export Completed %}
-
-&amp;#8259; **Export Completed**  
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-30.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% tab migration-status Import Completed %}
-
-&amp;#8259; **Import Completed**  
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-31.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% tab migration-status Migration Completed %}
-
-&amp;#8259; **Migration Completed**  
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-32.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% endtab %}
-
-{% endtabs %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-이 단계까지 완료되면 현재 상태는 **Source DB**와 **Target DB**간의 **Replication**이 완료된 상태이므로 이때 서비스 점검을 시작하고 아래쪽의 마이그레이션 **완료** 버튼을 클릭해서 최종 완료를 확인한 후에 서비스 점검을 종료하면 되겠습니다. 
-&quot; %}
-
-## 마이그레이션 완료
-마이그레이션 작업이 완료되면 아래와 같이 콘솔화면에서 [**완료**] 버튼이 활성화 됩니다. 즉, 현재는 [**Replication**] 작업이 완료된 상태로 [**Source DB**]와 [**Target DB**]가 동기화 되어 있고, [**Target DB**]는 [**쓰기 불가**] 상태입니다.  
-
-그러므로 [**완료**] 버튼 클릭해야 모든 작업이 완료되고, [**Target DB**]가 [**쓰기 가능**] 상태로 변경됩니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-10.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- [**완료**] 버튼 클릭하면 아래와 같이 안내 메시지가 출력되고 [**확인**] 버튼을 클릭하면 완료됩니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-34.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-### 최종 완료
-최종 완료가 되면 아래와 같이 [**Migration Status**] 상태가 **완료**상태로 변경되고 [**Migration 종료 일시**]로 기록됩니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-11.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-
-## Target DB 데이터 확인
-마이그레이션이 모두 완료되었으므로 [**Source DB**]의 데이터가 [**Target DB**]로 모두 이상 없이 마이그레이션 되었는지 [**Target DB**]에 접속해서 직접 확인해보겠습니다.  
-확인해보는 방법은 [**Target DB**]와 동일한 [**Subnet**]에 테스터 서버를 생성하고,  [**Target DB**]에 접속해서 [**Database**], [**Table**], [**Procedure**] 등이 정상적으로 존재하는지 살펴보는 것인데, 아래 스샷처럼 모두 이상이 없는 것을 확인할 수 있습니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-40.png&quot; width=&quot;840&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 오류 상황
-지금부터는 마이그레이션 진행 중에 나타날 수 있는 오류 메시지 관련해서 정리해보고, 해결 방법을 알아보겠습니다.
-
-### 방화벽 설정 오류  
-[**Source DB**]의 방화벽 Inbound 설정과 [**Target DB**]의 ACG Outbound 설정이 올바르지 않을 경우 나타나는 메시지 입니다. [접근 권한 설정 &lt;i class=&quot;fa-solid fa-arrow-up-from-bracket&quot;&gt;&lt;/i&gt;](#ACG) 내용을 다시 확인해주세요.
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Source DB 와 Target DB 서버 통신이 되지 않습니다. &lt;br/&gt;Source DB Inbound 와 Target DB Outbound ACG 를 점검해 주세요.&quot;%}
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-36.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-### Endpoint DB User 설정 오류  
-[**Endpoint 설정**]에서 [**DB User**] 또는 [**DB Password**] 설정이 올바르지 않을 경우 나타나는 메시지 입니다. [Endpoint 설정 &lt;i class=&quot;fa-solid fa-arrow-up-from-bracket&quot;&gt;&lt;/i&gt;](#Endpoint) 내용을 다시 확인해주세요.
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Source DB 에 접속이 되지 않습니다.&lt;br /&gt;DB ACL 을 점검해 주세요.&quot;%}
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-37.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-### DEFINER 계정 생성 오류
-[**Source DB**]에 [**Procedure**], [**Function**], [**VIEW**] 등이 존재하고, 이때 사용된 DB User 즉, [**DEFINER**] 계정이 [**Target DB**]에 존재하지 않았을 경우 나타나는 메시지 입니다. [DEFINER 설정 &lt;i class=&quot;fa-solid fa-arrow-up-from-bracket&quot;&gt;&lt;/i&gt;](#DEFINER) 내용을 다시 확인해주세요.
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;Source DB에 생성된 Definer 계정이 Target DB 에 존재하지 않습니다.&lt;br /&gt;Definer 에 사용된 계정은 먼저 생성후 진행해 주세요.&lt;br /&gt;필요 Definer 계정 : abcd2@%&quot;%}
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-38.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-
-### 바이너리 로그 설정 오류
-Source DB의 바이너리 로그 설정 중에서, [server_id], [log_bin] 관련 설정이 올바르지 않을 경우 나타나는 메시지 입니다. [바이너리 로그 설정 &lt;i class=&quot;fa-solid fa-arrow-up-from-bracket&quot;&gt;&lt;/i&gt;](#log_bin) 내용을 다시 확인해주세요.
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;마이그레이션을 위해서는 Source DB Config 설정이 필요합니다.&lt;br /&gt;추가 필요 설정 : log_bin&quot;%}
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-39.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-
-### sql_mode 설정 오류
-[**Source DB**] 사전 설정에서 sql_mode 관련된 설정을 수정하지 않았을 경우 아래와 같이 마이그레이션 진행 중에 [**Importing**] 단계에서 실패가 발생하고 [**에러 보기**] 버튼을 클릭하면 아래와 같은 메시지가 나타납니다. [sql_mode 설정 &lt;i class=&quot;fa-solid fa-arrow-up-from-bracket&quot;&gt;&lt;/i&gt;](#sql_mode) 내용을 다시 확인해주세요.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-12.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;ERROR 1234 (42000) at line 98: Variable &apos;sql_mode&apos; can&apos;t be set to the value of &apos;NO_AUTO_CREATE_USER&apos;&quot;%}
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-13.png&quot; width=&quot;485&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-#### 마이그레이션 재실행
-위와 같이 [**sql_mode**] 관련 오류로 마이그레이션 작업이 실패했을 경우에는 [**재시작**] 버튼으로 재시작을 할 경우에는 동일한 오류가 계속 발생하게 됩니다.   
-이때는 [**sql_mode**] 설정을 수정한 후에 마이그레이션 작업을 삭제하고, [**Target DB**]에 생성된 [**Database**]을 모두 삭제 후에 마이그레이션 작업을 다시 생성해야 정상 작동합니다.
-
-- [**sql_mode**] 설정을 수정한 후에 [**삭제**] 버튼을 클릭해서 마이그레이션 작업을 삭제합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-14.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- [**Target DB**]의 [**DB 관리**] - [**DB Server 상세보기**] 메뉴를 클릭해서 [**Database 관리**] 기능으로 이동합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-16.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-- [**Database 관리**]에서 [**Source DB**]에서 Import한 [**Database**]을 모두 삭제하고, [**저장**] 버튼을 클릭합니다.  
-그런 후에 마이그레이션 작업을 다시 생성해야 정상 작동합니다.
-
-{% include image.html file=&quot;database/migration/ncloud-database-db-migration-from-mysql57-to-mysql80-guide-15.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 5.7에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법&quot; caption=&quot;&quot; %}
-
-## 참고 URL
-1. Database Migration Service 개요
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/dms-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/dms-overview&lt;/a&gt;
-
-2. Source DB 및 Target DB 접속 설정
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/dms-connect&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/dms-connect&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}  
-</description>
-            <pubDate>Tue, 24 Oct 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mysql57-to-mysql80-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mysql57-to-mysql80-guide.html</guid>
             
             <category>database</category>
             
