@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 06 Dec 2023 17:56:11 +0900</pubDate>
-        <lastBuildDate>Wed, 06 Dec 2023 17:56:11 +0900</lastBuildDate>
+        <pubDate>Wed, 06 Dec 2023 18:19:36 +0900</pubDate>
+        <lastBuildDate>Wed, 06 Dec 2023 18:19:36 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -21,7 +21,7 @@ Ncloud(네이버 클라우드)의 Cloud DB for MySQL에서는 DB Engine을 업�
 &amp;#8259; Master DB 는 Standby Master DB 로 전환하여 서비스 접근 차단은 최소한으로 유지합니다.&lt;br /&gt;
 &amp;nbsp;&amp;nbsp;&amp;nbsp;(Master DB Failover 기능으로 변경되는 시간과 동일합니다.)&lt;br /&gt;
 
-&amp;#8259; 업그레이드 작업은 1대씩 순차적으로 진행되고, Server 1대에 1분 내외로 작업 시간이 소요 됩니다.&lt;br /&gt;
+&amp;#8259; 업그레이드 작업은 1대씩 순차적으로 진행되고, Server 1대에 5분 내외로 작업 시간이 소요 됩니다.&lt;br /&gt;
 &amp;nbsp;&amp;nbsp;&amp;nbsp;(작업 순서 : Recovery &lt;i class=&apos;fa-solid fa-arrow-right&apos;&gt;&lt;/i&gt; Slave &lt;i class=&apos;fa-solid fa-arrow-right&apos;&gt;&lt;/i&gt; Master)&lt;br /&gt;
 
 &amp;#8259; Stand Alone Server 는 업그레이드 되는 동안 DB 접속이 되지 않습니다.&lt;br /&gt;
