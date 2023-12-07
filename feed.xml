@@ -5,10 +5,386 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 06 Dec 2023 18:19:36 +0900</pubDate>
-        <lastBuildDate>Wed, 06 Dec 2023 18:19:36 +0900</lastBuildDate>
+        <pubDate>Thu, 07 Dec 2023 15:32:34 +0900</pubDate>
+        <lastBuildDate>Thu, 07 Dec 2023 15:32:34 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Linux 스토리지 추가 생성 기본 가이드</title>
+            <description>## 개요
+네이버 클라우드에서 서버 생성 후에 스토리지를 추가 생성하는 경우가 있는데 이때 사용되는 스토리지는 Block Storage라고 해서 AWS의 EBS(Elastic Block Store)와 유사합니다.
+
+## 스토리지 추가 제약 사항
+- XEN 하이퍼바이저 기반 서버의 경우 Bare Metal 서버와 의 Micro 타입 서버에는 스토리지를 추가할 수 없습니다.
+
+
+## 추가 가능한 최대 사이즈와 개수
+
+&lt;div&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;하이퍼바이저&lt;/th&gt;      
+      &lt;th&gt;스토리지 타입&lt;/th&gt;
+      &lt;th&gt;미디어 타입&lt;/th&gt;
+      &lt;th&gt;최소 크기&lt;/th&gt;
+      &lt;th&gt;최대 크기&lt;/th&gt;
+      &lt;th&gt;추가 가능 개수&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+      &lt;td rowspan=&quot;2&quot;&gt;XEN&lt;/td&gt;
+      &lt;td&gt;HDD&lt;/td&gt;
+      &lt;td&gt;HDD&lt;/td&gt;
+      &lt;td&gt;10GB&lt;/td&gt;
+      &lt;td&gt;2TB&lt;/td&gt;
+      &lt;td&gt;15개&lt;/td&gt;
+    &lt;/tr&gt;  
+    &lt;tr&gt;     
+      &lt;td&gt;SSD&lt;/td&gt;
+      &lt;td&gt;SSD&lt;/td&gt;
+      &lt;td&gt;10GB&lt;/td&gt;
+      &lt;td&gt;2TB&lt;/td&gt;
+      &lt;td&gt;15개&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+      &lt;td rowspan=&quot;2&quot;&gt;KVM&lt;/td&gt;
+      &lt;td&gt;FB1&lt;/td&gt;
+      &lt;td&gt;HDD&lt;/td&gt;
+      &lt;td&gt;100GB&lt;/td&gt;
+      &lt;td&gt;16TB&lt;/td&gt;
+      &lt;td&gt;20개&lt;/td&gt;
+    &lt;/tr&gt;  
+    &lt;tr&gt;     
+      &lt;td&gt;CB1&lt;/td&gt;
+      &lt;td&gt;SSD&lt;/td&gt;
+      &lt;td&gt;10GB&lt;/td&gt;
+      &lt;td&gt;16TB&lt;/td&gt;
+      &lt;td&gt;20개&lt;/td&gt;
+    &lt;/tr&gt;        
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+
+## 리눅스 OS 서버 이미지별 포맷 명령어
+리눅스는 OS 즉, 네이버 클라우드에서 제공하는 서버 이미지별로 추가된 스토리지를 포맷하는 명령어가 다릅니다.
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; CentOS 5.x: mkfs.ext3 /dev/xvdb1 &lt;br /&gt;
+&amp;#8259; CentOS 6.x: mkfs.ext4 /dev/xvdb1 &lt;br /&gt;
+&amp;#8259; CentOS 7.x: mkfs.xfs /dev/xvdb1 &lt;br /&gt;
+&amp;#8259; Rocky Linux: mkfs.xfs /dev/xvdb1 &lt;br /&gt;
+&amp;#8259; Ubuntu Server / Desktop: mkfs.ext4 /dev/xvdb1 &lt;br /&gt;
+&quot; %}
+
+## ext4 vs XFS 명령어 비교
+
+&lt;div&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;항목&lt;/th&gt;
+      &lt;th&gt;ext4&lt;/th&gt;
+      &lt;th&gt;XFS&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;&lt;td&gt;포맷&lt;/td&gt;&lt;td&gt;mkfs.ext4&lt;/td&gt;&lt;td&gt;mkfs.xfs&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;마운트&lt;/td&gt;&lt;td&gt;mount&lt;/td&gt;&lt;td&gt;mount&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;리사이즈&lt;/td&gt;&lt;td&gt;resize2fs&lt;/td&gt;&lt;td&gt;xfs_growfs&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;복구&lt;/td&gt;&lt;td&gt;e2fsck&lt;/td&gt;&lt;td&gt;xfs_repair&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;라벨 변경&lt;/td&gt;&lt;td&gt;e2label&lt;/td&gt;&lt;td&gt;xfs_admin -L&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;디버깅&lt;/td&gt;&lt;td&gt;debugfs&lt;/td&gt;&lt;td&gt;xfs_db&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;할당량 설정&lt;/td&gt;&lt;td&gt;quota&lt;/td&gt;&lt;td&gt;quota&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+{% include tip.html content=&quot;xfs_growfs 명령어는 파일 시스템의 크기를 줄일 수는 없고 늘릴 수만 있습니다.&quot; %}
+
+## 참고 URL
+1.  Ncloud 블록 스토리지 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/server-storage-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/server-storage-vpc&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}    </description>
+            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html</guid>
+            
+            <category>linux</category>
+            
+            <category>storage</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Linux 스토리지(디스크) 추가 상세 가이드</title>
+            <description>## 개요
+Ncloud(네이버 클라우드)에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.
+
+## 전체 과정 요약
+스토리지(디스크)를 추가하는 전체 과정은 아래와 같이 하이퍼바이저별로 정리할 수 있으며, 각 단계별 상세 설명은 XEN 하이퍼바이저 기반 서버를 이용해서 진행하겠습니다.
+
+{% tabs storage-add %}
+
+{% tab storage-add XEN 하이퍼바이저 %}
+
+``` bash
+~# fdisk -l
+
+~# fdisk /dev/xvdb
+
+~# mkfs.xfs /dev/xvdb1
+
+  - CentOS 5.x: mkfs.ext3 /dev/xvdb1
+  - CentOS 6.x: mkfs.ext4 /dev/xvdb1
+  - CentOS 7.x: mkfs.xfs /dev/xvdb1
+  - Rocky Linux: mkfs.xfs /dev/xvdb1
+  - Ubuntu : mkfs.ext4 /dev/xvdb1
+
+~# mkdir /mnt/data
+
+~# mount /dev/xvdb1 /mnt/data
+
+~# df -hT
+
+~# vim /etc/fstab
+### =============================
+UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
+
+# 또는
+/dev/xvdb1 /mnt/data ext4 defaults 1 2
+### =============================
+```
+
+{% endtab %}
+
+{% tab storage-add KVM 하이퍼바이저 %}
+
+``` bash
+~# fdisk -l
+
+~# fdisk /dev/vdb
+
+~# mkfs.xfs /dev/vdb1
+
+  - CentOS 5.x: mkfs.ext3 /dev/vdb1
+  - CentOS 6.x: mkfs.ext4 /dev/vdb1
+  - CentOS 7.x: mkfs.xfs /dev/vdb1
+  - Rocky Linux: mkfs.xfs /dev/vdb1
+  - Ubuntu : mkfs.ext4 /dev/vdb1
+
+~# mkdir /mnt/data
+
+~# mount /dev/vdb1 /mnt/data
+
+~# df -hT
+
+~# vim /etc/fstab
+### =============================
+UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
+
+# 또는
+/dev/xvdb1 /mnt/data ext4 defaults 1 2
+### =============================
+```
+
+{% endtab %}
+{% endtabs %}
+
+
+## 스토리지 생성, 할당
+우선은 네이버 클라우드 콘솔 [Server] - [Server]에서 해당 서버를 선택하고 
+[서버 관리 및 설정 변경] - [스토리지 생성]을 선택합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+다음으로 [스토리지 생성] 화면에서 스토리지 종류, 이름, 적용서버, 크기 (최소 10GB, 최대 2000GB) 등을 선택하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-02.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+앞에서 설정한 스토리지 정보를 다시 살펴보고 이상이 없으면 [확인] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+추가된 스토리지는 [Server] - [Server] 리스트에서 해당 서버를 클릭해 상세정보에서 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 스토리지 할당 확인
+네이버 클라우드 콘솔에서 할당한 스토리지를 확인하기 위해 putty를 실행해 서버에 접속합니다.  
+이후 과정은 모두 서버에 접속한 상태에서 진행하게 됩니다.
+
+fdisk -l 명령어를 실행해보면 아래 화면처럼 /dev/xvdb 디스크가 할당된 것을 확인할 수 있습니다.
+
+``` bash
+~# fdisk -l
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 디스크 파티션
+다음 명령어를 입력해 할당된 디스크에 파티션을 생성합니다.  
+파티션 설정에는 기본인 MBR 방식과 2TB 이상의 디스크를 인식하기 위해 사용하는 GPT 방식이 있는데, 네이버 클라우드는 최대 2,000GB까지만 지원하므로 여기서는 기본방식인 MBR을 사용하겠습니다.
+``` bash
+~# fdisk /dev/xvdb
+```
+&lt;br /&gt;
+### 파티션 생성
+파티션을 생성할 때는 여러 단계의 옵션이 있습니다. 일반적으로는 아래와 같은 단계로 진행하면 됩니다.
+
+- 파티션을 새로 생성하기 위해 ‘n’을 입력
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- 생성할 파티션 타입에 따라 primary type이면 ‘p’, extended type이면 ‘e’를 입력.  
+  (primary type으로 생성하는 것이 일반적이며, primary 영역의 파티션이 부족할 경우 추가로 extended type으로 생성)
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- 생성할 파티션 번호와 cylinder 영역을 입력 (일반적으로 추가할 disk 전체를 mount하게 되고, 이 경우 default값을 그대로 사용하므로 Enter 입력)
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- ‘w’를 입력해 해당 구성을 적용. 파티션 생성 완료.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+마지막으로 fdisk -l 명령어로 생성된 파티션을 다시 확인합니다.  
+디스크가 /dev/xvdb1 장치로 인식된 것을 확인할 수 있습니다. 
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 디스크 포맷
+다음으로 파티션이 생성된 디스크를 포맷하면 되는데, OS별로 명령어가 다르므로 확인 후에 실행해야 합니다.  
+여기서는 CentOS 7.x 기준으로 mkfs.xfs 명령어를 사용했습니다.
+``` bash
+~# mkfs.xfs /dev/xvdb1
+
+- CentOS 5.x: mkfs.ext3 /dev/xvdb1
+- CentOS 6.x: mkfs.ext4 /dev/xvdb1
+- CentOS 7.x: mkfs.xfs /dev/xvdb1
+- Rocky Linux: mkfs.xfs /dev/xvdb1
+- Ubuntu : mkfs.ext4 /dev/xvdb1
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 디스크 마운트
+다음으로 디스크를 마운트할 포인트 즉, 디렉토리를 원하는 이름으로 생성하고 마운트를 합니다.  
+아래에 있는 마운트 경로 (/mnt/data)는 예시입니다. 원하는 경로를 직접 설정하시면 됩니다.
+``` bash
+~# mkdir /mnt/data
+~# mount /dev/xvdb1 /mnt/data
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+- 마운트된 내역을 확인합니다.
+
+``` bash
+~# df -hT
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+## 마운트 정보 등록
+마운트 정보는 설정에 저장하지 않으면 서버가 리부팅될 때 사라지기 때문에 fstab에 저장합니다.  
+마운트 정보를 등록할 때 장치명을 사용하는 방법과 장치의 UUID를 사용하는 방법이 있는데, 경우에 따라서는 장치명이 변경될 수도 있어, 이를 대비해 가능하면 UUID로 등록합니다.
+
+### UUID 확인
+UUID를 확인하려면 blkid 명령어를 사용합니다.  
+여기서 확인한 UUID를 별도로 복사해두었다가 fstab에 입력하게 됩니다.
+``` bash
+~# blkid /dev/xvdb1
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+vi로 /etc/fstab 파일을 열면 다음과 같습니다.  
+서버 생성과 함께 장착된 기본 디스크도 UUID로 입력된 것을 확인할 수 있습니다.
+``` bash
+~# vi /etc/fstab
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+앞에서 확인하고 복사해둔 추가 디스크의 UUID와 기타 정보를 입력합니다.  
+입력을 완료한 후 fstab 파일을 저장하고 빠져 나옵니다.  
+(fstab에 입력할때 사용하는 디스크 정보 옵션에 대한 정리는 아래에서 다시 확인할 수 있습니다.)
+
+``` bash
+### /etc/fstab
+
+UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
+
+# 또는
+/dev/xvdb1 /mnt/data ext4 defaults 1 2
+
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
+
+
+## fstab 설정 상세정보
+
+/etc/fstab은 부팅 단계에서 마운트되어야 할 볼륨 정보들이 저장되는 곳입니다.  
+(OS 이미지에 따라 파일 시스템이 다르기 때문에 주의해야 합니다.)
+
+파일의 각 항목이 의미하는 바는 아래와 같으며 각 항목은 Tab 또는 Space Bar로 구분합니다.
+
+(장치명) (마운트 포인트) (파일시스템 종류) (옵션) (dump 설정) (fsck 설정)
+
++ 장치명: 장치명은 장치의 UUID를 사용하거나 /dev/xvdb1와 같은 장치이름을 사용합니다.
+
++ 마운트 포인트: 볼륨을 마운트하고자 하는 위치입니다. 예시에서는 /mnt/data 디렉토리에 마운트했습니다.
+
++ 파일시스템 종류: OS별로 기본 파일시스템이 다르므로 알맞게 입력합니다.
+
+  - CentOS 5.x : ext3
+  - CentOS 6.x : ext4
+  - CentOS 7.x : xfs
+  - Rocky Linux : xfs  
+  - Ubuntu Server / Desktop : ext4
+
++ 옵션: 예시에서는 default 옵션을 사용하였으며, 해당 옵션에는 rw, nouser, auto, exec, suid 속성이 포함됩니다.  
+  각 속성의 내용은 다음과 같습니다. (필요한 옵션만 사용할 시, 각 옵션을 쉼표(,)로 구분하여 작성해주시면 됩니다.)
+
+  - auto : 부팅 시 자동 마운트
+  - rw : 읽기, 쓰기 모두 가능하도록 마운트
+  - nouser : root 계정만 마운트 가능
+  - exec : 파일 실행을 허용
+  - suid : SetUID와 SetGID를 허용
+
++ dump 설정: dump 명령으로 백업을 할 것인지에 대한 설정
+
+  - 0: dump되지 않는 파일 시스템
+  - 1: dump 가능한 파일 시스템
+
++ fsck 설정: 부팅시에 fsck 명령으로 파일시스템에 대한 무결성 검사를 할 것인지에 대한 설정
+
+  - 0 : 부팅 시 fsck 실행하지 않음
+  - 1 : 부팅 시 root 파일 시스템을 우선 체크
+  - 2 : 부팅 시 root 이외의 파일 시스템을 우선 체크
+
+## 참고 URL
+1. Ncloud Block Storage 생성, 추가 가이드
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/blockstorage-create-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/blockstorage-create-vpc&lt;/a&gt;
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}
+</description>
+            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</guid>
+            
+            <category>linux</category>
+            
+            <category>storage</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud Cloud DB for MySQL - DB Engine 업그레이드 가이드</title>
@@ -54,7 +430,7 @@ DB서버를 선택하고 [**DB 관리**] - [**MySQL Engine Upgrade**] 메뉴를 
 
 ### 주의사항
 {% include callout-v2.html type=&quot;danger&quot; level=&quot;3&quot; content=&quot;
-&amp;#8259; Major 버전 업그레이드로 인한 애플리케이션 호환성 검토를 먼저 후 진행한 후에 업그레이드 하시는 것을 권장합니다.&lt;br /&gt;
+&amp;#8259; Major 버전 업그레이드로 인한 애플리케이션 호환성 검토를 먼저 진행한 후에 업그레이드 하시는 것을 권장합니다.&lt;br /&gt;
 &amp;#8259; Major 버전 업그레이드는 **`고가용성 구성인 경우만 작업이 가능`**합니다.&lt;br /&gt;
 &amp;#8259; Major 버전 업그레이드 시 **`이전 버전으로 rollback이 불가능`**합니다.&lt;br /&gt;
 &amp;#8259; Major 버전 업그레이드 시 **DB config 의 default 값이 변경될 수** 있습니다.&lt;br /&gt;
@@ -466,227 +842,6 @@ Ncloud (네이버 클라우드)에서 제공하는 하이퍼바이저의 종류�
         </item>
         
         <item>
-            <title>Linux 스토리지(디스크) 추가 상세 가이드</title>
-            <description>## 개요
-Ncloud(네이버 클라우드)에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.
-
-## 전체 과정 요약
-``` bash
-~# fdisk -l
-
-~# fdisk /dev/xvdb
-
-~# mkfs.xfs /dev/xvdb1
-
-  - CentOS 5.x: mkfs.ext3 /dev/xvdb1
-  - CentOS 6.x: mkfs.ext4 /dev/xvdb1
-  - CentOS 7.x: mkfs.xfs /dev/xvdb1
-  - Rocky Linux: mkfs.xfs /dev/xvdb1
-  - Ubuntu : mkfs.ext4 /dev/xvdb1
-
-~# mkdir /mnt/data
-
-~# mount /dev/xvdb1 /mnt/data
-
-~# df -hT
-
-~# vim /etc/fstab
-### =============================
-UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
-
-# 또는
-/dev/xvdb1 /mnt/data ext4 defaults 1 2
-### =============================
-```
-
-## 스토리지 생성, 할당
-우선은 네이버 클라우드 콘솔 [Server] - [Server]에서 해당 서버를 선택하고 
-[서버 관리 및 설정 변경] - [스토리지 생성]을 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-다음으로 [스토리지 생성] 화면에서 스토리지 종류, 이름, 적용서버, 크기 (최소 10GB, 최대 2000GB) 등을 선택하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-02.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-앞에서 설정한 스토리지 정보를 다시 살펴보고 이상이 없으면 [확인] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-추가된 스토리지는 [Server] - [Server] 리스트에서 해당 서버를 클릭해 상세정보에서 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 스토리지 할당 확인
-네이버 클라우드 콘솔에서 할당한 스토리지를 확인하기 위해 putty를 실행해 서버에 접속합니다.  
-이후 과정은 모두 서버에 접속한 상태에서 진행하게 됩니다.
-
-fdisk -l 명령어를 실행해보면 아래 화면처럼 /dev/xvdb 디스크가 할당된 것을 확인할 수 있습니다.
-
-``` bash
-~# fdisk -l
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 디스크 파티션
-다음 명령어를 입력해 할당된 디스크에 파티션을 생성합니다.  
-파티션 설정에는 기본인 MBR 방식과 2TB 이상의 디스크를 인식하기 위해 사용하는 GPT 방식이 있는데, 네이버 클라우드는 최대 2,000GB까지만 지원하므로 여기서는 기본방식인 MBR을 사용하겠습니다.
-``` bash
-~# fdisk /dev/xvdb
-```
-&lt;br /&gt;
-### 파티션 생성
-파티션을 생성할 때는 여러 단계의 옵션이 있습니다. 일반적으로는 아래와 같은 단계로 진행하면 됩니다.
-
-- 파티션을 새로 생성하기 위해 ‘n’을 입력
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- 생성할 파티션 타입에 따라 primary type이면 ‘p’, extended type이면 ‘e’를 입력.  
-  (primary type으로 생성하는 것이 일반적이며, primary 영역의 파티션이 부족할 경우 추가로 extended type으로 생성)
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- 생성할 파티션 번호와 cylinder 영역을 입력 (일반적으로 추가할 disk 전체를 mount하게 되고, 이 경우 default값을 그대로 사용하므로 Enter 입력)
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- ‘w’를 입력해 해당 구성을 적용. 파티션 생성 완료.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-마지막으로 fdisk -l 명령어로 생성된 파티션을 다시 확인합니다.  
-디스크가 /dev/xvdb1 장치로 인식된 것을 확인할 수 있습니다. 
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 디스크 포맷
-다음으로 파티션이 생성된 디스크를 포맷하면 되는데, OS별로 명령어가 다르므로 확인 후에 실행해야 합니다.  
-여기서는 CentOS 7.x 기준으로 mkfs.xfs 명령어를 사용했습니다.
-``` bash
-~# mkfs.xfs /dev/xvdb1
-
-- CentOS 5.x: mkfs.ext3 /dev/xvdb1
-- CentOS 6.x: mkfs.ext4 /dev/xvdb1
-- CentOS 7.x: mkfs.xfs /dev/xvdb1
-- Rocky Linux: mkfs.xfs /dev/xvdb1
-- Ubuntu : mkfs.ext4 /dev/xvdb1
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 디스크 마운트
-다음으로 디스크를 마운트할 포인트 즉, 디렉토리를 원하는 이름으로 생성하고 마운트를 합니다.  
-아래에 있는 마운트 경로 (/mnt/data)는 예시입니다. 원하는 경로를 직접 설정하시면 됩니다.
-``` bash
-~# mkdir /mnt/data
-~# mount /dev/xvdb1 /mnt/data
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- 마운트된 내역을 확인합니다.
-
-``` bash
-~# df -hT
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 마운트 정보 등록
-마운트 정보는 설정에 저장하지 않으면 서버가 리부팅될 때 사라지기 때문에 fstab에 저장합니다.  
-마운트 정보를 등록할 때 장치명을 사용하는 방법과 장치의 UUID를 사용하는 방법이 있는데, 경우에 따라서는 장치명이 변경될 수도 있어, 이를 대비해 가능하면 UUID로 등록합니다.
-
-### UUID 확인
-UUID를 확인하려면 blkid 명령어를 사용합니다.  
-여기서 확인한 UUID를 별도로 복사해두었다가 fstab에 입력하게 됩니다.
-``` bash
-~# blkid /dev/xvdb1
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-vi로 /etc/fstab 파일을 열면 다음과 같습니다.  
-서버 생성과 함께 장착된 기본 디스크도 UUID로 입력된 것을 확인할 수 있습니다.
-``` bash
-~# vi /etc/fstab
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-앞에서 확인하고 복사해둔 추가 디스크의 UUID와 기타 정보를 입력합니다.  
-입력을 완료한 후 fstab 파일을 저장하고 빠져 나옵니다.  
-(fstab에 입력할때 사용하는 디스크 정보 옵션에 대한 정리는 아래에서 다시 확인할 수 있습니다.)
-
-``` bash
-### /etc/fstab
-
-UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
-
-# 또는
-/dev/xvdb1 /mnt/data ext4 defaults 1 2
-
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-
-## fstab 설정 상세정보
-
-/etc/fstab은 부팅 단계에서 마운트되어야 할 볼륨 정보들이 저장되는 곳입니다.  
-(OS 이미지에 따라 파일 시스템이 다르기 때문에 주의해야 합니다.)
-
-파일의 각 항목이 의미하는 바는 아래와 같으며 각 항목은 Tab 또는 Space Bar로 구분합니다.
-
-(장치명) (마운트 포인트) (파일시스템 종류) (옵션) (dump 설정) (fsck 설정)
-
-+ 장치명: 장치명은 장치의 UUID를 사용하거나 /dev/xvdb1와 같은 장치이름을 사용합니다.
-
-+ 마운트 포인트: 볼륨을 마운트하고자 하는 위치입니다. 예시에서는 /mnt/data 디렉토리에 마운트했습니다.
-
-+ 파일시스템 종류: OS별로 기본 파일시스템이 다르므로 알맞게 입력합니다.
-
-  - CentOS 5.x : ext3
-  - CentOS 6.x : ext4
-  - CentOS 7.x : xfs
-  - Rocky Linux : xfs  
-  - Ubuntu Server / Desktop : ext4
-
-+ 옵션: 예시에서는 default 옵션을 사용하였으며, 해당 옵션에는 rw, nouser, auto, exec, suid 속성이 포함됩니다.  
-  각 속성의 내용은 다음과 같습니다. (필요한 옵션만 사용할 시, 각 옵션을 쉼표(,)로 구분하여 작성해주시면 됩니다.)
-
-  - auto : 부팅 시 자동 마운트
-  - rw : 읽기, 쓰기 모두 가능하도록 마운트
-  - nouser : root 계정만 마운트 가능
-  - exec : 파일 실행을 허용
-  - suid : SetUID와 SetGID를 허용
-
-+ dump 설정: dump 명령으로 백업을 할 것인지에 대한 설정
-
-  - 0: dump되지 않는 파일 시스템
-  - 1: dump 가능한 파일 시스템
-
-+ fsck 설정: 부팅시에 fsck 명령으로 파일시스템에 대한 무결성 검사를 할 것인지에 대한 설정
-
-  - 0 : 부팅 시 fsck 실행하지 않음
-  - 1 : 부팅 시 root 파일 시스템을 우선 체크
-  - 2 : 부팅 시 root 이외의 파일 시스템을 우선 체크
-
-## 참고 URL
-1. Ncloud Block Storage 생성, 추가 가이드
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/blockstorage-create-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/blockstorage-create-vpc&lt;/a&gt;
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}
-</description>
-            <pubDate>Thu, 23 Nov 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</guid>
-            
-            <category>linux</category>
-            
-            <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
             <title>IIS에서 X-Forwarded-For를 이용해 Client IP 기록하기</title>
             <description>## 개요
 X-Forwarded-For (XFF) 는 HTTP Header 중 하나로 Load Balancer(로드밸런서)나 Proxy Server를 통해 웹서버에 접속하는 Client의 IP 주소를 식별하는 표준 헤더입니다.  
@@ -881,55 +1036,6 @@ C:\inetpub\logs\LogFiles\W3SVC1\*.log
             <category>analytics</category>
             
             <category>windows</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Cloud Log Analytics에서 수집하는 로그 유형</title>
-            <description>## 개요
-Cloud Log Analytics는 네이버 클라우드 플랫폼의 여러 서비스에서 발생하는 다양한 로그들을 한 곳에 모아 저장하고 손쉽게 분석하게 해주는 서비스입니다.
-
-## 로그 템플릿 종류
-Cloud Log Analytics에서 수집하는 각 종 서비스의 로그 템플릿 종류는 다음과 같습니다.
-
-- Server SYSLOG
-- Apache 로그(Access log, Apache Error Log)
-- MySQL 설치형 상품의 로그(Error Log, Slow Log)
-- Microsoft SQL Server 설치형 상품의 Error Log
-- Tomcat 로그(Catalina Log)
-- Windows 서버의 Event Log
-- Windows 서버의 각종 text 형식의 로그
-- Cloud DB for MySQL 로그
-- Cloud DB for MSSQL 로그
-- Cloud DB for MongoDB 로그
-- Cloud DB for PostgreSQL 로그
-- Application Server Launcher 로그
-- Application Load Balancer 로그
-- Search Engine Service 로그
-- Cloud Data Streaming Service 로그
-- Bare Metal Server 로그
-- Kubernetes Service Audit 로그
-- 그외 템플릿으로 제공되지 않는 로그도 Custom Log 기능으로 직접 대상 로그를 지정해서 수집할 수 있습니다
-
-
-## 로그 보관 기간
-로그 데이터의 **보관 기간은 30일**로, 30일이 지난 데이터는 자동 삭제되며, 사전에 별도로 통지하지 않습니다.
-
-
-## 참고 URL
-&lt;a href=&quot;https://guide.ncloud-docs.com/docs/cla-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cla-overview&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}  </description>
-            <pubDate>Tue, 14 Nov 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-template-info.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-template-info.html</guid>
-            
-            <category>log</category>
-            
-            <category>analytics</category>
             
             
         </item>
@@ -1154,6 +1260,55 @@ Windows 서버에서 Agent 삭제를 시도할 때 아래와 같이 오류 메�
         </item>
         
         <item>
+            <title>Cloud Log Analytics에서 수집하는 로그 유형</title>
+            <description>## 개요
+Cloud Log Analytics는 네이버 클라우드 플랫폼의 여러 서비스에서 발생하는 다양한 로그들을 한 곳에 모아 저장하고 손쉽게 분석하게 해주는 서비스입니다.
+
+## 로그 템플릿 종류
+Cloud Log Analytics에서 수집하는 각 종 서비스의 로그 템플릿 종류는 다음과 같습니다.
+
+- Server SYSLOG
+- Apache 로그(Access log, Apache Error Log)
+- MySQL 설치형 상품의 로그(Error Log, Slow Log)
+- Microsoft SQL Server 설치형 상품의 Error Log
+- Tomcat 로그(Catalina Log)
+- Windows 서버의 Event Log
+- Windows 서버의 각종 text 형식의 로그
+- Cloud DB for MySQL 로그
+- Cloud DB for MSSQL 로그
+- Cloud DB for MongoDB 로그
+- Cloud DB for PostgreSQL 로그
+- Application Server Launcher 로그
+- Application Load Balancer 로그
+- Search Engine Service 로그
+- Cloud Data Streaming Service 로그
+- Bare Metal Server 로그
+- Kubernetes Service Audit 로그
+- 그외 템플릿으로 제공되지 않는 로그도 Custom Log 기능으로 직접 대상 로그를 지정해서 수집할 수 있습니다
+
+
+## 로그 보관 기간
+로그 데이터의 **보관 기간은 30일**로, 30일이 지난 데이터는 자동 삭제되며, 사전에 별도로 통지하지 않습니다.
+
+
+## 참고 URL
+&lt;a href=&quot;https://guide.ncloud-docs.com/docs/cla-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cla-overview&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}  </description>
+            <pubDate>Tue, 14 Nov 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-template-info.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-template-info.html</guid>
+            
+            <category>log</category>
+            
+            <category>analytics</category>
+            
+            
+        </item>
+        
+        <item>
             <title>Object Storage 접속용 Windows Client Tool - S3 Browser</title>
             <description>## 개요
 네이버 클라우드의 Object Storage에 접속, 관리하는 방법은 aws cli 등 여러가지 있지만 Windows PC에서 간편하게 접속해서 관리할 수 있는 클라이언트 툴이 몇개 있습니다.  
@@ -1250,154 +1405,6 @@ S3 Browser를 이용해 파일을 업로드할 때 업로드하는 파일의 권
             <category>object_storage</category>
             
             <category>backup</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
-
-## 구성
-WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
-
-
-## 요금
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;상품명&lt;/th&gt;
-      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
-      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
-      &lt;th&gt;비고&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-        &lt;td rowspan=&quot;4&quot;&gt;WAF VM&lt;/td&gt;
-        &lt;td&gt;0 ~ 100 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
-        &lt;td rowspan=&quot;4&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;        
-        &lt;td&gt;100 초과 ~ 300 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-    &lt;/tr&gt; 
-    &lt;tr&gt;        
-        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
-    &lt;/tr&gt;  
-    &lt;tr&gt;
-        &lt;td&gt;WAF LB&lt;/td&gt;
-        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
-    &lt;/tr&gt; 
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-### 과금 구간 기준
-과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
-
-### 서브 도메인의 요금
-- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
-- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
-- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
-
-## 요금 예시
-
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
-      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
-      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
-      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
-      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-        &lt;td&gt;160 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;160 Mbps&lt;/td&gt;        
-        &lt;td&gt;2개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;300 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-        &lt;td&gt;301 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
-
-## WAF 신청 시 주의 사항
-
-### VPC
-
-- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
-- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
-- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
-- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
-- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
-- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
-- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
-
-
-### Classic
-- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
-
-
-
-## 참고 URL
-1. Ncloud Security Monitoring 서비스 안내
-- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
-
-2. Ncloud Security Monitoring 가이드 
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}</description>
-            <pubDate>Fri, 03 Nov 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
-            
-            <category>security</category>
-            
-            <category>monitoring</category>
             
             
         </item>
