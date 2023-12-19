@@ -5,10 +5,237 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 07 Dec 2023 16:05:50 +0900</pubDate>
-        <lastBuildDate>Thu, 07 Dec 2023 16:05:50 +0900</lastBuildDate>
+        <pubDate>Tue, 19 Dec 2023 12:08:52 +0900</pubDate>
+        <lastBuildDate>Tue, 19 Dec 2023 12:08:52 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud API Key 접근 제한 설정하는 방법</title>
+            <description>## 개요
+Ncloud(네이버 클라우드)를 이용하다보면 여러 가지 정보를 조회하거나 서버를 생성하는 등의 작업을 위해 API를 활용하게 되는 경우가 많습니다. 그런데 이때 사용하는 **API Key를 접근 제한 없이 사용하게 되면 외부에 유출되거나 했을 때 심각한 보안 문제를 일으키게 되므로** 사전에 API Key에 대한 권한을 설정하거나 접근 제한을 설정해서 사용하는 것이 권장됩니다.  
+
+여기서는 API Key를 최소 권한으로 생성하고, 접근 경로를 제한 하는 등의 방법들을 정리해보겠습니다.
+
+## 서브 계정 생성
+API Key 보안과 관련해서 가장 중요한 원칙은 메인 계정이 아닌 최소 권한을 가진 서브 계정(Sub Account)에서 API Key를 생성하는 것입니다.  
+
+{% include warning.html title=&quot;&quot; content=&quot;
+메인 계정은 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API Key를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 반드시 서브 계정에서 API Key를 생성해야 합니다.
+&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+서브 계정(Sub Account)을 생성하는 방법은 아래 문서를 참고하시기 바랍니다.&lt;br /&gt;&lt;br /&gt;
+&amp;#8259; &lt;a href=&apos;/management/ncloud_management_sub_account_guide.html&apos; target=&apos;_blank&apos;&gt;Ncloud 서브 계정 (Sub Account) 생성 가이드&lt;/a&gt;
+&quot; %}
+
+&lt;br /&gt;
+- 테스트를 위해 아래와 같이 서브 계정을 준비하고, 계정을 클릭해서 서브 계정 세부 정보 화면으로 이동합니다.
+{% include image.html file=&quot;management/ncloud-management-sub-account-07.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+## 계정 권한 설정
+서브 계정의 권한은 최소로 설정해야 합니다.  
+예를 들어 Object Storage만 접근하는지, VPC Server 관련된 기능만 사용할 것인지, VPC Server 관련된 기능 중에서도 조회 기능만 사용할 것인지, Server 생성 등을 포함한 모든 기능을 사용할 것인지 등의 사용에 필요한 권한을 모두 정리해서 최소한의 권한으로 설정하는 것이 안전합니다.  
+
+우선, 서브 계정 세부 정보 화면에서 아래쪽에 있는 [**정책**] 탭에 있는 [**개별 권한 추가**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-08.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+정책 추가 화면에서는 네이버 클라우드에서 기본으로 제공하는 [관리형 정책]과 사용자가 직접 정의하는 [사용자 정의 정책]이 있습니다.  
+우선 [관리형 정책]에서 필요한 정책을 선택하고 [추가] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-24.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+- 정책이 워낙 많기 때문에 가능하면 위쪽의 검색 기능을 이용해서 정책을 찾는 것을 추천합니다.  
+여기서는 테스트를 위해 Function으로 검색해서 [NCP_VPC_CLOUD_FUNCTIONS_MANAGER (VPC 기반 Cloud Functions 서비스 내 모든 기능을 이용할 수 있는 권한)]을 선택했습니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-api-gateway-access-control-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법&quot; caption=&quot;&quot; %}
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-api-gateway-access-control-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법&quot; caption=&quot;&quot; %}
+
+## API Gateway 접근 권한 설정
+우선, [서브 계정 세부 정보] 화면에서 [수정] 메뉴 버튼을 클릭합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-api-gateway-access-control-guide-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법&quot; caption=&quot;&quot; %}
+
+- [**서브 계정 정보**] 수정 화면에서 [**접근 권한**]에 있는 [**API Gateway 접근**]을 체크합니다. 그리고, 되도록이면 [**지정된 Source에서만 접근 가능**] 옵션을 선택하고, 지정된 IP 등을 추가하는 것을 권장합니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-12.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+- 위 화면에서 [**추가**] 버튼을 클릭하면 아래와 같이 [**접근 가능 Source 지정**] 팝업이 나타나는데, IP를 입력하거나 VPC Server를 선택하면 됩니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-13.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; [**VPC Server**]의 경우 IP 주소로는 접근할 수 없습니다.&lt;br /&gt;
+&amp;#8259; 아래 화면처럼 VPC Server 리스트에서 직접 선택해야 접근 가능합니다.&lt;br /&gt;
+&amp;#8259; 그러므로 다른 계정의 VPC Server는 접근 가능 리소스에 추가할 수 없습니다.
+&quot; %}
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-api-gateway-access-control-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법&quot; caption=&quot;&quot; %}
+
+### API Access Key 추가
+위에서 [**API Gateway 접근**] 권한을 추가하면 계정 정보 화면에 아래와 같이 [**Access Key**] 탭이 나타나고 [**추가**] 버튼을 클릭하면 [**Access Key**]와 [**Secret Key**]를 생성할 수 있습니다.
+
+{% include image.html file=&quot;management/ncloud-management-sub-account-14.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
+
+
+## 접근 제한 테스트
+그러면 위에서 설정했던 접근 제한 설정이 제대로 작동하는지 테스트 해보겠습니다.
+
+### IP 제한
+위에서 설정한 [**접근 가능 Source 지정**] 항목에 IP를 설정하지 않거나, 지정되지 않은 IP에서 접근할 경우 아래의 예시와 같은 오류 메시지가 반환됩니다.
+
+- 호출 API: getProductList
+
+``` xml
+&lt;Message&gt;
+  &lt;error&gt;
+      &lt;errorCode&gt;230&lt;/errorCode&gt;
+      &lt;message&gt;Forbidden&lt;/message&gt;
+      &lt;details&gt;IP not allowed for authentication.&lt;/details&gt;
+  &lt;/error&gt;
+&lt;/Message&gt;
+```
+
+### 계정 권한 제한
+계정에 올바른 권한이 설정되지 않았을 경우 아래와 같은 오류 메시지가 반환됩니다.
+
+- 호출 API: createServerInstances
+
+``` xml
+&lt;responseError&gt;
+  &lt;returnCode&gt;802&lt;/returnCode&gt;
+  &lt;returnMessage&gt;You do not have authority about action : [VPCServer:Change/createServerInstance].&lt;/returnMessage&gt;
+&lt;/responseError&gt;
+```
+
+- 호출 API: getDemandCostList
+
+``` xml
+&lt;responseError&gt;
+  &lt;returnCode&gt;2210&lt;/returnCode&gt;
+  &lt;returnMessage&gt;You do not have authority about action : [NCP_FINANCE_MANAGER].&lt;/returnMessage&gt;
+&lt;/responseError&gt;
+```
+
+
+## 주요 API 최소 권한
+
+&lt;div&gt;
+  &lt;table class=&quot;simple_table&quot;&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;        
+        &lt;th&gt;API&lt;/th&gt;
+        &lt;th&gt;설명&lt;/th&gt;
+        &lt;th&gt;Classic/VPC&lt;/th&gt;
+        &lt;th&gt;최소 권한&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;      
+        &lt;tr&gt;
+          &lt;td&gt;getProductList&lt;/td&gt;
+          &lt;td&gt;Ncloud 상품 리스트 조회&lt;/td&gt;
+          &lt;td&gt;공통&lt;/td&gt;
+          &lt;td&gt;없음&lt;/td&gt;
+        &lt;/tr&gt; 
+         &lt;tr&gt;
+          &lt;td&gt;getDemandCostList&lt;/td&gt;
+          &lt;td&gt;청구 비용 리스트 조회&lt;/td&gt;
+          &lt;td&gt;공통&lt;/td&gt;
+          &lt;td&gt;NCP_FINANCE_MANAGER&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td rowspan=&quot;2&quot;&gt;getServerInstanceList&lt;/td&gt;
+          &lt;td rowspan=&quot;2&quot;&gt;서버 인스턴스(VM) 리스트 조회&lt;/td&gt;  
+          &lt;td&gt;VPC&lt;/td&gt;
+          &lt;td&gt;NCP_VPC_SERVER_VIEWER&lt;/td&gt;        
+        &lt;/tr&gt;  
+        &lt;tr&gt;          
+          &lt;td&gt;Classic&lt;/td&gt;
+          &lt;td&gt;NCP_SERVER_&lt;strong&gt;OBSERVER&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td rowspan=&quot;2&quot;&gt;createServerInstances&lt;/td&gt;
+          &lt;td rowspan=&quot;2&quot;&gt;서버 인스턴스(VM) 생성&lt;/td&gt;
+          &lt;td&gt;VPC&lt;/td&gt;
+          &lt;td&gt;NCP_VPC_SERVER_MANAGER&lt;/td&gt;
+        &lt;/tr&gt; 
+        &lt;tr&gt;
+          &lt;td&gt;Classic&lt;/td&gt;
+          &lt;td&gt;NCP_SERVER_MANAGER&lt;/td&gt;
+        &lt;/tr&gt; 
+        &lt;tr&gt;
+          &lt;td rowspan=&quot;2&quot;&gt;Get Action List&lt;/td&gt;
+          &lt;td rowspan=&quot;2&quot;&gt;CloudFunction 액션 리스트 조회&lt;/td&gt;
+          &lt;td&gt;VPC&lt;/td&gt;
+          &lt;td&gt;NCP_VPC_CLOUD_FUNCTIONS_VIEWER&lt;/td&gt;
+        &lt;/tr&gt; 
+        &lt;tr&gt;
+          &lt;td&gt;Classic&lt;/td&gt;
+          &lt;td&gt;NCP_CLOUD_FUNCTIONS_&lt;strong&gt;MANAGER&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;    
+        &lt;tr&gt;
+          &lt;td rowspan=&quot;2&quot;&gt;Post Action&lt;/td&gt;
+          &lt;td rowspan=&quot;2&quot;&gt;CloudFunction 액션 실행&lt;/td&gt;
+          &lt;td&gt;VPC&lt;/td&gt;
+          &lt;td&gt;NCP_VPC_CLOUD_FUNCTIONS_MANAGER&lt;/td&gt;
+        &lt;/tr&gt; 
+        &lt;tr&gt;
+          &lt;td&gt;Classic&lt;/td&gt;
+          &lt;td&gt;NCP_CLOUD_FUNCTIONS_MANAGER&lt;/td&gt;
+        &lt;/tr&gt; 
+        &lt;tr&gt;
+          &lt;td&gt;ListBuckets&lt;/td&gt;
+          &lt;td&gt;ObjectStorage 버킷 리스트 조회&lt;/td&gt;
+          &lt;td&gt;공통&lt;/td&gt;
+          &lt;td&gt;NCP_OBJECT_STORAGE_VIEWER&lt;/td&gt;
+        &lt;/tr&gt; 
+        &lt;tr&gt;
+          &lt;td&gt;createAutoScalingGroup&lt;/td&gt;
+          &lt;td&gt;Auto Scaling Group 생성&lt;/td&gt;
+          &lt;td&gt;VPC&lt;/td&gt;
+          &lt;td&gt;NCP_VPC_AUTOSCALING_MANAGER&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;SMS API&lt;/td&gt;
+          &lt;td&gt;Simple &amp; Easy Notification Service 내&lt;br /&gt;SMS 발신번호 등록 기능을 제외한&lt;br /&gt;모든 기능&lt;/td&gt;
+          &lt;td&gt;공통&lt;/td&gt;
+          &lt;td&gt;NCP_SENS_MANAGER&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;geoLocation&lt;/td&gt;
+          &lt;td&gt;지정한 IP의 위치 정보 조회&lt;/td&gt;
+          &lt;td&gt;공통&lt;/td&gt;
+          &lt;td&gt;NCP_GEOLOCATION_MANAGER&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+## 참고 URL
+1.  Ncloud Sub Account 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/subaccount-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/subaccount-overview&lt;/a&gt;
+
+2.  Ncloud API 사용 가이드
+	- &lt;a href=&quot;https://api.ncloud-docs.com/docs/api-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://api.ncloud-docs.com/docs/api-overview&lt;/a&gt;  
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}
+</description>
+            <pubDate>Tue, 19 Dec 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/management/ncloud-management-sub-account-api-gateway-access-control-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-sub-account-api-gateway-access-control-guide.html</guid>
+            
+            <category>account</category>
+            
+            <category>api</category>
+            
+            <category>security</category>
+            
+            
+        </item>
         
         <item>
             <title>Linux 스토리지 추가 생성 기본 가이드</title>
@@ -119,6 +346,150 @@
             <category>linux</category>
             
             <category>storage</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
+
+## 구성
+WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
+
+
+## 요금
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;상품명&lt;/th&gt;
+      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
+      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
+      &lt;th&gt;비고&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;WAF VM&lt;/td&gt;
+        &lt;td&gt;0 ~ 300 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
+    &lt;/tr&gt;  
+    &lt;tr&gt;
+        &lt;td&gt;WAF LB&lt;/td&gt;
+        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
+    &lt;/tr&gt; 
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+### 과금 구간 기준
+과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
+
+### 서브 도메인의 요금
+- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
+- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
+- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
+
+## 요금 예시
+
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
+      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
+      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
+      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
+      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;2개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;300 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+        &lt;td&gt;301 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
+
+## WAF 신청 시 주의 사항
+
+### VPC
+
+- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
+- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
+- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
+- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
+- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
+- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
+- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
+
+
+### Classic
+- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
+
+
+
+## 참고 URL
+1. Ncloud Security Monitoring 서비스 안내
+- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
+
+2. Ncloud Security Monitoring 가이드 
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
+            
+            <category>security</category>
+            
+            <category>monitoring</category>
             
             
         </item>
@@ -382,150 +753,6 @@ UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
             <category>linux</category>
             
             <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
-
-## 구성
-WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
-
-
-## 요금
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;상품명&lt;/th&gt;
-      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
-      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
-      &lt;th&gt;비고&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-        &lt;td rowspan=&quot;3&quot;&gt;WAF VM&lt;/td&gt;
-        &lt;td&gt;0 ~ 300 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
-        &lt;td rowspan=&quot;3&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
-    &lt;/tr&gt;  
-    &lt;tr&gt;
-        &lt;td&gt;WAF LB&lt;/td&gt;
-        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
-    &lt;/tr&gt; 
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-### 과금 구간 기준
-과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
-
-### 서브 도메인의 요금
-- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
-- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
-- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
-
-## 요금 예시
-
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
-      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
-      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
-      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
-      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-        &lt;td&gt;90 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;90 Mbps&lt;/td&gt;        
-        &lt;td&gt;2개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;300 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-        &lt;td&gt;301 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
-
-## WAF 신청 시 주의 사항
-
-### VPC
-
-- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
-- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
-- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
-- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
-- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
-- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
-- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
-
-
-### Classic
-- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
-
-
-
-## 참고 URL
-1. Ncloud Security Monitoring 서비스 안내
-- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
-
-2. Ncloud Security Monitoring 가이드 
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}</description>
-            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
-            
-            <category>security</category>
-            
-            <category>monitoring</category>
             
             
         </item>
@@ -1448,107 +1675,6 @@ Cloud Log Analytics에서 수집하는 각 종 서비스의 로그 템플릿 종
             <category>log</category>
             
             <category>analytics</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Object Storage 접속용 Windows Client Tool - S3 Browser</title>
-            <description>## 개요
-네이버 클라우드의 Object Storage에 접속, 관리하는 방법은 aws cli 등 여러가지 있지만 Windows PC에서 간편하게 접속해서 관리할 수 있는 클라이언트 툴이 몇개 있습니다.  
-그 중에서 이번에는 S3 Browser의 사용법에 대해 간단히 정리해보겠습니다.
-
-## S3 Browser
-S3 Browser는 Amazon S3 and Amazon CloudFront를 위한 클라이언트입니다
-이 버전은 무료버전이기는 하지만, 정확히는 **personal use only**, **non-commecial use only**라고 명시되어 있습니다.  
-그래서 라이선스와 관계없이 사용 가능하고, 더 많은 기능이 포함된 유료 버전도 있습니다. 
-
-상세한 정보와 다운로드는 아래 링크에서 확인하시면 됩니다.
-
-&lt;a href=&quot;https://s3browser.com/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://s3browser.com/&lt;/a&gt;
-
-
-## 사용법
-
-프로그램을 다운 받아서 설치하고, 실행을 하면 여러 종류의 스토리지 중에서 원하는 것을 선택하게 됩니다.  
-이 클라이언트는 AWS S3를 위한 것으로 CloudBerry Explorer와는 다르게 AWS의 다양한 S3 서비스들만 접속이 가능한데, 이용 가능한 스토리지 리스트는 마지막에서 정리해보겠습니다. 
-
-{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
-
-
-Account Type은  **S3 Compatible Storage**를 선택하면 됩니다.  
-- Account name: 여기는 알아보기 쉬운 이름을 적으면 됩니다. 예를 들어 Naver Cloud
-- REST Endpoint: 여기는 네이버 클라우드의 endpoint-url을 적습니다. **kr.object.ncloudstorage.com**
-- Access Key ID: 여기는 Access Key ID
-- Secret Access Key: 여기는 Secret Key
-
-{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_02.jpg&quot; width=&quot;718&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
-
-{% include callout_v2.html type=&quot;success&quot; level=&quot;1&quot; content=&quot;네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.&quot; %}
-
-
-계정 정보를 입력하고 접속을 하면 버킷 리스트가 나타나고 원하는 버킷을 선택해서 들어가면 다음처럼 파일들을 확인할 수 있습니다.
-
-{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_03.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
-
-
-Object Storage에 있는 파일을 로컬PC로 가져오려면 원하는 파일을 선택하고 마우스 오른쪽 버튼을 눌러서 **Download** 명령을 선택하면 됩니다.
-
-{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_04.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
-
-
-그 외 여러 가지 기능들이 있는데 그리 어려운 기능은 아니므로 직접 사용해보시면 금방 알 수 있습니다.
-
-마지막으로 S3 Browser로 접속 가능한 S3 리스트를 확인해보겠습니다.
-
-{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_05.jpg&quot; width=&quot;717&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
-
-- Amazon S3 Storage
-- S3 Compatible Storage
-- Amazon S3 in China
-- Amazon S3 GovCloud Storage
-- Amazon S3 GovCloud Storage (FIPS 140-2)
-- Amazon S3 via EC2 IAM Role
-- Amazon S3 via AssumeRole
-- Amazon S3 (Credentials from Environment Variables)
-- Amazon S3 (Credentials from AWS Config or Credential file)
-
-
-## 업로드하는 파일 권한 자동 적용
-S3 Browser를 이용해 파일을 업로드할 때 업로드하는 파일의 권한을 자동으로 적용하는 방법에 대해 살펴보겠습니다.
-
-우선 S3 Browser에서 [**Tools**] - [**Option**] 메뉴를 클릭합니다.
-
-{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
-
-- [**Option**] 메뉴에 보면 여러 옵션들이 있는데 아래 스샷에서 표시한 2가지 옵션이 중요합니다. 각각에 대한 설명은 아래쪽에서 다시 정리해보겠습니다.
-{% include image.html file=&quot;storage/ncp_storage_object_storage_s3_client_s3browser_07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법&quot; caption=&quot;&quot; %}
-
-### 버킷(Bucket) 권한 상속
-[**Inherit permissions from parent bucket**] 옵션은 버킷(Bucket)에 업로드 되는 파일들은 버킷(Bucket)의 권한을 상속 받게 하는 옵션입니다.  
-예를 들어 버킷(Bucket)의 권한이 [**All User**]에게 [**Read**] 권한이라면 이 옵션을 선택해두면 이 버킷(Bucket)에 업로드 되는 모든 파일은 [**All User**]에게 [**Read**] 권한을 가지게 됩니다.
-
-### 권한 유지
-[**Preserve permissions when overwriting existing files**] 옵션은 이미 버킷(Bucket)에 존재하는 파일을 다시 업로드 해서 덮어 쓰기를 할 경우 기존의 권한을 유지하도록 하는 옵션입니다.
-
-
-## 참고 URL
-1.  S3 Browser 홈페이지
-	- &lt;a href=&quot;https://s3browser.com/&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://s3browser.com/&lt;/a&gt;
-
-2.  S3 Browser S3-Compatible Storages 설정 가이드
-	- &lt;a href=&quot;https://s3browser.com/s3-compatible-storage.aspx&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://s3browser.com/s3-compatible-storage.aspx&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}</description>
-            <pubDate>Mon, 06 Nov 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/storage/ncloud_storage_object_storage_s3_client_s3browser.html</guid>
-            
-            <category>object_storage</category>
-            
-            <category>backup</category>
             
             
         </item>
