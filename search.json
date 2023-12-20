@@ -501,6 +501,17 @@
 
 
 {
+"title": "MySQL 데이터 저장 디렉토리(datadir) 변경해서 설치하는 방법",
+"tags": "databasemysqlinstallrocky_linux",
+"keywords": "Database, 록키 리눅스, 디비, install, Rocky Linux",
+"url": "/database/ncloud-database-mysql-datadir-change-install-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "MySQL GTID Replication 생성 상세 가이드",
 "tags": "databasebackupmysql",
 "keywords": "Database, 복제, Backup, 이중화, 고가용성, Master, Slave",
