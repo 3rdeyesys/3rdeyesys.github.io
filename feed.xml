@@ -5,15 +5,15 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 20 Dec 2023 16:09:14 +0900</pubDate>
-        <lastBuildDate>Wed, 20 Dec 2023 16:09:14 +0900</lastBuildDate>
+        <pubDate>Thu, 21 Dec 2023 18:40:46 +0900</pubDate>
+        <lastBuildDate>Thu, 21 Dec 2023 18:40:46 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
         <item>
-            <title>MySQL 데이터 저장 디렉토리(datadir) 변경해서 설치하는 방법</title>
+            <title>MySQL 데이터 저장 디렉토리(datadir) 위치를 변경해서 설치하는 방법</title>
             <description>## 개요
-Ncloud(네이버 클라우드) 서버에 MySQL을 설치할 때 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법을 정리해보겠습니다.
+Ncloud(네이버 클라우드) 서버에 MySQL을 설치할 때 MySQL 데이터 저장 디렉토리(datadir) 위치를 변경해서 설치하는 방법을 정리해보겠습니다.
 
 ## 테스트 환경
 - 서버: Rocky Linux 8.8
@@ -65,9 +65,18 @@ DB 데이터를 저장할 임의의 디렉토리를 생성합니다. /database/m
 datadir=/database/mysql
 socket=/database/mysql/mysql.sock
 
+# 선택사항: CharacterSet, Collation 설정 추가
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init-connect=&apos;SET NAMES utf8mb4&apos;
+skip-character-set-client-handshake
+
 # 로컬에서 접속하기 위한 client 용 설정 추가
 [client]
 socket=/database/mysql/mysql.sock
+
+# 선택사항: CharacterSet 설정 추가
+default-character-set=utf8mb4
 ```
 {% include image.html file=&quot;database/ncloud-database-mysql-datadir-change-install-guide-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드&quot; caption=&quot;&quot; %}
 
@@ -151,7 +160,7 @@ mysql&gt; show databases;
 
 ## 문서 업데이트 내역
 {% include doc-history.html width=&quot;50%&quot; %}  	</description>
-            <pubDate>Wed, 20 Dec 2023 00:00:00 +0900</pubDate>
+            <pubDate>Thu, 21 Dec 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/database/ncloud-database-mysql-datadir-change-install-guide.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/database/ncloud-database-mysql-datadir-change-install-guide.html</guid>
             

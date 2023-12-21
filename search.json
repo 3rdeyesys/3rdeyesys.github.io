@@ -501,7 +501,7 @@
 
 
 {
-"title": "MySQL 데이터 저장 디렉토리(datadir) 변경해서 설치하는 방법",
+"title": "MySQL 데이터 저장 디렉토리(datadir) 위치를 변경해서 설치하는 방법",
 "tags": "databasemysqlinstallrocky_linux",
 "keywords": "Database, 록키 리눅스, 디비, install, Rocky Linux",
 "url": "/database/ncloud-database-mysql-datadir-change-install-guide.html",
