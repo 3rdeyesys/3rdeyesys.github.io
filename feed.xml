@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 28 Dec 2023 11:17:55 +0900</pubDate>
-        <lastBuildDate>Thu, 28 Dec 2023 11:17:55 +0900</lastBuildDate>
+        <pubDate>Thu, 28 Dec 2023 16:41:57 +0900</pubDate>
+        <lastBuildDate>Thu, 28 Dec 2023 16:41:57 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -46,7 +46,7 @@ Error: Failed to download metadata for repo &apos;extras&apos;: Cannot download 
 {% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
 
 ## 해결 방법-1
-첫번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
+첫번째 방법은 패키지를 설치할 때 미러 사이트 주소에서 404 에러가 발생하는 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
 
 ``` bash
 ~# dnf -y install httpd --disablerepo=extras

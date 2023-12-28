@@ -461,7 +461,23 @@ background-color: #347DBE;
 
 ul#mysidebar {
     border-radius:0px;
+    overflow-y:auto;
 }
+
+ul#mysidebar::-webkit-scrollbar {
+    width: 5px;
+}
+ul#mysidebar::-webkit-scrollbar-button {
+    background: #FAFAFA
+}
+ul#mysidebar::-webkit-scrollbar-track-piece {
+    background: #F1F1F1
+}
+ul#mysidebar::-webkit-scrollbar-thumb {
+    background: #E1E1E1
+}​
+
+
 
 .nav ul li ul li a {
     padding-left:40px;
@@ -945,7 +961,8 @@ span.soft {
 @media (min-width: 1000px) {
 
     ul#mysidebar {
-        width: 225px;
+        width: 240px;
+        height:850px;
     }
 }
 
