@@ -5,10 +5,189 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 21 Dec 2023 18:40:46 +0900</pubDate>
-        <lastBuildDate>Thu, 21 Dec 2023 18:40:46 +0900</lastBuildDate>
+        <pubDate>Thu, 28 Dec 2023 11:17:55 +0900</pubDate>
+        <lastBuildDate>Thu, 28 Dec 2023 11:17:55 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud KVM Hypervisor 타입의 Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
+            <description>## 개요  
+Ncloud (네이버 클라우드)에서 **KVM Hypervisor 타입의 록키 리눅스(Rocky Linux) 8.8 서버**를 제공하고 있는데, 서버를 생성하고 나서 Apache, PHP 등의 패키지를 설치할 때 패키지 다운로드 사이트 또는 미러 사이트에서 8.8 버전에 대한 패키지 정보를 찾을 수 없다는 메시지가 나타나면서 패키지를 설치할 수 없는 경우가 있습니다.   
+`XEN Hypervisor 타입의 서버에서는 문제가 없는데 왜 KVM Hypervisor 타입 서버에서만 이런 문제가 생기는지`와 어떻게 하면 해결할 수 있는지를 정리해보겠습니다.
+
+## 오류 상황
+콘솔에서 서버를 생성한 후에 아무 것도 하지 않고 테스트로 Apache를 설치해보려고 했는데, 오류 메시지가 나타나면서 설치를 할 수 없었습니다. 또한 Extras 리포지토리 미러 사이트도 Ncloud 내부 서버가 아닌 록키 리눅스 공식 미러 사이트로 연결하려고 시도한 것을 확인할 수 있습니다.  
+
+이때, 혹시 외부와 통신이 안되어서 그런 것이 아닐까 오해할 수 있는데, **`아래 오류 메시지를 보면 미러 사이트에 접속할 수 없다는 것이 아니고, 파일을 찾을 수 없다는 404 에러 메시지인 것`**을 알 수 있습니다. 즉, 외부 통신은 아무 문제 없다는 것입니다.
+
+``` bash
+~# dnf -y install httpd
+
+Rocky Linux 8.8 - Extras                                 501  B/s | 3.3 kB     00:06
+Errors during downloading metadata for repository &apos;extras&apos;:
+  - Status code: 404 for https://rocky-linux-asia-east2.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 35.241.40.125)
+  - Status code: 404 for https://rocky-linux-asia-south2.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 34.149.203.6)
+  - Status code: 404 for https://rocky-linux-asia-northeast3.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 35.186.196.188)
+  - Status code: 404 for https://rocky-linux-asia-northeast1.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 34.160.117.186)
+  - Status code: 404 for https://rocky-linux-me-west1.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 34.149.26.62)
+  - Status code: 404 for https://rocky-linux-asia-east1.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 35.186.202.231)
+  - Status code: 404 for https://rocky-linux-asia-southeast1.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 34.160.39.155)
+  - Status code: 404 for https://rocky-linux-asia-southeast2.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 34.111.41.84)
+  - Status code: 404 for https://rocky-linux-asia-northeast2.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 34.107.160.108)
+  - Status code: 404 for https://rocky-linux-asia-south1.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/extras/x86_64/os/repodata/repomd.xml (IP: 34.120.3.13)
+Error: Failed to download metadata for repo &apos;extras&apos;: Cannot download repomd.xml: Cannot download repodata/repomd.xml: All mirrors were tried
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-01.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+### 외부 통신이 되지 않는 경우
+외부 통신이 되지 않는 경우는 아래와 같이 더 이상 진행이 되지 않고 계속 멈춰있는 상태가 되므로 **여기서 다뤄보는 문제와는 관계가 없습니다**.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 해결 방법-1
+첫번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [**Extras**] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.
+
+``` bash
+~# dnf -y install httpd --disablerepo=extras
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-02.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 해결 방법-2
+두번째 방법은 [**Rocky-Extras.repo**] 리포지토리 설정파일의 주소를 Ncloud 내부 서버로 변경하는 방법입니다.
+
+``` conf
+# vim /etc/yum.repos.d/Rocky-Extras.repo
+
+# Rocky-Extras.repo
+
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
+#baseurl=http://dl.rockylinux.org/$contentdir/$releasever/extras/$basearch/os/
+
+baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-03.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+- 주소 변경 후에 아파치를 설치해보면 문제 없이 잘 설치 되는 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-04.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## KVM vs XEN
+그런데 XEN 하이퍼바이저 타입의 서버에서는 아무 문제 없이 설치가 잘되는데 왜 KVM 하이퍼바이저 타입의 서버에서만 문제가 생기는 것인지 궁금해서 두 타입의 서버의 리포지토리 파일들을 비교해봤습니다.
+
+### KVM 타입
+우선, 문제가 발생한 KVM 하이퍼바이저 타입의 서버에서 리포지토리 파일의 리스트를 확인해봤습니다.  
+리스트에는 [**AppStream**], [**BaseOS**], [**Extras**] 리포지토리 파일 뿐만 아니라 다수의 파일이 존재하는 것을 알 수 있습니다.
+
+``` bash
+~# ls -al /etc/yum.repos.d/
+
+Rocky-AppStream.repo
+Rocky-BaseOS.repo
+Rocky-Debuginfo.repo
+Rocky-Devel.repo
+Rocky-Extras.repo
+Rocky-HighAvailability.repo
+Rocky-Media.repo
+Rocky-NFV.repo
+Rocky-Plus.repo
+Rocky-PowerTools.repo
+Rocky-ResilientStorage.repo
+Rocky-RT.repo
+Rocky-Sources.repo
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+### XEN 타입
+다음으로, 문제가 없는 XEN 하이퍼바이저 타입의 서버에서 리포지토리 파일의 리스트를 확인해봤습니다.  
+그런데, 여기는 [**AppStream**], [**BaseOS**] 단 두가지의 리포지토리 파일만 존재하는 것을 알 수 있었습니다.
+
+``` bash
+~# ls -al /etc/yum.repos.d/
+
+Rocky-AppStream.repo
+Rocky-BaseOS.repo
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 해결 방법-3
+세번째 해결 방법은 위에서 확인했 듯이 [**/etc/yum.repos.d/**] 경로에 있는 리포지토리 파일 리스트에서 [**AppStream**], [**BaseOS**] 두가지만 남겨두고 나머지 파일들은 다른 곳에 백업하고 나서 지우면 이상 없이 패키지 설치가 가능합니다.
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 원인 분석
+원인을 찾기 위해 처음에 문제가 생겼을 때 나타났던 오류 메시지에서 리포지토리 미러사이트 주소를 하나 선택해서 접속해봤습니다.  
+접속해봤더니 패키지 관련 디렉토리나 파일들은 존재하지 않고 [**README.txt**] 안내 파일만 존재하는 것을 알 수 있었습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&lt;a href=&apos;https://rocky-linux-asia-east1.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;https://rocky-linux-asia-east1.production.gcp.mirrors.ctrliq.cloud/pub/rocky//8.8/&lt;/a&gt;
+&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+### README.txt
+해당 파일을 클릭해서 열어보니 아래와 같이 파일들이 다른 곳으로 옮겨졌으니 그쪽에서 확인해보라는 메시지를 확인할 수 있었습니다.  
+즉, Rocky Linux 8.8 버전은 출시된지 오래된 버전이어서 미러링 사이트들에서는 삭제되고, 공식 다운로드 사이트의 별도의 디렉토리로 옮겨진 것으로 판단이됩니다.
+
+``` text
+This content has been moved to the Rocky Linux Vault
+
+https://dl.rockylinux.org/vault/rocky/8.8/
+```
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+### 공식 사이트
+위 파일에서 확인한 공식 사이트로 접속해보니 아래와 같이 패키지 관련 디렉토리가 존재하는 것을 알 수 있었습니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&lt;a href=&apos;https://dl.rockylinux.org/vault/rocky/8.8/&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;https://dl.rockylinux.org/vault/rocky/8.8/&lt;/a&gt;
+&quot; %}
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 해결 방법-4
+원인 분석에서 확인했 듯이 공식 사이트의 별도 디렉토리에 패키지 파일들이 존재하므로 [**Rocky-Extras.repo**] 리포지토리 파일을 아래와 같이 수정하는 방법도 가능합니다.
+
+``` conf
+# vim /etc/yum.repos.d/Rocky-Extras.repo
+
+# Rocky-Extras.repo
+
+#mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&amp;repo=extras-$releasever
+#baseurl=http://dl.rockylinux.org/$contentdir/$releasever/extras/$basearch/os/
+#baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/
+
+baseurl=https://dl.rockylinux.org/vault/rocky/$releasever/extras/$basearch/os/
+```
+
+{% include image.html file=&quot;compute/ncloud-compute-server-kvm-rocky-linux-repo-mirror-error-troubleshooting-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud (네이버 클라우드) KVM Hypervisor 타입의 Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  Rocky Linux 서버 소개
+	- &lt;a href=&quot;/compute/ncloud-compute-server-rocky-linux-guide.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-guide.html&lt;/a&gt;
+
+2.  Rocky Linux 미러 사이트 리스트
+	- &lt;a href=&quot;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://mirrors.rockylinux.org/mirrormanager/mirrors/Rocky&lt;/a&gt;
+
+3.  Ncloud XEN Hypervisor 타입의 Rocky Linux 8.6 서버 Repository 미러 사이트 오류 문제 해결 방법
+	- &lt;a href=&quot;/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html&lt;/a&gt;  
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}  </description>
+            <pubDate>Thu, 28 Dec 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-kvm-hypervisor-repository-mirror-site-error-troubleshooting.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud-compute-server-rocky-linux-kvm-hypervisor-repository-mirror-site-error-troubleshooting.html</guid>
+            
+            <category>linux</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
         
         <item>
             <title>MySQL 데이터 저장 디렉토리(datadir) 위치를 변경해서 설치하는 방법</title>
@@ -403,6 +582,150 @@ API Key 보안과 관련해서 가장 중요한 원칙은 메인 계정이 아�
         </item>
         
         <item>
+            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
+
+## 구성
+WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
+
+
+## 요금
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;상품명&lt;/th&gt;
+      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
+      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
+      &lt;th&gt;비고&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;WAF VM&lt;/td&gt;
+        &lt;td&gt;0 ~ 300 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
+    &lt;/tr&gt;  
+    &lt;tr&gt;
+        &lt;td&gt;WAF LB&lt;/td&gt;
+        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
+    &lt;/tr&gt; 
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+### 과금 구간 기준
+과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
+
+### 서브 도메인의 요금
+- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
+- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
+- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
+
+## 요금 예시
+
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
+      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
+      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
+      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
+      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;2개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;300 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+        &lt;td&gt;301 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
+
+## WAF 신청 시 주의 사항
+
+### VPC
+
+- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
+- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
+- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
+- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
+- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
+- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
+- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
+
+
+### Classic
+- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
+
+
+
+## 참고 URL
+1. Ncloud Security Monitoring 서비스 안내
+- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
+
+2. Ncloud Security Monitoring 가이드 
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
+            
+            <category>security</category>
+            
+            <category>monitoring</category>
+            
+            
+        </item>
+        
+        <item>
             <title>Linux 스토리지(디스크) 추가 상세 가이드</title>
             <description>## 개요
 Ncloud(네이버 클라우드)에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.
@@ -661,150 +984,6 @@ UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
             <category>linux</category>
             
             <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
-
-## 구성
-WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
-
-
-## 요금
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;상품명&lt;/th&gt;
-      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
-      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
-      &lt;th&gt;비고&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-        &lt;td rowspan=&quot;3&quot;&gt;WAF VM&lt;/td&gt;
-        &lt;td&gt;0 ~ 300 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
-        &lt;td rowspan=&quot;3&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
-    &lt;/tr&gt;  
-    &lt;tr&gt;
-        &lt;td&gt;WAF LB&lt;/td&gt;
-        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
-    &lt;/tr&gt; 
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-### 과금 구간 기준
-과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
-
-### 서브 도메인의 요금
-- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
-- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
-- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
-
-## 요금 예시
-
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
-      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
-      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
-      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
-      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-        &lt;td&gt;90 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;90 Mbps&lt;/td&gt;        
-        &lt;td&gt;2개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;300 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-        &lt;td&gt;301 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
-
-## WAF 신청 시 주의 사항
-
-### VPC
-
-- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
-- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
-- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
-- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
-- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
-- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
-- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
-
-
-### Classic
-- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
-
-
-
-## 참고 URL
-1. Ncloud Security Monitoring 서비스 안내
-- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
-
-2. Ncloud Security Monitoring 가이드 
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}</description>
-            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
-            
-            <category>security</category>
-            
-            <category>monitoring</category>
             
             
         </item>
@@ -1572,55 +1751,6 @@ C:\inetpub\logs\LogFiles\W3SVC1\*.log
             <category>analytics</category>
             
             <category>windows</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Cloud Log Analytics에서 수집하는 로그 유형</title>
-            <description>## 개요
-Cloud Log Analytics는 네이버 클라우드 플랫폼의 여러 서비스에서 발생하는 다양한 로그들을 한 곳에 모아 저장하고 손쉽게 분석하게 해주는 서비스입니다.
-
-## 로그 템플릿 종류
-Cloud Log Analytics에서 수집하는 각 종 서비스의 로그 템플릿 종류는 다음과 같습니다.
-
-- Server SYSLOG
-- Apache 로그(Access log, Apache Error Log)
-- MySQL 설치형 상품의 로그(Error Log, Slow Log)
-- Microsoft SQL Server 설치형 상품의 Error Log
-- Tomcat 로그(Catalina Log)
-- Windows 서버의 Event Log
-- Windows 서버의 각종 text 형식의 로그
-- Cloud DB for MySQL 로그
-- Cloud DB for MSSQL 로그
-- Cloud DB for MongoDB 로그
-- Cloud DB for PostgreSQL 로그
-- Application Server Launcher 로그
-- Application Load Balancer 로그
-- Search Engine Service 로그
-- Cloud Data Streaming Service 로그
-- Bare Metal Server 로그
-- Kubernetes Service Audit 로그
-- 그외 템플릿으로 제공되지 않는 로그도 Custom Log 기능으로 직접 대상 로그를 지정해서 수집할 수 있습니다
-
-
-## 로그 보관 기간
-로그 데이터의 **보관 기간은 30일**로, 30일이 지난 데이터는 자동 삭제되며, 사전에 별도로 통지하지 않습니다.
-
-
-## 참고 URL
-&lt;a href=&quot;https://guide.ncloud-docs.com/docs/cla-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cla-overview&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}  </description>
-            <pubDate>Tue, 14 Nov 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-template-info.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-template-info.html</guid>
-            
-            <category>log</category>
-            
-            <category>analytics</category>
             
             
         </item>

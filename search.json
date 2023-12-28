@@ -270,7 +270,18 @@
 
 
 {
-"title": "Ncloud Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법",
+"title": "Ncloud KVM Hypervisor 타입의 Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법",
+"tags": "linuxrocky_linux",
+"keywords": "Linux, 록키 리눅스, 록키, Repository, Mirror, 하이퍼바이저, XEN",
+"url": "/compute/ncloud-compute-server-rocky-linux-kvm-hypervisor-repository-mirror-site-error-troubleshooting.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Ncloud XEN Hypervisor 타입의 Rocky Linux 8.6 서버 Repository 미러 사이트 오류 문제 해결 방법",
 "tags": "linuxrocky_linux",
 "keywords": "Linux, 록키 리눅스, 록키, Repository, Mirror",
 "url": "/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-troubleshooting.html",
