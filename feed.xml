@@ -5,8 +5,8 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 10 Jan 2024 15:57:56 +0900</pubDate>
-        <lastBuildDate>Wed, 10 Jan 2024 15:57:56 +0900</lastBuildDate>
+        <pubDate>Wed, 10 Jan 2024 16:08:43 +0900</pubDate>
+        <lastBuildDate>Wed, 10 Jan 2024 16:08:43 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
         
@@ -68,13 +68,7 @@ Google Cloud Platform의 Cloud DNS에서도 AWS와 마찬가지로 255자를 초
             <link>https://docs.3rdeyesys.com/networking/ncloud-networking-global-dns-configure-long-txt-record.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud-networking-global-dns-configure-long-txt-record.html</guid>
             
-            <category>vpc</category>
-            
-            <category>load_balancer</category>
-            
-            <category>proxy</category>
-            
-            <category>rocky_linux</category>
+            <category>dns</category>
             
             
         </item>
