@@ -753,6 +753,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
           
           
+          <li><a title="DNS TXT 레코드 225자 이상 등록하기" href="/networking/ncloud-networking-global-dns-configure-long-txt-record.html" >DNS TXT 레코드 225자 이상 등록하기</a></li>          
+                    
+          
+          
+          
+          
+          
           <li><a title="VPC Peering 생성 가이드" href="/networking/ncloud_networking_vpc_peering_guide.html" >VPC Peering 생성 가이드</a></li>          
                     
           
@@ -2982,6 +2989,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				
 					,
 					
+					"networking-ncloud-networking-global-dns-configure-long-txt-record-html": {
+						"id": "networking-ncloud-networking-global-dns-configure-long-txt-record-html",
+						"title": "DNS 설정에서 255자 이상의 TXT 레코드(SPF, DKIM, DMARC 등) 등록하는 방법",
+						"categories": "",
+						"url": " /networking/ncloud-networking-global-dns-configure-long-txt-record.html",
+						"content": "개요\nDNS 설정할 때 TXT 레코드의 설정 값은 일반적으로 255자로 제한되어 있습니다. 하지만 메일 발신 도메인 인증을 위한 SPF, DKIM 레코드의 설정 값은 255자를 넘는 경우가 많은데 이때 이런 255자 이상의 문자열을 등록할 수 있는 방법에 대해 대표적인 DNS 서비스 업체별로 확인해보겠습니다.\n\nNcloud Global DNS\n우선 Ncloud(네이버 클라우드)의 DNS 서비스인 [Global DNS]는 다른 DNS 제공 업체와 다르게 255자가 넘는 경우에도 자동으로 문자열을 분리해서 등록해줍니다.\n그러므로 Ncloud(네이버 클라우드)에서는 TXT 레코드 값의 길이를 신경쓰지 않고 편하게 등록하시면 됩니다.\n\n레코드 등록 예시\n아래와 같이 예시로 255자가 넘는 DKIM 정보를 [Global DNS]에 등록했습니다. 등록하면서 문자열을 나누지 않고 전체를 하나의 문자열로 등록했습니다.\n\n\n  \n  \n    \n  \n\n\nDNS 레코드 정보 조회 예시\n위에서 예시로 등록한 레코드 정보를 아래와 같이 확인해보면 레코드 문자열이 자동으로 255자 이하로 나누어서 표시되는 것을 확인할 수 있습니다.\nnslookup -q=txt ***._domainkey.조회할도메인\n\n\n\n  \n  \n    \n  \n\n\nAWS Route53\nAWS Route53에서는 255자를 초과하는 값의 경우 각각 255자 이하의 문자열로 나누어서 각 문자열을 큰따옴표로 묶어서 등록해야 합니다. 이때 각 문자열 사이에 줄바꿈을 입력하면 안됩니다.\n\n예시\n\n  원본 문자열: “v=DKIM1;p=BHIUKuk…..YubhjfvF_Very_Long_String_Record_ThjBJHkMghJbG”\n  수정 문자열: “v=DKIM1;p=BHIUKuk…..YubhjfvF_Very_Lo\" \"ng_String_Record_ThjBJHkMghJbG”\n\n\nGoogle Cloud DNS\nGoogle Cloud Platform의 Cloud DNS에서도 AWS와 마찬가지로 255자를 초과하는 값의 경우 각각 255자 이하의 문자열로 나누어서 각 문자열을 큰따옴표로 묶어서 등록해야 합니다. 이때 각 문자열 사이에 줄바꿈을 입력하면 안됩니다.\n\n예시\n\n  원본 문자열: “v=DKIM1;p=BHIUKuk…..YubhjfvF_Very_Long_String_Record_ThjBJHkMghJbG”\n  수정 문자열: “v=DKIM1;p=BHIUKuk…..YubhjfvF_Very_Lo\" \"ng_String_Record_ThjBJHkMghJbG”\n\n\n참고 URL\n\n\n  Ncloud Global DNS 가이드\n    \n      https://guide.ncloud-docs.com/docs/globaldns-overview\n    \n  \n  Ncloud Cloud Outbound Mailer 도메인 보안 인증\n    \n      https://guide.ncloud-docs.com/docs/cloudoutboundmailer-use-domain#%EB%8F%84%EB%A9%94%EC%9D%B8-%EB%B3%B4%EC%95%88\n    \n  \n  AWS Route53에서 255자 보다 긴 TXT 레코드 구성하기\n    \n      https://repost.aws/ko/knowledge-center/route-53-configure-long-spf-txt-records\n    \n  \n  GCP Cloud DNS 레코드 추가 가이드\n    \n      https://cloud.google.com/dns/docs/records?hl=ko#record_type\n    \n  \n\n\n문서 업데이트 내역\n\n  \n    \n      \n        날짜\n        내용\n      \n    \n    \n      \n      \n      \n      \n        \n          2024-01-10\n          문서 최초 생성"
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
 					"networking-ncloud-networking-ipsecvpn-fortigate-setting-guide-html": {
 						"id": "networking-ncloud-networking-ipsecvpn-fortigate-setting-guide-html",
 						"title": "Ncloud VPC환경 IPsecVPN과 FortiGate 장비 연동 가이드",
@@ -5014,9 +5036,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </a>
         		
         </div>
-        &copy;2023 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
+        &copy;2024 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-         Site last generated: 2023-12-28 <br />        
+         Site last generated: 2024-01-10 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>

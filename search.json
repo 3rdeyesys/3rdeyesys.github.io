@@ -721,6 +721,17 @@
 
 
 {
+"title": "DNS 설정에서 255자 이상의 TXT 레코드(SPF, DKIM, DMARC 등) 등록하는 방법",
+"tags": "vpcload_balancerproxyrocky_linux",
+"keywords": "LoadBalancer, 로드밸런스, 프록시, 프록시 프로토콜",
+"url": "/networking/ncloud-networking-global-dns-configure-long-txt-record.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Ncloud VPC환경 IPsecVPN과 FortiGate 장비 연동 가이드",
 "tags": "vpcipsecvpnfortigate",
 "keywords": "LoadBalancer, 로드밸런스, 프록시, 프록시 프로토콜",

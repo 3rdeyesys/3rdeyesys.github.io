@@ -5,10 +5,79 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 28 Dec 2023 16:41:57 +0900</pubDate>
-        <lastBuildDate>Thu, 28 Dec 2023 16:41:57 +0900</lastBuildDate>
+        <pubDate>Wed, 10 Jan 2024 15:57:56 +0900</pubDate>
+        <lastBuildDate>Wed, 10 Jan 2024 15:57:56 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>DNS 설정에서 255자 이상의 TXT 레코드(SPF, DKIM, DMARC 등) 등록하는 방법</title>
+            <description>## 개요
+DNS 설정할 때 TXT 레코드의 설정 값은 일반적으로 255자로 제한되어 있습니다. 하지만 메일 발신 도메인 인증을 위한 SPF, DKIM 레코드의 설정 값은 255자를 넘는 경우가 많은데 이때 이런 255자 이상의 문자열을 등록할 수 있는 방법에 대해 대표적인 DNS 서비스 업체별로 확인해보겠습니다.
+
+## Ncloud Global DNS
+우선 Ncloud(네이버 클라우드)의 DNS 서비스인 [**Global DNS**]는 다른 DNS 제공 업체와 다르게 `255자가 넘는 경우에도 자동으로 문자열을 분리해서 등록해줍니다`.  
+그러므로 Ncloud(네이버 클라우드)에서는 TXT 레코드 값의 길이를 신경쓰지 않고 편하게 등록하시면 됩니다.
+
+### 레코드 등록 예시
+아래와 같이 예시로 255자가 넘는 DKIM 정보를 [**Global DNS**]에 등록했습니다. 등록하면서 문자열을 나누지 않고 전체를 하나의 문자열로 등록했습니다.
+
+{% include image.html file=&quot;networking/ncloud-networking-global-dns-configure-long-txt-record-01.png&quot; width=&quot;845&quot; alt=&quot;DNS 설정할 때 255자 이상인 TXT 레코드(SPF, DKIM, DMARC 등)를 등록하는 방법&quot; caption=&quot;&quot; %}
+
+### DNS 레코드 정보 조회 예시
+위에서 예시로 등록한 레코드 정보를 아래와 같이 확인해보면 레코드 문자열이 자동으로 255자 이하로 나누어서 표시되는 것을 확인할 수 있습니다.
+``` bash
+nslookup -q=txt ***._domainkey.조회할도메인
+```
+
+{% include image.html file=&quot;networking/ncloud-networking-global-dns-configure-long-txt-record-02.png&quot; width=&quot;845&quot; alt=&quot;DNS 설정할 때 255자 이상인 TXT 레코드(SPF, DKIM, DMARC 등)를 등록하는 방법&quot; caption=&quot;&quot; %}
+
+## AWS Route53
+AWS Route53에서는 255자를 초과하는 값의 경우 각각 255자 이하의 문자열로 나누어서 각 문자열을 큰따옴표로 묶어서 등록해야 합니다. `이때 각 문자열 사이에 줄바꿈을 입력하면 안됩니다`.
+
+### 예시
+- 원본 문자열: **&quot;v=DKIM1;p=BHIUKuk.....YubhjfvF_Very_Long_String_Record_ThjBJHkMghJbG&quot;**
+- 수정 문자열: **&quot;v=DKIM1;p=BHIUKuk.....YubhjfvF_Very_Lo`&quot; &quot;`ng_String_Record_ThjBJHkMghJbG&quot;**
+
+
+## Google Cloud DNS
+Google Cloud Platform의 Cloud DNS에서도 AWS와 마찬가지로 255자를 초과하는 값의 경우 각각 255자 이하의 문자열로 나누어서 각 문자열을 큰따옴표로 묶어서 등록해야 합니다. `이때 각 문자열 사이에 줄바꿈을 입력하면 안됩니다`.
+
+### 예시
+- 원본 문자열: **&quot;v=DKIM1;p=BHIUKuk.....YubhjfvF_Very_Long_String_Record_ThjBJHkMghJbG&quot;**
+- 수정 문자열: **&quot;v=DKIM1;p=BHIUKuk.....YubhjfvF_Very_Lo`&quot; &quot;`ng_String_Record_ThjBJHkMghJbG&quot;**
+
+## 참고 URL
+
+1. Ncloud Global DNS 가이드
+  - &lt;a href=&quot;https://guide.ncloud-docs.com/docs/globaldns-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/globaldns-overview&lt;/a&gt;
+
+2. Ncloud Cloud Outbound Mailer 도메인 보안 인증
+  - &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudoutboundmailer-use-domain#%EB%8F%84%EB%A9%94%EC%9D%B8-%EB%B3%B4%EC%95%88&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudoutboundmailer-use-domain#%EB%8F%84%EB%A9%94%EC%9D%B8-%EB%B3%B4%EC%95%88&lt;/a&gt;  
+
+3. AWS Route53에서 255자 보다 긴 TXT 레코드 구성하기
+  - &lt;a href=&quot;https://repost.aws/ko/knowledge-center/route-53-configure-long-spf-txt-records&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://repost.aws/ko/knowledge-center/route-53-configure-long-spf-txt-records&lt;/a&gt;
+
+4. GCP Cloud DNS 레코드 추가 가이드
+  - &lt;a href=&quot;https://cloud.google.com/dns/docs/records?hl=ko#record_type&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://cloud.google.com/dns/docs/records?hl=ko#record_type&lt;/a&gt;  
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Wed, 10 Jan 2024 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/networking/ncloud-networking-global-dns-configure-long-txt-record.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/networking/ncloud-networking-global-dns-configure-long-txt-record.html</guid>
+            
+            <category>vpc</category>
+            
+            <category>load_balancer</category>
+            
+            <category>proxy</category>
+            
+            <category>rocky_linux</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud KVM Hypervisor 타입의 Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
@@ -726,6 +795,119 @@ WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따�
         </item>
         
         <item>
+            <title>Linux 스토리지 추가 생성 기본 가이드</title>
+            <description>## 개요
+네이버 클라우드에서 서버 생성 후에 스토리지를 추가 생성하는 경우가 있는데 이때 사용되는 스토리지는 Block Storage라고 해서 AWS의 EBS(Elastic Block Store)와 유사합니다.
+
+## 스토리지 추가 제약 사항
+- XEN 하이퍼바이저 기반 서버의 경우 Bare Metal 서버와 의 Micro 타입 서버에는 스토리지를 추가할 수 없습니다.
+
+
+## 추가 가능한 최대 사이즈와 개수
+
+&lt;div&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;하이퍼바이저&lt;/th&gt;      
+      &lt;th&gt;스토리지 타입&lt;/th&gt;
+      &lt;th&gt;미디어 타입&lt;/th&gt;
+      &lt;th&gt;최소 크기&lt;/th&gt;
+      &lt;th&gt;최대 크기&lt;/th&gt;
+      &lt;th&gt;추가 가능 개수&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+      &lt;td rowspan=&quot;2&quot;&gt;XEN&lt;/td&gt;
+      &lt;td&gt;HDD&lt;/td&gt;
+      &lt;td&gt;HDD&lt;/td&gt;
+      &lt;td&gt;10GB&lt;/td&gt;
+      &lt;td&gt;2TB&lt;/td&gt;
+      &lt;td&gt;15개&lt;/td&gt;
+    &lt;/tr&gt;  
+    &lt;tr&gt;     
+      &lt;td&gt;SSD&lt;/td&gt;
+      &lt;td&gt;SSD&lt;/td&gt;
+      &lt;td&gt;10GB&lt;/td&gt;
+      &lt;td&gt;2TB&lt;/td&gt;
+      &lt;td&gt;15개&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+      &lt;td rowspan=&quot;2&quot;&gt;KVM&lt;/td&gt;
+      &lt;td&gt;FB1&lt;/td&gt;
+      &lt;td&gt;HDD&lt;/td&gt;
+      &lt;td&gt;100GB&lt;/td&gt;
+      &lt;td&gt;16TB&lt;/td&gt;
+      &lt;td&gt;20개&lt;/td&gt;
+    &lt;/tr&gt;  
+    &lt;tr&gt;     
+      &lt;td&gt;CB1&lt;/td&gt;
+      &lt;td&gt;SSD&lt;/td&gt;
+      &lt;td&gt;10GB&lt;/td&gt;
+      &lt;td&gt;16TB&lt;/td&gt;
+      &lt;td&gt;20개&lt;/td&gt;
+    &lt;/tr&gt;        
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+
+## 리눅스 OS 서버 이미지별 포맷 명령어
+리눅스는 OS 즉, 네이버 클라우드에서 제공하는 서버 이미지별로 추가된 스토리지를 포맷하는 명령어가 다릅니다.
+
+{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&amp;#8259; CentOS 5.x: mkfs.ext3 /dev/xvdb1 &lt;br /&gt;
+&amp;#8259; CentOS 6.x: mkfs.ext4 /dev/xvdb1 &lt;br /&gt;
+&amp;#8259; CentOS 7.x: mkfs.xfs /dev/xvdb1 &lt;br /&gt;
+&amp;#8259; Rocky Linux: mkfs.xfs /dev/xvdb1 &lt;br /&gt;
+&amp;#8259; Ubuntu Server / Desktop: mkfs.ext4 /dev/xvdb1 &lt;br /&gt;
+&quot; %}
+
+## ext4 vs XFS 명령어 비교
+
+&lt;div&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;항목&lt;/th&gt;
+      &lt;th&gt;ext4&lt;/th&gt;
+      &lt;th&gt;XFS&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;&lt;td&gt;포맷&lt;/td&gt;&lt;td&gt;mkfs.ext4&lt;/td&gt;&lt;td&gt;mkfs.xfs&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;마운트&lt;/td&gt;&lt;td&gt;mount&lt;/td&gt;&lt;td&gt;mount&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;리사이즈&lt;/td&gt;&lt;td&gt;resize2fs&lt;/td&gt;&lt;td&gt;xfs_growfs&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;복구&lt;/td&gt;&lt;td&gt;e2fsck&lt;/td&gt;&lt;td&gt;xfs_repair&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;라벨 변경&lt;/td&gt;&lt;td&gt;e2label&lt;/td&gt;&lt;td&gt;xfs_admin -L&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;디버깅&lt;/td&gt;&lt;td&gt;debugfs&lt;/td&gt;&lt;td&gt;xfs_db&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;할당량 설정&lt;/td&gt;&lt;td&gt;quota&lt;/td&gt;&lt;td&gt;quota&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+{% include tip.html content=&quot;xfs_growfs 명령어는 파일 시스템의 크기를 줄일 수는 없고 늘릴 수만 있습니다.&quot; %}
+
+## 참고 URL
+1.  Ncloud 블록 스토리지 사용 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/server-storage-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/server-storage-vpc&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}    </description>
+            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html</guid>
+            
+            <category>linux</category>
+            
+            <category>storage</category>
+            
+            
+        </item>
+        
+        <item>
             <title>Linux 스토리지(디스크) 추가 상세 가이드</title>
             <description>## 개요
 Ncloud(네이버 클라우드)에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.
@@ -980,119 +1162,6 @@ UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
             <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
             <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</link>
             <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</guid>
-            
-            <category>linux</category>
-            
-            <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Linux 스토리지 추가 생성 기본 가이드</title>
-            <description>## 개요
-네이버 클라우드에서 서버 생성 후에 스토리지를 추가 생성하는 경우가 있는데 이때 사용되는 스토리지는 Block Storage라고 해서 AWS의 EBS(Elastic Block Store)와 유사합니다.
-
-## 스토리지 추가 제약 사항
-- XEN 하이퍼바이저 기반 서버의 경우 Bare Metal 서버와 의 Micro 타입 서버에는 스토리지를 추가할 수 없습니다.
-
-
-## 추가 가능한 최대 사이즈와 개수
-
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;하이퍼바이저&lt;/th&gt;      
-      &lt;th&gt;스토리지 타입&lt;/th&gt;
-      &lt;th&gt;미디어 타입&lt;/th&gt;
-      &lt;th&gt;최소 크기&lt;/th&gt;
-      &lt;th&gt;최대 크기&lt;/th&gt;
-      &lt;th&gt;추가 가능 개수&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-      &lt;td rowspan=&quot;2&quot;&gt;XEN&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;2TB&lt;/td&gt;
-      &lt;td&gt;15개&lt;/td&gt;
-    &lt;/tr&gt;  
-    &lt;tr&gt;     
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;2TB&lt;/td&gt;
-      &lt;td&gt;15개&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-      &lt;td rowspan=&quot;2&quot;&gt;KVM&lt;/td&gt;
-      &lt;td&gt;FB1&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;100GB&lt;/td&gt;
-      &lt;td&gt;16TB&lt;/td&gt;
-      &lt;td&gt;20개&lt;/td&gt;
-    &lt;/tr&gt;  
-    &lt;tr&gt;     
-      &lt;td&gt;CB1&lt;/td&gt;
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;16TB&lt;/td&gt;
-      &lt;td&gt;20개&lt;/td&gt;
-    &lt;/tr&gt;        
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-
-## 리눅스 OS 서버 이미지별 포맷 명령어
-리눅스는 OS 즉, 네이버 클라우드에서 제공하는 서버 이미지별로 추가된 스토리지를 포맷하는 명령어가 다릅니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; CentOS 5.x: mkfs.ext3 /dev/xvdb1 &lt;br /&gt;
-&amp;#8259; CentOS 6.x: mkfs.ext4 /dev/xvdb1 &lt;br /&gt;
-&amp;#8259; CentOS 7.x: mkfs.xfs /dev/xvdb1 &lt;br /&gt;
-&amp;#8259; Rocky Linux: mkfs.xfs /dev/xvdb1 &lt;br /&gt;
-&amp;#8259; Ubuntu Server / Desktop: mkfs.ext4 /dev/xvdb1 &lt;br /&gt;
-&quot; %}
-
-## ext4 vs XFS 명령어 비교
-
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;항목&lt;/th&gt;
-      &lt;th&gt;ext4&lt;/th&gt;
-      &lt;th&gt;XFS&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;&lt;td&gt;포맷&lt;/td&gt;&lt;td&gt;mkfs.ext4&lt;/td&gt;&lt;td&gt;mkfs.xfs&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;마운트&lt;/td&gt;&lt;td&gt;mount&lt;/td&gt;&lt;td&gt;mount&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;리사이즈&lt;/td&gt;&lt;td&gt;resize2fs&lt;/td&gt;&lt;td&gt;xfs_growfs&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;복구&lt;/td&gt;&lt;td&gt;e2fsck&lt;/td&gt;&lt;td&gt;xfs_repair&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;라벨 변경&lt;/td&gt;&lt;td&gt;e2label&lt;/td&gt;&lt;td&gt;xfs_admin -L&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;디버깅&lt;/td&gt;&lt;td&gt;debugfs&lt;/td&gt;&lt;td&gt;xfs_db&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;할당량 설정&lt;/td&gt;&lt;td&gt;quota&lt;/td&gt;&lt;td&gt;quota&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-{% include tip.html content=&quot;xfs_growfs 명령어는 파일 시스템의 크기를 줄일 수는 없고 늘릴 수만 있습니다.&quot; %}
-
-## 참고 URL
-1.  Ncloud 블록 스토리지 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/server-storage-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/server-storage-vpc&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}    </description>
-            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html</guid>
             
             <category>linux</category>
             
@@ -1667,88 +1736,6 @@ Cloud Log Analytics에서 수집한 로그를 확인해보면 위에서 설정�
             <category>load_balancer</category>
             
             <category>log</category>
-            
-            <category>windows</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Cloud Log Analytics에서 Windows IIS Log 수집하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드) Cloud Log Analytics 서비스에서 Windows 웹서버인 IIS 로그를 수집하는 방법에 대해 정리해보겠습니다.
-
-## 테스트 서버
-- Windows Server 2019 (64-bit) English Edition
-
-## 수집 설정
-- [**Cloud Log Analytics**] - [**Management**]에서 서버를 선택하고 [**수집 설정**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-02.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-[**Log 수집 설정**] 화면에서 각 설정 항목을 다음과 같이 입력합니다.
-- **Log Template**: **Custom Log**를 선택합니다.
-- **Log Type**: 임의의 값을 입력합니다. (예: iislog)
-- **Log 경로**: 실제 저장되는 로그파일의 경로를 입력합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-10.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-
-### Log 파일 경로 확인
-IIS Log 파일의 경로는 [**IIS Manager**]를 실행하고, 사이트 정보에서 [**Logging**] 메뉴를 선택하면 아래와 같이 [**Directory**] 항목을 확인할 수 있습니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-해당 경로를 찾아가면 아래와 같이 로그 파일이 저장되어 있는 것을 확인할 수 있습니다. 
-
-```text
-# 예시
-C:\inetpub\logs\LogFiles\W3SVC1\u_ex231114.log
-```
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-### Log 파일 경로 입력
-실제 Log 파일은 일별 또는 시간 별로 파일명이 다르게 저장되는 경우가 대부분이므로 [**Log 경로**]에는 다음과 같이 전체 파일을 수집하도록 입력하면 됩니다. 이제 모든 항목을 입력했으면 [**추가**] 버튼을 클릭합니다.
-
-```text
-# 예시
-C:\inetpub\logs\LogFiles\W3SVC1\*.log
-```
-
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-05.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-그리고, 입력한 내용에 이상이 없으면 [**적용**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-06.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-## 로그 수집 Agent 설치
-로그 수집 설정을 마치면 [**로그 수집 Agent 설치**] 방법에 대한 안내 팝업이 나타납니다. 설치 안내 내용 중에서 [**로그 수집 agent 설치 명령어**] 항목에 있는 [**클립보드에 복사하기**] 버튼을 클릭해서 설치 명령어를 복사합니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-서버의 [**Windows PowerShell**]을 실행시켜서 위에서 복사한 [**로그 수집 agent 설치 명령어**] 입력합니다. 설치가 정상적으로 완료되면 [**Finish Installation**] 이라는 메시지를 확인할 수 있습니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-08.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-## 수집된 로그 확인
-설치 후 5분 정도 기다렸다 [**Cloud Log Analytics**] - [**Search**] 메뉴에 들어가보면 아래와 같이 수집된 로그를 확인할 수 있습니다.
-
-{% include image.html file=&quot;management/ncloud-management-cloud-log-analytics-guide-09.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Cloud Log Analytics에서 Windows IIS Log 수집하는 방법&quot; caption=&quot;&quot; %}
-
-
-## 참고 URL
-&lt;a href=&quot;https://guide.ncloud-docs.com/docs/cla-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cla-overview&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}  </description>
-            <pubDate>Thu, 16 Nov 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide.html</guid>
-            
-            <category>Log</category>
-            
-            <category>analytics</category>
             
             <category>windows</category>
             
