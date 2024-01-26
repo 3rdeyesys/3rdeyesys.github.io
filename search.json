@@ -149,6 +149,17 @@
 
 
 {
+"title": "Ncloud Cloud Outbound Mailer 도메인 인증 방법 3가지(SPF, DKIM, DMARC) 안내",
+"tags": "mailauth",
+"keywords": "Linux, 록키 리눅스, 록키, Repository, Mirror, 하이퍼바이저, XEN",
+"url": "/application-service/ncloud-application-service-cloud-outbound-mailer-domain-authentication.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Kubernetes Service 클러스터 생성 및 제어 가이드 | Linux",
 "tags": "kubernetesvpc",
 "keywords": "k8s, K8S, 쿠버네티스",
