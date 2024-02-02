@@ -5,10 +5,149 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 01 Feb 2024 14:59:02 +0900</pubDate>
-        <lastBuildDate>Thu, 01 Feb 2024 14:59:02 +0900</lastBuildDate>
+        <pubDate>Fri, 02 Feb 2024 10:47:54 +0900</pubDate>
+        <lastBuildDate>Fri, 02 Feb 2024 10:47:54 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Cloud Outbound Mailer로 대량 메일 발송하는 방법</title>
+            <description>## 개요
+네이버 클라우드 서비스 중에서 각 종 공지나 이벤트, 마케팅으로 회원들에게 대량의 메일을 발송해야 할 때 사용할 수 있는 것이 Cloud Outbound Mailer 입니다.  
+대량 메일을 발송하는 방법은 여러가지 있지만, 그 중에서도 가장 자주, 간편하게 사용하는 것이 Excel 등의 파일을 업로드 해서 발송하는 방법입니다.  
+
+
+## 이용 신청
+Cloud Outbound Mailer는 먼저 이용신청을 하셔야 합니다.
+[Console] - [Cloud Outbound Mailer] - [Mailing list] 에서 [이용 신청] 버튼을 클릭하시면 됩니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_01.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+다음으로 서비스 이용약관에 동의하시면 됩니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_02.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+## 도메인 인증
+
+{% include warning.html title=&quot;도메인 인증&quot; content=&quot;
+Gmail에서는 2024년 2월부터 새로운 이메일 발신자 가이드라인을 적용하면서 도메인 인증을 받지 않은 경우 메일이 스팸처리되거나 제대로 전송되지 않을 수 있다고 공지하고 있습니다. 그래서 Ncloud에서도 도메인 인증을 받아야만 Gmail로 메일 발송할 수 있도록 하고 있습니다. 그러므로 메일 발송 전에 도메인 인증을 받는 것을 권장합니다.&lt;br /&gt;&lt;br /&gt;
+- &lt;a href=&apos;/application-service/ncloud-application-service-cloud-outbound-mailer-domain-authentication.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Cloud Outbound Mailer 도메인 인증 방법 3가지(SPF, DKIM, DMARC) 안내 바로 가기&lt;/a&gt;
+&quot; %}
+
+
+## 메일 작성
+메일링 리스트 화면에서 발송하기 버튼을 클릭합니다.
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_03.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+메일 작성-발송하기 화면입니다.  
+이중에서 보내는 메일주소, 제목, 내용, 받는 사람은 필수 입력 사항입니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_01.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+[대량 발송용 입력양식 파일다운로드]와 [대량 발송용 파일 선택]은 [보내는 메일 주소]와 [제목], [내용] 을 입력해야 활성화 됩니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_02.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+### 대량메일 발송용 입력양식
+Cloud Outbound Mailer에서 제공하는 대량메일 발송용 입력양식을 다운 받아서 보면, [수신자 Email 주소], [NAME] 이렇게 2가지 항목으로 구성되어 있습니다.  
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_03.jpg&quot; width=&quot;687&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+그 외에도 필요한 항목들을 추가해서 사용할 수 있습니다. 여기서는 [GRADE], [GIFT	] 항목을 추가해서 테스트 해보겠습니다. 
+추가 항목의 이름은 어떤 것이든 상관없습니다. 실제 메일 내용에서 동일한 이름을 사용하기만 하면 문제 없습니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_04.jpg&quot; width=&quot;698&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+### 보내는 이름, 보내는 메일주소, 제목 입력
+우선, 보내는 이름과 보내는 메일주소, 제목을 입력합니다.  
+제목에는 대량 메일 수신자들의 이름이 들어가도록 위에서 확인한 입력 양식에 있던 이름에 해당하는 [NAME] 필드가 들어갈 수 있게 **${NAME} 코드를 입력**합니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_05.jpg&quot; width=&quot;806&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+### 내용 입력
+내용은 직접 입력해도 되고 별도로 제작된 html 파일을 이용할 수도 있는데 Cloud Outbound Mailer에서는 html 파일 업로드는 지원하지 않습니다.  
+그러므로 html 소스를 직접 복사해서 화면에 입력해야 합니다.  다음과 같은 샘플용 html을 준비해서 &lt;body&gt;와 &lt;/body&gt;태그 사이에 있는 내용을 복사해서 에디터의 html모드에 붙여넣습니다.  
+
+{% include tip.html content=&quot;스타일은 css 파일이나 style태그를 사용하지 말고 가급적 태그 안에 inline으로 적용하는 것이 좋습니다. 
+메일 서비스 별로 head 태그만 없애는 곳도 있고, style태그를 모두 없애거나, body태그 안쪽의 내용만 남기고 모두 없애는 곳도 있기 때문에 inline 형식으로 적용하는 것이 가장 안전합니다.&quot; %}
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_06.jpg&quot; width=&quot;800&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+복사한 html을 Editor 모드로 바꾸면 다음과 같이 보입니다.  
+여기서 위에서 준비한 입력양식 Excel 파일에 있던 ${NAME}, ${GRADE}, ${GIFT} 항목을 적절하게 배치해서 입력해두었습니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_07.jpg&quot; width=&quot;800&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+### 대량메일 수신자 파일 등록, 확인 후 발송
+위에서 준비했던 대량메일 수신자 정보가 들어있는 Excel 파일을 등록하고 [확인 후 발송] 버튼을 클릭합니다.  
+바로 발송을 해도 되지만 그것보다는 메일 내용이 제대로 표시되는지, 수신자 목록은 문제 없이 로딩되었는지 확인 한 후에 발송하는 것이 안전합니다.  
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_08.jpg&quot; width=&quot;800&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 발송 준비
+확인 후 발송을 선택하면 이렇게 [발송 준비] 상태로 리스트에 나타납니다.  
+이 상태에서 수신자와 메일 내용이 올바르게 설정되었는지 확인하기 위해 [수신자별 목록] 탭을 선택합니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_09.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+### 수신자별 목록
+수신자별 목록을 살펴보면 다음과 같이 나옵니다.  Excel 파일에 등록해 두었던 이름과 이메일 주소가 문제없이 나타납니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_10.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+### 메일 내용 확인
+수신자별 목록에서 하나를 선택하면 상세 내용이 나오는데, 그 중에서 아래쪽에 있는 [내용보기] 버튼을 클릭해서 메일 본문 내용도 문제가 없는지 확인합니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_11.jpg&quot; width=&quot;800&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+내용 보기를 하시면 아래와 같이 Excel 파일에 등록해 두었던  [NAME], [GRADE], [GIFT] 항목들이 문제없이 설정되어 표시된 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_12.jpg&quot; width=&quot;800&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 메일 발송
+이제 다시 [요청별 목록]으로 돌아와서 [즉시 발송] 버튼을 클릭해 메일을 발송합니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_13.jpg&quot; width=&quot;850&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+### 메일 도착 확인
+실제 존재하는 메일 주소로 발송해보면 이렇게 메일이 잘 들어온 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_bulk_mail_14.jpg&quot; width=&quot;800&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 메일 발송 도메인
+메일 발송은 잘되었고, 도착도 잘했는데 궁금한 것이 한가지 생깁니다.  
+과연 메일 발송 도메인은 어떤 것일까?  그래서 구글 계정으로 보낸 메일에서 발송 도메인을 확인해보았습니다.  
+도메인은 **email.ncloud.com** 인 것을 확인할 수 있습니다.
+
+{% include image.html file=&quot;application-service/cloud_outbound_mailer_00.jpg&quot; width=&quot;800&quot; alt=&quot;Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법&quot; caption=&quot;&quot; %}
+
+
+## 참고 URL
+&lt;a href=&quot;https://guide.ncloud-docs.com/docs/email-email-1-2&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/email-email-1-2&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}  </description>
+            <pubDate>Fri, 02 Feb 2024 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/application-service/ncloud_application_service_cloud_outbound_mailer_bulk_mail_send.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/application-service/ncloud_application_service_cloud_outbound_mailer_bulk_mail_send.html</guid>
+            
+            <category>application</category>
+            
+            <category>mail</category>
+            
+            
+        </item>
         
         <item>
             <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Linux</title>
@@ -1476,6 +1615,150 @@ API Key 보안과 관련해서 가장 중요한 원칙은 메인 계정이 아�
         </item>
         
         <item>
+            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
+
+## 구성
+WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
+
+
+## 요금
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;상품명&lt;/th&gt;
+      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
+      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
+      &lt;th&gt;비고&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;WAF VM&lt;/td&gt;
+        &lt;td&gt;0 ~ 300 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
+    &lt;/tr&gt;  
+    &lt;tr&gt;
+        &lt;td&gt;WAF LB&lt;/td&gt;
+        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
+    &lt;/tr&gt; 
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+### 과금 구간 기준
+과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
+
+### 서브 도메인의 요금
+- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
+- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
+- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
+
+## 요금 예시
+
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
+      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
+      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
+      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
+      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;2개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;300 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+        &lt;td&gt;301 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
+
+## WAF 신청 시 주의 사항
+
+### VPC
+
+- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
+- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
+- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
+- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
+- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
+- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
+- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
+
+
+### Classic
+- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
+
+
+
+## 참고 URL
+1. Ncloud Security Monitoring 서비스 안내
+- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
+
+2. Ncloud Security Monitoring 가이드 
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
+            
+            <category>security</category>
+            
+            <category>monitoring</category>
+            
+            
+        </item>
+        
+        <item>
             <title>Linux 스토리지(디스크) 추가 상세 가이드</title>
             <description>## 개요
 Ncloud(네이버 클라우드)에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.
@@ -1734,263 +2017,6 @@ UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
             <category>linux</category>
             
             <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Linux 스토리지 추가 생성 기본 가이드</title>
-            <description>## 개요
-네이버 클라우드에서 서버 생성 후에 스토리지를 추가 생성하는 경우가 있는데 이때 사용되는 스토리지는 Block Storage라고 해서 AWS의 EBS(Elastic Block Store)와 유사합니다.
-
-## 스토리지 추가 제약 사항
-- XEN 하이퍼바이저 기반 서버의 경우 Bare Metal 서버와 의 Micro 타입 서버에는 스토리지를 추가할 수 없습니다.
-
-
-## 추가 가능한 최대 사이즈와 개수
-
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;하이퍼바이저&lt;/th&gt;      
-      &lt;th&gt;스토리지 타입&lt;/th&gt;
-      &lt;th&gt;미디어 타입&lt;/th&gt;
-      &lt;th&gt;최소 크기&lt;/th&gt;
-      &lt;th&gt;최대 크기&lt;/th&gt;
-      &lt;th&gt;추가 가능 개수&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-      &lt;td rowspan=&quot;2&quot;&gt;XEN&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;2TB&lt;/td&gt;
-      &lt;td&gt;15개&lt;/td&gt;
-    &lt;/tr&gt;  
-    &lt;tr&gt;     
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;2TB&lt;/td&gt;
-      &lt;td&gt;15개&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-      &lt;td rowspan=&quot;2&quot;&gt;KVM&lt;/td&gt;
-      &lt;td&gt;FB1&lt;/td&gt;
-      &lt;td&gt;HDD&lt;/td&gt;
-      &lt;td&gt;100GB&lt;/td&gt;
-      &lt;td&gt;16TB&lt;/td&gt;
-      &lt;td&gt;20개&lt;/td&gt;
-    &lt;/tr&gt;  
-    &lt;tr&gt;     
-      &lt;td&gt;CB1&lt;/td&gt;
-      &lt;td&gt;SSD&lt;/td&gt;
-      &lt;td&gt;10GB&lt;/td&gt;
-      &lt;td&gt;16TB&lt;/td&gt;
-      &lt;td&gt;20개&lt;/td&gt;
-    &lt;/tr&gt;        
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-
-## 리눅스 OS 서버 이미지별 포맷 명령어
-리눅스는 OS 즉, 네이버 클라우드에서 제공하는 서버 이미지별로 추가된 스토리지를 포맷하는 명령어가 다릅니다.
-
-{% include callout_v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; CentOS 5.x: mkfs.ext3 /dev/xvdb1 &lt;br /&gt;
-&amp;#8259; CentOS 6.x: mkfs.ext4 /dev/xvdb1 &lt;br /&gt;
-&amp;#8259; CentOS 7.x: mkfs.xfs /dev/xvdb1 &lt;br /&gt;
-&amp;#8259; Rocky Linux: mkfs.xfs /dev/xvdb1 &lt;br /&gt;
-&amp;#8259; Ubuntu Server / Desktop: mkfs.ext4 /dev/xvdb1 &lt;br /&gt;
-&quot; %}
-
-## ext4 vs XFS 명령어 비교
-
-&lt;div&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;항목&lt;/th&gt;
-      &lt;th&gt;ext4&lt;/th&gt;
-      &lt;th&gt;XFS&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;&lt;td&gt;포맷&lt;/td&gt;&lt;td&gt;mkfs.ext4&lt;/td&gt;&lt;td&gt;mkfs.xfs&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;마운트&lt;/td&gt;&lt;td&gt;mount&lt;/td&gt;&lt;td&gt;mount&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;리사이즈&lt;/td&gt;&lt;td&gt;resize2fs&lt;/td&gt;&lt;td&gt;xfs_growfs&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;복구&lt;/td&gt;&lt;td&gt;e2fsck&lt;/td&gt;&lt;td&gt;xfs_repair&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;라벨 변경&lt;/td&gt;&lt;td&gt;e2label&lt;/td&gt;&lt;td&gt;xfs_admin -L&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;디버깅&lt;/td&gt;&lt;td&gt;debugfs&lt;/td&gt;&lt;td&gt;xfs_db&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;할당량 설정&lt;/td&gt;&lt;td&gt;quota&lt;/td&gt;&lt;td&gt;quota&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-{% include tip.html content=&quot;xfs_growfs 명령어는 파일 시스템의 크기를 줄일 수는 없고 늘릴 수만 있습니다.&quot; %}
-
-## 참고 URL
-1.  Ncloud 블록 스토리지 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/server-storage-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/server-storage-vpc&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}    </description>
-            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_guide.html</guid>
-            
-            <category>linux</category>
-            
-            <category>storage</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
-            <description>## 개요
-Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
-
-## 구성
-WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
-
-{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
-
-
-## 요금
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;상품명&lt;/th&gt;
-      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
-      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
-      &lt;th&gt;비고&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-        &lt;td rowspan=&quot;3&quot;&gt;WAF VM&lt;/td&gt;
-        &lt;td&gt;0 ~ 300 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
-        &lt;td rowspan=&quot;3&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-    &lt;/tr&gt;
-    &lt;tr&gt;        
-        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
-    &lt;/tr&gt;  
-    &lt;tr&gt;
-        &lt;td&gt;WAF LB&lt;/td&gt;
-        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
-    &lt;/tr&gt; 
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-### 과금 구간 기준
-과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
-
-### 서브 도메인의 요금
-- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
-- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
-- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
-
-## 요금 예시
-
-&lt;div class=&quot;col-sm-12&quot;&gt;
-&lt;table class=&quot;simple_table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
-      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
-      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
-      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
-      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;    
-    &lt;tr&gt;
-        &lt;td&gt;90 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;90 Mbps&lt;/td&gt;        
-        &lt;td&gt;2개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,225,200 원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;300 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,174,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,200,000 원&lt;/td&gt;
-    &lt;/tr&gt; 
-    &lt;tr&gt;
-        &lt;td&gt;301 Mbps&lt;/td&gt;        
-        &lt;td&gt;1개&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
-        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
-        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;  
-&lt;/div&gt;
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;3&quot; content=&quot;SLA 수준이 낮은 [단일구성 WAF서비스]를 이용하고자 하시면, 고객지원으로 문의하셔야 합니다.&quot; %}
-
-## WAF 신청 시 주의 사항
-
-### VPC
-
-- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
-- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
-- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
-- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
-- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
-- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
-- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
-
-
-### Classic
-- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
-
-
-
-## 참고 URL
-1. Ncloud Security Monitoring 서비스 안내
-- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
-
-2. Ncloud Security Monitoring 가이드 
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}</description>
-            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
-            
-            <category>security</category>
-            
-            <category>monitoring</category>
             
             
         </item>
