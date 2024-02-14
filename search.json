@@ -138,6 +138,17 @@
 
 
 {
+"title": "Ncloud Clova OCR 서비스 중에서 Template OCR 사용 방법 안내",
+"tags": "aiauth",
+"keywords": "Linux, 록키 리눅스, 록키, Repository, Mirror, 하이퍼바이저, XEN",
+"url": "/ai-services/ncloud-ai-services-clova-ocr-template-ocr-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Windows PowerShell에서 Ncloud API를 호출하는 샘플 예제",
 "tags": "apiwindows",
 "keywords": "API, 파워쉘",
