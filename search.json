@@ -138,9 +138,20 @@
 
 
 {
+"title": "Ncloud Clova OCR - Template OCR API 연동 PHP 샘플 예제",
+"tags": "aiauth",
+"keywords": "AI, OCR, 문서인식",
+"url": "/ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Ncloud Clova OCR 서비스 중에서 Template OCR 사용 방법 안내",
 "tags": "aiauth",
-"keywords": "Linux, 록키 리눅스, 록키, Repository, Mirror, 하이퍼바이저, XEN",
+"keywords": "AI, OCR, 문서인식",
 "url": "/ai-services/ncloud-ai-services-clova-ocr-template-ocr-guide.html",
 "summary": ""
 }

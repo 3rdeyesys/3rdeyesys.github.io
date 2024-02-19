@@ -5,10 +5,642 @@
         <description>써드아이시스템(3rdeyesys) 기술문서 사이트입니다 - Ncloud 프리미엄 파트너</description>
         <link>https://docs.3rdeyesys.com/</link>
         <atom:link href="https://docs.3rdeyesys.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 14 Feb 2024 11:58:54 +0900</pubDate>
-        <lastBuildDate>Wed, 14 Feb 2024 11:58:54 +0900</lastBuildDate>
+        <pubDate>Mon, 19 Feb 2024 14:32:36 +0900</pubDate>
+        <lastBuildDate>Mon, 19 Feb 2024 14:32:36 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
+        
+        <item>
+            <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
+            <description>## 개요
+Ncloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.
+
+## 구성
+WAF 서비스 장비는 [**WAF VM + WAF LB**]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.
+
+{% include image.html file=&quot;security/ncloud-security-security-monitoring-waf-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-bottom&quot; alt=&quot;Ncloud (네이버 클라우드) Security Monitoring WAF 구성도&quot; caption=&quot;&quot; %}
+
+
+## 요금
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;상품명&lt;/th&gt;
+      &lt;th&gt;과금 구간 (Mbps)&lt;/th&gt;
+      &lt;th&gt;가격 (월 요금, VAT별도)&lt;/th&gt;
+      &lt;th&gt;비고&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;Multi&lt;br /&gt;&lt;br /&gt;WAF VM&lt;/td&gt;
+        &lt;td&gt;0 ~ 300 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;리전 단위 판매&lt;br /&gt;이중화 기본 제공&lt;br /&gt;(요금은 이중화 가격)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;2,274,800 원&lt;/td&gt;        
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;Single&lt;br /&gt;&lt;br /&gt;WAF VM&lt;/td&gt;
+        &lt;td&gt;0 ~ 300 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;624,800 원&lt;/td&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;리전 단위 판매&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;300 초과 ~ 500 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;924,800 원&lt;/td&gt;        
+    &lt;/tr&gt;
+    &lt;tr&gt;        
+        &lt;td&gt;500 초과 ~ 1,000 이하&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,299,800 원&lt;/td&gt;        
+    &lt;/tr&gt;  
+    &lt;tr&gt;
+        &lt;td&gt;WAF LB&lt;/td&gt;
+        &lt;td&gt;WAF LB 1개당&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td&gt;WAF LB개수는 WAF 모니터링을 신청하려는&lt;br /&gt;도메인 개수 또는 인증서 개수를 의미&lt;/td&gt;
+    &lt;/tr&gt; 
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+### 과금 구간 기준
+과금 구간을 결정, 변경하게 되는 기준은 **`월 기준 in/out 트래픽 중에서 Peak 트래픽입`**니다. 그러므로 월 기준으로 단 한번이라도 신청 구간을 초과할 경우 과금 기준이 변경될 수 있습니다.
+
+### 추가 도메인
+여러 개의 도메인을 추가할 경우 도메인 개수 만큼 WAF LB 요금이 추가 됩니다.
+
+### 서브 도메인의 요금
+- **개별 인증서**를 사용하는 서브 도메인은 인증서 개수 만큼 WAF LB 요금이 추가 됩니다.
+- **Wildcard 인증서**를 사용하는 서브 도메인은 추가 요금 없이, 개수 제한 없이 사용 가능합니다.
+- 다만, 서브 도메인 개수나 트래픽에 따라 WAF LB 또는 WAF VM이 추가 되어 요금이 증가할 수 있습니다.
+
+## 요금 예시
+
+### Multi WAF
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
+      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
+      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
+      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
+      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,000,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;2개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,025,200 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;300 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;974,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,000,000 원&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+        &lt;td&gt;301 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,474,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;1,500,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+### Single WAF
+&lt;div class=&quot;col-sm-12&quot;&gt;
+&lt;table class=&quot;simple_table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;해당 월 Peak 트래픽&lt;/th&gt;   
+      &lt;th&gt;도메인 또는&lt;br /&gt;인증서 개수&lt;/th&gt;   
+      &lt;th&gt;WAF VM 요금 (VAT 별도)&lt;/th&gt;      
+      &lt;th&gt;WAF LB 요금 (VAT 별도)&lt;/th&gt;
+      &lt;th&gt;합계 (VAT 별도)&lt;br /&gt;&lt;br /&gt;(WAF VM 요금 + WAF LB 요금)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;    
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;624,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;650,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;90 Mbps&lt;/td&gt;        
+        &lt;td&gt;2개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;624,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;50,400 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;675,200 원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;300 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;624,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;650,000 원&lt;/td&gt;
+    &lt;/tr&gt; 
+    &lt;tr&gt;
+        &lt;td&gt;301 Mbps&lt;/td&gt;        
+        &lt;td&gt;1개&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;924,800 원&lt;/td&gt;        
+        &lt;td style=&quot;text-align:right;&quot;&gt;25,200 원&lt;/td&gt;
+        &lt;td style=&quot;text-align:right;&quot;&gt;950,000 원&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;  
+&lt;/div&gt;
+
+{% include callout-v2.html type=&quot;warning&quot; level=&quot;3&quot; content=&quot;WAF 이용 요금은 고객 서비스의 서버 정지와 무관하게 청구됩니다. 서버 정지와 함께 Security Monitoring 서비스의 WAF 계약도 함께 해지해야 과금되지 않습니다.&quot; %}
+
+
+## WAF 신청 시 주의 사항
+
+### VPC
+
+- **`Application Load Balancer 사용 필수`**: WAF는 Reverse Proxy 방식으로 사용자별 별도의 WAF 플랫폼을 구성하여 제공하고, HTTP/HTTPS 트래픽에 대한 보안 모니터링을 제공합니다. 따라서 Application Load Balancer를 사용하는 HTTP/HTTPS 서비스에만 제공이 가능합니다.
+- **`서비스 도메인 필수`**: WAF 서비스를 사용하려면 사용자 서비스 도메인의 CNAME을 WAF Load Balancer 도메인 정보로 수정하여 트래픽이 WAF를 향하도록 설정해야 합니다. 그러므로 서비스 도메인이 있어야 서비스를 신청할 수 있습니다.
+- **서비스 인증서 전달**: HTTPS 서비스 모니터링을 위해 WAF Load Balancer에 인증서를 설치해야 하며, 서비스 신청 시 사용자 서비스의 인증서도 함께 전달해야 합니다.
+- **HTTP 80 리스너 설정**: WAF VM과 사용자 서비스 Application Load Balancer 간의 통신은 HTTP 80 port 공인 통신을 사용합니다. 그러므로 사용자 서비스 Application Load Balancer에 HTTP 80 리스너를 기본으로 구성해야 합니다.
+- **리다이렉션 설정**: WAF Load Balancer에서 80 포트에 대한 443 리다이렉트 설정도 기본으로 지원하고 있습니다. 따라서 WAF 서비스를 정상적으로 사용하려면 사용자의 Application Load Balancer나 서버에서 HTTP -&gt; HTTPS 리다이렉트가 있는 경우 삭제해야 합니다.
+- **HTTP 프로토콜 설정**: HTTPS 모니터링 신청 시, 신청한 Application Load Balancer 리스너에 HTTP 프로토콜 설정이 필요합니다.
+- **CNAME 설정**: WAF(V2) 제공을 위해서 고객 대상 도메인에 CNAME 설정을 해야 합니다. 고객 대상 도메인이 Base 도메인인 경우, CNAME 설정이 불가능하오니 A레코드에 WAF VIP로 설정합니다. 그리고, WAF 구성 후 고객에게 CNAME에 등록할 WAF Load Balancer 도메인 설정 정보 전달 예정입니다.
+
+
+### Classic
+- **HTTP/HTTPS 표준 프로토콜 사용 필수**: WAF는 HTTP/HTTPS 표준 프로토콜을 사용하는 웹 서비스에 대한 보안 모니터링을 제공합니다. 따라서 네이버 클라우드 플랫폼의 Load Balancer를 사용 중인 서비스에 대한 모니터링을 하려면 Load Balancer Protocol을 반드시 HTTP, HTTPS로 설정해야 합니다. 만약 TCP, SSL로 설정하는 경우 WAF 서비스를 사용할 수 없습니다.
+
+
+
+## 참고 URL
+1. Ncloud Security Monitoring 서비스 안내
+- &lt;a href=&quot;https://www.ncloud.com/product/security/securityMonitoring&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://www.ncloud.com/product/security/securityMonitoring&lt;/a&gt;
+
+2. Ncloud Security Monitoring 가이드 
+- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/securitymonitoring-overview&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}</description>
+            <pubDate>Mon, 19 Feb 2024 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/security/ncloud-security-security-monitoring-waf-price-info.html</guid>
+            
+            <category>security</category>
+            
+            <category>monitoring</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>Ncloud Clova OCR - Template OCR API 연동 PHP 샘플 예제</title>
+            <description>## 개요  
+Ncloud (네이버 클라우드) [**Clova OCR**]은 전송한 문서나 이미지를 인식하여 사용자가 지정한 영역의 텍스트와 데이터를 정확하게 추출하는 서비스입니다. 여기서는 API를 이용해서 
+Template OCR로 [**사업자등록증**]을 인식하는 예제를 PHP 코드로 정리해보겠습니다.
+
+## 서비스 배포
+테스트는 Template을 미리 생성한 상태에서 진행해보겠습니다. Template 생성 방법은 아래 링크의 문서에서 확인하시면 됩니다.
+
+{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
+&lt;a href=&apos;/ai-services/ncloud-ai-services-clova-ocr-template-ocr-guide.html&apos; target=&apos;_blank&apos; style=&apos;word-break:break-all;&apos;&gt;Ncloud Clova OCR 서비스 중에서 Template OCR 사용 방법&lt;/a&gt;
+&quot; %}
+
+- [**배포 관리**]에서 [**서비스 배포**] 버튼을 클릭해서 해당 템플릿을 서비스 배포합니다.
+
+{% include image.html file=&quot;ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Clova OCR 서비스 중에서 Template OCR을 사용하는 방법 안내&quot; caption=&quot;&quot; %}
+
+- **서비스 배포** 확인 팝업창에서 [**확인**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide-02.png&quot; width=&quot;485&quot; alt=&quot;Ncloud (네이버 클라우드) Clova OCR 서비스 중에서 Template OCR을 사용하는 방법 안내&quot; caption=&quot;&quot; %}
+
+- [**서비스 배포**]가 완료되면 아래와 같이 **배포 상태**와 **배포 종료 시간**을 확인할 수 있습니다.
+
+{% include image.html file=&quot;ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Clova OCR 서비스 중에서 Template OCR을 사용하는 방법 안내&quot; caption=&quot;&quot; %}
+
+## API Gateway 연동
+[**설정**] - [**API Gateway 연동**] 탭에서 [**연동**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Clova OCR 서비스 중에서 Template OCR을 사용하는 방법 안내&quot; caption=&quot;&quot; %}
+
+- [**API Gateway 연동**]은 기본이 **자동 연동**입니다. API 연동에 필요한 [**Secret Key**]를 만들기 위해서 [**생성**] 버튼을 클릭합니다.
+
+{% include image.html file=&quot;ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide-05.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Clova OCR 서비스 중에서 Template OCR을 사용하는 방법 안내&quot; caption=&quot;&quot; %}
+
+- 생성된 [**Secret key**]와 [**API Gateway Invoke URL**]을 복사해서 API 연동 코드에 사용합니다.
+
+{% include image.html file=&quot;ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide-06.png&quot; width=&quot;685&quot; alt=&quot;Ncloud (네이버 클라우드) Clova OCR 서비스 중에서 Template OCR을 사용하는 방법 안내&quot; caption=&quot;&quot; %}
+
+## 인식 필드
+API 연동 코드를 작성하기 전에 이전에 생성했던 템플릿에서 인식 필드를 다시 한번 확인했보겠습니다.
+
+- 필드 01: 등록번호
+- 필드 02: 법인명
+- 필드 03: 대표자
+- 필드 04: 사업장 소재지
+- 필드 05: 업태
+- 필드 06: 종목
+
+{% include image.html file=&quot;ai-services/ncloud-ai-services-clova-ocr-template-ocr-guide-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Clova OCR 서비스 중에서 Template OCR을 사용하는 방법 안내&quot; caption=&quot;&quot; %}
+
+## PHP 샘플 코드
+Clova OCR API는 크게 2가지 방법으로 나눌 수 있습니다.
+
+- 파일 URL을 전달하는 방법
+- 파일을 업로드하는 방법
+
+아래 PHP 코드는 2가지 방법으로 각각 구현되어 있습니다. 그리고 각 코드의 상세 설명은 아래쪽에서 정리해보겠습니다.
+
+{% tabs ocr-cods %}
+
+{% tab ocr-cods 파일 URL %}
+
+``` php
+&lt;?php  
+
+  // Secret Key
+  $ncloud_clova_ocr_secretkey = &quot;Ijkouhuh89bj89yBHt86ghvhj&amp;T*^VHJ&amp;T*R^FVHJHJ&quot;;  
+
+  // API Gateway Invoke URL
+  $api_url = &quot;https://***.apigw.ntruss.com/custom/v1/28410/****중간 생략****/infer&quot;;
+
+  // Template ID
+  $ncloud_clova_ocr_template_ids = [28222];
+    
+  $unixtimestamp =  round(microtime(true) * 1000);
+
+  // http 호출 헤더값 설정
+  $http_header = array();        
+  $http_header[0] = &quot;X-OCR-SECRET: &quot;.$ncloud_clova_ocr_secretkey.&quot;&quot;;
+  $http_header[1] = &quot;Content-Type:application/json; charset=utf-8&quot;;
+
+  $ocr_request_id = &quot;ocr-test&quot;.$unixtimestamp;
+
+  // 전송할 값들을 배열 형태로 저장
+  $postvars = [
+    &quot;version&quot;=&gt; &quot;V2&quot;,
+    &quot;requestId&quot;=&gt; $ocr_request_id,
+    &quot;timestamp&quot;=&gt; $unixtimestamp,
+    &quot;lang&quot;=&gt; &quot;ko&quot;,
+    &quot;images&quot;=&gt; [
+      [
+        &quot;format&quot;=&gt; &quot;jpg&quot;,
+        &quot;name&quot;=&gt; &quot;ocr-test&quot;,
+        &quot;data&quot;=&gt; null,
+        &quot;url&quot;=&gt; &quot;https://kr.object.ncloudstorage.com/(버킷 이름)/ocr-test.jpg&quot;,
+        &quot;templateIds&quot;=&gt; $ncloud_clova_ocr_template_ids
+      ]
+    ]
+  ];
+
+  // 배열 형태로 저장한 값들을 json 형태로 변환
+  $json_portvars = json_encode($postvars);
+
+  // api 호출
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $api_url);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);  
+  curl_setopt($ch, CURLOPT_POST, TRUE);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
+  curl_setopt($ch,CURLOPT_POSTFIELDS, $json_portvars);
+
+  $json_response = curl_exec($ch);
+  $err = curl_error($ch);
+  $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+  curl_close($ch);
+
+  
+  if ($json_response &amp;&amp; $status_code == &quot;200&quot;)
+  {
+    $obj_response_array = json_decode($json_response, true);
+
+    $obj_clova_ocr_data = $obj_response_array[&quot;images&quot;][0];
+
+    // 사업자 등록번호
+    $business_number = $obj_clova_ocr_data[&quot;fields&quot;][0];
+    $business_number= $business_number[&quot;inferText&quot;];
+
+    //=============== 중간 생략 ================= //
+
+    // 종목
+    $business_item = $obj_clova_ocr_data[&quot;fields&quot;][5];
+    $business_item= $business_item[&quot;inferText&quot;];
+
+    echo(&quot;사업자 등록번호:&quot;.$business_number.&quot;&lt;br /&gt;&quot;);
+    echo(&quot;종목:&quot;.$business_item.&quot;&lt;br /&gt;&quot;);
+  } 
+  else 
+  {
+    $obj_error_response_array = json_decode($json_response, true);
+  }
+
+  
+?&gt;
+```
+
+{% endtab %}
+
+{% tab ocr-cods 파일 업로드 %}
+
+``` php
+&lt;?php  
+
+  // 업로드한 파일을 바이너리로 읽어서 BASE64로 인코딩
+  $ocr_upload_file = $_FILES[&quot;clova_ocr_upload_file&quot;];
+  $ocr_upload_file_tmp_name = $ocr_upload_file[&quot;tmp_name&quot;];
+
+  $ocr_upload_file_binary = fread(fopen($ocr_upload_file_tmp_name, &quot;r&quot;), filesize($ocr_upload_file_tmp_name));
+  $ocr_upload_file_string = base64_encode($ocr_upload_file_binary);
+
+  // Secret Key
+  $ncloud_clova_ocr_secretkey = &quot;Ijkouhuh89bj89yBHt86ghvhj&amp;T*^VHJ&amp;T*R^FVHJHJ&quot;;  
+
+  // API Gateway Invoke URL
+  $api_url = &quot;https://***.apigw.ntruss.com/custom/v1/28410/****중간 생략****/infer&quot;;
+
+  // Template ID
+  $ncloud_clova_ocr_template_ids = [28222];
+    
+  $unixtimestamp =  round(microtime(true) * 1000);
+
+  // http 호출 헤더값 설정
+  $http_header = array();        
+  $http_header[0] = &quot;X-OCR-SECRET: &quot;.$ncloud_clova_ocr_secretkey.&quot;&quot;;
+  $http_header[1] = &quot;Content-Type:application/json; charset=utf-8&quot;;
+
+  $ocr_request_id = &quot;ocr-test&quot;.$unixtimestamp;
+
+  // 전송할 값들을 배열 형태로 저장
+  $postvars = [
+    &quot;version&quot;=&gt; &quot;V2&quot;,
+    &quot;requestId&quot;=&gt; $ocr_request_id,
+    &quot;timestamp&quot;=&gt; $unixtimestamp,
+    &quot;lang&quot;=&gt; &quot;ko&quot;,
+    &quot;images&quot;=&gt; [
+      [
+        &quot;format&quot;=&gt; &quot;jpg&quot;,
+        &quot;name&quot;=&gt; &quot;ocr-test&quot;,
+        &quot;data&quot;=&gt; $clova_ocr_upload_file_string,
+        &quot;url&quot;=&gt; null,
+        &quot;templateIds&quot;=&gt; $ncloud_clova_ocr_template_ids
+      ]
+    ]
+  ];
+
+  // 배열 형태로 저장한 값들을 json 형태로 변환
+  $json_portvars = json_encode($postvars);
+
+  // api 호출
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $api_url);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);  
+  curl_setopt($ch, CURLOPT_POST, TRUE);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
+  curl_setopt($ch,CURLOPT_POSTFIELDS, $json_portvars);
+
+  $json_response = curl_exec($ch);
+  $err = curl_error($ch);
+  $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+  curl_close($ch);
+
+  
+  if ($json_response &amp;&amp; $status_code == &quot;200&quot;)
+  {
+    $obj_response_array = json_decode($json_response, true);
+
+    $obj_clova_ocr_data = $obj_response_array[&quot;images&quot;][0];
+
+    // 사업자 등록번호
+    $business_number = $obj_clova_ocr_data[&quot;fields&quot;][0];
+    $business_number= $business_number[&quot;inferText&quot;];
+
+    //=============== 중간 생략 ================= //
+
+    // 종목
+    $business_item = $obj_clova_ocr_data[&quot;fields&quot;][5];
+    $business_item= $business_item[&quot;inferText&quot;];
+
+    echo(&quot;사업자 등록번호:&quot;.$business_number.&quot;&lt;br /&gt;&quot;);
+    echo(&quot;종목:&quot;.$business_item.&quot;&lt;br /&gt;&quot;);
+  } 
+  else 
+  {
+    $obj_error_response_array = json_decode($json_response, true);
+  }
+
+  
+?&gt;
+```
+
+{% endtab %}
+
+{% endtabs %}
+
+### 코드 상세 설명
+
+- 우선, 도메인에서 API Gateway 연동 후에 생성된 Secret Key와 Invoke URL을 복사해서 입력하고, Template ID도 설정합니다.
+
+``` php
+&lt;?php  
+  // Secret Key
+  $ncloud_clova_ocr_secretkey = &quot;Ijkouhuh89bj89y****중간 생략****j&amp;T*^VHJ&amp;T*R^FVHJHJ&quot;;  
+
+  // API Gateway Invoke URL
+  $api_url = &quot;https://***.apigw.ntruss.com/custom/v1/*****/****중간 생략****/infer&quot;;
+
+  // Template ID
+  $ncloud_clova_ocr_template_ids = [28222];
+?&gt;
+```
+
+- 다음으로 http 호출 헤더값으로, 위에서 변수에 저장했던 Secret Key와 Content-Type을 설정합니다.
+
+``` php
+&lt;?php
+  // http 호출 헤더값 설정
+  $http_header = array();        
+  $http_header[0] = &quot;X-OCR-SECRET: &quot;.$ncloud_clova_ocr_secretkey.&quot;&quot;;
+  $http_header[1] = &quot;Content-Type:application/json; charset=utf-8&quot;;
+?&gt;
+```
+
+- 다음으로 POST로 전송할 값들을 json 형태로 저장합니다.
+
+{% tabs ocr-cods-desc %}
+
+{% tab ocr-cods-desc 파일 URL %}
+
+``` php
+&lt;?php
+  // 전송할 값들을 배열 형태로 저장
+  $postvars = [
+    &quot;version&quot;=&gt; &quot;V2&quot;,
+    &quot;requestId&quot;=&gt; $ocr_request_id,
+    &quot;timestamp&quot;=&gt; $unixtimestamp,
+    &quot;lang&quot;=&gt; &quot;ko&quot;,
+    &quot;images&quot;=&gt; [
+      [
+        &quot;format&quot;=&gt; &quot;jpg&quot;,
+        &quot;name&quot;=&gt; &quot;ocr-test&quot;,
+        &quot;data&quot;=&gt; null,
+        &quot;url&quot;=&gt; &quot;https://kr.object.ncloudstorage.com/(버킷 이름)/ocr-test.jpg&quot;,
+        &quot;templateIds&quot;=&gt; $ncloud_clova_ocr_template_ids
+      ]
+    ]
+  ];
+
+  // 배열 형태로 저장한 값들을 json 형태로 변환
+  $json_portvars = json_encode($postvars);
+?&gt;
+```
+{% endtab %}
+
+{% tab ocr-cods-desc 파일 업로드 %}
+``` php
+&lt;?php
+  // 업로드한 파일을 바이너리로 읽어서 BASE64로 인코딩
+  $ocr_upload_file = $_FILES[&quot;clova_ocr_upload_file&quot;];
+  $ocr_upload_file_tmp_name = $ocr_upload_file[&quot;tmp_name&quot;];
+
+  $ocr_upload_file_binary = fread(fopen($ocr_upload_file_tmp_name, &quot;r&quot;), filesize($ocr_upload_file_tmp_name));
+  $ocr_upload_file_string = base64_encode($ocr_upload_file_binary);
+
+  // 전송할 값들을 배열 형태로 저장
+  $postvars = [
+    &quot;version&quot;=&gt; &quot;V2&quot;,
+    &quot;requestId&quot;=&gt; $ocr_request_id,
+    &quot;timestamp&quot;=&gt; $unixtimestamp,
+    &quot;lang&quot;=&gt; &quot;ko&quot;,
+    &quot;images&quot;=&gt; [
+      [
+        &quot;format&quot;=&gt; &quot;jpg&quot;,
+        &quot;name&quot;=&gt; &quot;ocr-test&quot;,
+        &quot;data&quot;=&gt; $ocr_upload_file_string,
+        &quot;url&quot;=&gt; null,
+        &quot;templateIds&quot;=&gt; $ncloud_clova_ocr_template_ids
+      ]
+    ]
+  ];
+
+  // 배열 형태로 저장한 값들을 json 형태로 변환
+  $json_portvars = json_encode($postvars);
+?&gt;
+```
+{% endtab %}
+
+{% endtabs %}
+
+
+
+- version: &quot;V2&quot;로 고정
+- requestId: 임의의 값
+- timestamp: UNIX TimeStamp
+- lang: 판독할 문서의 언어
+- images: 판독할 문서의 정보
+  - format: 문서 포맷 (jpg, jpeg, png, tiff, pdf 등)
+  - name: 임의의 값
+  - data: 파일을 업로드할 경우의 파일 데이터, URL을 전송할 경우 이 값은 null로 설정
+  - url: 파일의 url을 전송할 경우에 사용, 파일을 업로드할 경우 이 값은 null로 설정
+  - templateIds: 판독에 사용할 Template 아이디들을 배열 형태로 설정
+
+&lt;br /&gt;
+
+- 준비를 모두 마쳤으면 API를 호출합니다.
+
+``` php
+&lt;?php
+  // api 호출
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $api_url);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);  
+  curl_setopt($ch, CURLOPT_POST, TRUE);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
+  curl_setopt($ch,CURLOPT_POSTFIELDS, $json_portvars);
+
+  $json_response = curl_exec($ch);
+  $err = curl_error($ch);
+  $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+?&gt;
+```
+
+- 마지막으로 API 호출 후 반환된 결과 값을 파싱해서 출력해봅니다.
+
+``` php
+&lt;?php
+    $obj_response_array = json_decode($json_response, true);
+
+    $obj_clova_ocr_data = $obj_response_array[&quot;images&quot;][0];
+
+    // 사업자 등록번호
+    $business_number = $obj_clova_ocr_data[&quot;fields&quot;][0];
+    $business_number= $business_number[&quot;inferText&quot;];
+
+    //=============== 중간 생략 ================= //
+
+    // 종목
+    $business_item = $obj_clova_ocr_data[&quot;fields&quot;][5];
+    $business_item= $business_item[&quot;inferText&quot;];
+
+    echo(&quot;사업자 등록번호:&quot;.$business_number.&quot;&lt;br /&gt;&quot;);
+    echo(&quot;종목:&quot;.$business_item.&quot;&lt;br /&gt;&quot;);
+?&gt;
+```
+
+Template을 생성할 때 설정했던 인식 필드에서 [**필드 01**]은 첫번째 값으로 반환되므로 여기서는 $obj_clova_ocr_data[&quot;fields&quot;][0]에 해당됩니다.
+마찬가지로 나머지 필드도 순서대로 가져오면 인식된 값을 확인할 수 있습니다.
+
+## 결과
+
+{% include image.html file=&quot;ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide-07.png&quot; width=&quot;845&quot; alt=&quot;Ncloud (네이버 클라우드) Clova OCR 서비스 중에서 Template OCR을 사용하는 방법 안내&quot; caption=&quot;&quot; %}
+
+## 참고 URL
+1.  Ncloud CLOVA OCR 기본 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/clovaocr-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/clovaocr-overview&lt;/a&gt;
+
+2.  Ncloud CLOVA OCR Template 생성 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/clovaocr-template&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/clovaocr-template&lt;/a&gt;
+
+
+## 문서 업데이트 내역
+{% include doc-history.html width=&quot;50%&quot; %}  </description>
+            <pubDate>Mon, 19 Feb 2024 00:00:00 +0900</pubDate>
+            <link>https://docs.3rdeyesys.com/ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide.html</link>
+            <guid isPermaLink="true">https://docs.3rdeyesys.com/ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide.html</guid>
+            
+            <category>ai</category>
+            
+            <category>auth</category>
+            
+            
+        </item>
         
         <item>
             <title>Ncloud Clova OCR 서비스 중에서 Template OCR 사용 방법 안내</title>
@@ -146,11 +778,11 @@ Ncloud (네이버 클라우드) [**Clova OCR**]은 전송한 문서나 이미지
 
 
 ## 참고 URL
-1.  Ncloud Cloud Outbound Mailer 기본 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/email-email-1-1&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/email-email-1-1&lt;/a&gt;
+1.  Ncloud CLOVA OCR 기본 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/clovaocr-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/clovaocr-overview&lt;/a&gt;
 
-2.  Ncloud Cloud Outbound Mailer 도메인 인증 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/cloudoutboundmailer-use-domain&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/cloudoutboundmailer-use-domain&lt;/a&gt;
+2.  Ncloud CLOVA OCR Templage 생성 가이드
+	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/clovaocr-template&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/clovaocr-template&lt;/a&gt;
 
 
 ## 문서 업데이트 내역
@@ -1539,496 +2171,6 @@ mysql&gt; show databases;
             <category>install</category>
             
             <category>rocky_linux</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Ncloud API Key 접근 제한 설정하는 방법</title>
-            <description>## 개요
-Ncloud(네이버 클라우드)를 이용하다보면 여러 가지 정보를 조회하거나 서버를 생성하는 등의 작업을 위해 API를 활용하게 되는 경우가 많습니다. 그런데 이때 사용하는 **API Key를 접근 제한 없이 사용하게 되면 외부에 유출되거나 했을 때 심각한 보안 문제를 일으키게 되므로** 사전에 API Key에 대한 권한을 설정하거나 접근 제한을 설정해서 사용하는 것이 권장됩니다.  
-
-여기서는 API Key를 최소 권한으로 생성하고, 접근 경로를 제한 하는 등의 방법들을 정리해보겠습니다.
-
-## 서브 계정 생성
-API Key 보안과 관련해서 가장 중요한 원칙은 메인 계정이 아닌 최소 권한을 가진 서브 계정(Sub Account)에서 API Key를 생성하는 것입니다.  
-
-{% include warning.html title=&quot;&quot; content=&quot;
-메인 계정은 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API Key를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 반드시 서브 계정에서 API Key를 생성해야 합니다.
-&quot; %}
-
-{% include callout-v2.html type=&quot;info&quot; level=&quot;2&quot; content=&quot;
-서브 계정(Sub Account)을 생성하는 방법은 아래 문서를 참고하시기 바랍니다.&lt;br /&gt;&lt;br /&gt;
-&amp;#8259; &lt;a href=&apos;/management/ncloud_management_sub_account_guide.html&apos; target=&apos;_blank&apos;&gt;Ncloud 서브 계정 (Sub Account) 생성 가이드&lt;/a&gt;
-&quot; %}
-
-&lt;br /&gt;
-- 테스트를 위해 아래와 같이 서브 계정을 준비하고, 계정을 클릭해서 서브 계정 세부 정보 화면으로 이동합니다.
-{% include image.html file=&quot;management/ncloud-management-sub-account-07.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
-
-## 계정 권한 설정
-서브 계정의 권한은 최소로 설정해야 합니다.  
-예를 들어 Object Storage만 접근하는지, VPC Server 관련된 기능만 사용할 것인지, VPC Server 관련된 기능 중에서도 조회 기능만 사용할 것인지, Server 생성 등을 포함한 모든 기능을 사용할 것인지 등의 사용에 필요한 권한을 모두 정리해서 최소한의 권한으로 설정하는 것이 안전합니다.  
-
-우선, 서브 계정 세부 정보 화면에서 아래쪽에 있는 [**정책**] 탭에 있는 [**개별 권한 추가**] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-08.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
-
-정책 추가 화면에서는 네이버 클라우드에서 기본으로 제공하는 [관리형 정책]과 사용자가 직접 정의하는 [사용자 정의 정책]이 있습니다.  
-우선 [관리형 정책]에서 필요한 정책을 선택하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-24.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
-
-- 정책이 워낙 많기 때문에 가능하면 위쪽의 검색 기능을 이용해서 정책을 찾는 것을 추천합니다.  
-여기서는 테스트를 위해 Function으로 검색해서 [NCP_VPC_CLOUD_FUNCTIONS_MANAGER (VPC 기반 Cloud Functions 서비스 내 모든 기능을 이용할 수 있는 권한)]을 선택했습니다.
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-api-gateway-access-control-guide-01.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법&quot; caption=&quot;&quot; %}
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-api-gateway-access-control-guide-02.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법&quot; caption=&quot;&quot; %}
-
-## API Gateway 접근 권한 설정
-우선, [서브 계정 세부 정보] 화면에서 [수정] 메뉴 버튼을 클릭합니다.
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-api-gateway-access-control-guide-03.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법&quot; caption=&quot;&quot; %}
-
-- [**서브 계정 정보**] 수정 화면에서 [**접근 권한**]에 있는 [**API Gateway 접근**]을 체크합니다. 그리고, 되도록이면 [**지정된 Source에서만 접근 가능**] 옵션을 선택하고, 지정된 IP 등을 추가하는 것을 권장합니다.
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-12.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
-
-- 위 화면에서 [**추가**] 버튼을 클릭하면 아래와 같이 [**접근 가능 Source 지정**] 팝업이 나타나는데, IP를 입력하거나 VPC Server를 선택하면 됩니다.
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-13.png&quot; width=&quot;685&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
-
-{% include callout-v2.html type=&quot;warning&quot; level=&quot;2&quot; content=&quot;
-&amp;#8259; [**VPC Server**]의 경우 IP 주소로는 접근할 수 없습니다.&lt;br /&gt;
-&amp;#8259; 아래 화면처럼 VPC Server 리스트에서 직접 선택해야 접근 가능합니다.&lt;br /&gt;
-&amp;#8259; 그러므로 다른 계정의 VPC Server는 접근 가능 리소스에 추가할 수 없습니다.
-&quot; %}
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-api-gateway-access-control-guide-04.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법&quot; caption=&quot;&quot; %}
-
-### API Access Key 추가
-위에서 [**API Gateway 접근**] 권한을 추가하면 계정 정보 화면에 아래와 같이 [**Access Key**] 탭이 나타나고 [**추가**] 버튼을 클릭하면 [**Access Key**]와 [**Secret Key**]를 생성할 수 있습니다.
-
-{% include image.html file=&quot;management/ncloud-management-sub-account-14.png&quot; width=&quot;845&quot; sub-class=&quot;docimage-no-top&quot; alt=&quot;Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드&quot; caption=&quot;&quot; %}
-
-
-## 접근 제한 테스트
-그러면 위에서 설정했던 접근 제한 설정이 제대로 작동하는지 테스트 해보겠습니다.
-
-### IP 제한
-위에서 설정한 [**접근 가능 Source 지정**] 항목에 IP를 설정하지 않거나, 지정되지 않은 IP에서 접근할 경우 아래의 예시와 같은 오류 메시지가 반환됩니다.
-
-- 호출 API: getProductList
-
-``` xml
-&lt;Message&gt;
-  &lt;error&gt;
-      &lt;errorCode&gt;230&lt;/errorCode&gt;
-      &lt;message&gt;Forbidden&lt;/message&gt;
-      &lt;details&gt;IP not allowed for authentication.&lt;/details&gt;
-  &lt;/error&gt;
-&lt;/Message&gt;
-```
-
-### 계정 권한 제한
-계정에 올바른 권한이 설정되지 않았을 경우 아래와 같은 오류 메시지가 반환됩니다.
-
-- 호출 API: createServerInstances
-
-``` xml
-&lt;responseError&gt;
-  &lt;returnCode&gt;802&lt;/returnCode&gt;
-  &lt;returnMessage&gt;You do not have authority about action : [VPCServer:Change/createServerInstance].&lt;/returnMessage&gt;
-&lt;/responseError&gt;
-```
-
-- 호출 API: getDemandCostList
-
-``` xml
-&lt;responseError&gt;
-  &lt;returnCode&gt;2210&lt;/returnCode&gt;
-  &lt;returnMessage&gt;You do not have authority about action : [NCP_FINANCE_MANAGER].&lt;/returnMessage&gt;
-&lt;/responseError&gt;
-```
-
-
-## 주요 API 최소 권한
-
-&lt;div&gt;
-  &lt;table class=&quot;simple_table&quot;&gt;
-    &lt;thead&gt;
-      &lt;tr&gt;        
-        &lt;th&gt;API&lt;/th&gt;
-        &lt;th&gt;설명&lt;/th&gt;
-        &lt;th&gt;Classic/VPC&lt;/th&gt;
-        &lt;th&gt;최소 권한&lt;/th&gt;
-      &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;      
-        &lt;tr&gt;
-          &lt;td&gt;getProductList&lt;/td&gt;
-          &lt;td&gt;Ncloud 상품 리스트 조회&lt;/td&gt;
-          &lt;td&gt;공통&lt;/td&gt;
-          &lt;td&gt;없음&lt;/td&gt;
-        &lt;/tr&gt; 
-         &lt;tr&gt;
-          &lt;td&gt;getDemandCostList&lt;/td&gt;
-          &lt;td&gt;청구 비용 리스트 조회&lt;/td&gt;
-          &lt;td&gt;공통&lt;/td&gt;
-          &lt;td&gt;NCP_FINANCE_MANAGER&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td rowspan=&quot;2&quot;&gt;getServerInstanceList&lt;/td&gt;
-          &lt;td rowspan=&quot;2&quot;&gt;서버 인스턴스(VM) 리스트 조회&lt;/td&gt;  
-          &lt;td&gt;VPC&lt;/td&gt;
-          &lt;td&gt;NCP_VPC_SERVER_VIEWER&lt;/td&gt;        
-        &lt;/tr&gt;  
-        &lt;tr&gt;          
-          &lt;td&gt;Classic&lt;/td&gt;
-          &lt;td&gt;NCP_SERVER_&lt;strong&gt;OBSERVER&lt;/strong&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td rowspan=&quot;2&quot;&gt;createServerInstances&lt;/td&gt;
-          &lt;td rowspan=&quot;2&quot;&gt;서버 인스턴스(VM) 생성&lt;/td&gt;
-          &lt;td&gt;VPC&lt;/td&gt;
-          &lt;td&gt;NCP_VPC_SERVER_MANAGER&lt;/td&gt;
-        &lt;/tr&gt; 
-        &lt;tr&gt;
-          &lt;td&gt;Classic&lt;/td&gt;
-          &lt;td&gt;NCP_SERVER_MANAGER&lt;/td&gt;
-        &lt;/tr&gt; 
-        &lt;tr&gt;
-          &lt;td rowspan=&quot;2&quot;&gt;Get Action List&lt;/td&gt;
-          &lt;td rowspan=&quot;2&quot;&gt;CloudFunction 액션 리스트 조회&lt;/td&gt;
-          &lt;td&gt;VPC&lt;/td&gt;
-          &lt;td&gt;NCP_VPC_CLOUD_FUNCTIONS_VIEWER&lt;/td&gt;
-        &lt;/tr&gt; 
-        &lt;tr&gt;
-          &lt;td&gt;Classic&lt;/td&gt;
-          &lt;td&gt;NCP_CLOUD_FUNCTIONS_&lt;strong&gt;MANAGER&lt;/strong&gt;&lt;/td&gt;
-        &lt;/tr&gt;    
-        &lt;tr&gt;
-          &lt;td rowspan=&quot;2&quot;&gt;Post Action&lt;/td&gt;
-          &lt;td rowspan=&quot;2&quot;&gt;CloudFunction 액션 실행&lt;/td&gt;
-          &lt;td&gt;VPC&lt;/td&gt;
-          &lt;td&gt;NCP_VPC_CLOUD_FUNCTIONS_MANAGER&lt;/td&gt;
-        &lt;/tr&gt; 
-        &lt;tr&gt;
-          &lt;td&gt;Classic&lt;/td&gt;
-          &lt;td&gt;NCP_CLOUD_FUNCTIONS_MANAGER&lt;/td&gt;
-        &lt;/tr&gt; 
-        &lt;tr&gt;
-          &lt;td&gt;ListBuckets&lt;/td&gt;
-          &lt;td&gt;ObjectStorage 버킷 리스트 조회&lt;/td&gt;
-          &lt;td&gt;공통&lt;/td&gt;
-          &lt;td&gt;NCP_OBJECT_STORAGE_VIEWER&lt;/td&gt;
-        &lt;/tr&gt; 
-        &lt;tr&gt;
-          &lt;td&gt;createAutoScalingGroup&lt;/td&gt;
-          &lt;td&gt;Auto Scaling Group 생성&lt;/td&gt;
-          &lt;td&gt;VPC&lt;/td&gt;
-          &lt;td&gt;NCP_VPC_AUTOSCALING_MANAGER&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;SMS API&lt;/td&gt;
-          &lt;td&gt;Simple &amp; Easy Notification Service 내&lt;br /&gt;SMS 발신번호 등록 기능을 제외한&lt;br /&gt;모든 기능&lt;/td&gt;
-          &lt;td&gt;공통&lt;/td&gt;
-          &lt;td&gt;NCP_SENS_MANAGER&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;geoLocation&lt;/td&gt;
-          &lt;td&gt;지정한 IP의 위치 정보 조회&lt;/td&gt;
-          &lt;td&gt;공통&lt;/td&gt;
-          &lt;td&gt;NCP_GEOLOCATION_MANAGER&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-&lt;/div&gt;
-
-## 참고 URL
-1.  Ncloud Sub Account 사용 가이드
-	- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/ko/subaccount-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/ko/subaccount-overview&lt;/a&gt;
-
-2.  Ncloud API 사용 가이드
-	- &lt;a href=&quot;https://api.ncloud-docs.com/docs/api-overview&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://api.ncloud-docs.com/docs/api-overview&lt;/a&gt;  
-
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}
-</description>
-            <pubDate>Tue, 19 Dec 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/management/ncloud-management-sub-account-api-gateway-access-control-guide.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/management/ncloud-management-sub-account-api-gateway-access-control-guide.html</guid>
-            
-            <category>account</category>
-            
-            <category>api</category>
-            
-            <category>security</category>
-            
-            
-        </item>
-        
-        <item>
-            <title>Linux 스토리지(디스크) 추가 상세 가이드</title>
-            <description>## 개요
-Ncloud(네이버 클라우드)에서 리눅스 서버에 디스크를 추가하는 것은 스토리지 즉, Block Storage를 생성해서 서버에 연결하는 작업이 필요합니다.
-
-## 전체 과정 요약
-스토리지(디스크)를 추가하는 전체 과정은 아래와 같이 하이퍼바이저별로 정리할 수 있으며, 각 단계별 상세 설명은 XEN 하이퍼바이저 기반 서버를 이용해서 진행하겠습니다.
-
-{% tabs storage-add %}
-
-{% tab storage-add XEN 하이퍼바이저 %}
-
-``` bash
-~# fdisk -l
-
-~# fdisk /dev/xvdb
-
-~# mkfs.xfs /dev/xvdb1
-
-  - CentOS 5.x: mkfs.ext3 /dev/xvdb1
-  - CentOS 6.x: mkfs.ext4 /dev/xvdb1
-  - CentOS 7.x: mkfs.xfs /dev/xvdb1
-  - Rocky Linux: mkfs.xfs /dev/xvdb1
-  - Ubuntu : mkfs.ext4 /dev/xvdb1
-
-~# mkdir /mnt/data
-
-~# mount /dev/xvdb1 /mnt/data
-
-~# df -hT
-
-~# vim /etc/fstab
-### =============================
-UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
-
-# 또는
-/dev/xvdb1 /mnt/data ext4 defaults 1 2
-### =============================
-```
-
-{% endtab %}
-
-{% tab storage-add KVM 하이퍼바이저 %}
-
-``` bash
-~# fdisk -l
-
-~# fdisk /dev/vdb
-
-~# mkfs.xfs /dev/vdb1
-
-  - CentOS 5.x: mkfs.ext3 /dev/vdb1
-  - CentOS 6.x: mkfs.ext4 /dev/vdb1
-  - CentOS 7.x: mkfs.xfs /dev/vdb1
-  - Rocky Linux: mkfs.xfs /dev/vdb1
-  - Ubuntu : mkfs.ext4 /dev/vdb1
-
-~# mkdir /mnt/data
-
-~# mount /dev/vdb1 /mnt/data
-
-~# df -hT
-
-~# vim /etc/fstab
-### =============================
-UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
-
-# 또는
-/dev/xvdb1 /mnt/data ext4 defaults 1 2
-### =============================
-```
-
-{% endtab %}
-{% endtabs %}
-
-
-## 스토리지 생성, 할당
-우선은 네이버 클라우드 콘솔 [Server] - [Server]에서 해당 서버를 선택하고 
-[서버 관리 및 설정 변경] - [스토리지 생성]을 선택합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-01.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-다음으로 [스토리지 생성] 화면에서 스토리지 종류, 이름, 적용서버, 크기 (최소 10GB, 최대 2000GB) 등을 선택하고 [추가] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-02.png&quot; width=&quot;685&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-앞에서 설정한 스토리지 정보를 다시 살펴보고 이상이 없으면 [확인] 버튼을 클릭합니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-03.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-추가된 스토리지는 [Server] - [Server] 리스트에서 해당 서버를 클릭해 상세정보에서 확인할 수 있습니다.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-04.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 스토리지 할당 확인
-네이버 클라우드 콘솔에서 할당한 스토리지를 확인하기 위해 putty를 실행해 서버에 접속합니다.  
-이후 과정은 모두 서버에 접속한 상태에서 진행하게 됩니다.
-
-fdisk -l 명령어를 실행해보면 아래 화면처럼 /dev/xvdb 디스크가 할당된 것을 확인할 수 있습니다.
-
-``` bash
-~# fdisk -l
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-05.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 디스크 파티션
-다음 명령어를 입력해 할당된 디스크에 파티션을 생성합니다.  
-파티션 설정에는 기본인 MBR 방식과 2TB 이상의 디스크를 인식하기 위해 사용하는 GPT 방식이 있는데, 네이버 클라우드는 최대 2,000GB까지만 지원하므로 여기서는 기본방식인 MBR을 사용하겠습니다.
-``` bash
-~# fdisk /dev/xvdb
-```
-&lt;br /&gt;
-### 파티션 생성
-파티션을 생성할 때는 여러 단계의 옵션이 있습니다. 일반적으로는 아래와 같은 단계로 진행하면 됩니다.
-
-- 파티션을 새로 생성하기 위해 ‘n’을 입력
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-06.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- 생성할 파티션 타입에 따라 primary type이면 ‘p’, extended type이면 ‘e’를 입력.  
-  (primary type으로 생성하는 것이 일반적이며, primary 영역의 파티션이 부족할 경우 추가로 extended type으로 생성)
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-07.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- 생성할 파티션 번호와 cylinder 영역을 입력 (일반적으로 추가할 disk 전체를 mount하게 되고, 이 경우 default값을 그대로 사용하므로 Enter 입력)
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-08.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- ‘w’를 입력해 해당 구성을 적용. 파티션 생성 완료.
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-09.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-마지막으로 fdisk -l 명령어로 생성된 파티션을 다시 확인합니다.  
-디스크가 /dev/xvdb1 장치로 인식된 것을 확인할 수 있습니다. 
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-10.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 디스크 포맷
-다음으로 파티션이 생성된 디스크를 포맷하면 되는데, OS별로 명령어가 다르므로 확인 후에 실행해야 합니다.  
-여기서는 CentOS 7.x 기준으로 mkfs.xfs 명령어를 사용했습니다.
-``` bash
-~# mkfs.xfs /dev/xvdb1
-
-- CentOS 5.x: mkfs.ext3 /dev/xvdb1
-- CentOS 6.x: mkfs.ext4 /dev/xvdb1
-- CentOS 7.x: mkfs.xfs /dev/xvdb1
-- Rocky Linux: mkfs.xfs /dev/xvdb1
-- Ubuntu : mkfs.ext4 /dev/xvdb1
-```
-
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-11.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 디스크 마운트
-다음으로 디스크를 마운트할 포인트 즉, 디렉토리를 원하는 이름으로 생성하고 마운트를 합니다.  
-아래에 있는 마운트 경로 (/mnt/data)는 예시입니다. 원하는 경로를 직접 설정하시면 됩니다.
-``` bash
-~# mkdir /mnt/data
-~# mount /dev/xvdb1 /mnt/data
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-12.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-- 마운트된 내역을 확인합니다.
-
-``` bash
-~# df -hT
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-13.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-## 마운트 정보 등록
-마운트 정보는 설정에 저장하지 않으면 서버가 리부팅될 때 사라지기 때문에 fstab에 저장합니다.  
-마운트 정보를 등록할 때 장치명을 사용하는 방법과 장치의 UUID를 사용하는 방법이 있는데, 경우에 따라서는 장치명이 변경될 수도 있어, 이를 대비해 가능하면 UUID로 등록합니다.
-
-### UUID 확인
-UUID를 확인하려면 blkid 명령어를 사용합니다.  
-여기서 확인한 UUID를 별도로 복사해두었다가 fstab에 입력하게 됩니다.
-``` bash
-~# blkid /dev/xvdb1
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-14.png&quot; width=&quot;840&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-vi로 /etc/fstab 파일을 열면 다음과 같습니다.  
-서버 생성과 함께 장착된 기본 디스크도 UUID로 입력된 것을 확인할 수 있습니다.
-``` bash
-~# vi /etc/fstab
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-15.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-앞에서 확인하고 복사해둔 추가 디스크의 UUID와 기타 정보를 입력합니다.  
-입력을 완료한 후 fstab 파일을 저장하고 빠져 나옵니다.  
-(fstab에 입력할때 사용하는 디스크 정보 옵션에 대한 정리는 아래에서 다시 확인할 수 있습니다.)
-
-``` bash
-### /etc/fstab
-
-UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
-
-# 또는
-/dev/xvdb1 /mnt/data ext4 defaults 1 2
-
-```
-{% include image.html file=&quot;compute/ncloud-compute-server-storage-add-detail-process-16.png&quot; width=&quot;845&quot; alt=&quot;Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드&quot; caption=&quot;&quot; %}
-
-
-## fstab 설정 상세정보
-
-/etc/fstab은 부팅 단계에서 마운트되어야 할 볼륨 정보들이 저장되는 곳입니다.  
-(OS 이미지에 따라 파일 시스템이 다르기 때문에 주의해야 합니다.)
-
-파일의 각 항목이 의미하는 바는 아래와 같으며 각 항목은 Tab 또는 Space Bar로 구분합니다.
-
-(장치명) (마운트 포인트) (파일시스템 종류) (옵션) (dump 설정) (fsck 설정)
-
-+ 장치명: 장치명은 장치의 UUID를 사용하거나 /dev/xvdb1와 같은 장치이름을 사용합니다.
-
-+ 마운트 포인트: 볼륨을 마운트하고자 하는 위치입니다. 예시에서는 /mnt/data 디렉토리에 마운트했습니다.
-
-+ 파일시스템 종류: OS별로 기본 파일시스템이 다르므로 알맞게 입력합니다.
-
-  - CentOS 5.x : ext3
-  - CentOS 6.x : ext4
-  - CentOS 7.x : xfs
-  - Rocky Linux : xfs  
-  - Ubuntu Server / Desktop : ext4
-
-+ 옵션: 예시에서는 default 옵션을 사용하였으며, 해당 옵션에는 rw, nouser, auto, exec, suid 속성이 포함됩니다.  
-  각 속성의 내용은 다음과 같습니다. (필요한 옵션만 사용할 시, 각 옵션을 쉼표(,)로 구분하여 작성해주시면 됩니다.)
-
-  - auto : 부팅 시 자동 마운트
-  - rw : 읽기, 쓰기 모두 가능하도록 마운트
-  - nouser : root 계정만 마운트 가능
-  - exec : 파일 실행을 허용
-  - suid : SetUID와 SetGID를 허용
-
-+ dump 설정: dump 명령으로 백업을 할 것인지에 대한 설정
-
-  - 0: dump되지 않는 파일 시스템
-  - 1: dump 가능한 파일 시스템
-
-+ fsck 설정: 부팅시에 fsck 명령으로 파일시스템에 대한 무결성 검사를 할 것인지에 대한 설정
-
-  - 0 : 부팅 시 fsck 실행하지 않음
-  - 1 : 부팅 시 root 파일 시스템을 우선 체크
-  - 2 : 부팅 시 root 이외의 파일 시스템을 우선 체크
-
-## 참고 URL
-1. Ncloud Block Storage 생성, 추가 가이드
-- &lt;a href=&quot;https://guide.ncloud-docs.com/docs/blockstorage-create-vpc&quot; target=&quot;_blank&quot; style=&quot;word-break:break-all;&quot;&gt;https://guide.ncloud-docs.com/docs/blockstorage-create-vpc&lt;/a&gt;
-
-## 문서 업데이트 내역
-{% include doc-history.html width=&quot;50%&quot; %}
-</description>
-            <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
-            <link>https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</link>
-            <guid isPermaLink="true">https://docs.3rdeyesys.com/compute/ncloud_compute_server_storage_add_detail_process.html</guid>
-            
-            <category>linux</category>
-            
-            <category>storage</category>
             
             
         </item>
