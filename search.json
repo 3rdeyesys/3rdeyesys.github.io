@@ -139,7 +139,7 @@
 
 {
 "title": "Ncloud Clova OCR - Template OCR API 연동 PHP 샘플 예제",
-"tags": "aiauth",
+"tags": "aiapi",
 "keywords": "AI, OCR, 문서인식",
 "url": "/ai-services/ncloud-ai-services-clova-ocr-template-ocr-api-guide.html",
 "summary": ""
@@ -150,7 +150,7 @@
 
 {
 "title": "Ncloud Clova OCR 서비스 중에서 Template OCR 사용 방법 안내",
-"tags": "aiauth",
+"tags": "ai",
 "keywords": "AI, OCR, 문서인식",
 "url": "/ai-services/ncloud-ai-services-clova-ocr-template-ocr-guide.html",
 "summary": ""
@@ -1482,11 +1482,11 @@
 
 
 {
-"title": "Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치",
+"title": "Mysql, MariaDB 외부접속을 위한 환경설정 bind-address 위치",
 "tags": "databasemysqlmariadb",
 "keywords": "Database, Config",
 "url": "/database/ncloud_database_mysql_mariadb_config_bind_address.html",
-"summary": "Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내입니다"
+"summary": "Ncloud Mysql, MariaDB 외부접속을 위한 환경설정 bind-address 위치 안내입니다"
 }
 ,
 
@@ -1997,6 +1997,8 @@
 "summary": "Ncloud 서비스와 관련된 새로운 소식들을 알려 드립니다."
 }
 ,
+
+
 
 
 

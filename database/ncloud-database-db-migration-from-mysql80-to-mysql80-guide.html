@@ -18,8 +18,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:title" content="Ncloud 데이터베이스 마이그레이션 서비스 From MySQL 8.0 To MySQL 8.0" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:description" content="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 8.0에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다" />
-<link rel="canonical" href="https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mysql80-to-mysql80-guide.html" />
-<meta property="og:url" content="https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mysql80-to-mysql80-guide.html" />
+<link rel="canonical" href="https://docs.3rdeyesys.com/docs/database/cloud-db-mysql/db-migration/from-mysql80-to-mysql80-guide/" />
+<meta property="og:url" content="https://docs.3rdeyesys.com/docs/database/cloud-db-mysql/db-migration/from-mysql80-to-mysql80-guide/" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-25.png" />
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 8.0에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다" />
@@ -30,43 +30,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:image:alt" content="Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 8.0에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다" />
 <meta property="twitter:title" content="Ncloud 데이터베이스 마이그레이션 서비스 From MySQL 8.0 To MySQL 8.0" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 8.0에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다","headline":"Ncloud 데이터베이스 마이그레이션 서비스 From MySQL 8.0 To MySQL 8.0","image":{"alt":"Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 8.0에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다","url":"https://docs.3rdeyesys.com/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-25.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/database/ncloud-database-db-migration-from-mysql80-to-mysql80-guide.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 8.0에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다","headline":"Ncloud 데이터베이스 마이그레이션 서비스 From MySQL 8.0 To MySQL 8.0","image":{"alt":"Ncloud(네이버 클라우드) Database Migration 서비스를 이용해 MySQL 8.0에서 클라우드 환경 Cloud DB for MySQL 8.0으로 마이그레이션하는 방법입니다","url":"https://docs.3rdeyesys.com/images/database/migration/ncloud-database-db-migration-from-mysql57-to-mysql57-guide-25.png","@type":"imageObject"},"url":"https://docs.3rdeyesys.com/docs/database/cloud-db-mysql/db-migration/from-mysql80-to-mysql80-guide/"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title>Ncloud 데이터베이스 마이그레이션 서비스 | From MySQL 8.0 To MySQL 8.0 | 써드아이시스템 기술문서</title>
-<link rel="stylesheet" href="/css/syntax.css">
+<link rel="stylesheet" href="/v2/css/syntax.css">
 
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/bootstrap.min.css">
+  href="/v2/css/bootstrap.min.css">
 <link rel="stylesheet" href="/fontawesome/css/all.min.css" />
 <link rel="stylesheet" href="/fontawesome/css/v4.7.0.css" />
-<link rel="stylesheet" href="/css/modern-business.css"> <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/v2/css/modern-business.css"> <!-- Latest compiled and minified CSS -->
 <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
-<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"--> <link rel="stylesheet" href="/css/customstyles.css"> <link rel="stylesheet" href="/css/boxshadowproperties.css">
+<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"--> <link rel="stylesheet" href="/v2/css/customstyles.css"> <link rel="stylesheet" href="/v2/css/boxshadowproperties.css">
 <!-- most color styles are extracted out to here -->
-<link rel="stylesheet" href="/css/theme-ncloud.css">
-<link rel="stylesheet" href="/css/tabs.css">
+<link rel="stylesheet" href="/v2/css/theme-ncloud.css">
+<link rel="stylesheet" href="/v2/css/tabs.css">
 
-<script src="/js/jquery.341.min.js"></script>
+<script src="/v2/js/jquery.341.min.js"></script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script-->
 
-<script src="/js/jquery.cookie.141.min.js"></script>
+<script src="/v2/js/jquery.cookie.141.min.js"></script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script-->
-<script src="/js/jquery.navgoco.min.js"></script>
+<script src="/v2/js/jquery.navgoco.min.js"></script>
 
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="/js/bootstrap.341.min.js"></script>
+<script src="/v2/js/bootstrap.341.min.js"></script>
 <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script-->
 <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script-->
-<!-- Anchor.js --><script src="/js/anchor.420.min.js"> </script>
+<!-- Anchor.js --><script src="/v2/js/anchor.420.min.js"> </script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script-->
-<script src="/js/toc.js"></script>
-<script src="/js/customscripts.js"></script>
+<script src="/v2/js/toc.js"></script>
+<script src="/v2/js/customscripts.js"></script>
 
-  <script src="/js/tabs.js"></script>
+  <script src="/v2/js/tabs.js"></script>
 
 
 
@@ -75,7 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="alternate"
   type="application/rss+xml"
   title="3RDEYESYSTEM Technical Documentations"
-  href="https://docs.3rdeyesys.com/feed.xml">
+  href="https://docs.3rdeyesys.com/rss.xml">
 
 
     <script>
@@ -174,19 +174,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 
                                 
-                <li><a href="/update/update.html" class="new_dot_lv_2">Update</a></li>
+                <li><a href="/" class="new_dot_lv_2">Docs_V3</a></li>
                 
                 
                                 
-                <li><a href="/news/news.html" class="new_dot_lv_2">News</a></li>
+                <li><a href="/docs/help/update/" >Update</a></li>
                 
                 
                                 
-                <li><a href="/faq/faq.html" class="new_dot_lv_2">FAQ</a></li>
+                <li><a href="/docs/help/news/" >News</a></li>
                 
                 
                                 
-                <li><a href="/tag/tag_archives_overview.html" >Tag</a></li>
+                <li><a href="/docs/help/faq/" >FAQ</a></li>
                 
                 
                 
@@ -212,7 +212,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 
                 
-                <li><a href="https://www.3rdeyesys.com/question/" target="_blank" rel="noopener">1:1 문의하기</a></li>                                
+                <li><a href="https://www.3rdeyesys.com/question/" target="_blank" rel="noopener">1:1 문의</a></li>                                
                 
                  
                                
@@ -2036,6 +2036,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 
   
+    
+      <div class="alert alert-success" role="alert"><i class="fa fa-check-square-o"></i> <b>Tip: </b>
+			기술문서 사이트가 리뉴얼 되었습니다. <a href="/docs/database/cloud-db-mysql/db-migration/from-mysql80-to-mysql80-guide/" id="link_to_v2_content" style="float: right;"><button type="button" class="btn btn-primary">새로운 페이지로 이동 &#8663;</button></a>
+			</div>
+    
+  
+  
 
   <h2 id="개요">개요</h2>
 <p>Ncloud(네이버 클라우드)의 Database Migration Service는 다양한 환경의 데이터베이스를 클라우드 환경으로 손쉽게 마이그레이션하도록 도와주는 서비스로 여기서는 <strong>Public</strong> 환경의 MySQL 8.0을 <strong>Private</strong> 환경의 [<strong>Cloud DB for MySQL 8.0</strong>]으로 마이그레이션하는 방법에 대해 정리해보겠습니다.</p>
@@ -2121,7 +2128,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>Target DB: Cloud DB for MySQL 8.0.32</li>
 </ul>
 
-<ul class="tab" data-tab="4d391d31-50ed-4f35-a494-f0124f7eb29e" data-name="db-verstion">
+<ul class="tab" data-tab="1ef995cb-9bc7-4d7e-8da8-dc5ed65297bf" data-name="db-verstion">
   
       <li class="active">
           <a href="#">Source DB </a>
@@ -2132,7 +2139,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </li>
   
 </ul>
-<ul class="tab-content" id="4d391d31-50ed-4f35-a494-f0124f7eb29e" data-name="db-verstion">
+<ul class="tab-content" id="1ef995cb-9bc7-4d7e-8da8-dc5ed65297bf" data-name="db-verstion">
   
       <li class="active">
 <p>⁃ <strong>Source DB</strong></p>
@@ -2161,7 +2168,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h3 id="source-db-정보-확인">Source DB 정보 확인</h3>
 <p>테스트에 사용할 Source DB의 버전, Database, DB User 등의 정보를 확인해보겠습니다.</p>
 
-<ul class="tab" data-tab="a216506b-aafa-42b5-b1dc-72e3badaa9ed" data-name="sourcedb-setting">
+<ul class="tab" data-tab="e6bcb144-13ba-4c13-88cd-20540d9688e6" data-name="sourcedb-setting">
   
       <li class="active">
           <a href="#">MariaDB 버전 </a>
@@ -2188,7 +2195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </li>
   
 </ul>
-<ul class="tab-content" id="a216506b-aafa-42b5-b1dc-72e3badaa9ed" data-name="sourcedb-setting">
+<ul class="tab-content" id="e6bcb144-13ba-4c13-88cd-20540d9688e6" data-name="sourcedb-setting">
   
       <li class="active">
 <p>⁃ <strong>MariaDB 버전</strong><br />
@@ -2284,7 +2291,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>MySQL <strong>8.0.20 이상</strong>은 8.0.19 이하 버전과 다르게 ROUTINE Dump를 위한 <strong>SHOW_ROUTINE</strong> 권한이 필수이니 버전에 맞게 쿼리를 사용해야 합니다.</li>
 </ul>
 
-<ul class="tab" data-tab="a1badf2f-6d06-47fd-bbd9-51ad3d8acd64" data-name="sourcedb-mig-user">
+<ul class="tab" data-tab="b2319806-cc93-4029-bbf3-e5dedf08d474" data-name="sourcedb-mig-user">
   
       <li class="active">
           <a href="#">8.0.20 이상 </a>
@@ -2295,7 +2302,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </li>
   
 </ul>
-<ul class="tab-content" id="a1badf2f-6d06-47fd-bbd9-51ad3d8acd64" data-name="sourcedb-mig-user">
+<ul class="tab-content" id="b2319806-cc93-4029-bbf3-e5dedf08d474" data-name="sourcedb-mig-user">
   
       <li class="active">
 <p>⁃ 위쪽에서 Source DB에 테스용으로 [<strong>testdb1</strong>], [<strong>testdb2</strong>] 이렇게 2개를 데이터베이스가 존재하므로 두 개의 데이터베이스 각각에 대해 권한을 부여했습니다.</p>
@@ -2623,7 +2630,7 @@ Source DB에 이 외의 설정으로 되어 있다면 Character Set을 변경 �
 <h4 id="진행-상태-확인-메일">진행 상태 확인 메일</h4>
 <p>진행 상태는 콘솔에서도 확인할 수 있지만, 작업이 오래 걸리는 경우도 대비해서 각 단계가 완료될 때마다 안내 메일이 발송됩니다.</p>
 
-<ul class="tab" data-tab="222d10c1-5a4b-4ac2-bbfc-e933776d534a" data-name="migration-status">
+<ul class="tab" data-tab="6960e401-5ddb-4ca2-9d66-0dd299950c50" data-name="migration-status">
   
       <li class="active">
           <a href="#">Export Completed </a>
@@ -2638,7 +2645,7 @@ Source DB에 이 외의 설정으로 되어 있다면 Character Set을 변경 �
       </li>
   
 </ul>
-<ul class="tab-content" id="222d10c1-5a4b-4ac2-bbfc-e933776d534a" data-name="migration-status">
+<ul class="tab-content" id="6960e401-5ddb-4ca2-9d66-0dd299950c50" data-name="migration-status">
   
       <li class="active">
 <p>⁃ <strong>Export Completed</strong></p>
@@ -2905,7 +2912,7 @@ Source DB에 이 외의 설정으로 되어 있다면 Character Set을 변경 �
         </div>
         &copy;2024 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2023-10-26<br/> Site last generated: 2024-02-19 <br />        
+        <span>Page last updated:</span> 2023-10-26<br/> Site last generated: 2024-04-17 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -2998,19 +3005,6 @@ $("#toc_onoff").click(function() {
 </script>
 
         
-
-        
-          <!-- NCloud Real User Analytics -->
-<script>
-  (function() {
-    var s = document.getElementsByTagName('script')[0]
-      , p = document.createElement('script');
-    p.async = 'async';
-    p.src = 'https://rua-api.ncloud.com/api/v1/beacon/boomerang/collect/'+
-      'e4c80491-1665-457b-9cec-550a5f554dde';
-    s.parentNode.insertBefore(p, s);
-  })();
-</script>
 
         
       

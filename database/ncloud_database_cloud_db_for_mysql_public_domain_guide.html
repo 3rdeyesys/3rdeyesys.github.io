@@ -18,8 +18,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:title" content="Cloud DB for MySQL 생성후 Public 도메인으로 접속하기" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:description" content="Ncloud Cloud DB for MySQL 생성후 Public 도메인으로 접속하는 방법입니다" />
-<link rel="canonical" href="https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html" />
-<meta property="og:url" content="https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html" />
+<link rel="canonical" href="https://docs.3rdeyesys.com/docs/database/cloud-db-mysql/cdb-access-public-domain-guide/" />
+<meta property="og:url" content="https://docs.3rdeyesys.com/docs/database/cloud-db-mysql/cdb-access-public-domain-guide/" />
 <meta property="og:site_name" content="3RDEYESYSTEM Technical Documentations" />
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/database/ncp_database_cloud_db_for_mysql_public_domain_06.jpg" />
 <meta property="og:type" content="article" />
@@ -28,41 +28,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/database/ncp_database_cloud_db_for_mysql_public_domain_06.jpg" />
 <meta property="twitter:title" content="Cloud DB for MySQL 생성후 Public 도메인으로 접속하기" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Cloud DB for MySQL 생성후 Public 도메인으로 접속하는 방법입니다","headline":"Cloud DB for MySQL 생성후 Public 도메인으로 접속하기","image":"https://docs.3rdeyesys.com/images/database/ncp_database_cloud_db_for_mysql_public_domain_06.jpg","url":"https://docs.3rdeyesys.com/database/ncloud_database_cloud_db_for_mysql_public_domain_guide.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Ncloud Cloud DB for MySQL 생성후 Public 도메인으로 접속하는 방법입니다","headline":"Cloud DB for MySQL 생성후 Public 도메인으로 접속하기","image":"https://docs.3rdeyesys.com/images/database/ncp_database_cloud_db_for_mysql_public_domain_06.jpg","url":"https://docs.3rdeyesys.com/docs/database/cloud-db-mysql/cdb-access-public-domain-guide/"}</script>
 <!-- End Jekyll SEO tag -->
 
 <title>Cloud DB for MySQL 생성후 Public 도메인으로 접속하기 | 써드아이시스템 기술문서</title>
-<link rel="stylesheet" href="/css/syntax.css">
+<link rel="stylesheet" href="/v2/css/syntax.css">
 
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/bootstrap.min.css">
+  href="/v2/css/bootstrap.min.css">
 <link rel="stylesheet" href="/fontawesome/css/all.min.css" />
 <link rel="stylesheet" href="/fontawesome/css/v4.7.0.css" />
-<link rel="stylesheet" href="/css/modern-business.css"> <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/v2/css/modern-business.css"> <!-- Latest compiled and minified CSS -->
 <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
-<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"--> <link rel="stylesheet" href="/css/customstyles.css"> <link rel="stylesheet" href="/css/boxshadowproperties.css">
+<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"--> <link rel="stylesheet" href="/v2/css/customstyles.css"> <link rel="stylesheet" href="/v2/css/boxshadowproperties.css">
 <!-- most color styles are extracted out to here -->
-<link rel="stylesheet" href="/css/theme-ncloud.css">
+<link rel="stylesheet" href="/v2/css/theme-ncloud.css">
 
 
-<script src="/js/jquery.341.min.js"></script>
+<script src="/v2/js/jquery.341.min.js"></script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script-->
 
-<script src="/js/jquery.cookie.141.min.js"></script>
+<script src="/v2/js/jquery.cookie.141.min.js"></script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script-->
-<script src="/js/jquery.navgoco.min.js"></script>
+<script src="/v2/js/jquery.navgoco.min.js"></script>
 
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="/js/bootstrap.341.min.js"></script>
+<script src="/v2/js/bootstrap.341.min.js"></script>
 <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script-->
 <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script-->
-<!-- Anchor.js --><script src="/js/anchor.420.min.js"> </script>
+<!-- Anchor.js --><script src="/v2/js/anchor.420.min.js"> </script>
 <!--script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script-->
-<script src="/js/toc.js"></script>
-<script src="/js/customscripts.js"></script>
+<script src="/v2/js/toc.js"></script>
+<script src="/v2/js/customscripts.js"></script>
 
 
 
@@ -71,7 +71,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="alternate"
   type="application/rss+xml"
   title="3RDEYESYSTEM Technical Documentations"
-  href="https://docs.3rdeyesys.com/feed.xml">
+  href="https://docs.3rdeyesys.com/rss.xml">
 
 
     <script>
@@ -170,19 +170,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 
                                 
-                <li><a href="/update/update.html" class="new_dot_lv_2">Update</a></li>
+                <li><a href="/" class="new_dot_lv_2">Docs_V3</a></li>
                 
                 
                                 
-                <li><a href="/news/news.html" class="new_dot_lv_2">News</a></li>
+                <li><a href="/docs/help/update/" >Update</a></li>
                 
                 
                                 
-                <li><a href="/faq/faq.html" class="new_dot_lv_2">FAQ</a></li>
+                <li><a href="/docs/help/news/" >News</a></li>
                 
                 
                                 
-                <li><a href="/tag/tag_archives_overview.html" >Tag</a></li>
+                <li><a href="/docs/help/faq/" >FAQ</a></li>
                 
                 
                 
@@ -208,7 +208,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 
                 
-                <li><a href="https://www.3rdeyesys.com/question/" target="_blank" rel="noopener">1:1 문의하기</a></li>                                
+                <li><a href="https://www.3rdeyesys.com/question/" target="_blank" rel="noopener">1:1 문의</a></li>                                
                 
                  
                                
@@ -2032,6 +2032,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 
   
+    
+      <div class="alert alert-success" role="alert"><i class="fa fa-check-square-o"></i> <b>Tip: </b>
+			기술문서 사이트가 리뉴얼 되었습니다. <a href="/docs/database/cloud-db-mysql/cdb-access-public-domain-guide/" id="link_to_v2_content" style="float: right;"><button type="button" class="btn btn-primary">새로운 페이지로 이동 &#8663;</button></a>
+			</div>
+    
+  
+  
 
   <h2 id="개요">개요</h2>
 <p>네이버 클라우드의 Cloud DB for MySQL 서비스는 MySQL 데이터베이스를 쉽고 간편하게 구축하고 관리할 수 있고 자동 Fail-Over, 자동백업, 네이버 서비스에서 검증된 최적화된 설정 등을 제공해주는 
@@ -2371,7 +2378,7 @@ MySQL Workbench는 아래 경로에서 다운 받을 수 있습니다.</p>
         </div>
         &copy;2024 Copyright 3RDEYESYSTEM Corp. All rights reserved. <br />
         Built with <a href="https://jekyllrb-ko.github.io/" target="_blank" class="no_icon">Jekyll</a> & <a href="https://idratherbewriting.com/documentation-theme-jekyll/" target="_blank" class="no_icon">Documentation Theme</a> <br />
-        <span>Page last updated:</span> 2021-12-13<br/> Site last generated: 2024-02-19 <br />        
+        <span>Page last updated:</span> 2021-12-13<br/> Site last generated: 2024-04-17 <br />        
         <p><img src="/images/3rdeyesys_logo_white.png" alt="Company logo" style="filter: brightness(0.1);"/></p>
         <p><img src="/images/ncloud/ncloud-premium-partner-logo-gray-160px.png" alt="ncloud premium partner logo" /></p>
       </div>
@@ -2464,19 +2471,6 @@ $("#toc_onoff").click(function() {
 </script>
 
         
-
-        
-          <!-- NCloud Real User Analytics -->
-<script>
-  (function() {
-    var s = document.getElementsByTagName('script')[0]
-      , p = document.createElement('script');
-    p.async = 'async';
-    p.src = 'https://rua-api.ncloud.com/api/v1/beacon/boomerang/collect/'+
-      'e4c80491-1665-457b-9cec-550a5f554dde';
-    s.parentNode.insertBefore(p, s);
-  })();
-</script>
 
         
       
