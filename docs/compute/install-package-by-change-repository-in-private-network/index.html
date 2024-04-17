@@ -2428,6 +2428,7 @@
         <li><a href="#개요">개요</a></li>
         <li><a href="#centos">CentOS</a>
           <ul>
+            <li><a href="#classic-환경---centos">Classic 환경 - CentOS</a></li>
             <li><a href="#sed-명령어-사용">sed 명령어 사용</a></li>
             <li><a href="#vpc-환경---centos">VPC 환경 - CentOS</a></li>
           </ul>
@@ -2458,6 +2459,7 @@
         <li><a href="#개요">개요</a></li>
         <li><a href="#centos">CentOS</a>
           <ul>
+            <li><a href="#classic-환경---centos">Classic 환경 - CentOS</a></li>
             <li><a href="#sed-명령어-사용">sed 명령어 사용</a></li>
             <li><a href="#vpc-환경---centos">VPC 환경 - CentOS</a></li>
           </ul>
@@ -2514,9 +2516,7 @@
   <code>vi /etc/yum.repos.d/CentOS-Base.repo</code>
   </pre>
   </div>
-<br />
-### Classic 환경 - CentOS
-네이버 클라우드 Classic 환경 CentOS에서 repository 주소는 미러 사이트가 기본으로 설정 되어 있는 것을 확인할 수 있습니다.
+<h3 id="classic-환경---centos">Classic 환경 - CentOS <a href="#classic-%ed%99%98%ea%b2%bd---centos" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>네이버 클라우드 Classic 환경 CentOS에서 repository 주소는 미러 사이트가 기본으로 설정 되어 있는 것을 확인할 수 있습니다.</p>
 <img src="/images/compute/ncp_server_repository_change_on_private_network_01.png" width="770" alt="Ncloud Secure Zone이나 Private Network 환경에서 Repository를 변경해 리눅스 패키지 설치하는 방법" class="docimage">
 <p>하지만 현재 서버는 Secure Zone 등 외부와 통신이 되지 않는 상태이므로 이대로는 패키지 설치를 할 수 없습니다.
 이때 네이버 클라우드 내부 repository ( <strong>mirror.ncloud.com</strong> )로 접속하도록 mirrorlist를 주석처리하고, baseurl을 주석해제하고, 경로를 수정해주면 됩니다.</p>
