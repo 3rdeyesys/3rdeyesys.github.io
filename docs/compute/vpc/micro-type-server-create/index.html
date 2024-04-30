@@ -39,8 +39,8 @@
 <meta property="og:description" content="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법을 간단하게 정리했습니다" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/docs/compute/vpc/micro-type-server-create/" /><meta property="og:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_4754774920188995218.png"/><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2023-09-11T00:00:00+09:00" />
-<meta property="article:modified_time" content="2023-09-11T00:00:00+09:00" />
+<meta property="article:published_time" content="2023-06-21T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-04-30T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_4754774920188995218.png"/><meta name="twitter:title" content="Ncloud VPC 환경에서 무료 서버(Micro Type) 이용하는 방법"/>
 <meta name="twitter:description" content="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법을 간단하게 정리했습니다"/>
@@ -2521,15 +2521,15 @@
 <ul>
 <li>[<strong>Server</strong>] - [<strong>Server</strong>]에서 [<strong>서버 생성</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-vpc-server-create-guide-02.png" width="845" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-vpc-server-create-guide-38.png" width="1140" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" class="docimage">
 <h2 id="서버-생성-콘솔-선택">서버 생성 콘솔 선택 <a href="#%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b1-%ec%bd%98%ec%86%94-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ncloud 서버 생성 콘솔화면은 신규 기능이 업데이트 되면서 2가지를 선택할 수 있습니다. Micro 타입 서버는 <strong>KVM</strong> 하이퍼바이저 기반의 서버이므로  [<strong>신규 콘솔 화면</strong>]으로 진행하겠습니다.</p>
 <ul>
 <li>기존 콘솔 화면: <strong>XEN, RHV</strong> 하이퍼바이저 기반의 서버(g1,g2)를 생성할 수 있습니다.</li>
 <li>신규 콘솔 화면: <strong>XEN, RHV</strong> 하이퍼바이저 기반의 서버(g1,g2)뿐만 아니라 <strong>KVM</strong> 기반 및 다양한 성능을 제공하는 기본 스토리지로 서버(<strong>g3</strong>)를 생성할 수 있습니다.</li>
 </ul>
 <img src="/images/compute/ncloud-compute-vpc-server-create-guide-03.png" width="685" alt="Ncloud VPC 환경에서 서버를 생성하는 방법" class="docimage">
-<h2 id="서버-이미지-선택">서버 이미지 선택 <a href="#%ec%84%9c%eb%b2%84-%ec%9d%b4%eb%af%b8%ec%a7%80-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Micro 타입 서버를 생성하려면 하이퍼바이저 기준으로 [<strong>KVM</strong>] 서버 이미지를 선택하면 됩니다. 현재 Ncloud에서 제공되는 [<strong>KVM</strong>] 서버 이미지는 아래와 같이 [<strong>Rocky Linux 8.8</strong>], [<strong>Ubuntu 20.04</strong>], [<strong>CentOS 7.8</strong>] 이렇게 3가지 입니다. 여기서는 Ubuntu 20.04로 생성해보겠습니다.</p>
-<img src="/images/compute/ncloud-compute-micro-type-server-create-vpc-guide-01.png" width="845" alt="Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법" class="docimage">
+<h2 id="서버-이미지-선택">서버 이미지 선택 <a href="#%ec%84%9c%eb%b2%84-%ec%9d%b4%eb%af%b8%ec%a7%80-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Micro 타입 서버를 생성하려면 하이퍼바이저 기준으로 [<strong>KVM</strong>] 서버 이미지를 선택하면 됩니다. 현재 Ncloud에서 제공되는 [<strong>KVM</strong>] 서버 이미지는 아래와 같이 [<strong>Rocky Linux 8.8</strong>], [<strong>Ubuntu 22.04</strong>], [<strong>Windows Server 2022</strong>] 이렇게 3가지 입니다. 여기서는 Ubuntu 22.04로 생성해보겠습니다.</p>
+<img src="/images/compute/ncloud-compute-micro-type-server-create-vpc-guide-07.png" width="1140" alt="Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법" class="docimage">
 <h2 id="서버-설정">서버 설정 <a href="#%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>서버 설정 단계에서는 [<strong>VPC</strong>]와 [<strong>Subnet</strong>]을 선택하고  [<strong>서버 스펙</strong>]과 [<strong>요금제</strong>], [<strong>Network Interface</strong>], [<strong>공인 IP 할당 여부</strong>] 등을 선택하게 됩니다.<br>
 <code>서버는 1년간 무료이지만, 공인 IP를 할당하게 되면 공인 IP 비용이 청구됩니다.</code></p>
 <img src="/images/compute/ncloud-compute-micro-type-server-create-vpc-guide-02.png" width="845" alt="Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법" class="docimage">
@@ -2550,7 +2550,7 @@
 [<strong>VPC</strong>]를 생성하면 자동으로 생성되는 <strong>기본 ACG</strong>를 선택하거나 별도로 생성한 ACG가 있을 경우 해당 ACG를 선택하면 됩니다. <strong>적용할 ACG는 최대 3개</strong>까지 선택할 수 있습니다.</p>
 <img src="/images/compute/ncloud-compute-micro-type-server-create-vpc-guide-04.png" width="845" alt="Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법" class="docimage">
 <h2 id="서버-생성-완료">서버 생성 완료 <a href="#%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b1-%ec%99%84%eb%a3%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>모든 단계를 마치고 나면 아래와 같이 서버가 생성된 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/ncloud-compute-micro-type-server-create-vpc-guide-05.png" width="845" alt="Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-micro-type-server-create-vpc-guide-08.png" width="845" alt="Ncloud (네이버 클라우드) VPC 환경에서 무료 서버(Micro Type) 이용하는 방법" class="docimage">
 <h2 id="서버-접속">서버 접속 <a href="#%ec%84%9c%eb%b2%84-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>생성된 서버에 접속해서 vCPU와 Memory 상태를 확인해보면 다음과 같습니다.</p>
 
 
@@ -2599,6 +2599,10 @@
           <td>2023-09-11</td>        
           <td>지원하는 서버 이미지 추가 내용 업데이트</td>          
         </tr>
+        <tr>
+          <td>2024-04-30</td>        
+          <td>지원하는 서버 이미지, 스크린샷 업데이트</td>          
+        </tr>
     </tbody>
 </table>  
     </div>
@@ -2618,6 +2622,8 @@
     <span class="tag-list"><a href="/tags/linux"> linux</a></span>
                                                               
     <span class="tag-list"><a href="/tags/free"> free</a></span>
+                                                              
+    <span class="tag-list"><a href="/tags/windows"> windows</a></span>
     
 </ul>
 
@@ -2668,7 +2674,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-04-17
+                        Site last modified: 2024-04-30
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">
