@@ -6,8 +6,15 @@
     <description>Recent content on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 30 Apr 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 03 May 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
+      <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</link>
+      <pubDate>Fri, 03 May 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</guid>
+      <description>개요 linkRocky Linux (록키 리눅스)는 CentOS의 서비스 지원 종료로 대안으로 떠오른 CentOS 기반의 리눅스 OS입니다.&#xA;Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 선정되어 국내에서 록키 리눅스 인프라와 기술지원을 위해 협력해왔고, 드디어 Ncloud 콘솔에서 록키 리눅스를 제공하기 시작했기에 간단하게 소개해보려고 합니다.&#xA;제공 버전 linkNcloud에서는 현재 Rocky Linux 8.6 버전과 8.8 버전을 VPC 환경에서 제공하고 있습니다. 여기서는 8.6 버전을 기준으로 소개해보겠습니다.&#xA;설치할 소프트웨어 link록키 리눅스 서버를 실행하고 보통 자주 사용하게 되는 아래의 소프트웨어들을 설치하고 확인해보겠습니다.</description>
+    </item>
     <item>
       <title>Ncloud VPC 환경에서 무료 서버(Micro Type) 이용하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/compute/vpc/micro-type-server-create/</link>
@@ -70,13 +77,6 @@
       <pubDate>Wed, 31 Jan 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/archive-storage/api-access-token-create/</guid>
       <description>개요 link네이버 클라우드(Ncloud) Archive Storage API를 이용하려고 할 때 먼저 인증 토큰을 생성하고 생성된 토큰을 이용해서 API로 Archive Storage에 접근해야 합니다. 여기서는 PHP로 API 인증 토큰을 생성하는 방법에 대해 우선 전체 소스코드를 살펴보고 다음으로 주요 코드를 상세하게 살펴보겠습니다.&#xA;API 정보 link OpenStack Swift API : 2.15.1 (Pike) OpenStack Keystone V3 API : v3.8 인증 토큰 생성 코드 link&#xD;&amp;lt;?php&#xD;// 전송해야 할 설정값&#xD;$ncloud_accesskey = &amp;#34;네이버 클라우드 AccessKey&amp;#34;;&#xD;$ncloud_secretkey = &amp;#34;네이버 클라우드 SecretKey&amp;#34;;&#xD;$ncloud_domain_id = &amp;#34;Archive Storage 도메인 ID&amp;#34;;&#xD;$ncloud_project_id = &amp;#34;Archive Storage 프로젝트 ID&amp;#34;;&#xD;$api_server = &amp;#34;https://kr.</description>
-    </item>
-    <item>
-      <title>Ncloud Cloud Outbound Mailer 도메인 인증 방법 3가지(SPF, DKIM, DMARC) 안내</title>
-      <link>https://docs.3rdeyesys.com/docs/application-services/cloud-outbound-mailer/domain-authentication-guide/</link>
-      <pubDate>Fri, 26 Jan 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/application-services/cloud-outbound-mailer/domain-authentication-guide/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) Cloud Outbound Mailer를 사용할 때 도메인을 등록하고 SPF(Sender Policy Framework), DKIM(DomainKeys Identified Mail), DMARC(Domain-based Message Authentication, Reporting, and Conformance) 인증을 받으면 발신자 자격을 입증할 수 있고 타인이 도메인을 사칭해 메일을 발송하는 것을 막을 수 있습니다.&#xA;또한, 인증된 도메인임을 증명함으로써 수신측 메일 서비스에서 차단되거나 스팸 처리될 가능성도 매우 낮아지는 이점이 있으므로 가능하면 도메인 인증을 하는 것이 좋습니다.&#xA;report&#xD;Gmail 공지: 특히 Gmail에서는 2024년 2월부터 새로운 이메일 발신자 가이드라인을 적용하면서 도메인 인증을 받지 않은 경우 메일이 스팸처리되거나 제대로 전송되지 않을 수 있다고 공지하고 있습니다.</description>
     </item>
   </channel>
 </rss>
