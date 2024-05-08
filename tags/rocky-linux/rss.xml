@@ -6,7 +6,7 @@
     <description>Recent content in Rocky Linux on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Fri, 03 May 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 08 May 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/rocky-linux/rss.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
@@ -35,6 +35,13 @@
       <pubDate>Thu, 13 Jul 2023 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/rocky-linux/apache-https-ssl-setting/</guid>
       <description>개요 linkNcloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 Apache 웹서버를 설치하고, HTTPS 접속을 위한 SSL 인증서 설정하고, HTTP로 접속 시에 HTTPS로 리다이렉트하는 방법까지 정리해보겠습니다.&#xA;테스트 환경 link테스트에 사용할 서버 환경은 다음과 같습니다.&#xA;⁃ OS: Rocky Linux 8.6 ⁃ 웹서버: Apache 2.4 ⁃ 테스트 사이트: rocky-https-test.com&#xD;패키지 업데이트 link우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;[dnf upgrade-minimal]과 [dnf update-minimal]의 차이점에 대해 [man dnf] 명령어로 매뉴얼을 살펴보면 Rocky Linux에서 패키지 업데이트를 위한 기본 명령어는 [dnf upgrade-minimal]이며, [dnf update-minimal]는 더 이상 사용되지 않는 별칭이라고 합니다.</description>
+    </item>
+    <item>
+      <title>록키 리눅스(Rocky Linux) 8.8에 NginX 최신 버전 설치하기</title>
+      <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/</guid>
+      <description>개요 linkNcloud (네이버 클라우드)에서 제공하는 Rocky Linux (록키 리눅스) 최신 서버이미지인 8.8버전에서 일반적인 방법으로는 NginX 최신 버전을 설치할 수 없는 경우가 있어서, 어떻게 하면 최신 버전을 설치할 수 있는지 소개해보려고 합니다.&#xA;서버 준비 link&#xD;패키지 업데이트 link우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;NginX 최신 버전 확인 linkNginX 공식 사이트에서 2024-05-08 기준 최신 버전 정보를 확인해보면 다음과 같습니다.&#xA;⁃ https://nginx.org/&#xD;[2024-04-23] nginx-1.26.0 stable version [2024-04-16] nginx-1.</description>
     </item>
     <item>
       <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/Rocky Linux</title>
@@ -70,13 +77,6 @@
       <pubDate>Mon, 04 Sep 2023 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mysql-57-install-on-rocky-linux/</guid>
       <description>개요 link록키 리눅스(Rocky Linux)는 기본 데이터베이스가 MariaDB인데, 상황에 따라 MySQL이 필요한 경우가 있습니다. 이번에는 그 중에서 MySQL 5.7 버전을 설치하는 방법을 정리해보겠습니다.&#xA;서버 준비 link우선 Rocky Linux 서버를 준비합니다.&#xA;Rocky Linux 소개 link록키 리눅스에 대한 간략한 소개는 아래 문서에서 확인할 수 있습니다.&#xA;⁃ Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개&#xD;패키지 업데이트 link우선 패키지 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;info&#xD;dnf: Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다.</description>
-    </item>
-    <item>
-      <title>MySQL 8.0 최신 버전 설치하는 방법 | Rocky Linux</title>
-      <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mysql-8-latest-version-install-on-rocky-linux/</link>
-      <pubDate>Mon, 04 Sep 2023 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mysql-8-latest-version-install-on-rocky-linux/</guid>
-      <description>개요 link록키 리눅스(Rocky Linux)는 기본 데이터베이스가 MariaDB인데, 상황에 따라 MySQL이 필요한 경우가 있습니다. 이번에는 그 중에서 MySQL 8.0 최신 버전을 설치하는 방법을 정리해보겠습니다.&#xA;서버 준비 link우선 Rocky Linux 서버를 준비합니다.&#xA;Rocky Linux 소개 link록키 리눅스에 대한 간략한 소개는 아래 문서에서 확인할 수 있습니다.&#xA;⁃ Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개&#xD;패키지 업데이트 link우선 패키지 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;info&#xD;dnf: Dandified YUM의 약자인 dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다.</description>
     </item>
   </channel>
 </rss>
