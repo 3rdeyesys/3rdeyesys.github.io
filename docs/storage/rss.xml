@@ -7,8 +7,7 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/docs/storage/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/docs/storage/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud에서 제공하는 스토리지들의 요금과 특징 비교</title>
       <link>https://docs.3rdeyesys.com/docs/storage/ncloud-storage-compare/</link>
       <pubDate>Mon, 28 Dec 2020 00:00:00 +0900</pubDate>

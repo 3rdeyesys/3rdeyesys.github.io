@@ -7,15 +7,13 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Fri, 30 Apr 2021 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/url/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/url/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>nShortURL</title>
       <link>https://docs.3rdeyesys.com/docs/application-services/nshorturl/</link>
       <pubDate>Fri, 30 Apr 2021 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/application-services/nshorturl/</guid>
       <description></description>
-    </item>
-    <item>
+    </item><item>
       <title>PHP로 nShortURL 서비스 이용하기 샘플 예제</title>
       <link>https://docs.3rdeyesys.com/docs/application-services/nshorturl/nshorturl-php-sample/</link>
       <pubDate>Fri, 30 Apr 2021 00:00:00 +0900</pubDate>

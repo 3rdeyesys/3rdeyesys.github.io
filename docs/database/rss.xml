@@ -7,8 +7,7 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/docs/database/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/docs/database/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud 설치형 DB서버와 관리형 Cloud DB 비교</title>
       <link>https://docs.3rdeyesys.com/docs/database/ncloud-database-type-compare/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0900</pubDate>

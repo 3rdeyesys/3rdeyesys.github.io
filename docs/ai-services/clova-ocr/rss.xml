@@ -7,15 +7,13 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Mon, 19 Feb 2024 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/docs/ai-services/clova-ocr/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/docs/ai-services/clova-ocr/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud Clova OCR - Template OCR API 연동 PHP 샘플 예제</title>
       <link>https://docs.3rdeyesys.com/docs/ai-services/clova-ocr/template-ocr-api-guide/</link>
       <pubDate>Mon, 19 Feb 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/ai-services/clova-ocr/template-ocr-api-guide/</guid>
       <description>개요 linkNcloud (네이버 클라우드) [Clova OCR]은 전송한 문서나 이미지를 인식하여 사용자가 지정한 영역의 텍스트와 데이터를 정확하게 추출하는 서비스입니다. 여기서는 API를 이용해서 Template OCR로 [사업자등록증]을 인식하는 예제를 PHP 코드로 정리해보겠습니다.&#xA;서비스 배포 link테스트는 Template을 미리 생성한 상태에서 진행해보겠습니다. Template 생성 방법은 아래 링크의 문서에서 확인하시면 됩니다.&#xA;⁃ Ncloud Clova OCR 서비스 중에서 Template OCR 사용 방법&#xD;[배포 관리]에서 [서비스 배포] 버튼을 클릭해서 해당 템플릿을 서비스 배포합니다. 서비스 배포 확인 팝업창에서 [확인] 버튼을 클릭합니다.</description>
-    </item>
-    <item>
+    </item><item>
       <title>Ncloud Clova OCR 서비스 중에서 Template OCR 사용 방법 안내</title>
       <link>https://docs.3rdeyesys.com/docs/ai-services/clova-ocr/template-ocr-guide/</link>
       <pubDate>Wed, 14 Feb 2024 00:00:00 +0900</pubDate>

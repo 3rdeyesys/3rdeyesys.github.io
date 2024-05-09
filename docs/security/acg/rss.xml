@@ -7,15 +7,13 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Wed, 06 Jul 2022 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/docs/security/acg/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/docs/security/acg/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud 방화벽 ACG 권장설정과 Custom ACG 설정 예시</title>
       <link>https://docs.3rdeyesys.com/docs/security/acg/custom-acg-configure-sample/</link>
       <pubDate>Wed, 06 Jul 2022 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/security/acg/custom-acg-configure-sample/</guid>
       <description>개요 linkNcloud (네이버 클라우드)의 IP/Port 기반 필터링 방화벽 서비스인 ACG(Access Control Group) 권장설정과 Custom ACG 설정할 때 참고할 만한 예시를 몇가지 정리해보겠습니다.&#xA;Inboud 기본 규칙 삭제 link&#xD;서버 생성 시에 기본으로 생성되는 Default ACG에는 아래처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 접근이 허용되어 있는데 보안을 위해 이 항목을 삭제하고 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.&#xD;VPC 화면 link아래는 Default ACG가 생성되면서 설정된 전체 접근 허용 상태입니다. 여기서 X버튼을 클릭해서 [0.</description>
-    </item>
-    <item>
+    </item><item>
       <title>Ncloud 방화벽 ACG 설정 기본 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/security/acg/basic-guide/</link>
       <pubDate>Thu, 30 Jun 2022 00:00:00 +0900</pubDate>

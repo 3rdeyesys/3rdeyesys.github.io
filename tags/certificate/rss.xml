@@ -7,15 +7,13 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Wed, 08 Feb 2023 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/certificate/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/certificate/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>SSL인증서 DCV (Domain Control Validation) 인증 방법과 유의사항 정리</title>
       <link>https://docs.3rdeyesys.com/docs/security/certificate/ssl-dcv-guide/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/security/certificate/ssl-dcv-guide/</guid>
       <description>개요 linkHTTPS 접속을 위한 SSL 인증서를 발급 받기 위해서는 DCV (Domain Control Validation)를 인증받아야 하는데, 이때 필요한 인증방법과 유의 사항을 정리해보겠습니다.&#xA;DCV 인증 방법 linkDCV 인증방법은 3가지가 있습니다.&#xA;Email 인증 DNS 인증 http 인증 Email 인증 linkEmail 인증은 도메인 등록정보에서 확인되는 이메일과 추가로 5개의 임의로 지정된 메일주소로 인증메일을 발송합니다.&#xA;도메인 등록 정보 이메일 link도메인 등록 기관에서 도메인 소유자 정보를 노출하지 않는 블라인드 서비스를 이용하고 있을 경우 인증메일을 받을 수 없습니다. Email 인증을 하기 전에 블라인드 서비스를 해제하고 인증을 요청하셔야 합니다.</description>
-    </item>
-    <item>
+    </item><item>
       <title>Ncloud Certificate Manager SSL 인증서 등록 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/security/certificate/certificate-manager-register-ssl-certificate-guide/</link>
       <pubDate>Wed, 08 Feb 2023 00:00:00 +0900</pubDate>

@@ -7,8 +7,7 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Thu, 02 Dec 2021 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/restore/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/restore/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>MySQL 복구 시 ERROR 1227 (42000) 문제 원인과 해결방법</title>
       <link>https://docs.3rdeyesys.com/docs/database/cloud-db-mysql/db-restore-error-1227-troubleshotting/</link>
       <pubDate>Thu, 02 Dec 2021 00:00:00 +0900</pubDate>

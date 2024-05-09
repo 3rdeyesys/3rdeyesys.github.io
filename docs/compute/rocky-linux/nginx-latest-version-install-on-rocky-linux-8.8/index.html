@@ -77,7 +77,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.56eabc21482ef79d35b3a5b5e90a2778cd7a8fa19b68d0c5e8acb7a7d3a56d28.css" rel="stylesheet" integrity="sha256-Vuq8IUgu9501s6W16QoneM16j6GbaNDF6Ky3p9OlbSg=" />
+    <link href="/css/customstyles-v3.min.e0604dbbd906ebc6ec3007d007fa2eb7b306d3d6b325edc03c19be73dcc91749.css" rel="stylesheet" integrity="sha256-4GBNu9kG68bsMAfQB/out7MG09azJe3APBm&#43;c9zJF0k=" />
     
     
     
@@ -2290,6 +2290,28 @@
                         </li>
                     
                 
+                    
+                    
+                    
+                        <li class="sidebar-dropdown  ">
+                            <button class="btn">
+                                <i class="material-symbols-outlined me-2">search</i>
+                                Search
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                        
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/search/search/">Search</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
             
         </ul>
         
@@ -2310,6 +2332,10 @@
             <button id="close-sidebar" class="btn btn-icon btn-soft">
                 <span class="material-icons size-20 menu-icon align-middle">menu</span>
             </button>
+            <form action="/docs/search/search/" method="get" id="search-form">
+                <input type="search" name="q" id="search-input" onfocus="this.placeholder=''" onblur="this.placeholder='Search'" placeholder="Search">                
+                <input type="submit" value="Search" style="display: none;">
+            </form>
             
             </div>
         <div class="d-flex align-items-start">
@@ -2461,10 +2487,10 @@
             <li><a href="#설치-오류-상황">설치 오류 상황</a></li>
             <li><a href="#실제-경로-확인">실제 경로 확인</a></li>
             <li><a href="#repository-경로-변경">Repository 경로 변경</a></li>
-            <li><a href="#설치">설치</a></li>
-            <li><a href="#접속화면">접속화면</a></li>
           </ul>
         </li>
+        <li><a href="#설치">설치</a></li>
+        <li><a href="#접속화면">접속화면</a></li>
         <li><a href="#참고-url">참고 URL</a></li>
         <li><a href="#문서-업데이트-내역">문서 업데이트 내역</a></li>
       </ul>
@@ -2499,10 +2525,10 @@
             <li><a href="#설치-오류-상황">설치 오류 상황</a></li>
             <li><a href="#실제-경로-확인">실제 경로 확인</a></li>
             <li><a href="#repository-경로-변경">Repository 경로 변경</a></li>
-            <li><a href="#설치">설치</a></li>
-            <li><a href="#접속화면">접속화면</a></li>
           </ul>
         </li>
+        <li><a href="#설치">설치</a></li>
+        <li><a href="#접속화면">접속화면</a></li>
         <li><a href="#참고-url">참고 URL</a></li>
         <li><a href="#문서-업데이트-내역">문서 업데이트 내역</a></li>
       </ul>
@@ -2694,14 +2720,14 @@ module_hotfixes=true</code>
 		
 
 		<a class="nav-link  active"
-		   id="ecbfdaTab" data-bs-toggle="tab" data-bs-target="#ecbfda"
-		   type="button" role="tab" aria-controls="ecbfda" aria-selected="true">stable 버전 활성화</a>
+		   id="cdfabeTab" data-bs-toggle="tab" data-bs-target="#cdfabe"
+		   type="button" role="tab" aria-controls="cdfabe" aria-selected="true">stable 버전 활성화</a>
 
 		
 
 		<a class="nav-link "
-		   id="fbdecaTab" data-bs-toggle="tab" data-bs-target="#fbdeca"
-		   type="button" role="tab" aria-controls="fbdeca" aria-selected="true">mainline 버전 활성화</a>
+		   id="ebcafdTab" data-bs-toggle="tab" data-bs-target="#ebcafd"
+		   type="button" role="tab" aria-controls="ebcafd" aria-selected="true">mainline 버전 활성화</a>
 
 		
 
@@ -2717,7 +2743,7 @@ module_hotfixes=true</code>
 
 
 
-<div class="tab-pane fade show active" id="ecbfda" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="cdfabe" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2748,7 +2774,7 @@ module_hotfixes=true</code>
 
 
 
-<div class="tab-pane fade" id="fbdeca" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="ebcafd" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2841,7 +2867,7 @@ module_hotfixes=true</code>
   </pre>
   </div>
 <img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-10.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
-<h3 id="설치">설치 <a href="#%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NginX 설치합니다. 설치 방법과 설치된 버전은 다음과 같습니다.</p>
+<h2 id="설치">설치 <a href="#%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>NginX 설치합니다. 설치 방법과 설치된 버전은 다음과 같습니다.</p>
 
 <nav>
 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -2854,14 +2880,14 @@ module_hotfixes=true</code>
 		
 
 		<a class="nav-link  active"
-		   id="ceadfbTab" data-bs-toggle="tab" data-bs-target="#ceadfb"
-		   type="button" role="tab" aria-controls="ceadfb" aria-selected="true">stable 버전 (1.26.0) 설치</a>
+		   id="efbcdaTab" data-bs-toggle="tab" data-bs-target="#efbcda"
+		   type="button" role="tab" aria-controls="efbcda" aria-selected="true">stable 버전 (1.26.0) 설치</a>
 
 		
 
 		<a class="nav-link "
-		   id="fdaebcTab" data-bs-toggle="tab" data-bs-target="#fdaebc"
-		   type="button" role="tab" aria-controls="fdaebc" aria-selected="true">mainline 버전 (1.25.5) 설치</a>
+		   id="acdfebTab" data-bs-toggle="tab" data-bs-target="#acdfeb"
+		   type="button" role="tab" aria-controls="acdfeb" aria-selected="true">mainline 버전 (1.25.5) 설치</a>
 
 		
 
@@ -2877,7 +2903,7 @@ module_hotfixes=true</code>
 
 
 
-<div class="tab-pane fade show active" id="ceadfb" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="efbcda" role="tabpanel" aria-labelledby="nav-1">
 
 	<ul>
 <li>[<strong>dnf config-manager</strong>] 기능을 사용해 <strong>mainline</strong> 버전을 <code>비활성화</code> 합니다.</li>
@@ -2933,7 +2959,7 @@ module_hotfixes=true</code>
 
 
 
-<div class="tab-pane fade" id="fdaebc" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="acdfeb" role="tabpanel" aria-labelledby="nav-1">
 
 	<ul>
 <li>[<strong>dnf config-manager</strong>] 기능을 사용해 <strong>stable</strong> 버전을 <code>비활성화</code> 합니다.</li>
@@ -2986,7 +3012,7 @@ module_hotfixes=true</code>
 
 
 </div>
-<h3 id="접속화면">접속화면 <a href="#%ec%a0%91%ec%86%8d%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치 완료 후에 nginx를 실행 시키고, 웹브라우저로 접속해보면 다음과 같이 기본 샘플 페이지를 확인할 수 있습니다.</p>
+<h2 id="접속화면">접속화면 <a href="#%ec%a0%91%ec%86%8d%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>설치 완료 후에 nginx를 실행 시키고, 웹브라우저로 접속해보면 다음과 같이 기본 샘플 페이지를 확인할 수 있습니다.</p>
 
 
 

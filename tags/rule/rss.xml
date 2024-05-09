@@ -7,8 +7,7 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Tue, 07 Mar 2023 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/rule/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/rule/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud 모니터링 서비스 Cloud Insight Rule Template 설정 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/management/cloud-insight/rule-template-guide/</link>
       <pubDate>Tue, 07 Mar 2023 00:00:00 +0900</pubDate>

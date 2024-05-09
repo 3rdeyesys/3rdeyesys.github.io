@@ -7,8 +7,7 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Wed, 17 Mar 2021 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/google/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/google/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법  </title>
       <link>https://docs.3rdeyesys.com/docs/compute/cloud-functions/php-smtp-via-gmail-with-phpmailer/</link>
       <pubDate>Wed, 17 Mar 2021 00:00:00 +0900</pubDate>

@@ -7,15 +7,13 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Fri, 02 Feb 2024 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/docs/application-services/cloud-outbound-mailer/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/docs/application-services/cloud-outbound-mailer/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud Cloud Outbound Mailer로 대량 메일 발송하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/application-services/cloud-outbound-mailer/bulk-mail-send-guide/</link>
       <pubDate>Fri, 02 Feb 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/application-services/cloud-outbound-mailer/bulk-mail-send-guide/</guid>
       <description>개요 link네이버 클라우드 서비스 중에서 각 종 공지나 이벤트, 마케팅으로 회원들에게 대량의 메일을 발송해야 할 때 사용할 수 있는 것이 Cloud Outbound Mailer 입니다.&#xA;대량 메일을 발송하는 방법은 여러가지 있지만, 그 중에서도 가장 자주, 간편하게 사용하는 것이 Excel 등의 파일을 업로드 해서 발송하는 방법입니다.&#xA;이용 신청 linkCloud Outbound Mailer는 먼저 이용신청을 하셔야 합니다. [Console] - [Cloud Outbound Mailer] - [Mailing list] 에서 [이용 신청] 버튼을 클릭하시면 됩니다.&#xA;다음으로 서비스 이용약관에 동의하시면 됩니다.</description>
-    </item>
-    <item>
+    </item><item>
       <title>Ncloud Cloud Outbound Mailer 도메인 인증 방법 3가지(SPF, DKIM, DMARC) 안내</title>
       <link>https://docs.3rdeyesys.com/docs/application-services/cloud-outbound-mailer/domain-authentication-guide/</link>
       <pubDate>Fri, 26 Jan 2024 00:00:00 +0900</pubDate>

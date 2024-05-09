@@ -7,8 +7,7 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Tue, 23 May 2023 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/logging/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/logging/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Load Balancer에 연동된 NginX에서 Client IP 기록하고 확인하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/compute/nginx/client-ip-logging-in-loadbalancer-guide/</link>
       <pubDate>Tue, 23 May 2023 00:00:00 +0900</pubDate>

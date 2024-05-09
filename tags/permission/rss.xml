@@ -7,15 +7,13 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Mon, 06 Mar 2023 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/permission/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/permission/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Object Storage Bucket에 CORS 설정하기</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/cors/setting-cors-on-bucket/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/cors/setting-cors-on-bucket/</guid>
       <description>개요 linkObject Storage를 이용해 서비스 개발을 하다 보면 CORS 와 관련된 오류와 종종 마주치게 되는데, 테스트 버킷과 사이트를 생성해서 해결 방법을 알아보겠습니다. 그리고, Ncloud(네이버 클라우드) Object Storage의 CORS 설정은 콘솔이 아닌, CLI와 외부 Client Tool 등을 사용해야 하는데 각각의 방법을 차례로 소개합니다.&#xA;info&#xD;CORS(Cross-Origin Resource Sharing)는 웹 애플리케션이 서비스되는 도메인에서 다른 도메인에 있는 리소스를 접근해야 할 때 리소스에 대한 접근 허용, 제한 등에 대한 방법을 정의합니다.&#xA;테스트 방법 link Object Storage에 cors-test 라는 이름의 버킷 생성 http://cors-test.</description>
-    </item>
-    <item>
+    </item><item>
       <title>Object Storage에서 CORS를 SDK for S3 API로 설정하기</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/cors/setting-cors-on-bucket-using-api-sdk/</link>
       <pubDate>Mon, 06 Mar 2023 00:00:00 +0900</pubDate>

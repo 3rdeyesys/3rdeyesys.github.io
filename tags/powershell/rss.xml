@@ -7,8 +7,7 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Thu, 29 Dec 2022 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/powershell/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/powershell/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Windows PowerShell에서 Ncloud API를 호출하는 샘플 예제</title>
       <link>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-powershell-sample/</link>
       <pubDate>Thu, 29 Dec 2022 00:00:00 +0900</pubDate>

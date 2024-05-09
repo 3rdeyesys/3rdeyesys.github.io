@@ -7,8 +7,7 @@
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
     <lastBuildDate>Wed, 22 Mar 2023 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://docs.3rdeyesys.com/tags/player/rss.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <atom:link href="https://docs.3rdeyesys.com/tags/player/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud Video Player Enhancement 사용 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/media/video-player-enhancement/basic-guide/</link>
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0900</pubDate>
