@@ -42,8 +42,8 @@
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/management/ncloud-management-cloud-log-analytics-guide-01.png" />
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드) 로그 분석 서비스인 Cloud Log Analytics를 생성하고 설정하는 방법" />
 <meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2021-12-14T00:00:00+09:00" />
-<meta property="article:modified_time" content="2021-12-14T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-05-10T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-05-10T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" />
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/management/ncloud-management-cloud-log-analytics-guide-01.png" />
 <meta property="twitter:image:alt" content="Ncloud(네이버 클라우드) 로그 분석 서비스인 Cloud Log Analytics를 생성하고 설정하는 방법" />
@@ -2595,7 +2595,6 @@
 <li>Ubuntu 16.04</li>
 <li>Ubuntu 18.04</li>
 <li>Ubuntu 20.04</li>
-<li>Ubuntu 22.04</li>
 <li>SLES 15</li>
 <li>Debian 9</li>
 <li>Debian 10</li>
@@ -2604,6 +2603,9 @@
 <li>Windows Server 2016</li>
 <li>Windows Server 2019</li>
 <li>Windows Server2022</li>
+<li>Rocky Linux 8.6</li>
+<li>Rocky Linux 8.8</li>
+<li>navix 8.8</li>
 </ul>
 <h2 id="저장-용량">저장 용량 <a href="#%ec%a0%80%ec%9e%a5-%ec%9a%a9%eb%9f%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ul>
 <li><strong>최대 100GB</strong>까지 저장할 수 있습니다.</li>
@@ -2642,11 +2644,28 @@ Cloud Log Analytics는 Classic, VPC 환경 공통 서비스이므로 어느쪽 �
   
 
   <div class="prism-codeblock ">
-  <pre id="deba2d0" class="language-bash ">
+  <pre id="79dc5a7" class="language-bash ">
   <code># VPC 환경
-curl -s http://cm.vcla.ncloud.com/setUpClaVPC/{설치키(Install Key)} | sudo sh
+curl -s http://cm.vcla.ncloud.com/setUpClaVPC/{설치키(Install Key)} | sudo sh</code>
+  </pre>
+  </div>
 
-# Classic 환경
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="ce78c4e" class="language-bash ">
+  <code># Classic 환경
 curl -s http://cm.cla.ncloud.com/setUpCla/{설치키(Install Key)} | sudo sh</code>
   </pre>
   </div>
@@ -2670,7 +2689,7 @@ curl -s http://cm.cla.ncloud.com/setUpCla/{설치키(Install Key)} | sudo sh</co
   
 
   <div class="prism-codeblock ">
-  <pre id="aa365c5" class="language-bash ">
+  <pre id="11cefbd" class="language-bash ">
   <code>systemctl status filebeat</code>
   </pre>
   </div>
@@ -2697,7 +2716,7 @@ curl -s http://cm.cla.ncloud.com/setUpCla/{설치키(Install Key)} | sudo sh</co
   
 
   <div class="prism-codeblock ">
-  <pre id="5f618b5" class="language-bash ">
+  <pre id="7752f68" class="language-bash ">
   <code># VPC 환경
 Invoke-Expression $((New-Object System.Net.WebClient).DownloadString(&#34;http://cm.vcla.ncloud.com/setUpwinClaVPC/{설치키(Install Key)}&#34;))
 
@@ -2742,7 +2761,7 @@ Invoke-Expression $((New-Object System.Net.WebClient).DownloadString(&#34;http:/
   
 
   <div class="prism-codeblock ">
-  <pre id="381b18f" class="language-bash ">
+  <pre id="5212d15" class="language-bash ">
   <code># VPC 환경
 curl -s http://cm.vcla.ncloud.com/removeCla | sudo sh
 
@@ -2771,7 +2790,7 @@ curl -s http://cm.cla.ncloud.com/removeCla | sudo sh</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="0ac9dbc" class="language-bash ">
+  <pre id="68f7dd5" class="language-bash ">
   <code># VPC 환경
 Invoke-Expression $((New-Object System.Net.WebClient).DownloadString(&#34;http://cm.vcla.ncloud.com/removewinCla&#34;))
 
@@ -2827,6 +2846,10 @@ Invoke-Expression $((New-Object System.Net.WebClient).DownloadString(&#34;http:/
           <td>2024-02-16</td>        
           <td>지원 운영체제 리스트 추가</td>          
         </tr>
+        <tr>
+          <td>2024-05-10</td>        
+          <td>Rocky Linux 등 지원 운영체제 리스트 업데이트</td>          
+        </tr>
     </tbody>
 </table>  
     </div>
@@ -2843,7 +2866,7 @@ Invoke-Expression $((New-Object System.Net.WebClient).DownloadString(&#34;http:/
                                                               
     <span class="tag-list"><a href="/tags/log"> log</a></span>
                                                               
-    <span class="tag-list"><a href="/tags/analytic"> analytic</a></span>
+    <span class="tag-list"><a href="/tags/analytics"> analytics</a></span>
     
 </ul>
 
@@ -2894,7 +2917,7 @@ Invoke-Expression $((New-Object System.Net.WebClient).DownloadString(&#34;http:/
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-05-08
+                        Site last modified: 2024-05-10
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">
