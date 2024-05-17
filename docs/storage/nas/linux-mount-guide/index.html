@@ -39,8 +39,8 @@
 <meta property="og:description" content="Ncloud(네이버 클라우드) VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드입니다" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/docs/storage/nas/linux-mount-guide/" /><meta property="og:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_6179793418806294509.png"/><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2021-07-27T00:00:00+09:00" />
-<meta property="article:modified_time" content="2021-07-27T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-05-17T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-05-17T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_6179793418806294509.png"/><meta name="twitter:title" content="NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드"/>
 <meta name="twitter:description" content="Ncloud(네이버 클라우드) VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드입니다"/>
@@ -2467,33 +2467,41 @@
       <ul>
         <li><a href="#개요">개요</a></li>
         <li><a href="#특징">특징</a></li>
-        <li><a href="#vpc-subnet--생성">VPC-Subnet  생성</a>
-          <ul>
-            <li><a href="#vpc-생성">VPC 생성</a></li>
-            <li><a href="#subnet-생성">Subnet 생성</a></li>
-          </ul>
-        </li>
         <li><a href="#서버-생성">서버 생성</a></li>
         <li><a href="#nas-생성">NAS 생성</a>
           <ul>
             <li><a href="#nfs-접근-제어-설정">NFS 접근 제어 설정</a></li>
           </ul>
         </li>
-        <li><a href="#centos-설정">CentOS 설정</a>
+        <li><a href="#nas-마운트-정보-확인">NAS 마운트 정보 확인</a></li>
+        <li><a href="#rocky-linux-설정">Rocky Linux 설정</a>
           <ul>
             <li><a href="#nfs-관련-패키지-설치">NFS 관련 패키지 설치</a></li>
-            <li><a href="#nas-볼륨-마운트하기">NAS 볼륨 마운트하기</a></li>
+            <li><a href="#nas-볼륨-마운트">NAS 볼륨 마운트</a></li>
             <li><a href="#fstab-설정">fstab 설정</a></li>
           </ul>
         </li>
         <li><a href="#ubuntu-설정">Ubuntu 설정</a>
           <ul>
             <li><a href="#nfs-관련-패키지-설치-1">NFS 관련 패키지 설치</a></li>
-            <li><a href="#nas-마운트하기">NAS 마운트하기</a></li>
+            <li><a href="#nas-볼륨-마운트하기">NAS 볼륨 마운트하기</a></li>
             <li><a href="#fstab-설정-1">fstab 설정</a></li>
           </ul>
         </li>
-        <li><a href="#이벤트-설정">이벤트 설정</a></li>
+        <li><a href="#centos-설정">CentOS 설정</a>
+          <ul>
+            <li><a href="#nfs-관련-패키지-설치-2">NFS 관련 패키지 설치</a></li>
+            <li><a href="#nas-볼륨-마운트하기-1">NAS 볼륨 마운트하기</a></li>
+            <li><a href="#fstab-설정-2">fstab 설정</a></li>
+          </ul>
+        </li>
+        <li><a href="#nas-사용량-알림-이벤트-설정">NAS 사용량 알림 이벤트 설정</a>
+          <ul>
+            <li><a href="#nas-볼륨-선택">NAS 볼륨 선택</a></li>
+            <li><a href="#이벤트-항목-설정">이벤트 항목 설정</a></li>
+            <li><a href="#통보-대상-설정">통보 대상 설정</a></li>
+          </ul>
+        </li>
         <li><a href="#참고-url">참고 URL</a></li>
         <li><a href="#문서-업데이트-내역">문서 업데이트 내역</a></li>
       </ul>
@@ -2513,33 +2521,41 @@
       <ul>
         <li><a href="#개요">개요</a></li>
         <li><a href="#특징">특징</a></li>
-        <li><a href="#vpc-subnet--생성">VPC-Subnet  생성</a>
-          <ul>
-            <li><a href="#vpc-생성">VPC 생성</a></li>
-            <li><a href="#subnet-생성">Subnet 생성</a></li>
-          </ul>
-        </li>
         <li><a href="#서버-생성">서버 생성</a></li>
         <li><a href="#nas-생성">NAS 생성</a>
           <ul>
             <li><a href="#nfs-접근-제어-설정">NFS 접근 제어 설정</a></li>
           </ul>
         </li>
-        <li><a href="#centos-설정">CentOS 설정</a>
+        <li><a href="#nas-마운트-정보-확인">NAS 마운트 정보 확인</a></li>
+        <li><a href="#rocky-linux-설정">Rocky Linux 설정</a>
           <ul>
             <li><a href="#nfs-관련-패키지-설치">NFS 관련 패키지 설치</a></li>
-            <li><a href="#nas-볼륨-마운트하기">NAS 볼륨 마운트하기</a></li>
+            <li><a href="#nas-볼륨-마운트">NAS 볼륨 마운트</a></li>
             <li><a href="#fstab-설정">fstab 설정</a></li>
           </ul>
         </li>
         <li><a href="#ubuntu-설정">Ubuntu 설정</a>
           <ul>
             <li><a href="#nfs-관련-패키지-설치-1">NFS 관련 패키지 설치</a></li>
-            <li><a href="#nas-마운트하기">NAS 마운트하기</a></li>
+            <li><a href="#nas-볼륨-마운트하기">NAS 볼륨 마운트하기</a></li>
             <li><a href="#fstab-설정-1">fstab 설정</a></li>
           </ul>
         </li>
-        <li><a href="#이벤트-설정">이벤트 설정</a></li>
+        <li><a href="#centos-설정">CentOS 설정</a>
+          <ul>
+            <li><a href="#nfs-관련-패키지-설치-2">NFS 관련 패키지 설치</a></li>
+            <li><a href="#nas-볼륨-마운트하기-1">NAS 볼륨 마운트하기</a></li>
+            <li><a href="#fstab-설정-2">fstab 설정</a></li>
+          </ul>
+        </li>
+        <li><a href="#nas-사용량-알림-이벤트-설정">NAS 사용량 알림 이벤트 설정</a>
+          <ul>
+            <li><a href="#nas-볼륨-선택">NAS 볼륨 선택</a></li>
+            <li><a href="#이벤트-항목-설정">이벤트 항목 설정</a></li>
+            <li><a href="#통보-대상-설정">통보 대상 설정</a></li>
+          </ul>
+        </li>
         <li><a href="#참고-url">참고 URL</a></li>
         <li><a href="#문서-업데이트-내역">문서 업데이트 내역</a></li>
       </ul>
@@ -2565,8 +2581,8 @@
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>NAS (Network Attached Storage)는 다수의 서버, 사용자가 함께 사용하는 네트워크 저장공간으로,
 서버 간 데이터 공유, 대용량 스토리지, 유연한 용량 확대/축소, 스냅샷 백업 등이 필요한 경우에 주로 사용하며,
-네이버 클라우드 NAS 서비스의 주요 기능을 활용해 안전하고 편리하게 데이터를 관리할 수 있습니다.<br>
-이번 가이드에서는 NAS 볼륨을 생성하고, Linux 즉, CentOS와 Ubuntu 서버에 마운트하는 방법을 정리해보겠습니다.</p>
+Ncloud (네이버 클라우드) NAS 서비스의 주요 기능을 활용해 안전하고 편리하게 데이터를 관리할 수 있습니다.<br>
+이번 가이드에서는 NAS 볼륨을 생성하고, Linux 즉, Rocky Linux, Ubuntu 그리고 CentOS 서버에 동시에 마운트하는 방법을 정리해보겠습니다.</p>
 <h2 id="특징">특징 <a href="#%ed%8a%b9%ec%a7%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ul>
 <li>용량: 500GB ~ 10,000GB까지 가능하며, 확장은 100GB단위로 가능</li>
 <li>접근제어 설정 가능</li>
@@ -2574,27 +2590,45 @@
 <li>볼륨 암호화: 볼륨 단위로 AES-256 알고리즘 기반의 암호화 키를 사용하여 FIPS-140-2 레벨 1 수준의 암호화를 제공</li>
 <li>모니터링 및 이벤트 설정 가능</li>
 </ul>
-<h2 id="vpc-subnet--생성">VPC-Subnet  생성 <a href="#vpc-subnet--%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="vpc-생성">VPC 생성 <a href="#vpc-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>VPC환경에서 작업할 것이므로 우선 VPC를 생성합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_01.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<img src="/images/storage/ncp_storage_nas_guide_02.jpg" width="680" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<h3 id="subnet-생성">Subnet 생성 <a href="#subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Subnet 설정은 [Public]과 [일반]을 선택합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_03.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<img src="/images/storage/ncp_storage_nas_guide_04.jpg" width="680" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<h2 id="서버-생성">서버 생성 <a href="#%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>NAS 볼륨을 마운트할 서버 2개를 CentOS 7.8과 Ubuntu 18.04로 생성합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_05.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<h2 id="nas-생성">NAS 생성 <a href="#nas-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[NAS] - [Volume]에서 [NAS 볼륨 생성] 버튼을 클릭합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_06.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<p>NAS 볼륨 이름과 용량을 입력하고, 리눅스용 프로토콜인 NFS를 선택합니다.  CIFS는 윈도우용 프로토콜입니다.<br>
-용량은 500GB ~ 10,000GB까지 가능하며, 100GB단위로 추가할 수 있습니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_07.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<h3 id="nfs-접근-제어-설정">NFS 접근 제어 설정 <a href="#nfs-%ec%a0%91%ea%b7%bc-%ec%a0%9c%ec%96%b4-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NFS 접근 제어 설정에서는 NAS 볼륨을 마운트할 장비를 선택해서 ACL(네트워그 접근제어) 설정을 하게 됩니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_08.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<p>NAS 볼륨을 마운트할 장비를 선택하고, [ &gt; ] 버튼을 클릭해 오른쪽으로 이동시킵니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_09.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<img src="/images/storage/ncp_storage_nas_guide_10.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<p>마지막으로 설정 내용을 확인하고 [볼륨 생성] 버튼을 클릭합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_11.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<h2 id="centos-설정">CentOS 설정 <a href="#centos-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="nfs-관련-패키지-설치">NFS 관련 패키지 설치 <a href="#nfs-%ea%b4%80%eb%a0%a8-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAS 볼륨을 서버에 마운트하기 위해 우선 서버에 NFS 프로토콜 관련 패키지를 설치합니다.</p>
+<h2 id="서버-생성">서버 생성 <a href="#%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>NAS 볼륨을 마운트할 서버 3대를 Rocky Linux 8.8, Ubuntu 22.04, CentOS 7.8로 생성합니다.</p>
+<ul>
+<li>VPC 환경에서 서버를 생성하는 방법은 아래 문서에서 확인 가능합니다.</li>
+</ul>
+
+
+
+<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
+    ⁃ <a href="/docs/compute/vpc/server-create/">Ncloud VPC 환경에서 서버 생성하는 방법</a>
+</div>  
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-01.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h2 id="nas-생성">NAS 생성 <a href="#nas-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><img src="/images/storage/ncloud-storage-nas-linux-mount-guide-02.png" width="1000" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<ul>
+<li>[NAS] - [Volume]에서 [NAS 볼륨 생성] 버튼을 클릭합니다.</li>
+</ul>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-03.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<ul>
+<li>NAS 볼륨 이름과 용량을 입력하고, 리눅스용 프로토콜인 NFS를 선택합니다.  CIFS는 윈도우용 프로토콜입니다.
+<ul>
+<li>용량은 500GB ~ 10,000GB까지 가능하며, 100GB단위로 추가할 수 있습니다.</li>
+<li><strong>NAS 볼륨 이름</strong>은 영문 또는 숫자 또는 영문+숫자 조합으로 가능하며 최소 3자 ~ 최대 20자 까지 입력 가능합니다.</li>
+</ul>
+</li>
+</ul>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-04.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h3 id="nfs-접근-제어-설정">NFS 접근 제어 설정 <a href="#nfs-%ec%a0%91%ea%b7%bc-%ec%a0%9c%ec%96%b4-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NFS 접근 제어 설정에서는 NAS 볼륨을 마운트할 장비를 선택해서 ACL(네트워크 접근제어) 설정을 하게 됩니다.</p>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-05.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<ul>
+<li>NAS 볼륨을 마운트할 장비를 선택하고, [ &gt; ] 버튼을 클릭해 오른쪽으로 이동시킵니다.</li>
+<li>접근 용도에 따라서 [<strong>Read / Write</strong>] 또는 [<strong>Read Only</strong>]를 선택해서 이동 시킵니다.</li>
+</ul>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-06.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<ul>
+<li>마지막으로 설정 내용을 확인하고 [볼륨 생성] 버튼을 클릭합니다.</li>
+</ul>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-07.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h2 id="nas-마운트-정보-확인">NAS 마운트 정보 확인 <a href="#nas-%eb%a7%88%ec%9a%b4%ed%8a%b8-%ec%a0%95%eb%b3%b4-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>생성된 NAS 볼륨의 상세 정보를 살펴보면 아래와 같이 [<strong>마운트 정보</strong>] 항목에서 서버에 마운트할 때 사용할 <strong>마운트 정보</strong>를 확인할 수 있습니다.</p>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-08.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h2 id="rocky-linux-설정">Rocky Linux 설정 <a href="#rocky-linux-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="nfs-관련-패키지-설치">NFS 관련 패키지 설치 <a href="#nfs-%ea%b4%80%eb%a0%a8-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAS 볼륨을 리눅스 서버에 마운트하기 위해 우선 서버에 NFS 프로토콜 관련 패키지를 설치합니다.</p>
 
 
 
@@ -2610,12 +2644,12 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="9c7f04d" class="language-bash ">
-  <code>yum install nfs-utils</code>
+  <pre id="6466767" class="language-bash ">
+  <code>dnf -y install nfs-utils</code>
   </pre>
   </div>
-<img src="/images/storage/ncp_storage_nas_guide_12.jpg" width="660" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<h3 id="nas-볼륨-마운트하기">NAS 볼륨 마운트하기 <a href="#nas-%eb%b3%bc%eb%a5%a8-%eb%a7%88%ec%9a%b4%ed%8a%b8%ed%95%98%ea%b8%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAS 볼륨을 마운트할 디렉토리를 생성하고 {NAS 볼륨 마운트 정보}를 이용해 마운트한 후에 상태를 확인합니다.<br>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-09.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h3 id="nas-볼륨-마운트">NAS 볼륨 마운트 <a href="#nas-%eb%b3%bc%eb%a5%a8-%eb%a7%88%ec%9a%b4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAS 볼륨을 마운트할 디렉토리를 생성하고 위쪽에서 확인한 {<strong>NAS 볼륨 마운트 정보</strong>}를 이용해 마운트한 후에 상태를 확인합니다.<br>
 네이버 클라우드에서는 안정성이 높은 NFS v3(-o vers=3)로 마운트하여 사용할 것을 권고하고 있습니다.</p>
 
 
@@ -2632,16 +2666,40 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="b1252c4" class="language-bash ">
-  <code>mkdir /nas
-mount -t nfs -o vers=3 {NAS 볼륨 마운트 정보} /nas
+  <pre id="00592cd" class="language-bash ">
+  <code>mkdir /mnt/nas
+
+mount -t nfs -o vers=3 {NAS 볼륨 마운트 정보} /mnt/nas
+#예시: mount -t nfs -o vers=3 123.456.789.012:/n123456_nas /mnt/nas
+
 df -Th</code>
   </pre>
   </div>
-<img src="/images/storage/ncp_storage_nas_guide_20.jpg" width="782" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<img src="/images/storage/ncp_storage_nas_guide_13.jpg" width="660" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-11.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
 <h3 id="fstab-설정">fstab 설정 <a href="#fstab-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>부팅 후에도 마운트가 될 수 있도록 /etc/fstab 파일에 추가합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_14.jpg" width="660" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="0bfea9b" class="language-bash ">
+  <code>vim /etc/fstab
+
+{NAS 볼륨 마운트 정보} /mnt/nas nfs vers=3,defaults 0 0
+# 예시: 123.456.789.012:/n123456_nas /mnt/nas nfs vers=3,defaults 0 0</code>
+  </pre>
+  </div>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-12.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
 <h2 id="ubuntu-설정">Ubuntu 설정 <a href="#ubuntu-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="nfs-관련-패키지-설치-1">NFS 관련 패키지 설치 <a href="#nfs-%ea%b4%80%eb%a0%a8-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%84%a4%ec%b9%98-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>우분투에서도 우선 NFS 관련 패키지를 설치합니다.</p>
 
 
@@ -2658,12 +2716,12 @@ df -Th</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="6a36804" class="language-bash ">
-  <code>apt install nfs-common -y</code>
+  <pre id="0b95905" class="language-bash ">
+  <code>apt -y install nfs-common</code>
   </pre>
   </div>
-<img src="/images/storage/ncp_storage_nas_guide_15.jpg" width="660" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<h3 id="nas-마운트하기">NAS 마운트하기 <a href="#nas-%eb%a7%88%ec%9a%b4%ed%8a%b8%ed%95%98%ea%b8%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAS 볼륨을 마운트할 디렉토리를 생성하고 {NAS 볼륨 마운트 정보}를 이용해 마운트한 후에 상태를 확인합니다.<br>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-13.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h3 id="nas-볼륨-마운트하기">NAS 볼륨 마운트하기 <a href="#nas-%eb%b3%bc%eb%a5%a8-%eb%a7%88%ec%9a%b4%ed%8a%b8%ed%95%98%ea%b8%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAS 볼륨을 마운트할 디렉토리를 생성하고 {<strong>NAS 볼륨 마운트 정보</strong>}를 이용해 마운트한 후에 상태를 확인합니다.<br>
 네이버 클라우드에서는 안정성이 높은 NFS v3(-o vers=3)로 마운트하여 사용할 것을 권고하고 있습니다.</p>
 
 
@@ -2680,20 +2738,125 @@ df -Th</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="c5c1f10" class="language-bash ">
-  <code>mkdir /nas
-mount -t nfs -o vers=3 {NAS 볼륨 마운트 정보} /nas
+  <pre id="0100d1c" class="language-bash ">
+  <code>mkdir /mnt/nas
+
+mount -t nfs -o vers=3 {NAS 볼륨 마운트 정보} /mnt/nas
+#예시: mount -t nfs -o vers=3 123.456.789.012:/n123456_nas /mnt/nas
+
 df -Th</code>
   </pre>
   </div>
-<img src="/images/storage/ncp_storage_nas_guide_16.jpg" width="660" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-14.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
 <h3 id="fstab-설정-1">fstab 설정 <a href="#fstab-%ec%84%a4%ec%a0%95-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>부팅 후에도 마운트가 될 수 있도록 /etc/fstab 파일에 추가합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_17.jpg" width="660" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<h2 id="이벤트-설정">이벤트 설정 <a href="#%ec%9d%b4%eb%b2%a4%ed%8a%b8-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이벤트 설정에서는 NAS 볼륨 사용량 임계치를 설정하고 이벤트 발생 시 SMS나 Email로 통보를 받습니다.<br>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="e3f1963" class="language-bash ">
+  <code>vim /etc/fstab
+
+{NAS 볼륨 마운트 정보} /mnt/nas nfs vers=3,defaults 0 0
+# 예시: 123.456.789.012:/n123456_nas /mnt/nas nfs vers=3,defaults 0 0</code>
+  </pre>
+  </div>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-15.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h2 id="centos-설정">CentOS 설정 <a href="#centos-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="nfs-관련-패키지-설치-2">NFS 관련 패키지 설치 <a href="#nfs-%ea%b4%80%eb%a0%a8-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%84%a4%ec%b9%98-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAS 볼륨을 서버에 마운트하기 위해 우선 서버에 NFS 프로토콜 관련 패키지를 설치합니다.</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="439a219" class="language-bash ">
+  <code>yum -y install nfs-utils</code>
+  </pre>
+  </div>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-16.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h3 id="nas-볼륨-마운트하기-1">NAS 볼륨 마운트하기 <a href="#nas-%eb%b3%bc%eb%a5%a8-%eb%a7%88%ec%9a%b4%ed%8a%b8%ed%95%98%ea%b8%b0-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAS 볼륨을 마운트할 디렉토리를 생성하고 {NAS 볼륨 마운트 정보}를 이용해 마운트한 후에 상태를 확인합니다.<br>
+네이버 클라우드에서는 안정성이 높은 NFS v3(-o vers=3)로 마운트하여 사용할 것을 권고하고 있습니다.</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="1fadbb9" class="language-bash ">
+  <code>mkdir /mnt/nas
+
+mount -t nfs -o vers=3 {NAS 볼륨 마운트 정보} /mnt/nas
+#예시: mount -t nfs -o vers=3 123.456.789.012:/n123456_nas /mnt/nas
+
+df -Th</code>
+  </pre>
+  </div>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-18.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h3 id="fstab-설정-2">fstab 설정 <a href="#fstab-%ec%84%a4%ec%a0%95-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>부팅 후에도 마운트가 될 수 있도록 /etc/fstab 파일에 추가합니다.</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="d0c8d5c" class="language-bash ">
+  <code>vim /etc/fstab
+
+{NAS 볼륨 마운트 정보} /mnt/nas nfs vers=3,defaults 0 0
+# 예시: 123.456.789.012:/n123456_nas /mnt/nas nfs vers=3,defaults 0 0</code>
+  </pre>
+  </div>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-19.png" width="1137" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h2 id="nas-사용량-알림-이벤트-설정">NAS 사용량 알림 이벤트 설정 <a href="#nas-%ec%82%ac%ec%9a%a9%eb%9f%89-%ec%95%8c%eb%a6%bc-%ec%9d%b4%eb%b2%a4%ed%8a%b8-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이벤트 설정에서는 NAS 볼륨 사용량 임계치를 설정하고 이벤트 발생 시 SMS나 Email로 통보를 받습니다.<br>
 볼륨 설정에서 이벤트 설정을 클릭합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_18.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
-<p>이벤트 통보 방법과 휴대폰 또는 이메일 등을 입력하고 설정을 완료합니다.</p>
-<img src="/images/storage/ncp_storage_nas_guide_19.jpg" width="770" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-20.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h3 id="nas-볼륨-선택">NAS 볼륨 선택 <a href="#nas-%eb%b3%bc%eb%a5%a8-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/storage/ncloud-storage-nas-linux-mount-guide-21.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h3 id="이벤트-항목-설정">이벤트 항목 설정 <a href="#%ec%9d%b4%eb%b2%a4%ed%8a%b8-%ed%95%ad%eb%aa%a9-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li>알림 이벤트를 설정할 디스크 사용량 <strong>임계치 % 값</strong>과 <strong>지속 시간</strong>을 분 단위로 입력하고 추가 버튼을 클릭합니다.</li>
+<li>예) 70%, 5분으로 입력했을 경우: 디스크 사용량이 70% 이상인 상태가 5분 이상 지속되면 알림 이벤트가 발송됩니다.</li>
+</ul>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-22.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
+<h3 id="통보-대상-설정">통보 대상 설정 <a href="#%ed%86%b5%eb%b3%b4-%eb%8c%80%ec%83%81-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li>이벤트 통보 방법과 휴대폰 또는 이메일 등을 입력하고 설정을 완료합니다.</li>
+</ul>
+<img src="/images/storage/ncloud-storage-nas-linux-mount-guide-23.png" width="1140" alt="Ncloud VPC환경에서 NAS 볼륨을 생성하고 Linux 서버에 마운트하기 가이드" class="docimage">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>Ncloud NAS 상품 가이드<br>
 <a href="https://guide.ncloud-docs.com/docs/nas-overview" rel="external" target="_blank">https://guide.ncloud-docs.com/docs/nas-overview<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
@@ -2709,6 +2872,10 @@ df -Th</code>
         <tr>
           <td>2021-07-27</td>        
           <td>문서 최초 생성</td>          
+        </tr>
+        <tr>
+          <td>2024-05-17</td>        
+          <td>Rocky Linux 내용 추가, 스크린샷 업데이트</td>          
         </tr>
     </tbody>
 </table>      
@@ -2777,7 +2944,7 @@ df -Th</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-05-13
+                        Site last modified: 2024-05-17
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">
