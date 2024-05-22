@@ -39,8 +39,8 @@
 <meta property="og:description" content="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드입니다" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/docs/networking/loadbalancer/vpc-application-loadbalancer-guide/" /><meta property="og:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_2596443125105450267.png"/><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2022-08-04T00:00:00+09:00" />
-<meta property="article:modified_time" content="2022-08-04T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-05-22T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-05-22T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_2596443125105450267.png"/><meta name="twitter:title" content="VPC 환경에서 Application Load Balancer 생성하기"/>
 <meta name="twitter:description" content="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드입니다"/>
@@ -2476,11 +2476,17 @@
         <li><a href="#테스트용-server-생성">테스트용 Server 생성</a></li>
         <li><a href="#target-group-생성">Target Group 생성</a></li>
         <li><a href="#load-balancer-생성">Load Balancer 생성</a></li>
-        <li><a href="#acg-설정">ACG 설정</a></li>
+        <li><a href="#acg-설정">ACG 설정</a>
+          <ul>
+            <li><a href="#acg-확인">ACG 확인</a></li>
+            <li><a href="#inbound-규칙-추가">Inbound 규칙 추가</a></li>
+          </ul>
+        </li>
         <li><a href="#server-웹서버-설정">Server 웹서버 설정</a>
           <ul>
-            <li><a href="#ubuntu에-apache-php-설치하기-스크립트">Ubuntu에 Apache, PHP 설치하기 스크립트</a></li>
-            <li><a href="#centos에-apache-php-설치하기-스크립트">CentOS에 Apache, PHP 설치하기 스크립트</a></li>
+            <li><a href="#rocky-linux">Rocky Linux</a></li>
+            <li><a href="#ubuntu">Ubuntu</a></li>
+            <li><a href="#centos">CentOS</a></li>
           </ul>
         </li>
         <li><a href="#접속-테스트">접속 테스트</a></li>
@@ -2512,11 +2518,17 @@
         <li><a href="#테스트용-server-생성">테스트용 Server 생성</a></li>
         <li><a href="#target-group-생성">Target Group 생성</a></li>
         <li><a href="#load-balancer-생성">Load Balancer 생성</a></li>
-        <li><a href="#acg-설정">ACG 설정</a></li>
+        <li><a href="#acg-설정">ACG 설정</a>
+          <ul>
+            <li><a href="#acg-확인">ACG 확인</a></li>
+            <li><a href="#inbound-규칙-추가">Inbound 규칙 추가</a></li>
+          </ul>
+        </li>
         <li><a href="#server-웹서버-설정">Server 웹서버 설정</a>
           <ul>
-            <li><a href="#ubuntu에-apache-php-설치하기-스크립트">Ubuntu에 Apache, PHP 설치하기 스크립트</a></li>
-            <li><a href="#centos에-apache-php-설치하기-스크립트">CentOS에 Apache, PHP 설치하기 스크립트</a></li>
+            <li><a href="#rocky-linux">Rocky Linux</a></li>
+            <li><a href="#ubuntu">Ubuntu</a></li>
+            <li><a href="#centos">CentOS</a></li>
           </ul>
         </li>
         <li><a href="#접속-테스트">접속 테스트</a></li>
@@ -2544,85 +2556,72 @@
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 VPC 환경의 대표적인 Load Balancer인 Application Load Balancer 를 생성하는 가이드입니다.<br>
-VPC와 Subnet을 생성하고, 테스트를 위한 서버 2대를 CentOS와 Ubuntu 각각 1대씩 준비해서 Application Load Balancer와 연결하고 접속해보는 과정까지 정리해보겠습니다.</p>
+VPC와 Subnet을 생성하고, 테스트를 위한 서버 3대를 Rocky Linux, Ubuntu, CentOS 각각 1대씩 준비해서 Application Load Balancer와 연결하고 접속해보는 과정까지 정리해보겠습니다.</p>
 <h2 id="vpc-생성">VPC 생성 <a href="#vpc-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>VPC 환경에서는 먼저 VPC를 먼저 생성해야 하며, 이미 만들어진 VPC가 있다면 그대로 이용하셔도 됩니다.<br>
 VPC의 IP 주소 범위는 private 대역 (10.0.0.0/8, 172.160.0./12, 192.168.0.0/16) 내에서 /16 ~ /28 범위여야 합니다.<br>
-여기서는 192.168.0.0/16 범위의 VPC를 생성하겠습니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_01.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+여기서는 172.16.0.0/16 범위의 VPC를 생성하겠습니다.</p>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-01.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
 <h2 id="subnet-생성">Subnet 생성 <a href="#subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Load Balancer를 생성할 때 Server와는 다른 Subnet을 사용해야 정상 작동합니다.<br>
 그래서 여기서도 Load Balancer용 Subnet과 테스트 Server용 Subnet을 각각 생성하도록 하겠습니다.</p>
-<h3 id="load-balancer용-subnet-생성">Load Balancer용 Subnet 생성 <a href="#load-balancer%ec%9a%a9-subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Load Balancer는 Private Subnet에 위치해야 하므로 192.168.1.0/24 IP 대역에 Internet Gateway 전용 여부 옵션은 N (Private)을 선택합니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_02.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<h3 id="server용-subnet-생성">Server용 Subnet 생성 <a href="#server%ec%9a%a9-subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>일반 서버용 Subnet은 192.168.2.0/24 IP 대역에 Internet Gateway 전용 여부 옵션은 Y (Public)을 선택합니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_03.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<h2 id="테스트용-server-생성">테스트용 Server 생성 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8%ec%9a%a9-server-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>테스트를 위한 서버는 위에서 생성했던 192.168.2.0/24 IP 대역의 Subnet을 선택하고 Network Interface도 동일한 Subnet을 선택합니다.<br>
-Load Balancer를 테스트 하기 위한 서버이므로 2대를 생성하면서 1대는 CentOS, 나머지 1대는 Ubunt로 생성하겠습니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_04.jpg" width="850" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<h2 id="target-group-생성">Target Group 생성 <a href="#target-group-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[VPC] - [Load Balancer] - [Target Group]에서 Load Balancer가 바라보게 될 Target Group를 설정합니다.<br>
-여기서는 HTTP 프로토콜과 80 포트를 선택하겠습니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_05.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<p>다음으로 Health Check 설정에서는 HTTP, 80포트, HEAD Method를 선택합니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_06.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<p>마지막으로 Target 즉, 대상이 되는 서버 2대 (lb-test-ubuntu, lb-test-centos)를 선택하고, 적용 Target쪽으로 이동시키는 버튼을 클릭합니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_07.jpg" width="810" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<p>대상 서버들이 적용 Target으로 설정된 모습입니다. 이후에는 전체 설정을 다시 확인하고 생성 완료를 하면 됩니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_08.jpg" width="810" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<h2 id="load-balancer-생성">Load Balancer 생성 <a href="#load-balancer-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 VPC 환경에서 제공하는 Load Balancer는 애플리케이션 로드밸런서, 네트워크 로드밸런서, 네트워크 프록시 로드밸런서 이렇게 3가지가 있습니다.<br>
+<h3 id="load-balancer용-subnet-생성">Load Balancer용 Subnet 생성 <a href="#load-balancer%ec%9a%a9-subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>IP 주소 범위는 172.16.11.0/24으로 하고, Internet Gateway 전용 여부 옵션은 Y (Public)을 선택합니다.</p>
+<ul>
+<li>Public: 일반적인 경우로 외부에서 사용자가 로드밸런서에 접속하게 되는 서비스의 경우</li>
+<li>Private: 내부 장비나 서버들끼리 통신을 하는데 로드밸런서를 이용해서 부하를 분산하려고 하는 경우</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-02.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<h3 id="server용-subnet-생성">Server용 Subnet 생성 <a href="#server%ec%9a%a9-subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>일반 서버용 Subnet은 172.16.10.0/24 IP 대역에 Internet Gateway 전용 여부 옵션은 Y (Public)을 선택합니다.</p>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-03.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<h2 id="테스트용-server-생성">테스트용 Server 생성 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8%ec%9a%a9-server-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>테스트를 위한 서버는 위에서 생성했던 172.16.10.0/24 IP 대역의 Subnet을 선택하고 Rocky Linux, Ubuntu, CentOS 각각 1대씩 생성했습니다.</p>
+<ul>
+<li>Rocky Linux 8.8</li>
+<li>Ubuntu 22.04</li>
+<li>CentOS 7.8</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-04.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<h2 id="target-group-생성">Target Group 생성 <a href="#target-group-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>VPC</strong>] - [<strong>Load Balancer</strong>] - [<strong>Target Group</strong>]에서 Load Balancer가 바라보게 될 Target Group를 설정합니다.</p>
+<ul>
+<li>여기서는 HTTP 프로토콜과 80 포트를 선택하겠습니다.</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-05.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<ul>
+<li>다음으로 Health Check 설정에서는 HTTP, 80포트, HEAD Method를 선택합니다.</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-06.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<ul>
+<li>마지막으로 Target 즉, 대상이 되는 서버 3대 (lb-test-rocky, lb-test-ubuntu, lb-test-centos)를 선택하고, 적용 Target쪽으로 이동시키는 버튼을 클릭합니다.</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-07.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<ul>
+<li>대상 서버들이 적용 Target으로 설정된 모습입니다. [<strong>다음</strong>] 버튼을 클릭한 후에 전체 설정을 다시 확인하고 생성 완료를 하면 됩니다.</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-08.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<h2 id="load-balancer-생성">Load Balancer 생성 <a href="#load-balancer-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 VPC 환경에서 제공하는 Load Balancer는 애플리케이션 로드밸런서, 네트워크 로드밸런서, 네트워크 프록시 로드밸런서, 인라인 로드밸런서 이렇게 4가지가 있습니다.<br>
 그 중에서 가장 많이 사용하는 HTTP, HTTPS 트래픽을 사용하는 웹 애플리케이션용 Application Load Balancer를 생성하겠습니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_09.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<p>Network는 Public IP, Subnet은 앞에서 생성했던 192.168.1.0/24 대역의 Subnet을 선택합니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_10.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<p>리스너 설정에서 프로토콜은 HTTP, 포트는 80을 선택하고 [추가] 버튼을 클릭합니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_11.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<p>Target Group은 앞에서 생성했던 test-tg을 선택하면, 아래에 해당 Target Group의 설정이 표시됩니다.<br>
-다음으로 전체 설정을 다시 확인하고 최종 생성하기 버튼을 클릭하면 Load Balancer가 생성됩니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_12.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<h2 id="acg-설정">ACG 설정 <a href="#acg-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Load Balancer가 정상 작동하기 위해서는 [Server] - [ACG]에서 [Inbound 규칙]에 Load Balancer용 Subnet 대역인 192.168.1.0/24 대역의 80 포트를 허용포트로 설정해 줍니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_14.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<h2 id="server-웹서버-설정">Server 웹서버 설정 <a href="#server-%ec%9b%b9%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Application Load Balancer를 테스트 하기 위해서는 테스트 Server에 웹서버가 설정되어 있어야 하는데, 네이버 클라우드 VPC 환경에서는 LAMP, LEMP 등의 웹서버가 설정된 이미지를 제공하지 않습니다.<br>
-그래서 기본 OS만 설치된 서버에 Apache 웹서버와 php를 설치하도록 하겠습니다. 설치 작업은 아래와 같이 Ubuntu와 CentOS 각각 스크립트를 만들어서 한번에 설치하는 방법을 사용했는데, 필요에 따라서는 하나씩 별도로 설치하셔도 됩니다.</p>
-<h3 id="ubuntu에-apache-php-설치하기-스크립트">Ubuntu에 Apache, PHP 설치하기 스크립트 <a href="#ubuntu%ec%97%90-apache-php-%ec%84%a4%ec%b9%98%ed%95%98%ea%b8%b0-%ec%8a%a4%ed%81%ac%eb%a6%bd%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Apache와 PHP를 설치하고 기본문서 index.html에 서버의 호스트명을 출력하는 스크립트를 적용합니다.</p>
-<p>사용한 OS는 Ubuntu 16.04 입니다.</p>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="eec075f" class="language-bash ">
-  <code>#!/bin/bash
-
-apt update
-apt install apache2 
-apt install php
-apt install libapache2-mod-php
-
-systemctl start apache2
-
-cd /var/www/html
-echo &#34;&lt;?php&#34; &gt; index.html
-echo &#34;echo \&#34;Your server name is \&#34;.(gethostname()).\&#34;&lt;br&gt;\&#34;;&#34; &gt;&gt; index.html
-echo &#34;?&gt;&#34; &gt;&gt; index.html
-
-echo AddType application/x-httpd-php .php .php3 .php4 .php5 .html .htm .inc &gt;&gt; phpadd
-cat phpadd &gt;&gt; /etc/apache2/apache2.conf
-
-systemctl restart apache2
-systemctl enable apache2
-systemctl status apache2</code>
-  </pre>
-  </div>
-<h3 id="centos에-apache-php-설치하기-스크립트">CentOS에 Apache, PHP 설치하기 스크립트 <a href="#centos%ec%97%90-apache-php-%ec%84%a4%ec%b9%98%ed%95%98%ea%b8%b0-%ec%8a%a4%ed%81%ac%eb%a6%bd%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>사용한 OS는 CentOS 7.3 입니다.</p>
-
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-09.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<ul>
+<li>Network는 Public IP, Subnet은 앞에서 생성했던 172.16.11.0/24 대역의 Subnet을 선택합니다.</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-10.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<ul>
+<li>리스너 설정에서 프로토콜은 HTTP, 포트는 80을 선택하고 [추가] 버튼을 클릭합니다.</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-11.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<ul>
+<li>Target Group은 앞에서 생성했던 lb-test-tg을 선택하면, 아래에 해당 Target Group의 설정이 표시됩니다.<br>
+다음으로 전체 설정을 다시 확인하고 최종 생성하기 버튼을 클릭하면 Load Balancer가 생성됩니다.</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-12.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<h2 id="acg-설정">ACG 설정 <a href="#acg-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Load Balancer가 정상 작동하기 위해서는 [Server] - [ACG]에서 [Inbound 규칙]에 Load Balancer용 Subnet 대역인 172.16.11.0/24 대역의 80 포트를 허용포트로 설정해야 합니다.</p>
+<h3 id="acg-확인">ACG 확인 <a href="#acg-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>우선 서버들에 적용된 ACG를 확인하기 위해 서버 상세 정보에서 [<strong>ACG 수정</strong>] 버튼을 클릭합니다.</p>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-13.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<ul>
+<li>[ACG 수정] 팝업에서 [<strong>적용 ACG</strong>]에 적용된 ACG 이름을 확인합니다.</li>
+</ul>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-14.png" width="982" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<h3 id="inbound-규칙-추가">Inbound 규칙 추가 <a href="#inbound-%ea%b7%9c%ec%b9%99-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 확인한 ACG를 찾아서 [<strong>Inbound 규칙</strong>]에 Load Balancer용 Subnet 대역인 172.16.11.0/24 대역의 80 포트를 허용포트로 추가했습니다.</p>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-15.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<h2 id="server-웹서버-설정">Server 웹서버 설정 <a href="#server-%ec%9b%b9%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Application Load Balancer를 테스트 하기 위해서는 테스트 Server에 웹서버가 설정되어 있어야 하는데, 여기서는 Apache 웹서버를 설치하고 기본문서 index.html에 각 서버를 나타내는 텍스트를 적용합니다.</p>
+<h3 id="rocky-linux">Rocky Linux <a href="#rocky-linux" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
   
@@ -2637,42 +2636,80 @@ systemctl status apache2</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="4edf538" class="language-bash ">
-  <code>#!/bin/bash
-
-yum -y install httpd php
+  <pre id="3ced224" class="language-bash ">
+  <code>dnf -y install httpd 
 
 systemctl start httpd
 
 cd /var/www/html
-echo &#34;&lt;?php&#34; &gt; index.html
-echo &#34;echo \&#34;Your server name is \&#34;.(gethostname()).\&#34;&lt;br&gt;\&#34;;&#34; &gt;&gt; index.html
-echo &#34;?&gt;&#34; &gt;&gt; index.html
+echo &#34;&lt;center&gt;&lt;h1&gt;Load Balancer Test Server - Rocky Linux&lt;/h1&gt;&lt;/center&gt;&#34; &gt; index.html</code>
+  </pre>
+  </div>
+<h3 id="ubuntu">Ubuntu <a href="#ubuntu" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
-echo AddType application/x-httpd-php .php .php3 .php4 .php5 .html .htm .inc &gt;&gt; phpadd
-cat phpadd &gt;&gt; /etc/httpd/conf/httpd.conf
 
-systemctl restart httpd
-systemctl enable httpd
-systemctl status httpd</code>
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="565e123" class="language-bash ">
+  <code>apt -y install apache2 
+
+systemctl start apache2
+
+cd /var/www/html
+echo &#34;&lt;center&gt;&lt;h1&gt;Load Balancer Test Server - Ubuntu&lt;/h1&gt;&lt;/center&gt;&#34; &gt; index.html</code>
+  </pre>
+  </div>
+<h3 id="centos">CentOS <a href="#centos" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="9bae29e" class="language-bash ">
+  <code>yum -y install httpd
+
+systemctl start httpd
+
+cd /var/www/html
+echo &#34;&lt;center&gt;&lt;h1&gt;Load Balancer Test Server - CentOS&lt;/h1&gt;&lt;/center&gt;&#34; &gt; index.html</code>
   </pre>
   </div>
 <h2 id="접속-테스트">접속 테스트 <a href="#%ec%a0%91%ec%86%8d-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>앞에서 생성했던 Load Balancer 정보에서 접속 정보용 주소를 확인하고 복사합니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_16.jpg" width="770" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<p>복사한 Load Balancer 주소를 웹브라우저에 입력하고 계속 새로 고침을 해보면 아래와 같이 CentOS 서버와 Ubuntu에 접속될 때 마다 해당 서버의 호스트명이 출력되면서 Load Balancer가 정상 작동하는 것을 확인할 수 있습니다.</p>
-<img src="/images/networking/ncp_networking_load_balancer_application_15-1.jpg" width="560" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
-<img src="/images/networking/ncp_networking_load_balancer_application_15-2.jpg" width="560" alt="Ncloud VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-16.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<p>복사한 Load Balancer 주소를 웹브라우저에 입력하고 계속 새로 고침을 해보면 아래와 같이 Rocky Linux, Ubuntu, CentOS 서버에 접속될 때 마다 해당 서버의 텍스트가 출력되면서 Load Balancer가 정상 작동하는 것을 확인할 수 있습니다.</p>
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-17.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-18.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
+<img src="/images/networking/ncloud-networking-load-balancer-application-lb-guide-19.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 Application Load Balancer 생성하기 가이드" class="docimage">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ncloud Application Load Balancer 가이드<br>
 <a href="https://guide.ncloud-docs.com/docs/loadbalancer-application-vpc" rel="external" target="_blank">https://guide.ncloud-docs.com/docs/loadbalancer-application-vpc<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
 </li>
 <li>
-<p>Ncloud Target Group 가이드<br>
-<a href="https://guide.ncloud-docs.com/docs/loadbalancer-targetscreen-vpc" rel="external" target="_blank">https://guide.ncloud-docs.com/docs/loadbalancer-targetscreen-vpc<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
+<p>Ncloud Load Balancer Target Group 가이드<br>
+<a href="https://guide.ncloud-docs.com/docs/loadbalancer-targetgroup-vpc" rel="external" target="_blank">https://guide.ncloud-docs.com/docs/loadbalancer-targetgroup-vpc<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
 </li>
 </ol>
-<h2 id="문서-업데이트-내역">문서 업데이트 내역 <a href="#%eb%ac%b8%ec%84%9c-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%eb%82%b4%ec%97%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><table class="simple_table small_font col-sm-5 ">
+<h2 id="문서-업데이트-내역">문서 업데이트 내역 <a href="#%eb%ac%b8%ec%84%9c-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%eb%82%b4%ec%97%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><table class="simple_table small_font col-sm-6 ">
     <thead>
       <tr>
         <th>날짜</th>   
@@ -2683,6 +2720,10 @@ systemctl status httpd</code>
         <tr>
           <td>2022-08-04</td>        
           <td>문서 최초 생성</td>          
+        </tr>
+        <tr>
+          <td>2024-05-22</td>        
+          <td>로드밸런서 생성 시 Subnet과 네트워크 관련 설정 변경 내용 적용</td>          
         </tr>
     </tbody>
 </table>  
@@ -2749,7 +2790,7 @@ systemctl status httpd</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-05-17
+                        Site last modified: 2024-05-22
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">
