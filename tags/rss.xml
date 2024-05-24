@@ -6,8 +6,14 @@
     <description>Recent content in Tags on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 22 May 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 24 May 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Acg</title>
+      <link>https://docs.3rdeyesys.com/tags/acg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/acg/</guid>
+      <description></description>
+    </item><item>
       <title>Load Balancer</title>
       <link>https://docs.3rdeyesys.com/tags/load-balancer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -60,12 +66,6 @@
       <link>https://docs.3rdeyesys.com/tags/analytics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://docs.3rdeyesys.com/tags/analytics/</guid>
-      <description></description>
-    </item><item>
-      <title>Log</title>
-      <link>https://docs.3rdeyesys.com/tags/log/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/log/</guid>
       <description></description>
     </item>
   </channel>

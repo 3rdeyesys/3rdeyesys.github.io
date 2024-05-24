@@ -6,8 +6,14 @@
     <description>Recent content on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 22 May 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 24 May 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>VPC 환경 Load Balancer 상품군의 종류와 변화</title>
+      <link>https://docs.3rdeyesys.com/docs/networking/loadbalancer/vpc-loadbalancer-type/</link>
+      <pubDate>Fri, 24 May 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/networking/loadbalancer/vpc-loadbalancer-type/</guid>
+      <description>개요 linkLoad Balancer는 수신 트래픽을 다수의 서버로 분산시키는 서비스로서, 수신 트래픽을 등록된 멤버 서버로 분산시켜 가용성을 높이고 시스템 가동률을 조절하는 역할을 수행합니다.&#xA;VPC 플랫폼에서는 Network Load Balancer / Application Load Balancer / Network Proxy Load Balancer / Inline Load Balancer 가 제공되어 서비스에 적합한 로드밸런서를 선택할 수 있습니다.&#xA;종류 link Application Load Balancer&#xA;HTTP 및 HTTPS 트래픽을 사용하는 웹 애플리케이션을 위한 유연한 기능을 제공&#xA;Network Load Balancer&#xA;DSR(Direct Server Return) 구조의 고성능, 대규모 네트워크 연결에 적합한 로드밸런서로 고정 IP를 제공</description>
+    </item><item>
       <title>VPC 환경에서 Application Load Balancer 생성하기</title>
       <link>https://docs.3rdeyesys.com/docs/networking/loadbalancer/vpc-application-loadbalancer-guide/</link>
       <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
@@ -61,12 +67,6 @@
       <pubDate>Wed, 03 May 2023 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/vpc/server-create/</guid>
       <description>개요 linkNcloud (네이버 클라우드) VPC환경에서 서버를 생성하는 순서를 정리해보겠습니다.&#xA;얼마전 업데이트에서 서버 생성 콘솔 화면에 큰 변화가 생겼기에 그 내용까지 함께 포함했습니다.&#xA;서버 생성 순서 linkVPC 환경에서 서버를 생성하려면 Subnet 설정 등 사전에 미리 설정해야 하는 것과 서버 생성 후에 설정해야 하는 것들이 있는데, 순서대로 정리하고 아래쪽에서 차례대로 살펴보겠습니다.&#xA;VPC 설정 Subnet 설정 서버 생성&#xA;3-1. 서버 인증키 설정 ACG (방화벽) 설정 VPC 설정 linkVPC (Virtual Private Cloud) 즉, 클라우드 상에서 논리적으로 격리된 고객 전용 네트워크 공간을 먼저 생성하고 해당 공간에 서버를 생성하게 됩니다.</description>
-    </item><item>
-      <title>Ncloud Security Monitoring WAF 서비스 요금 정보</title>
-      <link>https://docs.3rdeyesys.com/docs/security/security-monitoring/waf-price-info/</link>
-      <pubDate>Mon, 19 Feb 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/security/security-monitoring/waf-price-info/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) Security Monitoring 서비스는 무료인 Basic 서비스와 유료인 Managed 서비스가 있고, 그 중에서 유료 서비스인 Managed 서비스는 IDS, Anti-DOS, WAF, Anti-Virus, IPS 등 4가지 서비스를 모두 제공하고 있는데 그 중에서 WAF(Web Application Firewall) 서비스의 이용 요금 구성과 신청 시 주의 사항에 대해 정리해보겠습니다.&#xA;구성 linkWAF 서비스 장비는 [WAF VM + WAF LB]로 구성되어 있습니다. 따라서 사용 요금도 WAF VM 요금과 WAF LB 요금이 별도로 청구됩니다.&#xA;요금 link&#xD;상품명&#xD;과금 구간 (Mbps)&#xD;가격 (월 요금, VAT별도)&#xD;비고&#xD;Multi</description>
     </item>
   </channel>
 </rss>
