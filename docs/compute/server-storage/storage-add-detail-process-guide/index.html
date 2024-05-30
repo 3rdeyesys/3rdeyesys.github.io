@@ -2558,14 +2558,14 @@
 		
 
 		<a class="nav-link  active"
-		   id="cebfdaTab" data-bs-toggle="tab" data-bs-target="#cebfda"
-		   type="button" role="tab" aria-controls="cebfda" aria-selected="true">XEN 하이퍼바이저</a>
+		   id="cfbaedTab" data-bs-toggle="tab" data-bs-target="#cfbaed"
+		   type="button" role="tab" aria-controls="cfbaed" aria-selected="true">XEN 하이퍼바이저</a>
 
 		
 
 		<a class="nav-link "
-		   id="efbadcTab" data-bs-toggle="tab" data-bs-target="#efbadc"
-		   type="button" role="tab" aria-controls="efbadc" aria-selected="true">KVM 하이퍼바이저</a>
+		   id="decafbTab" data-bs-toggle="tab" data-bs-target="#decafb"
+		   type="button" role="tab" aria-controls="decafb" aria-selected="true">KVM 하이퍼바이저</a>
 
 		
 
@@ -2581,7 +2581,7 @@
 
 
 
-<div class="tab-pane fade show active" id="cebfda" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="cfbaed" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2598,26 +2598,26 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="699cea8" class="language-bash ">
-  <code> fdisk -l
+  <pre id="eac2ca6" class="language-bash ">
+  <code>fdisk -l
 
- fdisk /dev/xvdb
+fdisk /dev/xvdb
 
- mkfs.xfs /dev/xvdb1
+mkfs.xfs /dev/xvdb1
 
-  - CentOS 5.x: mkfs.ext3 /dev/xvdb1
-  - CentOS 6.x: mkfs.ext4 /dev/xvdb1
-  - CentOS 7.x: mkfs.xfs /dev/xvdb1
-  - Rocky Linux: mkfs.xfs /dev/xvdb1
-  - Ubuntu : mkfs.ext4 /dev/xvdb1
+- CentOS 5.x: mkfs.ext3 /dev/xvdb1
+- CentOS 6.x: mkfs.ext4 /dev/xvdb1
+- CentOS 7.x: mkfs.xfs /dev/xvdb1
+- Rocky Linux: mkfs.xfs /dev/xvdb1
+- Ubuntu : mkfs.ext4 /dev/xvdb1
 
- mkdir /mnt/data
+mkdir /mnt/data
 
- mount /dev/xvdb1 /mnt/data
+mount /dev/xvdb1 /mnt/data
 
- df -hT
+df -hT
 
- vim /etc/fstab
+vim /etc/fstab
 ### =============================
 UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
 
@@ -2635,7 +2635,7 @@ UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
 
 
 
-<div class="tab-pane fade" id="efbadc" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="decafb" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2652,31 +2652,31 @@ UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
   
 
   <div class="prism-codeblock ">
-  <pre id="9fabd84" class="language-bash ">
-  <code> fdisk -l
+  <pre id="e33aee4" class="language-bash ">
+  <code>fdisk -l
 
- fdisk /dev/vdb
+fdisk /dev/vdb
 
- mkfs.xfs /dev/vdb1
+mkfs.xfs /dev/vdb1
 
-  - CentOS 5.x: mkfs.ext3 /dev/vdb1
-  - CentOS 6.x: mkfs.ext4 /dev/vdb1
-  - CentOS 7.x: mkfs.xfs /dev/vdb1
-  - Rocky Linux: mkfs.xfs /dev/vdb1
-  - Ubuntu : mkfs.ext4 /dev/vdb1
+- CentOS 5.x: mkfs.ext3 /dev/vdb1
+- CentOS 6.x: mkfs.ext4 /dev/vdb1
+- CentOS 7.x: mkfs.xfs /dev/vdb1
+- Rocky Linux: mkfs.xfs /dev/vdb1
+- Ubuntu : mkfs.ext4 /dev/vdb1
 
- mkdir /mnt/data
+mkdir /mnt/data
 
- mount /dev/vdb1 /mnt/data
+mount /dev/vdb1 /mnt/data
 
- df -hT
+df -hT
 
- vim /etc/fstab
+vim /etc/fstab
 ### =============================
 UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
 
 # 또는
-/dev/xvdb1 /mnt/data ext4 defaults 1 2
+/dev/vdb1 /mnt/data xfs defaults 1 2
 ### =============================</code>
   </pre>
   </div>
@@ -2875,8 +2875,8 @@ UUID=1fd5s61f5d-*** 중략 ***-f84ew13 /mnt/data xfs defaults 1 2
   
 
   <div class="prism-codeblock ">
-  <pre id="43bc2fe" class="language-bash ">
-  <code> vi /etc/fstab</code>
+  <pre id="2f67e88" class="language-bash ">
+  <code> vim /etc/fstab</code>
   </pre>
   </div>
 <img src="/images/compute/ncloud-compute-server-storage-add-detail-process-15.png" width="845" alt="Ncloud(네이버 클라우드) Linux 서버 스토리지(디스크) 추가 상세 가이드" class="docimage">
@@ -3047,7 +3047,7 @@ UUID=29f58417-*** 중략 ***38d0f /mnt/data xfs defaults 1 2
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-05-24
+                        Site last modified: 2024-05-30
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

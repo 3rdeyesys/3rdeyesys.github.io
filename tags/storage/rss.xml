@@ -6,7 +6,7 @@
     <description>Recent content in Storage on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/storage/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Linux 서버 스토리지 추가 생성 기본 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-add-basic-guide/</link>
@@ -22,15 +22,15 @@
     </item><item>
       <title>Ncloud 블록 스토리지(디스크) 크기 확장하는 방법 | Linux</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-extend-guide-linux/</link>
-      <pubDate>Fri, 11 Nov 2022 00:00:00 +0900</pubDate>
+      <pubDate>Thu, 30 May 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-extend-guide-linux/</guid>
-      <description>개요 linkNcloud(네이버 클라우드) 리눅스 환경 서버의 블록스토리지 볼륨 크기를 확장하고 적용하는 방법을 정리해보겠습니다.&#xA;테스트 환경 link CentOS 7.8 Ubuntu 20.04 추가 블록스토리지 10GB OS 영역에서 사용하는 50G 블록스토리지 외에 아래와 같이 추가로 할당 된 10G의 블록스토리지의 크기를 변경하고 적용해보겠습니다.&#xA;추가 블록 스토리지 할당 방법에 대한 가이드는 아래의 링크를 참조 바랍니다.&#xA;Linux 스토리지(디스크) 추가 상세 가이드 스토리지 스냅샷 백업 link아래와 같이 [Console] - [Server] - [Storage]에서 크기를 변경할 스토리지를 선택하고 [스토리지 설정] - [스냅샷 생성] 메뉴를 선택합니다.</description>
+      <description>개요 linkNcloud(네이버 클라우드) 리눅스 환경 서버의 블록스토리지 볼륨 크기를 확장하고 적용하는 방법을 정리해보겠습니다.&#xA;테스트 환경 link Rocky Linux 8.8 (KVM 타입) Ubuntu 22.04 (KVM 타입) CentOS 7.8 (KVM 타입) 추가 블록스토리지 10GB OS 영역에서 사용하는 10G 블록스토리지 외에 아래와 같이 추가로 할당 된 10G의 블록스토리지의 크기를 변경하고 적용해보겠습니다.&#xA;추가 블록 스토리지 할당 방법에 대한 가이드는 아래의 링크를 참조 바랍니다.&#xA;⁃ Linux 스토리지(디스크) 추가 상세 가이드&#xD;스토리지 스냅샷 백업 link아래와 같이 [Console] - [Server] - [Storage]에서 크기를 변경할 스토리지를 선택하고 [스토리지 설정] - [스냅샷 생성] 메뉴를 선택합니다.</description>
     </item><item>
       <title>Ncloud 블록 스토리지(디스크) LVM 구성하기 - Linux</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-lvm-create/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-lvm-create/</guid>
-      <description>개요 link네이버 클라우드 서버는 하나의 서버당 로컬 디스크 즉, 블록 스토리지(Block Storage)를 OS가 설치되는 기본 스토리지 1개 이외에 15개를 추가할 수 있으며, 각 스토리지 용량은 10GB ~2,000GB 까지 가능합니다.&#xA;그리고, 2,000GB 이상을 사용해야 할 경우는 NAS 장비를 사용하거나 Object Storage를 활용하는 경우가 많지만, 상황에 따라서는 2,000GB를 초과하는 용량의 블록 스토리지를 사용해야 하는 경우도 있습니다.&#xA;이럴때 사용하는 방법이 **LVM (Logical Volume Manager)**를 사용하여 여러 개의 스토리지를 합쳐서 대용량으로 사용하거나 합쳐진 대용량을 다시 필요한 용량으로 나누어서 사용하는 방법입니다.</description>
+      <description>개요 link네이버 클라우드 서버는 하나의 서버당 로컬 디스크 즉, 블록 스토리지(Block Storage)를 OS가 설치되는 기본 스토리지 1개 이외에 15개를 추가할 수 있으며, 각 스토리지 용량은 10GB ~2,000GB 까지 가능합니다.&#xA;그리고, 2,000GB 이상을 사용해야 할 경우는 NAS 장비를 사용하거나 Object Storage를 활용하는 경우가 많지만, 상황에 따라서는 2,000GB를 초과하는 용량의 블록 스토리지를 사용해야 하는 경우도 있습니다.&#xA;이럴때 사용하는 방법이 LVM (Logical Volume Manager) 을 사용하여 여러 개의 스토리지를 합쳐서 대용량으로 사용하거나 합쳐진 대용량을 다시 필요한 용량으로 나누어서 사용하는 방법입니다.</description>
     </item><item>
       <title>Ncloud Windows 서버 스토리지(디스크) 추가 상세 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-add-detail-process-guide-windows/</link>

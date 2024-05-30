@@ -2527,7 +2527,7 @@
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 서버는 하나의 서버당 로컬 디스크 즉, 블록 스토리지(Block Storage)를 OS가 설치되는 기본 스토리지 1개 이외에 15개를 추가할 수 있으며, 각 스토리지 용량은 10GB ~2,000GB 까지 가능합니다.<br>
 그리고, 2,000GB 이상을 사용해야 할 경우는 NAS 장비를 사용하거나 Object Storage를 활용하는 경우가 많지만, 상황에 따라서는 2,000GB를 초과하는 용량의 블록 스토리지를 사용해야 하는 경우도 있습니다.</p>
-<p>이럴때 사용하는 방법이 **LVM (Logical Volume Manager)**를 사용하여 여러 개의 스토리지를 합쳐서 대용량으로 사용하거나 합쳐진 대용량을 다시 필요한 용량으로 나누어서 사용하는 방법입니다.</p>
+<p>이럴때 사용하는 방법이 <strong>LVM (Logical Volume Manager)</strong> 을 사용하여 여러 개의 스토리지를 합쳐서 대용량으로 사용하거나 합쳐진 대용량을 다시 필요한 용량으로 나누어서 사용하는 방법입니다.</p>
 <p>그래서 이번에는 리눅스 환경에서 LVM으로 대용량 스토리지를 생성하는 방법을 정리해보겠습니다.</p>
 <h2 id="스토리지-생성">스토리지 생성 <a href="#%ec%8a%a4%ed%86%a0%eb%a6%ac%ec%a7%80-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>2,000GB 이상의 용량을 필요로 할 때에 대한 내용이지만, 테스트를 위해 10GB 스토리지 2개를 생성하겠습니다.</p>
 <img src="/images/compute/ncp_server_storage_lvm_create_01.jpg" width="770" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
@@ -2757,14 +2757,15 @@ quit</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="23c8324" class="language-bash ">
+  <pre id="9f32a80" class="language-bash ">
   <code>
  mkfs.ext4 /dev/VG01/LV01
 
+- Rocky Linux : mkfs.xfs /dev/VG01/LV01
+- Ubuntu : mkfs.ext4 /dev/VG01/LV01
 - CentOS 5.x: mkfs.ext3 /dev/VG01/LV01
 - CentOS 6.x: mkfs.ext4 /dev/VG01/LV01
-- CentOS 7.x: mkfs.xfs /dev/VG01/LV01
-- Ubuntu : mkfs.ext4 /dev/VG01/LV01</code>
+- CentOS 7.x: mkfs.xfs /dev/VG01/LV01</code>
   </pre>
   </div>
 <img src="/images/compute/ncp_server_storage_lvm_create_12.jpg" width="700" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
@@ -2984,7 +2985,7 @@ quit</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-05-24
+                        Site last modified: 2024-05-30
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">
