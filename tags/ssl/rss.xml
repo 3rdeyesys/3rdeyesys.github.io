@@ -30,7 +30,7 @@
       <link>https://docs.3rdeyesys.com/docs/compute/nginx/https-ssl-setting-guide-centos/</link>
       <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/nginx/https-ssl-setting-guide-centos/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) CentOS 서버에서 NginX 최신 버전에 SSL 인증서를 설정하고, http로 접속 시에 https로 리다이렉트하는 방법에 대한 내용을 정리해보겠습니다.&#xA;report&#xD;CentOS 지원 종료: 2024년 06월 30일 기준으로 CentOS 7에 대한 지원이 종료됩니다. 이후에는 보안, 기능 업데이트가 없으므로 가능하면 [Rocky Linux], [Ubuntu]를 사용하는 것이 좋습니다. ⁃ CentOS EOF(End Of Lift) 일정 안내 ⁃ Ncloud(네이버 클라우드) CentOS 7 서버이미지 판매종료 안내 서버 환경 link&#xD;⁃ OS: CentOS 7.8 ⁃ NginX: NginX 1.</description>
+      <description>개요 linkNcloud (네이버 클라우드) CentOS 서버에서 NginX 최신 버전에 SSL 인증서를 설정하고, http로 접속 시에 https로 리다이렉트하는 방법에 대한 내용을 정리해보겠습니다.&#xA;report&#xD;CentOS 지원 종료: 2024년 06월 30일 기준으로 CentOS 7에 대한 지원이 종료됩니다. 이후에는 보안, 기능 업데이트가 없으므로 가능하면 [Rocky Linux], [Ubuntu]를 사용하는 것이 좋습니다. ⁃ CentOS EOF(End Of Life) 일정 안내 ⁃ Ncloud(네이버 클라우드) CentOS 7 서버이미지 판매종료 안내 서버 환경 link&#xD;⁃ OS: CentOS 7.8 ⁃ NginX: NginX 1.</description>
     </item><item>
       <title>로드밸런서(Load Balancer) 인증서 교체하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/networking/loadbalancer/lb-certificate-change/</link>

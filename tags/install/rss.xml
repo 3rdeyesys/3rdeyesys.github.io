@@ -24,7 +24,7 @@
       <link>https://docs.3rdeyesys.com/docs/compute/nginx/install-setting-guide-centos/</link>
       <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/nginx/install-setting-guide-centos/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) CentOS 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.&#xA;report&#xD;CentOS 지원 종료: 2024년 06월 30일 기준으로 CentOS 7에 대한 지원이 종료됩니다. 이후에는 보안, 기능 업데이트가 없으므로 가능하면 [Rocky Linux], [Ubuntu]를 사용하는 것이 좋습니다. ⁃ CentOS EOF(End Of Lift) 일정 안내 ⁃ Ncloud(네이버 클라우드) CentOS 7 서버이미지 판매종료 안내 서버 환경 link&#xD;⁃ OS: CentOS 7.8 ⁃ NginX: NginX 1.21.5&#xD;yum 유틸리티 설치 linkyum으로 NginX를 설치하기 전에 yum-utils를 먼저 설치합니다.</description>
+      <description>개요 linkNcloud (네이버 클라우드) CentOS 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.&#xA;report&#xD;CentOS 지원 종료: 2024년 06월 30일 기준으로 CentOS 7에 대한 지원이 종료됩니다. 이후에는 보안, 기능 업데이트가 없으므로 가능하면 [Rocky Linux], [Ubuntu]를 사용하는 것이 좋습니다. ⁃ CentOS EOF(End Of Life) 일정 안내 ⁃ Ncloud(네이버 클라우드) CentOS 7 서버이미지 판매종료 안내 서버 환경 link&#xD;⁃ OS: CentOS 7.8 ⁃ NginX: NginX 1.21.5&#xD;yum 유틸리티 설치 linkyum으로 NginX를 설치하기 전에 yum-utils를 먼저 설치합니다.</description>
     </item><item>
       <title>MySQL 5.7 설치하는 방법 | Rocky Linux</title>
       <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mysql-57-install-on-rocky-linux/</link>
