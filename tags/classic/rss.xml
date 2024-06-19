@@ -6,7 +6,7 @@
     <description>Recent content in Classic on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/classic/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Classic 환경 서버 접속 가이드(Linux) - 공인IP 없을 때</title>
       <link>https://docs.3rdeyesys.com/docs/compute/classic/server-access-linux/no-public-ip/</link>
@@ -52,9 +52,9 @@
     </item><item>
       <title>Ncloud LAMP 기본 명령어와 환경 설정 파일 위치 | CentOS</title>
       <link>https://docs.3rdeyesys.com/docs/compute/lamp/config-centos/</link>
-      <pubDate>Fri, 13 Nov 2020 00:00:00 +0900</pubDate>
+      <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/lamp/config-centos/</guid>
-      <description>Apache 시작, 중지, 재시작 linkApache 시작, 중지, 재시작 명령어는 CentOS 6에서 사용하던 것이 CentOS 7이 되면서 변경되었습니다. CentOS 6.x 이하에서는 service {서비스명} [stop|start|restart] 순서였다면 CentOS 7.X 에서는 systemctl [stop|start|restart] {서비스명} 의 순서로 바뀌었습니다. 내용을 정리하면 다음과 같습니다.&#xA;CentOS 6.x 이하 link&#xD;- 중지 : service httpd stop&#xD;- 시작 : service httpd start&#xD;- 재시작 : service httpd restart&#xD;CentOS 7.x link&#xD;- 중지 : systemctl stop httpd&#xD;- 시작 : systemctl start httpd&#xD;- 재시작 : systemctl restart httpd&#xD;mysql 시작, 중지, 재시작 linkmysql도 Apache와 마찬가지 방식으로 CentOS 6 이하와 CentOS 7에서 사용하는 명령어가 변경되었습니다.</description>
+      <description>Apache 시작, 중지, 재시작 linkApache 시작, 중지, 재시작 명령어는 CentOS 6에서 사용하던 것이 CentOS 7이 되면서 변경되었습니다. CentOS 6.x 이하에서는 service {서비스명} [stop|start|restart] 순서였다면 CentOS 7.X 에서는 systemctl [stop|start|restart] {서비스명} 의 순서로 바뀌었습니다. 내용을 정리하면 다음과 같습니다.&#xA;report&#xD;CentOS 지원 종료: 2024년 06월 30일 기준으로 CentOS 7에 대한 지원이 종료됩니다. 이후에는 보안, 기능 업데이트가 없으므로 가능하면 [Rocky Linux], [Ubuntu]를 사용하는 것이 좋습니다. ⁃ CentOS EOF(End Of Lift) 일정 안내 ⁃ Ncloud(네이버 클라우드) CentOS 7 서버이미지 판매종료 안내 CentOS 6.</description>
     </item><item>
       <title>Classic 환경 Windows 서버 이미지를 VPC 환경으로 복제하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/compute/classic/windows-server-image-copy-to-vpc/</link>

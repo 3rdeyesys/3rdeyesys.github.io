@@ -6,48 +6,54 @@
     <description>Recent content in Tags on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 17 Jun 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Apache</title>
+      <link>https://docs.3rdeyesys.com/tags/apache/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/apache/</guid>
+      <description></description>
+    </item><item>
+      <title>Centos</title>
+      <link>https://docs.3rdeyesys.com/tags/centos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/centos/</guid>
+      <description></description>
+    </item><item>
+      <title>Classic</title>
+      <link>https://docs.3rdeyesys.com/tags/classic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/classic/</guid>
+      <description></description>
+    </item><item>
+      <title>Https</title>
+      <link>https://docs.3rdeyesys.com/tags/https/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/https/</guid>
+      <description></description>
+    </item><item>
+      <title>Install</title>
+      <link>https://docs.3rdeyesys.com/tags/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/install/</guid>
+      <description></description>
+    </item><item>
+      <title>Ip</title>
+      <link>https://docs.3rdeyesys.com/tags/ip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/ip/</guid>
+      <description></description>
+    </item><item>
+      <title>Lamp</title>
+      <link>https://docs.3rdeyesys.com/tags/lamp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/lamp/</guid>
+      <description></description>
+    </item><item>
       <title>Linux</title>
       <link>https://docs.3rdeyesys.com/tags/linux/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://docs.3rdeyesys.com/tags/linux/</guid>
-      <description></description>
-    </item><item>
-      <title>Nginx</title>
-      <link>https://docs.3rdeyesys.com/tags/nginx/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/nginx/</guid>
-      <description></description>
-    </item><item>
-      <title>Php</title>
-      <link>https://docs.3rdeyesys.com/tags/php/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/php/</guid>
-      <description></description>
-    </item><item>
-      <title>Rocky Linux</title>
-      <link>https://docs.3rdeyesys.com/tags/rocky-linux/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/rocky-linux/</guid>
-      <description></description>
-    </item><item>
-      <title>Server</title>
-      <link>https://docs.3rdeyesys.com/tags/server/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/server/</guid>
-      <description></description>
-    </item><item>
-      <title>Storage</title>
-      <link>https://docs.3rdeyesys.com/tags/storage/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/storage/</guid>
-      <description></description>
-    </item><item>
-      <title>Acg</title>
-      <link>https://docs.3rdeyesys.com/tags/acg/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/acg/</guid>
       <description></description>
     </item><item>
       <title>Load Balancer</title>
@@ -56,16 +62,10 @@
       <guid>https://docs.3rdeyesys.com/tags/load-balancer/</guid>
       <description></description>
     </item><item>
-      <title>Vpc</title>
-      <link>https://docs.3rdeyesys.com/tags/vpc/</link>
+      <title>Mariadb</title>
+      <link>https://docs.3rdeyesys.com/tags/mariadb/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/vpc/</guid>
-      <description></description>
-    </item><item>
-      <title>Nas</title>
-      <link>https://docs.3rdeyesys.com/tags/nas/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/nas/</guid>
+      <guid>https://docs.3rdeyesys.com/tags/mariadb/</guid>
       <description></description>
     </item>
   </channel>
