@@ -38,7 +38,8 @@
 <meta property="og:title" content="MariaDB Multi Source Replication 구성 가이드" />
 <meta property="og:description" content="Ncloud(네이버 클라우드)에서 MariaDB Multi Source Replication 구성하는 방법에 대한 상세 가이드입니다" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://docs.3rdeyesys.com/docs/database/mysql-mariadb/replication/mariadb-multi-source-replication/" />
+<meta property="og:url" content="https://docs.3rdeyesys.com/docs/database/mysql-mariadb/replication/mariadb-multi-source-replication/" />  
+
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/database/ncloud-database-mariadb-multi-source-replication-guide-01.png" />
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드)에서 MariaDB Multi Source Replication 구성하는 방법에 대한 상세 가이드" />
 <meta property="article:section" content="docs" />
@@ -1139,6 +1140,12 @@
                                                                                 
                                                                                 
                                                                                     <li class=" "><a class="sidebar-nested-link" href="/docs/database/mysql-mariadb/install/mysql-datadir-change-install-guide/">datadir 위치 변경 설치</a></li>
+                                                                                
+                                                                            
+                                                                                
+                                                                                
+                                                                                
+                                                                                    <li class=" "><a class="sidebar-nested-link" href="/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/">MariaDB 10.11 설치</a></li>
                                                                                 
                                                                             
                                                                         </ul>
@@ -2644,14 +2651,14 @@ cd /data</code>
 		
 
 		<a class="nav-link  active"
-		   id="cadbefTab" data-bs-toggle="tab" data-bs-target="#cadbef"
-		   type="button" role="tab" aria-controls="cadbef" aria-selected="true">MySQL 호환</a>
+		   id="decabfTab" data-bs-toggle="tab" data-bs-target="#decabf"
+		   type="button" role="tab" aria-controls="decabf" aria-selected="true">MySQL 호환</a>
 
 		
 
 		<a class="nav-link "
-		   id="fcaedbTab" data-bs-toggle="tab" data-bs-target="#fcaedb"
-		   type="button" role="tab" aria-controls="fcaedb" aria-selected="true">MariaDB 전용</a>
+		   id="beadfcTab" data-bs-toggle="tab" data-bs-target="#beadfc"
+		   type="button" role="tab" aria-controls="beadfc" aria-selected="true">MariaDB 전용</a>
 
 		
 
@@ -2667,7 +2674,7 @@ cd /data</code>
 
 
 
-<div class="tab-pane fade show active" id="cadbef" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="decabf" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2705,7 +2712,7 @@ systemctl restart mariadb</code>
 
 
 
-<div class="tab-pane fade" id="fcaedb" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="beadfc" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2858,14 +2865,14 @@ scp test1.sql root@10.0.0.8:/data</code>
 		
 
 		<a class="nav-link  active"
-		   id="eacdbfTab" data-bs-toggle="tab" data-bs-target="#eacdbf"
-		   type="button" role="tab" aria-controls="eacdbf" aria-selected="true">MySQL 호환</a>
+		   id="afedcbTab" data-bs-toggle="tab" data-bs-target="#afedcb"
+		   type="button" role="tab" aria-controls="afedcb" aria-selected="true">MySQL 호환</a>
 
 		
 
 		<a class="nav-link "
-		   id="edfbcaTab" data-bs-toggle="tab" data-bs-target="#edfbca"
-		   type="button" role="tab" aria-controls="edfbca" aria-selected="true">MariaDB 전용</a>
+		   id="cbdeafTab" data-bs-toggle="tab" data-bs-target="#cbdeaf"
+		   type="button" role="tab" aria-controls="cbdeaf" aria-selected="true">MariaDB 전용</a>
 
 		
 
@@ -2881,7 +2888,7 @@ scp test1.sql root@10.0.0.8:/data</code>
 
 
 
-<div class="tab-pane fade show active" id="eacdbf" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="afedcb" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2919,7 +2926,7 @@ systemctl restart mariadb</code>
 
 
 
-<div class="tab-pane fade" id="edfbca" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="cbdeaf" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -3366,7 +3373,7 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-06-19
+                        Site last modified: 2024-06-26
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

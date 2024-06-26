@@ -38,7 +38,8 @@
 <meta property="og:title" content="Ncloud VPC 환경에서 서버 생성하는 방법" />
 <meta property="og:description" content="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법을 간단하게 정리했습니다" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://docs.3rdeyesys.com/docs/compute/vpc/server-create/" />
+<meta property="og:url" content="https://docs.3rdeyesys.com/docs/compute/vpc/server-create/" />  
+
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/ncloud-compute-vpc-server-create-guide-04.png" />
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법을 간단하게 정리" />
 <meta property="article:section" content="docs" />
@@ -1139,6 +1140,12 @@
                                                                                 
                                                                                 
                                                                                     <li class=" "><a class="sidebar-nested-link" href="/docs/database/mysql-mariadb/install/mysql-datadir-change-install-guide/">datadir 위치 변경 설치</a></li>
+                                                                                
+                                                                            
+                                                                                
+                                                                                
+                                                                                
+                                                                                    <li class=" "><a class="sidebar-nested-link" href="/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/">MariaDB 10.11 설치</a></li>
                                                                                 
                                                                             
                                                                         </ul>
@@ -2660,20 +2667,20 @@ VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있�
 		
 
 		<a class="nav-link  active"
-		   id="dfceabTab" data-bs-toggle="tab" data-bs-target="#dfceab"
-		   type="button" role="tab" aria-controls="dfceab" aria-selected="true">최신 서버 이미지</a>
+		   id="dcefabTab" data-bs-toggle="tab" data-bs-target="#dcefab"
+		   type="button" role="tab" aria-controls="dcefab" aria-selected="true">최신 서버 이미지</a>
 
 		
 
 		<a class="nav-link "
-		   id="cbefadTab" data-bs-toggle="tab" data-bs-target="#cbefad"
-		   type="button" role="tab" aria-controls="cbefad" aria-selected="true">NCP 서버 이미지</a>
+		   id="efabcdTab" data-bs-toggle="tab" data-bs-target="#efabcd"
+		   type="button" role="tab" aria-controls="efabcd" aria-selected="true">NCP 서버 이미지</a>
 
 		
 
 		<a class="nav-link "
-		   id="edafbcTab" data-bs-toggle="tab" data-bs-target="#edafbc"
-		   type="button" role="tab" aria-controls="edafbc" aria-selected="true">3rd party 이미지</a>
+		   id="aedfbcTab" data-bs-toggle="tab" data-bs-target="#aedfbc"
+		   type="button" role="tab" aria-controls="aedfbc" aria-selected="true">3rd party 이미지</a>
 
 		
 
@@ -2689,7 +2696,7 @@ VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있�
 
 
 
-<div class="tab-pane fade show active" id="dfceab" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="dcefab" role="tabpanel" aria-labelledby="nav-1">
 
 	<img src="/images/compute/ncloud-compute-vpc-server-create-guide-39.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법" class="docimage">
 
@@ -2701,7 +2708,7 @@ VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있�
 
 
 
-<div class="tab-pane fade" id="cbefad" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="efabcd" role="tabpanel" aria-labelledby="nav-1">
 
 	<img src="/images/compute/ncloud-compute-vpc-server-create-guide-41.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법" class="docimage">
 
@@ -2713,7 +2720,7 @@ VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있�
 
 
 
-<div class="tab-pane fade" id="edafbc" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="aedfbc" role="tabpanel" aria-labelledby="nav-1">
 
 	<img src="/images/compute/ncloud-compute-vpc-server-create-guide-40.png" width="1140" alt="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법" class="docimage">
 
@@ -2756,14 +2763,14 @@ VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있�
 		
 
 		<a class="nav-link  active"
-		   id="aecfbdTab" data-bs-toggle="tab" data-bs-target="#aecfbd"
-		   type="button" role="tab" aria-controls="aecfbd" aria-selected="true">사설 IP 자동 할당</a>
+		   id="cedbafTab" data-bs-toggle="tab" data-bs-target="#cedbaf"
+		   type="button" role="tab" aria-controls="cedbaf" aria-selected="true">사설 IP 자동 할당</a>
 
 		
 
 		<a class="nav-link "
-		   id="edfacbTab" data-bs-toggle="tab" data-bs-target="#edfacb"
-		   type="button" role="tab" aria-controls="edfacb" aria-selected="true">사설 IP 수동 할당</a>
+		   id="bcedfaTab" data-bs-toggle="tab" data-bs-target="#bcedfa"
+		   type="button" role="tab" aria-controls="bcedfa" aria-selected="true">사설 IP 수동 할당</a>
 
 		
 
@@ -2779,7 +2786,7 @@ VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있�
 
 
 
-<div class="tab-pane fade show active" id="aecfbd" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="cedbaf" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>[<strong>Network Interface</strong>]에 할당되는 사설 IP는 아래와 같이 IP 입력 칸에 아무것도 입력하지 않으면 자동할당 됩니다.</p>
 <img src="/images/compute/ncloud-compute-vpc-server-create-guide-09.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법" class="docimage">
@@ -2793,7 +2800,7 @@ VPC는 고객의 계정마다 <strong>최대 3개</strong>를 생성할 수 있�
 
 
 
-<div class="tab-pane fade" id="edfacb" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="bcedfa" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>IP 입력 칸에 선택된 [<strong>Subnet</strong>] 범위 내의 원하는 IP를 입력해서 수동으로 할당할 수도 있습니다.</p>
 <img src="/images/compute/ncloud-compute-vpc-server-create-guide-11.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 서버를 생성하는 방법" class="docimage">
@@ -3077,7 +3084,7 @@ Public Subnet을 선택했고 서버에 공인 IP가 필요할 경우에는 [<st
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-06-19
+                        Site last modified: 2024-06-26
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

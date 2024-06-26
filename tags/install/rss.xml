@@ -6,7 +6,7 @@
     <description>Recent content in Install on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.124.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 19 Jun 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 26 Jun 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/install/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Rocky Linux에서 NginX 설치, 설정하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/compute/nginx/install-setting-guide-rocky-linux/</link>
@@ -44,6 +44,12 @@
       <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mysql-datadir-change-install-guide/</guid>
       <description>개요 linkNcloud(네이버 클라우드) 서버에 MySQL을 설치할 때 MySQL 데이터 저장 디렉토리(datadir) 위치를 변경해서 설치하는 방법을 정리해보겠습니다.&#xA;테스트 환경 link 서버: Rocky Linux 8.8 DB: MySQL 8.0 MySQL 설치 link아래와 같은 순서대로 MySQL 8.0 최신 버전을 설치합니다.&#xA;dnf -y upgrade-minimal&#xD;dnf -y install https://dev.mysql.com/get/mysql80-community-release-el8-9.noarch.rpm&#xD;dnf module reset mysql&#xD;dnf module disable mysql&#xD;dnf -y install mysql-community-server&#xD;데이터 저장 디렉토리 생성 linkDB 데이터를 저장할 임의의 디렉토리를 생성합니다. /database/mysql 과 같이 생성하고 실제 저장되는 디렉토리는 mysql로 하겠습니다.</description>
     </item><item>
+      <title>Rocky Linux 8에 MariaDB 10.11 설치하는 방법</title>
+      <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/</link>
+      <pubDate>Wed, 26 Jun 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/</guid>
+      <description>개요 linkNcloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법을 정리해보겠습니다. 설치하면서 데이터 저장 디렉토리(datadir) 위치를 별도의 디렉토리로 변경해서 설치하는 방법입니다.&#xA;설치 환경 link Rocky Linux: 8.8 MariaDB: 10.11 데이터 저장 디렉토리(datadir) 위치 변경 로그(log_error) 저장 디렉토리 위치 변경 서버 준비 link현재 Ncloud에서 제공하는 Rocky Linux 서버 이미지의 최신 버전은 Rocky Linux 8.8 입니다.&#xA;패키지 업데이트 link우선, 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;데이터 저장 디렉토리 생성 linkDB 데이터와 로그를 저장할 임의의 디렉토리를 생성합니다.</description>
+    </item><item>
       <title>VPC환경에서 Cloud DB for MySQL 생성하기</title>
       <link>https://docs.3rdeyesys.com/docs/database/cloud-db-mysql/cdb-create-basic-guide/</link>
       <pubDate>Fri, 01 Sep 2023 00:00:00 +0900</pubDate>
@@ -61,12 +67,6 @@
       <pubDate>Fri, 26 May 2023 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/database/cloud-db-mssql/cdb-create-basic-guide/</guid>
       <description>개요 linkNcloud (네이버 클라우드) Cloud DB for MSSQL의 메뉴와 주요 기능에 대한 간략한 소개를 정리해보겠습니다.&#xA;테스트 환경 link VPC와 Private Subnet Cloud DB for MSSQL 15.0.4.198.2 Standard Edition (MSSQL 2019) Cloud DB for MSSQL 서비스 위치 link[Cloud DB for MSSQL]은 [콘솔] - [Services] - [Database]에서 찾을 수 있습니다.&#xA;그리고 Cloud DB for MSSQL에는 다음과 같은 메뉴들이 있는데, 자세한 내용은 아래쪽에서 메뉴별로 하나씩 소개해보겠습니다.&#xA;DB Server Monitoring Backup Event Config Group DB Server 메뉴 linkDB Server 메뉴에서는 MSSQL Server를 생성, 삭제하거나 운영 중인 MSSQL Server 목록을 확인할 수 있습니다.</description>
-    </item><item>
-      <title>Cloud DB for MSSQL 생성후 Public 도메인으로 접속하기</title>
-      <link>https://docs.3rdeyesys.com/docs/database/cloud-db-mssql/cdb-access-public-domain-guide/</link>
-      <pubDate>Tue, 30 May 2023 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/database/cloud-db-mssql/cdb-access-public-domain-guide/</guid>
-      <description>개요 linkNcloud(네이버 클라우드) VPC 환경에서 관리형 MSSQL DB 서버인 Cloud DB for MSSQL 생성 Public 도메인으로 접속하는 방법에 대하여 정리해보겠습니다.&#xA;테스트 환경 link VPC와 Public Subnet Cloud DB for MSSQL 15.0.4.198.2 Standard Edition (MSSQL 2019) Cloud DB for MSSQL 서비스 위치 link[콘솔] - [Services] - [Database]에서 [Cloud DB for MSSQL]을 찾을 수 있습니다.&#xA;Cloud DB for MSSQL 서버 생성 link[Cloud DB for MSSQL] - [DB Server]에서 [DB server 생성] 버튼을 클릭합니다.</description>
     </item>
   </channel>
 </rss>
