@@ -6,13 +6,13 @@
     <description>Recent content in Php on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 19 Jun 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/php/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
       <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</link>
-      <pubDate>Fri, 03 May 2024 00:00:00 +0900</pubDate>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</guid>
-      <description>개요 linkRocky Linux (록키 리눅스)는 CentOS의 서비스 지원 종료로 대안으로 떠오른 CentOS 기반의 리눅스 OS입니다.&#xA;Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 선정되어 국내에서 록키 리눅스 인프라와 기술지원을 위해 협력해왔고, 드디어 Ncloud 콘솔에서 록키 리눅스를 제공하기 시작했기에 간단하게 소개해보려고 합니다.&#xA;제공 버전 linkNcloud에서는 현재 Rocky Linux 8.6 버전과 8.8 버전을 VPC 환경에서 제공하고 있습니다. 여기서는 8.6 버전을 기준으로 소개해보겠습니다.&#xA;설치할 소프트웨어 link록키 리눅스 서버를 실행하고 보통 자주 사용하게 되는 아래의 소프트웨어들을 설치하고 확인해보겠습니다.</description>
+      <description>개요 linkRocky Linux (록키 리눅스)는 CentOS의 서비스 지원 종료로 대안으로 떠오른 CentOS 기반의 리눅스 OS입니다.&#xA;Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 선정되어 국내에서 록키 리눅스 인프라와 기술지원을 위해 협력해왔고, 드디어 Ncloud 콘솔에서 록키 리눅스를 제공하기 시작했기에 간단하게 소개해보려고 합니다.&#xA;제공 버전 linkNcloud에서는 현재 Rocky Linux 8.6, 8.8, 8.10 버전을 VPC 환경에서 제공하고 있습니다. 여기서는 8.10 버전을 기준으로 소개해보겠습니다.&#xA;설치할 소프트웨어 link록키 리눅스 서버를 실행하고 보통 자주 사용하게 되는 아래의 소프트웨어들을 설치하고 확인해보겠습니다.</description>
     </item><item>
       <title>Ncloud LAMP 기본 환경 설정 정보</title>
       <link>https://docs.3rdeyesys.com/docs/compute/lamp/config-basic/</link>

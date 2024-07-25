@@ -6,8 +6,56 @@
     <description>Recent content in Tags on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 23 Jul 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Apache</title>
+      <link>https://docs.3rdeyesys.com/tags/apache/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/apache/</guid>
+      <description></description>
+    </item><item>
+      <title>Linux</title>
+      <link>https://docs.3rdeyesys.com/tags/linux/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/linux/</guid>
+      <description></description>
+    </item><item>
+      <title>Mariadb</title>
+      <link>https://docs.3rdeyesys.com/tags/mariadb/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/mariadb/</guid>
+      <description></description>
+    </item><item>
+      <title>Mysql</title>
+      <link>https://docs.3rdeyesys.com/tags/mysql/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/mysql/</guid>
+      <description></description>
+    </item><item>
+      <title>Nginx</title>
+      <link>https://docs.3rdeyesys.com/tags/nginx/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/nginx/</guid>
+      <description></description>
+    </item><item>
+      <title>Php</title>
+      <link>https://docs.3rdeyesys.com/tags/php/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/php/</guid>
+      <description></description>
+    </item><item>
+      <title>Rocky Linux</title>
+      <link>https://docs.3rdeyesys.com/tags/rocky-linux/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/rocky-linux/</guid>
+      <description></description>
+    </item><item>
+      <title>Server</title>
+      <link>https://docs.3rdeyesys.com/tags/server/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/server/</guid>
+      <description></description>
+    </item><item>
       <title>Database</title>
       <link>https://docs.3rdeyesys.com/tags/database/</link>
       <pubDate>Tue, 23 Jul 2024 00:00:00 +0900</pubDate>
@@ -18,54 +66,6 @@
       <link>https://docs.3rdeyesys.com/tags/mongodb/</link>
       <pubDate>Tue, 23 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/tags/mongodb/</guid>
-      <description></description>
-    </item><item>
-      <title>Mssql</title>
-      <link>https://docs.3rdeyesys.com/tags/mssql/</link>
-      <pubDate>Tue, 23 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/mssql/</guid>
-      <description></description>
-    </item><item>
-      <title>Mysql</title>
-      <link>https://docs.3rdeyesys.com/tags/mysql/</link>
-      <pubDate>Tue, 23 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/mysql/</guid>
-      <description></description>
-    </item><item>
-      <title>Postgresql</title>
-      <link>https://docs.3rdeyesys.com/tags/postgresql/</link>
-      <pubDate>Tue, 23 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/postgresql/</guid>
-      <description></description>
-    </item><item>
-      <title>Encrypt</title>
-      <link>https://docs.3rdeyesys.com/tags/encrypt/</link>
-      <pubDate>Wed, 03 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/encrypt/</guid>
-      <description></description>
-    </item><item>
-      <title>Password</title>
-      <link>https://docs.3rdeyesys.com/tags/password/</link>
-      <pubDate>Wed, 03 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/password/</guid>
-      <description></description>
-    </item><item>
-      <title>Security</title>
-      <link>https://docs.3rdeyesys.com/tags/security/</link>
-      <pubDate>Wed, 03 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/security/</guid>
-      <description></description>
-    </item><item>
-      <title>Install</title>
-      <link>https://docs.3rdeyesys.com/tags/install/</link>
-      <pubDate>Wed, 26 Jun 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/install/</guid>
-      <description></description>
-    </item><item>
-      <title>Mariadb</title>
-      <link>https://docs.3rdeyesys.com/tags/mariadb/</link>
-      <pubDate>Wed, 26 Jun 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/mariadb/</guid>
       <description></description>
     </item>
   </channel>
