@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://docs.3rdeyesys.com/docs/compute/nginx/install-setting-guide-rocky-linux/</loc>
+    <lastmod>2024-07-26T00:00:00+09:00</lastmod>
+    <priority>0.7</priority>
+  </url><url>
     <loc>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</loc>
     <lastmod>2024-07-25T00:00:00+09:00</lastmod>
     <priority>0.7</priority>
@@ -240,10 +244,6 @@
   </url><url>
     <loc>https://docs.3rdeyesys.com/docs/developer-tools/jenkins/install-guide-on-rocky-linux/</loc>
     <lastmod>2023-07-03T00:00:00+09:00</lastmod>
-    <priority>0.7</priority>
-  </url><url>
-    <loc>https://docs.3rdeyesys.com/docs/compute/nginx/install-setting-guide-rocky-linux/</loc>
-    <lastmod>2023-06-29T00:00:00+09:00</lastmod>
     <priority>0.7</priority>
   </url><url>
     <loc>https://docs.3rdeyesys.com/docs/compute/rocky-linux/xen-hypervisor-repository-mirror-site-error-troubleshooting/</loc>
