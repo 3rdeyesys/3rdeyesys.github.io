@@ -14,6 +14,12 @@
       <guid>https://docs.3rdeyesys.com/docs/compute/nginx/install-setting-guide-rocky-linux/</guid>
       <description>개요 linkNcloud (네이버 클라우드) Rocky Linux (록키 리눅스) 서버에 NginX 최신 버전을 Package로 설치하고 기본 설정을 하는 방법에 대한 내용을 정리해보겠습니다.&#xA;서버 환경 link&#xD;⁃ OS: Rocky Linux 8.10 ⁃ NginX: NginX 1.27.0 ⁃ 테스트 사이트: nginx-test.com&#xD;서버 준비 linkNcloud에서는 현재 Rocky Linux 8.6, 8.8, 8.10 버전을 VPC 환경에서 제공하고 있습니다. 여기서는 8.10 버전을 기준으로 소개해보겠습니다.&#xA;패키지 업데이트 link우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;info&#xD;dnf: Dandified YUM의 약자인dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로dnf를 기본 패키지 관리자로 사용하고 있습니다.</description>
     </item><item>
+      <title>록키 리눅스(Rocky Linux) 8.8에 NginX 최신 버전 설치하기</title>
+      <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/</link>
+      <pubDate>Fri, 26 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/</guid>
+      <description>개요 linkNcloud (네이버 클라우드)에서 제공하는 Rocky Linux (록키 리눅스) 최신 서버이미지인 8.8버전에서 일반적인 방법으로는 NginX 최신 버전을 설치할 수 없는 경우가 있어서, 어떻게 하면 최신 버전을 설치할 수 있는지 소개해보려고 합니다.&#xA;서버 준비 link&#xD;패키지 업데이트 link우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;NginX 버전 확인 linkNcloud Rocky Linux 8.8에 포함되어 있는 NginX 버전을 확인합니다.&#xA;리스트를 살펴보면 1.14가 기본 버전이고, 8.8에 포함된 최신 버전은 1.22인 것을 알 수 있습니다.</description>
+    </item><item>
       <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
       <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</link>
       <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
@@ -32,11 +38,11 @@
       <guid>https://docs.3rdeyesys.com/docs/security/secret-manager/basic-guide/</guid>
       <description>개요 link웹사이트나 게임 등에서 서비스가 동작할 때 각종 비밀번호, 데이터베이스 연결정보, 인증서 키, 암호화 복호화 키 등을 사용하는 경우가 많습니다. 하지만, 이런 중요한 키 등을 소스코드에 포함시켜 하드코딩해두는 방식은 보안적인 측면에서 절대로 해서는 안되는 방식입니다만, 그렇다고 어디 따로 보관해서 사용하는 것도 마땅치 않은 것도 사실입니다.&#xA;Ncloud(네이버 클라우드)의 Secret Manager 서비스는 이런 비밀번호나 인증키 같은 중요한 정보를 안전하게 저장하고 필요할 때 가져다 쓸 수 있도록 해주는 서비스로 현재 OBT (Open Beta Test)로 제공 중이며, 10월 1일 정식 제공 전까지는 무료로 이용할 수 있습니다.</description>
     </item><item>
-      <title>Rocky Linux 8에 MariaDB 10.11 설치하는 방법</title>
+      <title>Rocky Linux 8.8에 MariaDB 10.11 설치하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/</link>
       <pubDate>Wed, 26 Jun 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/</guid>
-      <description>개요 linkNcloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법을 정리해보겠습니다. 설치하면서 데이터 저장 디렉토리(datadir) 위치를 별도의 디렉토리로 변경해서 설치하는 방법입니다.&#xA;설치 환경 link Rocky Linux: 8.8 MariaDB: 10.11 데이터 저장 디렉토리(datadir) 위치 변경 로그(log_error) 저장 디렉토리 위치 변경 서버 준비 link현재 Ncloud에서 제공하는 Rocky Linux 서버 이미지의 최신 버전은 Rocky Linux 8.8 입니다.&#xA;패키지 업데이트 link우선, 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;데이터 저장 디렉토리 생성 linkDB 데이터와 로그를 저장할 임의의 디렉토리를 생성합니다.</description>
+      <description>개요 linkNcloud(네이버 클라우드) Rocky Linux 8.8 서버에 MariaDB 10.11 버전을 설치하는 방법을 정리해보겠습니다. 설치하면서 데이터 저장 디렉토리(datadir) 위치를 별도의 디렉토리로 변경해서 설치하는 방법입니다.&#xA;설치 환경 link Rocky Linux: 8.8 MariaDB: 10.11 데이터 저장 디렉토리(datadir) 위치 변경 로그(log_error) 저장 디렉토리 위치 변경 서버 준비 link2024-06-26 현재 Ncloud에서 제공하는 Rocky Linux 서버 이미지의 최신 버전은 Rocky Linux 8.8 입니다.&#xA;패키지 업데이트 link우선, 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;데이터 저장 디렉토리 생성 linkDB 데이터와 로그를 저장할 임의의 디렉토리를 생성합니다.</description>
     </item><item>
       <title>Proxy Protocol을 이용해 Client IP 확인하기 | CentOS</title>
       <link>https://docs.3rdeyesys.com/docs/networking/loadbalancer/proxy-portocol/client-ip-logging-on-centos/</link>
@@ -61,12 +67,6 @@
       <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/lamp/config-centos/</guid>
       <description>Apache 시작, 중지, 재시작 linkApache 시작, 중지, 재시작 명령어는 CentOS 6에서 사용하던 것이 CentOS 7이 되면서 변경되었습니다. CentOS 6.x 이하에서는 service {서비스명} [stop|start|restart] 순서였다면 CentOS 7.X 에서는 systemctl [stop|start|restart] {서비스명} 의 순서로 바뀌었습니다. 내용을 정리하면 다음과 같습니다.&#xA;report&#xD;CentOS 지원 종료: 2024년 06월 30일 기준으로 CentOS 7에 대한 지원이 종료됩니다. 이후에는 보안, 기능 업데이트가 없으므로 가능하면 [Rocky Linux], [Ubuntu]를 사용하는 것이 좋습니다. ⁃ CentOS EOL(End Of Life) 일정 안내 ⁃ Ncloud(네이버 클라우드) CentOS 7 서버이미지 판매종료 안내 CentOS 6.</description>
-    </item><item>
-      <title>http 접속 시에 https로 강제 리다이렉트 시키는 방법 - Apache/CentOS</title>
-      <link>https://docs.3rdeyesys.com/docs/compute/redirect-http-to-https/apache-centos/</link>
-      <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/compute/redirect-http-to-https/apache-centos/</guid>
-      <description>개요 link웹사이트 SSL 인증서를 설치하고 https 접속을 유도할 때 http로 접속하면 https로 강제로 리다이렉트 시키는 방법을 사용하는 경우가 많습니다. 웹페이지 소스에서 http 접속 여부를 판단해서 redirect 시키는 방법 등 여러가지 있을 수 있는데 여기서는 Apache 설정으로 쉽게 할 수 있는 방법을 소개합니다.&#xA;SSL 인증서가 설치되어 있다는 가정하에 우선 Linux CentOS에서 설정하는 방법을 확인해보겠습니다.&#xA;report&#xD;CentOS 지원 종료: 2024년 06월 30일 기준으로 CentOS 7에 대한 지원이 종료됩니다. 이후에는 보안, 기능 업데이트가 없으므로 가능하면 [Rocky Linux], [Ubuntu]를 사용하는 것이 좋습니다.</description>
     </item>
   </channel>
 </rss>

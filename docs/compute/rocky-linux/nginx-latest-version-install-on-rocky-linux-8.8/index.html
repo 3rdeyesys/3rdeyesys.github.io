@@ -40,13 +40,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/" />  
 
-<meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-01.png" />
+<meta property="og:image" content="https://docs.3rdeyesys.com/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-14.png" />
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" />
 <meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2024-05-08T00:00:00+09:00" />
-<meta property="article:modified_time" content="2024-05-08T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-07-26T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-07-26T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" />
-<meta property="twitter:image" content="https://docs.3rdeyesys.com/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-01.png" />
+<meta property="twitter:image" content="https://docs.3rdeyesys.com/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-14.png" />
 <meta property="twitter:image:alt" content="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" />
 <meta name="twitter:title" content="록키 리눅스(Rocky Linux) 8.8에 NginX 최신 버전 설치하기"/>
 <meta name="twitter:description" content="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법을 소개합니다"/>
@@ -2508,13 +2508,8 @@
         <li><a href="#개요">개요</a></li>
         <li><a href="#서버-준비">서버 준비</a></li>
         <li><a href="#패키지-업데이트">패키지 업데이트</a></li>
+        <li><a href="#nginx-버전-확인">NginX 버전 확인</a></li>
         <li><a href="#nginx-최신-버전-확인">NginX 최신 버전 확인</a></li>
-        <li><a href="#nginx-최신-버전-설치-불가-상황">NginX 최신 버전 설치 불가 상황</a>
-          <ul>
-            <li><a href="#epel-리포지토리-패키지-설치">EPEL 리포지토리 패키지 설치</a></li>
-            <li><a href="#nginx-버전-리스트">NginX 버전 리스트</a></li>
-          </ul>
-        </li>
         <li><a href="#nginx-설치-방법-확인">NginX 설치 방법 확인</a>
           <ul>
             <li><a href="#repository-설정">Repository 설정</a></li>
@@ -2546,13 +2541,8 @@
         <li><a href="#개요">개요</a></li>
         <li><a href="#서버-준비">서버 준비</a></li>
         <li><a href="#패키지-업데이트">패키지 업데이트</a></li>
+        <li><a href="#nginx-버전-확인">NginX 버전 확인</a></li>
         <li><a href="#nginx-최신-버전-확인">NginX 최신 버전 확인</a></li>
-        <li><a href="#nginx-최신-버전-설치-불가-상황">NginX 최신 버전 설치 불가 상황</a>
-          <ul>
-            <li><a href="#epel-리포지토리-패키지-설치">EPEL 리포지토리 패키지 설치</a></li>
-            <li><a href="#nginx-버전-리스트">NginX 버전 리스트</a></li>
-          </ul>
-        </li>
         <li><a href="#nginx-설치-방법-확인">NginX 설치 방법 확인</a>
           <ul>
             <li><a href="#repository-설정">Repository 설정</a></li>
@@ -2588,7 +2578,7 @@
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ncloud (네이버 클라우드)에서 제공하는 Rocky Linux (록키 리눅스) 최신 서버이미지인 <strong>8.8버전</strong>에서 일반적인 방법으로는 NginX 최신 버전을 설치할 수 없는 경우가 있어서, 어떻게 하면 최신 버전을 설치할 수 있는지 소개해보려고 합니다.</p>
-<h2 id="서버-준비">서버 준비 <a href="#%ec%84%9c%eb%b2%84-%ec%a4%80%eb%b9%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-01.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
+<h2 id="서버-준비">서버 준비 <a href="#%ec%84%9c%eb%b2%84-%ec%a4%80%eb%b9%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-14.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
 <h2 id="패키지-업데이트">패키지 업데이트 <a href="#%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.</p>
 
 
@@ -2610,26 +2600,8 @@
   </pre>
   </div>
 <img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-02.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
-<h2 id="nginx-최신-버전-확인">NginX 최신 버전 확인 <a href="#nginx-%ec%b5%9c%ec%8b%a0-%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>NginX 공식 사이트에서 <strong>2024-05-08</strong> 기준 최신 버전 정보를 확인해보면 다음과 같습니다.</p>
-
-
-
-<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
-    ⁃ <a href="https://nginx.org/" rel="external" target="_blank">https://nginx.org/<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>
-</div>  
-<ul>
-<li>[2024-04-23] nginx-<code>1.26.0</code> <strong>stable</strong> version</li>
-<li>[2024-04-16] nginx-<code>1.25.5</code> <strong>mainline</strong> version</li>
-</ul>
-
-
-
-<div markdown="span" class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">
-    일반적으로는 [<strong>mainline</strong>] 버전이 최신 버전인데, 이번 경우에는 예외적으로 [<strong>stable</strong>] 버전이 최신 버전인것으로 확인됩니다.
-</div>  
-<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-03.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
-<h2 id="nginx-최신-버전-설치-불가-상황">NginX 최신 버전 설치 불가 상황 <a href="#nginx-%ec%b5%9c%ec%8b%a0-%eb%b2%84%ec%a0%84-%ec%84%a4%ec%b9%98-%eb%b6%88%ea%b0%80-%ec%83%81%ed%99%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>일반적으로 NginX 최신버전(mainline)을 설치하기 위해서는 epel-release 리포지토리 패키지가 필요하므로, 해당 패키지를 설치하고 최신 버전 설치가 가능한지 확인해보겠습니다.</p>
-<h3 id="epel-리포지토리-패키지-설치">EPEL 리포지토리 패키지 설치 <a href="#epel-%eb%a6%ac%ed%8f%ac%ec%a7%80%ed%86%a0%eb%a6%ac-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NginX 최신 버전을 설치하기 위한 epel-release 리포지토리 패키지를 설치하겠습니다.</p>
+<h2 id="nginx-버전-확인">NginX 버전 확인 <a href="#nginx-%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ncloud Rocky Linux 8.8에 포함되어 있는 NginX 버전을 확인합니다.<br>
+리스트를 살펴보면 1.14가 기본 버전이고, 8.8에 포함된 최신 버전은 1.22인 것을 알 수 있습니다.</p>
 
 
 
@@ -2645,30 +2617,7 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="d68a466" class="language-bash ">
-  <code> dnf -y install epel-release</code>
-  </pre>
-  </div>
-<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-04.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
-<h3 id="nginx-버전-리스트">NginX 버전 리스트 <a href="#nginx-%eb%b2%84%ec%a0%84-%eb%a6%ac%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치가 완료되었으면, Ncloud Rocky Linux 8.8에서 지원하는 NginX 버전을 확인합니다.<br>
-리스트를 살펴보면 1.14가 기본 버전이고, 현재 활성화된 버전도 1.14인 것을 알 수 있습니다.<br>
-그리고, 원래는 있어야 할 <strong>mainline</strong> 버전이 epel-release 리포지토리 패키지를 설치했음에도 리스트에 나타나지 않는 것을 확인할 수 있습니다.</p>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="917b6d5" class="language-bash ">
+  <pre id="00706da" class="language-bash ">
   <code> dnf module list nginx</code>
   </pre>
   </div>
@@ -2680,6 +2629,18 @@
 <li>nginx 1.22</li>
 </ul>
 <img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-05.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
+<h2 id="nginx-최신-버전-확인">NginX 최신 버전 확인 <a href="#nginx-%ec%b5%9c%ec%8b%a0-%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>그렇다면 NginX의 최신 버전은 어떤 것일지 NginX 공식 사이트에서 <strong>2024-07-26</strong> 기준 정보를 확인해보면 다음과 같습니다.</p>
+
+
+
+<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
+    ⁃ <a href="https://nginx.org/" rel="external" target="_blank">https://nginx.org/<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>
+</div>  
+<ul>
+<li>[2024-04-23] nginx-<code>1.26.1</code> <strong>stable</strong> version</li>
+<li>[2024-04-16] nginx-<code>1.27.0</code> <strong>mainline</strong> version</li>
+</ul>
+<img src="/images/compute/lemp/ncloud-server-nginx-install-with-php-on-rocky-linux-02.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX와 PHP를 설치, 연동하는 방법" class="docimage">
 <h2 id="nginx-설치-방법-확인">NginX 설치 방법 확인 <a href="#nginx-%ec%84%a4%ec%b9%98-%eb%b0%a9%eb%b2%95-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>NginX 공식 사이트에서 RHEL과 CentOS, Oracle Linux, Rocky Linux, AlmaLinux 등을 위한 설치 방법을 찾아보면 다음과 같습니다.</p>
 
 
@@ -2705,7 +2666,7 @@ Repository 디렉토리에 nginx.repo 파일을 만들고 아래와 같은 내�
   
 
   <div class="prism-codeblock ">
-  <pre id="ca8a283" class="language-bash ">
+  <pre id="136ced5" class="language-bash ">
   <code> vim /etc/yum.repos.d/nginx.repo</code>
   </pre>
   </div>
@@ -2724,7 +2685,7 @@ Repository 디렉토리에 nginx.repo 파일을 만들고 아래와 같은 내�
   
 
   <div class="prism-codeblock ">
-  <pre id="4751861" class="language-bash ">
+  <pre id="223dc11" class="language-bash ">
   <code>[nginx-stable]
 name=nginx stable repo
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
@@ -2755,14 +2716,14 @@ module_hotfixes=true</code>
 		
 
 		<a class="nav-link  active"
-		   id="badecfTab" data-bs-toggle="tab" data-bs-target="#badecf"
-		   type="button" role="tab" aria-controls="badecf" aria-selected="true">stable 버전 활성화</a>
+		   id="acdbefTab" data-bs-toggle="tab" data-bs-target="#acdbef"
+		   type="button" role="tab" aria-controls="acdbef" aria-selected="true">mainline 버전 활성화</a>
 
 		
 
 		<a class="nav-link "
-		   id="fcdabeTab" data-bs-toggle="tab" data-bs-target="#fcdabe"
-		   type="button" role="tab" aria-controls="fcdabe" aria-selected="true">mainline 버전 활성화</a>
+		   id="cabefdTab" data-bs-toggle="tab" data-bs-target="#cabefd"
+		   type="button" role="tab" aria-controls="cabefd" aria-selected="true">stable 버전 활성화</a>
 
 		
 
@@ -2778,38 +2739,7 @@ module_hotfixes=true</code>
 
 
 
-<div class="tab-pane fade show active" id="badecf" role="tabpanel" aria-labelledby="nav-1">
-
-	
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="53337d5" class="language-bash ">
-  <code> dnf config-manager --disable nginx-mainline
- dnf config-manager --enable nginx-stable</code>
-  </pre>
-  </div>
-
-
-</div>
-
-
-
-
-
-
-<div class="tab-pane fade" id="fcdabe" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="acdbef" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2836,18 +2766,68 @@ module_hotfixes=true</code>
 </div>
 
 
+
+
+
+
+<div class="tab-pane fade" id="cabefd" role="tabpanel" aria-labelledby="nav-1">
+
+	
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="53337d5" class="language-bash ">
+  <code> dnf config-manager --disable nginx-mainline
+ dnf config-manager --enable nginx-stable</code>
+  </pre>
+  </div>
+
+
+</div>
+
+
 </div>
 <h3 id="설치-오류-상황">설치 오류 상황 <a href="#%ec%84%a4%ec%b9%98-%ec%98%a4%eb%a5%98-%ec%83%81%ed%99%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위 상태 그대로 설치를 시도해보면 아래와 같이 리포지토리 정보에 있는 NginX 패키지 다운로드 경로가 존재하지 않는다는 오류 메시지 발생합니다.</p>
-<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-07.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="adf7558" class="language-bash ">
+  <code>dnf -y install nginx</code>
+  </pre>
+  </div>
+<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-15.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
 <h3 id="실제-경로-확인">실제 경로 확인 <a href="#%ec%8b%a4%ec%a0%9c-%ea%b2%bd%eb%a1%9c-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>오류 원인을 찾기 위해 실제 다운로드 경로에 가서 확인해보면 OS 버전 경로가 [<strong>8.8</strong>]과 같은 소수점 아래의 마이너 버전은 없고 [<strong>8</strong>]과 같은 메이저 버전의 경로만 존재하는 것을 확인할 수 있습니다.</p>
-<ul>
-<li>stable</li>
-</ul>
-<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-08.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
 <ul>
 <li>mainline</li>
 </ul>
 <img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-09.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
+<ul>
+<li>stable</li>
+</ul>
+<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-08.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
 <h3 id="repository-경로-변경">Repository 경로 변경 <a href="#repository-%ea%b2%bd%eb%a1%9c-%eb%b3%80%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>실제 경로에 맞추어 NginX 리포지토리 설정 파일에서 [<strong>$releaserver</strong>] 부분을 [<strong>8</strong>]로 수정합니다.</p>
 
 
@@ -2915,14 +2895,14 @@ module_hotfixes=true</code>
 		
 
 		<a class="nav-link  active"
-		   id="abedfcTab" data-bs-toggle="tab" data-bs-target="#abedfc"
-		   type="button" role="tab" aria-controls="abedfc" aria-selected="true">stable 버전 (1.26.0) 설치</a>
+		   id="edbacfTab" data-bs-toggle="tab" data-bs-target="#edbacf"
+		   type="button" role="tab" aria-controls="edbacf" aria-selected="true">mainline 버전 (1.27.0) 설치</a>
 
 		
 
 		<a class="nav-link "
-		   id="fcebadTab" data-bs-toggle="tab" data-bs-target="#fcebad"
-		   type="button" role="tab" aria-controls="fcebad" aria-selected="true">mainline 버전 (1.25.5) 설치</a>
+		   id="efcbdaTab" data-bs-toggle="tab" data-bs-target="#efcbda"
+		   type="button" role="tab" aria-controls="efcbda" aria-selected="true">stable 버전 (1.26.1) 설치</a>
 
 		
 
@@ -2938,68 +2918,12 @@ module_hotfixes=true</code>
 
 
 
-<div class="tab-pane fade show active" id="abedfc" role="tabpanel" aria-labelledby="nav-1">
-
-	<ul>
-<li>[<strong>dnf config-manager</strong>] 기능을 사용해 <strong>mainline</strong> 버전을 <code>비활성화</code> 합니다.</li>
-<li>[<strong>dnf config-manager</strong>] 기능을 사용해 <strong>stable</strong> 버전을 <code>활성화</code> 합니다.</li>
-<li>설치된 stable 버전: 1.26.0</li>
-</ul>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="53337d5" class="language-bash ">
-  <code> dnf config-manager --disable nginx-mainline
- dnf config-manager --enable nginx-stable</code>
-  </pre>
-  </div>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="d99b464" class="language-bash ">
-  <code> dnf -y install nginx</code>
-  </pre>
-  </div>
-<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-11.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
-
-
-</div>
-
-
-
-
-
-
-<div class="tab-pane fade" id="fcebad" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="edbacf" role="tabpanel" aria-labelledby="nav-1">
 
 	<ul>
 <li>[<strong>dnf config-manager</strong>] 기능을 사용해 <strong>stable</strong> 버전을 <code>비활성화</code> 합니다.</li>
 <li>[<strong>dnf config-manager</strong>] 기능을 사용해 <strong>mainline</strong> 버전을 <code>활성화</code> 합니다.</li>
-<li>설치된 mainline 버전: 1.25.5</li>
+<li>설치된 mainline 버전: 1.27.0</li>
 </ul>
 
 
@@ -3040,10 +2964,67 @@ module_hotfixes=true</code>
   <code> dnf -y install nginx</code>
   </pre>
   </div>
-<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-12.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
+<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-16.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
 
 
 </div>
+
+
+
+
+
+
+<div class="tab-pane fade" id="efcbda" role="tabpanel" aria-labelledby="nav-1">
+
+	<ul>
+<li>[<strong>dnf config-manager</strong>] 기능을 사용해 <strong>mainline</strong> 버전을 <code>비활성화</code> 합니다.</li>
+<li>[<strong>dnf config-manager</strong>] 기능을 사용해 <strong>stable</strong> 버전을 <code>활성화</code> 합니다.</li>
+<li>설치된 stable 버전: 1.26.1</li>
+</ul>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="53337d5" class="language-bash ">
+  <code> dnf config-manager --disable nginx-mainline
+ dnf config-manager --enable nginx-stable</code>
+  </pre>
+  </div>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="d99b464" class="language-bash ">
+  <code> dnf -y install nginx</code>
+  </pre>
+  </div>
+<img src="/images/compute/nginx-latest-version-install-on-rocky-linux-8.8-17.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하는 록키 리눅스 (Rocky Linux) 8.8버전에 NginX 최신 버전을 설치하는 방법" class="docimage">
+
+
+</div>
+
 
 
 </div>
@@ -3094,6 +3075,10 @@ module_hotfixes=true</code>
         <tr>
           <td>2024-05-08</td>        
           <td>문서 최초 생성</td>          
+        </tr>
+        <tr>
+          <td>2024-07-26</td>        
+          <td>NginX 1.26.1, 1.27.0 버전 적용</td>          
         </tr>
     </tbody>
 </table>  

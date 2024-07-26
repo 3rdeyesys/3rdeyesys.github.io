@@ -38,11 +38,11 @@
       <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mysql-datadir-change-install-guide/</guid>
       <description>개요 linkNcloud(네이버 클라우드) 서버에 MySQL을 설치할 때 MySQL 데이터 저장 디렉토리(datadir) 위치를 변경해서 설치하는 방법을 정리해보겠습니다.&#xA;테스트 환경 link 서버: Rocky Linux 8.8 DB: MySQL 8.0 MySQL 설치 link아래와 같은 순서대로 MySQL 8.0 최신 버전을 설치합니다.&#xA;dnf -y upgrade-minimal&#xD;dnf -y install https://dev.mysql.com/get/mysql80-community-release-el8-9.noarch.rpm&#xD;dnf module reset mysql&#xD;dnf module disable mysql&#xD;dnf -y install mysql-community-server&#xD;데이터 저장 디렉토리 생성 linkDB 데이터를 저장할 임의의 디렉토리를 생성합니다. /database/mysql 과 같이 생성하고 실제 저장되는 디렉토리는 mysql로 하겠습니다.</description>
     </item><item>
-      <title>Rocky Linux 8에 MariaDB 10.11 설치하는 방법</title>
+      <title>Rocky Linux 8.8에 MariaDB 10.11 설치하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/</link>
       <pubDate>Wed, 26 Jun 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/</guid>
-      <description>개요 linkNcloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법을 정리해보겠습니다. 설치하면서 데이터 저장 디렉토리(datadir) 위치를 별도의 디렉토리로 변경해서 설치하는 방법입니다.&#xA;설치 환경 link Rocky Linux: 8.8 MariaDB: 10.11 데이터 저장 디렉토리(datadir) 위치 변경 로그(log_error) 저장 디렉토리 위치 변경 서버 준비 link현재 Ncloud에서 제공하는 Rocky Linux 서버 이미지의 최신 버전은 Rocky Linux 8.8 입니다.&#xA;패키지 업데이트 link우선, 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;데이터 저장 디렉토리 생성 linkDB 데이터와 로그를 저장할 임의의 디렉토리를 생성합니다.</description>
+      <description>개요 linkNcloud(네이버 클라우드) Rocky Linux 8.8 서버에 MariaDB 10.11 버전을 설치하는 방법을 정리해보겠습니다. 설치하면서 데이터 저장 디렉토리(datadir) 위치를 별도의 디렉토리로 변경해서 설치하는 방법입니다.&#xA;설치 환경 link Rocky Linux: 8.8 MariaDB: 10.11 데이터 저장 디렉토리(datadir) 위치 변경 로그(log_error) 저장 디렉토리 위치 변경 서버 준비 link2024-06-26 현재 Ncloud에서 제공하는 Rocky Linux 서버 이미지의 최신 버전은 Rocky Linux 8.8 입니다.&#xA;패키지 업데이트 link우선, 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;데이터 저장 디렉토리 생성 linkDB 데이터와 로그를 저장할 임의의 디렉토리를 생성합니다.</description>
     </item><item>
       <title>Mysql, MariaDB 환경설정 파일 my.cnf 위치</title>
       <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/configure/config-file-my-cnf-position/</link>

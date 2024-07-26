@@ -6,19 +6,19 @@
     <description>Recent content in Rocky Linux on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jul 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/docs/compute/rocky-linux/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>록키 리눅스(Rocky Linux) 8.8에 NginX 최신 버전 설치하기</title>
+      <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/</link>
+      <pubDate>Fri, 26 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/</guid>
+      <description>개요 linkNcloud (네이버 클라우드)에서 제공하는 Rocky Linux (록키 리눅스) 최신 서버이미지인 8.8버전에서 일반적인 방법으로는 NginX 최신 버전을 설치할 수 없는 경우가 있어서, 어떻게 하면 최신 버전을 설치할 수 있는지 소개해보려고 합니다.&#xA;서버 준비 link&#xD;패키지 업데이트 link우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;NginX 버전 확인 linkNcloud Rocky Linux 8.8에 포함되어 있는 NginX 버전을 확인합니다.&#xA;리스트를 살펴보면 1.14가 기본 버전이고, 8.8에 포함된 최신 버전은 1.22인 것을 알 수 있습니다.</description>
+    </item><item>
       <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
       <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</link>
       <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</guid>
       <description>개요 linkRocky Linux (록키 리눅스)는 CentOS의 서비스 지원 종료로 대안으로 떠오른 CentOS 기반의 리눅스 OS입니다.&#xA;Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 선정되어 국내에서 록키 리눅스 인프라와 기술지원을 위해 협력해왔고, 드디어 Ncloud 콘솔에서 록키 리눅스를 제공하기 시작했기에 간단하게 소개해보려고 합니다.&#xA;제공 버전 linkNcloud에서는 현재 Rocky Linux 8.6, 8.8, 8.10 버전을 VPC 환경에서 제공하고 있습니다. 여기서는 8.10 버전을 기준으로 소개해보겠습니다.&#xA;설치할 소프트웨어 link록키 리눅스 서버를 실행하고 보통 자주 사용하게 되는 아래의 소프트웨어들을 설치하고 확인해보겠습니다.</description>
-    </item><item>
-      <title>록키 리눅스(Rocky Linux) 8.8에 NginX 최신 버전 설치하기</title>
-      <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/</link>
-      <pubDate>Wed, 08 May 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/compute/rocky-linux/nginx-latest-version-install-on-rocky-linux-8.8/</guid>
-      <description>개요 linkNcloud (네이버 클라우드)에서 제공하는 Rocky Linux (록키 리눅스) 최신 서버이미지인 8.8버전에서 일반적인 방법으로는 NginX 최신 버전을 설치할 수 없는 경우가 있어서, 어떻게 하면 최신 버전을 설치할 수 있는지 소개해보려고 합니다.&#xA;서버 준비 link&#xD;패키지 업데이트 link우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;NginX 최신 버전 확인 linkNginX 공식 사이트에서 2024-05-08 기준 최신 버전 정보를 확인해보면 다음과 같습니다.&#xA;⁃ https://nginx.org/&#xD;[2024-04-23] nginx-1.26.0 stable version [2024-04-16] nginx-1.</description>
     </item><item>
       <title>Ncloud KVM Hypervisor 타입의 Rocky Linux 서버 Repository 미러 사이트 오류 문제 해결 방법</title>
       <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/kvm-hypervisor-repository-mirror-site-error-troubleshooting/</link>
