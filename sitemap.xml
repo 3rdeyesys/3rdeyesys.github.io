@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://docs.3rdeyesys.com/docs/compute/nginx/install-with-php-on-rocky-linux/</loc>
+    <lastmod>2024-07-29T00:00:00+09:00</lastmod>
+    <priority>0.7</priority>
+  </url><url>
     <loc>https://docs.3rdeyesys.com/docs/compute/nginx/install-setting-guide-rocky-linux/</loc>
     <lastmod>2024-07-26T00:00:00+09:00</lastmod>
     <priority>0.7</priority>
@@ -44,10 +48,6 @@
   </url><url>
     <loc>https://docs.3rdeyesys.com/docs/compute/redirect-http-to-https/apache-centos/</loc>
     <lastmod>2024-06-19T00:00:00+09:00</lastmod>
-    <priority>0.7</priority>
-  </url><url>
-    <loc>https://docs.3rdeyesys.com/docs/compute/nginx/install-with-php-on-rocky-linux/</loc>
-    <lastmod>2024-06-17T00:00:00+09:00</lastmod>
     <priority>0.7</priority>
   </url><url>
     <loc>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-extend-guide-linux/</loc>

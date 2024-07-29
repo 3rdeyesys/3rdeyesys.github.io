@@ -6,7 +6,7 @@
     <description>Recent content in Rocky Linux on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Fri, 26 Jul 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/rocky-linux/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud에서 제공하는 록키 리눅스(Rocky Linux) 서버 소개</title>
       <link>https://docs.3rdeyesys.com/docs/compute/rocky-linux/basic-guide/</link>
@@ -52,9 +52,9 @@
     </item><item>
       <title>NginX &#43; PHP 설치, 연동하는 방법 | Rocky Linux</title>
       <link>https://docs.3rdeyesys.com/docs/compute/nginx/install-with-php-on-rocky-linux/</link>
-      <pubDate>Mon, 17 Jun 2024 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 29 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/nginx/install-with-php-on-rocky-linux/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) Rocky Linux(록키 리눅스)에 NginX와 PHP를 설치하고 연동하는 방법을 정리해보겠습니다.&#xA;설치 환경 link Rocky Linux: 8.8 NginX: 1.27.0 PHP: 8.0 서버 준비 link&#xD;패키지 업데이트 link우선, 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;NginX 설치 준비 linkNginX 버전 리스트 linkNcloud Rocky Linux 8.8에서 지원하는 NginX 버전을 확인합니다.&#xA;리스트를 살펴보면 1.14가 기본 버전이고, 현재 활성화된 버전은 없는 것을 알 수 있습니다.&#xA;dnf module list nginx&#xD;nginx 1.</description>
+      <description>개요 linkNcloud (네이버 클라우드) Rocky Linux(록키 리눅스)에 NginX와 PHP를 설치하고 연동하는 방법을 정리해보겠습니다.&#xA;설치 환경 link Rocky Linux: 8.10 NginX: 1.27.0 PHP: 8.2 서버 준비 linkNcloud에서는 현재 Rocky Linux 8.6, 8.8, 8.10 버전을 VPC 환경에서 제공하고 있습니다. 여기서는 [8.10] 버전을 기준으로 소개해보겠습니다.&#xA;패키지 업데이트 link우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;info&#xD;dnf: Dandified YUM의 약자인dnf는 기존의 yum 패키지 관리자가 갖고 있던 여러 단점들을 수정, 업그레이드해서 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로dnf를 기본 패키지 관리자로 사용하고 있습니다.</description>
     </item><item>
       <title>외부 네트워크에 연결할 수 없는 환경에서 Repository를 변경해 리눅스 패키지 설치하기</title>
       <link>https://docs.3rdeyesys.com/docs/compute/install-package-by-change-repository-in-private-network/</link>
