@@ -6,7 +6,7 @@
     <description>Recent content in Database on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 23 Jul 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jul 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/database/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud 설치형 DB서버와 관리형 Cloud DB 비교</title>
       <link>https://docs.3rdeyesys.com/docs/database/ncloud-database-type-compare/</link>
@@ -44,6 +44,12 @@
       <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-guide/</guid>
       <description>개요 linkNcloud(네이버 클라우드) Rocky Linux 8.8 서버에 MariaDB 10.11 버전을 설치하는 방법을 정리해보겠습니다. 설치하면서 데이터 저장 디렉토리(datadir) 위치를 별도의 디렉토리로 변경해서 설치하는 방법입니다.&#xA;설치 환경 link Rocky Linux: 8.8 MariaDB: 10.11 데이터 저장 디렉토리(datadir) 위치 변경 로그(log_error) 저장 디렉토리 위치 변경 서버 준비 link2024-06-26 현재 Ncloud에서 제공하는 Rocky Linux 서버 이미지의 최신 버전은 Rocky Linux 8.8 입니다.&#xA;패키지 업데이트 link우선, 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;데이터 저장 디렉토리 생성 linkDB 데이터와 로그를 저장할 임의의 디렉토리를 생성합니다.</description>
     </item><item>
+      <title>Rocky Linux 8.10에 MariaDB 10.11 설치하는 방법</title>
+      <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-810-guide/</link>
+      <pubDate>Tue, 30 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/install/mariadb-10.11-install-on-rocky-linux-810-guide/</guid>
+      <description>개요 linkNcloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법을 정리해보겠습니다. 설치하면서 데이터 저장 디렉토리(datadir) 위치를 별도의 디렉토리로 변경해서 설치하는 방법입니다.&#xA;설치 환경 link Rocky Linux: 8.10 MariaDB: 10.11 데이터 저장 디렉토리(datadir) 위치 변경 로그(log_error) 저장 디렉토리 위치 변경 서버 준비 link2024-07-29 현재 Ncloud에서 제공하는 Rocky Linux 서버 이미지의 최신 버전은 Rocky Linux 8.10 입니다.&#xA;패키지 업데이트 link우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.&#xA;dnf -y upgrade-minimal&#xD;MariaDB 설치 link버전 확인 link우선, Ncloud Rocky Linux 8.</description>
+    </item><item>
       <title>Mysql, MariaDB 환경설정 파일 my.cnf 위치</title>
       <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/configure/config-file-my-cnf-position/</link>
       <pubDate>Fri, 28 Apr 2023 00:00:00 +0900</pubDate>
@@ -61,12 +67,6 @@
       <pubDate>Fri, 19 Feb 2021 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/configure/config-mariadb-access-from-remote-ubuntu/</guid>
       <description>개요 link네이버 클라우드 Ubuntu에서 mariaDB 외부접속을 허용하고, mariaDB용 클라이언트 HeidiSQL을 이용해서 원격접속하는 방법을 정리해보겠습니다.&#xA;여기서 원격접속이라 함은 SSH의 Tunnels를 이용하지 않고, 외부 클라이언트 등을 이용한 직접 접속을 뜻합니다.&#xA;계정 비밀번호 생성 link여기서는 네이버 클라우드에서 서버를 생성했을 때 자동으로 설정되는 root 계정을 이용한 방법을 정리하게 됩니다.&#xA;네이버 클라우드에서는 처음 mariaDB를 설치하면 root 계정에 비밀번호가 설정되어 있지 않습니다.&#xA;# mariadb 실행&#xD;mysql&#xD;# 비밀번호 설정&#xD;MariaDB [(None)]&amp;gt; set password=password(&amp;#39;비밀번호&amp;#39;);&#xD;계정 권한 부여 link외부에서 해당 계정(여기서는 root)으로 접속할 수 있도록 계정에 권한을 부여하는 쿼리입니다.</description>
-    </item><item>
-      <title>mariaDB 외부접속 허용, 원격접속하기 with HeidiSQL | CentOS</title>
-      <link>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/configure/config-mariadb-access-from-remote-centos/</link>
-      <pubDate>Fri, 19 Feb 2021 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/database/mysql-mariadb/configure/config-mariadb-access-from-remote-centos/</guid>
-      <description>개요 link네이버 클라우드 CentOS에서 mariaDB 외부접속을 허용하고, mariaDB용 클라이언트 HeidiSQL을 이용해서 원격접속하는 방법을 정리해보겠습니다.&#xA;여기서 원격접속이라 함은 SSH의 Tunnels를 이용하지 않고, 외부 클라이언트 등을 이용한 직접 접속을 뜻합니다.&#xA;CentOS는 Ubuntu와 달리 mariaDB 환경설정 파일 my.cnf에서 외부 IP에서 접근이 막혀 있지 않기에 환경설정 파일은 수정하지 않습니다.&#xA;계정 비밀번호 생성 link여기서는 네이버 클라우드에서 서버를 생성했을 때 자동으로 설정되는 root 계정을 이용한 방법을 정리하게 됩니다.&#xA;네이버 클라우드에서는 처음 mariaDB를 설치하면 root 계정에 비밀번호가 설정되어 있지 않습니다.</description>
     </item>
   </channel>
 </rss>

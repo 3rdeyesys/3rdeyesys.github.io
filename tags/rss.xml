@@ -6,8 +6,38 @@
     <description>Recent content in Tags on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 29 Jul 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jul 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Database</title>
+      <link>https://docs.3rdeyesys.com/tags/database/</link>
+      <pubDate>Tue, 30 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/database/</guid>
+      <description></description>
+    </item><item>
+      <title>Install</title>
+      <link>https://docs.3rdeyesys.com/tags/install/</link>
+      <pubDate>Tue, 30 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/install/</guid>
+      <description></description>
+    </item><item>
+      <title>Mariadb</title>
+      <link>https://docs.3rdeyesys.com/tags/mariadb/</link>
+      <pubDate>Tue, 30 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/mariadb/</guid>
+      <description></description>
+    </item><item>
+      <title>Mysql</title>
+      <link>https://docs.3rdeyesys.com/tags/mysql/</link>
+      <pubDate>Tue, 30 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/mysql/</guid>
+      <description></description>
+    </item><item>
+      <title>Rocky Linux</title>
+      <link>https://docs.3rdeyesys.com/tags/rocky-linux/</link>
+      <pubDate>Tue, 30 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/rocky-linux/</guid>
+      <description></description>
+    </item><item>
       <title>Linux</title>
       <link>https://docs.3rdeyesys.com/tags/linux/</link>
       <pubDate>Mon, 29 Jul 2024 00:00:00 +0900</pubDate>
@@ -26,46 +56,16 @@
       <guid>https://docs.3rdeyesys.com/tags/php/</guid>
       <description></description>
     </item><item>
-      <title>Rocky Linux</title>
-      <link>https://docs.3rdeyesys.com/tags/rocky-linux/</link>
-      <pubDate>Mon, 29 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/rocky-linux/</guid>
-      <description></description>
-    </item><item>
       <title>Server</title>
       <link>https://docs.3rdeyesys.com/tags/server/</link>
       <pubDate>Mon, 29 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/tags/server/</guid>
       <description></description>
     </item><item>
-      <title>Install</title>
-      <link>https://docs.3rdeyesys.com/tags/install/</link>
-      <pubDate>Fri, 26 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/install/</guid>
-      <description></description>
-    </item><item>
       <title>Web</title>
       <link>https://docs.3rdeyesys.com/tags/web/</link>
       <pubDate>Fri, 26 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/tags/web/</guid>
-      <description></description>
-    </item><item>
-      <title>Apache</title>
-      <link>https://docs.3rdeyesys.com/tags/apache/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/apache/</guid>
-      <description></description>
-    </item><item>
-      <title>Mariadb</title>
-      <link>https://docs.3rdeyesys.com/tags/mariadb/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/mariadb/</guid>
-      <description></description>
-    </item><item>
-      <title>Mysql</title>
-      <link>https://docs.3rdeyesys.com/tags/mysql/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/mysql/</guid>
       <description></description>
     </item>
   </channel>
