@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "style.css",
-	"sourceRoot": "D:/Work/markdown/docs-v3-src",
+	"sourceRoot": "D:/Work/GitHub/docs-v3-src",
 	"sources": [
 		"themes/lotusdocs/assets/docs/scss/style.scss",
 		"themes/lotusdocs/assets/docs/scss/custom/plugins/icons/_google-material.scss",
