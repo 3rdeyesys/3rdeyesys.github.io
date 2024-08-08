@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://docs.3rdeyesys.com/docs/ai-services/korean-name-romanizer/php-sample/</loc>
+    <lastmod>2024-08-08T00:00:00+09:00</lastmod>
+    <priority>0.7</priority>
+  </url><url>
     <loc>https://docs.3rdeyesys.com/docs/database/ncloud-database-type-compare/</loc>
     <lastmod>2024-08-02T00:00:00+09:00</lastmod>
     <priority>0.7</priority>
@@ -580,10 +584,6 @@
   </url><url>
     <loc>https://docs.3rdeyesys.com/docs/compute/auth-security/ssh-access-security-setting/</loc>
     <lastmod>2021-05-27T00:00:00+09:00</lastmod>
-    <priority>0.7</priority>
-  </url><url>
-    <loc>https://docs.3rdeyesys.com/docs/ai-services/korean-name-romanizer/php-sample/</loc>
-    <lastmod>2021-05-24T00:00:00+09:00</lastmod>
     <priority>0.7</priority>
   </url><url>
     <loc>https://docs.3rdeyesys.com/docs/etc/pdf-merge-php-sample/</loc>

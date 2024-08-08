@@ -6,8 +6,14 @@
     <description>Recent content on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Fri, 02 Aug 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Ncloud Korean Name Romanizer 서비스 이용하기 PHP 샘플 예제</title>
+      <link>https://docs.3rdeyesys.com/docs/ai-services/korean-name-romanizer/php-sample/</link>
+      <pubDate>Thu, 08 Aug 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/ai-services/korean-name-romanizer/php-sample/</guid>
+      <description>서비스 종료 안내 link&#xD;report&#xD;Ncloud(네이버 클라우드)에서 제공하던 Korean Name Romanizer 서비스가 종료되었습니다.&#xA;※ 종료 일시 : 2024년 7월 18일(목) 18시 00분 (GMT + 09:00)&#xA;※ 대상 서비스 : Korean Name Romanizer&#xA;※ 영향 범위 : 서비스 종료 이후 Korean Name Romanizer 이용 불가(API 호출 시 에러)&#xA;※ 서비스 종료 공지 : https://www.ncloud.com/support/notice/all/1736&#xA;개요 linkPapago Korean Name Romanizer는 한글로 된 이름을 로마자 표기로 변환해주는 서비스로, 현행 로마자 표기법을 따라 변환한 이름과 통계적으로 많이 사용되는 로마자 이름도 함께 제안 받을 수 있습니다.</description>
+    </item><item>
       <title>Ncloud 설치형 DB서버와 관리형 Cloud DB 비교</title>
       <link>https://docs.3rdeyesys.com/docs/database/ncloud-database-type-compare/</link>
       <pubDate>Fri, 02 Aug 2024 00:00:00 +0900</pubDate>
@@ -61,12 +67,6 @@
       <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/networking/loadbalancer/proxy-portocol/client-ip-logging-on-centos/</guid>
       <description>개요 linkNcloud Load Balancer는 HTTP, HTTPS, TCP, SSL 이렇게 4가지의 프로토콜을 지원합니다.&#xA;그런데, Load Balancer를 사용하면서 Client IP를 확인하려고 할 때 http, https 통신의 경우 X-Forwarded-For 헤더값이 지원되기에 Client IP를 확인할 수 있지만, TCP 통신의 경우 X-Forwarded-For 헤더를 사용할 수 없기에 Client IP를 확인하기 위해서는 Proxy Protocol 옵션을 활성화 시켜야 합니다.&#xA;여기서는 Ncloud Network Proxy Load Balancer의 TCP 프로토콜을 사용하면서 Proxy Protocol 옵션을 활성화시켜 CentOS 서버에서 Client IP를 기록하는 방법을 소개하겠습니다.</description>
-    </item><item>
-      <title>CentOS에서 NginX SSL 인증서 설정하는 방법</title>
-      <link>https://docs.3rdeyesys.com/docs/compute/nginx/https-ssl-setting-guide-centos/</link>
-      <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/compute/nginx/https-ssl-setting-guide-centos/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) CentOS 서버에서 NginX 최신 버전에 SSL 인증서를 설정하고, http로 접속 시에 https로 리다이렉트하는 방법에 대한 내용을 정리해보겠습니다.&#xA;report&#xD;CentOS 지원 종료: 2024년 06월 30일 기준으로 CentOS 7에 대한 지원이 종료됩니다. 이후에는 보안, 기능 업데이트가 없으므로 가능하면 [Rocky Linux], [Ubuntu]를 사용하는 것이 좋습니다. ⁃ CentOS EOL(End Of Life) 일정 안내 ⁃ Ncloud(네이버 클라우드) CentOS 7 서버이미지 판매종료 안내 서버 환경 link&#xD;⁃ OS: CentOS 7.8 ⁃ NginX: NginX 1.</description>
     </item>
   </channel>
 </rss>
