@@ -6,7 +6,7 @@
     <description>Recent content in Object Storage on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 02 Aug 2023 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 12 Aug 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/object-storage/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Object Storage와 연동이 필수인 서비스</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/services-required-integrating-with-object-storage/</link>
@@ -22,7 +22,7 @@
     </item><item>
       <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</link>
-      <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</guid>
       <description>개요 linkNcloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.&#xA;그래서 Object Storage에 접속, 관리할 때 AWS의 CLI(Command Line Interface)를 사용할 수 있는데 그 중에서 AWS CLI 버전 2의 설치와 사용방법에 대해 정리해보겠습니다.&#xA;AWS CLI 버전 2 설치 link&#xD;info&#xD;AWS CLI 버전 1에서는 설치와 실행에 Python과 PIP를 이용하는 방법이 주로 사용되었지만, AWS CLI 버전 2에서는 Python 임베디드 버전이 포함되어 있어 별도로 설치할 필요가 없기에 설치 파일도 ZIP 압축 파일 형태로 제공됩니다.</description>
     </item><item>
@@ -64,7 +64,7 @@
     </item><item>
       <title>Object Storage 접속용 Windows Client Tool | CloudBerry Explorer</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/client-tool/s3-client-tool-cloudberry-explorer/</link>
-      <pubDate>Fri, 08 Oct 2021 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/client-tool/s3-client-tool-cloudberry-explorer/</guid>
       <description>개요 link네이버 클라우드의 Object Storage에 접속, 관리하는 방법은 aws cli 등 여러가지 있지만 Windows PC에서 간편하게 접속해서 관리할 수 있는 클라이언트 툴이 몇개 있습니다.&#xA;그 중에서 가장 많이 사용되는 것이 바로 CloudBerry Explorer 인데, 사용법에 대해 간단히 정리해보겠습니다.&#xA;CloudBerry Explorer linkCloudBerry Explorer의 정식 명칭은 CloudBerry Explorer Freeware for Amazon S3입니다.&#xA;이 버전은 무료버전이며 더 많은 기능이 포함된 유료 버전도 있습니다. 그리고 Amazon S3 뿐만 아니라 Microsoft Azur, Google Cloud 등을 위한 버전도 따로 있습니다.</description>
     </item>

@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2594,17 +2600,17 @@
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ncloud(네이버 클라우드)의 Backup 상품은 기존에 별도의 신청서를 작성해서 사용하던 [<strong>Managed Backup</strong>]의 대체 상품으로 출시된, 콘솔에서 바로 이용할 수 있는 상품으로 이 백업 상품을 이용해 리눅스 파일 데이터를 백업하는 방법을 알아보도록 하겠습니다.</p>
 <h2 id="상품위치">상품위치 <a href="#%ec%83%81%ed%92%88%ec%9c%84%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Backup 상품은 [<strong>Console</strong>] - [<strong>Services</strong>] - [<strong>Storage</strong>]에 있습니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-01.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-01.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="테스트-서버">테스트 서버 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8-%ec%84%9c%eb%b2%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>백업을 테스트할 리눅스 서버를 아래와 같이 미리 준비했습니다.</p>
 <p>그리고, 백업과 복원에 필요한 디렉토리를 다음과 같이 생성했습니다.</p>
 <ul>
 <li>백업할 디렉토리: /backup-data</li>
 <li>복원할 디렉토리: /restore</li>
 </ul>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-01.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-01.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="리소스-생성">리소스 생성 <a href="#%eb%a6%ac%ec%86%8c%ec%8a%a4-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>먼저 백업 혹은 복구를 수행할 대상 서버를 설정합니다.<br>
 Backup 탭에서 [<strong>Backup</strong>] - [<strong>Resource</strong>]로 이동해서 [리소스 생성] 버튼을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-02.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-02.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h3 id="리소스-생성-방법">리소스 생성 방법 <a href="#%eb%a6%ac%ec%86%8c%ec%8a%a4-%ec%83%9d%ec%84%b1-%eb%b0%a9%eb%b2%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ol>
 <li>리소스 이름을 입력합니다.</li>
 <li>백업 서버가 소속된 존(zone)을 선택합니다.</li>
@@ -2627,29 +2633,29 @@ Backup 탭에서 [<strong>Backup</strong>] - [<strong>Resource</strong>]로 이�
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
     아이디와 비밀번호는 에이전트 설치를 위해 <strong>백업 대상 서버 접속 시 일회성으로 사용</strong>하며, 별도로 저장되지 않습니다.
 </div>  
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-02.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-02.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>내용 최종 확인 후 리소스 생성을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-03.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-03.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h3 id="백업-에이전트-설치-확인">백업 에이전트 설치 확인 <a href="#%eb%b0%b1%ec%97%85-%ec%97%90%ec%9d%b4%ec%a0%84%ed%8a%b8-%ec%84%a4%ec%b9%98-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>리소스가 생성 되면서 백업 에이전트가 설치되는데 정상적으로 설치가 완료되면 [생성 완료]라는 메시지가 나타납니다.<br>
 (에이전트 설치는 대략 5분 정도의 시간이 걸리며, 상단의 [새로 고침] 버튼을 클릭하면 확인할 수 있습니다.)</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-04.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-04.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p><strong>에이전트 설치 실패</strong><br>
 아이디/비번을 잘못 입력했거나 기타의 이유로 에이전트 설치가 실패했을 경우에는 [추가] 버튼을 클릭해서 다시 설치하면 됩니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-05.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-05.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="저장소-생성">저장소 생성 <a href="#%ec%a0%80%ec%9e%a5%ec%86%8c-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 백업 데이터를 저장할 저장소를 만들고 관리합니다.<br>
 Backup 탭에서 [<strong>Backup</strong>] - [<strong>Storage</strong>]로 이동하여 저장소 생성을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-03.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-03.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>저장소 이름과 백업 저장소가 위치할 존(zone)을 지정 후 다음을 클릭해서 저장소를 생성합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-04.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-04.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h3 id="소산-백업용-스토리지-추가-생성">소산 백업용 스토리지 추가 생성 <a href="#%ec%86%8c%ec%82%b0-%eb%b0%b1%ec%97%85%ec%9a%a9-%ec%8a%a4%ed%86%a0%eb%a6%ac%ec%a7%80-%ec%b6%94%ea%b0%80-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>추후 Remote Backup 메뉴에서 소산 백업(이중화 백업)에 사용할 스토리지를 미리 추가로 생성하도록 하겠습니다.<br>
 현재 KR-2존에 생성한 스토리지는 그대로 두고 KR-1존에 test2-backup-storage라는 이름으로 추가 생성했습니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-05.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-05.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="정책-생성">정책 생성 <a href="#%ec%a0%95%ec%b1%85-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음은 저장소에 대한 정책을 설정 및 관리합니다.<br>
 Backup 탭에서 [<strong>Backup</strong>] - [<strong>Policy</strong>]로 이동하여 정책 생성을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-06.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-06.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p><strong>정책 생성</strong><br>
 정책 이름, 보관 주기, 생성한 저장소가 위치한 존을 선택한 후 [연결 저장소]가 맞는지 확인 후 정책을 생성합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-07.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-07.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 
 
 
@@ -2661,7 +2667,7 @@ Backup 탭에서 [<strong>Backup</strong>] - [<strong>Policy</strong>]로 이동
 </div>  
 <h2 id="작업-생성">작업 생성 <a href="#%ec%9e%91%ec%97%85-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 에이전트가 설치된 리소스와 사전에 설정한 저장소 및 정책 등을 활용하여 실제 백업을 수행하는 작업을 생성하고 관리합니다.</p>
 <p>Backup 탭에서 [<strong>Backup</strong>] - [<strong>Job</strong>]으로 이동하여 작업 생성을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-08.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-08.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>작업 이름과 대상 리소스(서버) 백업 유형 및 백업 대상 디렉터리 지정을 한 후  Policy 메뉴에서 생성한 백업 정책을 선택합니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
@@ -2672,54 +2678,54 @@ Backup 탭에서 [<strong>Backup</strong>] - [<strong>Policy</strong>]로 이동
 <p><strong>주의</strong>: Job과 Policy는 1:1 매핑만 가능합니다.</p>
   </div>
   </div>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-07.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-07.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="일정-생성">일정 생성 <a href="#%ec%9d%bc%ec%a0%95-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>마지막으로 작업을 수행하는 일정에 대해 계획하고 관리합니다.<br>
 Backup 탭에서 [<strong>Backup</strong>] - [<strong>Schedule</strong>]로 이동하여 일정 생성을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-09.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-09.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>일정 이름과 job에서 등록한 서버 백업 작업을 선택 후 백업 방식, 주기, 시작 요일과 시간을 구성한 후 일정을 생성합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-10.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-10.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="소산-백업-이중화-백업">소산 백업 (이중화 백업) <a href="#%ec%86%8c%ec%82%b0-%eb%b0%b1%ec%97%85-%ec%9d%b4%ec%a4%91%ed%99%94-%eb%b0%b1%ec%97%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>백업 상품의 소산 백업을 이용해 기존에 수행한 백업 데이터를 지리적으로 떨어진 다른 존으로 이중화할 수 있습니다.</p>
 <p>Backup 탭에서 [<strong>Backup</strong>] - [<strong>Remote Backup</strong>] 으로 이동하여 소산 설정을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-11.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-11.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>소산 이름, job에서 등록한 작업 선택, 소산 저장소가 위치한 존 선택, 보관 주기, 소산 백업 주기를 설정 후 소산 백업 일정을 등록합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-12.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-12.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 
 
 
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
     소산 일정에 백업 작업이 완료되어 있지 않은 경우, 다음 소산 일정에 소산이 수행됩니다.
 </div>  
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-13.png" width="500" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-13.png" width="500" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="백업-완료-확인">백업 완료 확인 <a href="#%eb%b0%b1%ec%97%85-%ec%99%84%eb%a3%8c-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>기본 백업과 소산 백업까지 모두 완료되면 아래와 같이 [<strong>Report</strong>] 메뉴에서 결과를 확인할 수 있습니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-17.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-17.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="복원">복원 <a href="#%eb%b3%b5%ec%9b%90" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>복원 기능을 이용하면 위에서 백업한 데이터를 Restore 메뉴에서 원하는 시점의 특정 데이터를 선택해서 원하는 리소스에 복원할 수 있습니다.</p>
 <p>[<strong>Job</strong>]에서 설정한 /backup-data 디렉터리에 저장되어 있는 파일들을 /restore 디렉터리로 복원을 진행해 보겠습니다. 현재 /restore 디렉터리는 비어있는 상태입니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-08.png" width="840" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-08.png" width="840" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>Backup 탭에서 [<strong>Restore</strong>]로 이동하여 복원 설정을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-14.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-14.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>복원 설정에서는 백업된 데이터 중 어떤 데이터로 복원할 것인지에 대한 세부항목을 선택합니다.<br>
 <strong>복원 시점</strong>은 [<strong>가장 최근 백업 시점</strong>] 또는 백업된 데이터들 중에서 [<strong>직접 지정</strong>]도 가능합니다.<br>
 <strong>복원 대상</strong>은 Job에서 설정한 디렉터리를 선택하고 [다음]을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-09.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-09.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>타깃 설정에서는 백업한 데이터를 복원할 서버와 디렉터리를 지정하고 다음을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-10.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-10.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>최종 내용을 확인 후 복원 시작을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-11.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-11.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>복원 시작 후 복원 상태 확인이 가능합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-12.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-12.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>작업이 종료되면 /restore 경로에 데이터가 정상적으로 복원된 것을 확인할 수 있습니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-14.png" width="840" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-14.png" width="840" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="report">Report <a href="#report" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>백업 혹은 복구에 대한 작업 결과를 일간/월간 단위의 보고서로 확인할 수 있습니다.</p>
 <p>Backup 탭에서 <strong>[Report]</strong> 로 이동하여 확인합니다.</p>
 <p>Backup Report에서 발생하는 이벤트는 이메일 수신 신청으로 메일로 알림을 받도록 설정이 가능합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-13.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-13.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>항목에서 담당자 이름 및 메일 주소를 확인하고 [<strong>추가</strong>] 버튼을 클릭한 후 저장합니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-15.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-15.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>등록이 완료되면 아래와 같이 메일로 리포트를 받아보실 수 있으며 <strong>매일 오전 10시 일간 리포트</strong>와 <strong>매월 1일 월간 리포트</strong>가 전송됩니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-15.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-15.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="백업-리소스-삭제">백업 리소스 삭제 <a href="#%eb%b0%b1%ec%97%85-%eb%a6%ac%ec%86%8c%ec%8a%a4-%ec%82%ad%ec%a0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>더 이상 백업 서비스를 이용하지 않게 되어 백업 리소스를 삭제하려면 위에서 생성했던 순서의 반대로 삭제를 진행해야 합니다.</p>
 <p>우선, [Backup] - [Resource]에서 해당 리소스를 선택하고 [리소스 삭제] 버튼을 클릭해보겠습니다.</p>
-<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-16.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-linux-data-16.png" width="845" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <p>그러면 다음과 같이 리소스와 함께 설치-생성되었던 [Agent], [Job], [Schedule], [Remote Backup]를 먼저 삭제해야 한다는 안내 메시지가 나타납니다.</p>
 
 
@@ -2733,7 +2739,7 @@ Backup 탭에서 [<strong>Backup</strong>] - [<strong>Schedule</strong>]로 이�
 [Agent] ==&gt;
 [Resource]
 </div>  
-<img src="/images/storage/ncloud-storage-backup-service-guide-common-16.png" width="480" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-backup-service-guide-common-16.png" width="480" alt="Ncloud(네이버 클라우드)의 백업 서비스 상품을 이용해 리눅스 데이터 영역을 백업하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>Ncloud 백업 상품 가이드<br>
 <a href="https://guide.ncloud-docs.com/docs/backup-overview" rel="external" target="_blank">https://guide.ncloud-docs.com/docs/backup-overview<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
@@ -2817,7 +2823,7 @@ Backup 탭에서 [<strong>Backup</strong>] - [<strong>Schedule</strong>]로 이�
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

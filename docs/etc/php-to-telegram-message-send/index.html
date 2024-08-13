@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2565,33 +2571,33 @@
 </ol>
 <h2 id="채팅-봇-생성">채팅 봇 생성 <a href="#%ec%b1%84%ed%8c%85-%eb%b4%87-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>텔레그램(Telegram) 메신저에서 채팅 봇을 생성하고 관리해주는 봇인 [<strong>BotFather</strong>]를 검색합니다.
 여러 개의 봇들이 나타나는데 그 중에서 인증 마크가 붙어 있는 텔레그램 공식 봇을 선하고 채팅 방에  들어갑니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_01.png" width="800" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_01.png" width="800" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>[BotFather] 채팅 봇 방에 들어가면 채팅 봇에 대한 설명과 봇 API 매뉴얼 링크를 확인할 수 있습니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_02.png" width="642" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_02.png" width="642" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>이제 채팅 봇 생성을 위해 <strong>/start</strong> 명령을 입력하면 아래와 같이 채팅 봇 생성, 관리에 대한 명령어들을 확인할 수 있습니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_03.png" width="637" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_03.png" width="637" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>다음으로 새로운 채팅 봇을 생성하는 명령어인 <strong>/newbot</strong>을 입력하면, 채팅 봇 이름과 채팅 봇 유저명을 입력하라는 안내가 나옵니다.
 차례대로 입력하면 되는데, 여기서 입력하는 이름을 텔레그램 내에서 고유한 값이므로 간단한 이름을 입력하면 중복된 이름이라 생성이 되지 않으니 자신만의 고유한 이름을 입력합니다.</p>
 <p>그리고 두번째로 입력하는 <strong>채팅 봇 유저명(username for your bot)은 반드시 마지막이 bot</strong>로 끝나야 합니다.
 두가지 모두 입력하고 나면 아래쪽에 채팅 봇과 연동하기 위한 API Token을 확인할 수 있는데, 이 Token을 PHP에서 사용하게 됩니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_04.png" width="637" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_04.png" width="637" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>채팅 봇이 생성되었는지 텔레그램에서 검색해보면 아래와 같이 확인할 수 있습니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_05.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_05.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <h2 id="채널-생성">채널 생성 <a href="#%ec%b1%84%eb%84%90-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>채널을 생성하기 위해 텔레그램 왼쪽 메뉴를 클릭합니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_06.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_06.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>메뉴 화면에서 [채널 만들기]를 클릭합니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_07.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_07.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>원하는 채널명을 입력하고, 만들기를 클릭하면, 공개-비공개를 선택할 수 있는데 여기서는 [비공개 채널]을 선택하고 저장합니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_08.png" width="770" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_08.png" width="770" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>저장하고 나면 다음으로 [참가자 추가] 화면이 나타나는데 위에서 생성했던 채팅 봇 이름을 입력해서 확인하고, 선택 후에 [추가] 버튼을 클릭합니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_10.png" width="770" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_10.png" width="770" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>그러면 아래와 같이 [봇은 관리자로서만 추가될 수 있습니다]라는 메시지가 나타납니다. 바로 [관리자로 세우기] 버튼을 클릭합니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_12.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_12.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>관리자의 권한은 여러가지가 있는데 원하는 권한을 부여하고 [저장] 버튼을 클릭합니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_13.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_13.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <h2 id="채팅-방-id-확인">채팅 방 ID 확인 <a href="#%ec%b1%84%ed%8c%85-%eb%b0%a9-id-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>메시지를 전송하기 위해서는 현재 생성된 비공개 채널의 chat_id를 확인해야 합니다.<br>
 우선, 채널에서 아무 메시지나 입력합니다. (<strong>꼭 하셔야 합니다</strong>)</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_14.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_14.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <p>다음으로 웹브라우저에서 다음 주소를 입력합니다.  주소에는 위에서 확인했던 API Token이 들어갑니다.</p>
 
 
@@ -2616,7 +2622,7 @@ https://api.telegram.org/bot123456789:JFDS89FMJK8932-MKJE8FNBH3289I/getUpdates</
   </pre>
   </div>
 <p>입력하면 나타나면 결과에서 &ldquo;chat&rdquo; : {&ldquo;id&rdquo; : -12586498, &hellip;.} 와 같은 형식의 <strong>id</strong> 값을 복사합니다. 이 값이 바로 비공개 채널의 chat_id 입니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_15.png" width="770" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_15.png" width="770" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <h2 id="메시지-전송-코드-작성">메시지 전송 코드 작성 <a href="#%eb%a9%94%ec%8b%9c%ec%a7%80-%ec%a0%84%ec%86%a1-%ec%bd%94%eb%93%9c-%ec%9e%91%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>마지막으로 메시지를 전송하는 PHP 코드를 작성해보겠습니다.<br>
 위에서 구했던 [API Token], [chat_id]를 아래 코드에 입력하고 실행하면 됩니다.</p>
 
@@ -2679,7 +2685,7 @@ https://api.telegram.org/bot123456789:JFDS89FMJK8932-MKJE8FNBH3289I/getUpdates</
   </pre>
   </div>
 <p>위 코드를 실행하면 아래와 같이 비공개 채널에 메시지가 도착한 것을 확인할 수 있습니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_16.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_16.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <h2 id="메시지-스타일-적용">메시지 스타일 적용 <a href="#%eb%a9%94%ec%8b%9c%ec%a7%80-%ec%8a%a4%ed%83%80%ec%9d%bc-%ec%a0%81%ec%9a%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>텔레그램 채팅 봇 API는 메시지에 bold, underline 등의 몇가지 html 스타일을 지원합니다.<br>
 html 스타일을 적용하기 위해서는 전송 파라미터에 <strong>parse_mode=html</strong>을 추가해야 합니다.<br>
 그러면 위 전송 코드 중에서 변경해야 하는 코드만 정리해보겠습니다.</p>
@@ -2716,7 +2722,7 @@ html 스타일을 적용하기 위해서는 전송 파라미터에 <strong>parse
   </pre>
   </div>
 <p>위 코드처럼 스타일을 적용하고 실행하면 아래와 같이 표시됩니다.</p>
-<img src="/images/etc/etc_php_to_telegram_msg_send_17.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage">
+<img src="/images/etc/etc_php_to_telegram_msg_send_17.png" width="632" alt="PHP로 텔레그램(Telegram) 대화방인 비공개 채널에 메시지 전송하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>텔레그램 채팅 봇 안내<br>
@@ -2810,7 +2816,7 @@ html 스타일을 적용하기 위해서는 전송 파라미터에 <strong>parse
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

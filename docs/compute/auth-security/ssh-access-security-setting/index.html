@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2606,8 +2612,8 @@
   <code> vi /etc/ssh/sshd_config</code>
   </pre>
   </div>
-<h3 id="centos">CentOS <a href="#centos" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncp_server_ssh_security_setting_01.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage">
-<h3 id="ubuntu">Ubuntu <a href="#ubuntu" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncp_server_ssh_security_setting_06.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage">
+<h3 id="centos">CentOS <a href="#centos" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncp_server_ssh_security_setting_01.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage  mb-5">
+<h3 id="ubuntu">Ubuntu <a href="#ubuntu" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncp_server_ssh_security_setting_06.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage  mb-5">
 <h2 id="root-로그인-차단">root 로그인 차단 <a href="#root-%eb%a1%9c%ea%b7%b8%ec%9d%b8-%ec%b0%a8%eb%8b%a8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>로그인 차단은 위 설정에서 PermitRootLogin 항목을 바꾸시면 됩니다.<br>
 CentOS는 주석처리 되어 있으므로 주석을 해제하고 설정을 변경하시면 되고, Ubuntu는 주석이 해제된 상태이므로 설정값만 변경하시면 됩니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
@@ -2645,7 +2651,7 @@ PermitRootLogin yes
 PermitRootLogin no</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_ssh_security_setting_02.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage">
+<img src="/images/compute/ncp_server_ssh_security_setting_02.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage  mb-5">
 <h3 id="기타-옵션">기타 옵션 <a href="#%ea%b8%b0%ed%83%80-%ec%98%b5%ec%85%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2713,7 +2719,7 @@ MaxAuthTries 3</code>
   </pre>
   </div>
 <p>데몬 재시작 후 로그인을 시도해보면 로그인이 실패하는 것을 확인하실 수 있습니다.</p>
-<img src="/images/compute/ncp_server_ssh_security_setting_03.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage">
+<img src="/images/compute/ncp_server_ssh_security_setting_03.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage  mb-5">
 <h2 id="ssh-접속-로그-확인">SSH 접속 로그 확인 <a href="#ssh-%ec%a0%91%ec%86%8d-%eb%a1%9c%ea%b7%b8-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>SSH로 접속을 하면 성공, 실패에 대한 로그가 모두 남게 되는데, 이 로그를 주기적으로 확인하는 것이 좋습니다.</p>
 <h3 id="접속-실패-로그">접속 실패 로그 <a href="#%ec%a0%91%ec%86%8d-%ec%8b%a4%ed%8c%a8-%eb%a1%9c%ea%b7%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
@@ -2737,7 +2743,7 @@ MaxAuthTries 3</code>
  lastb</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_ssh_security_setting_04.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage">
+<img src="/images/compute/ncp_server_ssh_security_setting_04.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage  mb-5">
 <h3 id="접속-성공-로그">접속 성공 로그 <a href="#%ec%a0%91%ec%86%8d-%ec%84%b1%ea%b3%b5-%eb%a1%9c%ea%b7%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2757,7 +2763,7 @@ MaxAuthTries 3</code>
   <code> last -f /var/log/wtmp</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_ssh_security_setting_05.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage">
+<img src="/images/compute/ncp_server_ssh_security_setting_05.jpg" width="660" alt="Ncloud 리눅스서버 SSH 접속 보안 설정하기" class="docimage  mb-5">
 <ol>
 <li>
 <p>Ncloud 서버 접속 가이드<br>
@@ -2849,7 +2855,7 @@ MaxAuthTries 3</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

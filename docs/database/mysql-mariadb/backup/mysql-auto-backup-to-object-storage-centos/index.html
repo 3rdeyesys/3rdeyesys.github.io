@@ -43,8 +43,8 @@
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/database/ncp_database_mysql_backup_to_object_storage_02.jpg" />
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드) CentOS에서 MySQL DB를 Object Storage로 자동 백업하는 방법" />
 <meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2021-10-08T00:00:00+09:00" />
-<meta property="article:modified_time" content="2021-10-08T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-08-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-08-12T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" />
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/database/ncp_database_mysql_backup_to_object_storage_02.jpg" />
 <meta property="twitter:image:alt" content="Ncloud(네이버 클라우드) CentOS에서 MySQL DB를 Object Storage로 자동 백업하는 방법" />
@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2706,8 +2712,23 @@ chmod 755 /bin/db_backup.sh</code>
   <code>pip install awscli==1.15.85</code>
   </pre>
   </div>
-<h2 id="api-인증키-생성">API 인증키 생성 <a href="#api-%ec%9d%b8%ec%a6%9d%ed%82%a4-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
-<img src="/images/api/ncloud_api_auth_key_create.png" width="770" alt="Ncloud API 인증키 생성 방법" class="docimage">
+<h2 id="api-인증키-생성">API 인증키 생성 <a href="#api-%ec%9d%b8%ec%a6%9d%ed%82%a4-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 API 인증키는 [<strong>콘솔</strong>] - [<strong>서브 계정</strong>] - [<strong>서브 계정 세부 정보</strong>] - [<strong>Access Key</strong>]탭에서  Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
+<div class="alert alert-danger d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  <span class="material-icons size-20 me-2">
+  report
+  </span></div>
+  <div class="w-100">
+<p><strong>API 인증키를 서브 계정으로 생성해야 하는 이유</strong>: 메인 계정은 클라우서 서비스의 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API 인증키를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 <strong>반드시 서브 계정에서 API 인증키를 생성해야</strong> 합니다.</p>
+  </div>
+  </div>
+
+
+
+<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
+    ⁃ <a href="/docs/api/ncloud-api-key-create-guide/">Ncloud API 인증키 생성하는 방법</a>
+</div>  
+<img src="/images/api/ncloud-api-key-create-guide-15.png" width="1140" alt="Ncloud(네이버 클라우드) API 인증키를 생성하는 방법" class="docimage  no-top  mb-5">
 <h2 id="aws-cli-환경-설정">AWS CLI 환경 설정 <a href="#aws-cli-%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 AWS CLI로 접속하기 위해 환경설정을 해야 합니다.<br>
 위 단계에서 확인한 Access Key ID와 Secret Key를 아래 화면에서 입력하고 나머지 2가지 항목을 입력하지 않으셔도 됩니다.</p>
 
@@ -2735,7 +2756,7 @@ Default output format [None]: [Enter]</code>
   </pre>
   </div>
 <h2 id="object-storage-bucket-생성">Object Storage Bucket 생성 <a href="#object-storage-bucket-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Object Storage에 data-back-up Bucket을 생성하고 그 아래에 db 폴더를 생성합니다.</p>
-<img src="/images/database/ncp_database_mysql_backup_to_object_storage_01.jpg" width="768" alt="Ncloud CentOS에서 mysql DB를 Object Storage로 자동 백업하기" class="docimage">
+<img src="/images/database/ncp_database_mysql_backup_to_object_storage_01.jpg" width="768" alt="Ncloud CentOS에서 mysql DB를 Object Storage로 자동 백업하기" class="docimage  mb-5">
 <h2 id="object-storage-접속-테스트">Object Storage 접속 테스트 <a href="#object-storage-%ec%a0%91%ec%86%8d-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 Object Storage로 접속해보겠습니다. 얼핏 명령어만 보면 AWS에 접속하는 것처럼 보입니다. 그래서 네이버 클라우드로 접속하기 위한 &ndash;endpoint-url= 로 시작하는 옵션이 반드시 필요합니다.</p>
 
 
@@ -2824,7 +2845,7 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3 sync /data_backup/ s3:
   </div>
 <h2 id="백업-결과-확인">백업 결과 확인 <a href="#%eb%b0%b1%ec%97%85-%ea%b2%b0%ea%b3%bc-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>백업이 진행되고 나면 아래와 같이 db 백업 파일이 Object Storage에 저장된 것을 확인할 수 있습니다.<br>
 스샷에서는 빠른 확인을 위해 새벽 6시가 아닌 5분 단위로 백업한 내역입니다.</p>
-<img src="/images/database/ncp_database_mysql_backup_to_object_storage_02.jpg" width="850" alt="Ncloud CentOS에서 mysql DB를 Object Storage로 자동 백업하기" class="docimage">
+<img src="/images/database/ncp_database_mysql_backup_to_object_storage_02.jpg" width="850" alt="Ncloud CentOS에서 mysql DB를 Object Storage로 자동 백업하기" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>mysql DB 자동백업 방법<br>
@@ -2846,6 +2867,10 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3 sync /data_backup/ s3:
         <tr>
           <td>2021-10-08</td>        
           <td>문서 최초 생성</td>          
+        </tr>
+        <tr>
+          <td>2024-08-12</td>        
+          <td>API 인증키 생성 방법 안내 변경</td>          
         </tr>
     </tbody>
 </table>     
@@ -2918,7 +2943,7 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3 sync /data_backup/ s3:
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

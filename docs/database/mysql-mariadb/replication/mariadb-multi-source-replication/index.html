@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2637,10 +2643,10 @@
 <li>각 서버에 MariaDB 10.3 이상 설치</li>
 <li>MariaDB 리플리케이션작업 진행 시 마스터 서버의 데이터베이스에 쓰기 작업 금지</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-01.png" width="845" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-01.png" width="845" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h2 id="acg-설정">ACG 설정 <a href="#acg-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>서버 준비가 끝났으면 우선 마스터 서버 <i class="fa-solid fa-arrow-right"></i> 슬레이브 서버로 디비 백업 파일 복사과 복제 구성에 필요한 22, 3306 포트를 오픈해야 합니다.<br>
 오픈 할 때 규칙은 마스터 서버와 슬레이브 서버의 공통 ACG에 사설 IP 대역 전체를 지정할 수도 있고, 슬레이브 서버 전용 ACG에 마스터 서버 IP만 등록하는 방법도 있습니다.</p>
-<img src="/images/database/ncloud-database-mysql-multi-source-replication-guide-02.png" width="845" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mysql-multi-source-replication-guide-02.png" width="845" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h2 id="slave-장비에-백업-디렉토리-생성">Slave 장비에 백업 디렉토리 생성 <a href="#slave-%ec%9e%a5%eb%b9%84%ec%97%90-%eb%b0%b1%ec%97%85-%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>먼저 Slave 장비에 Master 장비들로 부터 DB 복원용 덤프 파일을 전송 받을 백업 디렉토리를 생성하는 것 부터 시작하겠습니다.</p>
 
 
@@ -2662,7 +2668,7 @@
 cd /data</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-15.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-15.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h2 id="master1-장비-구성">Master1 장비 구성 <a href="#master1-%ec%9e%a5%eb%b9%84-%ea%b5%ac%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="master1-설정-추가">Master1 설정 추가 <a href="#master1-%ec%84%a4%ec%a0%95-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
 <li><strong>/etc/my.cnf.d/mariadb-server.cnf</strong>에 Master1 설정을 추가합니다.</li>
 <li>MariaDB 버전에 따라서는 <strong>/etc/my.cnf.d/server.cnf</strong> 인 경우도 있습니다.</li>
@@ -2679,14 +2685,14 @@ cd /data</code>
 		
 
 		<a class="nav-link  active"
-		   id="ecfdabTab" data-bs-toggle="tab" data-bs-target="#ecfdab"
-		   type="button" role="tab" aria-controls="ecfdab" aria-selected="true">MySQL 호환</a>
+		   id="fdeacbTab" data-bs-toggle="tab" data-bs-target="#fdeacb"
+		   type="button" role="tab" aria-controls="fdeacb" aria-selected="true">MySQL 호환</a>
 
 		
 
 		<a class="nav-link "
-		   id="decbafTab" data-bs-toggle="tab" data-bs-target="#decbaf"
-		   type="button" role="tab" aria-controls="decbaf" aria-selected="true">MariaDB 전용</a>
+		   id="eadbfcTab" data-bs-toggle="tab" data-bs-target="#eadbfc"
+		   type="button" role="tab" aria-controls="eadbfc" aria-selected="true">MariaDB 전용</a>
 
 		
 
@@ -2702,7 +2708,7 @@ cd /data</code>
 
 
 
-<div class="tab-pane fade show active" id="ecfdab" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="fdeacb" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2740,7 +2746,7 @@ systemctl restart mariadb</code>
 
 
 
-<div class="tab-pane fade" id="decbaf" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="eadbfc" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2776,8 +2782,8 @@ systemctl restart mariadb</code>
 
 
 </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-03.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-04.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-03.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-04.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="리플리케이션-계정-생성">리플리케이션 계정 생성 <a href="#%eb%a6%ac%ed%94%8c%eb%a6%ac%ec%bc%80%ec%9d%b4%ec%85%98-%ea%b3%84%ec%a0%95-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>MariaDB 접속 후 리플리케이션을 진행할 계정 생성</p>
 
 
@@ -2801,7 +2807,7 @@ MariaDB [(none)]&gt; grant replication slave on *.* to &#39;리플리케이션 �
 MariaDB [(none)]&gt; flush privileges;</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-05.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-05.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="테스트-db-생성">테스트 DB 생성 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8-db-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.</p>
 
 
@@ -2822,7 +2828,7 @@ MariaDB [(none)]&gt; flush privileges;</code>
   <code>MariaDB [(none)]&gt; CREATE DATABASE testdb1 default CHARACTER SET UTF8;</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-07.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-07.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="master1-정보확인">Master1 정보확인 <a href="#master1-%ec%a0%95%eb%b3%b4%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>이제 리플리케이션 설정에 필요한 Master 정보를 확인합니다.</p>
 
 
@@ -2850,7 +2856,7 @@ MariaDB [(none)]&gt; show master status;</code>
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-3">
     [<strong>show master status</strong>] 명령으로 확인한 [<strong>File</strong>], [<strong>Position</strong>] 정보는 아래쪽에서 <code>Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야</code> 합니다.
 </div>  
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-06.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-06.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="db-백업-파일-슬레이브-장비로-전송">DB 백업 파일 슬레이브 장비로 전송 <a href="#db-%eb%b0%b1%ec%97%85-%ed%8c%8c%ec%9d%bc-%ec%8a%ac%eb%a0%88%ec%9d%b4%eb%b8%8c-%ec%9e%a5%eb%b9%84%eb%a1%9c-%ec%a0%84%ec%86%a1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>testdb1 DB의 백업파일을 생성하고, 슬레이브 서버로 전송합니다.</p>
 
 
@@ -2876,7 +2882,7 @@ mysqldump -u root -p --databases testdb1 &gt; /data/test1.sql
 scp test1.sql root@10.0.0.8:/data</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-08.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-08.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h2 id="master2-장비-구성">Master2 장비 구성 <a href="#master2-%ec%9e%a5%eb%b9%84-%ea%b5%ac%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="master2-설정-추가">Master2 설정 추가 <a href="#master2-%ec%84%a4%ec%a0%95-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
 <li><strong>/etc/my.cnf.d/mariadb-server.cnf</strong>에 Master2 설정을 추가합니다.</li>
 <li>MariaDB 버전에 따라서는 <strong>/etc/my.cnf.d/server.cnf</strong> 인 경우도 있습니다.</li>
@@ -2893,14 +2899,14 @@ scp test1.sql root@10.0.0.8:/data</code>
 		
 
 		<a class="nav-link  active"
-		   id="afcdebTab" data-bs-toggle="tab" data-bs-target="#afcdeb"
-		   type="button" role="tab" aria-controls="afcdeb" aria-selected="true">MySQL 호환</a>
+		   id="fbeacdTab" data-bs-toggle="tab" data-bs-target="#fbeacd"
+		   type="button" role="tab" aria-controls="fbeacd" aria-selected="true">MySQL 호환</a>
 
 		
 
 		<a class="nav-link "
-		   id="badecfTab" data-bs-toggle="tab" data-bs-target="#badecf"
-		   type="button" role="tab" aria-controls="badecf" aria-selected="true">MariaDB 전용</a>
+		   id="acbfedTab" data-bs-toggle="tab" data-bs-target="#acbfed"
+		   type="button" role="tab" aria-controls="acbfed" aria-selected="true">MariaDB 전용</a>
 
 		
 
@@ -2916,7 +2922,7 @@ scp test1.sql root@10.0.0.8:/data</code>
 
 
 
-<div class="tab-pane fade show active" id="afcdeb" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="fbeacd" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2954,7 +2960,7 @@ systemctl restart mariadb</code>
 
 
 
-<div class="tab-pane fade" id="badecf" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="acbfed" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -2990,8 +2996,8 @@ systemctl restart mariadb</code>
 
 
 </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-09.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-10.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-09.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-10.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="리플리케이션-계정-생성-1">리플리케이션 계정 생성 <a href="#%eb%a6%ac%ed%94%8c%eb%a6%ac%ec%bc%80%ec%9d%b4%ec%85%98-%ea%b3%84%ec%a0%95-%ec%83%9d%ec%84%b1-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>MariaDB 접속 후 리플리케이션을 진행할 계정 생성합니다.</p>
 
 
@@ -3015,7 +3021,7 @@ MariaDB [(none)]&gt; grant replication slave on *.* to &#39;리플리케이션 �
 MariaDB [(none)]&gt; flush privileges;</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-11.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-11.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="테스트-db-생성-1">테스트 DB 생성 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8-db-%ec%83%9d%ec%84%b1-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>다음으로 테스트에 사용할 DB를 생성하겠습니다. 이미 생성되어 있는 다른 DB를 사용할 경우에는 별도로 테스트용 DB를 생성할 필요는 없습니다.</p>
 
 
@@ -3036,7 +3042,7 @@ MariaDB [(none)]&gt; flush privileges;</code>
   <code>MariaDB [(none)]&gt; CREATE DATABASE testdb2 default CHARACTER SET UTF8;</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-13.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-13.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="master2-정보확인">Master2 정보확인 <a href="#master2-%ec%a0%95%eb%b3%b4%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>마찬가지로 리플리케이션 설정에 필요한 Master 정보를 확인합니다.</p>
 
 
@@ -3064,7 +3070,7 @@ MariaDB [(none)]&gt; show master status;</code>
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-3">
     [<strong>show master status</strong>] 명령으로 확인한 [<strong>File</strong>], [<strong>Position</strong>] 정보는 아래쪽에서 <code>Slave DB를 설정할 때 입력해야 하므로 별도로 기록해두어야</code> 합니다.
 </div>  
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-12.png" width="" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-12.png" width="" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="db-백업-파일-슬레이브-장비로-전송-1">DB 백업 파일 슬레이브 장비로 전송 <a href="#db-%eb%b0%b1%ec%97%85-%ed%8c%8c%ec%9d%bc-%ec%8a%ac%eb%a0%88%ec%9d%b4%eb%b8%8c-%ec%9e%a5%eb%b9%84%eb%a1%9c-%ec%a0%84%ec%86%a1-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>testdb2 DB의 백업파일 생성하고, 슬레이브 서버로 전송합니다.</p>
 
 
@@ -3089,7 +3095,7 @@ mysqldump -u root -p --databases testdb2 &gt; /data/test2.sql
 scp test2.sql root@10.0.0.8:/data</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-14.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-14.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h2 id="slave-장비-구성">Slave 장비 구성 <a href="#slave-%ec%9e%a5%eb%b9%84-%ea%b5%ac%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="slave-설정-추가">Slave 설정 추가 <a href="#slave-%ec%84%a4%ec%a0%95-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
 <li><strong>/etc/my.cnf.d/mariadb-server.cnf</strong>에 Slave 설정을 추가합니다.</li>
 <li>MariaDB 버전에 따라서는 <strong>/etc/my.cnf.d/server.cnf</strong> 인 경우도 있습니다.</li>
@@ -3130,8 +3136,8 @@ slave-skip-errors = all
 systemctl restart mariadb</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-16.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-17.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-16.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-17.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="db-복구-진행">DB 복구 진행 <a href="#db-%eb%b3%b5%ea%b5%ac-%ec%a7%84%ed%96%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>먼저 복구할 DB를 미리 생성하고 Master1, Master2 장비에서 전송 받은 백업 파일을 사용해 DB를 복구합니다.</p>
 
 
@@ -3159,15 +3165,15 @@ mysql -u root -p testdb1 &lt; /data/test1.sql
 mysql -u root -p testdb2 &lt; /data/test2.sql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-18.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-18.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <ul>
 <li>백업 파일을 전송 받은 디렉토리로 이동해 백업 파일이 정상적으로 전송되었는지 확인합니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-19.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-19.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <ul>
 <li>백업 파일을 사용해 DB를 복구합니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-20.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-20.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h2 id="리플리케이션-채널-설정">리플리케이션 채널 설정 <a href="#%eb%a6%ac%ed%94%8c%eb%a6%ac%ec%bc%80%ec%9d%b4%ec%85%98-%ec%b1%84%eb%84%90-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>리플리케이션 채널을 설정하는 쿼리문은 다음과 같은데, MySQL과는 일부 다른 부분이 있으니 잘 확인하고 사용해야 합니다.</p>
 
 
@@ -3232,7 +3238,7 @@ MariaDB [(none)]&gt; CHANGE MASTER &#39;ch_testdb2&#39; TO MASTER_HOST=&#39;10.0
 MariaDB [(none)]&gt; FLUSH PRIVILEGES;</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-21.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-21.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h3 id="리플리케이션-채널-시작">리플리케이션 채널 시작 <a href="#%eb%a6%ac%ed%94%8c%eb%a6%ac%ec%bc%80%ec%9d%b4%ec%85%98-%ec%b1%84%eb%84%90-%ec%8b%9c%ec%9e%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>리플리케이션 시작 후 에러가 없는지 확인합니다.</p>
 
 
@@ -3263,33 +3269,33 @@ MariaDB [(none)]&gt; show slave &#39;ch_testdb2&#39; status\G</code>
 <li>Master1<br>
 상태 확인에서는 [<strong>Slave_IO_State</strong>], [<strong>Slave_IO_Running</strong>], [<strong>Slave_SQL_Running</strong>] 항목들이 아래와 같이 되어 있으면 정상입니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-22.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-22.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <ul>
 <li>Master2<br>
 상태 확인에서는 [<strong>Slave_IO_State</strong>], [<strong>Slave_IO_Running</strong>], [<strong>Slave_SQL_Running</strong>] 항목들이 아래와 같이 되어 있으면 정상입니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-23.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-23.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h2 id="리플리케이션-테스트">리플리케이션 테스트 <a href="#%eb%a6%ac%ed%94%8c%eb%a6%ac%ec%bc%80%ec%9d%b4%ec%85%98-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>리플리케이션 설정을 모두 마친 후에 Master 서버들에서 DB 작업을 진행하고, Slave 서버에 해당 내용이 복제되는지 확인해보겠습니다.</p>
 <ul>
 <li>Master1 서버 작업<br>
 Master1 서버에 테스트를 위한 [<strong>sampletable1</strong>] Table을 생성합니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-24.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-24.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <ul>
 <li>Slave 서버 확인<br>
 Slave 서버에서 testdb1 DB에 sampletable1 Table이 복제되었는지 확인합니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-25.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-25.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <ul>
 <li>Master2 서버 작업<br>
 Master2 서버에 테스트를 위한 [<strong>sampletable2</strong>] Table을 생성합니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-26.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-26.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <ul>
 <li>Slave 서버 확인<br>
 Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인합니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-27.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-multi-source-replication-guide-27.png" width="840" alt="Ncloud에서 MariaDB Multi Source Replication 구성하는 방법" class="docimage  mb-5">
 <h2 id="리플리케이션-명령어-모음">리플리케이션 명령어 모음 <a href="#%eb%a6%ac%ed%94%8c%eb%a6%ac%ec%bc%80%ec%9d%b4%ec%85%98-%eb%aa%85%eb%a0%b9%ec%96%b4-%eb%aa%a8%ec%9d%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><table class="simple_table">
   <thead>
     <tr>
@@ -3401,7 +3407,7 @@ Slave 서버에서 testdb2 DB에 sampletable2 Table이 복제되었는지 확인
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

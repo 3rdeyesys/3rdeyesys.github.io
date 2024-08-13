@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2600,12 +2606,12 @@
 <h2 id="비밀번호-확인">비밀번호 확인 <a href="#%eb%b9%84%eb%b0%80%eb%b2%88%ed%98%b8-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>비밀번호를 초기화 하기 전에 먼저 비밀번호를 확인하는 방법부터 알아보겠습니다.<br>
 (Linux, Windows 서버 모두 동일합니다.)</p>
 <p>어드민 패스워드(관리자 비밀번호) 확인은 서버를 선택하고, [서버 관리 및 설정 변경] - [관리자 비밀번호 확인] 메뉴를 선택하면 됩니다.</p>
-<img src="/images/compute/ncloud-compute-server-admin-password-reset-01.png" width="845" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-admin-password-reset-01.png" width="845" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <p>[관리자 비밀번호]를 확인하려면 서버를 생성할 때 사용한 *.pem 형태의 인증키를 사용해야 합니다.</p>
-<img src="/images/compute/ncloud-compute-server-admin-password-reset-04.png" width="685" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-admin-password-reset-04.png" width="685" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <p>pem 인증키를 사용하면 아래와 같이 비밀번호를 확인할 수 있습니다.</p>
-<h3 id="linux">Linux <a href="#linux" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncloud-compute-server-admin-password-reset-02.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
-<h3 id="windows">Windows <a href="#windows" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncloud-compute-server-admin-password-reset-09.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<h3 id="linux">Linux <a href="#linux" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncloud-compute-server-admin-password-reset-02.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
+<h3 id="windows">Windows <a href="#windows" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncloud-compute-server-admin-password-reset-09.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <h2 id="비밀번호-초기화">비밀번호 초기화 <a href="#%eb%b9%84%eb%b0%80%eb%b2%88%ed%98%b8-%ec%b4%88%ea%b8%b0%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위에서 확인해본 어드민 패스워드(관리자 비밀번호)를 초기화 하려면, 먼저 <strong>서버를 정지</strong>시키고 [<strong>서버 관리 및 설정 변경</strong>] - [<strong>관리자 비밀번호 초기화</strong>] 메뉴를 선택하면 됩니다.</p>
 
 
@@ -2619,19 +2625,19 @@
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-3">
     [<strong>관리자 비밀번호 초기화</strong>] 기능은 서버를 [<strong>정지</strong>] 시킨 상태에서만 가능합니다.
 </div>  
-<img src="/images/compute/ncloud-compute-server-admin-password-reset-03.png" width="845" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-admin-password-reset-03.png" width="845" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <h3 id="사용자-확인">사용자 확인 <a href="#%ec%82%ac%ec%9a%a9%ec%9e%90-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[관리자 비밀번호 초기화]를 하려면 먼저 아래와 같이 <strong>접속 계정의 비밀번호를 입력</strong>해서 사용자 확인을 먼저 해야 합니다.</p>
-<img src="/images/compute/ncloud-compute-server-admin-password-reset-08.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-admin-password-reset-08.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <h3 id="인증키-확인">인증키 확인 <a href="#%ec%9d%b8%ec%a6%9d%ed%82%a4-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>비밀번호를 초기화 할 때에도 확인할 때와 마찬가지로 <strong>pem 인증키를 사용</strong>해야 합니다.</p>
-<img src="/images/compute/ncloud-compute-server-admin-password-reset-04.png" width="685" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-admin-password-reset-04.png" width="685" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <h3 id="초기화">초기화 <a href="#%ec%b4%88%ea%b8%b0%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>인증키를 확인하고 나면 아래와 같이 비밀번호가 초기화 되고, 정지 상태인 서버를 [<strong>지금 시작</strong>]할 것인지, [<strong>나중에 시작</strong>]할 것인지 묻는 창이 나타납니다.
 여기서는 [<strong>지금 시작</strong>] 버튼을 선택하겠습니다.</p>
-<img src="/images/compute/ncloud-compute-server-admin-password-reset-05.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-admin-password-reset-05.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <h3 id="서버-시작">서버 시작 <a href="#%ec%84%9c%eb%b2%84-%ec%8b%9c%ec%9e%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[지금 시작] 버튼을 클릭하면 아래와 같이 정지되어 있던 서버가 다시 시작됩니다.</p>
-<img src="/images/compute/ncloud-compute-server-admin-password-reset-06.png" width="845" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-admin-password-reset-06.png" width="845" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <h2 id="초기화된-비밀번호-확인">초기화된 비밀번호 확인 <a href="#%ec%b4%88%ea%b8%b0%ed%99%94%eb%90%9c-%eb%b9%84%eb%b0%80%eb%b2%88%ed%98%b8-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>서버가 시작된 후에 다시 [<strong>관리자 비밀번호 확인</strong>]을 해보면 아래와 같이 비밀번호가 초기화 되고 새로운 비밀번호가 할당된 것을 확인할 수 있습니다.</p>
-<h3 id="linux-1">Linux <a href="#linux-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncloud-compute-server-admin-password-reset-07.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
-<h3 id="windows-1">Windows <a href="#windows-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncloud-compute-server-admin-password-reset-10.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage">
+<h3 id="linux-1">Linux <a href="#linux-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncloud-compute-server-admin-password-reset-07.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
+<h3 id="windows-1">Windows <a href="#windows-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/compute/ncloud-compute-server-admin-password-reset-10.png" width="485" alt="Ncloud 서버 어드민 패스워드(관리자 비밀번호) 초기화하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ncloud 서버 정보 확인 및 서버 관리 가이드<br>
@@ -2725,7 +2731,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

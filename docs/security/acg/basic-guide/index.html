@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2629,10 +2635,10 @@
     Classic 환경에서는 서버 자체에 할당되는 개념이었으나 VPC에는 NIC 즉, 네트워크 카드에 할당되는 개념이어서 VPC 환경에서는 <strong>NIC 당 최대 3개</strong>까지 ACG를 적용할 수 있습니다.
 </div>  
 <h2 id="acg-위치">ACG 위치 <a href="#acg-%ec%9c%84%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ncloud 콘솔에서 ACG의 위치는 [<strong>Services</strong>] - [<strong>Compute</strong>] - [<strong>Server</strong>] - [<strong>ACG</strong>]에 있습니다.</p>
-<h3 id="vpc-환경-1">VPC 환경 <a href="#vpc-%ed%99%98%ea%b2%bd-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/security/ncloud-security-acg-guide-03.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
-<img src="/images/security/ncloud-security-acg-guide-04.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
-<h3 id="classic-환경-1">Classic 환경 <a href="#classic-%ed%99%98%ea%b2%bd-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/security/ncloud-security-acg-guide-01.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
-<img src="/images/security/ncloud-security-acg-guide-02.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
+<h3 id="vpc-환경-1">VPC 환경 <a href="#vpc-%ed%99%98%ea%b2%bd-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/security/ncloud-security-acg-guide-03.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
+<img src="/images/security/ncloud-security-acg-guide-04.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
+<h3 id="classic-환경-1">Classic 환경 <a href="#classic-%ed%99%98%ea%b2%bd-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/security/ncloud-security-acg-guide-01.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
+<img src="/images/security/ncloud-security-acg-guide-02.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
 <h2 id="기본-규칙">기본 규칙 <a href="#%ea%b8%b0%eb%b3%b8-%ea%b7%9c%ec%b9%99" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="default-acg">Default ACG <a href="#default-acg" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>기본적으로 추가되는 ACG</p>
 <ul>
 <li>모든 들어오는 연결(inbound traffic)을 차단함</li>
@@ -2640,23 +2646,23 @@
 <li>Default ACG 내 속한 서버들끼리의 네트워크 양방향 통신(TCP, UDP, ICMP)이 허용됨</li>
 <li>원격 접속 기본 포트 (<strong>Linux - 22, Windows - 3389</strong>)에 대한 TCP 허용됨</li>
 </ul>
-<h4 id="vpc-화면">VPC 화면 <a href="#vpc-%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><h5 id="inbound-기본-설정">Inbound (기본 설정) <a href="#inbound-%ea%b8%b0%eb%b3%b8-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h5><img src="/images/security/ncp_security_acg_vpc_inbound.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
+<h4 id="vpc-화면">VPC 화면 <a href="#vpc-%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><h5 id="inbound-기본-설정">Inbound (기본 설정) <a href="#inbound-%ea%b8%b0%eb%b3%b8-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h5><img src="/images/security/ncp_security_acg_vpc_inbound.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
 
 
 
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-1">
     기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.
 </div>  
-<h5 id="inbound-권장-설정">Inbound (권장 설정) <a href="#inbound-%ea%b6%8c%ec%9e%a5-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h5><img src="/images/security/ncp_security_acg_vpc_inbound_02.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
-<h5 id="outbound">Outbound <a href="#outbound" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h5><img src="/images/security/ncp_security_acg_vpc_outbound.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
-<h4 id="classic-화면-기본-설정">Classic 화면 (기본 설정) <a href="#classic-%ed%99%94%eb%a9%b4-%ea%b8%b0%eb%b3%b8-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><img src="/images/security/ncp_security_acg_classic.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
+<h5 id="inbound-권장-설정">Inbound (권장 설정) <a href="#inbound-%ea%b6%8c%ec%9e%a5-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h5><img src="/images/security/ncp_security_acg_vpc_inbound_02.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
+<h5 id="outbound">Outbound <a href="#outbound" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h5><img src="/images/security/ncp_security_acg_vpc_outbound.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
+<h4 id="classic-화면-기본-설정">Classic 화면 (기본 설정) <a href="#classic-%ed%99%94%eb%a9%b4-%ea%b8%b0%eb%b3%b8-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><img src="/images/security/ncp_security_acg_classic.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
 
 
 
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-1">
     기본으로 생성된 ACG에는 위처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 허용되어 있는데 보안을 위해 이 항목을 삭제하고 아래와 같이 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.
 </div>  
-<h4 id="classic-화면-권장-설정">Classic 화면 (권장 설정) <a href="#classic-%ed%99%94%eb%a9%b4-%ea%b6%8c%ec%9e%a5-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><img src="/images/security/ncp_security_acg_classic_02.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
+<h4 id="classic-화면-권장-설정">Classic 화면 (권장 설정) <a href="#classic-%ed%99%94%eb%a9%b4-%ea%b6%8c%ec%9e%a5-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><img src="/images/security/ncp_security_acg_classic_02.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
 <h3 id="custom-acg">Custom ACG <a href="#custom-acg" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Default ACG 이외에 사용자가 추가하는 ACG</p>
 <ul>
 <li>모든 inbound traffic을 차단함(규칙으로 명시되어 있지 않음)</li>
@@ -2781,7 +2787,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

@@ -43,8 +43,8 @@
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg" />
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드) Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" />
 <meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2023-11-06T00:00:00+09:00" />
-<meta property="article:modified_time" content="2023-11-06T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-08-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-08-12T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" />
 <meta property="twitter:image" content="https://docs.3rdeyesys.com/images/storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg" />
 <meta property="twitter:image:alt" content="Ncloud(네이버 클라우드) Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" />
@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2521,7 +2527,11 @@
       <ul>
         <li><a href="#개요">개요</a></li>
         <li><a href="#s3-browser">S3 Browser</a></li>
-        <li><a href="#사용법">사용법</a></li>
+        <li><a href="#사용법">사용법</a>
+          <ul>
+            <li><a href="#api-인증-key-생성">API 인증 Key 생성</a></li>
+          </ul>
+        </li>
         <li><a href="#업로드하는-파일-권한-자동-적용">업로드하는 파일 권한 자동 적용</a>
           <ul>
             <li><a href="#버킷bucket-권한-상속">버킷(Bucket) 권한 상속</a></li>
@@ -2547,7 +2557,11 @@
       <ul>
         <li><a href="#개요">개요</a></li>
         <li><a href="#s3-browser">S3 Browser</a></li>
-        <li><a href="#사용법">사용법</a></li>
+        <li><a href="#사용법">사용법</a>
+          <ul>
+            <li><a href="#api-인증-key-생성">API 인증 Key 생성</a></li>
+          </ul>
+        </li>
         <li><a href="#업로드하는-파일-권한-자동-적용">업로드하는 파일 권한 자동 적용</a>
           <ul>
             <li><a href="#버킷bucket-권한-상속">버킷(Bucket) 권한 상속</a></li>
@@ -2588,7 +2602,7 @@
 </ul>
 <h2 id="사용법">사용법 <a href="#%ec%82%ac%ec%9a%a9%eb%b2%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>프로그램을 다운 받아서 설치하고, 실행을 하면 여러 종류의 스토리지 중에서 원하는 것을 선택하게 됩니다.<br>
 이 클라이언트는 AWS S3를 위한 것으로 CloudBerry Explorer와는 다르게 AWS의 다양한 S3 서비스들만 접속이 가능한데, 이용 가능한 스토리지 리스트는 마지막에서 정리해보겠습니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_01.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage  mb-5">
 <p>Account Type은  <strong>S3 Compatible Storage</strong>를 선택하면 됩니다.</p>
 <ul>
 <li>Account name: 여기는 알아보기 쉬운 이름을 적으면 됩니다. 예를 들어 Naver Cloud</li>
@@ -2596,20 +2610,31 @@
 <li>Access Key ID: 여기는 Access Key ID</li>
 <li>Secret Access Key: 여기는 Secret Key</li>
 </ul>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_02.jpg" width="718" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_02.jpg" width="718" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage  mb-5">
+<h3 id="api-인증-key-생성">API 인증 Key 생성 <a href="#api-%ec%9d%b8%ec%a6%9d-key-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>네이버 클라우드 API 인증키는 [<strong>콘솔</strong>] - [<strong>서브 계정</strong>] - [<strong>서브 계정 세부 정보</strong>] - [<strong>Access Key</strong>]탭에서  Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
+<div class="alert alert-danger d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  <span class="material-icons size-20 me-2">
+  report
+  </span></div>
+  <div class="w-100">
+<p><strong>API 인증키를 서브 계정으로 생성해야 하는 이유</strong>: 메인 계정은 클라우서 서비스의 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API 인증키를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 <strong>반드시 서브 계정에서 API 인증키를 생성해야</strong> 합니다.</p>
+  </div>
+  </div>
 
 
 
-<div markdown="span" class="bs-callout-v2 bs-callout-v2-success bs-callout-v2-level-1">
-    네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
+<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
+    ⁃ <a href="/docs/api/ncloud-api-key-create-guide/">Ncloud API 인증키 생성하는 방법</a>
 </div>  
+<img src="/images/api/ncloud-api-key-create-guide-15.png" width="1140" alt="Ncloud(네이버 클라우드) API 인증키를 생성하는 방법" class="docimage  no-top  mb-5">
 <p>계정 정보를 입력하고 접속을 하면 버킷 리스트가 나타나고 원하는 버킷을 선택해서 들어가면 다음처럼 파일들을 확인할 수 있습니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_03.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_03.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage  mb-5">
 <p>Object Storage에 있는 파일을 로컬PC로 가져오려면 원하는 파일을 선택하고 마우스 오른쪽 버튼을 눌러서 <strong>Download</strong> 명령을 선택하면 됩니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_04.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_04.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage  mb-5">
 <p>그 외 여러 가지 기능들이 있는데 그리 어려운 기능은 아니므로 직접 사용해보시면 금방 알 수 있습니다.</p>
 <p>마지막으로 S3 Browser로 접속 가능한 S3 리스트를 확인해보겠습니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_05.jpg" width="717" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_05.jpg" width="717" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage  mb-5">
 <ul>
 <li>Amazon S3 Storage</li>
 <li>S3 Compatible Storage</li>
@@ -2623,11 +2648,11 @@
 </ul>
 <h2 id="업로드하는-파일-권한-자동-적용">업로드하는 파일 권한 자동 적용 <a href="#%ec%97%85%eb%a1%9c%eb%93%9c%ed%95%98%eb%8a%94-%ed%8c%8c%ec%9d%bc-%ea%b6%8c%ed%95%9c-%ec%9e%90%eb%8f%99-%ec%a0%81%ec%9a%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>S3 Browser를 이용해 파일을 업로드할 때 업로드하는 파일의 권한을 자동으로 적용하는 방법에 대해 살펴보겠습니다.</p>
 <p>우선 S3 Browser에서 [<strong>Tools</strong>] - [<strong>Option</strong>] 메뉴를 클릭합니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_06.png" width="845" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_06.png" width="845" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>Option</strong>] 메뉴에 보면 여러 옵션들이 있는데 아래 스샷에서 표시한 2가지 옵션이 중요합니다. 각각에 대한 설명은 아래쪽에서 다시 정리해보겠습니다.</li>
 </ul>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_07.png" width="845" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_s3browser_07.png" width="845" alt="Ncloud Object Storage 접속용 Windows Client Tool - S3 Browser 사용 방법" class="docimage  mb-5">
 <h3 id="버킷bucket-권한-상속">버킷(Bucket) 권한 상속 <a href="#%eb%b2%84%ed%82%b7bucket-%ea%b6%8c%ed%95%9c-%ec%83%81%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>Inherit permissions from parent bucket</strong>] 옵션은 버킷(Bucket)에 업로드 되는 파일들은 버킷(Bucket)의 권한을 상속 받게 하는 옵션입니다.<br>
 예를 들어 버킷(Bucket)의 권한이 [<strong>All User</strong>]에게 [<strong>Read</strong>] 권한이라면 이 옵션을 선택해두면 이 버킷(Bucket)에 업로드 되는 모든 파일은 [<strong>All User</strong>]에게 [<strong>Read</strong>] 권한을 가지게 됩니다.</p>
 <h3 id="권한-유지">권한 유지 <a href="#%ea%b6%8c%ed%95%9c-%ec%9c%a0%ec%a7%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>Preserve permissions when overwriting existing files</strong>] 옵션은 이미 버킷(Bucket)에 존재하는 파일을 다시 업로드 해서 덮어 쓰기를 할 경우 기존의 권한을 유지하도록 하는 옵션입니다.</p>
@@ -2664,6 +2689,10 @@
         <tr>
           <td>2023-11-06</td>        
           <td>파일 업로드할 때 권한 적용 안내 추가</td>          
+        </tr>
+        <tr>
+          <td>2024-08-12</td>        
+          <td>API 인증키 생성 방법 안내 변경</td>          
         </tr>
     </tbody>
 </table>  
@@ -2736,7 +2765,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

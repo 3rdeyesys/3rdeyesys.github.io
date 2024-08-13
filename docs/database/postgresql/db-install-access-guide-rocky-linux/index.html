@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2640,7 +2646,7 @@
   <code>dnf module list postgresql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-02.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-02.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="기본-버전-비활성화">기본 버전 비활성화 <a href="#%ea%b8%b0%eb%b3%b8-%eb%b2%84%ec%a0%84-%eb%b9%84%ed%99%9c%ec%84%b1%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>PostgreSQL 13</strong> 최신 버전을 사용하기 위해 기본 버전들은 모두 비활성화합니다. 비활성화 처리 후 리스트를 다시 조회해보면 [<strong>disabled</strong>]를 뜻하는 [<strong>X</strong>]로 변경된 것을 확인할 수 있습니다.</p>
 
 
@@ -2662,7 +2668,7 @@
 dnf module list postgresql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-03.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-03.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="리포지토리-설치">리포지토리 설치 <a href="#%eb%a6%ac%ed%8f%ac%ec%a7%80%ed%86%a0%eb%a6%ac-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>PostgreSQL 13</strong>] 설치 정보가 담겨 있는 리포지토리 RPM을 설치합니다.</p>
 
 
@@ -2683,7 +2689,7 @@ dnf module list postgresql</code>
   <code>dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-01.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-01.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="postgresql-설치">PostgreSQL 설치 <a href="#postgresql-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>PostgreSQL 13</strong>]을 설치합니다.</p>
 
 
@@ -2704,7 +2710,7 @@ dnf module list postgresql</code>
   <code>dnf install -y postgresql13-server</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-04.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-04.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="기본-db-생성">기본 DB 생성 <a href="#%ea%b8%b0%eb%b3%b8-db-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>initdb</strong>] 명령으로 기본 DB를 생성하고 올바르게 생성되었는지 로그를 확인해보겠습니다.</p>
 
 
@@ -2727,7 +2733,7 @@ postgresql-13-setup initdb
 cat /var/lib/pgsql/13/initdb.log</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-05.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-05.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="postgresql-시작">PostgreSQL 시작 <a href="#postgresql-%ec%8b%9c%ec%9e%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2749,7 +2755,7 @@ systemctl start postgresql-13
 systemctl status postgresql-13</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-06.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-06.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h2 id="db-접속">DB 접속 <a href="#db-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>기본 마스터 계정인 [<strong>postgres</strong>]로 [<strong>PostgreSQL</strong>]에 접속합니다.</p>
 
 
@@ -2771,7 +2777,7 @@ systemctl status postgresql-13</code>
 bash$ psql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-07.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-07.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="유저-생성">유저 생성 <a href="#%ec%9c%a0%ec%a0%80-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>테스트용 계정 [testuser]를 생성하고 [<strong>\du</strong>] 명령으로 생성된 유저를 확인합니다.</p>
 
 
@@ -2793,7 +2799,7 @@ bash$ psql</code>
 postgres=# \du </code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-08.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-08.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="db-생성-및-소유자-지정">DB 생성 및 소유자 지정 <a href="#db-%ec%83%9d%ec%84%b1-%eb%b0%8f-%ec%86%8c%ec%9c%a0%ec%9e%90-%ec%a7%80%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>테스트용 DB를 생성하고 소유자를 지정한 후에 [<strong>\l</strong>] 명령으로 생성된 DB를 확인합니다.</p>
 
 
@@ -2817,7 +2823,7 @@ postgres=# \q
 bash$</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-09.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-09.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="접속-시도---인증-오류">접속 시도 - 인증 오류 <a href="#%ec%a0%91%ec%86%8d-%ec%8b%9c%eb%8f%84---%ec%9d%b8%ec%a6%9d-%ec%98%a4%eb%a5%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 생성한 계정으로 접속을 시도해보면, 아래와 같이 인증 오류가 발생합니다.<br>
 다음 단계에서는 이 인증 오류를 <strong>해결하는 방법 2가지</strong>를 확인해보겠습니다.</p>
 
@@ -2840,7 +2846,7 @@ bash$</code>
 psql: error: FATAl: Peer authentication failed for user &#34;testuser&#34;</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-10.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-10.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h2 id="인증-오류-해결">인증 오류 해결 <a href="#%ec%9d%b8%ec%a6%9d-%ec%98%a4%eb%a5%98-%ed%95%b4%ea%b2%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>인증 문제를 해결하고 [<strong>PostgreSQL</strong>]에 접속하는 방법은 크게 2가지가 있는데 한가지씩 확인해보겠습니다.</p>
 <h3 id="방법1---동일한-계정-생성">방법1 - 동일한 계정 생성 <a href="#%eb%b0%a9%eb%b2%951---%eb%8f%99%ec%9d%bc%ed%95%9c-%ea%b3%84%ec%a0%95-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>우선, 처음에 DB 생성 후에 추가했던 [<strong>PostgreSQL</strong>] 유저 계정과 동일한 계정을 OS 사용자에도 추가하는 방법입니다.</p>
 <p>아래와 같이 DB 유저와 동일한 [testuser] 계정을 생성하겠습니다.</p>
@@ -2864,7 +2870,7 @@ psql: error: FATAl: Peer authentication failed for user &#34;testuser&#34;</code
 passwd testuser</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-11.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-11.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li><strong>DB 접속</strong><br>
 새로 생성한 [<strong>testuser</strong>] 계정으로 전환한 후에 접속을 해보면 문제 없이 접속되는 것을 확인할 수 있습니다.</li>
@@ -2889,7 +2895,7 @@ passwd testuser</code>
 ~$ psql -U testuser -d testdb</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-12.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-12.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h3 id="방법2---인증-설정-파일-수정">방법2 - 인증 설정 파일 수정 <a href="#%eb%b0%a9%eb%b2%952---%ec%9d%b8%ec%a6%9d-%ec%84%a4%ec%a0%95-%ed%8c%8c%ec%9d%bc-%ec%88%98%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>다음으로 인증 관련 설정 파일인 [<strong>pg_hba.conf</strong>] 파일을 수정해서 접속하는 방법을 확인해보겠습니다.</p>
 <p>[<strong>pg_hba.conf</strong>] 파일을 열어보면 아래와 같이 DB 접근 설정 항목들이 있는데 [<strong>local</strong>]과 IPv4용 [<strong>host</strong>]의 METHOD 항목을 보시면 각각 [<strong>peer</strong>]과 [<strong>scram-sha-256</strong>]으로 설정되어 있는 것을 확인할 수 있습니다.</p>
 
@@ -2921,11 +2927,11 @@ passwd testuser</code>
 <ul>
 <li>수정 전</li>
 </ul>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-13.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-13.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>수정 후</li>
 </ul>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-14.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-14.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li><strong>DB 재시작 후 접속</strong><br>
 설정 파일을 수정했으면 [<strong>PostgreSQL</strong>]을 재시작하고 다시 접속해봅니다.<br>
@@ -2951,7 +2957,7 @@ passwd testuser</code>
 psql -U testuser -d testdb</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-15.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-postgresql-install-connect-guide-rocky-linux-15.png" width="840" alt="Ncloud(네이버 클라우드) VPC환경에서 설치형 PostgreSQL DB를 설치하고, 접속하는 방법" class="docimage  mb-5">
 <h2 id="기본-배포-버전-설치">기본 배포 버전 설치 <a href="#%ea%b8%b0%eb%b3%b8-%eb%b0%b0%ed%8f%ac-%eb%b2%84%ec%a0%84-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>PostgreSQL 13</strong>] 최신 버전이 아닌 기본 배포 버전을 설치하려면 아래와 같은 방법으로 설치를 하면 됩니다.<br>
 나머지 인증 방법은 위에서 설명한 내용과 동일합니다.</p>
 
@@ -3123,7 +3129,7 @@ systemctl status postgresql</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

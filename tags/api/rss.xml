@@ -6,11 +6,11 @@
     <description>Recent content in Api on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 19 Feb 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 13 Aug 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/api/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</link>
-      <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</guid>
       <description>개요 linkNcloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.&#xA;그래서 Object Storage에 접속, 관리할 때 AWS의 CLI(Command Line Interface)를 사용할 수 있는데 그 중에서 AWS CLI 버전 2의 설치와 사용방법에 대해 정리해보겠습니다.&#xA;AWS CLI 버전 2 설치 link&#xD;info&#xD;AWS CLI 버전 1에서는 설치와 실행에 Python과 PIP를 이용하는 방법이 주로 사용되었지만, AWS CLI 버전 2에서는 Python 임베디드 버전이 포함되어 있어 별도로 설치할 필요가 없기에 설치 파일도 ZIP 압축 파일 형태로 제공됩니다.</description>
     </item><item>
@@ -22,7 +22,7 @@
     </item><item>
       <title>PHP로 Archive Storage API 인증 토큰 생성하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/storage/archive-storage/api-access-token-create/</link>
-      <pubDate>Wed, 31 Jan 2024 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/archive-storage/api-access-token-create/</guid>
       <description>개요 link네이버 클라우드(Ncloud) Archive Storage API를 이용하려고 할 때 먼저 인증 토큰을 생성하고 생성된 토큰을 이용해서 API로 Archive Storage에 접근해야 합니다. 여기서는 PHP로 API 인증 토큰을 생성하는 방법에 대해 우선 전체 소스코드를 살펴보고 다음으로 주요 코드를 상세하게 살펴보겠습니다.&#xA;API 정보 link OpenStack Swift API : 2.15.1 (Pike) OpenStack Keystone V3 API : v3.8 인증 토큰 생성 코드 link&#xD;&amp;lt;?php&#xD;// 전송해야 할 설정값&#xD;$ncloud_accesskey = &amp;#34;네이버 클라우드 AccessKey&amp;#34;;&#xD;$ncloud_secretkey = &amp;#34;네이버 클라우드 SecretKey&amp;#34;;&#xD;$ncloud_domain_id = &amp;#34;Archive Storage 도메인 ID&amp;#34;;&#xD;$ncloud_project_id = &amp;#34;Archive Storage 프로젝트 ID&amp;#34;;&#xD;$api_server = &amp;#34;https://kr.</description>
     </item><item>
@@ -56,17 +56,17 @@
       <guid>https://docs.3rdeyesys.com/docs/application-services/nshorturl/nshorturl-php-sample/</guid>
       <description>개요 linkSNS를 사용하거나 SMS를 보낼 때 길고 복잡한 URL은 무척 불편하기에 짧게 바꿔주는 서비스들이 인기를 얻었습니다.&#xA;대표적으로 goo.gl, bit.ly 등이 있는데 현재 구글의 goo.gl는 서비스가 종료되었습니다.&#xA;그래서 이를 대신해서 네이버 클라우드에 있는 길고 복잡한 URL을 간단하고 짧게 바꿔주는 API 서비스 nShortURL 서비스를 추천합니다. nShortURL은 OpenAPI 형태로 제공되는데 여기서는 PHP로 호출하는 방식을 살펴볼텐데, 우선 전체 소스코드를 살펴보고 다음으로 주요 코드를 상세하게 살펴보겠습니다.&#xA;이용 요금 linknShortURL은 무료로 제공되는 서비스이며, 일 25,000건, 월 750,000건 내에서 사용 가능하며 상향이 필요한 경우 고객지원으로 문의하면 됩니다.</description>
     </item><item>
+      <title>Ncloud API 인증키 생성하는 방법</title>
+      <link>https://docs.3rdeyesys.com/docs/api/ncloud-api-key-create-guide/</link>
+      <pubDate>Tue, 13 Aug 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/api/ncloud-api-key-create-guide/</guid>
+      <description>개요 linkNcloud(네이버 클라우드)를 이용하다보면 여러 가지 정보를 조회하거나 서버를 생성하는 등의 작업을 위해 API를 활용하게 되는 경우가 많습니다. 이때 API를 사용하기 위해 반드시 필요한 것이 [Access Key]와 [Secret Key]등으로 구성된 [API 인증키]입니다. 여기서는 [API 인증키]를 어떻게 생성하고, 보안과 관련해서 지켜야할 원칙이나 설정은 어떤 것이 있는지 정리해보겠습니다.&#xA;계정과 권한 설정 link그러면 [API 인증키]를 어떻게 생성하는지 살펴보기 전에 [API 인증키]를 생성할 계정과 권한 설정에 관해서 먼저 정리해보겠습니다.&#xA;API 인증키 생성 계정 linkAPI 인증키 생성과 관련해서 가장 중요한 원칙은 메인 계정이 아닌 최소 권한을 가진 서브 계정(Sub Account)에서 API 인증키를 생성하는 것입니다.</description>
+    </item><item>
       <title>PHP로 Ncloud API를 호출하는 샘플 예제</title>
       <link>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-php-sample/</link>
-      <pubDate>Tue, 06 Apr 2021 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-php-sample/</guid>
       <description>개요 link네이버 클라우드 인프라와 상품 및 솔루션 등의 활용을 도와주는 API를 PHP로 호출하는 샘플 예제를 정리해봅니다.&#xA;네이버 클라우드 API는 RESTful API 방식으로 제공되며, XML와 JSON 형식으로 응답합니다 우선 전체 소스코드를 살펴보고 다음으로 주요 코드를 상세하게 살펴보겠습니다.&#xA;API 호출 샘플 코드 link&#xD;&amp;lt;?php&#xD;// 기본 데이터 설정&#xD;$unixtimestamp = round(microtime(true) * 1000);&#xD;$ncp_accesskey = &amp;#34;네이버 클라우드 AccessKey&amp;#34;;&#xD;$ncp_secretkey = &amp;#34;네이버 클라우드 SecretKey&amp;#34;;&#x9;$api_server = &amp;#34;https://billingapi.apigw.ntruss.com&amp;#34;;&#xD;// API URL 예시 : 상품별 가격 리스트 호출 api&#xD;$api_url = &amp;#34;/billing/v1/product/getProductPriceList&amp;#34;;&#xD;$api_url = $api_url.</description>
-    </item><item>
-      <title>C#으로 Ncloud API를 호출하는 샘플 예제</title>
-      <link>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-csharp-sample/</link>
-      <pubDate>Wed, 07 Apr 2021 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-csharp-sample/</guid>
-      <description>개요 link네이버 클라우드 인프라와 상품 및 솔루션 등의 활용을 도와주는 API를 C#으로 호출하는 샘플 예제중에서 핵심인 인증을 위한 암호화 문자열 생성 코드를 정리해보겠습니다.&#xA;암호화 샘플 코드 link&#xD;public string unixTimeStamp;&#xD;public string ncpAccessKey = &amp;#34;네이버 클라우드 AccessKey&amp;#34;;&#xD;public string ncpSecretKey = &amp;#34;네이버 클라우드 SecretKey&amp;#34;;&#x9;public string apiCallMethod = &amp;#34;GET&amp;#34;;&#xD;public string apiServer = &amp;#34;https://billingapi.apigw.ntruss.com&amp;#34;;&#xD;public string apiUrl = &amp;#34;네이버 클라우드 API URL&amp;#34;;&#xD;// apiUrl 예시: &amp;#34;/billing/v1/product/getProductPriceList&amp;#34;;&#xD;public string MakeSignature()&#xD;{&#xD;string msgSignature;&#xD;string space = &amp;#34; &amp;#34;;&#xD;string newLine = &amp;#34;\n&amp;#34;;&#xD;// 13자리 유닉스 타임스탬프 설정&#xD;DateTime now = DateTime.</description>
     </item>
   </channel>
 </rss>

@@ -6,19 +6,19 @@
     <description>Recent content in Object Storage on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 02 Aug 2023 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 12 Aug 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/docs/storage/object-storage/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
+      <link>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</link>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</guid>
+      <description>개요 linkNcloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.&#xA;그래서 Object Storage에 접속, 관리할 때 AWS의 CLI(Command Line Interface)를 사용할 수 있는데 그 중에서 AWS CLI 버전 2의 설치와 사용방법에 대해 정리해보겠습니다.&#xA;AWS CLI 버전 2 설치 link&#xD;info&#xD;AWS CLI 버전 1에서는 설치와 실행에 Python과 PIP를 이용하는 방법이 주로 사용되었지만, AWS CLI 버전 2에서는 Python 임베디드 버전이 포함되어 있어 별도로 설치할 필요가 없기에 설치 파일도 ZIP 압축 파일 형태로 제공됩니다.</description>
+    </item><item>
       <title>Object Storage 버킷 접근 로그 확인하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/bucket-access-log-management-guide/</link>
       <pubDate>Wed, 02 Aug 2023 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/bucket-access-log-management-guide/</guid>
       <description>개요 linkNcloud(네이버 클라우드) Object Storage에 존재하는 오브젝트, 즉 파일을 호출, 접근한 기록이나 오브젝트를 업로드한 로그를 확인하는 방법을 정리해보겠습니다.&#xA;버킷 생성 link우선, 테스트에 사용할 버킷과 로그를 저장할 버킷을 생성하고, 테스트용 버킷에는 파일 몇개를 업로드 해두었습니다.&#xA;object-bucket-test: 테스트용 버킷 object-bucket-test-log: 로그를 저장할 버킷 로그 설정 link로그를 설정하는 방법은 버킷을 선택하고, 옆에 있는 [ ] 아이콘을 클릭하면 나타나는 메뉴에서 [로그 관리]를 선택합니다.&#xA;로그 관리 설정 link[로그 관리] 설정 팝업에서 로그를 저장할 버킷을 선택하고, 로그 파일의 Prefix를 입력한 후 [+ 추가] 버튼을 클릭합니다.</description>
-    </item><item>
-      <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
-      <link>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</link>
-      <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.&#xA;그래서 Object Storage에 접속, 관리할 때 AWS의 CLI(Command Line Interface)를 사용할 수 있는데 그 중에서 AWS CLI 버전 2의 설치와 사용방법에 대해 정리해보겠습니다.&#xA;AWS CLI 버전 2 설치 link&#xD;info&#xD;AWS CLI 버전 1에서는 설치와 실행에 Python과 PIP를 이용하는 방법이 주로 사용되었지만, AWS CLI 버전 2에서는 Python 임베디드 버전이 포함되어 있어 별도로 설치할 필요가 없기에 설치 파일도 ZIP 압축 파일 형태로 제공됩니다.</description>
     </item><item>
       <title>Object Storage Lifecycle Management 관리대상 설정 방법</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/lifecycle-management-guide/</link>

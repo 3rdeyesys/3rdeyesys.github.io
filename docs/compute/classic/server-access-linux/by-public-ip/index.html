@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2587,30 +2593,30 @@
 </div>  
 <p>그러므로, <code>공인 IP로 22, 3389 포트에 접속하려는 경우에는 포트 포워딩을 해제</code>하시고,<br>
 포트 포워딩을 설정하지 않았다면 다음 순서인 관리자(root) 비밀번호 확인으로 바로 이동하시면 되겠습니다.</p>
-<img src="/images/compute/ncp_server_connect_14.jpg" width="770" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_14.jpg" width="770" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <p>포트 포워딩을 해제 하시려면 아래 화면처럼 설정된 포트 포워딩에서 <strong>삭제</strong> 버튼을 클릭하시고 하단의 <strong>적용</strong> 버튼을 클릭합니다.</p>
-<img src="/images/compute/ncp_server_connect_15.jpg" width="770" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_15.jpg" width="770" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <h2 id="관리자-비밀번호-확인">관리자 비밀번호 확인 <a href="#%ea%b4%80%eb%a6%ac%ec%9e%90-%eb%b9%84%eb%b0%80%eb%b2%88%ed%98%b8-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드에서 처음 서버를 생성하고 접속하게 되면 root와 비밀번호로 접속하게 됩니다.
 물론 매번 비번을 입력하고 접속하는 것은 번거롭기도 하고 보안 측면에서 좋지 않기 때문에 이후에 SSH Key를 생성해서 접속하는 방식으로 바꾸는 것이 좋습니다.</p>
-<img src="/images/compute/ncp_server_connect_06.jpg" width="770" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_06.jpg" width="770" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <p>관리자 비밀번호 확인 메뉴를 클릭하면 인증키를 확인하는 화면이 나옵니다.
 인증키는 서버 생성시에 설정하고 PC에 다운로드 해 둔 확장지 *.pem 파일입니다.</p>
-<img src="/images/compute/ncp_server_connect_07.jpg" width="700" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_07.jpg" width="700" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <p>인증키 파일을 마우스로 끌어오거나 화면을 클릭해서 선택합니다.</p>
-<img src="/images/compute/ncp_server_connect_08.jpg" width="700" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_08.jpg" width="700" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <p>인증키가 일치하면 아래와 같이 root 계정에 해당하는 비밀번호가 나타납니다.
 이 비밀번호를 복사하여 저장해둡니다.
 혹시 복사-저장하는 것을 잊으셨어도 언제든지 관리자 비밀번호 확인 메뉴에 들어가서 인증키를 인증하면 다시 확인할 수 있으니 걱정하지 않으셔도 됩니다.</p>
-<img src="/images/compute/ncp_server_connect_09.jpg" width="500" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_09.jpg" width="500" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <h2 id="터미널-프로그램putty-실행">터미널 프로그램(Putty) 실행 <a href="#%ed%84%b0%eb%af%b8%eb%84%90-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%a8putty-%ec%8b%a4%ed%96%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Putty를 실행해서 공인IP를 입력합니다.</p>
-<img src="/images/compute/ncp_server_connect_16.jpg" width="500" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_16.jpg" width="500" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <p>접속을 하면 rsa2 key fingerprint 를 Putty 캐시에 저장할 것인지 묻는 화면이 나타납니다.
 보통 예(Y)를 선택하면 됩니다.</p>
-<img src="/images/compute/ncp_server_connect_17.jpg" width="600" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_17.jpg" width="600" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <h2 id="root-계정과-관리자-비밀번호-입력">root 계정과 관리자 비밀번호 입력 <a href="#root-%ea%b3%84%ec%a0%95%ea%b3%bc-%ea%b4%80%eb%a6%ac%ec%9e%90-%eb%b9%84%eb%b0%80%eb%b2%88%ed%98%b8-%ec%9e%85%eb%a0%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>계정 root와 관리자 비밀번호 확인에서 저장해 둔 비밀번호를 입력합니다.</p>
-<img src="/images/compute/ncp_server_connect_18.jpg" width="600" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_18.jpg" width="600" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <p>접속이 완료되면 이렇게 화면이 나타납니다.</p>
-<img src="/images/compute/ncp_server_connect_19.jpg" width="600" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage">
+<img src="/images/compute/ncp_server_connect_19.jpg" width="600" alt="공인IP를 사용해 Ncloud 서버(Linux)에 접속하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>Ncloud Classic 환경 서버 Public IP<br>
 <a href="https://guide.ncloud-docs.com/docs/server-publicip-classic" rel="external" target="_blank">https://guide.ncloud-docs.com/docs/server-publicip-classic<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
@@ -2696,7 +2702,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

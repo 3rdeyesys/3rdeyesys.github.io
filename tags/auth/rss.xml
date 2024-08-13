@@ -6,7 +6,7 @@
     <description>Recent content in Auth on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 31 Jan 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 13 Aug 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/auth/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud 서버 인증키 변경하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/compute/auth-security/server-authentication-key-change/</link>
@@ -28,13 +28,13 @@
     </item><item>
       <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
       <link>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</link>
-      <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</guid>
       <description>개요 linkNcloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.&#xA;그래서 Object Storage에 접속, 관리할 때 AWS의 CLI(Command Line Interface)를 사용할 수 있는데 그 중에서 AWS CLI 버전 2의 설치와 사용방법에 대해 정리해보겠습니다.&#xA;AWS CLI 버전 2 설치 link&#xD;info&#xD;AWS CLI 버전 1에서는 설치와 실행에 Python과 PIP를 이용하는 방법이 주로 사용되었지만, AWS CLI 버전 2에서는 Python 임베디드 버전이 포함되어 있어 별도로 설치할 필요가 없기에 설치 파일도 ZIP 압축 파일 형태로 제공됩니다.</description>
     </item><item>
       <title>PHP로 Archive Storage API 인증 토큰 생성하는 방법</title>
       <link>https://docs.3rdeyesys.com/docs/storage/archive-storage/api-access-token-create/</link>
-      <pubDate>Wed, 31 Jan 2024 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/archive-storage/api-access-token-create/</guid>
       <description>개요 link네이버 클라우드(Ncloud) Archive Storage API를 이용하려고 할 때 먼저 인증 토큰을 생성하고 생성된 토큰을 이용해서 API로 Archive Storage에 접근해야 합니다. 여기서는 PHP로 API 인증 토큰을 생성하는 방법에 대해 우선 전체 소스코드를 살펴보고 다음으로 주요 코드를 상세하게 살펴보겠습니다.&#xA;API 정보 link OpenStack Swift API : 2.15.1 (Pike) OpenStack Keystone V3 API : v3.8 인증 토큰 생성 코드 link&#xD;&amp;lt;?php&#xD;// 전송해야 할 설정값&#xD;$ncloud_accesskey = &amp;#34;네이버 클라우드 AccessKey&amp;#34;;&#xD;$ncloud_secretkey = &amp;#34;네이버 클라우드 SecretKey&amp;#34;;&#xD;$ncloud_domain_id = &amp;#34;Archive Storage 도메인 ID&amp;#34;;&#xD;$ncloud_project_id = &amp;#34;Archive Storage 프로젝트 ID&amp;#34;;&#xD;$api_server = &amp;#34;https://kr.</description>
     </item><item>
@@ -46,7 +46,7 @@
     </item><item>
       <title>Archive Storage CLI 사용 가이드 | Windows 환경</title>
       <link>https://docs.3rdeyesys.com/docs/storage/archive-storage/cli-guide-windows/</link>
-      <pubDate>Fri, 19 Nov 2021 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/archive-storage/cli-guide-windows/</guid>
       <description>개요 link네이버 클라우드(Ncloud) Archive Storage CLI를 Windows 환경에서 사용하는 방법에 대해 정리해보겠습니다.&#xA;CLI 정보 linkArchive Storage가 OepnStack으로 구성되어 있고, Client는 Python 기반의 Client를 사용하게 됩니다.&#xA;python-keystoneclient : 3.17.0 python-swiftclient : 3.6.0 Python 다운로드 link먼저 Python을 다운로드 합니다. 권장하는 버전은 3.6 이상입니다. 여기서는 3.9를 설치하겠습니다.&#xA;https://www.python.org/downloads/ Python 설치 linkPATH 추가 linkPython 설치 시작화면에 PATH에 python을 추가하는 옵션이 있습니다.&#xA;&amp;ldquo;Add Python 3.9 to PATH&amp;rdquo; 옵션을 선택하고 설치를 시작하면 됩니다.&#xA;PATH 문자 길이 제한 해제 linkWindows에는 기본설정에 파일경로가 최대 260자로 제한되어 있는데, 이 제한을 풀것인지 확인하는 과정입니다.</description>
     </item><item>
@@ -62,11 +62,11 @@
       <guid>https://docs.3rdeyesys.com/docs/security/ssl-vpn/basic-guide-classic/</guid>
       <description>개요 linkNcloud(네이버 클라우드) 외부에서 내부에 구성된 네트워크로 암호화된 보안 접속 통신을 제공하는 서비스인 SSL VPN을 Classic 환경에서 설정하고, 서버에 접속하는 방법에 대해 정리해보겠습니다.&#xA;SSL VPN이란? link VPN은 가상 사설망(Virtual Private Network)의 약자로, 외부에서 접근할 수 없는 사설망에 내 PC나 네트워크를 연결시키는 방법을 말합니다. 사설망과의 연결은 가상 터널을 통해 이루어지며, 이 가상 터널을 SSL 암호화로 보호하는 것이 SSL VPN입니다. 가상 터널을 통해 사설망과 연결된 사용자 PC는 사설망의 라우팅 및 ACL 정책에 따라 내부 서버에 접근할 수 있습니다.</description>
     </item><item>
-      <title>Gmail을 이용해 smtp 메일 발송할 때 인증오류 해결 방법</title>
-      <link>https://docs.3rdeyesys.com/docs/etc/smtp-auth-error-troubleshooting-using-gmail-account/</link>
-      <pubDate>Mon, 30 Nov 2020 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/etc/smtp-auth-error-troubleshooting-using-gmail-account/</guid>
-      <description>개요 link웹서버나 애플리케이션 등에서 gmail 계정을 이용해서 smtp로 메일을 발송하는 경우가 있습니다.&#xA;관리자의 안내 메일이나 소수회원을 위한 다량메일 발송등을 하는 것이 그런 경우인데&#xA;예전에는 보안 수준이 낮은 앱의 액세스 허용 옵션으로 가능했었지만, 최근에는 이 설정으로도 해결되지 않는 경우가 많습니다.&#xA;이럴 때 확실하게 인증할 수 있는 방법이 구글계정 2단계 인증 사용과 앱 비밀번호 설정입니다.&#xA;인증 오류 메시지 link위에서 이야기한 2단계 인증과 앱 비밀번호를 사용하지 않고 smtp로 구글계정&#xA;report&#xD;인증 오류 메시지: The SMTP server requires a secure connection or the client was not authenticated.</description>
+      <title>Ncloud API 인증키 생성하는 방법</title>
+      <link>https://docs.3rdeyesys.com/docs/api/ncloud-api-key-create-guide/</link>
+      <pubDate>Tue, 13 Aug 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/api/ncloud-api-key-create-guide/</guid>
+      <description>개요 linkNcloud(네이버 클라우드)를 이용하다보면 여러 가지 정보를 조회하거나 서버를 생성하는 등의 작업을 위해 API를 활용하게 되는 경우가 많습니다. 이때 API를 사용하기 위해 반드시 필요한 것이 [Access Key]와 [Secret Key]등으로 구성된 [API 인증키]입니다. 여기서는 [API 인증키]를 어떻게 생성하고, 보안과 관련해서 지켜야할 원칙이나 설정은 어떤 것이 있는지 정리해보겠습니다.&#xA;계정과 권한 설정 link그러면 [API 인증키]를 어떻게 생성하는지 살펴보기 전에 [API 인증키]를 생성할 계정과 권한 설정에 관해서 먼저 정리해보겠습니다.&#xA;API 인증키 생성 계정 linkAPI 인증키 생성과 관련해서 가장 중요한 원칙은 메인 계정이 아닌 최소 권한을 가진 서브 계정(Sub Account)에서 API 인증키를 생성하는 것입니다.</description>
     </item>
   </channel>
 </rss>

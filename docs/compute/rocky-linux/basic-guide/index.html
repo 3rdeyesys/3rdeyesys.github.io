@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2664,7 +2670,7 @@
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Rocky Linux (록키 리눅스)는 CentOS의 서비스 지원 종료로 대안으로 떠오른 CentOS 기반의 리눅스 OS입니다.<br>
 Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 선정되어 국내에서 록키 리눅스 인프라와 기술지원을 위해 협력해왔고, 드디어 Ncloud 콘솔에서 록키 리눅스를 제공하기 시작했기에 간단하게 소개해보려고 합니다.</p>
 <h2 id="제공-버전">제공 버전 <a href="#%ec%a0%9c%ea%b3%b5-%eb%b2%84%ec%a0%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ncloud에서는 현재 Rocky Linux 8.6, 8.8, 8.10 버전을 VPC 환경에서 제공하고 있습니다. 여기서는 8.10 버전을 기준으로 소개해보겠습니다.</p>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-41.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-41.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="설치할-소프트웨어">설치할 소프트웨어 <a href="#%ec%84%a4%ec%b9%98%ed%95%a0-%ec%86%8c%ed%94%84%ed%8a%b8%ec%9b%a8%ec%96%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>록키 리눅스 서버를 실행하고 보통 자주 사용하게 되는 아래의 소프트웨어들을 설치하고 확인해보겠습니다.</p>
 <ul>
 <li>Apache</li>
@@ -2673,7 +2679,7 @@ Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 �
 <li>MariaDB</li>
 </ul>
 <h2 id="접속-화면">접속 화면 <a href="#%ec%a0%91%ec%86%8d-%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>서버를 생성하고 접속하면 아래와 같이 Ncloud 로고가 크게 표시된 화면을 볼 수 있습니다.</p>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-42.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-42.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="패키지-업데이트">패키지 업데이트 <a href="#%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.</p>
 
 
@@ -2704,7 +2710,7 @@ Ncloud (네이버 클라우드)는 이 록키 리눅스의 핵심 파트너로 �
 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.</p>
   </div>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-43.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-43.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="apache-설치">Apache 설치 <a href="#apache-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="버전-확인">버전 확인 <a href="#%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Rocky Linux 8.10에 포함된 Apache 버전을 확인해보면 아래와 같이 [<strong>2.4</strong>] 버전만 존재하는 것을 알 수 있습니다.</p>
 
 
@@ -2725,7 +2731,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf module list httpd</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-44.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-44.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="설치">설치 <a href="#%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치된 버전은 다음과 같습니다.</p>
 <ul>
 <li>Apache: 2.4.37</li>
@@ -2749,10 +2755,10 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf -y install httpd</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-45.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-45.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="접속화면">접속화면 <a href="#%ec%a0%91%ec%86%8d%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치 완료 후에 Apache를 시작하고 웹브라우저로 접속해보면 다음과 같이 Apache 로고가 포함된 화면을 확인할 수 있습니다.</p>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-46.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-47.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-46.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-47.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="php-설치">PHP 설치 <a href="#php-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="버전-확인-1">버전 확인 <a href="#%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Ncloud Rocky Linux 8.10에서 지원하는 PHP 버전은 다음과 같이 확인해볼 수 있습니다.<br>
 리스트를 확인해보면 7.2버전이 기본이고, 최신 버전은 8.2버전인 것을 알 수 있습니다.</p>
 
@@ -2781,7 +2787,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 <li>PHP 8.0</li>
 <li>PHP 8.2</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-48.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-48.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="버전-활성화-정보-초기화">버전 활성화 정보 초기화 <a href="#%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94-%ec%a0%95%eb%b3%b4-%ec%b4%88%ea%b8%b0%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>최신 버전인 8.2버전을 설치하기 위해 버전 활성화 정보를 초기화 합니다. 아래처럼 현재 활성화된 버전이 없을 경우에는 아무 변화없이 완료됩니다.</p>
 
 
@@ -2802,7 +2808,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf module reset php</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-49.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-49.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="82-버전-활성화">8.2 버전 활성화 <a href="#82-%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>다음으로 8.2 버전을 활성화 합니다.</p>
 
 
@@ -2823,7 +2829,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf module enable php:8.2</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-50.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-50.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="설치-1">설치 <a href="#%ec%84%a4%ec%b9%98-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>마지막으로 8.2 버전을 설치하고 버전을 확인해봅니다.</p>
 
 
@@ -2863,7 +2869,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>php -v</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-51.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-51.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="nginx-설치">NginX 설치 <a href="#nginx-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="버전-확인-2">버전 확인 <a href="#%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Rocky Linux 8.10에서 지원하는 NginX 버전을 확인합니다.<br>
 리스트를 살펴보면 1.14가 기본 버전이고, Rocky Linux 8.10에 포함된 최신 버전은 1.24인 것을 알 수 있습니다. (1.14버전이 활성화 상태인 것은 위쪽에서 PHP를 설치하면서 생긴 현상입니다.)</p>
 
@@ -2893,7 +2899,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 <li>NginX 1.22</li>
 <li>NginX 1.24</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-52.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-52.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="버전-활성화-정보-초기화-1">버전 활성화 정보 초기화 <a href="#%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94-%ec%a0%95%eb%b3%b4-%ec%b4%88%ea%b8%b0%ed%99%94-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>우선 위에서 확인했던 NginX 버전 활성화 정보를 초기화 합니다.<br>
 혹시 활성화된 버전이 없을 경우에는 별다른 변화 없이 과정이 완료됩니다.</p>
 
@@ -2915,7 +2921,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf module reset nginx</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-53.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-53.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="124-버전-활성화">1.24 버전 활성화 <a href="#124-%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Rocky Linux 8.10에 포함된 최신 버전인 1.24 버전을 활성화합니다.</p>
 
 
@@ -2936,7 +2942,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf module enable nginx:1.24</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-54.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-54.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="설치-2">설치 <a href="#%ec%84%a4%ec%b9%98-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NginX 설치합니다. 설치된 버전은 다음과 같습니다.</p>
 
 
@@ -2979,7 +2985,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 <ul>
 <li>NginX: 1.24.0</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-55.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-55.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="접속화면-1">접속화면 <a href="#%ec%a0%91%ec%86%8d%ed%99%94%eb%a9%b4-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치 완료 후에 nginx를 실행 시키고, 웹브라우저로 접속해보면 다음과 같이 NginX 로고가 포함된 화면을 확인할 수 있습니다.</p>
 
 
@@ -3001,8 +3007,8 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 systemctl start nginx</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-56.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-57.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-56.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-57.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="mariadb-mysql-설치">MariaDB (MySQL) 설치 <a href="#mariadb-mysql-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="버전-확인-3">버전 확인 <a href="#%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8-3" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>우선, Ncloud Rocky Linux 8.10에서 지원하는 MariaDB 버전을 확인합니다.<br>
 리스트를 살펴보면 10.3이 기본 버전이고 10.11 버전이 최신인 것을 알 수 있습니다.</p>
 
@@ -3029,7 +3035,7 @@ systemctl start nginx</code>
 <li>mariadb 10.5</li>
 <li>mariadb 10.11</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-58.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-58.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="버전-활성화-정보-초기화-2">버전 활성화 정보 초기화 <a href="#%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94-%ec%a0%95%eb%b3%b4-%ec%b4%88%ea%b8%b0%ed%99%94-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>최신 버전인 10.11버전을 설치하기 위해 버전 활성화 정보를 초기화 합니다. 아래처럼 현재 활성화된 버전이 없을 경우에는 아무 변화없이 완료됩니다.</p>
 
 
@@ -3050,7 +3056,7 @@ systemctl start nginx</code>
   <code>dnf module reset mariadb</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-59.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-59.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="1011-버전-활성화">10.11 버전 활성화 <a href="#1011-%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Rocky Linux 8.10에 포함된 최신 버전인 10.11 버전을 활성화합니다.</p>
 
 
@@ -3071,7 +3077,7 @@ systemctl start nginx</code>
   <code>dnf module enable mariadb:10.11</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-60.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-60.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="설치-3">설치 <a href="#%ec%84%a4%ec%b9%98-3" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Rocky Linux에서는 기본 DB가 MariaDB이고, 설치할 때도 [<strong>mariadb-server</strong>]로 설치하게 됩니다.<br>
 여기서는 기본 버전으로 설치하겠습니다.</p>
 
@@ -3093,7 +3099,7 @@ systemctl start nginx</code>
   <code>dnf -y install mariadb-server</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-61.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-61.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="데몬-시작">데몬 시작 <a href="#%eb%8d%b0%eb%aa%ac-%ec%8b%9c%ec%9e%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>mariadb 데몬을 시작합니다.</p>
 
 
@@ -3115,7 +3121,7 @@ systemctl start nginx</code>
 systemctl start mariadb</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-62.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-62.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="보안-설정">보안 설정 <a href="#%eb%b3%b4%ec%95%88-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p><code>mariadb-secure-installation</code>은 MariaDB의 기본 보안을 설정하는 명령으로, 설정되는 항목은 다음과 같습니다.</p>
 <ul>
 <li>root 계정 패스워드 변경</li>
@@ -3143,7 +3149,7 @@ systemctl start mariadb</code>
   <code>mariadb-secure-installation</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-63.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-63.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="db-접속">DB 접속 <a href="#db-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>mariadb</strong>] 명령을 입력하면 아래와 같이 MariaDB 서버에 접속됩니다.<br>
 설치된 DB 서버 버전은 다음과 같습니다.</p>
 <ul>
@@ -3169,7 +3175,7 @@ systemctl start mariadb</code>
   <code>mariadb</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-64.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-64.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h4 id="mysql_native_password-인증">mysql_native_password 인증 <a href="#mysql_native_password-%ec%9d%b8%ec%a6%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
 
 
@@ -3189,9 +3195,9 @@ systemctl start mariadb</code>
   <code>mariadb -u 계정 -p</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-65.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-65.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="웹-콘솔">웹 콘솔 <a href="#%ec%9b%b9-%ec%bd%98%ec%86%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Rocky Linux는 웹브라우저에서 서버에 접속해서 서버를 관리할 수 있는 웹 콘솔을 제공하는데, 처음 서버에 접속했던 콘솔화면을 보면 아래와 같이 웹 콘솔을 활성화하는 방법이 안내되어 있습니다.</p>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-66.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-66.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <p>아래 명령어를 입력하면 [<strong>9090</strong>] 포트로 접속할 수 있는 웹 콘솔이 활성화됩니다.</p>
 
 
@@ -3212,11 +3218,11 @@ systemctl start mariadb</code>
   <code>systemctl enable --now cockpit.socket</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-67.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-67.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="웹-콘솔-접속">웹 콘솔 접속 <a href="#%ec%9b%b9-%ec%bd%98%ec%86%94-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>먼저, ACG에서 [<strong>9090</strong>] 포트를 오픈하고, [<strong>https://{서버 IP}:9090</strong>]으로 접속하면 아래와 같은 화면을 볼 수 있습니다.</p>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-68.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-68.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h3 id="웹-콘솔-화면">웹 콘솔 화면 <a href="#%ec%9b%b9-%ec%bd%98%ec%86%94-%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>웹 콘솔에 접속하면 서버 상태와 시스템 정보, CPU-메모리 사용량 등을 확인할 수 있고, 그 외에도 여러 가지 기능을 확인할 수 있습니다.</p>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-69.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-69.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="버전-활성화-오류-해결-방법">버전 활성화 오류 해결 방법 <a href="#%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94-%ec%98%a4%eb%a5%98-%ed%95%b4%ea%b2%b0-%eb%b0%a9%eb%b2%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[dnf module enable &lt;module_name&gt;] 명령으로 다른 버전을 활성화하려고 할 때 아래와 같은 오류가 발생하는 경우가 있습니다.<br>
 오류 메시지 하단에 보면 [<strong>dnf module reset &lt;module_name&gt;</strong>] 명령을 입력하면 해결된다 합니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
@@ -3344,7 +3350,7 @@ It is recommended to rather remove all installed content from the module, and re
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

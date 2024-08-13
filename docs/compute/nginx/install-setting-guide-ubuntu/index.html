@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2641,7 +2647,7 @@
   <code> sudo apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_01.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_01.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h3 id="nginx-signing-key-가져오기">NginX Signing Key 가져오기 <a href="#nginx-signing-key-%ea%b0%80%ec%a0%b8%ec%98%a4%ea%b8%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2662,7 +2668,7 @@
     | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg &gt;/dev/null</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_02.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_02.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h3 id="nginx-signing-key-검증">NginX Signing Key 검증 <a href="#nginx-signing-key-%ea%b2%80%ec%a6%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 가져온 Signing Key를 아래 명령어로 검증합니다.<br>
 검증한 FingerPring 값이 <code>573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62</code> 와 일치하는지 확인합니다.</p>
 
@@ -2684,7 +2690,7 @@
   <code> gpg --dry-run --quiet --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_03.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_03.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h2 id="repository-설정">Repository 설정 <a href="#repository-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>NginX package를 다운 받아 설치하기 위해서는 Repository를 설정해야 합니다.<br>
 아래 명령어로 리포지토리를 설정합니다. NginX의 <strong>stable, mainline</strong> 두가지 버전 중에서 여기서는 <code>mainline 버전을 설치</code>합니다.</p>
 <h3 id="nginx-mainline">nginx-mainline <a href="#nginx-mainline" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
@@ -2737,7 +2743,7 @@
 NginX의 공식 설명에 따르면 버그 수정이나 보안 패치 등은 항상 mainline 버전에 먼저 적용되기 때문에 mainline을 사용하는 것을 추천한다고 합니다. <br />
 stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</strong>을 사용하고 있어서 신규 버전에서 <strong>호환성 문제</strong>가 발생할 가능성이 걱정될 때라고 합니다.
 </div>  
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_04.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_04.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h2 id="repository-우선-순위-설정">Repository 우선 순위 설정 <a href="#repository-%ec%9a%b0%ec%84%a0-%ec%88%9c%ec%9c%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>배포판에 기본 설정된 리포지토리 보다 위에서 설정한 리포지토리를 우선하도록 설정합니다.</p>
 
 
@@ -2759,7 +2765,7 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
     release o=nginx\nPin-Priority: 900\n&#34; | sudo tee /etc/apt/preferences.d/99nginx</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_05.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_05.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h2 id="nginx-설치">NginX 설치 <a href="#nginx-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>설정을 마쳤으면 apt로 NginX를 설치합니다.</p>
 
 
@@ -2780,7 +2786,7 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
   <code> sudo apt update</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_06.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_06.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 
 
 
@@ -2800,7 +2806,7 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
   <code> sudo apt install nginx</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_07.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_07.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h2 id="디렉토리-설정">디렉토리 설정 <a href="#%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 홈으로 사용할 디렉토리를 생성하고, 해당 디렉토리의 소유권을 설정하겠습니다.<br>
 그리고, NginX가 정상 작동하는지 확인해보기 위해 설치시에 포함된 index.html을 홈 디렉토리로 복사합니다.</p>
 
@@ -2825,7 +2831,7 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
  ls -al /ncp/data/www</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_08.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_08.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h2 id="환경-설정">환경 설정 <a href="#%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>주로 변경할 환경 설정 파일은 /etc/nginx/conf.d/default.conf 입니다.</p>
 
 
@@ -2867,7 +2873,7 @@ stable 버전을 사용하는 주된 경우는 <strong>third-party 모듈</stron
 server_name  nginx-test.com;</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_09.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_09.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h3 id="홈-디렉토리-기본-문서-설정">홈 디렉토리, 기본 문서 설정 <a href="#%ed%99%88-%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac-%ea%b8%b0%eb%b3%b8-%eb%ac%b8%ec%84%9c-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>앞에서 만들었던 홈 디렉토리 경로를 설정하고 기본 문서를 지정하는 곳입니다.</p>
 
 
@@ -2900,8 +2906,8 @@ server_name  nginx-test.com;</code>
     }</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_10.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_11.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_10.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_11.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h3 id="error-페이지-설정">error 페이지 설정 <a href="#error-%ed%8e%98%ec%9d%b4%ec%a7%80-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>404, 500 등의 error 페이지를 설정할 경우 아래 내용들을 수정하면 됩니다.</p>
 
 
@@ -2934,8 +2940,8 @@ server_name  nginx-test.com;</code>
     }</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_12.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_13.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_12.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_13.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h3 id="htaccess-파일-접근-금지-설정">.htaccess 파일 접근 금지 설정 <a href="#htaccess-%ed%8c%8c%ec%9d%bc-%ec%a0%91%ea%b7%bc-%ea%b8%88%ec%a7%80-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>.htaccess 파일에 대한 접근 금지를 설정할 경우 아래 내용을 주석 해제하면 됩니다.</p>
 
 
@@ -2964,8 +2970,8 @@ server_name  nginx-test.com;</code>
     }</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_14.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_15.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_14.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_15.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h2 id="nginx-실행">NginX 실행 <a href="#nginx-%ec%8b%a4%ed%96%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>설정을 모두 마쳤으면 NginX를 시작하고 상태를 확인합니다.</p>
 
 
@@ -2987,9 +2993,9 @@ server_name  nginx-test.com;</code>
  systemctl status nginx</code>
   </pre>
   </div>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_16.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_16.png" width="840" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h3 id="사이트-접속">사이트 접속 <a href="#%ec%82%ac%ec%9d%b4%ed%8a%b8-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NginX가 정상 작동하면 아래와 같이 서버 접속 화면을 확인할 수 있습니다.</p>
-<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_17.png" width="600" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage">
+<img src="/images/compute/lemp/ncloud_server_nginx_install_setting_guide_ubuntu_17.png" width="600" alt="Ncloud Ubuntu에서 NginX 설치, 설정하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>NginX Linux packages 설치 가이드<br>
@@ -3087,7 +3093,7 @@ server_name  nginx-test.com;</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

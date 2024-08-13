@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2616,7 +2622,7 @@
   <code>/etc/my.cnf</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-config-my-cnf-rocky-linux-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mysql-config-my-cnf-rocky-linux-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <h3 id="mariadb">MariaDB <a href="#mariadb" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Rocky Linux에서는 <strong>mariadb-server.cnf</strong> 파일입니다.</p>
 
 
@@ -2639,12 +2645,12 @@
   </div>
 <p>MariaDB에서도 <strong>my.cnf</strong> 파일이 <strong>/etc/</strong> 바로 밑에 위치하기는 하지만, 실제로 <strong>/etc/my.cnf</strong> 파일을 열어보면 다음과 같이 <strong>my.cnf.d</strong> 디렉토리에 있는 파일을 include만 하게 되어 있습니다.<br>
 즉, <strong>my.cnf</strong> 파일에 설정을 추가해도 되지만 가능하면 하위의 각각의 설정 파일에 추가하는 것이 좋습니다.</p>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-rocky-linux-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-rocky-linux-02.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-rocky-linux-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-rocky-linux-02.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <ul>
 <li><strong>/etc/my.cnf.d/mariadb-server.cnf</strong> 파일을 열어 보면 다음과 같이 구성 되어 있습니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-rocky-linux-03.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-rocky-linux-03.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <h2 id="ubuntu">Ubuntu <a href="#ubuntu" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ubuntu에서는 <strong>my.cnf</strong> 파일이 <strong>/etc/mysql</strong> 밑에 위치합니다.</p>
 
 
@@ -2687,23 +2693,23 @@
 /etc/mysql/mysql.conf.d/mysqld.cnf</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-05.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-05.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <p>먼저 <strong>/etc/mysql/my.cnf</strong> 파일을 열어 보면 다음과 같이 <strong>conf.d</strong> 디렉토리와 <strong>mysql.conf.d</strong> 디렉토리에 있는 파일을 include 하도록 되어 있습니다.</p>
-<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <p><strong>/etc/mysql/</strong> 디렉토리의 파일과 서브 디렉토리 구조를 살펴보면 다음과 같습니다. 여기서 <strong>mysql.conf.d</strong> 디렉토리에 있는 <strong>mysql.cnf</strong> 파일과 <strong>mysqld.cnf</strong> 파일을 살펴보겠습니다.</p>
-<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-02.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-02.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <ul>
 <li><strong>/etc/mysql/mysql.conf.d/mysql.cnf</strong><br>
 이 파일을 열어 보면 다음과 같이 [<strong>The MySQL database client configuration file</strong>]이라고 되어 있습니다.<br>
 즉, <strong>MySQL Client 관련 설정</strong>은 이곳에 지정하면 되겠습니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-03.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-03.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <ul>
 <li><strong>/etc/mysql/mysql.conf.d/mysqld.cnf</strong><br>
 이 파일을 열어 보면 다음과 같이 [<strong>The MySQL database server configuration file</strong>]이라고 되어 있습니다.<br>
 즉, <strong>MySQL Server 관련 설정</strong>은 이곳에 지정하면 되겠습니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-04.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mysql-config-my-cnf-ubuntu-04.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <h3 id="mariadb-1">MariaDB <a href="#mariadb-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Ubuntu 20.04, MariaDB 10.3에서는 아래의 4가지 파일을 주로 확인하면 되겠습니다.</p>
 
 
@@ -2727,26 +2733,26 @@
 /etc/mysql/mariadb.conf.d/50-server.cnf</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <p>그런데, <strong>/etc/mysql/my.cnf</strong> 파일의 정보를 확인해보면 결국 <strong>/etc/mysql/mariadb.cnf</strong> 파일의 심볼릭 링크라는 것을 알 수 있습니다. 그러므로 <strong>/etc/mysql/mariadb.cnf</strong> 파일을 살펴보겠습니다.</p>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-02.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-02.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <p><strong>/etc/mysql/mariadb.cnf</strong> 파일을 열어 보면 다음과 같이 <strong>conf.d</strong> 디렉토리와 <strong>mariadb.conf.d</strong> 디렉토리에 있는 파일을 include 하도록 되어 있습니다.</p>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-03.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-03.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <p><strong>/etc/mysql/</strong> 디렉토리의 파일과 서브 디렉토리 구조를 살펴보면 다음과 같습니다.<br>
 여기서 <strong>mariadb.conf.d</strong> 디렉토리에 있는 <strong>50-client.cnf</strong> 파일과 <strong>50-server.cnf</strong> 파일을 살펴보겠습니다.</p>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-04.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-04.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <ul>
 <li><strong>/etc/mysql/mariadb.conf.d/50-client.cnf</strong><br>
 이 파일을 열어 보면 다음과 같이 [<strong>This group is read by the client library</strong>]이라고 되어 있습니다.<br>
 즉, <strong>MariaDB Client 관련 설정</strong>은 이곳에 지정하면 되겠습니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-05.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-05.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <ul>
 <li><strong>/etc/mysql/mariadb.conf.d/50-server.cnf</strong><br>
 이 파일을 열어 보면 다음과 같이 [<strong>These groups are read by MariaDB server</strong>]이라고 되어 있습니다.<br>
 즉, <strong>MariaDB Server 관련 설정</strong>은 이곳에 지정하면 되겠습니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-06.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-ubuntu-06.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <h2 id="centos">CentOS <a href="#centos" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>마지막으로 CentOS를 살펴보겠습니다.</p>
 <h3 id="mysql-2">MySQL <a href="#mysql-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>MySQL은 <strong>my.cnf</strong> 파일이 <strong>/etc/</strong> 바로 밑에 위치합니다.</p>
 
@@ -2768,7 +2774,7 @@
   <code>/etc/my.cnf</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-config-my-cnf-centos-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mysql-config-my-cnf-centos-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <h3 id="mariadb-2">MariaDB <a href="#mariadb-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>MariaDB에서도 <strong>my.cnf</strong> 파일이 <strong>/etc/</strong> 바로 밑에 위치하기는 하지만, 실제로 <strong>/etc/my.cnf</strong> 파일을 열어보면 다음과 같이 <strong>my.cnf.d</strong> 디렉토리에 있는 파일을 include만 하게 되어 있습니다.<br>
 즉, <strong>my.cnf</strong> 파일에 설정을 추가해도 되지만 가능하면 하위의 각각의 설정 파일에 추가하는 것이 좋습니다.</p>
 
@@ -2790,12 +2796,12 @@
   <code>/etc/my.cnf.d/server.cnf</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-centos-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-centos-02.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-centos-01.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-centos-02.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <ul>
 <li><strong>/etc/my.cnf.d/server.cnf</strong> 파일을 열어 보면 다음과 같이 구성 되어 있습니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mariadb-config-my-cnf-centos-03.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage">
+<img src="/images/database/ncloud-database-mariadb-config-my-cnf-centos-03.png" width="840" alt="Ncloud Mysql, mariadb 환경설정 파일 my.cnf 위치 안내" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ncloud MySQL 서버 이미지 사용 가이드<br>
@@ -2891,7 +2897,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

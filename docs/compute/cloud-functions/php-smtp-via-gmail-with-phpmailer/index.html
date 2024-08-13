@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2618,9 +2624,9 @@
 PHPMailer는 GitHub에 있는 사이트로 가서 Code를 선택하고 Download ZIP을 클릭하면 다운받을 수 있습니다.<br>
 일반적인 Linux서버에서 사용하는 경우라면 composer를 이용해서 설치하면 되겠지만 Cloud Functions에는 zip 파일로 소스코드를 업로드 해야 하기에 다운로드 받겠습니다.</p>
 <p><a href="https://github.com/PHPMailer/PHPMailer" rel="external" target="_blank">https://github.com/PHPMailer/PHPMailer<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_01.jpg" width="850" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_01.jpg" width="850" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>다운받은 zip파일을 압축해제하면 아래와 같은 파일과 폴더를 확인할 수 있는데 여기서는 src, language 두 폴더만 사용합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_02.jpg" width="600" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_02.jpg" width="600" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h2 id="메일발송-코드-작성">메일발송 코드 작성 <a href="#%eb%a9%94%ec%9d%bc%eb%b0%9c%ec%86%a1-%ec%bd%94%eb%93%9c-%ec%9e%91%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>PHPMailer에서 제공하는 샘플코드를 참고해서 꼭 필요한 코드만 적었습니다. 파일은 <strong>index.php</strong>로 저장합니다.</p>
 <p>추가로 필요한 코드가 있으면 아래 링크에 있는 PHPMailer 샘플코드를 참고하시면 되겠습니다.</p>
 <p><a href="https://github.com/PHPMailer/PHPMailer/blob/master/examples/gmail.phps" rel="external" target="_blank">https://github.com/PHPMailer/PHPMailer/blob/master/examples/gmail.phps<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
@@ -2826,31 +2832,31 @@ $mail-&gt;CharSet = PHPMailer::CHARSET_UTF8;</code>
   </pre>
   </div>
 <h3 id="소스코드-zip-파일로-압축">소스코드 Zip 파일로 압축 <a href="#%ec%86%8c%ec%8a%a4%ec%bd%94%eb%93%9c-zip-%ed%8c%8c%ec%9d%bc%eb%a1%9c-%ec%95%95%ec%b6%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 작성한 소스코드를 index.php로 저장하고 클래스 파일들이 들어있는 src 폴더와 언어 파일이 들어있는 laguage 파일과 함께 zip 파일로 압축합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_03.jpg" width="650" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_04.jpg" width="650" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_03.jpg" width="650" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_04.jpg" width="650" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h2 id="cf-이용신청">CF 이용신청 <a href="#cf-%ec%9d%b4%ec%9a%a9%ec%8b%a0%ec%b2%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 콘솔에서 Cloud Functions에 들어가 이용신청을 합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_01.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_01.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h2 id="cf-action-생성">CF Action 생성 <a href="#cf-action-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="액션-생성">액션 생성 <a href="#%ec%95%a1%ec%85%98-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>버튼을 선택해 액션을 생성합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_02.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_02.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h3 id="트리거-선택">트리거 선택 <a href="#%ed%8a%b8%eb%a6%ac%ea%b1%b0-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>액션을 생성하기 전에 트리거 조건을 설정해야 하는데, 여기서는 트리거 설정 없이 액션 만들기를 선택하겠습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_03.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_03.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h3 id="이름-입력">이름 입력 <a href="#%ec%9d%b4%eb%a6%84-%ec%9e%85%eb%a0%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>액션의 이름은 특별한 규칙이 없으니 알아보기 쉬운 것으로 입력하면 됩니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_05.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_05.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 ### 소스코드 언어 선택
 소스코드 언어 중에서 php는 7.1, 7.3이 있는데 둘 중에 편하신대로 선택하시면 됩니다.
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_06.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_06.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h3 id="소스코드-업로드">소스코드 업로드 <a href="#%ec%86%8c%ec%8a%a4%ec%bd%94%eb%93%9c-%ec%97%85%eb%a1%9c%eb%93%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>소스코드 타입은 코드 직접 입력과 파일 업로드가 가능한데, 앞에서 만든 소스코드를 선택하고 업로드 합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_07.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_07.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>소스코드가 업로드 되었습니다. 등록된 소스코드는 나중에 다운로드 할 수도 있고 다른 파일을 재업로드 할 수도 있습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_08.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_08.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h2 id="네트워크-환경-설정">네트워크 환경 설정 <a href="#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>VPC 환경에서는 NAT Gateway를 이용해야 하기 때문에 네트워크 환경을 설정해야 합니다.<br>
 Classic 환경에서는 다음 단계인 <a href="/docs/compute/cloud-functions/php-smtp-via-gmail-with-phpmailer/#cfoptionselect">옵션 설정</a>으로 바로 이동하시면 됩니다.</p>
 <h3 id="vpc-연결-정보-선택">VPC 연결 정보 선택 <a href="#vpc-%ec%97%b0%ea%b2%b0-%ec%a0%95%eb%b3%b4-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>연결할 VPC와 Subnet을 선택합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_09.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_09.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h3 id="vpc-생성">VPC 생성 <a href="#vpc-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>혹시 VPC를 생성하지 않았거나 새로운 VPC에서 실행하려고 할 경우에는 VPC생성 버튼을 클릭해서 새 창에서 VPC를 생성합니다.
 VPC는 논리적으로 격리된 네트워크 공간을 뜻하며, IP 주소 범위는, private 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /16~/28 범위여야 합니다.</p>
 <p><a href="https://console.ncloud.com/vpc-network/vpc" rel="external" target="_blank">https://console.ncloud.com/vpc-network/vpc<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_10.jpg" width="770" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_10.jpg" width="770" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h3 id="subnet-생성">Subnet 생성 <a href="#subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>사용할 수 있는 Subnet이 없거나 새로 생성할 경우 Subnet 생성 버튼을 클릭합니다.<br>
 이름은 알아보기 쉽게 [ cf-phpmailer-smtp-subnet ]으로 입력했습니다.<br>
 Subnet의 IP 주소 범위는 VPC 주소 범위 이하로만 지정이 가능하며, private 대역(10.0.0.0/8,172.16.0.0/12,192.168.0.0/16) 내에서 /16~/28 범위여야 합니다.<br>
@@ -2859,46 +2865,46 @@ Subnet의 IP 주소 범위는 VPC 주소 범위 이하로만 지정이 가능하
 <strong>Cloud Functions는 Private Subnet에서만 작동</strong>하므로 N (Private)을 선택하셔야 합니다.<br>
 용도는 일반으로 선택하시면 됩니다.</p>
 <p><a href="https://console.ncloud.com/vpc-network/subnet" rel="external" target="_blank">https://console.ncloud.com/vpc-network/subnet<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_11.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_11.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h3 id="nat-gateway-생성">NAT Gateway 생성 <a href="#nat-gateway-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 생성한 Subnet이 Private이기 때문에 Cloud Functions으로 메일을 발송 즉, 외부와 통신을 하기 위해서는 NAT Gateway를 만들고 적용해주어야 합니다.<br>
 이름은 [ cf-phpmailer-smtp-natgateway ]로 입력했습니다.</p>
 <p><a href="https://console.ncloud.com/vpc-network/natgw" rel="external" target="_blank">https://console.ncloud.com/vpc-network/natgw<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_12.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_12.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h3 id="route-table-설정">Route Table 설정 <a href="#route-table-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>이제 Cloud Functions이 속한 Subnet이 NAT Gateway를 거쳐서 외부로 나갈 수 있도록 Route Table을 설정합니다.<br>
 VPC를 만들때 자동으로 생성된 2개의 Route Table중에서 private table을 선택하고 연관 Subnet 탭을 보시면 위에서 생성했던 [ cf-phpmailer-smtp-subnet ]을 확인할 수 있습니다.</p>
 <p><a href="https://console.ncloud.com/vpc-network/routeTable" rel="external" target="_blank">https://console.ncloud.com/vpc-network/routeTable<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_13.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_13.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>이제 Routes 생성 버튼을 클릭하고 설정 값들을 입력, 선택하고 생성 버튼을 클릭합니다.</p>
 <ul>
 <li>Destination : 0.0.0.0/0 입력</li>
 <li>Target Type : NATGW 선택</li>
 <li>Target Name : cf-phpmailer-smtp-natgateway 선택</li>
 </ul>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_14.jpg" width="845" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_14.jpg" width="845" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>생성 버튼을 클릭하고 나면 설정이 추가된 것을 확인할 수 있습니다. 이제 확인 버튼을 클릭해서 창을 닫습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_15.jpg" width="845" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_15.jpg" width="845" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>창을 닫고 나면 설정이 추가된 것을 Routes 탭에서 확인할 수 있습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_16.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_16.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>VPC관련 설정이 끝났으면 이전 창으로 돌아가서 다음 단계인 [ 옵션 설정 ]을 확인하시면 됩니다.</p>
 <h3 id="cfoptionselect">옵션 설정 <a href="#cfoptionselect" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>실행할 Main 함수의 이름은 main으로 그대로 두시고, 액션 메모리와 Timeout은 기본으로 두셔도 되고 익숙해진 이후에 상황에 맞게 조정하시면 됩니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_09.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_09.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h3 id="생성-완료">생성 완료 <a href="#%ec%83%9d%ec%84%b1-%ec%99%84%eb%a3%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>디폴트 파라미터의 경우 필요하실 경우 설정하시면 됩니다.<br>
 모든 준비가 끝났으면 생성 버튼을 클릭하여 액션을 생성합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_11.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_11.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h2 id="cf-action-실행">CF Action 실행 <a href="#cf-action-%ec%8b%a4%ed%96%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 생성된 액션을 실행해보겠습니다.
 액션의 기본정보 화면에서는 액션 실행과 수정, 삭제를 할 수 있고, 모니터링 화면에서는 액션이 실행된 통계 정보를 확인할 수 있습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_18.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_18.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>액션 실행화면 왼쪽에는 파라미터를 입력할 수 있고,
 오른쪽에는 결과가 나오는데 전체 결과 메시지를 확인하거나 결과만 보기 옵션으로 최종 성공 실패에 대한 결과 메시지만 볼 수도 있습니다.<br>
 우선은 파라미터 없이 실행해 보았고, 무사히 성공한 결과가 나왔습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_19.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_19.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>이번에는 파라미터를 입력하고 액션을 실행해보았습니다.  파라미터는 json 형태로 입력하면 됩니다.
 왼쪽 창에서 입력한 파라미터가 결과에 잘 반영되어 나왔습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_20.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_20.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <p>결과만 보기 옵션을 끄고 실행하면 이렇게 스크롤 해야만 전체를 확인할 수 있을 정도로 긴 결과 메시지가 나타납니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_21.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_21.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h2 id="발송메일-확인">발송메일 확인 <a href="#%eb%b0%9c%ec%86%a1%eb%a9%94%ec%9d%bc-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>메일함에서 확인해보면 이렇게 메일이 무사히 도착한 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_22.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_php_smtp_via_gmail_with_phpmailer_22.jpg" width="800" alt="NCloud Cloud Functions에서 PHPMailer를 사용하여 gmail을 통해 SMTP로 메일 발송하는 방법" class="docimage  mb-5">
 <h2 id="오류-메시지">오류 메시지 <a href="#%ec%98%a4%eb%a5%98-%eb%a9%94%ec%8b%9c%ec%a7%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위에서 앱 비밀번호를 사용해야 한다고 했는데 혹시 앱 비밀번호를 사용하지 않았을 경우 다음과 같은 오류 메시지가 나타나는 경우가 있습니다.</p>
 
 
@@ -2991,7 +2997,7 @@ The server response was: 5.7.0 Authentication Required.</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

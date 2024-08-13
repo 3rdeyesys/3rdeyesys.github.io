@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2570,19 +2576,19 @@
 OS중에서 CentOS는 기본 설정이 허용이지만, Ubuntu는 기본 설정이 localhost 만 접속 가능하도록 되어 있기 때문에 외부 접속을 허용해주기 위해서는 bind-address 설정을 수정해야 합니다.  그래서 여기서는 Ubuntu에 대해서만 살펴보겠습니다.</p>
 <h2 id="mysql-56">mysql 5.6 <a href="#mysql-56" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>mysql 5.6에서는 bind-address 설정이 <strong>/etc/mysql/my.cnf</strong> 파일에 있습니다.<br>
 OS는 Ubuntu 14.04만 제공됩니다.</p>
-<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_01.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage">
+<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_01.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage  mb-5">
 <h2 id="mysql-57">mysql 5.7 <a href="#mysql-57" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>mysql 5.7에서는 bind-address 설정이 <strong>/etc/mysql/mysql.conf.d/mysqld.cnf</strong> 파일에 있습니다.<br>
 OS는 Ubuntu 14.04와 16.04 두 버전이 있는데 모두 동일합니다.</p>
-<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_02.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage">
-<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_03.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage">
+<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_02.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage  mb-5">
+<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_03.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage  mb-5">
 <h2 id="mariadb">mariaDB <a href="#mariadb" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>mariaDB는 10.2 버전만 있으며 bind-address 설정이 <strong>/etc/mysql/my.cnf</strong> 파일에 있습니다.<br>
 OS는 Ubuntu 16.04만 제공됩니다.</p>
-<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_04.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage">
+<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_04.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage  mb-5">
 <h2 id="기타---mariadb-centos">기타 - mariaDB CentOS <a href="#%ea%b8%b0%ed%83%80---mariadb-centos" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>그 외에 mysql의 경우 CentOS는 개요에서 말씀드렸듯이 기본적으로 외부 접속을 차단하는 bind-address 항목이 존재하지 않는데
 mariaDB의 경우 외부 접속을 차단하지는 않지만, bind-address 항목이 주석처리된 상태로 포함되어 있습니다.<br>
 혹시나 차단하고 싶을 경우 사용하기 쉽게 미리 준비해둔 것으로 보입니다.
 주석처리된 bind-address의 위치는 <strong>/etc/my.cnf.d/server.cnf</strong> 입니다.</p>
-<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_05.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage">
+<img src="/images/database/ncp_database_mysql_mariadb_config_bind_address_05.jpg" width="800" alt="Ncloud Mysql, mariadb 외부접속을 위한 환경설정 bind-address 위치 안내" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ubuntu에서 mariaDB 외부접속 허용, 원격접속하기 with HeidiSQL<br>
@@ -2676,7 +2682,7 @@ mariaDB의 경우 외부 접속을 차단하지는 않지만, bind-address 항�
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

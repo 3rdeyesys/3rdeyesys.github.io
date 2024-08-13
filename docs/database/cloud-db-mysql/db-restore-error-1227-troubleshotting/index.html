@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2631,7 +2637,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
   <code>mysqldump -u user -p -h db-......vpc-cdb.ntruss.com -S /var/lib/mysql/mysql.sock --single-transaction --routines --triggers --events --databases test  &gt; dumpfile1.sql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_01.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_01.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <p>위에서 생성한 [<strong>&ndash;set-gtid-purged=OFF</strong>] 옵션을 사용하지 않은 백업 파일(dumpfile1.sql)을 이용해서 복구(Restore)시에 아래와 같이 ERROR 1227 (42000) 오류가 발생하면서 복구가 되지 않습니다.</p>
 
 
@@ -2652,7 +2658,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
   <code>mysql -h db-......vpc-cdb.ntruss.com -u user -p &lt; ./dumpfile1.sql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_03.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_03.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <h3 id="해결-방법-1">해결 방법 1 <a href="#%ed%95%b4%ea%b2%b0-%eb%b0%a9%eb%b2%95-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>이번에는 Warning 메시지에 나온 것처럼 [<strong>&ndash;set-gtid-purged=OFF</strong>] 옵션을 사용해서 백업을 받아 보겠습니다.</p>
 
 
@@ -2673,7 +2679,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
   <code>mysqldump --set-gtid-purged=OFF -u user -p -h db-......vpc-cdb.ntruss.com -S /var/lib/mysql/mysql.sock --single-transaction --routines --triggers --events --databases test  &gt; dumpfile2.sql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_02.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_02.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <p>[<strong>&ndash;set-gtid-purged=OFF</strong>] 옵션을 사용해서 생성한 백업 파일(dumpfile2.sql)을 이용해서 복구를 하면 아래와 같이 문제없이 복구가 잘됩니다.<br>
 그런데 이렇게 옵션을 적용해도 동일한 오류가 발생하는 경우가 있는데 이에 대해서는 아래쪽 <a href="/docs/database/cloud-db-mysql/db-restore-error-1227-troubleshotting/#cause2">원인 2</a>에서 확인해보겠습니다.</p>
 
@@ -2695,7 +2701,7 @@ GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본�
   <code>mysql -h db-......vpc-cdb.ntruss.com -u user -p &lt; ./dumpfile2.sql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_04.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_04.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <h3 id="해결-방법-2">해결 방법 2 <a href="#%ed%95%b4%ea%b2%b0-%eb%b0%a9%eb%b2%95-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>그런데 서비스를 하다 보면 DB 사이즈가 너무 커서 다시 백업을 진행하기 어렵다던가 하는 경우가 있습니다. 이럴 때는 백업 파일에 있는 GTID 관련 내용을 삭제하고 복구하시면 문제가 해결됩니다.<br>
 백업 파일 상단과 하단에 각각 아래와 같은 코드가 포함되어 있는데 이 내용을 삭제하거나 주석처리한 후에 복구를 시도하면 문제 없이 복구가 완료됩니다.</p>
 
@@ -2736,18 +2742,18 @@ SET @@GLOBAL.GTID_PURGED=&#39;207****-4***-7**-9*****c:1-12,
   </div>
 <p>[원인 1]에서는 복구를 시도할 때 [user] 계정을 사용했었는데 이 [user]계정으로 Trigger, Stored Routines (Procedures and Functions), View, Event 등을 생성한 상황에서 다른 계정 [new_user]를 이용해서 복구를 시도하는 상황을 가정보겠습니다.
 [new_user] 계정으로 복구를 시도하면 [<strong>&ndash;set-gtid-purged=OFF</strong>]을 적용한 백업 파일(dumpfile2.sql)을 이용했음에도 동일한 ERROR 1227 (42000) 오류가 발생하는 것을 확인할 수 있습니다.</p>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_05.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_05.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <p>아래와 같이 MySQL은 보안 강화를 위해 Trigger, Stored Routines (Procedures and Functions), View, Event를 처음 생성한 계정을 [<strong>DEFINER</strong>]로 명시해 둠으로써 다른 계정으로 접근하지 못하도록 하는 것이 기본 설정이 되어 있습니다.<br>
 그러므로 DB 복구를 시도할 때는 [<strong>DEFINER</strong>] 관련 내용을 삭제하거나 동일한 계정 또는 SUPER privilege를 가진 계정으로 복구해야 합니다.</p>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_08.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_08.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <h3 id="해결-방법-1-1">해결 방법 1 <a href="#%ed%95%b4%ea%b2%b0-%eb%b0%a9%eb%b2%95-1-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>첫번째 해결 방법은 백업 파일에서 [<strong>DEFINER</strong>] 관련 내용을 모두 찾아서 삭제하는 방법이 있습니다.
 여기서는 대표적으로 FUNCTION, PROCEDURE, VIEW에 해당하는 예시를 살펴보겠습니다.</p>
 <h4 id="function">FUNCTION <a href="#function" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>DB에서 FUNCTION을 사용했다면 아래와 같이 FUNCTION 생성 코드에 [<strong>CREATE DEFINER=`user`@`%` FUNCTION</strong>]처럼 계정이 표시되는데, 여기서 [<strong>DEFINER=`user`@`%`</strong>] 이 부분을 삭제하시면 됩니다.</p>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_06.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_06.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <h4 id="procedure">PROCEDURE <a href="#procedure" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>DB에서 PROCEDURE를 사용했다면 아래와 같이 PROCEDURE 생성 코드에 [<strong>CREATE DEFINER=`user`@`%` PROCEDURE</strong>]처럼 계정이 표시되는데, 여기서 [<strong>DEFINER=`user`@`%`</strong>] 이 부분을 삭제하시면 됩니다.</p>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_07.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_07.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <h4 id="view">VIEW <a href="#view" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>DB에서 VIEW를 사용했다면 아래와 같이 VIEW 생성 코드에 [<strong>/*!50013 DEFINER=`user`@`%` SQL SECURITY DEFINER */</strong>]처럼 계정이 표시되는데, 여기서는 이 라인을 모두 삭제하시면 됩니다.</p>
-<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_08.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage">
+<img src="/images/database/ncloud_database_cdb_mysql_restore_error_1227_troubleshooting_08.png" width="770" alt="Ncloud Cloud DB for MySQL 복구(Restore)시에 발생하는 오류 ERROR 1227 (42000) 문제 원인과 해결방법" class="docimage  mb-5">
 <h3 id="해결-방법-2-1">해결 방법 2 <a href="#%ed%95%b4%ea%b2%b0-%eb%b0%a9%eb%b2%95-2-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>두번째 해결 방법은 백업 파일 [<strong>DEFINER=</strong>]에 표시되어 있는 계정과 동일한 계정으로 복구를 진행하면 됩니다.</p>
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
@@ -2850,7 +2856,7 @@ SET @@GLOBAL.GTID_PURGED=&#39;207****-4***-7**-9*****c:1-12,
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

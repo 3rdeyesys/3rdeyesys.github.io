@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2562,7 +2568,7 @@
 그러므로 보안 침해 방지를 위해 설치 후에 root Password를 설정한 후에 DB를 사용하는 것이 안전합니다.<br>
 여기서는 Classic환경에서 MySQL 5.6과 5.7 버전의 root Password를 설정, 변경하는 방법에 대해 정리해보겠습니다.</p>
 <h2 id="mysql-버전">MySQL 버전 <a href="#mysql-%eb%b2%84%ec%a0%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 Classic환경에서 지원하는 설치형 MySQL 버전은 5.6과 5.7 입니다.</p>
-<img src="/images/database/ncp_database_mysql_root_password_update_00.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage">
+<img src="/images/database/ncp_database_mysql_root_password_update_00.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage  mb-5">
 
 
 
@@ -2601,7 +2607,7 @@ mysql&gt; select host, user, password from mysql.user;</code>
   </pre>
   </div>
 <p>초기 패스워드가 설정되어있지 않기 때문에 -p 옵션을 사용하지 않고 바로 접속 해서 user 테이블에 있는 계정 정보를 확인해보면 password 값이 비어 있는 것을 확인할 수 있습니다.</p>
-<img src="/images/database/ncp_database_mysql_root_password_update_01.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage">
+<img src="/images/database/ncp_database_mysql_root_password_update_01.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage  mb-5">
 <p>패스워드를 설정하고 다시 확인을 해보면 <strong>localhost의 root 계정</strong>에 패스워드가 설정된 것을 확인할 수 있습니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
@@ -2612,7 +2618,7 @@ mysql&gt; select host, user, password from mysql.user;</code>
 <p>계정 구분: Mysql의 계정은 host-user 두개를 합쳐서 키로 사용하게 되어 있습니다. 같은 user라도 접속하는 host 값이 다르면 별도의 계정처럼 인식합니다.</p>
   </div>
   </div>
-<img src="/images/database/ncp_database_mysql_root_password_update_02.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage">
+<img src="/images/database/ncp_database_mysql_root_password_update_02.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage  mb-5">
 <p>그런데 위에서 사용한 **set password = password(&lsquo;패스워드&rsquo;)**는 localhost@root에 대해서만 패스워드를 설정-변경합니다.<br>
 만약 외부에서 접속하기 위해 특정 IP를 추가했다거나 외부 접속을 모두 허용하기 위해 host에 %값을 설정했을 경우에는 패스워드가 설정-변경되지 않습니다.
 이때 사용하는 방법은 아래와 같습니다.</p>
@@ -2638,7 +2644,7 @@ mysql&gt; select host, user, password from mysql.user;</code>
   </pre>
   </div>
 <p>쿼리를 실행한 후에 조회를 해보면 user값이 root인 모든 계정의 password 값이 동일하게 설정된 것을 확인할 수 있습니다.</p>
-<img src="/images/database/ncp_database_mysql_root_password_update_03.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage">
+<img src="/images/database/ncp_database_mysql_root_password_update_03.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage  mb-5">
 <h2 id="mysql-57-설정">MySQL 5.7 설정 <a href="#mysql-57-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>마찬가지로 mysql 5.7 DB서버를 생성한 후 root 계정의 패스워드 상태를 확인해봅니다. 그 이후에 패스워드를 설정합니다.<br>
 MySQL 5.7은 패스워드 칼럼이 password가 아니고 authentication_string로 변경되었습니다.</p>
 
@@ -2671,10 +2677,10 @@ mysql&gt; select host, user, authentication_string from mysql.user;</code>
   </pre>
   </div>
 <p>초기 패스워드가 설정되어있지 않기 때문에 -p 옵션을 사용하지 않고 바로 접속 해서 user 테이블에 있는 계정 정보를 확인해보면 password 값이 비어 있는 것을 확인할 수 있습니다.</p>
-<img src="/images/database/ncp_database_mysql_root_password_update_04.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage">
+<img src="/images/database/ncp_database_mysql_root_password_update_04.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage  mb-5">
 <p>이때 MySQL 5.6 이하 버전처럼 update 명령어로 authentication_string 칼럼 값을 변경하려고 해도 적용되지 않습니다.<br>
 위에 적은 것처럼 ALTER 명령으로 변경해야 적용되니 주의해야 합니다.</p>
-<img src="/images/database/ncp_database_mysql_root_password_update_05.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage">
+<img src="/images/database/ncp_database_mysql_root_password_update_05.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage  mb-5">
 <h2 id="mysql-패스워드-정책">MySQL 패스워드 정책 <a href="#mysql-%ed%8c%a8%ec%8a%a4%ec%9b%8c%eb%93%9c-%ec%a0%95%ec%b1%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>MySQL은 아래와 같이 기본 패스워드 정책이 설정되어 있습니다. 그러므로 패스워드 설정 시에는 아래 조건에 맞게 입력하셔야 합니다.</p>
 <ul>
 <li>최소 길이 8자 이상</li>
@@ -2702,7 +2708,7 @@ mysql&gt; select host, user, authentication_string from mysql.user;</code>
   <code>mysql&gt; SHOW VARIABLES LIKE &#39;validate_password%&#39;;</code>
   </pre>
   </div>
-<img src="/images/database/ncp_database_mysql_root_password_update_06.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage">
+<img src="/images/database/ncp_database_mysql_root_password_update_06.jpg" width="770" alt="Ncloud 설치형 MySQL DB에서 root 패스워드 설정, 변경하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>설치형 MySQL 기본 가이드<br>
@@ -2794,7 +2800,7 @@ mysql&gt; select host, user, authentication_string from mysql.user;</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

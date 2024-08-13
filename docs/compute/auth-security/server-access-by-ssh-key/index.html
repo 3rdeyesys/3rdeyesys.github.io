@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2616,7 +2622,7 @@
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>리눅스 서버에 접속하는 방법은 [<strong>아이디-패스워드</strong>]로 접속하는 방법과 [<strong>SSH Key</strong>]를 이용해 접속하는 방법이 있습니다.<br>
 Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스워드</strong>]로 접속하는 방법을 제공하고 있으므로 여기서는 다른 방법인 [<strong>SSH Key</strong>]를 이용해 서버에 접속하는 방법을 정리해보게겠습니다.</p>
 <h2 id="테스트-서버-준비">테스트 서버 준비 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8-%ec%84%9c%eb%b2%84-%ec%a4%80%eb%b9%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>테스트로 사용할 서버는 [<strong>Rocky Linux 8.6</strong>] 서버로 생성했습니다.</p>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-01.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-01.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h2 id="ssh-key-생성">SSH Key 생성 <a href="#ssh-key-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 Ncloud 제공하는 [<strong>아이디-패스워드</strong>] 방식으로 서버에 접속한 후, 아래의 명령으로 SSH key를 생성합니다.</p>
 
 
@@ -2637,24 +2643,24 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
   <code> ssh-keygen -t rsa -m pem</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-02.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-02.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h3 id="상세-설명">상세 설명 <a href="#%ec%83%81%ec%84%b8-%ec%84%a4%eb%aa%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위의 SSH Key 생성 화면에서 몇가지를 좀 더 자세히 살펴보겠습니다.</p>
 <ul>
 <li>Key 저장 위치 설정<br>
 아래 스샷처럼 생성된 [<strong>SSH Key</strong>]를 어느 위치에 저장할 것인지 확인하는 단계입니다. 아무것도 입력하지 않고 Enter 키를 입력하면 기본 저장 위치인 [/root/.ssh/id_rsa]에 저장됩니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-24.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-24.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>Key 파일 암호 설정<br>
 보안을 좀 더 강화하려면 [<strong>SSH Key</strong>]를 사용할 때 암호(passphrase)를 입력하도록 설정할 수 있습니다. 아무것도 입력하지 않으면 암호 없이 사용하게 됩니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-25.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-25.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h3 id="생성된-key-확인">생성된 Key 확인 <a href="#%ec%83%9d%ec%84%b1%eb%90%9c-key-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Key가 생성된 디렉토리로 이동해서 살펴보면 [<strong>id_rsa</strong>], [<strong>id_rsa.pub</strong>] 이렇게 2개의 파일이 생성된 것을 확인할 수 있습니다.</p>
 <ul>
 <li>id_rsa: Private Key</li>
 <li>id_rsa.pub: Public Key</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-03.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-03.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h2 id="key-파일명-변경">Key 파일명 변경 <a href="#key-%ed%8c%8c%ec%9d%bc%eb%aa%85-%eb%b3%80%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>mv 명령어를 사용해 [<strong>SSH Key</strong>] 인증에서 사용할 파일명으로 변경 합니다.</p>
 
 
@@ -2676,69 +2682,69 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
  mv id_rsa.pub authorized_keys</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-23.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-23.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h2 id="private-key-복사">Private Key 복사 <a href="#private-key-%eb%b3%b5%ec%82%ac" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위에서 생성된 [<strong>Private Key</strong>]인 [<strong>id_rsa.pem</strong>] 파일을 로컬 PC로 가져오는 방법은 크게 2가지가 있는데 편하신 방법을 사용하면 되겠습니다.</p>
 <ol>
 <li>암호화 텍스트로 구성된 파일의 내용을 복사해서 로컬 PC 텍스트 편집기에 붙여넣고 새로운 파일로 저장하는 방법</li>
 <li>[<strong>WinSCP</strong>], [<strong>FileZilla</strong>] 등의 SFTP 프로그램을 이용해서 파일을 로컬 PC로 전송하는 방법</li>
 </ol>
 <h3 id="방법-1-텍스트-복사">방법 1: 텍스트 복사 <a href="#%eb%b0%a9%eb%b2%95-1-%ed%85%8d%ec%8a%a4%ed%8a%b8-%eb%b3%b5%ec%82%ac" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>id_rsa.pem</strong>] 파일은 암호화된 텍스트로 구성된 파일이므로 파일 내용을 확인해서 복사합니다.</p>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-26.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-26.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>복사한 내용을 로컬 PC의 텍스트 편집기에 붙여 넣고 저장합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-27.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-27.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h3 id="방법-2-winscp-접속">방법 2: WinSCP 접속 <a href="#%eb%b0%a9%eb%b2%95-2-winscp-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>WinSCP</strong>]로 서버에 접속하면 처음에는 파일이나 디렉토리가 전혀 보이지 않습니다. 즉, 인증키 파일이 저장된 [<strong>.ssh</strong>] 디렉토리가 숨겨진 디렉토리이기 때문입니다.</p>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-04.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-04.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>숨겨진 디렉토리를 확인하기 위해 [<strong>옵션</strong>] - [<strong>설정</strong>] 메뉴에 들어갑니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-05.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-05.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>설정</strong>] 창에서 [<strong>패널</strong>]을 선택하면 위쪽에 [<strong>숨김 파일 표시</strong>] 옵션이 있는데 이 옵션을 체크하고 [확인] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-06.png" width="547" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-06.png" width="547" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h4 id="key-전송">Key 전송 <a href="#key-%ec%a0%84%ec%86%a1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>[<strong>숨김 파일 표시</strong>] 옵션을 체크하면 아래와 같이 [<strong>.ssh</strong>] 디렉토리를 확인할 수 있습니다.</p>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-07.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-07.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>.ssh</strong>] 디렉토리에 들어가서 [<strong>id_rsa.pem</strong>] 파일을 로컬 PC로 전송합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-08.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-08.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h2 id="ppk-파일-변환">PPK 파일 변환 <a href="#ppk-%ed%8c%8c%ec%9d%bc-%eb%b3%80%ed%99%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>SSH Key</strong>] 인증으로 서버에 접속할 때 주로 사용하는 프로그램이 [<strong>PuTTY</strong>]인데, [<strong>Putty</strong>]에서는 [<strong>PEM</strong>] 파일이 아니라 [<strong>PPK</strong>]파일을 사용하기 때문에 [<strong>PEM</strong>] 파일을 [<strong>PPK</strong>]파일로 변환해야 합니다. 이럴 때 사용하는 것이 [<strong>PuTTY Key Generator</strong>] 즉, [<strong>PuTTYgen</strong>]인데, [<strong>PuTTY</strong>] 통합 설치 파일에 포함되어 있습니다.</p>
 <h3 id="putty-설치">PuTTY 설치 <a href="#putty-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>PuTTYgen</strong>] 사이트에 접속해서 [<strong>PuTTY</strong>]를 다운로드 받고 설치합니다.</p>
 <ul>
 <li><a href="https://www.puttygen.com/" rel="external" target="_blank">https://www.puttygen.com/<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-09.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-09.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>설치가 완료되었으면 로컬 PC에서 [<strong>PuTTYgen</strong>]을 찾아서 실행합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-10.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-10.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h3 id="key-변환">Key 변환 <a href="#key-%eb%b3%80%ed%99%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>우선 위에서 로컬 PC로 전송받았던 [<strong>id_rsa.pem</strong>]을 파일을 불러오기 위해 [<strong>PuTTYgen</strong>] 화면에서 가운데에 있는 [<strong>Load</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-11.png" width="602" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-11.png" width="602" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>파일 선택창에서 파일 확장자를 [<strong>All Files</strong>]로 선택 하고 [<strong>id_rsa.pem</strong>] 파일을 선택하고 [<strong>열기</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-12.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-12.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>Notice</strong>] 팝업에서 [<strong>확인</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-13.png" width="337" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-13.png" width="337" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>Save private key</strong>] 버튼을 눌러 PPK 파일로 변환합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-14.png" width="602" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-14.png" width="602" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>Key 파일에 암호 즉, [<strong>passphrase</strong>]가 없을 경우 경고 팝업이 뜨는데 [<strong>예</strong>] 버튼을 클릭해서 다음 단계로 넘어 갑니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-15.png" width="292" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-15.png" width="292" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>파일명을 입력 후 [<strong>저장</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-16.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-16.png" width="844" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h2 id="서버-접속">서버 접속 <a href="#%ec%84%9c%eb%b2%84-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 위에서 변환 저장한 Key 파일로 서버에 접속해보겠습니다.</p>
 <h3 id="putty-설정">PuTTY 설정 <a href="#putty-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>우선, [<strong>PuTTY</strong>] 프로그램을 실행합니다.</p>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-17.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-17.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>Host Name (or IP address)</strong>]에 접속할 서버의 IP를 입력합니다. 또는 [<strong>계정@서버IP</strong>] 형식으로 미리 로그인 계정을 입력해두는 방법도 있습니다.
 (예: 123.456.789.012 또는 <a href="mailto:root@123.456.789.012" rel="external" target="_blank">root@123.456.789.012<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>)</li>
@@ -2755,14 +2761,14 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
 		
 
 		<a class="nav-link  active"
-		   id="ebdacfTab" data-bs-toggle="tab" data-bs-target="#ebdacf"
-		   type="button" role="tab" aria-controls="ebdacf" aria-selected="true">IP만 입력</a>
+		   id="bcfadeTab" data-bs-toggle="tab" data-bs-target="#bcfade"
+		   type="button" role="tab" aria-controls="bcfade" aria-selected="true">IP만 입력</a>
 
 		
 
 		<a class="nav-link "
-		   id="edbcafTab" data-bs-toggle="tab" data-bs-target="#edbcaf"
-		   type="button" role="tab" aria-controls="edbcaf" aria-selected="true">계정@IP 입력</a>
+		   id="defabcTab" data-bs-toggle="tab" data-bs-target="#defabc"
+		   type="button" role="tab" aria-controls="defabc" aria-selected="true">계정@IP 입력</a>
 
 		
 
@@ -2778,9 +2784,9 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
 
 
 
-<div class="tab-pane fade show active" id="ebdacf" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="bcfade" role="tabpanel" aria-labelledby="nav-1">
 
-	<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-18.png" width="452" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+	<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-18.png" width="452" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 
 
 </div>
@@ -2790,9 +2796,9 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
 
 
 
-<div class="tab-pane fade" id="edbcaf" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="defabc" role="tabpanel" aria-labelledby="nav-1">
 
-	<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-28.png" width="452" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+	<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-28.png" width="452" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 
 
 </div>
@@ -2802,15 +2808,15 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
 <ul>
 <li>좌측의 Category에서 [<strong>Conncetion</strong>] - [<strong>SSH</strong>] - [<strong>Auth</strong>] - [<strong>Credentials</strong>] 설정 메뉴에서 [<strong>Private key file for authentication</strong>] 항목에 위에서 변환 저장했던 파일을 선택하기 위해 [<strong>Browser</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-19.png" width="452" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-19.png" width="452" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>위에서 저장했던 test-key.PPK 파일을 선택 합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-20.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-20.png" width="845" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <ul>
 <li>다음으로 아래쪽에 있는 [<strong>Open</strong>] 버튼을 클릭해서 서버에 접속합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-21.png" width="452" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-21.png" width="452" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 <h2 id="서버-접속-완료">서버 접속 완료 <a href="#%ec%84%9c%eb%b2%84-%ec%a0%91%ec%86%8d-%ec%99%84%eb%a3%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>그러면 아래와 같이 비밀번호 입력 없이 [<strong>Authenticating with public key &ldquo;imported-openssh-key&rdquo;</strong>]라는 메시지가 나타나면서 서버에 접속됩니다.<br>
 (PuTTY 접속 설정 [<strong>Host Name</strong>]에 IP만 입력했을 경우에는 [<strong>login as</strong>]에 로그인 계정을 입력해야 합니다.)</p>
 
@@ -2825,14 +2831,14 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
 		
 
 		<a class="nav-link  active"
-		   id="adfcbeTab" data-bs-toggle="tab" data-bs-target="#adfcbe"
-		   type="button" role="tab" aria-controls="adfcbe" aria-selected="true">IP만 입력</a>
+		   id="dcbefaTab" data-bs-toggle="tab" data-bs-target="#dcbefa"
+		   type="button" role="tab" aria-controls="dcbefa" aria-selected="true">IP만 입력</a>
 
 		
 
 		<a class="nav-link "
-		   id="daebcfTab" data-bs-toggle="tab" data-bs-target="#daebcf"
-		   type="button" role="tab" aria-controls="daebcf" aria-selected="true">계정@IP 입력</a>
+		   id="edafbcTab" data-bs-toggle="tab" data-bs-target="#edafbc"
+		   type="button" role="tab" aria-controls="edafbc" aria-selected="true">계정@IP 입력</a>
 
 		
 
@@ -2848,9 +2854,9 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
 
 
 
-<div class="tab-pane fade show active" id="adfcbe" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="dcbefa" role="tabpanel" aria-labelledby="nav-1">
 
-	<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-22.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+	<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-22.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 
 
 </div>
@@ -2860,9 +2866,9 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
 
 
 
-<div class="tab-pane fade" id="daebcf" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="edafbc" role="tabpanel" aria-labelledby="nav-1">
 
-	<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-29.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage">
+	<img src="/images/compute/ncloud-compute-server-connect-by-ssh-key-29.png" width="840" alt="Ncloud (네이버 클라우드) Linux 서버에 SSH Key로 접속하는 방법" class="docimage  mb-5">
 
 
 </div>
@@ -2964,7 +2970,7 @@ Ncloud (네이버 클라우드)에서는 기본으로 [<strong>아이디-패스�
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

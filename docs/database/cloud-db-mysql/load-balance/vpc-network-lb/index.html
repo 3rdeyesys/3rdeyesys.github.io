@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2640,10 +2646,10 @@
 <h2 id="db-서버-생성">DB 서버 생성 <a href="#db-%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 [Cloud DB for MySQL] - [DB Server]에서 DB를 생성합니다.</p>
 <h3 id="서버-설정">서버 설정 <a href="#%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>DB엔진 버전과 VPC, 그리고 Subnet을 선택합니다.</p>
 <p>[<strong>고가용성 지원</strong>]을 선택하면 [Standby DB]도 추가로 생성되고, [<strong>Multi Zone</strong>]을 선택하면 Master와 Standby Master DB를 각각 [<strong>서로 다른 Zone에 생성</strong>]해서 안정성을 높일 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-01.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-01.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <p>DB 서버 타입, 스토리지 타입, 스토리지 용량, DB 서버 이름, DB 서비스 이름 등을 입력합니다.<br>
 Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domain}.vpc-cdb.ntruss.com</strong>] 같은 형식으로 도메인이 생성됩니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-02.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-02.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="db-설정">DB 설정 <a href="#db-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>USER ID, DB 접근 HOST(IP), USER 암호, 접속 포트, DB명 등을 입력합니다.<br>
 고가용성을 선택한 경우 [Backup]은 기본으로 무조건 사용하게 됩니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
@@ -2655,14 +2661,14 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
 <p>접속포트 설정: DB 접속포트는 한번 설정하면 이후에 변경할 수 없으니 신중하게 설정하셔야 합니다.</p>
   </div>
   </div>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-03.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-03.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="slave-db-server-추가">Slave DB Server 추가 <a href="#slave-db-server-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>DB가 생성되었으면 [Master] DB를 선택하고, [DB 관리]에서 [Slave 추가] 메뉴를 선택합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-04.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-04.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <p>Slave DB Server를 추가할 때 설정할 수 있는 것은 Subnet 입니다. 부하 분산을 위해서는 2대 이상을 추가해야 하는데, 여기서는 테스트를 위해 2대를 추가하겠습니다.<br>
 우선 첫번째 Slave DB Server는 KR-2 존에 추가했습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-05.png" width="686" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-05.png" width="686" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <p>다음으로 두번째 Slave DB Server는 KR-1 존에 추가해보겠습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-06.png" width="686" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-06.png" width="686" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <p>이렇게 Slave DB Server 2대를 추가해서 [Master], [Standy Master] 포함 총 4대의 서버가 생성되었습니다.</p>
 
 
@@ -2670,15 +2676,15 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
     [Master] DB 서버와 첫번째 [Slave] DB 서버는 KR-2 존에, <br />[Standy Master] DB 서버와 두번째 [Slave] DB 서버는 KR-1 존에 생성해서 안정성을 높이는 구조를 선택했습니다.
 </div>  
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-07.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-07.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="target-group-설정">Target Group 설정 <a href="#target-group-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 Load Balancer와 Cloud DB for Mysql을 연결할 Target Group을 설정해보겠습니다.</p>
 <h3 id="target-group-생성">Target Group 생성 <a href="#target-group-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>여기서 중요한 항목은 프로토콜입니다. [Network Load Balancer]에 사용할 Target Group이므로 [TCP]를 선택합니다.<br>
 포트는 Cloud DB for Mysql 생성 시에 사용했던 포트를 입력해야 하는데 여기서는 3306을 사용하겠습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-08.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-08.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="health-check-설정">Health Check 설정 <a href="#health-check-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Health Check 설정에서는 TCP 프로토콜을 선택합니다. 포트는 마찬가지로 3306을 입력합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-09.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-09.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="target-추가">Target 추가 <a href="#target-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Target 추가 화면에 가면 앞에서 생성했던 Slave DB Server 2대를 확인할 수 있는데, 선택 후에 오른쪽으로 이동시킵니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-10.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-10.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="load-balancer-생성">Load Balancer 생성 <a href="#load-balancer-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>여기서는 [네트워크 프록시 로드밸런서 (Network Load Balancer)]를 선택합니다.</p>
 
 
@@ -2686,13 +2692,13 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-3">
     <strong>애플리케이션 로드밸런서-Application Load Balancer</strong>는 Cloud DB for MySQL의 부하분산에 <strong>사용할 수 없습니다</strong>.
 </div>  
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-11.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-11.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="로드밸런서-생성">로드밸런서 생성 <a href="#%eb%a1%9c%eb%93%9c%eb%b0%b8%eb%9f%b0%ec%84%9c-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>현재 네트워크 로드밸런서는 멀티존으로 구성할 수 없습니다. 그래서 서브넷 선택에서도 1개만 선택할 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-12.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-12.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="리스너-설정">리스너 설정 <a href="#%eb%a6%ac%ec%8a%a4%eb%84%88-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>리스너 프로토콜은 TCP, 포트는 3306으로 설정합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-13.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-13.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="target-group-선택">Target Group 선택 <a href="#target-group-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 생성했던 Target Group을 선택합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-14.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-14.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="acg-설정">ACG 설정 <a href="#acg-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네트워크 로드밸런서와 연동을 할 때는 로드밸런서의 Subnet 대역 뿐만 아니라 [네트워크 로드밸런서]에 접근하는 장비의 공인 IP를 [Cloud DB for MySQL]의 ACG에 추가해야 합니다.</p>
 
 
@@ -2703,20 +2709,20 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
 ⁃ 그러므로 ACG에는 로드밸런서의 Subnet 대역이 아닌 접속하는 서버의 공인 IP를 허용해 주어야 합니다.
 </div>  
 <h3 id="test-서버-공인-ip-확인">Test 서버 공인 IP 확인 <a href="#test-%ec%84%9c%eb%b2%84-%ea%b3%b5%ec%9d%b8-ip-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>테스트를 위해 미리 준비해 둔 CentOS를 설치한 서버입니다. ACG 설정에 추가할 공인 IP를 확인합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-15.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-15.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="load-balancer-서브넷-확인">Load Balancer 서브넷 확인 <a href="#load-balancer-%ec%84%9c%eb%b8%8c%eb%84%b7-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>ACG에 추가할 멀티존으로 구성된 로드밸런서의 서브넷을 확인합니다.<br>
 그리고, 테스트 시에 접속할 로드밸런서의 접속 정보를 메모해 둡니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-16.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-16.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="acg-확인">ACG 확인 <a href="#acg-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[Cloud DB for MySQL]의 [Master] DB를 선택하고 [ACG] 항목 옆의 버튼을 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-17.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-17.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <p>[ACG] 리스트에서 해당 ACG를 선택하고 [ACG 설정] 버튼을 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-18.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-18.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="acg-규칙-추가">ACG 규칙 추가 <a href="#acg-%ea%b7%9c%ec%b9%99-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>필요한 ACG 규칙을 추가합니다. 여기서는 테스트에 필요한 다음 항목들을 추가했습니다.</p>
 <ul>
 <li>Test CentOS Server -&gt; Cloud DB for MySQL 접근 규칙</li>
 <li>Load Balancer -&gt; Cloud DB for MySQL 접근 규칙</li>
 </ul>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-19.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-lb-19.png" width="845" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="테스트-서버-설정">테스트 서버 설정 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8-%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>DB 부하 분산 테스트에 사용할 서버에 MySQL Client를 설치합니다.</p>
 <div class="alert alert-primary d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
@@ -2746,7 +2752,7 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
   <code>yum -y install mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-20.png" width="840" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-20.png" width="840" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="부하-분산-테스트">부하 분산 테스트 <a href="#%eb%b6%80%ed%95%98-%eb%b6%84%ec%82%b0-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>설치된 MySQL Client를 이용해서 Load Balancer 도메인으로 접속한 후에 접속한 DB 서버의 호스트명을 확인하는 쿼리를 실행합니다.</p>
 <p>여러 차례 반복해보면 아래와 같이 위에서 추가했던 Slave DB [test-003-OOO], [test-004-OOO]에 각각 접속되는 것을 확인할 수 있습니다.</p>
 
@@ -2787,11 +2793,11 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
   <code>MySQL [(none)]&gt; SELECT @@hostname;</code>
   </pre>
   </div>
-<h3 id="test-003-ooo에-접속된-상태">[test-003-OOO]에 접속된 상태 <a href="#test-003-ooo%ec%97%90-%ec%a0%91%ec%86%8d%eb%90%9c-%ec%83%81%ed%83%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-21.png" width="840" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
-<h3 id="test-004-ooo에-접속된-상태">[test-004-OOO]에 접속된 상태 <a href="#test-004-ooo%ec%97%90-%ec%a0%91%ec%86%8d%eb%90%9c-%ec%83%81%ed%83%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-22.png" width="840" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage">
+<h3 id="test-003-ooo에-접속된-상태">[test-003-OOO]에 접속된 상태 <a href="#test-003-ooo%ec%97%90-%ec%a0%91%ec%86%8d%eb%90%9c-%ec%83%81%ed%83%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-21.png" width="840" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
+<h3 id="test-004-ooo에-접속된-상태">[test-004-OOO]에 접속된 상태 <a href="#test-004-ooo%ec%97%90-%ec%a0%91%ec%86%8d%eb%90%9c-%ec%83%81%ed%83%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-network-proxy-lb-22.png" width="840" alt="Ncloud VPC 환경에서 Cloud DB for MySQL 서버의 읽기 부하를 네트워크 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="db-삭제">DB 삭제 <a href="#db-%ec%82%ad%ec%a0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>테스트를 끝낸 DB를 삭제하려고 할 때 [Slave나 Recovery DB 서버가 있는 경우 Master DB를 삭제할 수 없습니다.]라는 메시지가 나타나는 것을 확인할 수 있습니다.</p>
 <p>그래서 DB를 삭제할 때는 [Slave DB]부터 삭제해야 하고, [Slave DB]를 삭제할 때에도 동시에 삭제할 수 없고 1대씩 차례로 삭제해야 합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-15.png" width="490" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-15.png" width="490" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ncloud Cloud DB for MySQL 읽기 부하 분산 설정 가이드<br>
@@ -2889,7 +2895,7 @@ Private Sub 도메인을 선택하고 입력하면 [<strong>*.{Private Sub Domai
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

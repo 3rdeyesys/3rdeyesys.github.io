@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2611,13 +2617,13 @@
 <li>서버 디스크 사용률</li>
 </ul>
 <h2 id="rule-template-설정">Rule Template 설정 <a href="#rule-template-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>먼저 [<strong>Cloud Insight</strong>] - [<strong>Configuration</strong>] - [<strong>Template</strong>]에서 [<strong>Rule Template</strong>] 탭을 선택하고, [<strong>Rule Template 생성</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-03.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-03.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h3 id="cpu-사용률">CPU 사용률 <a href="#cpu-%ec%82%ac%ec%9a%a9%eb%a5%a0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>서버 평균 CPU 사용률</strong>]은  [<strong>SERVER</strong>] 탭에서 [<strong><code>SEVER/avg_cpu_used_rto</code></strong>] 항목을 선택합니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-04.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-04.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h3 id="메모리-사용률">메모리 사용률 <a href="#%eb%a9%94%eb%aa%a8%eb%a6%ac-%ec%82%ac%ec%9a%a9%eb%a5%a0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>서버 평균 메모리 사용률</strong>]은 [<strong>Memory</strong>] 탭에서 [<strong><code>MEMORY/mem_usert</code></strong>] 항목을 선택합니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-05.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-05.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h3 id="디스크별-사용-중인-용량">디스크별 사용 중인 용량 <a href="#%eb%94%94%ec%8a%a4%ed%81%ac%eb%b3%84-%ec%82%ac%ec%9a%a9-%ec%a4%91%ec%9d%b8-%ec%9a%a9%eb%9f%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>디스크별 사용 중인 용량</strong>]은  [<strong>FILE STSTEM</strong>] 탭에서 [<strong><code>FILE STSTEM/fs_usert</code></strong>] 항목을 선택합니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-15.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-15.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 
 
 
@@ -2628,14 +2634,14 @@
 추가 디스크를 <strong>/data 디렉토리로 마운트</strong>했다고 가정했을 경우 아래 스샷처럼 [<strong><code>FILE STSTEM/fs_usert</code></strong>] 항목 오른쪽에 있는 [<strong>+</strong>] 버튼을 클릭해서 동일한
 항목을 하나 더 추가하고, 디멘션에서 [<strong>mnt_nm: /data</strong>]를 선택합니다. 다른 곳으로 마운트했을 경우에는 그에 맞는 값을 선택하면 됩니다.
 </div>  
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-16.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-16.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <ul>
 <li>3가지 항목을 모두 선택하고, [다음] 버튼을 클릭하면 아래와 같이 각 항목별로 조건을 설정할 수 있습니다.<br>
 여기서는 각 수치가 70% 이상일 경우로 설정했고, 몇 분간의 평균값으로 할 것인가는 사용하는 서비스 상황에 따라 조절하시면 됩니다.</li>
 </ul>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-06.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-06.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h2 id="event-rule-설정">Event Rule 설정 <a href="#event-rule-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 [<strong>Cloud Insight</strong>] - [<strong>Configuration</strong>] - [<strong>Event Rule</strong>]에서 [<strong>Event Rule 생성</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-07.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-07.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h3 id="감시-상품-선택">감시 상품 선택 <a href="#%ea%b0%90%ec%8b%9c-%ec%83%81%ed%92%88-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Ncloud Cloud Insight에서 모니터링 할 수 있는 상품은 아래와 같은데 그 중에서 여기서는 VPC Server를 선택하겠습니다.</p>
 <ul>
 <li>Classic Load Balancer Monitor</li>
@@ -2644,23 +2650,23 @@
 <li>VPC Server</li>
 <li>Object Storage</li>
 </ul>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-08.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-08.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h3 id="감시-대상-설정">감시 대상 설정 <a href="#%ea%b0%90%ec%8b%9c-%eb%8c%80%ec%83%81-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>감시 대상은 미리 설정한 그룹이나 Auto Scaling Group에서 선택할 수도 있는데, 여기서는 [<strong>전체 보기</strong>]를 선택해서 미리 만들어둔 테스트용 서버를 선택하겠습니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-09.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-09.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h3 id="감시-항목-설정">감시 항목 설정 <a href="#%ea%b0%90%ec%8b%9c-%ed%95%ad%eb%aa%a9-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><code>여기가 이 가이드 문서의 가장 중요한 단계</code>인데, 위에서 설정했던 [<strong>Template</strong>]인 [<strong>template-test</strong>]를 감시 항목으로 선택해보겠습니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-10.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-10.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h3 id="액션-설정">액션 설정 <a href="#%ec%95%a1%ec%85%98-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>액션 설정에서 [<strong>통보 대상자</strong>], [<strong>알림 유형</strong>], [<strong>리마인드 알림 주기</strong>], [<strong>종료 알림 여부</strong>]를 설정합니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-12.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-12.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h3 id="최종-확인">최종 확인 <a href="#%ec%b5%9c%ec%a2%85-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>지금까지 설정한 내역을 최종 확인한 후에 이상이 없으면 [<strong>생성</strong>] 버튼을 클릭해서 Event Rule 생성을 완료합니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-13.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-14.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-13.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-14.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h2 id="기타">기타 <a href="#%ea%b8%b0%ed%83%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="target-group-생성">Target Group 생성 <a href="#target-group-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서는 [<strong>Rule Template</strong>]만 사용했는데, 여러 대상을 미리 하나의 그룹으로 묶어서 관리할 수도 있습니다.<br>
 [<strong>Cloud Insight</strong>] - [<strong>Configuration</strong>] - [<strong>Template</strong>]에서 [<strong>Target Group</strong>] 탭을 선택하고, [<strong>Target Group 생성</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-01.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-01.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <ul>
 <li>그룹 생성화면에서 원하는 [<strong>Product Type</strong>]을 선택하고, 선택 가능한 감시 대상 중에서 Group으로 묶을 대상을 선택하고 아래 쪽으로 이동 시킨 후에 [<strong>생성</strong>] 버튼을 클릭하면 됩니다. 이후에 [<strong>Event Rule</strong>] 생성할 때 [<strong>감시 대상 설정</strong>] 단계에서 여기서 설정한 Group을 선택하면 됩니다.</li>
 </ul>
-<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-02.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage">
+<img src="/images/management/ncloud-management-cloud-insight-rule-template-guide-02.png" width="845" alt="Ncloud 모니터링 서비스 Cloud Insight 설정 가이드" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Cloud Insight 소개<br>
@@ -2756,7 +2762,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

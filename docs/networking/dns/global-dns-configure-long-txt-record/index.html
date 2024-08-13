@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2586,7 +2592,7 @@
 <h2 id="ncloud-global-dns">Ncloud Global DNS <a href="#ncloud-global-dns" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 Ncloud(네이버 클라우드)의 DNS 서비스인 [<strong>Global DNS</strong>]는 다른 DNS 제공 업체와 다르게 <code>255자가 넘는 경우에도 자동으로 문자열을 분리해서 등록해줍니다</code>.<br>
 그러므로 Ncloud(네이버 클라우드)에서는 TXT 레코드 값의 길이를 신경쓰지 않고 편하게 등록하시면 됩니다.</p>
 <h3 id="레코드-등록-예시">레코드 등록 예시 <a href="#%eb%a0%88%ec%bd%94%eb%93%9c-%eb%93%b1%eb%a1%9d-%ec%98%88%ec%8b%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래와 같이 예시로 255자가 넘는 DKIM 정보를 [<strong>Global DNS</strong>]에 등록했습니다. 등록하면서 문자열을 나누지 않고 전체를 하나의 문자열로 등록했습니다.</p>
-<img src="/images/networking/ncloud-networking-global-dns-configure-long-txt-record-01.png" width="845" alt="DNS 설정할 때 255자 이상인 TXT 레코드(SPF, DKIM, DMARC 등)를 등록하는 방법" class="docimage">
+<img src="/images/networking/ncloud-networking-global-dns-configure-long-txt-record-01.png" width="845" alt="DNS 설정할 때 255자 이상인 TXT 레코드(SPF, DKIM, DMARC 등)를 등록하는 방법" class="docimage  mb-5">
 <h3 id="dns-레코드-정보-조회-예시">DNS 레코드 정보 조회 예시 <a href="#dns-%eb%a0%88%ec%bd%94%eb%93%9c-%ec%a0%95%eb%b3%b4-%ec%a1%b0%ed%9a%8c-%ec%98%88%ec%8b%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 예시로 등록한 레코드 정보를 아래와 같이 확인해보면 레코드 문자열이 자동으로 255자 이하로 나누어서 표시되는 것을 확인할 수 있습니다.</p>
 
 
@@ -2607,7 +2613,7 @@
   <code>nslookup -q=txt ***._domainkey.조회할도메인</code>
   </pre>
   </div>
-<img src="/images/networking/ncloud-networking-global-dns-configure-long-txt-record-02.png" width="845" alt="DNS 설정할 때 255자 이상인 TXT 레코드(SPF, DKIM, DMARC 등)를 등록하는 방법" class="docimage">
+<img src="/images/networking/ncloud-networking-global-dns-configure-long-txt-record-02.png" width="845" alt="DNS 설정할 때 255자 이상인 TXT 레코드(SPF, DKIM, DMARC 등)를 등록하는 방법" class="docimage  mb-5">
 <h2 id="aws-route53">AWS Route53 <a href="#aws-route53" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>AWS Route53에서는 255자를 초과하는 값의 경우 각각 255자 이하의 문자열로 나누어서 각 문자열을 큰따옴표로 묶어서 등록해야 합니다. <code>이때 각 문자열 사이에 줄바꿈을 입력하면 안됩니다</code>.</p>
 <h3 id="예시">예시 <a href="#%ec%98%88%ec%8b%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
 <li>원본 문자열: <strong>&ldquo;v=DKIM1;p=BHIUKuk&hellip;..YubhjfvF_Very_Long_String_Record_ThjBJHkMghJbG&rdquo;</strong></li>
@@ -2719,7 +2725,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

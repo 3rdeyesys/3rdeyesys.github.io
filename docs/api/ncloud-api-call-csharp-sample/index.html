@@ -41,8 +41,8 @@
 <meta property="og:url" content="https://docs.3rdeyesys.com/docs/api/ncloud-api-call-csharp-sample/" />  
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_15417933185968133873.png"/>
 <meta property="og:image:alt" content="C#으로 Ncloud API를 호출하는 샘플 예제" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2021-04-07T00:00:00+09:00" />
-<meta property="article:modified_time" content="2021-04-07T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-08-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-08-12T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_15417933185968133873.png"/>
 <meta property="twitter:image:alt" content="C#으로 Ncloud API를 호출하는 샘플 예제" /><meta name="twitter:title" content="C#으로 Ncloud API를 호출하는 샘플 예제"/>
@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2504,13 +2510,14 @@
         <li><a href="#암호화-샘플-코드">암호화 샘플 코드</a></li>
         <li><a href="#코드-상세-설명">코드 상세 설명</a>
           <ul>
-            <li><a href="#네이버-클라우드-인증키">네이버 클라우드 인증키</a></li>
+            <li><a href="#네이버-클라우드-api-인증키">네이버 클라우드 API 인증키</a></li>
             <li><a href="#유닉스-타임스탬프">유닉스 타임스탬프</a></li>
             <li><a href="#hmac으로-암호화할-문자열-설정">hmac으로 암호화할 문자열 설정</a></li>
             <li><a href="#hmac_sha256-방식으로-암호화">hmac_sha256 방식으로 암호화</a></li>
           </ul>
         </li>
         <li><a href="#응답-예시">응답 예시</a></li>
+        <li><a href="#오류-메시지-확인">오류 메시지 확인</a></li>
         <li><a href="#참고-url">참고 URL</a></li>
         <li><a href="#문서-업데이트-내역">문서 업데이트 내역</a></li>
       </ul>
@@ -2532,13 +2539,14 @@
         <li><a href="#암호화-샘플-코드">암호화 샘플 코드</a></li>
         <li><a href="#코드-상세-설명">코드 상세 설명</a>
           <ul>
-            <li><a href="#네이버-클라우드-인증키">네이버 클라우드 인증키</a></li>
+            <li><a href="#네이버-클라우드-api-인증키">네이버 클라우드 API 인증키</a></li>
             <li><a href="#유닉스-타임스탬프">유닉스 타임스탬프</a></li>
             <li><a href="#hmac으로-암호화할-문자열-설정">hmac으로 암호화할 문자열 설정</a></li>
             <li><a href="#hmac_sha256-방식으로-암호화">hmac_sha256 방식으로 암호화</a></li>
           </ul>
         </li>
         <li><a href="#응답-예시">응답 예시</a></li>
+        <li><a href="#오류-메시지-확인">오류 메시지 확인</a></li>
         <li><a href="#참고-url">참고 URL</a></li>
         <li><a href="#문서-업데이트-내역">문서 업데이트 내역</a></li>
       </ul>
@@ -2628,7 +2636,7 @@ public string MakeSignature()
 }</code>
   </pre>
   </div>
-<h2 id="코드-상세-설명">코드 상세 설명 <a href="#%ec%bd%94%eb%93%9c-%ec%83%81%ec%84%b8-%ec%84%a4%eb%aa%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="네이버-클라우드-인증키">네이버 클라우드 인증키 <a href="#%eb%84%a4%ec%9d%b4%eb%b2%84-%ed%81%b4%eb%9d%bc%ec%9a%b0%eb%93%9c-%ec%9d%b8%ec%a6%9d%ed%82%a4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+<h2 id="코드-상세-설명">코드 상세 설명 <a href="#%ec%bd%94%eb%93%9c-%ec%83%81%ec%84%b8-%ec%84%a4%eb%aa%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="네이버-클라우드-api-인증키">네이버 클라우드 API 인증키 <a href="#%eb%84%a4%ec%9d%b4%eb%b2%84-%ed%81%b4%eb%9d%bc%ec%9a%b0%eb%93%9c-api-%ec%9d%b8%ec%a6%9d%ed%82%a4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
   
@@ -2648,8 +2656,23 @@ public string MakeSignature()
 public string ncpSecretKey = &#34;네이버 클라우드 SecretKey&#34;;	</code>
   </pre>
   </div>
-<p>네이버 클라우드 인증키는 네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
-<img src="/images/api/ncloud_api_auth_key_create.png" width="770" alt="Ncloud API 인증키 생성하는 방법" class="docimage">
+<p>네이버 클라우드 API 인증키는 [<strong>콘솔</strong>] - [<strong>서브 계정</strong>] - [<strong>서브 계정 세부 정보</strong>] - [<strong>Access Key</strong>]탭에서  Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
+<div class="alert alert-danger d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  <span class="material-icons size-20 me-2">
+  report
+  </span></div>
+  <div class="w-100">
+<p><strong>API 인증키를 서브 계정으로 생성해야 하는 이유</strong>: 메인 계정은 클라우서 서비스의 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API 인증키를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 <strong>반드시 서브 계정에서 API 인증키를 생성해야</strong> 합니다.</p>
+  </div>
+  </div>
+
+
+
+<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
+    ⁃ <a href="/docs/api/ncloud-api-key-create-guide/">Ncloud API 인증키 생성하는 방법</a>
+</div>  
+<img src="/images/api/ncloud-api-key-create-guide-15.png" width="1140" alt="Ncloud(네이버 클라우드) API 인증키를 생성하는 방법" class="docimage  no-top  mb-5">
 <h3 id="유닉스-타임스탬프">유닉스 타임스탬프 <a href="#%ec%9c%a0%eb%8b%89%ec%8a%a4-%ed%83%80%ec%9e%84%ec%8a%a4%ed%83%ac%ed%94%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2840,6 +2863,59 @@ using (HMACSHA256 sha256 = new HMACSHA256(hmac_key))
 &lt;/getProductPriceListResponse&gt;</code>
   </pre>
   </div>
+<h2 id="오류-메시지-확인">오류 메시지 확인 <a href="#%ec%98%a4%eb%a5%98-%eb%a9%94%ec%8b%9c%ec%a7%80-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위 응답 메시지는 정상적으로 호출이 이루어졌을 때인데, 인증키가 잘못되었다거나 접근 제한이 되어 있다거나 해서 API 서버에서 오류 메시지를 반환해줄 경우가 있습니다.<br>
+이럴 때 반환되는 오류 메시지를 확인하는 방법은 응답 메시지로 리턴 되는 값을 확인하면 됩니다.</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="0d18b1d" class="language-csharp ">
+  <code>Stream stream = webClient.OpenRead(apiServer &#43; apiUrl);
+responseJSON = new StreamReader(stream).ReadToEnd();
+
+// responseJSON 값에 오류 메시지 반환됨</code>
+  </pre>
+  </div>
+<ul>
+<li>그러면 아래와 같은 오류 메시지를 확인할 수 있습니다.</li>
+</ul>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="61b7da5" class="language-json ">
+  <code>{
+  &#34;error&#34;:
+    {
+      &#34;errorCode&#34;:&#34;200&#34;,
+      &#34;message&#34;:&#34;Authentication Failed&#34;,
+      &#34;details&#34;:&#34;Authentication information are missing.&#34;
+    }
+}</code>
+  </pre>
+  </div>
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>Ncloud API 가이드<br>
 <a href="https://api.ncloud-docs.com/docs/ko/home/" rel="external" target="_blank">https://api.ncloud-docs.com/docs/ko/home/<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
@@ -2855,6 +2931,10 @@ using (HMACSHA256 sha256 = new HMACSHA256(hmac_key))
         <tr>
           <td>2021-04-07</td>        
           <td>문서 최초 생성</td>          
+        </tr>
+        <tr>
+          <td>2024-08-12</td>        
+          <td>API 인증키 생성 방법 변경</td>          
         </tr>
     </tbody>
 </table>  
@@ -2921,7 +3001,7 @@ using (HMACSHA256 sha256 = new HMACSHA256(hmac_key))
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

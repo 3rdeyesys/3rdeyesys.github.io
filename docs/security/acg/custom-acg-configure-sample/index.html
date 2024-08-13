@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2658,21 +2664,21 @@
     서버 생성 시에 기본으로 생성되는 Default ACG에는 아래처럼 22, 3389 포트에 대해 0.0.0.0/0 즉, 전체 IP에 대해 접근이 허용되어 있는데 보안을 위해 이 항목을 삭제하고 지정된 IP에서만 접속하도록 수정하는 것을 적극 권장합니다.
 </div>  
 <h3 id="vpc-화면">VPC 화면 <a href="#vpc-%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래는 Default ACG가 생성되면서 설정된 전체 접근 허용 상태입니다. 여기서 X버튼을 클릭해서 [0.0.0.0/0] 대역의 설정 2가지를 모두 삭제합니다.</p>
-<img src="/images/security/ncp_security_acg_vpc_inbound.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
+<img src="/images/security/ncp_security_acg_vpc_inbound.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
 <p>위에서 기본 설정을 삭제하고 특정 IP만 접근 허용 상태입니다.<br>
 일반적으로 <code>[myip] 버튼을 클릭해서 현재 접속한 PC의 IP를 허용</code>하게 됩니다.</p>
-<img src="/images/security/ncp_security_acg_vpc_inbound_02.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
+<img src="/images/security/ncp_security_acg_vpc_inbound_02.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
 <h3 id="classic-화면">Classic 화면 <a href="#classic-%ed%99%94%eb%a9%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래도 Default ACG가 생성되면서 설정된 전체 접근 허용 상태입니다. 여기서 X버튼을 클릭해서 [0.0.0.0/0] 대역의 설정 2가지를 모두 삭제합니다.</p>
-<img src="/images/security/ncp_security_acg_classic.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
+<img src="/images/security/ncp_security_acg_classic.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
 <p>위에서 기본 설정을 삭제하고 특정 IP만 접근 허용한 상태입니다.<br>
 일반적으로 <code>[myip] 버튼을 클릭해서 현재 접속한 PC의 IP를 허용</code>하게 됩니다.</p>
-<img src="/images/security/ncp_security_acg_classic_02.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage">
+<img src="/images/security/ncp_security_acg_classic_02.png" width="770" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 가이드" class="docimage  mb-5">
 <h2 id="용도별-acg-구분">용도별 ACG 구분 <a href="#%ec%9a%a9%eb%8f%84%eb%b3%84-acg-%ea%b5%ac%eb%b6%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>ACG는 사용하는 서버들을 용도별로 구분해서 기본 ACG외에 별도의 Custom ACG를 아래의 예시처럼 그룹별로 생성해서 적용하는 것이 좋습니다.</p>
 <h3 id="vpc-환경에서-acg-생성">VPC 환경에서 ACG 생성 <a href="#vpc-%ed%99%98%ea%b2%bd%ec%97%90%ec%84%9c-acg-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[Server] - [ACG]에서 생성할 수 있으며 이름 규칙은 최소 3자, 최대 30자, 소문자만, 숫자와 하이픈(-) 사용 가능합니다.<br>
 그리고, ACG를 적용할 VPC도 선택해야 합니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-01.png" width="715" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-01.png" width="715" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="classic-환경에서-acg-생성">Classic 환경에서 ACG 생성 <a href="#classic-%ed%99%98%ea%b2%bd%ec%97%90%ec%84%9c-acg-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[Server] - [ACG]에서 생성할 수 있으며 이름 규칙은 최소 6자, 최대 30자, 소문자만, 숫자와 하이픈(-) 사용 가능합니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-02.png" width="715" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-02.png" width="715" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="용도별-custom-acg-생성-예시">용도별 Custom ACG 생성 예시 <a href="#%ec%9a%a9%eb%8f%84%eb%b3%84-custom-acg-%ec%83%9d%ec%84%b1-%ec%98%88%ec%8b%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래의 Custom ACG 명칭은 임의로 작성한 것이며, 어떤 규칙으로 이름을 정할 것인가는 각자 자체 기준에 따라 편하신대로 정하시면 됩니다.</p>
 <ul>
 <li>DB-ACG</li>
@@ -2721,7 +2727,7 @@
 <li>다음으로 생성한 ACG를 서버에 적용하는 단계입니다. 아래쪽에서 VPC, Classic 각각의 환경별로 살펴보겠습니다.</li>
 </ul>
 <h3 id="vpc-환경">VPC 환경 <a href="#vpc-%ed%99%98%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>VPC 환경은 NIC에 ACG가 적용되는 구조이므로 NIC당 최대 3개까지 할당할 수 있습니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-03.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-03.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="classic-환경">Classic 환경 <a href="#classic-%ed%99%98%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Classic 환경에서는 서버에 적용되는 구조이고, 최대 5개까지 선택 가능합니다.</p>
 
 
@@ -2729,12 +2735,12 @@
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-3">
     이때 <strong>Classic 환경 ACG는 서버를 생성하는 단계에서만 적용할 수</strong> 있습니다.<br /> <code>서버 생성이 완료된 후에는 추가로 ACG를 적용할 수 없습니다.</code>
 </div>  
-<img src="/images/security/ncloud-security-acg-setting-sample-04.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-04.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h2 id="custom-acg-추가-적용-제거">Custom ACG 추가 적용-제거 <a href="#custom-acg-%ec%b6%94%ea%b0%80-%ec%a0%81%ec%9a%a9-%ec%a0%9c%ea%b1%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Classic 환경과 달리 <strong>VPC 환경에서는</strong> ACG가 서버가 아닌 NIC에 적용되는 구조이며, <code>기존에 적용된 ACG외에 추가로 ACG를 적용하거나 제거할 수 있습니다</code>.</p>
 <p>아래와 같이 서버 상세정보 NIC 항목에서 [ACG 수정] 버튼을 클릭합니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-09.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-09.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="acg-추가-적용">ACG 추가 적용 <a href="#acg-%ec%b6%94%ea%b0%80-%ec%a0%81%ec%9a%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>ACG 수정 화면에서 왼쪽 창에서 적용하려는 ACG를 선택하고 오른쪽 창으로 이동시키면 됩니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-10.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-10.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="acg-제거">ACG 제거 <a href="#acg-%ec%a0%9c%ea%b1%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>ACG 수정 화면에서 오른쪽 창에서 제거하려는 ACG를 선택하고 왼쪽 창으로 이동시키면 됩니다.</p>
 
 
@@ -2742,14 +2748,14 @@
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
     이때 ACG는 최소 1개가 적용되어 있어야 하므로 마지막 ACG 1개는 제거할 수 없습니다.
 </div>  
-<img src="/images/security/ncloud-security-acg-setting-sample-11.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-11.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h2 id="접근소스를-load-balancer로-설정">접근소스를 Load Balancer로 설정 <a href="#%ec%a0%91%ea%b7%bc%ec%86%8c%ec%8a%a4%eb%a5%bc-load-balancer%eb%a1%9c-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>ACG를 설정할 때 접근 소스 항목은 보통 IP주소를 입력하게 됩니다.
 하지만 특수한 경우로 Load Balancer를 지정하거나 ACG를 직접 지정하는 경우도 있습니다.</p>
 <p>먼저 로드밸런서를 생성하고 서버와 연결한 후에 서버측 ACG에 로드밸런서의 접근을 허용하는 방법에 대해 알아보겠습니다.</p>
 <h3 id="vpc-환경-1">VPC 환경 <a href="#vpc-%ed%99%98%ea%b2%bd-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>VPC 환경에서 아래와 같이 로드밸런서의 서브넷 네트워크가 [<strong>10.0.4.0/24</strong>] 대역이라고 가정해보겠습니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-05.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-05.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <p>서버의 ACG 규칙 설정 화면에서 아래와 같이 접근소스에 위에서 확인한 로드밸런서의 서브넷 네트워크 [<strong>10.0.4.0/24</strong>]를 입력하면 됩니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-06.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-06.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 
 
 
@@ -2758,9 +2764,9 @@
 ⁃ <a href="/docs/networking/loadbalancer/vpc-application-loadbalancer-guide/">VPC 환경에서 Application Load Balancer 생성하기</a>
 </div>  
 <h3 id="classic-환경-1">Classic 환경 <a href="#classic-%ed%99%98%ea%b2%bd-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Classic 환경에서는 아래와 같이 로드밸런서의 ACG 소스 명칭이 [<strong>ncloud-load-balancer</strong>]로 고정되어 있습니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-07.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-07.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <p>ACG 규칙 설정 화면에서 접근소스에 로드밸런서의 ACG 소스 [<strong>ncloud-load-balancer</strong>]를 입력하면 됩니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-08.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-08.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h2 id="접근소스를-acg로-설정">접근소스를 ACG로 설정 <a href="#%ec%a0%91%ea%b7%bc%ec%86%8c%ec%8a%a4%eb%a5%bc-acg%eb%a1%9c-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 다른 ACG를 접근소스로 지정하는 경우도 있습니다. 이것은 해당 ACG가 적용된 서버들이 접근할 수 있도록 규칙을 설정하는 것인데, 아래 설정 방법과 예시를 통해 자세히 알아보겠습니다.</p>
 <h3 id="vpc-환경-2">VPC 환경 <a href="#vpc-%ed%99%98%ea%b2%bd-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>ACG 규칙 설정에서 접근 소스 항목에 지정하려는 ACG 이름을 일부 입력하면 아래와 같이 적용 가능한 ACG 리스트가 나타는데 그 중에서 지정하려는 ACG를 선택하면 됩니다.</p>
 
@@ -2769,9 +2775,9 @@
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
     VPC 환경에서 ACG를 접근소스를 설정할 때는 <strong>동일한 VPC에 생성된 ACG만 접근소스로 설정</strong>할 수 있습니다.
 </div>  
-<img src="/images/security/ncloud-security-acg-setting-sample-13.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-13.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="classic-환경-2">Classic 환경 <a href="#classic-%ed%99%98%ea%b2%bd-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Classic도 마찬가지로 ACG 규칙 설정에서 접근 소스 항목에 지정하려는 ACG 이름을 일부 입력하면 아래와 같이 적용 가능한 ACG 리스트가 나타는데 그 중에서 지정하려는 ACG를 선택하면 됩니다. Classic은 VPC와 달리 특별한 제한이 없습니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-12.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-12.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="예시">예시 <a href="#%ec%98%88%ec%8b%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래와 같이 SVR-1, SVR-2, SVR-3 서버에 각각 ACG-1, ACG-2가 적용되어 있다고 가정해보겠습니다.</p>
 <p>[<strong>ACG-1</strong>]</p>
 <ul>
@@ -2798,16 +2804,16 @@
   </div>
 <h2 id="acg-삭제">ACG 삭제 <a href="#acg-%ec%82%ad%ec%a0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Custom ACG는 VPC, Classic 환경 모두 [Console] - [Server] - [ACG] 메뉴에서 삭제할 수 있습니다.</p>
 <p>삭제하려는 ACG를 선택하고 [ACG 삭제] 버튼을 클릭합니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-14.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-14.png" width="845" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <p>ACG 삭제 팝업에서 [예] 버튼을 클릭합니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-15.png" width="480" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-15.png" width="480" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="삭제-불가">삭제 불가 <a href="#%ec%82%ad%ec%a0%9c-%eb%b6%88%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아직 적용된 서버나 NIC가 존재하는 ACG는 삭제할 수 없습니다.</p>
 <h4 id="vpc-환경-3">VPC 환경 <a href="#vpc-%ed%99%98%ea%b2%bd-3" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>VPC 환경에서 삭제를 시도하면 [ACG에 속해 있는 Network Interface가 존재합니다. 해당 Network Interface에서 ACG를 삭제 후 다시 시도해주세요]라는 메시지가 나타납니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-16.png" width="480" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-16.png" width="480" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h4 id="classic-환경-3">Classic 환경 <a href="#classic-%ed%99%98%ea%b2%bd-3" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Classic 환경에서 삭제를 시도하면 [서버가 한대라도 ACG 에 적용되어 있는 상태이면, 해당 ACG 는 삭제할 수 없습니다]라는 메시지가 나타납니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-17.png" width="480" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-17.png" width="480" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h3 id="default-acg-삭제-불가">Default ACG 삭제 불가 <a href="#default-acg-%ec%82%ad%ec%a0%9c-%eb%b6%88%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>기본적으로 생성된 Default ACG는 삭제할 수 없습니다.</p>
-<img src="/images/security/ncloud-security-acg-setting-sample-18.png" width="480" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage">
+<img src="/images/security/ncloud-security-acg-setting-sample-18.png" width="480" alt="Ncloud의 IP/Port 기반 필터링 방화벽 서비스 ACG(Access Control Group) 설정 예시" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>VPC 환경 ACG 설정<br>
@@ -2903,7 +2909,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

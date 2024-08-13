@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2619,7 +2625,7 @@
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>록키 리눅스(Rocky Linux)는 기본 데이터베이스가 MariaDB인데, 상황에 따라 MySQL이 필요한 경우가 있습니다. 이번에는 그 중에서 MySQL 5.7 버전을 설치하는 방법을 정리해보겠습니다.</p>
 <h2 id="서버-준비">서버 준비 <a href="#%ec%84%9c%eb%b2%84-%ec%a4%80%eb%b9%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 Rocky Linux 서버를 준비합니다.</p>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-01.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-01.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="rocky-linux-소개">Rocky Linux 소개 <a href="#rocky-linux-%ec%86%8c%ea%b0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>록키 리눅스에 대한 간략한 소개는 아래 문서에서 확인할 수 있습니다.</p>
 
 
@@ -2657,7 +2663,7 @@
 Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가지로 dnf를 기본 패키지 관리자로 사용하고 있습니다. 물론 호환성을 위해서 yum 명령어도 사용할 수 있습니다.</p>
   </div>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-02.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-02.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-community-패키지-설치">MySQL Community 패키지 설치 <a href="#mysql-community-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>MySQL 5.7 버전이 포함된 가장 최근의 Repository 설치 패키지는 mysql80-community-release-el7-10.noarch.rpm 입니다.</p>
 
 
@@ -2678,7 +2684,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf -y install https://dev.mysql.com/get/mysql80-community-release-el7-10.noarch.rpm</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-04.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-04.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-57-버전-리포지토리-활성화">MySQL 5.7 버전 리포지토리 활성화 <a href="#mysql-57-%eb%b2%84%ec%a0%84-%eb%a6%ac%ed%8f%ac%ec%a7%80%ed%86%a0%eb%a6%ac-%ed%99%9c%ec%84%b1%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="버전-활성화-정보-초기화">버전 활성화 정보 초기화 <a href="#%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94-%ec%a0%95%eb%b3%b4-%ec%b4%88%ea%b8%b0%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2698,7 +2704,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf module reset mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-05.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-05.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="기본-mysql-버전-비활성화">기본 MySQL 버전 비활성화 <a href="#%ea%b8%b0%eb%b3%b8-mysql-%eb%b2%84%ec%a0%84-%eb%b9%84%ed%99%9c%ec%84%b1%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2718,7 +2724,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf module disable mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-06.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-06.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="mysql-버전-확인">MySQL 버전 확인 <a href="#mysql-%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치된 리포지토리에서 MySQL 버전을 확인해보면 5.7과 8.0이 존재하는 것을 확인할 수 있습니다.</p>
 
 
@@ -2739,7 +2745,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
   <code>dnf repolist all | grep mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-19.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-19.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="mysql-57-버전-활성화">MySQL 5.7 버전 활성화 <a href="#mysql-57-%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치된 MySQL Community 패키지에서 MySQL 8.0 버전은 비활성화 하고, 5.7 버전을 활성화 합니다.</p>
 
 
@@ -2761,7 +2767,7 @@ Fedora 18 이후 버전에서 사용되고 있으며, Rocky Linux도 마찬가�
 dnf config-manager --enable mysql57-community</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-07.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-07.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-57-설치">MySQL 5.7 설치 <a href="#mysql-57-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>MySQL 5.7 서버를 설치합니다.</p>
 
 
@@ -2782,7 +2788,7 @@ dnf config-manager --enable mysql57-community</code>
   <code>dnf -y install mysql-community-server</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-08.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-08.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-초기화">MySQL 초기화 <a href="#mysql-%ec%b4%88%ea%b8%b0%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>아래 명령어로 기본 데이터베이스 생성 등의 초기화 작업을 진행합니다. 다만 여기서는 초기화 할 때 &ndash;initialize-insecure 옵션으로 비밀번호는 설정하지 않고 아래쪽 MySQL 보안 설정 단계에서 [<strong>mysql_secure_installation</strong>] 명령으로 설정하도록 하겠습니다.</p>
 
 
@@ -2803,7 +2809,7 @@ dnf config-manager --enable mysql57-community</code>
   <code>mysqld --initialize-insecure --user=mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-09.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-09.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-데몬-시작">MySQL 데몬 시작 <a href="#mysql-%eb%8d%b0%eb%aa%ac-%ec%8b%9c%ec%9e%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>초기화를 마쳤으면 MySQL 데몬을 시작합니다.</p>
 
 
@@ -2824,7 +2830,7 @@ dnf config-manager --enable mysql57-community</code>
   <code>systemctl start mysqld</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-10.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-10.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-보안-설정">MySQL 보안 설정 <a href="#mysql-%eb%b3%b4%ec%95%88-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>mysql_secure_installation</strong>]은 MySQL의 기본 보안을 설정하는 명령으로, 설정되는 항목은 다음과 같습니다.</p>
 <ul>
 <li>root 계정 패스워드 설정</li>
@@ -2854,7 +2860,7 @@ dnf config-manager --enable mysql57-community</code>
 <ul>
 <li>비밀번호를 설정할 때 비밀번호 유효성 검사 플러그인을 사용할 것인지 선택할 수 있는데 [<strong>Y</strong>]를 입력합니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-11.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-11.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="비밀번호-정책-수준-선택">비밀번호 정책 수준 선택 <a href="#%eb%b9%84%eb%b0%80%eb%b2%88%ed%98%b8-%ec%a0%95%ec%b1%85-%ec%88%98%ec%a4%80-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>제공되는 비밀번호 정책 수준은 [<strong>LOW</strong>], [<strong>MEDIUM</strong>], [<strong>STRONG</strong>]의 3가지가 있습니다.</p>
 <ul>
 <li>LOW: 8자 이상</li>
@@ -2862,21 +2868,21 @@ dnf config-manager --enable mysql57-community</code>
 <li>STRONG: 8자 이상, 숫자-대소문자-특수문자 포함, dictionary file에 포함된 단어 사용 불가</li>
 </ul>
 <p>여기서는 1을 입력해서 MEDIUM을 선택하겠습니다.</p>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-12.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-12.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <ul>
 <li>패스워드를 입력하면 패스워드의 복잡성 강도를 점수로 측정해주는데 이번 테스트에서는 100점을 받았습니다.<br>
 그리고, 방금 입력했던 패스워드를 그대로 사용할 것인지 확인하는데 [<strong>Y</strong>]를 입력합니다.<br>
 (혹시 입력했던 비밀번호를 변경하고 싶을 경우는 [<strong>N</strong>]를 입력합니다.)</li>
 </ul>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-13.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-13.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="익명-계정-삭제">익명 계정 삭제 <a href="#%ec%9d%b5%eb%aa%85-%ea%b3%84%ec%a0%95-%ec%82%ad%ec%a0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>다음으로 Anonymous Users 즉, 익명 계정들을 삭제할 것인지 묻는데 [<strong>Y</strong>]를 입력합니다.</p>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-14.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-14.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="원격-호스트에서-root-계정-접속-차단">원격 호스트에서 root 계정 접속 차단 <a href="#%ec%9b%90%ea%b2%a9-%ed%98%b8%ec%8a%a4%ed%8a%b8%ec%97%90%ec%84%9c-root-%ea%b3%84%ec%a0%95-%ec%a0%91%ec%86%8d-%ec%b0%a8%eb%8b%a8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>다음은 로컬이 아닌 원격에서 root 계정 로그인을 차단할 것인지 묻는데 [<strong>Y</strong>]를 입력합니다.</p>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-15.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-15.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="테스트-db-등-삭제">테스트 DB 등 삭제 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8-db-%eb%93%b1-%ec%82%ad%ec%a0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>테스트 DB 등을 삭제할 것인지 묻는데 여기서도 [<strong>Y</strong>]를 입력합니다.</p>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-16.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-16.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="설정-저장">설정 저장 <a href="#%ec%84%a4%ec%a0%95-%ec%a0%80%ec%9e%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>마지막으로 지금까지 선택한 설정을 모두 적용할 것인지 묻는데 [<strong>Y</strong>]를 입력합니다.</p>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-17.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-17.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-접속">MySQL 접속 <a href="#mysql-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위에서 설정했던 비번으로 접속해보면 [<strong>5.7.43 MySQL Community Server</strong>]인 것을 확인할 수 있습니다.</p>
 
 
@@ -2897,7 +2903,7 @@ dnf config-manager --enable mysql57-community</code>
   <code>mysql -u root -p</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-18.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-57-install-on-rocky-linux-18.png" width="840" alt="Ncloud Rocky Linux 서버에 MySQL 5.7 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>MySQL Yum Repository 다운로드 페이지<br>
@@ -2997,7 +3003,7 @@ dnf config-manager --enable mysql57-community</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

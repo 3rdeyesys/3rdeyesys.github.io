@@ -41,8 +41,8 @@
 <meta property="og:url" content="https://docs.3rdeyesys.com/docs/storage/object-storage/client-tool/s3-client-tool-cloudberry-explorer/" />  
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_6159867284814370434.png"/>
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드) Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법입니다" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2021-10-08T00:00:00+09:00" />
-<meta property="article:modified_time" content="2021-10-08T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-08-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-08-12T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_6159867284814370434.png"/>
 <meta property="twitter:image:alt" content="Ncloud(네이버 클라우드) Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법입니다" /><meta name="twitter:title" content="Object Storage 접속용 Windows Client Tool | CloudBerry Explorer"/>
@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2518,7 +2524,11 @@
       <ul>
         <li><a href="#개요">개요</a></li>
         <li><a href="#cloudberry-explorer">CloudBerry Explorer</a></li>
-        <li><a href="#사용법">사용법</a></li>
+        <li><a href="#사용법">사용법</a>
+          <ul>
+            <li><a href="#api-인증-key-생성">API 인증 Key 생성</a></li>
+          </ul>
+        </li>
         <li><a href="#참고-url">참고 URL</a></li>
         <li><a href="#문서-업데이트-내역">문서 업데이트 내역</a></li>
       </ul>
@@ -2538,7 +2548,11 @@
       <ul>
         <li><a href="#개요">개요</a></li>
         <li><a href="#cloudberry-explorer">CloudBerry Explorer</a></li>
-        <li><a href="#사용법">사용법</a></li>
+        <li><a href="#사용법">사용법</a>
+          <ul>
+            <li><a href="#api-인증-key-생성">API 인증 Key 생성</a></li>
+          </ul>
+        </li>
         <li><a href="#참고-url">참고 URL</a></li>
         <li><a href="#문서-업데이트-내역">문서 업데이트 내역</a></li>
       </ul>
@@ -2574,7 +2588,7 @@
 <h2 id="사용법">사용법 <a href="#%ec%82%ac%ec%9a%a9%eb%b2%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>프로그램을 다운 받아서 설치하고, 실행을 하면 여러 종류의 스토리지 중에서 원하는 것을 선택하게 됩니다.<br>
 이 클라이언트는 AWS S3를 위한 것이지만, 많은 스토리지들이 S3와 호환되는 구조로 만들어졌기 때문에 공통으로 사용 가능합니다.
 이용 가능한 스토리지 리스트는 마지막에서 정리해보겠습니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_05.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_05.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage  mb-5">
 <p>여기에 아직 네이버 클라우드는 리스트에 없기 때문에 저희는 <strong>S3 Compatible</strong>을 선택하면 됩니다.</p>
 <ul>
 <li>Display name: 여기는 알아보기 쉬운 이름을 적으면 됩니다. 예를 들어 Naver Cloud</li>
@@ -2582,20 +2596,31 @@
 <li>Access key: 여기는 Access Key ID</li>
 <li>Secret key: 여기는 Secret Key</li>
 </ul>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_02.jpg" width="551" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_02.jpg" width="551" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage  mb-5">
+<h3 id="api-인증-key-생성">API 인증 Key 생성 <a href="#api-%ec%9d%b8%ec%a6%9d-key-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>네이버 클라우드 API 인증키는 [<strong>콘솔</strong>] - [<strong>서브 계정</strong>] - [<strong>서브 계정 세부 정보</strong>] - [<strong>Access Key</strong>]탭에서  Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
+<div class="alert alert-danger d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  <span class="material-icons size-20 me-2">
+  report
+  </span></div>
+  <div class="w-100">
+<p><strong>API 인증키를 서브 계정으로 생성해야 하는 이유</strong>: 메인 계정은 클라우서 서비스의 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API 인증키를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 <strong>반드시 서브 계정에서 API 인증키를 생성해야</strong> 합니다.</p>
+  </div>
+  </div>
 
 
 
-<div markdown="span" class="bs-callout-v2 bs-callout-v2-success bs-callout-v2-level-1">
-    네이버 클라우드 포탈 -&gt; 마이페이지 -&gt; 계정관리 -&gt; 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.
+<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
+    ⁃ <a href="/docs/api/ncloud-api-key-create-guide/">Ncloud API 인증키 생성하는 방법</a>
 </div>  
+<img src="/images/api/ncloud-api-key-create-guide-15.png" width="1140" alt="Ncloud(네이버 클라우드) API 인증키를 생성하는 방법" class="docimage  no-top  mb-5">
 <p>계정 정보를 입력하고 접속을 하면 왼쪽에 로컬PC 폴더가, 오른쪽에 버킷 리스트가 나타나고 원하는 버킷을 선택해서 들어가면 다음처럼 파일들을 확인할 수 있습니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_01.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_01.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage  mb-5">
 <p>Object Storage에 있는 파일을 로컬PC로 가져오려면 원하는 파일을 선택하고 마우스 오른쪽 버튼을 눌러서 Copy 명령을 선택하면 됩니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_03.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_03.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage  mb-5">
 <p>그 외 여러 가지 기능들이 있는데 그리 어려운 기능은 아니므로 직접 사용해보시면 금방 알 수 있습니다.</p>
 <p>마지막으로 CloudBerry Explorer Freeware for Amazon S3로 접속 가능한 클라우드 스토리지 리스트를 확인해보겠습니다.</p>
-<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_04.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage">
+<img src="/images/storage/ncp_storage_object_storage_s3_client_cloudberry_explorer_04.jpg" width="850" alt="Ncloud Object Storage 접속용 Windows Client Tool - CloudBerry Explorer 사용 방법" class="docimage  mb-5">
 <ul>
 <li>Amazon S3</li>
 <li>Amazon S3 (China)</li>
@@ -2663,6 +2688,10 @@
         <tr>
           <td>2021-10-08</td>        
           <td>문서 최초 생성</td>          
+        </tr>
+        <tr>
+          <td>2024-08-12</td>        
+          <td>API 인증키 생성 방법 안내 변경</td>          
         </tr>
     </tbody>
 </table>  
@@ -2735,7 +2764,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

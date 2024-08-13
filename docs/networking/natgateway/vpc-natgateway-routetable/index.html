@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2646,52 +2652,52 @@
 </ul>
 <h2 id="vpc-서비스-위치">VPC 서비스 위치 <a href="#vpc-%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%9c%84%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>VPC</strong>] 서비스는 [<strong>Console</strong>] - [<strong>Networking</strong>]에 위치해 있습니다.</p>
 <p>그리고, 아래 스샷에서 확인할 수 있듯이 [<strong>VPC</strong>]에는 [<strong>VPC</strong>], [<strong>Subnet</strong>], [<strong>Network ACL</strong>], [<strong>NAT Gateway</strong>], [<strong>Route Table</strong>], [<strong>VPC Peering</strong>], [<strong>Virtual Private Gateway</strong>] 등의 하부 서비스 메뉴가 있습니다.</p>
-<img src="/images/networking/ncloud-networking-natgw-routetb-00.png" width="845" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncloud-networking-natgw-routetb-00.png" width="845" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h2 id="vpc-생성">VPC 생성 <a href="#vpc-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>먼저 VPC를 생성합니다. IP주소 범위는 10.0.0.0/16으로 정하겠습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_01.jpg" width="700" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_01.jpg" width="700" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h2 id="subnet-생성">Subnet 생성 <a href="#subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Subnet은 아래와 같이 총 3가지를 준비하겠습니다.</p>
 <ul>
 <li>NAT Gateway 동작 테스트를 위해 서버용 Public, Private Subnet</li>
 <li>NAT Gateway를 배치할 <strong>NAT Gateway 전용 Subnet</strong></li>
 </ul>
 <h3 id="public-subnet-생성">Public Subnet 생성 <a href="#public-subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Public Subnet의 IP 범위는 <strong>10.0.0.0/24</strong>로 설정하겠습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_02.jpg" width="700" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_02.jpg" width="700" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h3 id="private-subnet-생성">Private Subnet 생성 <a href="#private-subnet-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Private Subnet의 IP 범위는 <strong>10.0.1.0/24</strong>로 설정하겠습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_03.jpg" width="700" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_03.jpg" width="700" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h3 id="nat-gateway-전용-subnet">NAT Gateway 전용 Subnet <a href="#nat-gateway-%ec%a0%84%ec%9a%a9-subnet" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>NAT Gateway 전용 Subnet은 Subnet 생성 화면에서 아래쪽 용도 설정에서 [<strong>NatGateway</strong>]를 선택합니다.</p>
-<img src="/images/networking/ncloud-networking-natgw-routetb-01.png" width="685" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncloud-networking-natgw-routetb-01.png" width="685" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h2 id="acg-설정">ACG 설정 <a href="#acg-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>테스트를 위한 ACG (Access Control Group)를 생성하고 설정합니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_04.jpg" width="700" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_04.jpg" width="700" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h3 id="inbound-설정">Inbound 설정 <a href="#inbound-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Inbound 규칙에는 Public, Private Subnet과 SSH 접속을 위한 로컬PC IP를 허용하고, Ping 테스트를 위한 ICMP도 허용합니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_05.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_05.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h3 id="outbound-설정">Outbound 설정 <a href="#outbound-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Outbound 규칙은 TCP, UDP, ICMP 모두 전체 허용으로 추가합니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_06.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_06.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h2 id="서버-생성">서버 생성 <a href="#%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>테스트를 위해 Public, Private 각각의 Subnet에 1대씩 서버를 설정하고 Public 서버에는 공인 IP도 할당합니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_07.jpg" width="772" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_07.jpg" width="772" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h3 id="public---private-서버-접속-확인">Public -&gt; Private 서버 접속 확인 <a href="#public---private-%ec%84%9c%eb%b2%84-%ec%a0%91%ec%86%8d-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Public Subnet에 있는 서버에서 Private Subnet에 있는 서버로 통신이 가능한 것을 확인할 수 있습니다.<br>
 다음 단계에서 Private 서버로 SSH로 접속하기 위한 사전 확인 단계입니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_08.jpg" width="670" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_08.jpg" width="670" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h3 id="private-서버-외부-접속-여부-확인">Private 서버 외부 접속 여부 확인 <a href="#private-%ec%84%9c%eb%b2%84-%ec%99%b8%eb%b6%80-%ec%a0%91%ec%86%8d-%ec%97%ac%eb%b6%80-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Public 서버에서 Private 서버로 SSH로 접속한 후에 Private 서버에서 외부로 통신이 되는 것을 확인해보면 불가능한 것을 확인할 수 있습니다.<br>
 이후 단계에서 NAT Gateway를 설정하고 Private 서버에서 외부와 통신이 가능한지 확인해보겠습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_09.jpg" width="670" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_09.jpg" width="670" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h2 id="route-table-설정-확인">Route Table 설정 확인 <a href="#route-table-%ec%84%a4%ec%a0%95-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>NAT Gateway를 위한 Route Table 설정을 추가하기 전에 현재 상태의 Route Table 설정을 확인해보겠습니다.</p>
 <h3 id="public-subnet의-route-table-설정-확인">Public Subnet의 Route Table 설정 확인 <a href="#public-subnet%ec%9d%98-route-table-%ec%84%a4%ec%a0%95-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 Public Subnet의 서버와 Private Subnet의 서버가 통신이 가능했던 것은 VPC와 Subnet이 생성될때 Route Table이 생성되면서 VPC 내부 통신을 위한 규칙 (10.0.0.0/16 LOCAL)이 기본으로 설정되기 때문입니다.<br>
 그리고 Public의 경우 외부 통신을 위한 INTERNET GATEWAY가 추가되어 있는 것을 확인할 수 있습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_10.jpg" width="780" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_10.jpg" width="780" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h3 id="private-subnet의-route-table-설정-확인">Private Subnet의 Route Table 설정 확인 <a href="#private-subnet%ec%9d%98-route-table-%ec%84%a4%ec%a0%95-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>반면에 Private의 경우는 VPC 내부 통신을 위한 LOCAL만 설정된 것을 확인 할 수 있습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_11.jpg" width="780" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_11.jpg" width="780" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <p>Route Table 설정 화면에 들어가도 Target Type에 LOCAL만 선택할 수 있는 것을 확인할 수 있습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_14.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_14.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h2 id="nat-gateway-생성">NAT Gateway 생성 <a href="#nat-gateway-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>NAT Gateway</strong>]는 별도의 메뉴가 있지 않고, [<strong>Networking</strong>] - [<strong>VPC</strong>] 서비스 내에 하부 서비스로 존재합니다. 그러면 이제 [<strong>NAT Gateway 생성</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_15.png" width="845" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_15.png" width="845" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <p>이름을 입력하고 서비스 상황에 따라 유형을 [<strong>공인</strong>] 또는 [<strong>사설</strong>]을 선택한 후, VPC와 위에서 생성했던 <strong>전용 Subnet</strong>을 선택하고, NAT Gateway를 생성합니다. 그리고 마지막으로 Route Table에 NATGW 설정을 추가해야 완료되는데, 관련 설정은 아래에서 확인 가능합니다.</p>
-<img src="/images/networking/ncloud-networking-natgw-routetb-02.png" width="845" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncloud-networking-natgw-routetb-02.png" width="845" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h3 id="route-table-설정">Route Table 설정 <a href="#route-table-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>앞에서 LOCAL 항목만 존재했던 Private Subnet의 Route Table 설정 화면에 가보면 Target Type에 NATGW가 추가된 것을 확인할 수 있습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_18.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_18.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <p>목적지(Destination)에 0.0.0.0/0을 입력하고, Target Type을 NATGW를 선택하고 생성 버튼을 클릭합니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_19.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_19.jpg" width="770" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h2 id="외부-접속-테스트">외부 접속 테스트 <a href="#%ec%99%b8%eb%b6%80-%ec%a0%91%ec%86%8d-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>마지막으로 다시 한번 Private 서버에서 외부 통신이 가능한지 ping 테스트를 해보면, 아래 화면과 같이 정상적으로 통신이 되는 것을 확인할 수 있습니다.</p>
-<img src="/images/networking/ncp_networking_natgw_routetb_20.jpg" width="670" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage">
+<img src="/images/networking/ncp_networking_natgw_routetb_20.jpg" width="670" alt="Ncloud VPC 환경에서 NAT Gateway 설정하기 가이드" class="docimage  mb-5">
 <h2 id="고려사항">고려사항 <a href="#%ea%b3%a0%eb%a0%a4%ec%82%ac%ed%95%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><div class="alert alert-danger d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
   <span class="material-icons size-20 me-2">
@@ -2798,7 +2804,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

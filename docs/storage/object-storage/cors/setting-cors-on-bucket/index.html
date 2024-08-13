@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2732,7 +2738,7 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --b
 aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --bucket cors-test</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-03.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-03.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage  mb-5">
 <h2 id="s3-browser-사용">S3 Browser 사용 <a href="#s3-browser-%ec%82%ac%ec%9a%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>외부 Client Tool중에서 CORS 설정이 가능한 것은 S3 Browser 이며, 자세한 사용 방법은 아래의 링크 문서를 참고하시기 바랍니다.</p>
 
 
@@ -2741,9 +2747,9 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --b
     <a href="/storage/ncloud_storage_object_storage_s3_client_s3browser.html">Object Storage 접속용 Windows Client Tool - S3 Browser</a>
 </div>  
 <p>S3 브라우저에 접속 하신다음 CORS 설정 대상의 버킷에서 오른쪽 마우스 버튼을 클릭 합니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-01.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-01.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage  mb-5">
 <p>CORS Configuration 클릭하여 CORS 설정을 오픈하면 처음에는 아무 값도 설정되어 있지 않습니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-04.png" width="645" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-04.png" width="645" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage  mb-5">
 <h3 id="xml-형식의-설정-준비">XML 형식의 설정 준비 <a href="#xml-%ed%98%95%ec%8b%9d%ec%9d%98-%ec%84%a4%ec%a0%95-%ec%a4%80%eb%b9%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>마찬가지로 GET, PUT Method로 접근 가능한 설정을 이번에는 XML 형식으로 입력하고 [<strong>Apply</strong>] 버튼을 클릭해서 적용합니다.</p>
 
 
@@ -2772,11 +2778,11 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --b
 &lt;/CORSConfiguration&gt;</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-05.png" width="645" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-05.png" width="645" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage  mb-5">
 <h2 id="접속-테스트">접속 테스트 <a href="#%ec%a0%91%ec%86%8d-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="정상-접속-확인">정상 접속 확인 <a href="#%ec%a0%95%ec%83%81-%ec%a0%91%ec%86%8d-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설정을 마친 후 Javascript를 사용해서 cors-test 버킷에 있는 파일을 호출해보면 아래와 같이 문제 없이 접속되는 것을 확인할 수 있습니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-06.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-06.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage  mb-5">
 <h3 id="cors-변경">CORS 변경 <a href="#cors-%eb%b3%80%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>접속 차단을 테스트 하기 위해 CORS 설정에서 AllowedOrigin 값을 임의의 <strong><a href="http://example.com" rel="external" target="_blank">http://example.com<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></strong> 으로 변경하겠습니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-02.png" width="645" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-02.png" width="645" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage  mb-5">
 <h3 id="접속-차단-확인">접속 차단 확인 <a href="#%ec%a0%91%ec%86%8d-%ec%b0%a8%eb%8b%a8-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설정을 변경한 후에 접속을 해보면 이전과는 다르게 아래와 같은 메시지가 나타나면서 접속이 차단된 것을 확인할 수 있습니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
@@ -2787,7 +2793,7 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --b
 <p>error: Access to XMLHttpRequest at &lsquo;<a href="https://kr.object.ncloudstorage.com/cors-test/cors-test.txt'" rel="external" target="_blank">https://kr.object.ncloudstorage.com/cors-test/cors-test.txt'<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> from origin <br />&rsquo;<strong><a href="http://cors-test.com" rel="external" target="_blank">http://cors-test.com<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></strong>&rsquo; <strong>has been blocked by CORS policy</strong>: No &lsquo;Access-Control-Allow-Origin&rsquo; header is present on the requested resource.</p>
   </div>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-07.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-bucket-cors-setting-guide-07.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage Bucket에 CORS를 설정하는 방법" class="docimage  mb-5">
 <h2 id="cors-예시">CORS 예시 <a href="#cors-%ec%98%88%ec%8b%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="예시-1">예시 1 <a href="#%ec%98%88%ec%8b%9c-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래 예시는 http://*.cors-test.com 즉, cors-test.com 도메인을 가진 모든 하위 도메인에 대해 허용할 요청 Method와 허용할 응답 헤더 값을 정의했습니다.</p>
 
 
@@ -3023,7 +3029,7 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-bucket-cors --b
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

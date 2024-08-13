@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2594,7 +2600,7 @@
 <li>서버: Rocky Linux 8.8</li>
 <li>DB: MySQL 8.0</li>
 </ul>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-01.png" width="845" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-01.png" width="845" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-설치">MySQL 설치 <a href="#mysql-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>아래와 같은 순서대로 MySQL 8.0 최신 버전을 설치합니다.</p>
 
 
@@ -2619,7 +2625,7 @@ dnf module disable mysql
 dnf -y install mysql-community-server</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-02.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-02.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="데이터-저장-디렉토리-생성">데이터 저장 디렉토리 생성 <a href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a0%80%ec%9e%a5-%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>DB 데이터를 저장할 임의의 디렉토리를 생성합니다. /database/mysql 과 같이 생성하고 실제 저장되는 디렉토리는 mysql로 하겠습니다.</p>
 
 
@@ -2640,9 +2646,9 @@ dnf -y install mysql-community-server</code>
   <code>mkdir -p /database/mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-03.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-03.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="디렉토리-소유권-변경">디렉토리 소유권 변경 <a href="#%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac-%ec%86%8c%ec%9c%a0%ea%b6%8c-%eb%b3%80%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>실제 저장되는 디렉토리인 [<strong>mysql</strong>]에 대한 소유권을 변경해야 하는데, 변경하기 전에 현재 상태를 확인해보면 아래와 같이 root:root로 되어 있는 것을 알 수 있습니다.</p>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-11.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-11.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <p>아래 명령으로 mysql 디렉토리에 대한 소유권을 mysql:mysql로 변경합니다.</p>
 
 
@@ -2663,7 +2669,7 @@ dnf -y install mysql-community-server</code>
   <code>chown -R mysql:mysql /database/mysql/</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-12.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-12.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="환경-설정-변경">환경 설정 변경 <a href="#%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95-%eb%b3%80%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>환경 설정 파일 my.cnf 파일을 열어서 [<strong>mysqld</strong>] 항목에 있는 [<strong>datadir</strong>], [<strong>socket</strong>] 두가지의 설정을 위에서 생성한 [<strong>/database/mysql/</strong>] 디렉토리로 변경합니다. 그리고 아래쪽에 로컬에서 접속하기 위한 [<strong>client</strong>] 항목에 대한 [<strong>socket</strong>] 설정도 추가합니다.</p>
 
 
@@ -2702,7 +2708,7 @@ socket=/database/mysql/mysql.sock
 default-character-set=utf8mb4</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-04.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-04.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-초기화">MySQL 초기화 <a href="#mysql-%ec%b4%88%ea%b8%b0%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>아래 명령어로 기본 데이터베이스 생성 등의 초기화 작업을 진행합니다. 이때 위에서 생성한 [<strong>/database/mysql/</strong>] 디렉토리에서 초기화가 진행됩니다.<br>
 초기화 한 후에 디렉토리를 살펴보면 아래와 같이 기본 데이터 베이스 등이 정상적으로 생성된 것을 확인할 수 있습니다.</p>
 
@@ -2725,7 +2731,7 @@ default-character-set=utf8mb4</code>
 ls -al /database/mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-05.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-05.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-데몬-시작">MySQL 데몬 시작 <a href="#mysql-%eb%8d%b0%eb%aa%ac-%ec%8b%9c%ec%9e%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>초기화를 마쳤으면 MySQL 데몬을 시작합니다.</p>
 
 
@@ -2746,7 +2752,7 @@ ls -al /database/mysql</code>
   <code>systemctl start mysqld</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-06.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-06.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-보안-설정">MySQL 보안 설정 <a href="#mysql-%eb%b3%b4%ec%95%88-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>mysql_secure_installation</strong>]은 MySQL의 기본 보안을 설정하는 명령으로, 설정되는 항목은 다음과 같습니다.</p>
 <ul>
 <li>root 계정 패스워드 설정</li>
@@ -2773,7 +2779,7 @@ ls -al /database/mysql</code>
   <code>mysql_secure_installation</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-07.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-07.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="mysql-접속">MySQL 접속 <a href="#mysql-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위에서 설정했던 비번으로 접속해보면 [<strong>8.0.35 MySQL Community Server</strong>]인 것을 확인할 수 있습니다.</p>
 <p>[<strong>show databases</strong>] 명령으로 데이터베이스를 확인해보면 기본 데이터베이스 등 각종 시스템 데이터베이스가 모두 정상적으로 나타나는 것을 알 수 있습니다.</p>
 
@@ -2797,7 +2803,7 @@ ls -al /database/mysql</code>
 mysql&gt; show databases;</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-08.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-08.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="테스트-db-생성">테스트 DB 생성 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8-db-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>데이터베이스 생성도 문제 없이 잘되는지 확인해보기 위해 [<strong>testdb</strong>]를 생성하고, 확인해보겠습니다.</p>
 
 
@@ -2819,7 +2825,7 @@ mysql&gt; show databases;</code>
 mysql&gt; show databases;</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-09.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-09.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h3 id="디렉토리-확인">디렉토리 확인 <a href="#%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>변경해서 설치한 디렉토리에도 [<strong>testdb</strong>]가 제대로 생성되었는지 확인해보니 아래 화면처럼 정상적으로 생성된 것을 알 수 있습니다.</p>
 
 
@@ -2840,7 +2846,7 @@ mysql&gt; show databases;</code>
   <code>ls -al /database/mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-10.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage">
+<img src="/images/database/ncloud-database-mysql-datadir-change-install-guide-10.png" width="840" alt="Ncloud(네이버 클라우드) 서버에 MySQL 데이터 저장 디렉토리(datadir)를 변경해서 설치하는 방법에 대한 가이드" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>MySQL Yum Repository 다운로드 페이지<br>
@@ -2940,7 +2946,7 @@ mysql&gt; show databases;</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

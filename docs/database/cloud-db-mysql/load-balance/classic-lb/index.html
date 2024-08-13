@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2626,12 +2632,12 @@
 <h2 id="db-서버-생성">DB 서버 생성 <a href="#db-%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 [Cloud DB for MySQL] - [DB Server]에서 DB를 생성합니다.</p>
 <h3 id="서버-설정">서버 설정 <a href="#%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>서버 설정에서 중요한 부분은 [<strong>고가용성 지원</strong>] 항목입니다. Slave DB를 추가하기 위해서는 [<strong>고가용성 지원</strong>] 항목을 체크해야 합니다.
 혹시 고가용성 지원 없이 서버를 생성했을 경우 이후에 [<strong>고가용성 지원</strong>]을 설정하면 문제 없이 Slave DB를 추가할 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-01.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-01.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="db-설정">DB 설정 <a href="#db-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>그 외 필요한 DB 설정을 입력합니다. 여기서 Backup 설정은 고가용성을 선택했을 경우 자동으로 사용하도록 설정됩니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-02.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-02.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="slave-db-추가">Slave DB 추가 <a href="#slave-db-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>DB 서버 생성이 완료되면 아래와 같이 [Master], [Standy Master] 2대의 서버가 생성된 것을 확인할 수 있습니다.<br>
 Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</strong>]를 선택합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-03.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-03.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="slave-db-정보">Slave DB 정보 <a href="#slave-db-%ec%a0%95%eb%b3%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Slave DB 서버 추가 팝업에서는 특별히 수정할 부분 없이 [예] 버튼을 클릭하면 추가 됩니다.</p>
 
 
@@ -2639,14 +2645,14 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-warning bs-callout-v2-level-2">
     Slave DB Server는 Master DB Server와 동일한 스펙 (DB Server 타입, 스토리지 타입, 스토리지 용량)및 DB Config 설정으로 생성됩니다. Slave DB Server 역시 Master DB Server와 동일한 요금이 청구되며, 사용한 시간으로 과금됩니다.
 </div>  
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-04.png" width="685" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-04.png" width="685" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="생성-완료">생성 완료 <a href="#%ec%83%9d%ec%84%b1-%ec%99%84%eb%a3%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Slave DB를 1대 생성했으면 동일한 방법으로 하나 더 생성합니다.
 여기서는 [test-003], [test-004]라는 이름으로 생성되었습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-05.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-05.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="acg-설정">ACG 설정 <a href="#acg-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 방화벽 ACG를 미리 설정해야 하는데, Master DB를 선택하고 아래쪽에 있는 [<strong>ACG</strong>] 항목을 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-06.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-06.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <p>ACG 리스트에서 Cloud DB를 생성할때 자동으로 생성된 [cloud-db-OOOO]라는 이름의 ACG를 선택하고 [ACG 설정] 버튼을 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-07.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-07.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="규칙-설정">규칙 설정 <a href="#%ea%b7%9c%ec%b9%99-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>ACG에 설정이 필요한 규칙은 2가지입니다.</p>
 <ul>
 <li>부하 분산을 위한 Load Balancer -&gt; Cloud DB for MySQL로 접근을 허용하는 규칙</li>
@@ -2654,14 +2660,14 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
 </ul>
 <p>Load Balancer -&gt; Cloud DB for MySQL로 접근을 허용하는 규칙은 Load Balancer 전용 ACG [<strong>ncloud-load-balancer</strong>]를 [접근 소스] 항목에 추가합니다.</p>
 <p>Server -&gt; Cloud DB for MySQL로 접근을 허용하는 규칙은 [접근 소스] 항목에 [Server IP] 또는 [Server에 설정된 ACG]를 입력하면 됩니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-08.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-08.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="load-balancer-생성">Load Balancer 생성 <a href="#load-balancer-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>마지막으로 로드밸런서를 생성해야 하는데, 로드밸런서를 생성할 때 Slave DB와 연결하려면 <code>네트워크 항목을 [Private IP]로 설정</code>해야 합니다.<br>
 그리고 프로토콜은 TCP, 포트는 3306으로 설정하겠습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-09.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-09.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h3 id="서버-추가">서버 추가 <a href="#%ec%84%9c%eb%b2%84-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[서버 추가] 화면에는 적용할 서버 리스트에 위에서 생성했던 Slave DB 서버가 나타나는데, 모두 선택하고 오른쪽으로 이동 시킵니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-10.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-10.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <p>설정에 이상이 없으면 로드밸런서가 생성되고, 적용 서버의 연결 상태가 모두 [성공]으로 나타납니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-11.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-11.png" width="845" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="테스트-서버-설정">테스트 서버 설정 <a href="#%ed%85%8c%ec%8a%a4%ed%8a%b8-%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>읽기 부하가 제대로 분산되는지 테스트 하기 위해 준비된 서버에 [<strong>MySQL Client</strong>]를 설치합니다.</p>
 <div class="alert alert-primary d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
@@ -2691,7 +2697,7 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
   <code>yum -y install mysql</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-12.png" width="840" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-12.png" width="840" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="부하-분산-테스트">부하 분산 테스트 <a href="#%eb%b6%80%ed%95%98-%eb%b6%84%ec%82%b0-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>설치된 MySQL Client를 이용해서 Load Balancer IP로 접속한 후에 접속한 DB 서버의 호스트명을 확인하는 쿼리를 실행합니다.</p>
 <p>여러 차례 반복해보면 아래와 같이 위에서 추가했던 Slave DB [test-003], [test-004]에 각각 접속되는 것을 확인할 수 있습니다.</p>
 
@@ -2732,11 +2738,11 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
   <code>MySQL [(none)]&gt; SELECT @@hostname;</code>
   </pre>
   </div>
-<h3 id="test-003에-접속된-상태">[test-003]에 접속된 상태 <a href="#test-003%ec%97%90-%ec%a0%91%ec%86%8d%eb%90%9c-%ec%83%81%ed%83%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-13.png" width="840" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
-<h3 id="test-004에-접속된-상태">[test-004]에 접속된 상태 <a href="#test-004%ec%97%90-%ec%a0%91%ec%86%8d%eb%90%9c-%ec%83%81%ed%83%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-14.png" width="840" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<h3 id="test-003에-접속된-상태">[test-003]에 접속된 상태 <a href="#test-003%ec%97%90-%ec%a0%91%ec%86%8d%eb%90%9c-%ec%83%81%ed%83%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-13.png" width="840" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
+<h3 id="test-004에-접속된-상태">[test-004]에 접속된 상태 <a href="#test-004%ec%97%90-%ec%a0%91%ec%86%8d%eb%90%9c-%ec%83%81%ed%83%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-14.png" width="840" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="db-삭제">DB 삭제 <a href="#db-%ec%82%ad%ec%a0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>테스트를 끝낸 DB를 삭제하려고 할 때 [Slave나 Recovery DB 서버가 있는 경우 Master DB를 삭제할 수 없습니다.]라는 메시지가 나타나는 것을 확인할 수 있습니다.</p>
 <p>그래서 DB를 삭제할 때는 [Slave DB]부터 삭제해야 하고, [Slave DB]를 삭제할 때에도 동시에 삭제할 수 없고 1대씩 차례로 삭제해야 합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-15.png" width="490" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-mysql-read-load-balancing-15.png" width="490" alt="Ncloud Classic 환경에서 Cloud DB for MySQL 디비의 읽기 부하를 로드밸런서로 분산시키는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ncloud Cloud DB for MySQL 읽기 부하 분산 설정 가이드<br>
@@ -2834,7 +2840,7 @@ Master 서버를 선택하고 [DB 관리] 메뉴에서 [<strong>Slave 추가</st
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

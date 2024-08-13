@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2650,7 +2656,7 @@
 </div>  
 <h2 id="도메인-등록">도메인 등록 <a href="#%eb%8f%84%eb%a9%94%ec%9d%b8-%eb%93%b1%eb%a1%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>Cloud Outbound Mailer</strong>] - [<strong>Domain Management</strong>]에서 [<strong>도메인 등록</strong>] 버튼을 클릭합니다.<br>
 이미 도메인이 등록되어 있다면 다음 단계로 이동합니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-01.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-01.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="등록-절차">등록 절차 <a href="#%eb%93%b1%eb%a1%9d-%ec%a0%88%ec%b0%a8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ol>
 <li>이메일 발송 주소로 사용할 도메인을 입력 후, 인증 토큰 생성 버튼을 클릭합니다.</li>
 <li>인증 토큰이 생성되면 [복사하기] 버튼을 클릭하여 인증 토큰 정보를 복사합니다.</li>
@@ -2659,20 +2665,20 @@
 <li>Domain Management 메뉴에서 등록된 도메인 선택 후, [인증] 버튼을 클릭합니다.</li>
 <li>DNS 변경의 적용에는 시간이 소요될 수 있습니다. 정상적으로 TXT 레코드 등록을 완료했으나 인증이 되지 않는 경우 잠시 후 다시 [인증] 버튼을 클릭해 주세요.</li>
 </ol>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-02.png" width="685" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-02.png" width="685" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="인증-대기">인증 대기 <a href="#%ec%9d%b8%ec%a6%9d-%eb%8c%80%ea%b8%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>등록을 완료하면 아래와 같이 미인증 상태로 인증대기 중인 화면을 확인할 수 있습니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-03.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-03.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="인증-토큰-적용">인증 토큰 적용 <a href="#%ec%9d%b8%ec%a6%9d-%ed%86%a0%ed%81%b0-%ec%a0%81%ec%9a%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>해당 도메인을 등록한 DNS 서비스 업체에서 [<strong>인증 토큰</strong>]을 등록하면 되는데, 여기서는 Ncloud의 DNS 서비스인 [<strong>Global DNS</strong>]에서 아래와 같이 등록했습니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-04.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-04.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="인증-확인">인증 확인 <a href="#%ec%9d%b8%ec%a6%9d-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>DNS 서비스에 [<strong>인증 토큰</strong>]을 등록하고 잠시 기다렸다가 [<strong>도메인 인증 토큰</strong>] 항목에 있는 [<strong>인증</strong>] 버튼을 클릭하면 아래와 같이 [<strong>인증 일시</strong>] 시각을 확인할 수 있습니다.</p>
 <p>인증에 실패했다는 메시지가 나타날 경우 조금 더 기다렸다가 다시 [<strong>인증</strong>] 버튼을 클릭해보고, 그래도 인증에 실패하면 DNS에 [<strong>인증 토큰</strong>]이 제대로 등록되었는지 확인해보시기 바랍니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-05.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-05.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h2 id="spf-인증">SPF 인증 <a href="#spf-%ec%9d%b8%ec%a6%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>도메인 인증이 끝났으면 다음으로 [<strong>SPF</strong>] 인증을 해보겠습니다.</p>
 <p><strong>SPF(Sender Policy Framework) 인증</strong>은 메일 발신자 정보가 DNS에 등록된 메일 서버 정보와 일치하는지 확인하여 발신자 위조 여부를 확인하기 위한 인증입니다.</p>
 <ul>
 <li>우선 [<strong>SPF 레코드</strong>] 항목에 있는 [<strong>보기</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-06.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-06.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="인증-레코드-확인">인증 레코드 확인 <a href="#%ec%9d%b8%ec%a6%9d-%eb%a0%88%ec%bd%94%eb%93%9c-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>팝업에 나타난 인증 레코드를 복사합니다.</p>
 
 
@@ -2693,7 +2699,7 @@
   <code>v=spf1 include:email.ncloud.com ~all</code>
   </pre>
   </div>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-07.png" width="485" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-07.png" width="485" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="dns-레코드-등록">DNS 레코드 등록 <a href="#dns-%eb%a0%88%ec%bd%94%eb%93%9c-%eb%93%b1%eb%a1%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 복사한 인증 레코드를 DNS에 등록합니다. 이때 기존에 등록된 SPF 레코드가 존재할 경우에는 기존 레코드 문자열에 포함해서 등록해야 합니다.</p>
 
 
@@ -2730,14 +2736,14 @@ v=spf1 ip4:123.123.123.123 include:email.ncloud.com ~all</code>
 		
 
 		<a class="nav-link  active"
-		   id="ceafbdTab" data-bs-toggle="tab" data-bs-target="#ceafbd"
-		   type="button" role="tab" aria-controls="ceafbd" aria-selected="true">신규 등록일 경우</a>
+		   id="feacbdTab" data-bs-toggle="tab" data-bs-target="#feacbd"
+		   type="button" role="tab" aria-controls="feacbd" aria-selected="true">신규 등록일 경우</a>
 
 		
 
 		<a class="nav-link "
-		   id="cefbdaTab" data-bs-toggle="tab" data-bs-target="#cefbda"
-		   type="button" role="tab" aria-controls="cefbda" aria-selected="true">다른 SPF 레코드가 존재할 경우</a>
+		   id="edabcfTab" data-bs-toggle="tab" data-bs-target="#edabcf"
+		   type="button" role="tab" aria-controls="edabcf" aria-selected="true">다른 SPF 레코드가 존재할 경우</a>
 
 		
 
@@ -2753,9 +2759,9 @@ v=spf1 ip4:123.123.123.123 include:email.ncloud.com ~all</code>
 
 
 
-<div class="tab-pane fade show active" id="ceafbd" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="feacbd" role="tabpanel" aria-labelledby="nav-1">
 
-	<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-08.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+	<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-08.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 
 
 </div>
@@ -2765,9 +2771,9 @@ v=spf1 ip4:123.123.123.123 include:email.ncloud.com ~all</code>
 
 
 
-<div class="tab-pane fade" id="cefbda" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="edabcf" role="tabpanel" aria-labelledby="nav-1">
 
-	<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-09.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+	<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-09.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 
 
 </div>
@@ -2776,21 +2782,21 @@ v=spf1 ip4:123.123.123.123 include:email.ncloud.com ~all</code>
 </div>
 <h3 id="인증-확인-1">인증 확인 <a href="#%ec%9d%b8%ec%a6%9d-%ed%99%95%ec%9d%b8-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>인증 레코드를 등록하고 잠시 기다렸다가 [<strong>SPF 레코드</strong>] 항목에 있는 [<strong>인증</strong>] 버튼을 클릭하면 아래와 같이 [<strong>인증 일시</strong>] 시각을 확인할 수 있습니다.</p>
 <p>인증에 실패했다는 메시지가 나타날 경우 조금 더 기다렸다가 다시 [<strong>인증</strong>] 버튼을 클릭해보고, 그래도 인증에 실패하면 DNS에 [<strong>인증 레코드</strong>]가 제대로 등록되었는지 확인해보시기 바랍니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-10.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-10.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="인증-사용">인증 사용 <a href="#%ec%9d%b8%ec%a6%9d-%ec%82%ac%ec%9a%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>인증이 완료되었으면, 향후 [<strong>Cloud Outbound Mailer</strong>]에서 메일을 발송할 때 [<strong>SPF 인증</strong>]이 적용되도록 [<strong>사용</strong>]하기를 설정해야 합니다. 아래 스샷처럼 [<strong>SPF 레코드</strong>] 항목에 있는 [<strong>사용</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-11.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-11.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <ul>
 <li>[<strong>SPF 인증</strong>] 사용하기가 설정되면 아래와 같이 [<strong>사용 중</strong>] 상태로 바뀌면서 [<strong>사용 중지</strong>] 버튼이 활성화 됩니다.</li>
 </ul>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-12.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-12.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h2 id="dkim-인증">DKIM 인증 <a href="#dkim-%ec%9d%b8%ec%a6%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 [<strong>DKIM</strong>] 인증을 해보겠습니다.</p>
 <p><strong>DKIM(DomainKeys Identified Mail) 인증</strong>은 메일 헤더에 디지털 서명을 추가하여 메일의 위변조 여부를 확인하기 위한 인증입니다.</p>
 <ul>
 <li>우선 [<strong>DKIM</strong>] 서명키를 확인하기 위해 [<strong>DKIM 레코드</strong>] 항목에 있는 [<strong>보기</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-13.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-13.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="서명-키-확인">서명 키 확인 <a href="#%ec%84%9c%eb%aa%85-%ed%82%a4-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래와 같이 팝업에 나타난 [<strong>DKIM</strong>] 서명키를 복사해서 DNS에 등록합니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-14.png" width="485" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-14.png" width="485" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 
 
 
@@ -2813,15 +2819,15 @@ v=spf1 ip4:123.123.123.123 include:email.ncloud.com ~all</code>
 
 </div>  
 <h3 id="dns-등록">DNS 등록 <a href="#dns-%eb%93%b1%eb%a1%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래와 같이 호스트명을 <code>mailer._domainkey</code>로 입력하고, [<strong>DKIM</strong>] 서명키를 등록했습니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-15.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-15.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="인증-사용-1">인증 사용 <a href="#%ec%9d%b8%ec%a6%9d-%ec%82%ac%ec%9a%a9-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>인증이 완료되었으면, 향후 [<strong>Cloud Outbound Mailer</strong>]에서 메일을 발송할 때 [<strong>DKIM 인증</strong>]이 적용되도록 [<strong>사용</strong>]하기를 설정해야 합니다. 아래 스샷처럼 [<strong>DKIM</strong>] 항목에 있는 [<strong>사용</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-16.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-16.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <ul>
 <li>[<strong>DKIM 인증</strong>] 사용하기가 설정되면 아래와 같이 [<strong>사용 중</strong>] 상태로 바뀌면서 [<strong>사용 중지</strong>] 버튼이 활성화 됩니다.</li>
 </ul>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-17.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-17.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h2 id="dmarc-인증">DMARC 인증 <a href="#dmarc-%ec%9d%b8%ec%a6%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>DMARC</strong>] 인증은 다른 인증과 달리 레코드 값을 직접 설정해서 등록해야 합니다. 자세한 방법은 아래쪽에서 확인해보겠습니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-18.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-18.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="dmarc-레코드-값-준비">DMARC 레코드 값 준비 <a href="#dmarc-%eb%a0%88%ec%bd%94%eb%93%9c-%ea%b0%92-%ec%a4%80%eb%b9%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ol>
 <li>DMARC 레코드 이름, 즉 호스트명은 반드시 <code>_dmarc</code>를 입력해야 합니다.</li>
 <li>DMARC 레코드의 값은 아래와 같은 형식으로 구성됩니다.<br>
@@ -2894,14 +2900,14 @@ v=spf1 ip4:123.123.123.123 include:email.ncloud.com ~all</code>
   </tbody>
 </table>  
 <h3 id="dns-등록-1">DNS 등록 <a href="#dns-%eb%93%b1%eb%a1%9d-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래와 같이 호스트명을 <code>_dmarc</code>로 입력하고, [<strong>DMARC</strong>] 레코드를 등록했습니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-19.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-19.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="인증-확인-2">인증 확인 <a href="#%ec%9d%b8%ec%a6%9d-%ed%99%95%ec%9d%b8-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>인증 레코드를 등록하고 잠시 기다렸다가 [<strong>DMARC 인증</strong>] 항목에 있는 [<strong>인증 일시</strong>] 시각이 나타나는 것을 확인할 수 있습니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-20.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-20.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h2 id="도메인-인증-결과-테스트">도메인 인증 결과 테스트 <a href="#%eb%8f%84%eb%a9%94%ec%9d%b8-%ec%9d%b8%ec%a6%9d-%ea%b2%b0%ea%b3%bc-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>실제로 Gmail로 메일을 발송한 후 인증 결과를 테스트 해보겠습니다.</p>
 <p>Gmail 계정쪽으로 메일을 발송한 후 Gmail에 접속해서 도착한 메일을 선택하고 오른쪽 끝에 있는 [ <i class="fa-solid fa-ellipsis-vertical"></i> ] 아이콘을 클릭하면 나타나는 메뉴에서 [<strong>원본 보기</strong>]를 선택합니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-21.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-21.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h3 id="인증-pass">인증 PASS <a href="#%ec%9d%b8%ec%a6%9d-pass" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>메일의 [<strong>원본 보기</strong>]를 확인해보면 아래와 같이 [<strong>SPF</strong>], [<strong>DKIM</strong>], [<strong>DMARC</strong>] 3가지 인증 모두 <strong><code>PASS</code></strong> 즉, 인증이 정상적으로 완료되었다는 것을 알 수 있습니다.</p>
-<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-22.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage">
+<img src="/images/application-service/application-service-cloud-outbound-mailer-domain-auth-22.png" width="845" alt="Ncloud (네이버 클라우드) Cloud Outbound Mailer에서 도메인을 인증하는 방법 3가지(SPF, DKIM, DMARC)에 대한 안내" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ncloud Cloud Outbound Mailer 가이드<br>
@@ -2991,7 +2997,7 @@ v=spf1 ip4:123.123.123.123 include:email.ncloud.com ~all</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

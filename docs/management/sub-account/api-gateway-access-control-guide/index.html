@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2603,30 +2609,30 @@
 <ul>
 <li>테스트를 위해 아래와 같이 서브 계정을 준비하고, 계정을 클릭해서 서브 계정 세부 정보 화면으로 이동합니다.</li>
 </ul>
-<img src="/images/management/ncloud-management-sub-account-07.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-07.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage  mb-5">
 <h2 id="계정-권한-설정">계정 권한 설정 <a href="#%ea%b3%84%ec%a0%95-%ea%b6%8c%ed%95%9c-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>서브 계정의 권한은 최소로 설정해야 합니다.<br>
 예를 들어 Object Storage만 접근하는지, VPC Server 관련된 기능만 사용할 것인지, VPC Server 관련된 기능 중에서도 조회 기능만 사용할 것인지, Server 생성 등을 포함한 모든 기능을 사용할 것인지 등의 사용에 필요한 권한을 모두 정리해서 최소한의 권한으로 설정하는 것이 안전합니다.</p>
 <p>우선, 서브 계정 세부 정보 화면에서 아래쪽에 있는 [<strong>정책</strong>] 탭에 있는 [<strong>개별 권한 추가</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/management/ncloud-management-sub-account-08.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-08.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage  mb-5">
 <p>정책 추가 화면에서는 네이버 클라우드에서 기본으로 제공하는 [관리형 정책]과 사용자가 직접 정의하는 [사용자 정의 정책]이 있습니다.<br>
 우선 [관리형 정책]에서 필요한 정책을 선택하고 [추가] 버튼을 클릭합니다.</p>
-<img src="/images/management/ncloud-management-sub-account-24.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-24.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage  mb-5">
 <ul>
 <li>정책이 워낙 많기 때문에 가능하면 위쪽의 검색 기능을 이용해서 정책을 찾는 것을 추천합니다.<br>
 여기서는 테스트를 위해 Function으로 검색해서 [NCP_VPC_CLOUD_FUNCTIONS_MANAGER (VPC 기반 Cloud Functions 서비스 내 모든 기능을 이용할 수 있는 권한)]을 선택했습니다.</li>
 </ul>
-<img src="/images/management/ncloud-management-sub-account-api-gateway-access-control-guide-01.png" width="845" alt="Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법" class="docimage">
-<img src="/images/management/ncloud-management-sub-account-api-gateway-access-control-guide-02.png" width="845" alt="Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-api-gateway-access-control-guide-01.png" width="845" alt="Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법" class="docimage  mb-5">
+<img src="/images/management/ncloud-management-sub-account-api-gateway-access-control-guide-02.png" width="845" alt="Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법" class="docimage  mb-5">
 <h2 id="api-gateway-접근-권한-설정">API Gateway 접근 권한 설정 <a href="#api-gateway-%ec%a0%91%ea%b7%bc-%ea%b6%8c%ed%95%9c-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선, [서브 계정 세부 정보] 화면에서 [수정] 메뉴 버튼을 클릭합니다.</p>
-<img src="/images/management/ncloud-management-sub-account-api-gateway-access-control-guide-03.png" width="845" alt="Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-api-gateway-access-control-guide-03.png" width="845" alt="Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>서브 계정 정보</strong>] 수정 화면에서 [<strong>접근 권한</strong>]에 있는 [<strong>API Gateway 접근</strong>]을 체크합니다. 그리고, 되도록이면 [<strong>지정된 Source에서만 접근 가능</strong>] 옵션을 선택하고, 지정된 IP 등을 추가하는 것을 권장합니다.</li>
 </ul>
-<img src="/images/management/ncloud-management-sub-account-12.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-12.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage  mb-5">
 <ul>
 <li>위 화면에서 [<strong>추가</strong>] 버튼을 클릭하면 아래와 같이 [<strong>접근 가능 Source 지정</strong>] 팝업이 나타나는데, IP를 입력하거나 VPC Server를 선택하면 됩니다.</li>
 </ul>
-<img src="/images/management/ncloud-management-sub-account-13.png" width="685" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-13.png" width="685" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage  mb-5">
 
 
 
@@ -2635,9 +2641,9 @@
 ⁃ 아래 화면처럼 VPC Server 리스트에서 직접 선택해야 접근 가능합니다.<br />
 ⁃ 그러므로 다른 계정의 VPC Server는 접근 가능 리소스에 추가할 수 없습니다.
 </div>  
-<img src="/images/management/ncloud-management-sub-account-api-gateway-access-control-guide-04.png" width="845" alt="Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-api-gateway-access-control-guide-04.png" width="845" alt="Ncloud(네이버 클라우드) Sub Account(서브 계정)를 이용해 API Key 접근 제한 설정하는 방법" class="docimage  mb-5">
 <h3 id="api-access-key-추가">API Access Key 추가 <a href="#api-access-key-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 [<strong>API Gateway 접근</strong>] 권한을 추가하면 계정 정보 화면에 아래와 같이 [<strong>Access Key</strong>] 탭이 나타나고 [<strong>추가</strong>] 버튼을 클릭하면 [<strong>Access Key</strong>]와 [<strong>Secret Key</strong>]를 생성할 수 있습니다.</p>
-<img src="/images/management/ncloud-management-sub-account-14.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage">
+<img src="/images/management/ncloud-management-sub-account-14.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage  mb-5">
 <h2 id="접근-제한-테스트">접근 제한 테스트 <a href="#%ec%a0%91%ea%b7%bc-%ec%a0%9c%ed%95%9c-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>그러면 위에서 설정했던 접근 제한 설정이 제대로 작동하는지 테스트 해보겠습니다.</p>
 <h3 id="ip-제한">IP 제한 <a href="#ip-%ec%a0%9c%ed%95%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 설정한 [<strong>접근 가능 Source 지정</strong>] 항목에 IP를 설정하지 않거나, 지정되지 않은 IP에서 접근할 경우 아래의 예시와 같은 오류 메시지가 반환됩니다.</p>
 <ul>
@@ -2904,7 +2910,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

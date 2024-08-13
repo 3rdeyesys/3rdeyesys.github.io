@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2599,17 +2605,17 @@ LoadBalancer에 에 인증서를 두고 로드밸런서에서 HTTPS/443 요청�
 </div>  
 <h2 id="https와-http-접속">HTTPS와 HTTP 접속 <a href="#https%ec%99%80-http-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>로드밸런서 생성시 HTTPS/443 요청은 받을수 있게 설정하고, HTTP/80 요청을 설정하지않아
 test1.3rdeyesys.com 요청은 받을수 있지만 HTTP/80 요청은 연결이 불가한 상태임을 확인할 수 있습니다.</p>
-<h3 id="https433-접속-상태-확인">HTTPS/433 접속 상태 확인 <a href="#https433-%ec%a0%91%ec%86%8d-%ec%83%81%ed%83%9c-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/networking/ncloud_networking_load_balancer_http_to_https_01.png" width="528" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
-<h3 id="http80-접속-상태-확인">HTTP/80 접속 상태 확인 <a href="#http80-%ec%a0%91%ec%86%8d-%ec%83%81%ed%83%9c-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/networking/ncloud_networking_load_balancer_http_to_https_02.png" width="488" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<h3 id="https433-접속-상태-확인">HTTPS/433 접속 상태 확인 <a href="#https433-%ec%a0%91%ec%86%8d-%ec%83%81%ed%83%9c-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/networking/ncloud_networking_load_balancer_http_to_https_01.png" width="528" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
+<h3 id="http80-접속-상태-확인">HTTP/80 접속 상태 확인 <a href="#http80-%ec%a0%91%ec%86%8d-%ec%83%81%ed%83%9c-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/networking/ncloud_networking_load_balancer_http_to_https_02.png" width="488" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 <h2 id="리스너-추가">리스너 추가 <a href="#%eb%a6%ac%ec%8a%a4%eb%84%88-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>로드밸런서 생성시 설정한 HTTPS/443 요청 외에 HTTP/80 요청도 받을 수 있게 로드밸런서에서  HTTP/80 요청을 받을 새로운 리스너를 설정합니다.</p>
 <p>로드밸런서를 선택하고 상단의 [리스너 설정 변경] 버튼을 클릭합니다.</p>
-<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_03.png" width="800" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_03.png" width="800" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 <p>[리스너 추가] 버튼을 클릭합니다.</p>
-<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_04.png" width="790" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_04.png" width="790" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 <p>HTTP 프로토콜 항목란에 80포트, Target Group 항목란에 80  으로 설정하여 확인버튼을 눌러 마무리 합니다.</p>
-<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_05.png" width="625" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_05.png" width="625" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 <p>다음과 같이 80 to 80 으로 리스너가 추가되어 HTTP/80 요청에도 응답하여 페이지를 띄울수 있습니다.</p>
-<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_06.png" width="532" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_06.png" width="532" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 
 
 
@@ -2617,16 +2623,16 @@ test1.3rdeyesys.com 요청은 받을수 있지만 HTTP/80 요청은 연결이 �
     HTTP/80 요청은 로드밸런서를 거쳐 그대로 서버의 80 포트와 통신하기에 보안상에 문제가 생길수 있습니다. 그러므로 Application LoadBalancer의 기능을 이용하여 HTTP/80으로 들어오는 요청을 HTTPS/443으로 Redirection 하겠습니다.
 </div>  
 <h2 id="규칙-추가">규칙 추가 <a href="#%ea%b7%9c%ec%b9%99-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>HTTP로 생성한 리스너를 선택하고 [규칙 조회/변경] 버튼을 클릭합니다.</p>
-<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_07.png" width="660" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_07.png" width="660" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 <p>다음으로 [규칙 추가] 버튼을 클릭합니다.</p>
-<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_08.png" width="750" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_08.png" width="750" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 <p>다음의 항목들을 설정합니다.</p>
 <ul>
 <li><strong>우선순위</strong>: 규칙을 적용할 순번을 정할수 있습니다.</li>
 <li><strong>조건</strong>: Host Header 와 Path Pattern 를 선택 할수 있습니다. (본 테스트 에서는 Host Header 기반을 사용하였습니다.)</li>
 <li><strong>액션</strong>: Target group과 Redierction 을 선택할 수 있습니다. (Redierction 선택합니다.)</li>
 </ul>
-<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_09.png" width="800" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_09.png" width="800" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 
 
 
@@ -2637,10 +2643,10 @@ test1.3rdeyesys.com 요청은 받을수 있지만 HTTP/80 요청은 연결이 �
 ⁃  그 외 사용환경에 맞게 규칙을 설정해 사용합니다.
 </div>  
 <p>설정된 규칙들을 확인 합니다.</p>
-<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_11.png" width="740" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<img src="/images/networking/ncloud_networking_load_balancer_http_to_https_11.png" width="740" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 <h2 id="최종-테스트">최종 테스트 <a href="#%ec%b5%9c%ec%a2%85-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 다시 HTTP로 도메인 주소를 접속 해보면 규칙에 추가된 Host Header 기반으로 HTTPS로 Redirection 되는 모습을 확인 할수가 있습니다.</p>
-<h3 id="http80-으로-접속시도">HTTP/80 으로 접속시도 <a href="#http80-%ec%9c%bc%eb%a1%9c-%ec%a0%91%ec%86%8d%ec%8b%9c%eb%8f%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/networking/ncloud_networking_load_balancer_http_to_https_12.png" width="447" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
-<h3 id="https443-으로-redirection-확인">HTTPS/443 으로 Redirection 확인 <a href="#https443-%ec%9c%bc%eb%a1%9c-redirection-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/networking/ncloud_networking_load_balancer_http_to_https_13.png" width="548" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage">
+<h3 id="http80-으로-접속시도">HTTP/80 으로 접속시도 <a href="#http80-%ec%9c%bc%eb%a1%9c-%ec%a0%91%ec%86%8d%ec%8b%9c%eb%8f%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/networking/ncloud_networking_load_balancer_http_to_https_12.png" width="447" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
+<h3 id="https443-으로-redirection-확인">HTTPS/443 으로 Redirection 확인 <a href="#https443-%ec%9c%bc%eb%a1%9c-redirection-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><img src="/images/networking/ncloud_networking_load_balancer_http_to_https_13.png" width="548" alt="Ncloud VPC 환경의 Application LoadBalancer에 http로 접속 시에 https로 리다이렉트 시키는 방법" class="docimage  mb-5">
 <h2 id="문서-업데이트-내역">문서 업데이트 내역 <a href="#%eb%ac%b8%ec%84%9c-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%eb%82%b4%ec%97%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><table class="simple_table small_font col-sm-5 ">
     <thead>
       <tr>
@@ -2718,7 +2724,7 @@ test1.3rdeyesys.com 요청은 받을수 있지만 HTTP/80 요청은 연결이 �
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

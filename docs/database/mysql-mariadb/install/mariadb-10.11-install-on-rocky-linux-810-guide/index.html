@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2640,7 +2646,7 @@
 <li>로그(log_error) 저장 디렉토리 위치 변경</li>
 </ul>
 <h2 id="서버-준비">서버 준비 <a href="#%ec%84%9c%eb%b2%84-%ec%a4%80%eb%b9%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>2024-07-29 현재 Ncloud에서 제공하는 Rocky Linux 서버 이미지의 최신 버전은 Rocky Linux 8.10 입니다.</p>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-41.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-41.png" width="1140" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="패키지-업데이트">패키지 업데이트 <a href="#%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 패키지 관련한 보안-버그 수정 사항만 최소한으로 업데이트를 해보겠습니다.</p>
 
 
@@ -2661,7 +2667,7 @@
   <code>dnf -y upgrade-minimal</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-43.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-guide-43.png" width="1137" alt="Ncloud(네이버 클라우드)에서 제공하기 시작한 록키 리눅스 소개" class="docimage  mb-5">
 <h2 id="mariadb-설치">MariaDB 설치 <a href="#mariadb-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="버전-확인">버전 확인 <a href="#%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>우선, Ncloud Rocky Linux 8.10에서 지원하는 MariaDB 버전을 확인합니다.
 리스트를 살펴보면 10.3이 기본 버전이고 10.11 버전이 포함되어 있는 것을 알 수 있습니다. 즉, 별도로 리포지토리를 생성해서 설치할 필요가 없이 바로 설치하면 된다는 것입니다.</p>
 
@@ -2688,7 +2694,7 @@
 <li>mariadb 10.5</li>
 <li>mariadb 10.11</li>
 </ul>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-01.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-01.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h3 id="버전-활성화-정보-초기화">버전 활성화 정보 초기화 <a href="#%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94-%ec%a0%95%eb%b3%b4-%ec%b4%88%ea%b8%b0%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>최신 버전인 10.11버전을 설치하기 위해 버전 활성화 정보를 초기화 합니다. 현재 활성화된 버전이 없을 경우에는 아래처럼 아무 변화없이 완료됩니다.</p>
 
 
@@ -2709,7 +2715,7 @@
   <code>dnf module reset mariadb</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-02.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-02.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h3 id="1011-버전-활성화">10.11 버전 활성화 <a href="#1011-%eb%b2%84%ec%a0%84-%ed%99%9c%ec%84%b1%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Rocky Linux 8.10에 포함된 최신 버전인 10.11 버전을 활성화합니다.</p>
 
 
@@ -2730,7 +2736,7 @@
   <code>dnf module enable mariadb:10.11</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-03.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-03.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h3 id="설치">설치 <a href="#%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치는 [mariadb-server]로 하게 됩니다.</p>
 
 
@@ -2751,7 +2757,7 @@
   <code>dnf -y install mariadb-server</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-04.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-04.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h2 id="데이터-저장-디렉토리-생성">데이터 저장 디렉토리 생성 <a href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a0%80%ec%9e%a5-%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>DB 데이터와 로그를 저장할 임의의 디렉토리를 생성합니다. /data/db/mariadb 과 같이 생성하겠습니다.<br>
 각 디렉토리에 대한 권한 설정은 아래쪽에서 진행하겠습니다.</p>
 
@@ -2774,10 +2780,10 @@
 mkdir -p /data/log/mariadb/</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-guide-03.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-guide-03.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h2 id="환경-설정-변경">환경 설정 변경 <a href="#%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95-%eb%b3%80%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>환경 설정 파일을 열어서 몇가지 설정을 변경하겠습니다.</p>
 <h3 id="환경-설정-파일-위치">환경 설정 파일 위치 <a href="#%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95-%ed%8c%8c%ec%9d%bc-%ec%9c%84%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>환경 설정 파일의 위치는 [<strong>/etc/my.cnf.d/</strong>] 디렉토리에 있고, 이 중에서 [<strong>mariadb-server.cnf</strong>] 파일과 [<strong>client.cnf</strong>] 파일을 수정하겠습니다.</p>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-05.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-05.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h4 id="mariadb-servercnf">mariadb-server.cnf <a href="#mariadb-servercnf" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
 
 
@@ -2831,7 +2837,7 @@ init-connect=&#39;SET NAMES utf8mb4&#39;
 skip-character-set-client-handshake</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-06.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-06.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h4 id="clientcnf">client.cnf <a href="#clientcnf" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
 
 
@@ -2873,7 +2879,7 @@ skip-character-set-client-handshake</code>
 default-character-set=utf8mb4</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-guide-08.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-guide-08.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h2 id="mariadb-초기화">MariaDB 초기화 <a href="#mariadb-%ec%b4%88%ea%b8%b0%ed%99%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>데이터 저장 디렉토리가 변경되었기에 아래 명령어로 기본 데이터베이스 생성 등의 초기화 작업을 진행합니다. 이때 위에서 생성한 [<strong>/data/db/mariadb/</strong>] 디렉토리에서 초기화가 진행됩니다.<br>
 초기화 한 후에 디렉토리를 살펴보면 아래와 같이 기본 데이터 베이스 등이 정상적으로 생성된 것을 확인할 수 있습니다.</p>
 
@@ -2896,9 +2902,9 @@ default-character-set=utf8mb4</code>
 ls -al /data/db/mariadb/</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-07.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-07.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h2 id="디렉토리-소유권-변경">디렉토리 소유권 변경 <a href="#%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac-%ec%86%8c%ec%9c%a0%ea%b6%8c-%eb%b3%80%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>데이터와 로그가 저장되는 디렉토리에 대한 소유권을 변경해야 하는데, 변경하기 전에 현재 상태를 확인해보면 root:root로 되어 있는 것을 알 수 있습니다.</p>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-08.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-08.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <p>아래 명령으로 데이터와 로그 디렉토리에 대한 소유권을 mysql:mysql로 변경합니다. (<code>mariadb가 아니고 mysql인 것에 주의</code>해야 합니다.)</p>
 
 
@@ -2921,7 +2927,7 @@ chown -R mysql:mysql /data/log/mariadb/
 ls -al /data/db/mariadb/</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-09.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-09.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h2 id="mariadb-데몬-시작">MariaDB 데몬 시작 <a href="#mariadb-%eb%8d%b0%eb%aa%ac-%ec%8b%9c%ec%9e%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>초기화와 소유권 변경까지 마쳤으면 MariaDB 데몬을 시작하고, 서버 재시작시에도 자동으로 실행되도록 설정합니다.</p>
 
 
@@ -2944,7 +2950,7 @@ systemctl start mariadb
 systemctl status mariadb</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-10.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-10.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h2 id="mariadb-보안-설정">MariaDB 보안 설정 <a href="#mariadb-%eb%b3%b4%ec%95%88-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>mariadb-secure-installation</strong>]은 MariaDB의 기본 보안을 설정하는 명령으로, 설정되는 항목은 다음과 같습니다.</p>
 <ul>
 <li>root 계정 패스워드 변경</li>
@@ -2998,7 +3004,7 @@ Change the root password? [Y/n] n
  ... skipping.</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-guide-13.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-guide-13.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h3 id="기타-보안-설정">기타 보안 설정 <a href="#%ea%b8%b0%ed%83%80-%eb%b3%b4%ec%95%88-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>그 다음 보안 설정에서는 [<strong>익명 계정 삭제</strong>], [<strong>root 원격 접근 차단</strong>], [<strong>임시 데이터베이스 삭제</strong>]를 하도록 모두 <code>Y</code>를 선택합니다.</p>
 
 
@@ -3032,7 +3038,7 @@ Reload privilege tables now? [Y/n] y
  ... Success!</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-guide-14.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-guide-14.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h2 id="mariadb-접속">MariaDB 접속 <a href="#mariadb-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 DB에 접속해보면 [<strong>10.11.6</strong>] 버전인 것을 확인할 수 있습니다.</p>
 <p>[<strong>show databases</strong>] 명령으로 데이터베이스를 확인해보면 기본 데이터베이스 등 각종 시스템 데이터베이스가 모두 정상적으로 나타나고, 테스트용 데이터베이스 등은 삭제된 것을 알 수 있습니다.</p>
 
@@ -3056,9 +3062,9 @@ Reload privilege tables now? [Y/n] y
 MariaDB&gt; show databases;</code>
   </pre>
   </div>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-11.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-11.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h3 id="mysql_native_password-방식">mysql_native_password 방식 <a href="#mysql_native_password-%eb%b0%a9%ec%8b%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>mysql_native_password</strong> 방식으로 설정했을 경우 아래와 같이 접속 가능합니다.</p>
-<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-12.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage">
+<img src="/images/database/mariadb-10.11-install-on-rocky-linux-8.10-guide-12.png" width="1137" alt="Ncloud(네이버 클라우드) Rocky Linux 8.10 서버에 MariaDB 10.11 버전을 설치하는 방법" class="docimage  mb-5">
 <h2 id="mariadb-지원-인증-방식-종류">MariaDB 지원 인증 방식 종류 <a href="#mariadb-%ec%a7%80%ec%9b%90-%ec%9d%b8%ec%a6%9d-%eb%b0%a9%ec%8b%9d-%ec%a2%85%eb%a5%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ul>
 <li>mysql_native_password</li>
 <li>mysql_old_password</li>
@@ -3169,7 +3175,7 @@ MariaDB&gt; show databases;</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

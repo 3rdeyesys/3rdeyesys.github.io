@@ -41,8 +41,8 @@
 <meta property="og:url" content="https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/" />  
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_8789267177543604209.png"/>
 <meta property="og:image:alt" content="AWS CLI 버전 2를 설치하고 Ncloud(네이버 클라우드) Object Storage에 접속하는 방법입니다" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2021-06-02T00:00:00+09:00" />
-<meta property="article:modified_time" content="2021-06-02T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-08-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-08-12T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_8789267177543604209.png"/>
 <meta property="twitter:image:alt" content="AWS CLI 버전 2를 설치하고 Ncloud(네이버 클라우드) Object Storage에 접속하는 방법입니다" /><meta name="twitter:title" content="AWS CLI 버전 2를 이용한 Object Storage 접속 방법"/>
@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2619,7 +2625,7 @@
   <code>curl &#34;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&#34; -o &#34;awscliv2.zip&#34;</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-01.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-01.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage  mb-5">
 <h3 id="압축-풀기">압축 풀기 <a href="#%ec%95%95%ec%b6%95-%ed%92%80%ea%b8%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>unzip으로 압축을 풀겠습니다.</p>
 
 
@@ -2640,7 +2646,7 @@
   <code>unzip awscliv2.zip</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-02.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-02.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage  mb-5">
 <h3 id="설치">설치 <a href="#%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래 명령으로 쉽게 설치할 수 있습니다.</p>
 
 
@@ -2661,7 +2667,7 @@
   <code>./aws/install</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-03.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-03.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage  mb-5">
 <h3 id="버전-확인">버전 확인 <a href="#%eb%b2%84%ec%a0%84-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>설치가 완료된 후 버전을 확인해보면 아래와 같이 AWS CLI 버전과 임베디드된 Python 버전도 확인할 수 있습니다.</p>
 
 
@@ -2682,9 +2688,24 @@
   <code>aws --version</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-04.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage">
-<h2 id="api-인증키-생성">API 인증키 생성 <a href="#api-%ec%9d%b8%ec%a6%9d%ed%82%a4-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 접속에 필요한 인증키를 Ncloud (네이버 클라우드) 포탈 - 마이페이지 - 계정관리 - 인증키 관리 - API 인증키 관리 메뉴에서 Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
-<img src="/images/api/ncloud_api_auth_key_create.png" width="770" alt="Ncloud API 인증키 생성 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-04.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage  mb-5">
+<h2 id="api-인증키-생성">API 인증키 생성 <a href="#api-%ec%9d%b8%ec%a6%9d%ed%82%a4-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 접속에 필요한 API 인증키는 [<strong>콘솔</strong>] - [<strong>서브 계정</strong>] - [<strong>서브 계정 세부 정보</strong>] - [<strong>Access Key</strong>]탭에서  Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
+<div class="alert alert-danger d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  <span class="material-icons size-20 me-2">
+  report
+  </span></div>
+  <div class="w-100">
+<p><strong>API 인증키를 서브 계정으로 생성해야 하는 이유</strong>: 메인 계정은 클라우서 서비스의 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API 인증키를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 <strong>반드시 서브 계정에서 API 인증키를 생성해야</strong> 합니다.</p>
+  </div>
+  </div>
+
+
+
+<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
+    ⁃ <a href="/docs/api/ncloud-api-key-create-guide/">Ncloud API 인증키 생성하는 방법</a>
+</div>  
+<img src="/images/api/ncloud-api-key-create-guide-15.png" width="1140" alt="Ncloud(네이버 클라우드) API 인증키를 생성하는 방법" class="docimage  no-top  mb-5">
 <h2 id="aws-cli-환경-설정">AWS CLI 환경 설정 <a href="#aws-cli-%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 AWS CLI로 접속하기 위해 환경설정을 해야 합니다.<br>
 위 단계에서 확인한 Access Key ID와 Secret Key를 아래 화면에서 입력하고 나머지 2가지 항목은 입력하지 않으셔도 됩니다.</p>
 
@@ -2711,7 +2732,7 @@ Default region name [None]: [Enter]
 Default output format [None]: [Enter]</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-05.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-05.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage  mb-5">
 <h2 id="object-storage-접속">Object Storage 접속 <a href="#object-storage-%ec%a0%91%ec%86%8d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 Object Storage로 접속해보겠습니다. 얼핏 명령어만 보면 AWS에 접속하는 것처럼 보입니다. 그래서 네이버 클라우드로 접속하기 위한 &ndash;endpoint-url= 로 시작하는 옵션이 반드시 필요합니다.</p>
 
 
@@ -2739,7 +2760,7 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://aws-cli-test
 aws --endpoint-url=https://kr.object.ncloudstorage.com s3 sync /data_backup/ s3://data-back-up/</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-06.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-06.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage  mb-5">
 <h2 id="aws-cli-업데이트">AWS CLI 업데이트 <a href="#aws-cli-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>설치된 AWS CLI를 최신 버전으로 업데이트 하려면 아래 명령어를 사용하면 됩니다. 최신 버전이 설치된 상태에서는 아래 스샷처럼 이미 최신 버전과 동일한 버전이 설치되어 있다는 메시지가 나타납니다.</p>
 
 
@@ -2760,7 +2781,7 @@ aws --endpoint-url=https://kr.object.ncloudstorage.com s3 sync /data_backup/ s3:
   <code>./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-07.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-07.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage  mb-5">
 <h2 id="aws-cli-삭제">AWS CLI 삭제 <a href="#aws-cli-%ec%82%ad%ec%a0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>설치된 AWS CLI를 삭제하려면 아래의 단계대로 진행하시면 됩니다.</p>
 <h3 id="symlink-삭제">symlink 삭제 <a href="#symlink-%ec%82%ad%ec%a0%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
@@ -2821,7 +2842,7 @@ rm /usr/local/bin/aws_completer</code>
   <code>rm -rf ~/.aws/</code>
   </pre>
   </div>
-<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-08.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-aws-cli-guide-08.png" width="840" alt="AWS CLI를 설치하고 Ncloud Object Storage에 접속하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>AWS CLI 버전 2 가이드<br>
@@ -2843,6 +2864,10 @@ rm /usr/local/bin/aws_completer</code>
         <tr>
           <td>2023-05-09</td>        
           <td>AWS CLI 버전2로 업그레이드</td>          
+        </tr>
+        <tr>
+          <td>2024-08-12</td>        
+          <td>API 인증키 생성 방법 안내 변경</td>          
         </tr>
     </tbody>
 </table>      
@@ -2919,7 +2944,7 @@ rm /usr/local/bin/aws_completer</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2623,9 +2629,9 @@ Errors during downloading metadata for repository &#39;extras&#39;:
 Error: Failed to download metadata for repo &#39;extras&#39;: Cannot prepare internal mirrorlist: Status code: 404 for https://mirrors.rockylinux.org/mirrorlist?arch=x86_64&amp;repo=extras-8.6 (IP: 151.101.26.132)</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-01.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-01.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <h2 id="미러-사이트-확인">미러 사이트 확인 <a href="#%eb%af%b8%eb%9f%ac-%ec%82%ac%ec%9d%b4%ed%8a%b8-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>오류 메시지에 나온 공식 미리 사이트에 접속해보니 [<strong>AppStream</strong>], [<strong>extras</strong>] 등 모든 8.6 버전에 대한 정보가 사라진 것을 확인할 수 있었습니다.</p>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-02.png" width="845" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-02.png" width="845" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <h2 id="오류-상황-요약-정리">오류 상황 요약 정리 <a href="#%ec%98%a4%eb%a5%98-%ec%83%81%ed%99%a9-%ec%9a%94%ec%95%bd-%ec%a0%95%eb%a6%ac" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>현재 확인되는 오류 상황을 정리해보면 다음과 같습니다.</p>
 <ol>
 <li>패키지를 검색하는 저장소가 [<strong>AppStream</strong>] 이나 [<strong>BaseOS</strong>]가 아닌 [<strong>Extras</strong>]로 변경되어 있다.</li>
@@ -2653,7 +2659,7 @@ Error: Failed to download metadata for repo &#39;extras&#39;: Cannot prepare int
   <code> ls -al /etc/yum.repos.d/</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-06.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-06.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <ul>
 <li>위에서 확인한 설정 파일들 중에서 [<strong>Rocky-Extras.repo</strong>] 파일을 열어서 미러 사이트 주소를 확인해보면, Ncloud 내부 서버가 아닌 아래와 같이 록키 리눅스 공식 사이트로 설정되어 있는 것을 알 수 있습니다.</li>
 </ul>
@@ -2676,7 +2682,7 @@ Error: Failed to download metadata for repo &#39;extras&#39;: Cannot prepare int
   <code> vi /etc/yum.repos.d/Rocky-Extras.repo</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-07.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-07.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <h3 id="리포지토리-설정---정상-서버">리포지토리 설정 - 정상 서버 <a href="#%eb%a6%ac%ed%8f%ac%ec%a7%80%ed%86%a0%eb%a6%ac-%ec%84%a4%ec%a0%95---%ec%a0%95%ec%83%81-%ec%84%9c%eb%b2%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>그렇다면 아무 문제 없는 정상적인 서버의 경우는 어떤지 비교해서 살펴보겠습니다.</p>
 <p>마찬가지로 [<strong>/etc/yum.repos.d/</strong>] 디렉토리에 있는 리포지토리 설정 파일을 확인해보면 오류가 발생한 서버와 달리 아래와 같이 [<strong>Rocky-AppStream.repo</strong>], [<strong>Rocky-BaseOS.repo</strong>] 이렇게 2가지 파일만 존재하는 것을 확인할 수 있습니다.</p>
 
@@ -2698,11 +2704,11 @@ Error: Failed to download metadata for repo &#39;extras&#39;: Cannot prepare int
   <code> ls -al /etc/yum.repos.d/</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-03.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-03.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <ul>
 <li>또한 2가지 설정 파일들 중에서 [<strong>Rocky-AppStream.repo</strong>] 파일을 열어서 미러 사이트 주소를 확인해보면, 록키 리눅스 공식 사이트는 주석 처리가 되어 있고, [<strong>baseurl</strong>]이 [<strong>repo.ncloud.com</strong>] 이라는 Ncloud 내부 서버로 설정되어 있는 것을 알 수 있습니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-04.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-04.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <h3 id="원인-추적">원인 추적 <a href="#%ec%9b%90%ec%9d%b8-%ec%b6%94%ec%a0%81" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>오류가 발생한 서버와 정상적인 서버의 차이점을 비교 추적해보니 오류가 발생한 서버에서는 서버 생성 후에 <code>패키지 업데이트</code>가 진행된 것을 알 수 있었습니다.
 서버 생성 후에 설치된 패키지들의 업데이트를 적용하기 위해 [<strong>dnf upgrade</strong>]를 실행했고, 그에 따라 리포지토리 정보가 변경되었다는 것을 알 수 있었습니다.</p>
 
@@ -2724,7 +2730,7 @@ Error: Failed to download metadata for repo &#39;extras&#39;: Cannot prepare int
   <code> dnf -y upgrade</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-05.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-05.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 
 
 
@@ -2755,7 +2761,7 @@ Upgrade Command
        Deprecated aliases: update, upgrade-to, update-to, localupdate</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-11.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-11.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <h2 id="해결-방법">해결 방법 <a href="#%ed%95%b4%ea%b2%b0-%eb%b0%a9%eb%b2%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이 문제를 해결하는 방법은 몇가지가 있는데 차례대로 정리해보겠습니다.</p>
 <h3 id="방법-1">방법-1 <a href="#%eb%b0%a9%eb%b2%95-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>첫번째 방법은 [<strong>Rocky-Extras.repo</strong>] 리포지토리 설정파일의 주소를 Ncloud 내부 서버로 변경하는 방법입니다.</p>
 
@@ -2780,11 +2786,11 @@ Upgrade Command
 baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-08.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-08.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <ul>
 <li>주소 변경 후에 아파치를 설치해보면 문제 없이 잘 설치 되는 것을 확인할 수 있습니다.</li>
 </ul>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-09.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-09.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <h3 id="방법-2">방법-2 <a href="#%eb%b0%a9%eb%b2%95-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>두번째 방법은 패키지를 설치할 때 미러 사이트 주소가 변경된 [<strong>Extras</strong>] 저장소를 비활성화하는 옵션을 적용하는 방법입니다.</p>
 
 
@@ -2805,7 +2811,7 @@ baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/</code>
   <code> dnf -y install httpd --disablerepo=extras</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-10.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-10.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <h2 id="사전-예방책">사전 예방책 <a href="#%ec%82%ac%ec%a0%84-%ec%98%88%eb%b0%a9%ec%b1%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위 방법들은 패키지 업데이트 후에 문제를 해결하는 방법이므로, 사전에 이런 문제가 생기지 않도록 하는 것도 선택지 중의 하나입니다. 가능한 방법은 다음 2가지 입니다.</p>
 <ul>
 <li>패키지 업데이트를 진행하지 않는 방법</li>
@@ -2831,8 +2837,8 @@ baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/</code>
   <code> dnf -y upgrade-minimal</code>
   </pre>
   </div>
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-12.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
-<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-13.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-12.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
+<img src="/images/compute/ncloud-compute-server-rocky-linux-repository-mirror-site-error-13.png" width="840" alt="Ncloud (네이버 클라우드) Rocky Linux 서버 리포지토리 미러 사이트 오류 문제 해결 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Rocky Linux 서버 소개<br>
@@ -2928,7 +2934,7 @@ baseurl=http://repo.ncloud.com/rocky/$releasever/extras/$basearch/os/</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

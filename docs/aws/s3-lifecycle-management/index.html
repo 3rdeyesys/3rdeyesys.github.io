@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2559,22 +2565,22 @@
         <h2 id="개요">개요 <a href="#%ea%b0%9c%ec%9a%94" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>AWS S3에서는 버킷내 특정 디렉토리 하위 파일들에 대해 지정된 날짜가 지난 후 만료(삭제)가 되도록 설정할 수 있습니다.
 수명 주기 관리(LifeCycle Management)라고 불리는 이 방법은 파일관리 뿐만 아니라 비용절감에도 도움이 됩니다.</p>
 <h2 id="수명주기-설정">수명주기 설정 <a href="#%ec%88%98%eb%aa%85%ec%a3%bc%ea%b8%b0-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>AWS 콘솔에 접속 후 수명 주기를 적용할 S3 버킷으로 이동해 [관리] 메뉴 클릭합니다.</p>
-<img src="/images/aws/aws_s3_lifecycle_01.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage">
+<img src="/images/aws/aws_s3_lifecycle_01.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage  mb-5">
 <p>[수명 주기 규칙 생성] 버튼을 클릭합니다.</p>
-<img src="/images/aws/aws_s3_lifecycle_02.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage">
+<img src="/images/aws/aws_s3_lifecycle_02.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage  mb-5">
 <p>수명 주기 규칙 이름을 입력하고, 규칙 범위는 [하나 이상의 필터를 사용하여 이 규칙의 범위 제한]을 선택합니다.<br>
 접두사에는 수명 주기를 적용할 디렉토리나 파일 등의 필터를 작성합니다. 예를 들어 images 디렉토리가 포함된 모든 파일에 적용하려면 <strong>images/</strong> 라고 입력합니다. 이때 버킷명은 제외하고 입력해야 합니다.</p>
-<img src="/images/aws/aws_s3_lifecycle_03.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage">
+<img src="/images/aws/aws_s3_lifecycle_03.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage  mb-5">
 <p>수명 주기 규칙 작업에서 [객체의 현재버전 만료],  [객체의 이전버전 영구 삭제] 두가지 항목을 선택하면, 몇일 후에 삭제할 것인지를 설정할 수 있는 [객체 생성 후 경과 일수], [객체가 이전 버전이 된 후 경과 일수] 항목이 나타납니다.
 여기에 원하는 날짜를 각각 입력하고, [규칙 생성] 버튼을 클릭합니다.</p>
-<img src="/images/aws/aws_s3_lifecycle_06.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage">
+<img src="/images/aws/aws_s3_lifecycle_06.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage  mb-5">
 <h2 id="주의사항">주의사항 <a href="#%ec%a3%bc%ec%9d%98%ec%82%ac%ed%95%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>AWS 수명 주기 관련해서 주의해야 할 사항이 몇가지 있습니다.</p>
 <h3 id="수명-주기-규칙-작동-시점">수명 주기 규칙 작동 시점 <a href="#%ec%88%98%eb%aa%85-%ec%a3%bc%ea%b8%b0-%ea%b7%9c%ec%b9%99-%ec%9e%91%eb%8f%99-%ec%8b%9c%ec%a0%90" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>수명 주기 규칙이 생각한 것보다 늦게 작동하는 경우가 있습니다. 이는 <strong>Amazon S3가 객체의 전환 또는 만료(삭제) 날짜를 익일 자정(UTC)부터 계산하기 때문</strong>입니다.<br>
 예를 들어 2020년 1월 1일 10:30(UTC)에 객체를 생성하고 3일 후 객체가 만료(삭제)되도록 수명 주기 규칙을 설정할 경우 객체의 만료(삭제) 날짜는 2020년 1월 5일 00:00(UTC)이 됩니다.
 따라서 수명 주기 규칙이 충족되었는지 확인하기 전에 충분한 시간이 경과했는지 확인해야 합니다.</p>
 <h3 id="수명-주기-규칙-접두사-필터-설정">수명 주기 규칙 접두사 필터 설정 <a href="#%ec%88%98%eb%aa%85-%ec%a3%bc%ea%b8%b0-%ea%b7%9c%ec%b9%99-%ec%a0%91%eb%91%90%ec%82%ac-%ed%95%84%ed%84%b0-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>수명 주기 규칙에서 접두사 필터에 디렉토리를 지정할 경우 접두사 필터의 끝에 / 문자를 지정해야 합니다. 접두사 필터의 처음에 / 문자가 있으면 수명 주기 규칙이 올바르게 평가되지 않습니다.<br>
 즉, images 디렉토리가 포함된 모든 파일에 적용하려면 <strong>images/</strong> 라고 입력해야 합니다.</p>
-<img src="/images/aws/aws_s3_lifecycle_05.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage">
+<img src="/images/aws/aws_s3_lifecycle_05.jpg" width="770" alt="AWS S3 수명주기 (LifeCycle) 설정하기 가이드" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>AWS S3 수명 주기 관리 가이드<br>
@@ -2664,7 +2670,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

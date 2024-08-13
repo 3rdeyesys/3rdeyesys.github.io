@@ -41,8 +41,8 @@
 <meta property="og:url" content="https://docs.3rdeyesys.com/docs/storage/archive-storage/api-access-token-create/" />  
 <meta property="og:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_15618543193391374491.png"/>
 <meta property="og:image:alt" content="Ncloud(네이버 클라우드)에서 PHP로 Archive Storage API 인증 토큰 생성하는 방법입니다" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2024-01-31T00:00:00+09:00" />
-<meta property="article:modified_time" content="2024-01-31T00:00:00+09:00" />
+<meta property="article:published_time" content="2024-08-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-08-12T00:00:00+09:00" />
 <meta property="og:locale" content="ko-kr" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://docs.3rdeyesys.com/images/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_15618543193391374491.png"/>
 <meta property="twitter:image:alt" content="Ncloud(네이버 클라우드)에서 PHP로 Archive Storage API 인증 토큰 생성하는 방법입니다" /><meta name="twitter:title" content="PHP로 Archive Storage API 인증 토큰 생성하는 방법"/>
@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2698,17 +2704,23 @@
 ?&gt;</code>
   </pre>
   </div>
-<h2 id="코드-상세-설명">코드 상세 설명 <a href="#%ec%bd%94%eb%93%9c-%ec%83%81%ec%84%b8-%ec%84%a4%eb%aa%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="api-인증-key-생성">API 인증 Key 생성 <a href="#api-%ec%9d%b8%ec%a6%9d-key-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>Sub Account</strong>] - [<strong>Sub Accounts</strong>]에서 본인의 계정을 선택하고, [<strong>API Gateway 접근</strong>] 권한을 추가하면 계정 정보 화면에 아래와 같이 [<strong>Access Key</strong>] 탭이 나타나는데[<strong>추가</strong>] 버튼을 클릭하면 [<strong>Access Key</strong>]와 [<strong>Secret Key</strong>]를 생성할 수 있습니다.</p>
+<h2 id="코드-상세-설명">코드 상세 설명 <a href="#%ec%bd%94%eb%93%9c-%ec%83%81%ec%84%b8-%ec%84%a4%eb%aa%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="api-인증-key-생성">API 인증 Key 생성 <a href="#api-%ec%9d%b8%ec%a6%9d-key-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>네이버 클라우드 API 인증키는 [<strong>콘솔</strong>] - [<strong>서브 계정</strong>] - [<strong>서브 계정 세부 정보</strong>] - [<strong>Access Key</strong>]탭에서  Access Key ID와 Secret Key를 가져오셔야 하며, 아직 만들어진 Key가 없다면 새로 만드셔야 합니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
   <span class="material-icons size-20 me-2">
   report
   </span></div>
   <div class="w-100">
-<p>메인 계정은 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API Key를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 <strong>반드시 서브 계정에서 API Key를 생성해야</strong> 합니다.</p>
+<p><strong>API 인증키를 서브 계정으로 생성해야 하는 이유</strong>: 메인 계정은 클라우서 서비스의 최대 권한을 가지기 때문에 메인 계정으로 생성한 API도 메인 계정과 동일한 최대 권한을 가지게 됩니다. 그러므로 메인 계정으로 API 인증키를 생성하게 되면 이 Key가 유출되었을 때 심각한 문제가 생기기 때문에 <strong>반드시 서브 계정에서 API 인증키를 생성해야</strong> 합니다.</p>
   </div>
   </div>
-<img src="/images/management/ncloud-management-sub-account-14.png" width="845" alt="Ncloud (네이버 클라우드) Sub Account (서브 계정) 생성 가이드" class="docimage">
+
+
+
+<div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
+    ⁃ <a href="/docs/api/ncloud-api-key-create-guide/">Ncloud API 인증키 생성하는 방법</a>
+</div>  
+<img src="/images/api/ncloud-api-key-create-guide-15.png" width="1140" alt="Ncloud(네이버 클라우드) API 인증키를 생성하는 방법" class="docimage  no-top  mb-5">
 <h3 id="archive-storage-api-이용-정보">Archive Storage API 이용 정보 <a href="#archive-storage-api-%ec%9d%b4%ec%9a%a9-%ec%a0%95%eb%b3%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2730,9 +2742,9 @@
   </pre>
   </div>
 <p>Archive Storage API 이용을 위한 Domain ID와 Project ID는 [네이버 클라우드 포탈] - [Archive Storage]에서 [API 이용 정보 확인] 버튼을 클릭하면 확인할 수 있습니다.</p>
-<img src="/images/storage/ncloud_storage_archive_storage_api_access_token_create_01.png" width="770" alt="PHP로 Ncloud Archive Storage API 인증 토큰 생성하는 방법" class="docimage">
+<img src="/images/storage/ncloud_storage_archive_storage_api_access_token_create_01.png" width="770" alt="PHP로 Ncloud Archive Storage API 인증 토큰 생성하는 방법" class="docimage  mb-5">
 <p>[API 이용 정보 확인] 창에서 Domain ID와 Project ID를 확인하고, PHP 소스코드에 입력합니다.</p>
-<img src="/images/storage/ncloud_storage_archive_storage_api_access_token_create_02.png" width="500" alt="PHP로 Ncloud Archive Storage API 인증 토큰 생성하는 방법" class="docimage">
+<img src="/images/storage/ncloud_storage_archive_storage_api_access_token_create_02.png" width="500" alt="PHP로 Ncloud Archive Storage API 인증 토큰 생성하는 방법" class="docimage  mb-5">
 <h3 id="api-서버와-url-설정">API 서버와 URL 설정 <a href="#api-%ec%84%9c%eb%b2%84%ec%99%80-url-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2950,7 +2962,11 @@ Content-Type: application/json</code>
         </tr>
         <tr>
           <td>2024-01-31</td>        
-          <td>API 인증 Key 생성 방법 안내 변경</td>          
+          <td>API 인증키 생성 방법 안내 변경</td>          
+        </tr>
+        <tr>
+          <td>2024-08-12</td>        
+          <td>API 인증키 생성 방법 안내 업데이트</td>          
         </tr>
     </tbody>
 </table>  
@@ -3025,7 +3041,7 @@ Content-Type: application/json</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

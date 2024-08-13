@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2598,7 +2604,7 @@ HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항�
 &lt;/VirtualHost&gt;    </code>
   </pre>
   </div>
-<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-18.png" width="840" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage">
+<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-18.png" width="840" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage  mb-5">
 <ul>
 <li><code>301</code> 리다이렉트: <strong>Redirect</strong> <code>permanent</code> / https://사이트_도메인/</li>
 <li><code>302</code> 리다이렉트: <strong>Redirect</strong> / https://사이트_도메인/</li>
@@ -2634,7 +2640,7 @@ HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항�
 &lt;/VirtualHost&gt; </code>
   </pre>
   </div>
-<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-20.png" width="840" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage">
+<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-20.png" width="840" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage  mb-5">
 <p>위 설정 중에서 [R=301,L] 이 부분에 원하는 상태코드를 입력하면 됩니다.</p>
 <ul>
 <li>
@@ -2672,9 +2678,9 @@ HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항�
   <code> systemctl restart httpd</code>
   </pre>
   </div>
-<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png" width="840" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage">
+<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-07.png" width="840" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage  mb-5">
 <h2 id="리다이렉트-여부-확인">리다이렉트 여부 확인 <a href="#%eb%a6%ac%eb%8b%a4%ec%9d%b4%eb%a0%89%ed%8a%b8-%ec%97%ac%eb%b6%80-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>웹브라우저에서 [<strong>F12</strong>] 키로 개발자 모드로 변경한 후에 [<strong>http</strong>]로 접속을 해보면 아래 스샷처럼 HTTP 301 상태코드를 반환하면서 [<strong>https</strong>]로 리다이렉트된 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-19.png" width="845" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage">
+<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-19.png" width="845" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage  mb-5">
 <h2 id="ssl-모듈-설치">SSL 모듈 설치 <a href="#ssl-%eb%aa%a8%eb%93%88-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>리다이렉트 설정과 관계없이 SSL 인증서를 설정하고 HTTPS 접속을 하려면 [<strong>mod_ssl</strong>]가 설치되어 있어야 하는데, 혹시나 설치되어 있지 않다면 설치하셔야 합니다.</p>
 
 
@@ -2695,7 +2701,7 @@ HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항�
   <code> dnf -y install mod_ssl</code>
   </pre>
   </div>
-<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-12.png" width="840" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage">
+<img src="/images/compute/lamp/ncloud-server-apache-ssl-setting-guide-rocky-linux-12.png" width="840" alt="Ncloud Rocky Linux 서버 Apache에 HTTPS 접속을 위한 SSL 인증서 설정하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Rocky Linux에서 Apache SSL 인증서 설정하는 방법<br>
@@ -2791,7 +2797,7 @@ HTTP 환경 설정에서 [<strong>ServerName</strong>]을 제외한 다른 항�
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

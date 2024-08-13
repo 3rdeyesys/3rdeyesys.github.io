@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2601,7 +2607,7 @@
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-2">
     <a href="/docs/compute/vpc/server-create/">VPC 환경에서 서버 생성하는 방법</a>
 </div>  
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-01.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-01.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <p>로드밸런서도 마찬가지로 준비하고, 서버와 연동까지 완료했습니다. VPC 환경에서 로드밸런서를 생성하는 방법은 아래 문서를 참고하시면 됩니다.</p>
 
 
@@ -2612,7 +2618,7 @@
 <ul>
 <li>로드밸런서 상세 정보에서 [<strong>10.0.4.0/24</strong>]로 표시되는 서브넷 정보를 기억했다가 아래쪽에서 테스트할 때 확인해보겠습니다.</li>
 </ul>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-02.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-02.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <h2 id="설정-전-테스트">설정 전 테스트 <a href="#%ec%84%a4%ec%a0%95-%ec%a0%84-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선, <strong>X-Forwarded-For (XFF)</strong> 설정을 하기 전에 어떻게 기록이 남는지 확인해보겠습니다.</p>
 <h3 id="iis-접속-로그-확인">IIS 접속 로그 확인 <a href="#iis-%ec%a0%91%ec%86%8d-%eb%a1%9c%ea%b7%b8-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Windows IIS 접속 로그를 [<strong>Cloud Log Analytics</strong>]에서 확인하는 방법은 아래 문서를 참고하시며 됩니다.</p>
 
@@ -2622,39 +2628,39 @@
     <a href="/management/ncloud-management-cloud-log-analytics-windows-iis-log-collect-guide.html">Cloud Log Analytics에서 Windows IIS Log 수집하는 방법</a>
 </div>  
 <p>Cloud Log Analytics에서 수집한 로그를 확인해보면 위에서 설정했던 **Load Balancer의 IP 대역 (10.0.4.xx)**이 기록된 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-03.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-03.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <h2 id="iis-설정">IIS 설정 <a href="#iis-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 실제 Client IP가 기록 되도록 설정을 변경해보겠습니다.</p>
 <ul>
 <li>IIS Manager를 실행시켜서 메뉴 중에 [<strong>Logging</strong>]을 선택합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-04.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-04.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>Logging</strong>] 화면에서 [<strong>Format</strong>]은 기본 값인 [<strong>W3C</strong>] 그대로 두고 [<strong>Log File</strong>] 항목의 [<strong>Select Fields</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-05.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-05.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>W3C Logging Fields</strong>] 팝업창에서 [<strong>Custom Fields</strong>] 항목의 [<strong>Add Field</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-06.png" width="585" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-06.png" width="585" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>Add Custom Field</strong>] 팝업창에서 [<strong>Field Name</strong>], [<strong>Source</strong>] 두가지 항목 모두에 [<strong>X-Forwarded-For</strong>]를 입력하고 [<strong>OK</strong>] 버튼을 클릭합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-07.png" width="585" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-07.png" width="585" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <ul>
 <li>[<strong>Custom Fields</strong>]에 [<strong>X-Forwarded-For</strong>] 설정이 추가된 것을 확인할 수 있습니다.</li>
 </ul>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-08.png" width="585" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-08.png" width="585" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <ul>
 <li>팝업창을 닫고 [<strong>IIS Manager</strong>] - [<strong>Logging</strong>] 설정 화면 오른쪽에 있는 [<strong>Apply</strong>]를 클릭해서 변경된 설정을 적용합니다.</li>
 </ul>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-09.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-09.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <ul>
 <li>변경된 설정이 적용되었다는 메시지를 확인할 수 있습니다.</li>
 </ul>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-10.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-10.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <h2 id="설정-후-테스트">설정 후 테스트 <a href="#%ec%84%a4%ec%a0%95-%ed%9b%84-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위와 같이 서버에서 설정을 모두 마친 후에 로드 밸런서 URL로 접속합니다.<br>
 이후에 Cloud Log Analytics에서 로그를 확인해보면 아래와 같이 실제 접속한 Client의 IP가 추가로 기록된 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-11.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage">
+<img src="/images/compute/ncloud-server-x-forwarded-for-client-ip-logging-windows-iis-guide-11.png" width="845" alt="Ncloud(네이버 클라우드)에서 X-Forwarded-For를 이용해 Proxy, Load Balancer 환경에서 Client IP를 Windows IIS Log에 기록하는 방법" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>X-Forwarded-For 안내<br>
@@ -2752,7 +2758,7 @@
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

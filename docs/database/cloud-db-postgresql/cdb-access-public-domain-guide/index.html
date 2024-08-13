@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2635,7 +2641,7 @@
 <li>DB 엔진 버전: PostgreSQL 13.3</li>
 </ul>
 <h2 id="db-생성">DB 생성 <a href="#db-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[Cloud DB for PostgreSQL] - [DB Server]에서 [DB Server 생성] 버튼을 클릭해 DB를 생성을 시작합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-01.png" width="845" alt="Ncloud VPC환경에서 Ncloud Cloud DB for PostgreSQL 생성 후 Public 도메인으로 접속하는 방법" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-01.png" width="845" alt="Ncloud VPC환경에서 Ncloud Cloud DB for PostgreSQL 생성 후 Public 도메인으로 접속하는 방법" class="docimage  mb-5">
 <h3 id="서버-설정">서버 설정 <a href="#%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
 <li>DB 엔진: 현재 지원되는 <code>DB 엔진 버전은 PostgreSQL 13.3</code> 입니다.</li>
 <li>고가용성 지원은 기본 선택 사항인데, 필요하지 않을 경우 체크를 해제하면 됩니다.</li>
@@ -2650,13 +2656,13 @@
     ⁃ Public 도메인은 Public Subnet에 생성된 DB 서버에서만 이용 신청이 가능합니다. <br />
 ⁃ DB 서버 생성 이후에 Subnet 이전은 불가능합니다.
 </div>  
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-02.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 서버 설정 1" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-02.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 서버 설정 1" class="docimage  mb-5">
 <ul>
 <li>데이터 스토리지 타입과 암호화 적용 여부를 선택합니다.</li>
 <li>데이터 스토리지는 기본 10GB로 설정되며 최대 6000GB까지 자동으로 증가합니다.</li>
 <li>DB Server 이름과 DB Service 이름을 입력합니다. DB Service 이름은 DB Server를 역할별로 구분한 그룹의 명칭입니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-03.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 서버 설정 2" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-03.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 서버 설정 2" class="docimage  mb-5">
 <h3 id="db-설정">DB 설정 <a href="#db-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
 <li>USER ID와 암호를 입력합니다. (ID와 암호는 잊어버리지 않도록 잘 보관해야 합니다.)</li>
 <li>접근제어는 접근을 허용할 IP 대역을 입력합니다.</li>
@@ -2672,28 +2678,28 @@
 <p>접속포트 설정: DB 접속포트는 한번 설정하면 이후에 변경할 수 없으니 신중하게 설정하셔야 합니다.</p>
   </div>
   </div>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-04.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - DB 설정" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-04.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - DB 설정" class="docimage  mb-5">
 <h3 id="최종-확인">최종 확인 <a href="#%ec%b5%9c%ec%a2%85-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>지금까지 입력한 값이 이상이 없는지 특히 Public Subnet으로 설정했는지 최종 확인하고, 수정할 부분이 없으면 [생성] 버튼을 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-05.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 최종 확인" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-05.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 생성하기 - 최종 확인" class="docimage  mb-5">
 <h2 id="public-도메인-설정">Public 도메인 설정 <a href="#public-%eb%8f%84%eb%a9%94%ec%9d%b8-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>DB 생성이 완료되면 아래와 같이 DB의 상세 정보를 확인할 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-06.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인으로 접속하기" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-06.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인으로 접속하기" class="docimage  mb-5">
 <p>[DB 관리] - [Public 도메인 관리] 메뉴를 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-07.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인 생성하기" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-07.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인 생성하기" class="docimage  mb-5">
 <p>[Public 도메인 신청] 팝업에서 [예] 버튼을 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-08.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인 신청" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-08.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인 신청" class="docimage  mb-5">
 <p>이제 [Public 도메인]이 생성되었습니다. 생성된 Public 도메인과 ACG 이름이 중요하니 기억해 둡니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-09.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인 설정 완료" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-09.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Public 도메인 설정 완료" class="docimage  mb-5">
 <h2 id="acg-설정">ACG 설정 <a href="#acg-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[Server] - [ACG]에서 Cloud DB for PostgreSQL 생성 시에 자동으로 생성된 ACG [cloud-postgresql-ooooo]를 선택하고, [ACG 설정] 버튼을 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-10.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-10.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 설정하기" class="docimage  mb-5">
 <h3 id="acg-규칙-설정">ACG 규칙 설정 <a href="#acg-%ea%b7%9c%ec%b9%99-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>ACG 규칙 설정 창에서 [Inbound] 탭을 선택하고 <code>[접근 소스]는 [myIp]를 클릭</code>하고 허용 포트는 5432를 입력하고 [추가] 버튼을 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-11.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 규칙 설정" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-11.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL ACG 규칙 설정" class="docimage  mb-5">
 <h2 id="pgadmin-4-다운로드">pgAdmin 4 다운로드 <a href="#pgadmin-4-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>PostgreSQL에 접속하기 위한 클라이언트 pgAdmin 4를 다운로드 합니다.</p>
 <ul>
 <li><a href="https://www.pgadmin.org/download/" rel="external" target="_blank">pgAdmin 다운로드 페이지<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
 </ul>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-12.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 다운로드 페이지" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-12.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 다운로드 페이지" class="docimage  mb-5">
 <p>다운로드 할 버전은 <code>pgAdmin 4 v6.7 (released March 14, 2022)</code> 입니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-25.png" width="770" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 다운로드 버전 선택" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-25.png" width="770" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 다운로드 버전 선택" class="docimage  mb-5">
 <h2 id="pgadmin-4-설치">pgAdmin 4 설치 <a href="#pgadmin-4-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>pgAdmin 4 클라이언트가 설치되는 기본 경로는 다음과 같습니다.</p>
 
 
@@ -2714,7 +2720,7 @@
   <code>C:\Users\{Windows User Account}\AppData\Local\Programs\pgAdmin 4\v6</code>
   </pre>
   </div>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-13.png" width="500" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 설치하기" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-13.png" width="500" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 설치하기" class="docimage  mb-5">
 <h2 id="pgadmin-4--실행">pgAdmin 4  실행 <a href="#pgadmin-4--%ec%8b%a4%ed%96%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="pgadmin-master-password-입력">pgAdmin Master Password 입력 <a href="#pgadmin-master-password-%ec%9e%85%eb%a0%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>pgAdmin 4 접속/관리를 위한 Master Password를 입력합니다. DB와는 관계없고 단지 pgAdmin 클라이언트를 위한 패스워드입니다.</p>
 
 
@@ -2722,26 +2728,26 @@
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-danger bs-callout-v2-level-3">
     Master Password는 반드시 입력해야 합니다. 여기서 설정하지 않으면 <code>internal server error: crypt key is missing</code> 에러가 발생하면서 서버 관리를 할 수 없게 됩니다.
 </div>  
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-14.png" width="834" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Master Password 입력" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-14.png" width="834" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Master Password 입력" class="docimage  mb-5">
 <h3 id="pgadmin-master-password-재설정">pgAdmin Master Password 재설정 <a href="#pgadmin-master-password-%ec%9e%ac%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>이후에 혹시 Master Password를 잊어버렸을 경우에는 아래와 같이 [<strong>Reset Master Password</strong>] 기능을 이용해 재설정 할 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-27.png" width="834" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Master Password 재설정" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-27.png" width="834" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Master Password 재설정" class="docimage  mb-5">
 <h3 id="서버-추가">서버 추가 <a href="#%ec%84%9c%eb%b2%84-%ec%b6%94%ea%b0%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>pgAdmin에서 [Add New Server] 버튼을 클릭해서 위에서 생성했던 DB서버를 연결합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-15.png" width="837" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 서버 추가" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-15.png" width="837" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 서버 추가" class="docimage  mb-5">
 <h3 id="name-입력">Name 입력 <a href="#name-%ec%9e%85%eb%a0%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>등록할 DB의 이름을 편하게 입력합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-16.png" width="837" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Name 입력" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-16.png" width="837" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - Name 입력" class="docimage  mb-5">
 <h3 id="연결-정보-입력">연결 정보 입력 <a href="#%ec%97%b0%ea%b2%b0-%ec%a0%95%eb%b3%b4-%ec%9e%85%eb%a0%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
 <li>Host name/address: Cloud DB for PostgreSQL 생성 후에 확인한 <code>Public 도메인 (pg-oooo-vpc-pub-cdb-kr.ntruss.com)</code>을 입력합니다.</li>
 <li>Username: Cloud DB for PostgreSQL 생성 시에 입력한 <strong>USER ID</strong>를 입력합니다.</li>
 <li>Password: Cloud DB for PostgreSQL 생성 시에 입력한 <strong>USER 암호</strong>를 입력합니다.</li>
 </ul>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-17.png" width="837" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - 연결 정보 입력" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-17.png" width="837" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 실행 - 연결 정보 입력" class="docimage  mb-5">
 <h2 id="pgadmin-4-대시보드">pgAdmin 4 대시보드 <a href="#pgadmin-4-%eb%8c%80%ec%8b%9c%eb%b3%b4%eb%93%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>연결 정보에 이상이 없고 정상적으로 접속이 되면 아래와 같이 대시보드 화면을 확인할 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-18.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 대시보드" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-18.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 대시보드" class="docimage  mb-5">
 <h2 id="db-service-상세-보기">DB Service 상세 보기 <a href="#db-service-%ec%83%81%ec%84%b8-%eb%b3%b4%ea%b8%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>DB Service 상세 보기에서는 Database 추가/삭제, Config 관리, User 추가/삭제, Backup 설정 등을 관리할 수 있습니다.<br>
 Cloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 메뉴를 클릭합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-19.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL DB Service 상세 보기" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-19.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL DB Service 상세 보기" class="docimage  mb-5">
 <h3 id="database-관리">Database 관리 <a href="#database-%ea%b4%80%eb%a6%ac" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>PostgreSQL DB의 Database를 추가/삭제 할 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-20.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Database 관리" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-20.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL Database 관리" class="docimage  mb-5">
 <h3 id="db-user-관리">DB User 관리 <a href="#db-user-%ea%b4%80%eb%a6%ac" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Cloud DB for PostgreSQL의 DB User를 추가/삭제 할 수 있습니다.</p>
 
 
@@ -2753,13 +2759,13 @@ Cloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 
 ⁃ 이때 <code>계정 생성은 Ncloud 콘솔에서만 가능</code>합니다. (아래 화면의 DB User 관리 기능)<br />
 ⁃ 그 외의 <code>권한 설정은 pgAdmin4 웹페이지에서</code> 설정해야 합니다.
 </div>  
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-21.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL DB User 관리" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-21.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL DB User 관리" class="docimage  mb-5">
 <h4 id="서브-계정">서브 계정 <a href="#%ec%84%9c%eb%b8%8c-%ea%b3%84%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>subid라는 서브 계정을 만들었다고 가정했을 때 아래 화면처럼 Superuser 등의 권한 설정을 할 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-22.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 서브 계정" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-22.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL 서브 계정" class="docimage  mb-5">
 <h3 id="db-접근-권한-설정">DB 접근 권한 설정 <a href="#db-%ec%a0%91%ea%b7%bc-%ea%b6%8c%ed%95%9c-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>서브 계정의 특정 DB에 대한 접근 권한을 설정하고자 할 경우는 아래와 같이 DB를 선택하고, 마우스 오른쪽 클릭을 한 후 [Properties] 메뉴를 선택합니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-23.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL DB 접근 권한 설정" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-23.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL DB 접근 권한 설정" class="docimage  mb-5">
 <p>[Properties] 설정 화면에서 [Security] 메뉴를 선택하면 계정별로 권한을 설정할 수 있습니다.</p>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-24.png" width="750" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 계정 권한 설정" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-24.png" width="750" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 계정 권한 설정" class="docimage  mb-5">
 <h2 id="오류-상황">오류 상황 <a href="#%ec%98%a4%eb%a5%98-%ec%83%81%ed%99%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>pgAdmin 4를 사용할 때 아래와 같은 오류가 발생하는 경우가 있습니다.<br>
 이는 <code>pgAdmin 4 최신 버전인 6.8을 사용할 때 발생하는 것</code>으로 위에서 안내했 듯이 <code>6.7 버전을 사용하면 문제가 없습니다</code>.</p>
 <div class="alert alert-danger d-flex" role="alert">
@@ -2771,7 +2777,7 @@ Cloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 
 <p>Failed to retrieve data from server: Request failed with status code 500</p>
   </div>
   </div>
-<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-26.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 오류 상황" class="docimage">
+<img src="/images/database/ncloud-database-cloud-db-for-postgresql-public-domain-26.png" width="845" alt="Ncloud VPC환경에서 Cloud DB for PostgreSQL pgAdmin 4 오류 상황" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ncloud Cloud DB for PostgreSQL 기본 가이드<br>
@@ -2873,7 +2879,7 @@ Cloud DB for PostgreSQL을 선택하고 [DB 관리] - [DB Service 상세보기] 
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

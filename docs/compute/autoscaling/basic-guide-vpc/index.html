@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2125,6 +2125,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2726,9 +2732,9 @@
 <p>그런데, 언제 서버 수를 증가, 감소 시킬 것인 가에 대한 이벤트 설정이 <strong>Classic 환경의 경우 오토스케일 그룹에 속한 서버들의 평균값을 기준</strong>으로 하지만,
 <strong>VPC 환경의 경우 이 방법 말고도 특정 서버를 지정해서 해당 서버를 기준으로 이벤트 설정을 할 수도</strong> 있습니다.</p>
 <p>그래서 여기서는 사전에 준비된 서버를 기준으로 AutoScaling이 작동되는 것을 살펴보겠습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_42.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_42.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="기준-서버-생성">기준 서버 생성 <a href="#%ea%b8%b0%ec%a4%80-%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>AutoScaling 이벤트 설정의 기준이 되는 서버 1대를 아래와 같이 미리 생성하겠습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_16.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_16.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="설정-순서">설정 순서 <a href="#%ec%84%a4%ec%a0%95-%ec%88%9c%ec%84%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Auto Scaling 설정 순서를 요약하면 다음과 같습니다.</p>
 
 
@@ -2742,7 +2748,7 @@
 
 </div>  
 <h2 id="launch-configuration-설정">Launch Configuration 설정 <a href="#launch-configuration-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Auto Scaling 설정은 우선 [Auto Scaling] - [Launch Configuration]에서 [Launch Configuration 생성] 버튼을 클릭하는 것으로 시작합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_01.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_01.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="서버-이미지-선택">서버 이미지 선택 <a href="#%ec%84%9c%eb%b2%84-%ec%9d%b4%eb%af%b8%ec%a7%80-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>서버 이미지는 Ncloud(네이버 클라우드) 에서 제공하는 기본 이미지를 선택할 수도 있고, 기존에 사용하던 서버로 만들어 둔 [내 서버 이미지]를 사용할 수도 있습니다. 여기서는 기본 이미지를 사용하는 것으로 하겠습니다.</p>
 
 
@@ -2753,7 +2759,7 @@
 ⁃ Rocky Linux 8.6, 8.8 <br />
 ⁃ Ubuntu 16.04, 18.04, 20.04
 </div>  
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_02.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_02.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="windows-서버-이미지-버전">Windows 서버 이미지 버전 <a href="#windows-%ec%84%9c%eb%b2%84-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b2%84%ec%a0%84" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
 
 
@@ -2762,21 +2768,21 @@
 ⁃ Windows Server 2016 64bit English Edition <br />
 ⁃ Windows Server 2019 64bit English Edition
 </div>  
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_03.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_03.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="서버-설정">서버 설정 <a href="#%ec%84%9c%eb%b2%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>스토리지 종류와 서버 타입 등을 선택합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_04.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_04.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="이름-설정">이름 설정 <a href="#%ec%9d%b4%eb%a6%84-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Launch Configuration의 이름을 입력합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_05.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_05.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="인증키-설정">인증키 설정 <a href="#%ec%9d%b8%ec%a6%9d%ed%82%a4-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>인증키는 기존에 보유하고 있던 인증키를 이용해도 되고, 새로운 인증키를 설정해도 됩니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_06.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_06.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="최종-확인">최종 확인 <a href="#%ec%b5%9c%ec%a2%85-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>지금까지 설정한 내용이 이상 없는지 최종 확인을 하고 이상 없으면 [Launch Configuration 생성] 버튼을 클릭합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_07.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_07.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="auto-scaling-group-설정">Auto Scaling Group 설정 <a href="#auto-scaling-group-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 Auto Scaling Group을 생성합니다. [Auto Scaling] - [Auto Scaling Group]에서 [Auto Scaling Group 생성] 버튼을 클릭합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_08.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_08.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="launch-configuration-선택">Launch Configuration 선택 <a href="#launch-configuration-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>위에서 생성했던 Launch Configuration을 선택합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_09.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_09.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="그룹-설정">그룹 설정 <a href="#%ea%b7%b8%eb%a3%b9-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>여기서는 VPC와 Subnet 등의 네트워크 환경을 선택하고,  생성될 서버들의 이름과 최소, 최대 개수 등을 설정합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_10.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_10.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <ul>
 <li>
 <p><strong>서버이름 Prefix</strong> : 최대7자까지 지정할 수 있고, 나머지 이름의 뒷부분은 영문,숫자의 조합으로 무작위로 자동 생성됩니다.</p>
@@ -2804,7 +2810,7 @@
 <div markdown="span" class="bs-callout-v2 bs-callout-v2-primary bs-callout-v2-level-3">
     Auto Scaling으로 생성된 서버가 로드밸런서에 자동으로 연결되도록 하려면 [<strong>헬스 체크 유형</strong>]을 [<strong>로드밸런서</strong>]로 선택하고 [<strong>Target Group</strong>] 항목에서 원하는 로드밸런서의 Target Group을 선택하면 됩니다.
 </div>  
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_41.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_41.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <ul>
 <li>VPC 환경에서 로드밸런서를 생성하는 방법은 아래 문서를 참고하시면 됩니다.</li>
 </ul>
@@ -2815,42 +2821,42 @@
     ⁃ <a href="/networking/ncloud_networking_load_balancer_application_lb.html">VPC 환경에서 Application Load Balancer 생성하는 방법</a>
 </div>  
 <h3 id="네트워크-접근-설정">네트워크 접근 설정 <a href="#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ec%a0%91%ea%b7%bc-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>네트워크 접근에 필요한 ACG를 설정하고 선택합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_11.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_11.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="정책일정-설정">정책/일정 설정 <a href="#%ec%a0%95%ec%b1%85%ec%9d%bc%ec%a0%95-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>정책과 일정을 여기서 바로 설정할 수도 있고 나중에 설정할 수도 있는데,
 우선은 [정책 설정]에서 [서버 수 증가 정책]과 [서버 수 감소 정책]을 설정합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_12.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_12.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="통보-설정">통보 설정 <a href="#%ed%86%b5%eb%b3%b4-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>서버가 생성될 때 또는 서버가 반납될 때 언제 통보를 받을 것인지 선택하고, 누가 언제 통보 받을 것인지 설정합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_13.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_13.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="통보-대상-설정">통보 대상 설정 <a href="#%ed%86%b5%eb%b3%b4-%eb%8c%80%ec%83%81-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>먼저 [통보대상 관리 그룹]을 선택하고, 다음으로 관리자와 통보 방법을 선택합니다.<br>
 [통보대상 관리 그룹]이 설정되지 않았을 경우에는 [통보대상관리] 버튼을 클릭해 통보를 받을 대상의 그룹을 설정합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_14.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_14.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="최종-확인-1">최종 확인 <a href="#%ec%b5%9c%ec%a2%85-%ed%99%95%ec%9d%b8-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>지금까지 설정한 Auto Scaling Group 내역을 확인하고 이상이 없으면 [Auto Scaling Group 생성] 버튼을 클릭합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_15.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_15.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="event-rule-설정">Event Rule 설정 <a href="#event-rule-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>지정한 서버를 모니터링 하다가 설정한 조건에 해당되면 즉, 지정한 Event가 발생하면 Auto Scaling 설정을 적용해 서버를 증가시키거나 감소시키기 위한 감시 규칙인 [Event Rule]을 설정합니다.</p>
 <h3 id="서버-증가-event-rule-생성">서버 증가 Event Rule 생성 <a href="#%ec%84%9c%eb%b2%84-%ec%a6%9d%ea%b0%80-event-rule-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>VPC에서는 [Cloud Insight]로 모니터링을 하게 되므로 Event Rule 설정도 [Cloud Insight(Monitoring)] - [Configuration] - [Event Rule]에서 [Event Rules 생성] 버튼을 클릭합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_17.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_17.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="감시-상품-선택">감시 상품 선택 <a href="#%ea%b0%90%ec%8b%9c-%ec%83%81%ed%92%88-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Cloud Insight는 Server 뿐만 아니라 Load Balancer, Object Storage도 감시할 수 있는데 여기서는 처음에 생성했던 서버를 감시할 것이니 [Server(VPC)]를 선택합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_18.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_18.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="감시-대상-설정">감시 대상 설정 <a href="#%ea%b0%90%ec%8b%9c-%eb%8c%80%ec%83%81-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>맨 처음에 생성했던 서버를 선택합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_19.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_19.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="감시-항목-및-조건-설정">감시 항목 및 조건 설정 <a href="#%ea%b0%90%ec%8b%9c-%ed%95%ad%eb%aa%a9-%eb%b0%8f-%ec%a1%b0%ea%b1%b4-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>감시 항목 설정에서 [전체 보기]를 선택하고, [SERVER] 탭에서 [Metric ID]를 [cpu]로 검색한 후 평균 CPU 사용률 항목인 [SERVER/avg_cpu_used_rto]에서 [Level]과 [Condition], [Method], [Duration]을 선택합니다.</p>
 <p>먼저 서버를 증가시키는 경우에 해당하는 감시 항목을 설정하겠습니다.<br>
 아래의 설정 내용은 &ldquo;<strong>평균 CPU 사용률이 1분간 50% 이상일 경우 경고 수준으로 이벤트 통보를 한다</strong>&ldquo;라는 설정입니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_22.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_22.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="액션-설정">액션 설정 <a href="#%ec%95%a1%ec%85%98-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>앞에서 설정한 이벤트가 발생했을 경우 어떤 액션을 취할 것인지 설정하게 되는데 앞에서 [Auto Scaling Group] 설정에서 생성했던 정책을 선택하면 됩니다.<br>
 여기서는 [CPU 사용률 50% 이상]인 경우이므로 서버를 증가시키는 정책을 선택합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_23.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_23.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="최종-확인-2">최종 확인 <a href="#%ec%b5%9c%ec%a2%85-%ed%99%95%ec%9d%b8-2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>설정한 내용이 이상 없는지 최종 확인하고, 규칙 이름을 입력한 후에 [생성] 버튼을 클릭합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_24.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_24.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="서버-감소-event-rule-생성">서버 감소 Event Rule 생성 <a href="#%ec%84%9c%eb%b2%84-%ea%b0%90%ec%86%8c-event-rule-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>앞에서 생성한 [서버 증가 Event Rule]과 같은 방식으로 [서버 감소 Event Rule]을 생성합니다.</p>
 <p>아래의 설정 내용은 &ldquo;<strong>평균 CPU 사용률이 1분간 10% 이하일 경우 정보 알림 수준으로 이벤트 통보를 한다</strong>&ldquo;라는 설정입니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_25.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_25.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="액션-설정-1">액션 설정 <a href="#%ec%95%a1%ec%85%98-%ec%84%a4%ec%a0%95-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>여기서는 [CPU 사용률 10% 이하]인 경우이므로 서버를 감소시키는 정책을 선택합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_26.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_26.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="최종-확인-3">최종 확인 <a href="#%ec%b5%9c%ec%a2%85-%ed%99%95%ec%9d%b8-3" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>설정한 내용이 이상 없는지 최종 확인하고, 규칙 이름을 입력한 후에 [생성] 버튼을 클릭합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_27.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_27.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="event-rule-생성-완료">Event Rule 생성 완료 <a href="#event-rule-%ec%83%9d%ec%84%b1-%ec%99%84%eb%a3%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>서버 증가과 감소에 대한 Event Rule 2가지가 모두 생성된 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_28.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_28.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="stress-tool-설정">Stress Tool 설정 <a href="#stress-tool-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>CPU 사용률에 따른 Auto Scaling 작동 여부를 테스트 하기 위해 서버에 Stress Tool을 설치해보겠습니다.</p>
 <h3 id="epel-리포지토리-설정">EPEL 리포지토리 설정 <a href="#epel-%eb%a6%ac%ed%8f%ac%ec%a7%80%ed%86%a0%eb%a6%ac-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Stress Tool을 설치하기 위해서는 다음 명령어로 [EPEL 리포지토리]를 설정해야 합니다.</p>
 
@@ -2872,7 +2878,7 @@
   <code> yum -y install epel-release</code>
   </pre>
   </div>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_29.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_29.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="stress-tool-설치">Stress Tool 설치 <a href="#stress-tool-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
 
@@ -2892,7 +2898,7 @@
   <code> yum -y install stress</code>
   </pre>
   </div>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_30.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_30.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="stress-tool-실행">Stress Tool 실행 <a href="#stress-tool-%ec%8b%a4%ed%96%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="cpu-코어-개수-확인">CPU 코어 개수 확인 <a href="#cpu-%ec%bd%94%ec%96%b4-%ea%b0%9c%ec%88%98-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>CPU에 강제로 부하를 발생 시키기 위해서는 서버의 CPU 코어 개수를 확인해서 모든 코어에 부하를 발생시키는 것이 좋습니다.<br>
 CPU 코어 개수를 확인하는 방법은 아래 명령어를 입력하면 됩니다.</p>
 
@@ -2914,7 +2920,7 @@ CPU 코어 개수를 확인하는 방법은 아래 명령어를 입력하면 됩
   <code> grep -c processor /proc/cpuinfo</code>
   </pre>
   </div>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_31.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_31.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="명령어-테스트">명령어 테스트 <a href="#%eb%aa%85%eb%a0%b9%ec%96%b4-%ed%85%8c%ec%8a%a4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>CPU에 부하를 주는 명령어를 테스트 해보겠습니다.</p>
 
 
@@ -2941,7 +2947,7 @@ CPU 코어 개수를 확인하는 방법은 아래 명령어를 입력하면 됩
 <li>timeout: 몇 초 동안 부하를 발생 시킬 것인가</li>
 <li>verbose: 상세 로그를 표시</li>
 </ul>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_32.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_32.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="cpu-부하-발생">CPU 부하 발생 <a href="#cpu-%eb%b6%80%ed%95%98-%eb%b0%9c%ec%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>부하 발생 테스트를 마쳤으니 실제 Auto Scaling 테스트를 위해 300초 즉, 5분 동안 부하를 발생 시켜보겠습니다.</p>
 
 
@@ -2962,17 +2968,17 @@ CPU 코어 개수를 확인하는 방법은 아래 명령어를 입력하면 됩
   <code> stress --cpu 2 --timeout 300 --verbose</code>
   </pre>
   </div>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_33.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_33.png" width="840" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="서버-증가-확인">서버 증가 확인 <a href="#%ec%84%9c%eb%b2%84-%ec%a6%9d%ea%b0%80-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Stress Tool로 부하를 발생 시키고 서버 리스트를 확인해보면 아래와 같이 Auto Scaling 설정에서 지정한 대로 서버가 생성되고 있는 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_34.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_34.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="cpu-사용률-확인">CPU 사용률 확인 <a href="#cpu-%ec%82%ac%ec%9a%a9%eb%a5%a0-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[Cloud Insight]에서 서버 사용률을 확인해 보면 아래와 같이 5분간 CPU 사용률이 100%까지 올라간 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_35.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_35.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="서버-반납-확인">서버 반납 확인 <a href="#%ec%84%9c%eb%b2%84-%eb%b0%98%eb%82%a9-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Stress Tool로 부하를 발생 시키도록 설정한 5분이 지난 후에 서버 리스트를 보면 Auto Scaling으로 생성되었던 서버가 반납되고 있는 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_36.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_36.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="이벤트-발생-확인">이벤트 발생 확인 <a href="#%ec%9d%b4%eb%b2%a4%ed%8a%b8-%eb%b0%9c%ec%83%9d-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[Cloud Insight] - [Event]에서 서버 증가, 감소 관련 이벤트가 제대로 발생했는지 아래와 같이 그래프와 리스트로 확인할 수 있습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_37.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_37.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="이벤트-통보-확인">이벤트 통보 확인 <a href="#%ec%9d%b4%eb%b2%a4%ed%8a%b8-%ed%86%b5%eb%b3%b4-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이벤트 통보에서 설정한 대로 아래와 같이 Email로 Auto Scaling 이벤트 발생과 완료에 대한 통보 메일이 도착한 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_38.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_38.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="서비스-제한사항">서비스 제한사항 <a href="#%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%a0%9c%ed%95%9c%ec%82%ac%ed%95%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Auto Scaling 설정과 서버 스펙 등에 대한 제한 사항을 정리해보겠습니다.</p>
 <h3 id="스펙-및-서비스-환경-제한-사항">스펙 및 서비스 환경 제한 사항 <a href="#%ec%8a%a4%ed%8e%99-%eb%b0%8f-%ec%84%9c%eb%b9%84%ec%8a%a4-%ed%99%98%ea%b2%bd-%ec%a0%9c%ed%95%9c-%ec%82%ac%ed%95%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
 <li>총 디스크 사이즈 150GB 이하 서버만 가능</li>
@@ -2989,13 +2995,13 @@ CPU 코어 개수를 확인하는 방법은 아래 명령어를 입력하면 됩
 </ul>
 <h2 id="상세-모니터링">상세 모니터링 <a href="#%ec%83%81%ec%84%b8-%eb%aa%a8%eb%8b%88%ed%84%b0%eb%a7%81" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ncloud(네이버 클라우드) 에서는 기본 모니터링 외에 [상세 모니터링]도 지원하는데, [상세 모니터링]에서는 좀 더 자세하고 다양한 모니터링 항목 (Extended Metric)을 지원합니다.</p>
 <p>예를 들어 CPU 사용과 관련한 모니터링 항목에서도 아래와 같이 [CPU idle ratio average] 항목들도 확인할 수 있습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_39.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_39.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <p>또한, 위와 같이 [Server] 탭에서는 CPU들의 평균 값을 모니터링할 수 있는 것에 비해, 상세 모니터링을 적용하면 아래와 같이 [CPU] 탭에서 CPU 코어별로 각각 모니터링을 할 수도 있습니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_40.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_40.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h3 id="상세-모니터링-설정">상세 모니터링 설정 <a href="#%ec%83%81%ec%84%b8-%eb%aa%a8%eb%8b%88%ed%84%b0%eb%a7%81-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>상세 모니터링을 적용하는 방법은 서버를 선택하고 [서버 관리 및 설정 변경] 메뉴에서 [상세 모니터링 설정 변경] 메뉴를 선택합니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_20.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_20.png" width="845" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h4 id="상세-모니터링-신청">상세 모니터링 신청 <a href="#%ec%83%81%ec%84%b8-%eb%aa%a8%eb%8b%88%ed%84%b0%eb%a7%81-%ec%8b%a0%ec%b2%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>상세 모니터링 신청 팝업에서 [예] 버튼을 클릭하면 상세 모니터링이 적용됩니다. 상세 모니터링 신청 후 실제 데이터가 수집되기까지는 약간의 시간이 소요되므로 잠시 기다렸다 확인해보면 됩니다.</p>
-<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_21.png" width="480" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage">
+<img src="/images/compute/autoscaling/ncloud_server_autoscaling_guide_vpc_21.png" width="480" alt="Ncloud(네이버 클라우드) VPC 환경에서 AutoScaling 설정하는 방법" class="docimage  mb-5">
 <h2 id="용어-정리">용어 정리 <a href="#%ec%9a%a9%ec%96%b4-%ec%a0%95%eb%a6%ac" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Auto Scaling에서 사용되는 주요 용어들을 정리해보겠습니다.</p>
 <table>
 <thead>
@@ -3170,7 +3176,7 @@ CPU 코어 개수를 확인하는 방법은 아래 명령어를 입력하면 됩
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

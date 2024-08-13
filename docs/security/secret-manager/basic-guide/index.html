@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2590,20 +2596,20 @@
 <p>Ncloud(네이버 클라우드)의 <code>Secret Manager</code> 서비스는 이런 비밀번호나 인증키 같은 중요한 정보를 안전하게 저장하고 필요할 때 가져다 쓸 수 있도록 해주는 서비스로 현재 OBT (Open Beta Test)로 제공 중이며, 10월 1일 정식 제공 전까지는 무료로 이용할 수 있습니다.</p>
 <p>그래서 여기서는 [<strong>Secret Manager</strong>]에 데이터 베이스 연결정보를 저장하고 PHP에서 API로 해당 정보를 호출하는 기본 기능만을 우선 정리해보고, 상세 기능은 차후에 정식버전이 출시되면 다시 정리해보겠습니다.</p>
 <h2 id="서비스-위치">서비스 위치 <a href="#%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%9c%84%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>Secret Manager</strong>] 서비스의 위치는 [<strong>Security</strong>] - [<strong>Secret Manager</strong>]에 있습니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-01.png" width="1000" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-01.png" width="1000" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 <h2 id="secret-생성">Secret 생성 <a href="#secret-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>우선 [<strong>Secret 생성</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-02.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-02.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 <h3 id="secret-기본-정보-입력">Secret 기본 정보 입력 <a href="#secret-%ea%b8%b0%eb%b3%b8-%ec%a0%95%eb%b3%b4-%ec%9e%85%eb%a0%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Secret의 이름을 입력합니다. [<strong>보호 키</strong>]의 경우 현재는 기본으로 제공하는 [<strong>Default Key</strong>]만 선택 가능합니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-03.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-03.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 <h2 id="교체-설정">교체 설정 <a href="#%ea%b5%90%ec%b2%b4-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>Secret Manager</strong>] 서비스에서는 저장된 값을 주기적으로 교체 적용시킬 수도 있는데, 여기서는 <strong>자동 교체</strong>없이 다음 단계로 넘어가겠습니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-04.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-04.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 <h2 id="secret-값-입력">Secret 값 입력 <a href="#secret-%ea%b0%92-%ec%9e%85%eb%a0%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>[<strong>Secret Manager</strong>] 서비스를 활용하기 가장 좋은 정보가 바로 [<strong>Database 연결정보</strong>]입니다. 그래서 여기서는 데이터베이스 연결정보를 샘플로 만들어서 입력해보았습니다.<br>
 아래와 같이 [<strong>Key</strong>], [<strong>Value</strong>]를 각각 입력합니다. 이번에는 [<strong>자동 교체</strong>] 기능을 사용하지는 않지만, 시스템 구조상 <code>최소 1개는 반드시 선택해야</code> 하므로 아무거나 선택하고 다음 단계로 넘어가겠습니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-05.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-05.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 <h2 id="최종-확인">최종 확인 <a href="#%ec%b5%9c%ec%a2%85-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>입력한 Secret 값들을 마지막으로 확인하고 이상이 없으면 [<strong>Secret 생성</strong>] 버튼을 클릭해서 생성 완료를 합니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-06.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-06.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 <h2 id="secret-id-확인">Secret ID 확인 <a href="#secret-id-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p><strong>Secret</strong>이 생성되면 아래와 같은 화면을 볼 수 있으며, 그 중에서 [<strong>Secret ID</strong>]는 <strong>Secret 값</strong>을 얻기 위해 API를 호출할 때 사용하게 됩니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-07.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-07.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 <h2 id="secret-값-호출">Secret 값 호출 <a href="#secret-%ea%b0%92-%ed%98%b8%ec%b6%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="api-호출">API 호출 <a href="#api-%ed%98%b8%ec%b6%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>아래 코드는 API로 [<strong>Secret Manager</strong>]에 접근해서 설정된 <strong>Secret 값</strong>을 가져오는 방법에 대한 전체 코드인데, PHP로 구성되어 있습니다.<br>
 여기서 중요한 [<strong>API Access Key</strong>]와 [<strong>API Secret Key</strong>]를 생성하는 방법과 접근 제한 설정 등은 아래 문서에서 확인 가능합니다.</p>
 
@@ -2670,7 +2676,7 @@
   </pre>
   </div>
 <h3 id="secret-값-확인">Secret 값 확인 <a href="#secret-%ea%b0%92-%ed%99%95%ec%9d%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>API로 호출한 값을 출력해보면 아래와 같이 처음에 콘솔에서 입력했던 값이 정상적으로 반환되는 것을 알 수 있습니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-08.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-08.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 
 
 
@@ -2708,8 +2714,8 @@ array(2) {
   </pre>
   </div>
 <h2 id="secret-값-편집">Secret 값 편집 <a href="#secret-%ea%b0%92-%ed%8e%b8%ec%a7%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>설정했던 [<strong>Secret 값</strong>]을 수정, 편집하려면 [<strong>Secret 값</strong>] 탭에 들어가서 [<strong>Secret 값 보기</strong>] 버튼을 클릭한 후에 해당 값을 마우스 좌클릭 또는 우클릭해서 수정하면 됩니다.</p>
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-09.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
-<img src="/images/security/ncloud-security-secret-manager-basic-guide-10.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-09.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
+<img src="/images/security/ncloud-security-secret-manager-basic-guide-10.png" width="1140" alt="Ncloud (네이버 클라우드) Secret Manager 기본 가이드" class="docimage  mb-5">
 <h2 id="참고-url">참고 URL <a href="#%ec%b0%b8%ea%b3%a0-url" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ol>
 <li>
 <p>Ncloud Secret Manager 서비스 소개<br>
@@ -2803,7 +2809,7 @@ array(2) {
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

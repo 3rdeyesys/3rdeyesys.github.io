@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2619,22 +2625,22 @@
 <li>.Net, .Net Core SDK : <a href="https://dotnet.microsoft.com/download" rel="external" target="_blank">https://dotnet.microsoft.com/download<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
 </ul>
 <h2 id="프로젝트-생성">프로젝트 생성 <a href="#%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="프로젝트-템플릿-선택">프로젝트 템플릿 선택 <a href="#%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ed%85%9c%ed%94%8c%eb%a6%bf-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Visual Studio에서 제공하는 템플릿 중에서 C# Class library를 선택하니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_01.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_01.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="프로젝트-구성">프로젝트 구성 <a href="#%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ea%b5%ac%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>프로젝트 이름과 저장 위치 등을 입력합니다.
 여기서는 CloudFunctionsTestVisualStudio 라는 이름으로 시작합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_02.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_02.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="targetFrameworkSet">대상 프레임워크 지정 <a href="#targetFrameworkSet" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>대상 프레임워크는 .NET Standard 2.0으로 지정합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_03.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_03.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>프로젝트 생성 후에 CloudFunctionsTestVisualStudio.csproj 파일을 열어보면 TargetFramework 값이 netstandard2.0으로 되어 있는 것을 확인할 수 있습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_04.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_04.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h2 id="json-패키지-설치">json 패키지 설치 <a href="#json-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%84%a4%ec%b9%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 Cloud Functions은 json 형식으로 파라미터를 입력받고 결과를 출력하기 때문에 NuGet 패키지 관리자를 이용해서 json 패키지를 설치합니다.</p>
 <p>프로젝트 선택하고 마우스 오른쪽 버튼을 클릭해서 NuGet 패키지 관리 메뉴를 선택합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_05.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_05.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>NuGet 패키지 관리자 화면에서 json을 검색하고 Newtonsoft.Json 패키지를 선택, 설치를 합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_06.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_09.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_06.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_09.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>패키지 설치가 완료된 상태입니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_10.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_10.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h2 id="hellocs-작성">Hello.cs 작성 <a href="#hellocs-%ec%9e%91%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 name이라는 파라미터를 json 형태로 받아서 출력해주는 Hello.cs 스크립트를 작성합니다.</p>
 
 
@@ -2673,66 +2679,66 @@ namespace CloudFunctionsTestConsole
 }</code>
   </pre>
   </div>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_11.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_11.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h2 id="프로젝트-게시">프로젝트 게시 <a href="#%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ea%b2%8c%ec%8b%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 위에서 작성한 스크립트를 게시하고, zip 파일로 압축합니다.<br>
 여기서 만든 zip 파일을 네이버 클라우드 콘솔에서 등록하게 됩니다.</p>
 <p>[빌드]-[게시] 메뉴를 선택합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_12.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_12.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>게시 대상은 폴더를 선택합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_13.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_14.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_13.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_14.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>게시할 준비가 되었고 게시를 시작합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_15.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_15.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>게시가 완료되었습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_16.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_16.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>게시된 폴더에 가보면 .nupkg 파일이 생성되는데 저희는 이것을 이용하지 않고 상위 폴더에 있는 dll 파일을 사용합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_18.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_18.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>publish 상위 폴더에 가면 .deps.json, .dll, .pdb 이렇게 3개 파일이 생성되어 있는 것을 확인할 수 있는데 Cloud Functions에서는 이 파일을 사용합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_17.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_17.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="파일-압축">파일 압축 <a href="#%ed%8c%8c%ec%9d%bc-%ec%95%95%ec%b6%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>탐색기에서 3개의 파일을 선택하고 압축합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_19.jpg" width="770" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_20.jpg" width="770" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_19.jpg" width="770" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_20.jpg" width="770" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h2 id="cf-이용신청">CF 이용신청 <a href="#cf-%ec%9d%b4%ec%9a%a9%ec%8b%a0%ec%b2%ad" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>네이버 클라우드 콘솔에서 Cloud Functions에 들어가 이용신청을 합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_01.jpg" width="700" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_01.jpg" width="700" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h2 id="cf-action-생성">CF Action 생성 <a href="#cf-action-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="액션-생성">액션 생성 <a href="#%ec%95%a1%ec%85%98-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>버튼을 선택해 액션을 생성합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_02.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_02.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="트리거-선택">트리거 선택 <a href="#%ed%8a%b8%eb%a6%ac%ea%b1%b0-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>액션을 생성하기 전에 트리거 조건을 설정해야 하는데, 여기서는 트리거 설정 없이 액션 만들기를 선택하겠습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_03.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_03.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="이름-입력">이름 입력 <a href="#%ec%9d%b4%eb%a6%84-%ec%9e%85%eb%a0%a5" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>액션의 이름은 특별한 규칙이 없으니 알아보기 쉬운 것으로 입력하면 됩니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_21.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_21.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="소스코드-언어-선택">소스코드 언어 선택 <a href="#%ec%86%8c%ec%8a%a4%ec%bd%94%eb%93%9c-%ec%96%b8%ec%96%b4-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>소스코드 언어 중에서 저희는 dotnet:2.2를 선택합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_05.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_05.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="소스코드-업로드">소스코드 업로드 <a href="#%ec%86%8c%ec%8a%a4%ec%bd%94%eb%93%9c-%ec%97%85%eb%a1%9c%eb%93%9c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>소스코드 타입은 코드와 파일이 있지만, java와 .Net은 파일 업로드만 가능합니다.
 앞에서 만든 소스코드를 선택하고 업로드 합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_22.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_22.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>소스코드가업로드 되었습니다. 등록된 소스코드는 나중에 다운로드 할 수도 있고 다른 파일을 재업로드 할 수도 있습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_23.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_23.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="vpc-연결-정보-선택">VPC 연결 정보 선택 <a href="#vpc-%ec%97%b0%ea%b2%b0-%ec%a0%95%eb%b3%b4-%ec%84%a0%ed%83%9d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>VPC 환경에서는 연결할 VPC와 Subnet을 선택해야 합니다. Classic 환경에서는 다음 단계로 바로 이동하시면 됩니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_09.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_09.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="옵션-설정">옵션 설정 <a href="#%ec%98%b5%ec%85%98-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>실행할 Main 함수의 이름을 {Assembly}::{Class Full Name}::{Method} 형태의 풀네임으로 입력합니다.
 위에서 만든 Hello.cs에서는 <strong><span style="word-break:break-all;">CloudFunctionsTestVisualStudio::CloudFunctionsTestVisualStudio.Hello::Main</span></strong> 으로 입력합니다.</p>
 <p>액션 메모리와 Timeout은 기본으로 두셔도 되고 익숙해진 이후에 상황에 맞게 조정하시면 됩니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_24.jpg" width="700" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_24.jpg" width="700" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="mainFunctionNameRule">Main 함수 이름 작성 방법 <a href="#mainFunctionNameRule" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>입력할 Main 함수 이름을 어떻게 적으면 되는지 한번 더 살펴보겠습니다.<br>
 아래 소스코드 화면에서 보시면 namespace, class, Main 이렇게 이름이 적혀 있는 곳에서<br>
 { 1 }::{ 1 }.{ 2 }::{ 3 } 이렇게 연결해서 적으면 CloudFunctionsTestVisualStudio::CloudFunctionsTestVisualStudio.Hello::Main 이렇게 완성이 되고<br>
 이 이름을 Main 함수 이름 칸에 입력하시면 됩니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_25.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_25.jpg" width="800" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h3 id="생성-완료">생성 완료 <a href="#%ec%83%9d%ec%84%b1-%ec%99%84%eb%a3%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>디폴트 파라미터의 경우 필요하실 경우 설정하시면 됩니다.<br>
 모든 준비가 끝났으면 생성 버튼을 클릭하여 액션을 생성합니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_11.jpg" width="770" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_11.jpg" width="770" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h2 id="cf-action-실행">CF Action 실행 <a href="#cf-action-%ec%8b%a4%ed%96%89" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>이제 생성된 액션을 실행해보겠습니다.
 액션의 기본정보 화면에서는 액션 실행과 수정, 삭제를 할 수 있고, 모니터링 화면에서는 액션이 실행된 통계 정보를 확인할 수 있습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_26.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_26.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>액션 실행화면 왼쪽에는 파라미터를 입력할 수 있고,
 오른쪽에는 결과가 나오는데 전체 결과 메시지를 확인하거나 결과만 보기 옵션으로 최종 성공 실패에 대한 결과 메시지만 볼 수도 있습니다.<br>
 우선은 파라미터 없이 실행해 보았고, 무사히 성공한 결과가 나왔습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_27.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_27.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>이번에는 파라미터를 입력하고 액션을 실행해보았습니다.  파라미터는 json 형태로 입력하면 됩니다.
 왼쪽 창에서 입력한 파라미터가 결과에 잘 반영되어 나왔습니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_28.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_28.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>결과만 보기 옵션을 끄고 실행하면 이렇게 스크롤 해야만 전체를 확인할 수 있을 정도로 긴 결과 메시지가 나타납니다.</p>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_29.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_29.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <h2 id="오류-메시지">오류 메시지 <a href="#%ec%98%a4%eb%a5%98-%eb%a9%94%ec%8b%9c%ec%a7%80" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>위의 순서대로 진행을 하면 문제 없이 사용 가능한데, 이미 다른 방법으로 진행해보면서 오류 메시지를 경험하는 경우도 있을 듯하여 가장 많이 겪게 되는 오류 상황 2가지를 정리해보겠습니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
@@ -2743,7 +2749,7 @@ namespace CloudFunctionsTestConsole
 <p>Main 함수 이름 입력 오류: 액션 Main 함수 이름을 올바르게 입력하지 않으면 다음과 같은 오류 메시지가 나타납니다.&quot;error&quot; : &quot;main required format is \&quot;Assembly::Type::Function\&quot;.&quot;</p>
   </div>
   </div>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_30.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_30.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>상단에 설명한 [CF Action 생성] - [옵션 설정]에서 <a href="/docs/compute/cloud-functions/cf-create-using-dotnet-csharp-in-visual-studio/#mainFunctionNameRule">Main 함수 입력하는 부분</a>을 참고하셔서 정확하게 입력하시면 문제가 해결됩니다.</p>
 <div class="alert alert-danger d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">
@@ -2755,7 +2761,7 @@ namespace CloudFunctionsTestConsole
 그런데 이 대상 프레임워크가 맞지 않으면 다음과 같은 오류 메시지가 나타납니다.&quot;error&quot; : &quot;Unable to locate requested type (\&quot;CloudFunctionsTestVisualStudio.Hello\&quot;).&quot;</p>
   </div>
   </div>
-<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_31.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage">
+<img src="/images/compute/cloud_functions/ncp_server_cloud_functions_dotnet_csharp_vs_31.jpg" width="850" alt="Ncloud Cloud Functions Action을 .Net (C#)을 사용하여 Visual Studio에서 만드는 방법" class="docimage  mb-5">
 <p>위 [프로젝트 생성]에서 설명한 것처럼 프로젝트 생성할 때 <a href="/docs/compute/cloud-functions/cf-create-using-dotnet-csharp-in-visual-studio/#targetFrameworkSet">대상 프레임워크를 <strong>.NET Standard 2.0</strong>으로 지정</a>해야 합니다.</p>
 
     </div>
@@ -2825,7 +2831,7 @@ namespace CloudFunctionsTestConsole
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

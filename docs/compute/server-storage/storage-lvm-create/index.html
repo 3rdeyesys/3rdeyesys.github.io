@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2573,9 +2579,9 @@
 <p>이럴때 사용하는 방법이 <strong>LVM (Logical Volume Manager)</strong> 을 사용하여 여러 개의 스토리지를 합쳐서 대용량으로 사용하거나 합쳐진 대용량을 다시 필요한 용량으로 나누어서 사용하는 방법입니다.</p>
 <p>그래서 이번에는 리눅스 환경에서 LVM으로 대용량 스토리지를 생성하는 방법을 정리해보겠습니다.</p>
 <h2 id="스토리지-생성">스토리지 생성 <a href="#%ec%8a%a4%ed%86%a0%eb%a6%ac%ec%a7%80-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>2,000GB 이상의 용량을 필요로 할 때에 대한 내용이지만, 테스트를 위해 10GB 스토리지 2개를 생성하겠습니다.</p>
-<img src="/images/compute/ncp_server_storage_lvm_create_01.jpg" width="770" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_01.jpg" width="770" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <p>lvm-test-1, lvm-test-2 이름으로 생성된 스토리지 2개를 Ubuntu OS가 설치된 lvm-test-svr 서버에 연결했습니다.</p>
-<img src="/images/compute/ncp_server_storage_lvm_create_02.jpg" width="770" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_02.jpg" width="770" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <h2 id="파티션-설정">파티션 설정 <a href="#%ed%8c%8c%ed%8b%b0%ec%85%98-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>생성된 스토리지 2개에 각각 파티션을 설정합니다.<br>
 파티션 설정에는 parted 명령어를 사용합니다.</p>
 
@@ -2605,7 +2611,7 @@ p
 quit</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_03.jpg" width="700" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_03.jpg" width="700" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 
 
 
@@ -2633,7 +2639,7 @@ p
 quit</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_04.jpg" width="700" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_04.jpg" width="700" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <p>설정된 파티션들을 확인합니다.</p>
 
 
@@ -2654,7 +2660,7 @@ quit</code>
   <code> fdisk -l</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_05.jpg" width="600" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_05.jpg" width="600" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <h2 id="physical-volume-생성">Physical Volume 생성 <a href="#physical-volume-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>각 스토리지 장치에 Physical Volume을 생성합니다.</p>
 
 
@@ -2677,7 +2683,7 @@ quit</code>
  pvcreate /dev/xvdc1</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_06.jpg" width="500" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_06.jpg" width="500" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <p>Physical Volume이 제대로 생성되었는지 확인합니다.</p>
 
 
@@ -2698,7 +2704,7 @@ quit</code>
   <code> pvdisplay</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_07.jpg" width="600" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_07.jpg" width="600" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <h2 id="volume-group-생성">Volume Group 생성 <a href="#volume-group-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>준비된 두개의 Volume으로 하나의 Volume Group을 생성합니다.</p>
 
 
@@ -2719,7 +2725,7 @@ quit</code>
   <code> vgcreate VG01 /dev/xvdb1 /dev/xvdc1</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_08.jpg" width="500" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_08.jpg" width="500" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <p>생성된 Volume Group을 확인합니다.</p>
 
 
@@ -2740,7 +2746,7 @@ quit</code>
   <code> vgdisplay</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_09.jpg" width="550" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_09.jpg" width="550" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <h2 id="logical-volume-생성">Logical Volume 생성 <a href="#logical-volume-%ec%83%9d%ec%84%b1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>생성된 Volume Group 전체 크기를 사용하는 Logical Volume을 생성합니다.</p>
 
 
@@ -2761,7 +2767,7 @@ quit</code>
   <code> lvcreate --extents 100%FREE -n LV01 VG01</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_10.jpg" width="550" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_10.jpg" width="550" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <p>생성된 Logical Volume을 확인합니다.</p>
 
 
@@ -2782,7 +2788,7 @@ quit</code>
   <code> lvdisplay</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_11.jpg" width="550" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_11.jpg" width="550" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <h2 id="포맷">포맷 <a href="#%ed%8f%ac%eb%a7%b7" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>다음으로 포맷을 해야하는데, OS별로 명령어가 다르므로 확인 후에 실행해야 합니다.<br>
 여기서는 Ubuntu 기준으로 mkfs.ext4 명령어를 사용했습니다.</p>
 
@@ -2811,7 +2817,7 @@ quit</code>
 - CentOS 7.x: mkfs.xfs /dev/VG01/LV01</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_12.jpg" width="700" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_12.jpg" width="700" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <h2 id="마운트">마운트 <a href="#%eb%a7%88%ec%9a%b4%ed%8a%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>마운트를 하기 위해 우선 생성된 디스크 장치명을 확인합니다.</p>
 
 
@@ -2832,7 +2838,7 @@ quit</code>
   <code> fdisk -l</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_13.jpg" width="600" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_13.jpg" width="600" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <p>다음으로 디스크를 마운트할 포인트 즉, 디렉토리를 원하는 이름으로 생성하고 마운트를 합니다.<br>
 아래에 있는 마운트 경로 (/mnt/data)는 예시입니다. 원하는 경로를 직접 설정하시면 됩니다.</p>
 
@@ -2856,7 +2862,7 @@ quit</code>
  mount /dev/mapper/VG01-LV01 /mnt/data</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_14.jpg" width="600" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_14.jpg" width="600" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <h2 id="fstab-설정">fstab 설정 <a href="#fstab-%ec%84%a4%ec%a0%95" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>새로 생성된 디스크를 부팅 후에도 인식할 수 있게 blkid 명령으로 UUID를 확인하고 fstab에 등록합니다.</p>
 
 
@@ -2877,7 +2883,7 @@ quit</code>
   <code> blkid |grep /dev/mapper/VG01-LV01</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_15.jpg" width="650" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_15.jpg" width="650" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 
 
 
@@ -2897,7 +2903,7 @@ quit</code>
   <code> vi /etc/fstab</code>
   </pre>
   </div>
-<img src="/images/compute/ncp_server_storage_lvm_create_16.jpg" width="770" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage">
+<img src="/images/compute/ncp_server_storage_lvm_create_16.jpg" width="770" alt="Ncloud 리눅스서버 스토리지(디스크) LVM 구성하기" class="docimage  mb-5">
 <h2 id="fstab-설정-상세정보">fstab 설정 상세정보 <a href="#fstab-%ec%84%a4%ec%a0%95-%ec%83%81%ec%84%b8%ec%a0%95%eb%b3%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>/etc/fstab은 부팅 단계에서 마운트되어야 할 볼륨 정보들이 저장되는 곳입니다.<br>
 (OS 이미지에 따라 파일 시스템이 다르기 때문에 주의해야 합니다.)</p>
 <p>파일의 각 항목이 의미하는 바는 아래와 같으며 각 항목은 Tab 또는 Space Bar로 구분합니다.</p>
@@ -3028,7 +3034,7 @@ quit</code>
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">

@@ -75,7 +75,7 @@
 
     <link rel="stylesheet" href="/docs/scss/style.min.ecd972dfefa9b04048043036c44b5c7fe71fb11f8219cee1e4bba3d9b4cce27dfee5994e01144f4aa1804a57e957f674.css" integrity="sha384-7Nly3&#43;&#43;psEBIBDA2xEtcf&#43;cfsR&#43;CGc7h5Luj2bTM4n3&#43;5ZlOARRPSqGASlfpV/Z0"crossorigin="anonymous">
     
-    <link href="/css/customstyles-v3.min.295f87cc504046c15590d140a1d68299f7a92848c8dfdaed889a4b10c6cf907b.css" rel="stylesheet" integrity="sha256-KV&#43;HzFBARsFVkNFAodaCmfepKEjI39rtiJpLEMbPkHs=" />
+    <link href="/css/customstyles-v3.min.5286072d95efc0c2d0e3fc8f360b4b96faf5d0e203d019023b0c52fa6914fe00.css" rel="stylesheet" integrity="sha256-UoYHLZXvwMLQ4/yPNgtLlvr10OID0BkCOwxS&#43;mkU/gA=" />
     
     
     
@@ -2122,6 +2122,12 @@
                                         
                                         
                                         
+                                            <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-key-create-guide/">API 인증키 생성하는 방법</a></li>
+                                        
+                                    
+                                        
+                                        
+                                        
                                             <li class=" "><a class="sidebar-nested-link" href="/docs/api/ncloud-api-call-php-sample/">Ncloud API 샘플 | PHP</a></li>
                                         
                                     
@@ -2580,7 +2586,7 @@
 그런데 간혹, 웹브라우저나 앱에서 해당 파일을 호출 했을 때 <strong>html 페이지나 이미지 파일이 화면에 표시되지 않고 다운로드 되는 현상이 발생</strong>하기도 합니다.</p>
 <p>이것은 Object Storage에 파일이 등록될 때 파일의 속성을 나타내는 메타 데이터 중에서 <code>파일의 종류를 구분하기 위한 MIME Type에 대한 정보를 담고 있는 Content-Type 항목이 제대로 설정되지 않아서 발생하는 문제</code>입니다. 아래에서 이에 대한 내용을 자세히 정리해보겠습니다.</p>
 <h2 id="메타-데이터">메타 데이터 <a href="#%eb%a9%94%ed%83%80-%eb%8d%b0%ec%9d%b4%ed%84%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>메타 데이터는 파일의 속성이나 정보를 나타내는 값으로 Ncloud Object Storage에서는 파일 수정 날짜, 파일 크기 등의 기본으로 설정되는 시스템 메타 데이터와 사용자가 임의로 정의하는 유저 메타 데이터로 구분할 수 있으며 아래와 같이 Console 화면에서 확인할 수 있습니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-01.png" width="685" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-01.png" width="685" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage  mb-5">
 <h3 id="mime-type-media-type">MIME Type (Media Type) <a href="#mime-type-media-type" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>MIME은 [Multipurpose Internet Mail Extensions]의 약자로 이메일 전송을 위해 만들어진 인터넷 표준 형식으로, MIME Type이란 이메일로 전송되는 컨텐츠나 파일의 종류를 구분하기 위해 정의된 형식입니다. 최근에는 Media Type으로 표현하는 경우도 있습니다.</p>
 <h3 id="content-type">Content-Type <a href="#content-type" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>[<strong>Content-Type</strong>]은 MIME Type으로 정의된 컨텐츠나 파일을 전송할 때 프로토콜의 <strong>Header 값에 정의되는 속성</strong>입니다.
 Content-Type Header와 MIME Type은 이메일에 사용하기 위해 정의되었으나, 지금은 HTTP와 같은 다른 인터넷 프로토콜에서 널리 사용하고 있으며, MIME Type 등록은 IANA(Internet Assigned Numbers Authority)에서 관리하고 있습니다.</p>
@@ -2591,16 +2597,16 @@ Content-Type Header와 MIME Type은 이메일에 사용하기 위해 정의되�
     Ncloud Object Storage에서도 업로드 된 파일의 종류에 대한 정보를 Content-Type 속성으로 정의하고 있습니다.
 </div>  
 <h2 id="오류-상황">오류 상황 <a href="#%ec%98%a4%eb%a5%98-%ec%83%81%ed%99%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>예를 들어 Object Storage에 등록된 이미지 파일에 대한 Content-Type 속성이 제대로 정의되지 않았을 경우 아래와 같이 이미지 파일을 호출했을 때 이미지가 화면에 표시되지 않고 다운로드 되는 현상이 나타납니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-02.png" width="807" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-02.png" width="807" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage  mb-5">
 <h2 id="메타-데이터-변경">메타 데이터 변경 <a href="#%eb%a9%94%ed%83%80-%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b3%80%ea%b2%bd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>문제를 해결하기 위해서는 메타 데이터에 있는 [<strong>Content-Type</strong>]을 변경해야 하므로, 아래와 같이 콘솔 [<strong>Object Storage</strong>] - [<strong>Bucket Management</strong>]에서 해당 파일을 선택하고 [<strong>편집</strong>] - [<strong>메타 데이터 변경</strong>] 메뉴를 선택합니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-03.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-03.png" width="845" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage  mb-5">
 <p>[메타 데이터 관리] 팝업창에서 [<strong>Content-Type</strong>] 항목에 있는 [<strong>수정</strong>] 버튼을 클릭합니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-04.png" width="685" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-04.png" width="685" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage  mb-5">
 <p>이미지나 html 문서에 맞는 값을 입력합니다. 여기서는 png 이미지 파일이므로 [<strong>image/png</strong>]를 입력했습니다.<br>
 html의 경우는 [<strong>text/html</strong>]이며 기타 다양한 파일들의 MIME Type은 문서의 아래쪽에서 정리해보겠습니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-05.png" width="685" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-05.png" width="685" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage  mb-5">
 <p>[<strong>Content-Type</strong>] 값 변경 후에 브라우저의 캐시를 지우고 다시 호출해보면 아래와 같이 이미지가 정상적으로 나타나는 것을 확인할 수 있습니다.</p>
-<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-06.png" width="807" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage">
+<img src="/images/storage/ncloud-storage-object-storage-mimetype-contenttype-change-guide-06.png" width="807" alt="Ncloud(네이버 클라우드)의 Object Storage에서 html, 이미지 파일이 화면에 출력되지 않고 다운로드 되는 문제 해결방법" class="docimage  mb-5">
 <h2 id="mime-type-종류">MIME Type 종류 <a href="#mime-type-%ec%a2%85%eb%a5%98" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>전체 MIME Type 중에서 자주 사용되는 Type을 정리해보면 다음과 같습니다.</p>
 <table>
 <thead>
@@ -2849,7 +2855,7 @@ html의 경우는 [<strong>text/html</strong>]이며 기타 다양한 파일들�
                         Built with <a href="https://gohugo.io/" target="_blank" class="no_icon">HUGO</a> & <a href="https://lotusdocs.dev/docs/" target="_blank" class="no_icon">Lotus Docs</a>
                     </p>                    
                     <p class="mb-0">
-                        Site last modified: 2024-08-08
+                        Site last modified: 2024-08-13
                     </p>
                     <p class="mb-3">
                     <img src="/images/logo/3rdeyesys_logo_white.png" alt="Company logo" class="main-logo" style="margin-right:15px;">
