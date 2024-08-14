@@ -6,7 +6,7 @@
     <description>Recent content in Storage on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 12 Aug 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 14 Aug 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/storage/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Linux 서버 스토리지 추가 생성 기본 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-add-basic-guide/</link>
@@ -44,6 +44,12 @@
       <guid>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-extend-guide-windows/</guid>
       <description>개요 linkNcloud(네이버 클라우드) 윈도우 환경 서버의 블록스토리지 볼륨 크기를 확장하고 적용하는 방법을 정리해보겠습니다.&#xA;테스트 환경 link Windows Server 2019 (64-bit) English Edition 추가 블록스토리지 10GB OS 영역에서 사용하는 100G 블록스토리지 외에 아래와 같이 추가로 할당 된 10G의 블록스토리지의 크기를 변경하고 적용해보겠습니다.&#xA;추가 블록 스토리지 할당 방법에 대한 가이드는 아래의 링크를 참조 바랍니다.&#xA;Windows 스토리지(디스크) 추가 상세 가이드 스토리지 스냅샷 백업 link아래와 같이 [Console] - [Server] - [Storage]에서 크기를 변경할 스토리지를 선택하고 [스토리지 설정] - [스냅샷 생성] 메뉴를 선택합니다.</description>
     </item><item>
+      <title>Ncloud KVM 서버의 CB 타입 스토리지 요금 비교</title>
+      <link>https://docs.3rdeyesys.com/docs/compute/ncloud-compute-server-kvm-cb1-storage-price-info/</link>
+      <pubDate>Wed, 14 Aug 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/compute/ncloud-compute-server-kvm-cb1-storage-price-info/</guid>
+      <description>개요 linkNcloud(네이버 클라우드)에서 제공하는 KVM 하이퍼바이저 타입의 서버에는 FB(Fixed Block Storage)타입의 스토리지와 CB(Common Block Storage)타입의 스토리지를 사용할 수 있습니다. 그런데 이 중에서 CB타입의 스토리지 요금에 조금 특이한 부분이 있어서 정리해보려고 합니다.&#xA;요금 정보 link우선, Ncloud 포털의 서비스 소개에 있는 [Block Storage] 요금 안내를 살펴보면 다음과 같습니다.&#xA;⁃ 서비스 소개 Block Storage 요금 안내&#xA;FB(Fixed Block Storage)타입의 스토리지는 HDD 요금이 적용 CB(Common Block Storage)타입의 스토리지는 SSD 요금이 적용 요금 예시 link FB 타입 스토리지 10GB를 한 달(30일 기준) 동안 사용했을 때 요금: 576 원 (0.</description>
+    </item><item>
       <title>Ncloud에서 제공하는 스토리지들의 요금과 특징 비교</title>
       <link>https://docs.3rdeyesys.com/docs/storage/ncloud-storage-compare/</link>
       <pubDate>Mon, 28 Dec 2020 00:00:00 +0900</pubDate>
@@ -61,12 +67,6 @@
       <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/lifecycle-management-guide/</guid>
       <description>개요 link네이버 클라우드 Object Storage에 저장된 Object 즉, 파일들의 Lifecycle(수명주기)를 설정할 때 관리대상이 되는 Object를 결정하는 규칙에 대해 정리해보겠습니다.&#xA;Lifecycle Management(수명주기) 정책설정 link수명주기 정책 설정은 크게 정책, 관리대상, 이동위치 3가지 항목으로 구성됩니다.&#xA;정책 link정책 유형은 다음의 3가지가 있습니다.&#xA;만료 삭제 : 설정된 기간이 지난 파일을 삭제 이관 : 설정된 기간이 지난 파일을 Archive Storage로 이동 이관 후 삭제 : 설정된 기간이 지난 파일을 Archive Storage로 이동한 후 Object Storage에서 삭제 그리고 이동 시점은 파일이 Object Storage에 저장-생성된 후 경과한 일자를 기준으로 하며 1일 ~ 3,650일 사이의 값을 입력합니다.</description>
-    </item><item>
-      <title>AWS CLI 버전 2를 이용한 Object Storage 접속 방법</title>
-      <link>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</link>
-      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/how-to-access-using-aws-cli/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) Object Storage는 AWS의 스토리지 서비스 S3와 호환이 되도록 설계되어 있습니다.&#xA;그래서 Object Storage에 접속, 관리할 때 AWS의 CLI(Command Line Interface)를 사용할 수 있는데 그 중에서 AWS CLI 버전 2의 설치와 사용방법에 대해 정리해보겠습니다.&#xA;AWS CLI 버전 2 설치 link&#xD;info&#xD;AWS CLI 버전 1에서는 설치와 실행에 Python과 PIP를 이용하는 방법이 주로 사용되었지만, AWS CLI 버전 2에서는 Python 임베디드 버전이 포함되어 있어 별도로 설치할 필요가 없기에 설치 파일도 ZIP 압축 파일 형태로 제공됩니다.</description>
     </item>
   </channel>
 </rss>

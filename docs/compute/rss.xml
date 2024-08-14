@@ -6,8 +6,14 @@
     <description>Recent content in Compute on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 13 May 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 14 Aug 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/docs/compute/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Ncloud KVM 서버의 CB 타입 스토리지 요금 비교</title>
+      <link>https://docs.3rdeyesys.com/docs/compute/ncloud-compute-server-kvm-cb1-storage-price-info/</link>
+      <pubDate>Wed, 14 Aug 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/compute/ncloud-compute-server-kvm-cb1-storage-price-info/</guid>
+      <description>개요 linkNcloud(네이버 클라우드)에서 제공하는 KVM 하이퍼바이저 타입의 서버에는 FB(Fixed Block Storage)타입의 스토리지와 CB(Common Block Storage)타입의 스토리지를 사용할 수 있습니다. 그런데 이 중에서 CB타입의 스토리지 요금에 조금 특이한 부분이 있어서 정리해보려고 합니다.&#xA;요금 정보 link우선, Ncloud 포털의 서비스 소개에 있는 [Block Storage] 요금 안내를 살펴보면 다음과 같습니다.&#xA;⁃ 서비스 소개 Block Storage 요금 안내&#xA;FB(Fixed Block Storage)타입의 스토리지는 HDD 요금이 적용 CB(Common Block Storage)타입의 스토리지는 SSD 요금이 적용 요금 예시 link FB 타입 스토리지 10GB를 한 달(30일 기준) 동안 사용했을 때 요금: 576 원 (0.</description>
+    </item><item>
       <title>Ncloud (네이버 클라우드) 서버 정지 시 요금할인</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-operation-stop-price/</link>
       <pubDate>Fri, 13 Nov 2020 00:00:00 +0900</pubDate>
