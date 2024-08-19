@@ -6,13 +6,13 @@
     <description>Recent content in Storage on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.128.2</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 14 Aug 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Aug 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/storage/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Linux 서버 스토리지 추가 생성 기본 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-add-basic-guide/</link>
       <pubDate>Thu, 07 Dec 2023 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-add-basic-guide/</guid>
-      <description>개요 link네이버 클라우드에서 서버 생성 후에 스토리지를 추가 생성하는 경우가 있는데 이때 사용되는 스토리지는 블록스토리지(Block Storage)라고 해서 AWS의 EBS(Elastic Block Store)와 유사합니다.&#xA;스토리지 추가 제약 사항 link XEN 하이퍼바이저 기반 서버의 경우 Bare Metal 서버와 의 Micro 타입 서버에는 스토리지를 추가할 수 없습니다. 추가 가능한 최대 사이즈와 개수 link&#xD;하이퍼바이저 스토리지 타입&#xD;미디어 타입&#xD;최소 크기&#xD;최대 크기&#xD;추가 가능 개수&#xD;XEN&#xD;HDD&#xD;HDD&#xD;10GB&#xD;2TB&#xD;15개&#xD;SSD&#xD;SSD&#xD;10GB&#xD;2TB&#xD;15개&#xD;KVM&#xD;FB1&#xD;HDD&#xD;100GB&#xD;16TB&#xD;20개&#xD;CB1&#xD;SSD&#xD;10GB&#xD;16TB&#xD;20개&#xD;리눅스 OS 서버 이미지별 포맷 명령어 link리눅스는 OS 즉, 네이버 클라우드에서 제공하는 서버 이미지별로 추가된 스토리지를 포맷하는 명령어가 다릅니다.</description>
+      <description>개요 link네이버 클라우드에서 서버 생성 후에 스토리지를 추가 생성하는 경우가 있는데 이때 사용되는 스토리지는 블록스토리지(Block Storage)라고 해서 AWS의 EBS(Elastic Block Store)와 유사합니다.&#xA;스토리지 추가 제약 사항 link XEN 하이퍼바이저 기반 서버의 경우 Bare Metal 서버와 의 Micro 타입 서버에는 스토리지를 추가할 수 없습니다. 추가 가능한 최대 사이즈와 개수 link&#xD;하이퍼바이저 스토리지 타입&#xD;미디어 타입&#xD;최소 크기&#xD;최대 크기&#xD;추가 가능 개수&#xD;XEN&#xD;HDD&#xD;HDD&#xD;10GB&#xD;2TB&#xD;15개&#xD;SSD&#xD;SSD&#xD;10GB&#xD;2TB&#xD;15개&#xD;KVM&#xD;FB&#xD;HDD&#xD;100GB&#xD;16TB&#xD;20개&#xD;CB&#xD;SSD&#xD;10GB&#xD;16TB&#xD;20개&#xD;리눅스 OS 서버 이미지별 포맷 명령어 link리눅스는 OS 즉, 네이버 클라우드에서 제공하는 서버 이미지별로 추가된 스토리지를 포맷하는 명령어가 다릅니다.</description>
     </item><item>
       <title>Linux 서버 스토리지(디스크) 추가 상세 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-add-detail-process-guide/</link>
@@ -44,6 +44,12 @@
       <guid>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-extend-guide-windows/</guid>
       <description>개요 linkNcloud(네이버 클라우드) 윈도우 환경 서버의 블록스토리지 볼륨 크기를 확장하고 적용하는 방법을 정리해보겠습니다.&#xA;테스트 환경 link Windows Server 2019 (64-bit) English Edition 추가 블록스토리지 10GB OS 영역에서 사용하는 100G 블록스토리지 외에 아래와 같이 추가로 할당 된 10G의 블록스토리지의 크기를 변경하고 적용해보겠습니다.&#xA;추가 블록 스토리지 할당 방법에 대한 가이드는 아래의 링크를 참조 바랍니다.&#xA;Windows 스토리지(디스크) 추가 상세 가이드 스토리지 스냅샷 백업 link아래와 같이 [Console] - [Server] - [Storage]에서 크기를 변경할 스토리지를 선택하고 [스토리지 설정] - [스냅샷 생성] 메뉴를 선택합니다.</description>
     </item><item>
+      <title>Ncloud 블록 스토리지 타입별 요금 비교</title>
+      <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-price-compare-info/</link>
+      <pubDate>Mon, 19 Aug 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-price-compare-info/</guid>
+      <description>개요 linkNcloud(네이버 클라우드)에서 서버를 생성할 때 OS 영역으로 설정되는 기본 스토리지와 추가로 즉시 할당해서 바로 사용하는 스토리지는 블록스토리지(Block Storage)라고 하는데, 이 블록스토리지(Block Storage)의 요금은 서버의 하이퍼바이저 타입별로, 기본 스토리지와 추가 스토리지, 그리고 스토리지 타입별로 매우 다양한 특징을 갖고 있어서 다소 복잡한데, 여기서 한눈에 알아보기 쉽게 비교 정리해보았습니다.&#xA;요금 비교 link&#xD;하이퍼바이저 구분&#xD;타입&#xD;미디어&#xD;OS&#xD;최소 크기 요금&#xD;최대 크기&#xD;추가&#xA;가능 개수 비고 단가/GB&#xD;30일 기준&amp;#9312&#xD;XEN&#xD;기본&#xA;(OS)&#xD;HDD&#xD;HDD&#xD;Linux&#xD;10GB 0원&#xD;0원&#xD;10GB&#xD;-&#xD;Server 요금에 포함&amp;#9313&#xD;Windows&#xD;50GB 0원&#xD;0원&#xD;50GB&#xD;SSD&#xD;SSD&#xD;Linux&#xD;10GB 0원&#xD;0원&#xD;10GB&#xD;Windows&#xD;50GB 0원&#xD;0원&#xD;50GB&#xD;추가&#xD;HDD&#xD;HDD&#xD;공통&#xD;10GB 0.</description>
+    </item><item>
       <title>Ncloud KVM 서버의 CB 타입 스토리지 요금 비교</title>
       <link>https://docs.3rdeyesys.com/docs/compute/ncloud-compute-server-kvm-cb1-storage-price-info/</link>
       <pubDate>Wed, 14 Aug 2024 00:00:00 +0900</pubDate>
@@ -61,12 +67,6 @@
       <pubDate>Tue, 16 Feb 2021 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/services-required-integrating-with-object-storage/</guid>
       <description>개요 link네이버 클라우드의 수 많은 서비스들 중에는 Object Storage가 설정, 준비되어 있어야 하는 서비스들, 즉, Object Storage와 연동이 필수인 서비스들이 여럿 있습니다.&#xA;어떤 서비스들이 이에 해당하는지 정리해보겠습니다.&#xA;연동 필수 서비스 linkObject Storage와 연동이 필수인 서비스들에는 AI-Application Service와 Media 관련 서비스들이 많습니다.&#xA;CLOVA Speech CLOVA Dubbing VOD Transcoder VOD Station Video Player Image Optimizer SourceBuild Cloud Hadoop Data Analytics Service 연동 선택 서비스 linkObject Storage와 반드시 연동해야 하는 것은 아니지만, Object Storage를 이용하면 훨씬 편하고, 빠르고 안정적으로 서비스 가능한 경우도 있습니다.</description>
-    </item><item>
-      <title>Object Storage Lifecycle Management 관리대상 설정 방법</title>
-      <link>https://docs.3rdeyesys.com/docs/storage/object-storage/lifecycle-management-guide/</link>
-      <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/storage/object-storage/lifecycle-management-guide/</guid>
-      <description>개요 link네이버 클라우드 Object Storage에 저장된 Object 즉, 파일들의 Lifecycle(수명주기)를 설정할 때 관리대상이 되는 Object를 결정하는 규칙에 대해 정리해보겠습니다.&#xA;Lifecycle Management(수명주기) 정책설정 link수명주기 정책 설정은 크게 정책, 관리대상, 이동위치 3가지 항목으로 구성됩니다.&#xA;정책 link정책 유형은 다음의 3가지가 있습니다.&#xA;만료 삭제 : 설정된 기간이 지난 파일을 삭제 이관 : 설정된 기간이 지난 파일을 Archive Storage로 이동 이관 후 삭제 : 설정된 기간이 지난 파일을 Archive Storage로 이동한 후 Object Storage에서 삭제 그리고 이동 시점은 파일이 Object Storage에 저장-생성된 후 경과한 일자를 기준으로 하며 1일 ~ 3,650일 사이의 값을 입력합니다.</description>
     </item>
   </channel>
 </rss>
