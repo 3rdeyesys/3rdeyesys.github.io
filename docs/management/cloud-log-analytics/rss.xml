@@ -6,17 +6,17 @@
     <description>Recent content in Ncloud Cloud Log Analytics on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.133.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Fri, 10 May 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 09 Sep 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/rss.xml" rel="self" type="application/rss+xml" /><item>
       <title>Ncloud Cloud Log Analytics에서 수집하는 로그 유형</title>
       <link>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/cla-template-info/</link>
-      <pubDate>Fri, 16 Feb 2024 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 09 Sep 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/cla-template-info/</guid>
       <description>개요 linkCloud Log Analytics는 네이버 클라우드 플랫폼의 여러 서비스에서 발생하는 다양한 로그들을 한 곳에 모아 저장하고 손쉽게 분석하게 해주는 서비스입니다.&#xA;로그 템플릿 종류 linkCloud Log Analytics에서 수집하는 각 종 서비스의 로그 템플릿 종류는 다음과 같습니다.&#xA;Server SYSLOG Apache 로그(Access log, Apache Error Log) MySQL 설치형 상품의 로그(Error Log, Slow Log) Microsoft SQL Server 설치형 상품의 Error Log Tomcat 로그(Catalina Log) Windows 서버의 Event Log Windows 서버의 각종 text 형식의 로그 Cloud DB for MySQL 로그 Cloud DB for MSSQL 로그 Cloud DB for MongoDB 로그 Cloud DB for PostgreSQL 로그 Application Server Launcher 로그 Application Load Balancer 로그 Search Engine Service 로그 Cloud Data Streaming Service 로그 Bare Metal Server 로그 Ncloud Kubernetes Service Audit 로그 그외 템플릿으로 제공되지 않는 로그도 Custom Log 기능으로 직접 대상 로그를 지정해서 수집할 수 있습니다 지원 운영 체제 link지원하는 운영 체제는 다음과 같습니다.</description>
     </item><item>
       <title>Ncloud Cloud Log Analytics 설정 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/basic-guide/</link>
-      <pubDate>Fri, 10 May 2024 00:00:00 +0900</pubDate>
+      <pubDate>Mon, 09 Sep 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/basic-guide/</guid>
       <description>개요 linkCloud Log Analytics는 Ncloud(네이버 클라우드)가 제공하는 여러 서비스에서 발생하는 다양한 로그들을 한 곳에 모아 저장하고 손쉽게 분석할 수 있는 서비스로, 검색 기능을 이용해 여러 종류의 로그를 한 곳에서 한번에 조회하고 분석할 수 있어 효과적인 로그 관리가 가능합니다.&#xA;로그 템플릿 종류 linkCloud Log Analytics는 텍스트 형식으로 생성되는 모든 종류의 로그 데이터 파일을 수집할 수 있는데, 사전에 제공되는 로그 템플릿 종류는 다음과 같습니다.&#xA;Server SYSLOG Apache 로그(Access log, Apache Error Log) MySQL 설치형 상품의 로그(Error Log, Slow Log) Microsoft SQL Server 설치형 상품의 Error Log Tomcat 로그(Catalina Log) Windows 서버의 Event Log Windows 서버의 각종 text 형식의 로그 Cloud DB for MySQL 로그 Cloud DB for MSSQL 로그 Cloud DB for MongoDB 로그 Cloud DB for PostgreSQL 로그 Application Server Launcher 로그 Application Load Balancer 로그 Search Engine Service 로그 Cloud Data Streaming Service 로그 Bare Metal Server 로그 Ncloud Kubernetes Service Audit 로그 그외 템플릿으로 제공되지 않는 로그도 Custom Log 기능으로 직접 대상 로그를 지정해서 수집할 수 있습니다 지원 운영 체제 link지원하는 운영 체제는 다음과 같습니다.</description>
     </item><item>

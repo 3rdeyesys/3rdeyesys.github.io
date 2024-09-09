@@ -6,8 +6,20 @@
     <description>Recent content on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.133.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 19 Aug 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 09 Sep 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Ncloud Cloud Log Analytics에서 수집하는 로그 유형</title>
+      <link>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/cla-template-info/</link>
+      <pubDate>Mon, 09 Sep 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/cla-template-info/</guid>
+      <description>개요 linkCloud Log Analytics는 네이버 클라우드 플랫폼의 여러 서비스에서 발생하는 다양한 로그들을 한 곳에 모아 저장하고 손쉽게 분석하게 해주는 서비스입니다.&#xA;로그 템플릿 종류 linkCloud Log Analytics에서 수집하는 각 종 서비스의 로그 템플릿 종류는 다음과 같습니다.&#xA;Server SYSLOG Apache 로그(Access log, Apache Error Log) MySQL 설치형 상품의 로그(Error Log, Slow Log) Microsoft SQL Server 설치형 상품의 Error Log Tomcat 로그(Catalina Log) Windows 서버의 Event Log Windows 서버의 각종 text 형식의 로그 Cloud DB for MySQL 로그 Cloud DB for MSSQL 로그 Cloud DB for MongoDB 로그 Cloud DB for PostgreSQL 로그 Application Server Launcher 로그 Application Load Balancer 로그 Search Engine Service 로그 Cloud Data Streaming Service 로그 Bare Metal Server 로그 Ncloud Kubernetes Service Audit 로그 그외 템플릿으로 제공되지 않는 로그도 Custom Log 기능으로 직접 대상 로그를 지정해서 수집할 수 있습니다 지원 운영 체제 link지원하는 운영 체제는 다음과 같습니다.</description>
+    </item><item>
+      <title>Ncloud Cloud Log Analytics 설정 가이드</title>
+      <link>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/basic-guide/</link>
+      <pubDate>Mon, 09 Sep 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/basic-guide/</guid>
+      <description>개요 linkCloud Log Analytics는 Ncloud(네이버 클라우드)가 제공하는 여러 서비스에서 발생하는 다양한 로그들을 한 곳에 모아 저장하고 손쉽게 분석할 수 있는 서비스로, 검색 기능을 이용해 여러 종류의 로그를 한 곳에서 한번에 조회하고 분석할 수 있어 효과적인 로그 관리가 가능합니다.&#xA;로그 템플릿 종류 linkCloud Log Analytics는 텍스트 형식으로 생성되는 모든 종류의 로그 데이터 파일을 수집할 수 있는데, 사전에 제공되는 로그 템플릿 종류는 다음과 같습니다.&#xA;Server SYSLOG Apache 로그(Access log, Apache Error Log) MySQL 설치형 상품의 로그(Error Log, Slow Log) Microsoft SQL Server 설치형 상품의 Error Log Tomcat 로그(Catalina Log) Windows 서버의 Event Log Windows 서버의 각종 text 형식의 로그 Cloud DB for MySQL 로그 Cloud DB for MSSQL 로그 Cloud DB for MongoDB 로그 Cloud DB for PostgreSQL 로그 Application Server Launcher 로그 Application Load Balancer 로그 Search Engine Service 로그 Cloud Data Streaming Service 로그 Bare Metal Server 로그 Ncloud Kubernetes Service Audit 로그 그외 템플릿으로 제공되지 않는 로그도 Custom Log 기능으로 직접 대상 로그를 지정해서 수집할 수 있습니다 지원 운영 체제 link지원하는 운영 체제는 다음과 같습니다.</description>
+    </item><item>
       <title>Ncloud 블록 스토리지 타입별 요금 비교</title>
       <link>https://docs.3rdeyesys.com/docs/compute/server-storage/storage-price-compare-info/</link>
       <pubDate>Mon, 19 Aug 2024 00:00:00 +0900</pubDate>
@@ -55,18 +67,6 @@
       <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-php-sample/</guid>
       <description>개요 link네이버 클라우드 인프라와 상품 및 솔루션 등의 활용을 도와주는 API를 PHP로 호출하는 샘플 예제를 정리해봅니다.&#xA;네이버 클라우드 API는 RESTful API 방식으로 제공되며, XML와 JSON 형식으로 응답합니다 우선 전체 소스코드를 살펴보고 다음으로 주요 코드를 상세하게 살펴보겠습니다.&#xA;API 호출 샘플 코드 link&#xD;&amp;lt;?php&#xD;// 기본 데이터 설정&#xD;$unixtimestamp = round(microtime(true) * 1000);&#xD;$ncp_accesskey = &amp;#34;네이버 클라우드 AccessKey&amp;#34;;&#xD;$ncp_secretkey = &amp;#34;네이버 클라우드 SecretKey&amp;#34;;&#x9;$api_server = &amp;#34;https://billingapi.apigw.ntruss.com&amp;#34;;&#xD;// API URL 예시 : 상품별 가격 리스트 호출 api&#xD;$api_url = &amp;#34;/billing/v1/product/getProductPriceList&amp;#34;;&#xD;$api_url = $api_url.</description>
-    </item><item>
-      <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Windows</title>
-      <link>https://docs.3rdeyesys.com/docs/containers/kubernetes-service-start-guide-windows/</link>
-      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/containers/kubernetes-service-start-guide-windows/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 Windows 환경에서 제어하는 방법에 대해 소개합니다.&#xA;쿠버네티스란? link쿠버네티스(Kubernetes, K8S)는 배포, 스케일링, 그리고 컨테이너화된 애플리케이션의 관리를 자동화 해주는 오픈 소스 컨테이너 오케스트레이션 엔진으로 구글에서 처음 개발하기 시작했으나 현재는 구글이 오픈소스 프로젝트로 공개한 상태입니다.&#xA;특징 link쿠버네티스는 다음과 같은 특징이 있으며, 자세한 내용은 쿠버네티스 공식 페이지를 참고하시기 바랍니다.&#xA;쿠버네티스 공식 페이지: https://kubernetes.io/ko/docs/home/&#xA;서비스 디스커버리와 로드 밸런싱 스토리지 오케스트레이션 자동화된 롤아웃과 롤백 자동화된 빈 패킹(bin packing) 자동화된 복구(self-healing) 시크릿과 구성 관리 사전 준비 link먼저 쿠버네티스 클러스터에 사용할 전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet이 필요합니다.</description>
-    </item><item>
-      <title>Kubernetes Service 클러스터 생성 및 제어 가이드 | Linux</title>
-      <link>https://docs.3rdeyesys.com/docs/containers/kubernetes-service-start-guide-linux/</link>
-      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/containers/kubernetes-service-start-guide-linux/</guid>
-      <description>개요 linkNcloud (네이버 클라우드) VPC 환경에서 Kubernetes(쿠버네티스) 서비스를 생성하고 Linux 환경에서 제어하는 방법에 대해 소개합니다.&#xA;쿠버네티스란? link쿠버네티스(Kubernetes, K8S)는 배포, 스케일링, 그리고 컨테이너화된 애플리케이션의 관리를 자동화 해주는 오픈 소스 컨테이너 오케스트레이션 엔진으로 구글에서 처음 개발하기 시작했으나 현재는 구글이 오픈소스 프로젝트로 공개한 상태입니다.&#xA;특징 link쿠버네티스는 다음과 같은 특징이 있으며, 자세한 내용은 쿠버네티스 공식 페이지를 참고하시기 바랍니다.&#xA;쿠버네티스 공식 페이지: https://kubernetes.io/ko/docs/home/&#xA;서비스 디스커버리와 로드 밸런싱 스토리지 오케스트레이션 자동화된 롤아웃과 롤백 자동화된 빈 패킹(bin packing) 자동화된 복구(self-healing) 시크릿과 구성 관리 사전 준비 link먼저 쿠버네티스 클러스터에 사용할 전용 VPC와 Private 또는 Public Subnet 그리고, Load Balancer용 Subnet이 필요합니다.</description>
     </item>
   </channel>
 </rss>

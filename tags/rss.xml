@@ -6,8 +6,26 @@
     <description>Recent content in Tags on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.133.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 19 Aug 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 09 Sep 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/tags/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Analytics</title>
+      <link>https://docs.3rdeyesys.com/tags/analytics/</link>
+      <pubDate>Mon, 09 Sep 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/analytics/</guid>
+      <description></description>
+    </item><item>
+      <title>Log</title>
+      <link>https://docs.3rdeyesys.com/tags/log/</link>
+      <pubDate>Mon, 09 Sep 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/log/</guid>
+      <description></description>
+    </item><item>
+      <title>Monitoring</title>
+      <link>https://docs.3rdeyesys.com/tags/monitoring/</link>
+      <pubDate>Mon, 09 Sep 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/tags/monitoring/</guid>
+      <description></description>
+    </item><item>
       <title>Price</title>
       <link>https://docs.3rdeyesys.com/tags/price/</link>
       <pubDate>Mon, 19 Aug 2024 00:00:00 +0900</pubDate>
@@ -48,24 +66,6 @@
       <link>https://docs.3rdeyesys.com/tags/api/</link>
       <pubDate>Tue, 13 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/tags/api/</guid>
-      <description></description>
-    </item><item>
-      <title>Auth</title>
-      <link>https://docs.3rdeyesys.com/tags/auth/</link>
-      <pubDate>Tue, 13 Aug 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/auth/</guid>
-      <description></description>
-    </item><item>
-      <title>Secret</title>
-      <link>https://docs.3rdeyesys.com/tags/secret/</link>
-      <pubDate>Tue, 13 Aug 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/secret/</guid>
-      <description></description>
-    </item><item>
-      <title>Archive Storage</title>
-      <link>https://docs.3rdeyesys.com/tags/archive-storage/</link>
-      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/tags/archive-storage/</guid>
       <description></description>
     </item>
   </channel>
