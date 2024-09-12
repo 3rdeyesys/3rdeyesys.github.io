@@ -6,8 +6,14 @@
     <description>Recent content in 인증서 on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.133.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 08 Feb 2023 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 12 Sep 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/docs/security/certificate/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Ncloud Certificate Manager 무료 인증서 발급 가이드</title>
+      <link>https://docs.3rdeyesys.com/docs/security/certificate/certificate-manager-issue-free-certificates-guide/</link>
+      <pubDate>Thu, 12 Sep 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/security/certificate/certificate-manager-issue-free-certificates-guide/</guid>
+      <description>개요 linkNcloud(네이버 클라우드) Certificate Manager에서 발급 가능한 SSL 인증서는 2가지가 있는데 그 중에서 무료 인증서인 [Cloud Basic] 인증서를 발급하는 방법을 정리해보겠습니다.&#xA;무료 인증서 특징 link 알고리즘: RSA 2048 bit 유효기간: 395일 (1년 + 30일) 인증서당 도메인 개수: 10개 발급 가능한 인증서 개수: 최대 25개 사용 가능한 도메인 이름: FQDN (예: 𝕨𝕨𝕨.example.com) Apex 도메인 (예: example.com) 와일드카드 도메인 (예: *.example.com) Ncloud(네이버 클라우드) 서비스인 Load Balancer, Global Edge와 연동해서 사용 가능 등록된 인증서의 만료 예정일 30일 전부터 5일 단위로 알림(SMS/Email) 발송 Ncloud(네이버 클라우드) 내부에서만 사용 가능하며, 인증서 다운로드 및 외부 사용은 불가 Ncloud(네이버 클라우드) WAF에서는 사용 불가 Certificate Manager 위치 link[Certificate Manager]는 [Security] 카테고리에 있는데 아래처럼 검색을 이용하면 좀 더 편하게 이동하실 수 있습니다.</description>
+    </item><item>
       <title>Ncloud Certificate Manager SSL 인증서 등록 가이드</title>
       <link>https://docs.3rdeyesys.com/docs/security/certificate/certificate-manager-register-ssl-certificate-guide/</link>
       <pubDate>Wed, 08 Feb 2023 00:00:00 +0900</pubDate>

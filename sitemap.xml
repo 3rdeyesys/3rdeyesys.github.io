@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://docs.3rdeyesys.com/docs/security/certificate/certificate-manager-issue-free-certificates-guide/</loc>
+    <lastmod>2024-09-12T00:00:00+09:00</lastmod>
+    <priority>0.7</priority>
+  </url><url>
     <loc>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/cla-template-info/</loc>
     <lastmod>2024-09-09T00:00:00+09:00</lastmod>
     <priority>0.7</priority>

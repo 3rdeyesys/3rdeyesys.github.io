@@ -6,8 +6,14 @@
     <description>Recent content on 써드아이시스템 기술문서</description>
     <generator>Hugo 0.133.0</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 09 Sep 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 12 Sep 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://docs.3rdeyesys.com/rss.xml" rel="self" type="application/rss+xml" /><item>
+      <title>Ncloud Certificate Manager 무료 인증서 발급 가이드</title>
+      <link>https://docs.3rdeyesys.com/docs/security/certificate/certificate-manager-issue-free-certificates-guide/</link>
+      <pubDate>Thu, 12 Sep 2024 00:00:00 +0900</pubDate>
+      <guid>https://docs.3rdeyesys.com/docs/security/certificate/certificate-manager-issue-free-certificates-guide/</guid>
+      <description>개요 linkNcloud(네이버 클라우드) Certificate Manager에서 발급 가능한 SSL 인증서는 2가지가 있는데 그 중에서 무료 인증서인 [Cloud Basic] 인증서를 발급하는 방법을 정리해보겠습니다.&#xA;무료 인증서 특징 link 알고리즘: RSA 2048 bit 유효기간: 395일 (1년 + 30일) 인증서당 도메인 개수: 10개 발급 가능한 인증서 개수: 최대 25개 사용 가능한 도메인 이름: FQDN (예: 𝕨𝕨𝕨.example.com) Apex 도메인 (예: example.com) 와일드카드 도메인 (예: *.example.com) Ncloud(네이버 클라우드) 서비스인 Load Balancer, Global Edge와 연동해서 사용 가능 등록된 인증서의 만료 예정일 30일 전부터 5일 단위로 알림(SMS/Email) 발송 Ncloud(네이버 클라우드) 내부에서만 사용 가능하며, 인증서 다운로드 및 외부 사용은 불가 Ncloud(네이버 클라우드) WAF에서는 사용 불가 Certificate Manager 위치 link[Certificate Manager]는 [Security] 카테고리에 있는데 아래처럼 검색을 이용하면 좀 더 편하게 이동하실 수 있습니다.</description>
+    </item><item>
       <title>Ncloud Cloud Log Analytics에서 수집하는 로그 유형</title>
       <link>https://docs.3rdeyesys.com/docs/management/cloud-log-analytics/cla-template-info/</link>
       <pubDate>Mon, 09 Sep 2024 00:00:00 +0900</pubDate>
@@ -61,12 +67,6 @@
       <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
       <guid>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-csharp-sample/</guid>
       <description>개요 link네이버 클라우드 인프라와 상품 및 솔루션 등의 활용을 도와주는 API를 C#으로 호출하는 샘플 예제중에서 핵심인 인증을 위한 암호화 문자열 생성 코드를 정리해보겠습니다.&#xA;암호화 샘플 코드 link&#xD;public string unixTimeStamp;&#xD;public string ncpAccessKey = &amp;#34;네이버 클라우드 AccessKey&amp;#34;;&#xD;public string ncpSecretKey = &amp;#34;네이버 클라우드 SecretKey&amp;#34;;&#x9;public string apiCallMethod = &amp;#34;GET&amp;#34;;&#xD;public string apiServer = &amp;#34;https://billingapi.apigw.ntruss.com&amp;#34;;&#xD;public string apiUrl = &amp;#34;네이버 클라우드 API URL&amp;#34;;&#xD;// apiUrl 예시: &amp;#34;/billing/v1/product/getProductPriceList&amp;#34;;&#xD;public string MakeSignature()&#xD;{&#xD;string msgSignature;&#xD;string space = &amp;#34; &amp;#34;;&#xD;string newLine = &amp;#34;\n&amp;#34;;&#xD;// 13자리 유닉스 타임스탬프 설정&#xD;DateTime now = DateTime.</description>
-    </item><item>
-      <title>PHP로 Ncloud API를 호출하는 샘플 예제</title>
-      <link>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-php-sample/</link>
-      <pubDate>Mon, 12 Aug 2024 00:00:00 +0900</pubDate>
-      <guid>https://docs.3rdeyesys.com/docs/api/ncloud-api-call-php-sample/</guid>
-      <description>개요 link네이버 클라우드 인프라와 상품 및 솔루션 등의 활용을 도와주는 API를 PHP로 호출하는 샘플 예제를 정리해봅니다.&#xA;네이버 클라우드 API는 RESTful API 방식으로 제공되며, XML와 JSON 형식으로 응답합니다 우선 전체 소스코드를 살펴보고 다음으로 주요 코드를 상세하게 살펴보겠습니다.&#xA;API 호출 샘플 코드 link&#xD;&amp;lt;?php&#xD;// 기본 데이터 설정&#xD;$unixtimestamp = round(microtime(true) * 1000);&#xD;$ncp_accesskey = &amp;#34;네이버 클라우드 AccessKey&amp;#34;;&#xD;$ncp_secretkey = &amp;#34;네이버 클라우드 SecretKey&amp;#34;;&#x9;$api_server = &amp;#34;https://billingapi.apigw.ntruss.com&amp;#34;;&#xD;// API URL 예시 : 상품별 가격 리스트 호출 api&#xD;$api_url = &amp;#34;/billing/v1/product/getProductPriceList&amp;#34;;&#xD;$api_url = $api_url.</description>
     </item>
   </channel>
 </rss>
